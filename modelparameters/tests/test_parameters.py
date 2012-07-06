@@ -27,6 +27,7 @@ class TestParam(unittest.TestCase):
         self.assertEqual(str(cm.exception), "expected a 'str' (got '56' "\
                          "which is 'int') as the 'name' argument")
         self.assertEqual(repr(Param(45, "jada")), "Param(45, name='jada')")
+        self.assertEqual(str(Param(45, "jada")), "45")
         
     def test_assign(self):
         with self.assertRaises(TypeError) as cm:
@@ -89,6 +90,8 @@ class TestOptionParam(unittest.TestCase):
         self.assertEqual(repr(OptionParam(45, [45, 56])), "OptionParam(45, [45, 56])")
         self.assertEqual(repr(OptionParam(45, [45, 56], "bada")), \
                          "OptionParam(45, [45, 56], name='bada')")
+        self.assertEqual(str(OptionParam(45, [45, 56], "bada")), \
+                         "45 \xe2\x88\x88 [45, 56]")
     
     def test_assign(self):
         with self.assertRaises(ValueError) as cm:
@@ -117,6 +120,27 @@ class TestOptionParam(unittest.TestCase):
         self.assertEqual(p1.getvalue(), "wuabba")
         self.assertIsNone(p1.setvalue("bada"))
         self.assertEqual(p1.getvalue(), "bada")
+        
+class TestConstParam(unittest.TestCase):
+    def test_init(self):
+        with self.assertRaises(TypeError) as cm:
+            ConstParam(45, 56)
+        self.assertEqual(str(cm.exception), "expected a 'str' (got '56' "\
+                         "which is 'int') as the 'name' argument")
+        self.assertEqual(repr(ConstParam(45)),
+                         "ConstParam(45)")
+        self.assertEqual(str(ConstParam(45)), "45 - Constant")
+    
+    def test_assign(self):
+        with self.assertRaises(ValueError) as cm:
+            p = ConstParam(45, "bada")
+            p.setvalue(56)
+        self.assertEqual(str(cm.exception), "Illegal value 'bada': 56 != 45")
+
+        p = ConstParam(45, "bada")
+        self.assertIsNone(p.setvalue(45.))
+        self.assertEqual(p.getvalue(), 45)
+        
         
 if __name__ == "__main__":
     unittest.main()

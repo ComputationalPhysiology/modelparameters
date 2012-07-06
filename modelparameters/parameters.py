@@ -214,6 +214,8 @@ class OptionParam(Param):
             if not isinstance(val, self.value_type):
                 type_error("All values of the 'option check' " +\
                            "need to be of type: '%s'" % type(self._value).__name__)
+        
+        # Store options
         self._options = options
         
     def _check_arg(self):
@@ -223,7 +225,7 @@ class ConstParam(Param):
     """
     A Constant parameter which prevent any change of values
     """
-    def __init__(self, value, name=None):
+    def __init__(self, value, name=""):
         """
         Initialize the ConstParam
         
