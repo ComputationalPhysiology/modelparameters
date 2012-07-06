@@ -1,27 +1,220 @@
 __author__ = "Johan Hake (hake.dev@gmail.com)"
 __copyright__ = "Copyright (C) 2010 " + __author__
-__date__ = "2010-09-22 -- 2012-06-30"
+__date__ = "2010-09-22 -- 2012-07-06"
 __license__  = "GNU LGPL Version 3.0 or later"
 
 # System imports
+
+# Conditional numpy dependency
+try:
+    import numpy as _np
+    list_types = (_np.ndarray, list)
+    scalars = tuple(t for t in _np.ScalarType if not issubclass(t, basestring))
+    range_types = scalars + (_np.ndarray,)
+    _all = _np.all
+except Exception, e:
+    print e
+    _np = None
+    list_types = (list,)
+    scalars = (int, float, bool)
+    range_types = scalars
+    _all = lambda value : value
+
 import time as _time
 import math as _math
 import types as _types
-import numpy as np
-from numpy import inf
-
+import string as _string
 
 # local imports
 from logger import *
-
-# Define scalars
-scalars = np.ScalarType
 
 _toc_time = 0.0
 
 _argument_positions = ["first", "second", "third", "fourth", "fifth", "sixth",\
                        "seventh", "eigth", "ninth", "tenth"]
 
+VALUE_JUST = _string.rjust
+inf = float("inf")
+
+def value_formatter(value, width=0):
+    """
+    Return a formated string of a value
+
+    Arguments
+    ---------
+    value : any
+        The value which is formatted
+    width : int
+        A min str length value
+    """
+    ret = None
+    if isinstance(value, list_types) and len(value)>4:
+        if isinstance(value[0], int):
+            formatstr = "[%d, %d, ..., %d, %d]"
+        elif isinstance(value[0], float):
+            formatstr = "[%%.%(ff)s, %%.%(ff)s, ..., %%.%(ff)s, %%.%(ff)s]" % \
+                        float_format()
+        else:
+            formatstr = "[%s, %s, ..., %s, %s]"
+        ret = formatstr % (value[0], value[1], value[-2], value[-1])
+    
+    if isinstance(value, float):
+        if value == inf:
+            ret = "\xe2\x88\x9e"
+        elif value == -inf:
+            ret = "-\xe2\x88\x9e"
+    
+    elif isinstance(value, str):
+        ret = repr(value)
+        
+    if ret is None:
+        ret = str(value)
+    
+    if width == 0:
+        return ret
+    return VALUE_JUST(ret, width)
+
+class Range(object):
+    """
+    A simple class for helping checking a given value is within a certain range
+    """
+    def __init__(self, gt=None, ge=None, lt=None, le=None):
+        """
+        Create a Range
+
+        Arguments
+        ---------
+        gt : scalar (optional)
+            Greater than, range control of argument
+        ge : scalar (optional)
+            Greater than or equal, range control of argument
+        lt : scalar (optional)
+            Lesser than, range control of argument
+        le : scalar (optional)
+            Lesser than or equal, range control of argument
+        """
+        ops = [ge, gt, le, lt]
+        opnames = ["ge", "gt", "le", "lt"]
+
+        # Checking valid combinations of kwargs
+        if le is not None and lt is not None:
+            value_error("Cannot create a 'Range' including "\
+                        "both 'le' and 'lt'")
+        if ge is not None and gt is not None:
+            value_error("Cannot create a 'Range' including "\
+                        "both 'ge' and 'gt'")
+        
+        # Checking valid types for 'RangeChecks'
+        for op, opname in zip(ops, opnames):
+            if not (op is None or isinstance(op, scalars)):
+                type_error("expected a scalar for the '%s' arg" % opname)
+
+        # get limits
+        minval = gt if gt is not None else ge if ge is not None else -inf
+        maxval = lt if lt is not None else le if le is not None else inf
+
+        if minval > maxval:
+            value_error("expected the maxval to be larger than minval")
+
+        # Dict for test and repr
+        range_formats = {}
+        range_formats["minop"] = ">=" if gt is None else ">"
+        range_formats["maxop"] = "<=" if lt is None else "<"
+        range_formats["minvalue"] = str(minval)
+        range_formats["maxvalue"] = str(maxval)
+        
+        # Dict for pretty print
+        range_formats["minop_format"] = "[" if gt is None else "("
+        range_formats["maxop_format"] = "]" if lt is None else ")"
+        range_formats["minformat"] = value_formatter(minval)
+        range_formats["maxformat"] = value_formatter(maxval)
+
+        self._in_range = eval(("lambda value : _all(value %(minop)s %(minvalue)s) "\
+                               "and _all(value %(maxop)s %(maxvalue)s)")%\
+                              range_formats)
+        
+        # Define some string used for pretty print
+        self._range_str = "%(minop_format)s%(minformat)s, "\
+                          "%(maxformat)s%(maxop_format)s" % range_formats
+        
+        self._in_str = "%%s \xe2\x88\x88 %s" % self._range_str
+        
+        self._not_in_str = "%%s \xe2\x88\x89 %s" % self._range_str
+
+        self.arg_repr_str = ", ".join("%s=%s" % (opname, op) \
+                                      for op, opname in zip(ops, opnames) \
+                                      if op is not None)
+
+    def __repr__(self):
+        return "%s(%s)" % (self.__class__.__name__, self.arg_repr_str)
+
+    def __str__(self):
+        return self._range_str
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and \
+               self._in_str == other._in_str
+
+    def __contains__(self, value):
+        """
+        Return True of value is in range
+
+        Arguments
+        ---------
+        value : scalar%s
+            A value to be used in checking range
+        """ % ("" if _np is None else " and np.ndarray")
+        if not isinstance(value, range_types):
+            type_error("only scalars%s can be ranged checked" % \
+                       ("" if _np is None else " and np.ndarray"))
+        return self._in_range(value)
+
+    def format(self, value, width=0):
+        """
+        Return a formated range check of the value
+
+        Arguments
+        ---------
+        value : scalar
+            A value to be used in checking range
+        width : int
+            A min str length value
+        """
+        in_range = self.__contains__(value)
+        
+        if value in self:
+            return self.format_in(value, width)
+        return self.format_not_in(value, width)
+        
+    def format_in(self, value, width=0):
+        """
+        Return a formated range check 
+
+        Arguments
+        ---------
+        value : scalar
+            A value to be used in checking range
+        width : int
+            A min str length value
+        """
+        
+        return self._in_str % value_formatter(value, width)
+
+    def format_not_in(self, value, width=0):
+        """
+        Return a formated range check
+
+        Arguments
+        ---------
+        value : scalar
+            A value to be used in checking range
+        width : int
+            A min str length value
+        """
+        
+        return self._not_in_str % value_formatter(value, width)
+        
+    
 def _floor(value):
     return int(_math.floor(value))
 
@@ -36,20 +229,25 @@ def format_time(time):
     """
     minutes = _floor(time/60)
     seconds = _floor(time%60)
-    if minutes < 1:
+    if minutes == 0:
         return "%d s"%seconds
+    seconds_str =  " %d s" % seconds if seconds else ""
+
     hours = _floor(minutes/60)
     minutes = _floor(minutes%60)
-    if hours < 1:
-        return "%d m %d s"%(minutes, seconds)
-    
+    if hours == 0:
+        return "%d m%s"%(minutes, seconds_str)
+    minutes_str =  " %d m" % minutes if minutes else ""
+
     days = _floor(hours/24)
     hours = _floor(hours%24)
     
-    if days < 1:
-        return "%d h %d m %d s"%(hours, minutes, seconds)
+    if days == 0:
+        return "%d h%s%s"%(hours, minutes_str, seconds_str)
+    hours_str =  " %d h" % hours if hours else ""
 
-    return "%d days %d h %d m %d s"%(days, hours, minutes, seconds)
+    return "%d day%s%s%s%s"%(days, "s" if days>1 else "", hours_str, \
+                             minutes_str, seconds_str)
 
 def tic():
     """
@@ -97,7 +295,7 @@ def camel_capitalize(name):
     """
     Camel capitalize a str
     """
-    arg_check(name, str, context=camel_capitalize)
+    check_arg(name, str, context=camel_capitalize)
     return "".join(n.capitalize() for n in name.split("_"))
 
 def tuplewrap(arg):
@@ -146,74 +344,62 @@ def _range_check(arg, argtype, gt, ge, lt, le):
 
     # Check we want a scalar
     if isinstance(argtype, tuple):
-        assert(all(argtype_item in scalars for argtype_item in argtype))
+        assert(all(argtype_item in range_types for argtype_item in argtype))
     else:
-        assert(argtype in scalars)
+        assert(argtype in range_types)
 
-    # Checking valid combinations of kwargs
-    assert(not all([ge, gt]))
-    assert(not all([le, lt]))
+    range_checker = Range(gt, ge, lt, le)
+    if arg in range_checker:
+        return ""
+    return range_checker.format_not_in(arg)
 
-    # Check for valid type
-    if not isinstance(arg, argtype):
+def _check_arg(arg, argtype, identifyer, context, itemtype, gt, ge, lt, le):
+    """
+    Helper function for arg checking
+    """
+    assert(isinstance(argtype, (tuple, type)))
+
+    # First check for correct range
+    message = _range_check(arg, argtype, gt, ge, lt, le)
+    
+    # If we have a message we failed the range check
+    if message:
+
+        raise_error = value_error
         
-        # Return almost empty string
-        return ""
-
-    # Checking valid types for 'range checks'
-    wrong_range_check_type = False
-    for value in [ge, le, gt, lt]:
-        if not value is None:
-            wrong_range_check_type |= not isinstance(value, scalars)
-                
-    assert(not wrong_range_check_type)
-    
-    # Pick the min and max values
-    if not ge is None:
-        min_val = ge
-    elif not gt is None:
-        min_val = gt
+    # Check the argument
+    elif isinstance(arg, argtype):
+        if itemtype is None or not isinstance(arg, (list, tuple)):
+            return
+        iterativetype = type(arg).__name__
+        assert(isinstance(itemtype, (type, tuple)))
+        if all(isinstance(item, itemtype) for item in arg):
+            return
+        
+        itemtype = tuplewrap(itemtype)
+        
+        message = "expected a '%s' of '%s'"%(iterativetype,\
+                                ", ".join(argt.__name__ for argt in itemtype))
+        raise_error = type_error
     else:
-        min_val = -inf
-    
-    if not le is None:
-        max_val = le
-    elif not lt is None:
-        max_val = lt
-    else:
-        max_val = inf
+        argtype = tuplewrap(argtype)
+        message = "expected a '%s' (got '%s' which is '%s')"%\
+                  (", ".join(argt.__name__ for argt in argtype), \
+                   str(arg), type(arg).__name__)
+        raise_error = type_error
 
-    # Check the relation between the min and max value
-    if min_val > max_val:
-        error("Please provide a 'max value' that is "\
-              "larger than the 'min value'.")
-    
-    range_check_dict = {}
+    # Add identifyer information if passed
+    if isinstance(identifyer, int) and identifyer != -1:
+        message += " as the %s argument" % _argument_positions[identifyer]
+    elif isinstance(identifyer, str):
+        message += " as the '%s' argument" % identifyer
 
-    # Dict for test and repr
-    range_check_dict["min_op"] = ">=" if gt is None else ">"
-    range_check_dict["max_op"] = "<=" if lt is None else "<"
-    range_check_dict["min_value"] = str(min_val)
-    range_check_dict["max_value"] = str(max_val)
-    range_check_dict["value"] = arg
-    
-    # Define a 'check function'
-    if eval(("%(value)f %(min_op)s %(min_value)s "\
-             "and %(value)f %(max_op)s %(max_value)s")%\
-            range_check_dict):
-        return ""
-    
-    # Dict for pretty print
-    from parcheck import value_formatter
-    range_check_dict["min_op_format"] = "[" if gt is None else "("
-    range_check_dict["max_op_format"] = "]" if lt is None else ")"
-    range_check_dict["min_format"] = value_formatter(min_val)
-    range_check_dict["max_format"] = value_formatter(max_val)
-    range_check_dict["value"] = value_formatter(arg)
+    # Add context message
+    message += _context_message(context)
 
-    return "%(value)s \xe2\x88\x89 %(min_op_format)s%(min_format)s"\
-           ", %(max_format)s%(max_op_format)s" % range_check_dict
-    
+    # Display error message
+    raise_error(message)
+
 def check_arg(arg, argtype, num=-1, context=None, itemtype=None,
               gt=None, ge=None, lt=None, le=None):
     """
@@ -243,51 +429,12 @@ def check_arg(arg, argtype, num=-1, context=None, itemtype=None,
     le : scalar (optional)
         Lesser than or equal, range control of argument
     """
-    assert(isinstance(argtype, (tuple, type)))
+    assert(isinstance(num, int))
+    _check_arg(arg, argtype, num, context, itemtype, gt, ge, lt, le)
 
-    # First check for correct range
-    message = _range_check(arg, argtype, gt, ge, lt, le)
-    
-    # If we have a message we failed the range check
-    if message:
-
-        raise_error = value_error
-        
-    # Check the argument
-    elif isinstance(arg, argtype):
-        if itemtype is None or not isinstance(arg, (list, tuple)):
-            return
-        iterativetype = type(arg).__name__
-        assert(isinstance(itemtype, (type, tuple)))
-        if all(isinstance(item, itemtype) for item in arg):
-            return
-        
-        assert(isinstance(num, int))
-        itemtype = tuplewrap(itemtype)
-        
-        message = "expected a '%s' of '%s'"%(iterativetype,\
-                                ", ".join(argt.__name__ for argt in itemtype))
-        raise_error = type_error
-    else:
-        assert(isinstance(num, int))
-        argtype = tuplewrap(argtype)
-        message = "expected a '%s' (got '%s' which is '%s')"%\
-                  (", ".join(argt.__name__ for argt in argtype), \
-                   str(arg), type(arg).__name__)
-        raise_error = type_error
-
-    # Add positional information if passed
-    if num != -1:
-        message += " as the %s argument"%(_argument_positions[num])
-
-    # Add context message
-    message += _context_message(context)
-
-    # Display error message
-    raise_error(message)
 
 def check_kwarg(kwarg, name, argtype, context=None, itemtype=None,
-              gt=None, ge=None, lt=None, le=None):
+                gt=None, ge=None, lt=None, le=None):
     """
     Type check for keyword arguments
 
@@ -315,38 +462,8 @@ def check_kwarg(kwarg, name, argtype, context=None, itemtype=None,
     le : scalar (optional)
         Lesser than or equal, range control of argument
     """
-    assert(isinstance(argtype, (tuple, type)))
-    
-    # First check for correct range
-    message = _range_check(arg, argtype, gt, ge, lt, le)
-    
-    # If we have a message we failed the range check
-    if message:
-        pass
-
-    elif isinstance(kwarg, argtype):
-        if itemtype is None or not isinstance(kwarg, (list, tuple)):
-            return
-        iterativetype = type(kwarg).__name__
-        assert(isinstance(itemtype, (type, tuple)))
-        if all(isinstance(item, itemtype) for item in kwarg):
-            return
-        
-        assert(isinstance(num, int))
-        message = "expected a '%s' of '%s'"%(iterativetype, itemtype.__name__)
-    else:
-        assert(isinstance(name, str))
-        argtype = tuplewrap(argtype)
-        message = "expected a '%s'"%(", ".join(argt.__name__ \
-                                               for argt in argtype))
-    
-    message += " as the '%s' argument"%name
-
-    # Add context message
-    message += _context_message(context)
-
-    # Display error message
-    error(message)
+    assert(isinstance(name, str) and len(name)>0)
+    _check_arg(kwarg, argtype, name, context, itemtype, gt, ge, lt, le)
 
 def quote_join(list_of_str):
     """

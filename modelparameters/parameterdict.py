@@ -15,7 +15,7 @@ See help(ParameterDict) for an interactive example.
 
 __author__ = "Martin Sandve Alnaes <martin.alnes@gmail.com>, "\
              "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2008-06-22 -- 2012-06-27"
+__date__ = "2008-06-22 -- 2012-07-06"
 __copyright__ = "Copyright (C) 2008-2010 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -27,15 +27,13 @@ import sympy
 from string import ljust, rjust, center
 
 # local imports
-from parcheck import *
+from parameters import *
 from logger import *
 
 KEY_JUST = ljust
 PAR_PREFIX = "--"
 FORMAT_CONVERTER = {int:"int", float:"float", str:"string", \
                     list:None, tuple:None, bool:"int"}
-
-value_formatter = repr
 
 def par_cmp(obj1, obj2):
     assert(isinstance(obj1, tuple))

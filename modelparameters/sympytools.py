@@ -1,10 +1,10 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2012-06-29 -- 2012-06-29"
+__date__ = "2012-06-29 -- 2012-07-05"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
 # System imports
-import sympy
+import sympy as sp
 
 from sympy.printing import StrPrinter
 from sympy.printing.ccode import CCodePrinter
@@ -20,9 +20,9 @@ class ModelParameterPrinter(StrPrinter):
 _printer = ModelParameterPrinter()
 
 # Update printer
-sympy.Basic.__str__ = lambda self: _printer.doprint(self)
+sp.Basic.__str__ = lambda self: _printer.doprint(self)
 
-class SymbolParam(sympy.AtomicExpr):
+class SymbolParam(sp.AtomicExpr):
     """
     Class for all Symbols used in ScalarParam
     """
@@ -64,7 +64,7 @@ def Conditional(cond, true_value, false_value):
     true_value : Any model expression
          Model expression for a false evaluation of the conditional
     """
-    return sympy.functions.Piecewise((true_value, cond), (false_value, True))
+    return sp.functions.Piecewise((true_value, cond), (false_value, True))
 
 class CustomCCodePrinter(CCodePrinter):
     """
