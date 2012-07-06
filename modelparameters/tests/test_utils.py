@@ -41,7 +41,7 @@ class RangeTests(unittest.TestCase):
     def test_range_check(self):
         self.assertTrue(0.1 in Range(gt=0))
         self.assertTrue(0.1 in Range(gt=0, lt=0.2))
-        self.assertTrue(0.1 in Range(ge=0, lt=0.2))
+        self.assertTrue(0.1 in Range(0, 0.2))
         self.assertTrue(0.1 in Range(le=0.2))
         self.assertEqual(Range(le=0.2).format(0.1),
                          "0.1 \xe2\x88\x88 [-\xe2\x88\x9e, 0.2]")
@@ -56,7 +56,7 @@ class RangeTests(unittest.TestCase):
         array = np.arange(2,10)
         self.assertTrue(array in Range(gt=0))
         self.assertTrue(array in Range(gt=0, lt=20))
-        self.assertTrue(array in Range(ge=0, lt=20))
+        self.assertTrue(array in Range(0, 20))
         self.assertTrue(array in Range(le=20))
         self.assertEqual(Range(le=20).format(array),
                          "[2, 3, ..., 8, 9] \xe2\x88\x88 [-\xe2\x88\x9e, 20]")
@@ -75,7 +75,7 @@ class CheckArgs(unittest.TestCase):
                          "'int') as the first argument")
 
         with self.assertRaises(TypeError) as cm:
-            check_arg(["s"], list, itemtype=int)
+            check_arg(["s"], list, itemtypes=int)
         self.assertEqual(str(cm.exception), "expected a 'list' of 'int'")
 
         with self.assertRaises(TypeError) as cm:
@@ -112,7 +112,7 @@ class CheckArgs(unittest.TestCase):
         self.assertIsNone(check_arg(1, scalars))
         self.assertIsNone(check_arg(1.0, scalars))
         self.assertIsNone(check_arg(1.0, (float, int)))
-        self.assertIsNone(check_arg([1.0, 2.0], list, itemtype=float))
+        self.assertIsNone(check_arg([1.0, 2.0], list, itemtypes=float))
         self.assertIsNone(check_arg(1.0, scalars, gt=0, lt=2))
         self.assertIsNone(check_arg(5, scalars, ge=0, le=10))
 
@@ -130,7 +130,7 @@ class CheckArgs(unittest.TestCase):
                          "as the 'jada' argument")
 
         with self.assertRaises(TypeError) as cm:
-            check_kwarg(["s"], "jada", list, itemtype=int)
+            check_kwarg(["s"], "jada", list, itemtypes=int)
         self.assertEqual(str(cm.exception), "expected a 'list' of 'int' "\
                          "as the 'jada' argument")
 
@@ -165,10 +165,11 @@ class CheckArgs(unittest.TestCase):
         self.assertIsNone(check_kwarg(1, "bada", scalars))
         self.assertIsNone(check_kwarg(1.0, "bada", scalars))
         self.assertIsNone(check_kwarg(1.0, "bada", (float, int)))
-        self.assertIsNone(check_kwarg([1.0, 2.0], "bada", list, itemtype=float))
+        self.assertIsNone(check_kwarg([1.0, 2.0], "bada", list, itemtypes=float))
+        self.assertIsNone(check_kwarg([1.0, "jada"], "bada", list, \
+                                      itemtypes=(float, str)))
         self.assertIsNone(check_kwarg(1.0, "bada", scalars, gt=0, lt=2))
         self.assertIsNone(check_kwarg(5, "bada", scalars, ge=0, le=10))
-
 
 class BasicUtils(unittest.TestCase):
     def test_iterables(self):

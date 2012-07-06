@@ -18,7 +18,7 @@ import operator
 # local imports
 from config import *
 from logger import *
-from utils import check_arg, scalars, value_formater, _np
+from utils import check_arg,  check_kwarg, scalars, value_formatter, _np
 
 # Collect all parameters
 _all_parameters = {}
@@ -56,7 +56,6 @@ class Param(object):
         check_kwarg(name, "name", str)
         self._value = value
         self.value_type = type(value)
-        self._repr_str = "Param(%s)"
         self._not_in_str = None
         self._in_str = None
         self._in_range = None
@@ -68,8 +67,8 @@ class Param(object):
     def _set_name(self, name):
         check_arg(name, str)
         if self._name:
-            error("Cannot set name attribute of Parameter, "\
-                  "it is already set to '%s'" % self._name)
+            value_error("Cannot set name attribute of %s, it is already set "\
+                  "to '%s'" % (self.__class__.__name__, self._name))
         self._name = name
         
     name = property(_get_name, _set_name)
@@ -92,22 +91,21 @@ class Param(object):
         """
         # Fist check if the value is an int or float.
         # (Treat these independently)
-        name_str = "" if self.name is None else \
-                   " for the parameter '%s'"%self.name
+        name_str = "" if not self.name else " '%s'"%self.name
         if self.value_type in scalars and \
                isinstance(value, scalars):
             if isinstance(value, float) and self.value_type == int:
-                info("Converting %s to %d%s", str(value), int(value), \
+                info("Converting %s to %d%s", value, int(value), \
                      name_str)
             value = self.value_type(value)
         if self.value_type in [bool] and isinstance(value, int) and \
                not isinstance(value, bool):
-            info("Converting %s to '%s'%s", str(value), \
-                 "True" if value else "False", name_str)
+            info("Converting %s to '%s' while setting parameter%s", \
+                 value, bool(value), name_str)
             value = self.value_type(value)
             
         if not isinstance(value, self.value_type):
-            type_error("Please provide a '%s'%s"%\
+            type_error("expected '%s' while setting parameter%s"%\
                        (self.value_type.__name__, name_str))
         if self._in_range is not None:
             if not self._in_range(value):
@@ -151,7 +149,15 @@ class Param(object):
         """
         Returns an executable version of the Param
         """
-        return self._repr_str % value_formatter(self._value)
+        return "%s(%s%s%s)" % (self.__class__.__name__, \
+                               value_formatter(self._value), self._check_arg(),\
+                               self._name_arg())
+
+    def _name_arg(self):
+        return ", name='%s'" % self._name if self._name else ""
+    
+    def _check_arg(self):
+        return ""
     
     def __str__(self):
         """
@@ -177,13 +183,16 @@ class OptionParam(Param):
         name : str (optional)
             The name of the parameter. Used in pretty printing
         """
-        super(OptionParam, self).__init__(value, name)
         check_arg(options, list)
+        if len(options) < 2:
+            value_error("expected the options argument to be at least of length 2")
+            
+        super(OptionParam, self).__init__(value, name)
         
         # Check valid types for an 'option check'
         for option in options:
             if not isinstance(option, option_types):
-                type_error("options can only be 'str' and scalars got '%s'" % \
+                type_error("options can only be 'str' and scalars got: '%s'" % \
                            type(option).__name__)
         
         # Define a 'check function'
@@ -204,8 +213,12 @@ class OptionParam(Param):
         for val in options:
             if not isinstance(val, self.value_type):
                 type_error("All values of the 'option check' " +\
-                           "need to be of type: '%s'" % type(self.value).__name__)
+                           "need to be of type: '%s'" % type(self._value).__name__)
+        self._options = options
         
+    def _check_arg(self):
+        return ", %s" % repr(self._options)
+
 class ConstParam(Param):
     """
     A Constant parameter which prevent any change of values
@@ -223,7 +236,6 @@ class ConstParam(Param):
             The name of the parameter. Used in pretty printing
         """
         Param.__init__(self, value, name)
-        self._repr_str = "ConstParam(%s)"
         
         # Define a 'check function'
         self._in_range = lambda x : x == self._value
@@ -235,34 +247,31 @@ class ConstParam(Param):
 
 class ScalarParam(Param):
     """
-    A simple type and range checking class for a single value
-
-    Example:
-    ========
-    
-    >>> sigma = ScalarParam(5, ge=0, le=10)
-
-    @type value : scalar
-    @param value : The initial value of the ScalarParam parameter
-    @type ge : scalar
-    @param ge : Defines the lower closed limit of the check (greater or
-    equal than).
-    @type gt : scalar
-    @param gt : Defines the lower open limit of the check (greater than).
-    @type le : scalar
-    @param le : Defines the upper closed limit of the check (lesser or
-    equal than).
-    @type lt : scalar
-    @param lt : Defines the upper open limit of the check (lesser than).
-
-    If none of C{gt} or C{ge} are set, are -\inf set as the lower
-    limit. Likewise, if none of C{lt} or C{le} are set, are \inf
-    set as the upper limit.
-
+    A simple type and range checking class for a scalar value
     """
     def __init__(self, value, ge=None, le=None, gt=None, lt=None, \
                  name=None, symname=None):
-        Param.__init__(self, value, name)
+        """
+        Creating a ScalarParam
+        
+        Arguments
+        ---------
+        value : scalar
+            The initial value of this parameter
+        gt : scalar (optional)
+            Greater than, range control of argument
+        ge : scalar (optional)
+            Greater than or equal, range control of argument
+        lt : scalar (optional)
+            Lesser than, range control of argument
+        le : scalar (optional)
+            Lesser than or equal, range control of argument
+        name : str (optional)
+            The name of the parameter. Used in pretty printing
+        symname : str (optional, if sympy is available)
+            The name of the symbol which will be associated with this parameter
+        """
+        super(ScalarParam, self).__init__(value, name)
         
         self._range = Range(ge, le, gt, lt)
         self._in_range = self._range._in_range
@@ -281,26 +290,37 @@ class ScalarParam(Param):
         return self._name
     
     def _set_name(self, name):
-        "Set name"
+        """
+        Set the name. Can only be done if not set during instantiation
+        """
         symname=None
-        if isinstance(name, tuple):
-            assert(len(name)==2)
-            assert(all(isinstance(n, str) for n in name))
-            name, symname = name
-            
-        if not isinstance(name, str):
-            error("expected a str for the name argument")
+        name = tuplewrap(name)
+        check_kwarg(name, "name", tuple, itemtypes=str)
 
-        if self._name:
-            error("Cannot set name attribute of Parameter, "\
-                  "it is already set to '%s'"%self._name)
-        self._name = name
+        if len(name) == 1:
+            name = name[0]
+        elif len(name) == 2:
+            if sp is None:
+                error("sympy is not installed so setting symname is not supported")
+            name, symname = name
+        else:
+            value_error("expected 1 or 2 name arguments")
+        
+        super(ScalarParam, self)._set_name(name)
+
+        if sp is None:
+            return
         
         # Set name of symbol
-        self.sym.abbre = sympy.Symbol(symname)
+        self.sym.abbre = symname
     
     name = property(_get_name, _set_name)
     
+    def _name_arg(self):
+        if sp is None:
+            super(ScalarParam, self)._name_arg()
+        return ", name='%s', symname='%s'" % (self._name, self.sym.abbre)
+
 class ArrayParam(Param):
     """
     A numpy Array based parameter

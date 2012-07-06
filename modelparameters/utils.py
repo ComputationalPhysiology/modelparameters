@@ -78,20 +78,20 @@ class Range(object):
     """
     A simple class for helping checking a given value is within a certain range
     """
-    def __init__(self, gt=None, ge=None, lt=None, le=None):
+    def __init__(self, ge=None, le=None, gt=None, lt=None):
         """
         Create a Range
 
         Arguments
         ---------
-        gt : scalar (optional)
-            Greater than, range control of argument
         ge : scalar (optional)
             Greater than or equal, range control of argument
-        lt : scalar (optional)
-            Lesser than, range control of argument
         le : scalar (optional)
             Lesser than or equal, range control of argument
+        gt : scalar (optional)
+            Greater than, range control of argument
+        lt : scalar (optional)
+            Lesser than, range control of argument
         """
         ops = [ge, gt, le, lt]
         opnames = ["ge", "gt", "le", "lt"]
@@ -334,10 +334,10 @@ def _context_message(context):
 
     return " while calling '{0}'".format(context.func_name)
 
-def _range_check(arg, argtype, gt, ge, lt, le):
+def _range_check(arg, argtype, ge, le, gt, lt):
 
     # First check if we are interested in any range check
-    if all(comp is None for comp in [gt, ge, lt, le]):
+    if all(comp is None for comp in [ge, le, gt, lt]):
 
         # Return empty string 
         return ""
@@ -348,19 +348,19 @@ def _range_check(arg, argtype, gt, ge, lt, le):
     else:
         assert(argtype in range_types)
 
-    range_checker = Range(gt, ge, lt, le)
+    range_checker = Range(ge, le, gt, lt)
     if arg in range_checker:
         return ""
     return range_checker.format_not_in(arg)
 
-def _check_arg(arg, argtype, identifyer, context, itemtype, gt, ge, lt, le):
+def _check_arg(arg, argtype, identifyer, context, itemtypes, ge, le, gt, lt):
     """
     Helper function for arg checking
     """
     assert(isinstance(argtype, (tuple, type)))
 
     # First check for correct range
-    message = _range_check(arg, argtype, gt, ge, lt, le)
+    message = _range_check(arg, argtype, ge, le, gt, lt)
     
     # If we have a message we failed the range check
     if message:
@@ -369,17 +369,17 @@ def _check_arg(arg, argtype, identifyer, context, itemtype, gt, ge, lt, le):
         
     # Check the argument
     elif isinstance(arg, argtype):
-        if itemtype is None or not isinstance(arg, (list, tuple)):
+        if itemtypes is None or not isinstance(arg, (list, tuple)):
             return
         iterativetype = type(arg).__name__
-        assert(isinstance(itemtype, (type, tuple)))
-        if all(isinstance(item, itemtype) for item in arg):
+        assert(isinstance(itemtypes, (type, tuple)))
+        if all(isinstance(item, itemtypes) for item in arg):
             return
         
-        itemtype = tuplewrap(itemtype)
+        itemtypes = tuplewrap(itemtypes)
         
         message = "expected a '%s' of '%s'"%(iterativetype,\
-                                ", ".join(argt.__name__ for argt in itemtype))
+                                ", ".join(argt.__name__ for argt in itemtypes))
         raise_error = type_error
     else:
         argtype = tuplewrap(argtype)
@@ -400,8 +400,8 @@ def _check_arg(arg, argtype, identifyer, context, itemtype, gt, ge, lt, le):
     # Display error message
     raise_error(message)
 
-def check_arg(arg, argtype, num=-1, context=None, itemtype=None,
-              gt=None, ge=None, lt=None, le=None):
+def check_arg(arg, argtype, num=-1, context=None, itemtypes=None,
+              ge=None, le=None, gt=None, lt=None):
     """
     Type check for positional arguments
 
@@ -417,24 +417,24 @@ def check_arg(arg, argtype, num=-1, context=None, itemtype=None,
         The context of the check. If context is a class the check is
         assumed to be during creation. If a function/method the contex is
         assumed to be a call to that function/method
-    itemtype : type (optional)
-        If given argtype must be a tuple or list and itemtype forces each item
+    itemtypes : type (optional)
+        If given argtype must be a tuple or list and itemtypes forces each item
         to be a certain type
-    gt : scalar (optional)
-        Greater than, range control of argument
     ge : scalar (optional)
         Greater than or equal, range control of argument
-    lt : scalar (optional)
-        Lesser than, range control of argument
     le : scalar (optional)
         Lesser than or equal, range control of argument
+    gt : scalar (optional)
+        Greater than, range control of argument
+    lt : scalar (optional)
+        Lesser than, range control of argument
     """
     assert(isinstance(num, int))
-    _check_arg(arg, argtype, num, context, itemtype, gt, ge, lt, le)
+    _check_arg(arg, argtype, num, context, itemtypes, ge, le, gt, lt)
 
 
-def check_kwarg(kwarg, name, argtype, context=None, itemtype=None,
-                gt=None, ge=None, lt=None, le=None):
+def check_kwarg(kwarg, name, argtype, context=None, itemtypes=None,
+                ge=None, le=None, gt=None, lt=None):
     """
     Type check for keyword arguments
 
@@ -450,20 +450,20 @@ def check_kwarg(kwarg, name, argtype, context=None, itemtype=None,
         The context of the check. If context is a class the check is
         assumed to be during creation. If a function/method the contex is
         assumed to be a call to that function/method
-    itemtype : type (optional)
-        If given argtype must be a tuple or list and itemtype forces each item
+    itemtypes : type (optional)
+        If given argtype must be a tuple or list and itemtypes forces each item
         to be a certain type
-    gt : scalar (optional)
-        Greater than, range control of argument
     ge : scalar (optional)
         Greater than or equal, range control of argument
-    lt : scalar (optional)
-        Lesser than, range control of argument
     le : scalar (optional)
         Lesser than or equal, range control of argument
+    gt : scalar (optional)
+        Greater than, range control of argument
+    lt : scalar (optional)
+        Lesser than, range control of argument
     """
     assert(isinstance(name, str) and len(name)>0)
-    _check_arg(kwarg, argtype, name, context, itemtype, gt, ge, lt, le)
+    _check_arg(kwarg, argtype, name, context, itemtypes, ge, le, gt, lt)
 
 def quote_join(list_of_str):
     """
