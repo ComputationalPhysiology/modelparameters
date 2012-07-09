@@ -327,8 +327,5 @@ class TestScalarParam(unittest.TestCase):
         self.assertEqual(eval(str(expr), ns), 5*math.exp(5*0.5))
         
         
-            
-        
-        
 if __name__ == "__main__":
     unittest.main()
