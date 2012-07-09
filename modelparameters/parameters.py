@@ -1,5 +1,5 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2008-06-22 -- 2012-07-06"
+__date__ = "2008-06-22 -- 2012-07-09"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -8,9 +8,13 @@ __all__ = ["Param", "ScalarParam", "OptionParam", "ConstParam", "ArrayParam"]
 # System imports
 # Conditional sympy import
 try:
-    from sympytools import sp
-except:
+    from sympytools import sp, SymbolParam, store_symbol_parameter
+    dummy_sym = SymbolParam("", "")
+except Exception, e:
+    raise e
     sp = None
+    SymbolParam = None
+    dummy_sym = None
 
 import types
 import operator
@@ -18,23 +22,10 @@ import operator
 # local imports
 from config import *
 from logger import *
-from utils import check_arg,  check_kwarg, scalars, value_formatter, _np
-
-# Collect all parameters
-_all_parameters = {}
+from utils import check_arg,  check_kwarg, scalars, value_formatter,\
+     Range, _np, tuplewrap
 
 option_types = scalars + (str,)
-
-def symbol_to_params(sym):
-    """
-    Take a symbol or expression of symbols and returns the corresponding Parameters
-    """
-    check_arg(sym, SymbolParam, context=symbol_to_param)
-    param = _all_parameters.get(sym)
-        
-    if param is None:
-        error("No parameter with name '{0}' registered".format(sym.abbrev))
-    return param
 
 class Param(object):
     _combined_count = 0
@@ -71,19 +62,20 @@ class Param(object):
                   "to '%s'" % (self.__class__.__name__, self._name))
         self._name = name
         
-    name = property(_get_name, _set_name)
-    
-    def setvalue(self, value):
+    def set_value(self, value):
         """
         Try to set the value using the check
         """
         self._value = self.check(value)
         
-    def getvalue(self):
+    def get_value(self):
         """
         Return the value
         """
         return self._value
+    
+    name = property(_get_name, _set_name)
+    value = property(get_value, set_value)
     
     def check(self, value):
         """
@@ -165,6 +157,11 @@ class Param(object):
         """
         return self.format_data()
 
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and \
+               (self._name == other._name, self._value == other._value, \
+                self.__class__ == other.__class__)
+
 class OptionParam(Param):
     """
     A simple type and options checking class for a single value
@@ -207,7 +204,7 @@ class OptionParam(Param):
         self._repr_str = "OptionParam(%%s, %s)" % repr(options)
         
         # Set the value using the check functionality
-        self.setvalue(value)
+        self.set_value(value)
 
         # Check that all values in options has the same type
         for val in options:
@@ -220,6 +217,12 @@ class OptionParam(Param):
         
     def _check_arg(self):
         return ", %s" % repr(self._options)
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and \
+               (self._name == other._name, self._value == other._value, \
+                self.__class__ == other.__class__, \
+                self._options == other._options)
 
 class ConstParam(Param):
     """
@@ -245,14 +248,14 @@ class ConstParam(Param):
         # Define some string used for pretty print
         self._in_str = "%s - Constant"
         self._not_in_str = "%%s != %s" % self._value
-        self.setvalue(value)
+        self.set_value(value)
 
 class ScalarParam(Param):
     """
     A simple type and range checking class for a scalar value
     """
     def __init__(self, value, ge=None, le=None, gt=None, lt=None, \
-                 name=None, symname=None):
+                 unit="1", name="", symname=""):
         """
         Creating a ScalarParam
         
@@ -268,11 +271,15 @@ class ScalarParam(Param):
             Lesser than, range control of argument
         le : scalar (optional)
             Lesser than or equal, range control of argument
+        unit : str (optional, if sympy is available)
+            The unit of the scalar parameter
         name : str (optional)
             The name of the parameter. Used in pretty printing
         symname : str (optional, if sympy is available)
-            The name of the symbol which will be associated with this parameter
+            The name of the symbol which will be associated with this
+            parameter. Can only be set if name is also set.
         """
+        check_arg(value, scalars, 0, ScalarParam)
         super(ScalarParam, self).__init__(value, name)
         
         self._range = Range(ge, le, gt, lt)
@@ -283,10 +290,23 @@ class ScalarParam(Param):
         self._not_in_str = self._range._not_in_str
 
         # Define a 'repr string'
-        self._repr_str = "ScalarParam(%%s, %s%%s)" % self._range.arg_repr_str
-        
+        self._repr_str = "ScalarParam(%%s, %s%%s)" % (self._range.arg_repr_str)
+
+        # Create symbol
+        if name == "":
+            if symname != "":
+                type_error("expected no symname when name is not set")
+            self._sym = dummy_sym
+        elif sp is None:
+            self._sym = None
+        else:
+            self._sym = SymbolParam(name, name if symname == "" else symname)
+
+            # Store parameter 
+            store_symbol_parameter(self)
+
         # Set the value using the check functionality
-        self.setvalue(value)
+        self.set_value(value)
 
     def _get_name(self):
         return self._name
@@ -295,15 +315,16 @@ class ScalarParam(Param):
         """
         Set the name. Can only be done if not set during instantiation
         """
-        symname=None
         name = tuplewrap(name)
         check_kwarg(name, "name", tuple, itemtypes=str)
 
         if len(name) == 1:
             name = name[0]
+            symname = name
         elif len(name) == 2:
             if sp is None:
-                error("sympy is not installed so setting symname is not supported")
+                error("sympy is not installed so setting symname is not "\
+                      "supported")
             name, symname = name
         else:
             value_error("expected 1 or 2 name arguments")
@@ -313,15 +334,33 @@ class ScalarParam(Param):
         if sp is None:
             return
         
-        # Set name of symbol
-        self.sym.abbre = symname
+        # Create a new symbol with the updated name
+        self._sym = SymbolParam(name, symname)
+
+        # Store parameter 
+        store_symbol_parameter(self)
+
+    def get_sym(self):
+        return self._sym
     
     name = property(_get_name, _set_name)
+    sym = property(get_sym)
     
     def _name_arg(self):
+        """
+        Return a repr of the name arguments for a ScalarParam
+        """
+        name_arg = super(ScalarParam, self)._name_arg()
         if sp is None:
-            super(ScalarParam, self)._name_arg()
-        return ", name='%s', symname='%s'" % (self._name, self.sym.abbre)
+            return name_arg
+        return name_arg + (", symname='%s'" % (self._sym.abbrev) \
+               if self._sym.abbrev and self._sym.abbrev != self._name else "")
+
+    def __eq__(self, other):
+        return isinstance(other, self.__class__) and \
+               (self._name == other._name, self._value == other._value, \
+                self.__class__ == other.__class__, \
+                self._range == other._range)
 
 class ArrayParam(Param):
     """
@@ -472,6 +511,8 @@ class SlaveParam(Param):
         # If no '_in_str' is defined
         return "%s - SlaveParam(%s)"%(value_formatter(self.get(), str_length), \
                                     self._str_repr("symb"))
+
+__all__ = [_name for _name in globals().keys() if _name[0] != "_"]
 
 # Test code
 if __name__ == "__main__":

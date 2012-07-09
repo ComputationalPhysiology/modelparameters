@@ -1,6 +1,6 @@
 __author__ = "Johan Hake (hake.dev@gmail.com)"
 __copyright__ = "Copyright (C) 2010 " + __author__
-__date__ = "2010-09-22 -- 2012-07-06"
+__date__ = "2010-09-22 -- 2012-07-09"
 __license__  = "GNU LGPL Version 3.0 or later"
 
 # System imports
@@ -383,9 +383,12 @@ def _check_arg(arg, argtype, identifyer, context, itemtypes, ge, le, gt, lt):
         raise_error = type_error
     else:
         argtype = tuplewrap(argtype)
+        if argtype == scalars:
+            argtype_str = "scalar"
+        else:
+            argtype_str = ", ".join(argt.__name__ for argt in argtype)
         message = "expected a '%s' (got '%s' which is '%s')"%\
-                  (", ".join(argt.__name__ for argt in argtype), \
-                   str(arg), type(arg).__name__)
+                  (argtype_str, arg, type(arg).__name__)
         raise_error = type_error
 
     # Add identifyer information if passed
