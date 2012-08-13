@@ -325,6 +325,133 @@ class TestScalarParam(unittest.TestCase):
         ns.update(math.__dict__)
         
         self.assertEqual(eval(str(expr), ns), 5*math.exp(5*0.5))
+
+if np is not None:
+        
+    class TestArrayParam(unittest.TestCase):
+        def test_init(self):
+            with self.assertRaises(TypeError) as cm:
+                ArrayParam("jada")
+            self.assertEqual(str(cm.exception), "expected a 'scalar or np.ndarray'"
+                             " (got 'jada' which is 'str') as the first argument "
+                             "while instantiating 'ArrayParam'")
+    
+            self.assertEqual(repr(ArrayParam(45)),
+                             "ArrayParam([45])")
+            self.assertEqual(repr(ArrayParam(45, 5)),
+                             "ArrayParam([45, 45, ..., 45, 45])")
+            self.assertEqual(repr(ArrayParam(5.1, 4)),
+                             "ArrayParam([5.1, 5.1, 5.1, 5.1])")
+            self.assertEqual(repr(ArrayParam(np.array([45, 60, 40]))),
+                             "ArrayParam([45, 60, 40])")
+            self.assertEqual(repr(ArrayParam(45, name="jada")),
+                             "ArrayParam([45], name='jada')")
+            self.assertEqual(repr(ArrayParam(45, name="jada", symname="bada.jada")),
+                             "ArrayParam([45], name='jada', symname='bada.jada')")
+    
+            with self.assertRaises(TypeError) as cm:
+                ArrayParam(45, symname="jada")
+                self.assertEqual(str(cm.exception), "expected no symname when name "\
+                                 "is not set")
+            
+            with self.assertRaises(ValueError) as cm:
+                ArrayParam(45, 0)
+            self.assertEqual(str(cm.exception), "0 \xe2\x88\x89 [1, "\
+                             "\xe2\x88\x9e] as the 'size' argument while "\
+                             "instantiating 'ArrayParam'")
+        
+            with self.assertRaises(ValueError) as cm:
+                ArrayParam(45, ge=0, gt=0)
+            self.assertEqual(str(cm.exception), "Cannot create a 'Range' "\
+                             "including both 'ge' and 'gt'")
+        
+            with self.assertRaises(ValueError) as cm:
+                ArrayParam(np.array([40, 60, 45]), ge=50)
+            self.assertEqual(str(cm.exception), "Illegal value: [40, 60, 45] "\
+                             "\xe2\x88\x89 [50, \xe2\x88\x9e]")
+        
+            with self.assertRaises(ValueError) as cm:
+                ArrayParam(45, 4, ge=0, lt=10)
+            self.assertEqual(str(cm.exception), "Illegal value: [45, 45, 45, 45]"\
+                             " \xe2\x88\x89 [0, 10)")
+        
+        def test_name_assign(self):
+            with self.assertRaises(ValueError) as cm:
+                p0 = ArrayParam(45, name="jada")
+                p0.name = "bada"
+            self.assertEqual(str(cm.exception), "Cannot set name attribute of "\
+                             "ArrayParam, it is already set to 'jada'")
+        
+            with self.assertRaises(ValueError) as cm:
+                p0 = ArrayParam(45)
+                p0.name = "bada"
+                p0.name = "snada"
+            self.assertEqual(str(cm.exception), "Cannot set name attribute of "\
+                             "ArrayParam, it is already set to 'bada'")
+        
+            if sp is None:
+                return
+            
+            p0 = ArrayParam(45)
+            p0.name = "bada", "bada.sym"
+            self.assertEqual(p0.name, "bada")
+            self.assertEqual(str(p0.sym), "bada.sym")
+        
+        def test_value_assign(self):
+            with self.assertRaises(ValueError) as cm:
+                p = ArrayParam(5, 4, ge=0, lt=10)
+                p.value = 56
+            self.assertEqual(str(cm.exception), "Illegal value: 56 "\
+                             "\xe2\x88\x89 [0, 10)")
+        
+            with self.assertRaises(TypeError) as cm:
+                p = ArrayParam(5, ge=0, lt=10)
+                p.value = []
+            self.assertEqual(str(cm.exception), "expected a 'scalar or "\
+                             "np.ndarray' (got '[]' which is 'list') while "\
+                             "calling 'ArrayParam.setvalue'")
+        
+            p = ArrayParam(5., 2, ge=0, lt=10)
+            p.value = 6
+            self.assertTrue(np.all(p.value==np.array([6.0, 6.0])))
+            self.assertTrue(isinstance(p.value, np.ndarray) and p.value.dtype == np.float_)
+            
+            p = ArrayParam(5, 3, ge=0, lt=10)
+            p.value = 6.3
+            self.assertTrue(np.all(p.value==np.array([6, 6, 6])))
+            self.assertTrue(isinstance(p.value, np.ndarray) and p.value.dtype == np.intc)
+        
+        def test_equal(self):
+            p0 = ArrayParam(50, 3, ge=0, lt=100, name="bada")
+            p1 = ArrayParam(np.array([50]*3), ge=0, lt=100, name="bada")
+            self.assertTrue(p0==p1)
+            p0.value = 0
+            self.assertTrue(p0!=p1)
+        
+            p0 = ArrayParam(50, 3, gt=0, le=100, name="bada")
+            p1 = ArrayParam(50, 3, gt=0, lt=100, name="bada")
+            self.assertTrue(p0!=p1)
+            
+        def test_sym_access(self):
+            if sp is None:
+                return
+        
+            p0 = ScalarParam(5.0, ge=0, lt=10, name="jada")
+            p1 = ArrayParam(np.array([.2,.3,.4]), ge=0, lt=100, name="bada")
+        
+            expr = p0.sym*sp.exp(5*p1.sym)
+        
+            for symbol_param in symbol_params_from_expr(expr):
+                self.assertTrue(symbol_param in [p0.sym, p1.sym])
+            
+            for symbol_param in iter_symbol_params_from_expr(expr):
+                self.assertTrue(symbol_param in [p0.sym, p1.sym])
+            
+            ns = symbol_param_value_namespace(expr)
+            ns.update(np.__dict__)
+            
+            self.assertTrue(np.all(eval(str(expr), ns)==\
+                                   5.0*np.exp(5*np.array([.2,.3,.4]))))
         
         
 if __name__ == "__main__":

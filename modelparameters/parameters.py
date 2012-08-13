@@ -1,5 +1,5 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2008-06-22 -- 2012-07-09"
+__date__ = "2008-06-22 -- 2012-08-13"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -23,7 +23,8 @@ import operator
 from config import *
 from logger import *
 from utils import check_arg,  check_kwarg, scalars, value_formatter,\
-     Range, _np, tuplewrap
+     Range, tuplewrap, integers, nptypes
+from utils import _np as np
 
 option_types = scalars + (str,)
 
@@ -62,20 +63,20 @@ class Param(object):
                   "to '%s'" % (self.__class__.__name__, self._name))
         self._name = name
         
-    def set_value(self, value):
+    def setvalue(self, value):
         """
         Try to set the value using the check
         """
         self._value = self.check(value)
         
-    def get_value(self):
+    def getvalue(self):
         """
         Return the value
         """
         return self._value
     
     name = property(_get_name, _set_name)
-    value = property(get_value, set_value)
+    value = property(getvalue, setvalue)
     
     def check(self, value):
         """
@@ -83,13 +84,14 @@ class Param(object):
         """
         # Fist check if the value is an int or float.
         # (Treat these independently)
-        name_str = "" if not self.name else " '%s'"%self.name
+        name_str = "" if not self.name else " '%s'" % self.name
         if self.value_type in scalars and \
                isinstance(value, scalars):
             if isinstance(value, float) and self.value_type == int:
                 info("Converting %s to %d%s", value, int(value), \
                      name_str)
             value = self.value_type(value)
+            
         if self.value_type in [bool] and isinstance(value, int) and \
                not isinstance(value, bool):
             info("Converting %s to '%s' while setting parameter%s", \
@@ -97,8 +99,12 @@ class Param(object):
             value = self.value_type(value)
             
         if not isinstance(value, self.value_type):
+            if self.value_type == nptypes:
+                type_name = "scalar or np.ndarray"
+            else:
+                type_name = self.value_type.__name__
             type_error("expected '%s' while setting parameter%s"%\
-                       (self.value_type.__name__, name_str))
+                       (type_name, name_str))
         if self._in_range is not None:
             if not self._in_range(value):
                 value_error("Illegal value%s: %s"%\
@@ -201,10 +207,10 @@ class OptionParam(Param):
         self._not_in_str = "%%s \xe2\x88\x89 %s" % repr(options)
         
         # Define a 'repr string'
-        self._repr_str = "OptionParam(%%s, %s)" % repr(options)
+        #self._repr_str = "OptionParam(%%s, %s)" % repr(options)
         
         # Set the value using the check functionality
-        self.set_value(value)
+        self.setvalue(value)
 
         # Check that all values in options has the same type
         for val in options:
@@ -248,7 +254,7 @@ class ConstParam(Param):
         # Define some string used for pretty print
         self._in_str = "%s - Constant"
         self._not_in_str = "%%s != %s" % self._value
-        self.set_value(value)
+        self.setvalue(value)
 
 class ScalarParam(Param):
     """
@@ -289,9 +295,6 @@ class ScalarParam(Param):
         self._in_str = self._range._in_str
         self._not_in_str = self._range._not_in_str
 
-        # Define a 'repr string'
-        self._repr_str = "ScalarParam(%%s, %s%%s)" % (self._range.arg_repr_str)
-
         # Create symbol
         if name == "":
             if symname != "":
@@ -306,7 +309,9 @@ class ScalarParam(Param):
             store_symbol_parameter(self)
 
         # Set the value using the check functionality
-        self.set_value(value)
+        # (Only if not called from derived class)
+        if type(self) == ScalarParam:
+            self.setvalue(value)
 
     def _get_name(self):
         return self._name
@@ -362,155 +367,211 @@ class ScalarParam(Param):
                 self.__class__ == other.__class__, \
                 self._range == other._range)
 
-class ArrayParam(Param):
+class ArrayParam(ScalarParam):
     """
     A numpy Array based parameter
     """
-    def __init__(self, value, size=None, name=None, symname=None):
+    def __init__(self, value, size=None, ge=None, le=None, gt=None, lt=None, \
+                 unit="1", name="", symname=""):
+        """
+        Creating an ArrayParam
+        
+        Arguments
+        ---------
+        value : scalar, np.ndarray
+            The initial value of this parameter
+        size : integer (optional)
+            Set the size of the ns.array. If set value must be a scalar
+        gt : scalar (optional)
+            Greater than, range control of argument
+        ge : scalar (optional)
+            Greater than or equal, range control of argument
+        lt : scalar (optional)
+            Lesser than, range control of argument
+        le : scalar (optional)
+            Lesser than or equal, range control of argument
+        unit : str (optional, if sympy is available)
+            The unit of the scalar parameter
+        name : str (optional)
+            The name of the parameter. Used in pretty printing
+        symname : str (optional, if sympy is available)
+            The name of the symbol which will be associated with this
+            parameter. Can only be set if name is also set.
+        """
+        
+        if np is None:
+            error("numpy is not installed so ArrayParam is not available")
+
+        # If setting value using size
         if size is not None:
             # If a size is provided a scalar is expected for the value
-            if not isinstance(value, scalars):
-                error("expected a scalar as the first argument")
-            if not isinstance(size, int) and size<=0:
-                error("expected a positive int as the second argument")
-            value = _np.array([value]*size, dtype="d" \
-                             if isinstance(value, float) \
-                             else "i")
-        
-        # Checking Array argument
-        if isinstance(value, _np.ndarray):
-            if value.dtype.char == "f":
-                value = value.astype("d")
-            elif value.dtype.char in ["I", "u", "b"]:
-                value = value.astype("i")
-            elif value.dtype.char not in ["i", "d"]:
-                error("expected dtype of passed NumPy array to "\
-                      "be a scalar")
-        elif isinstance(value, scalars):
-            value = _np.array([value])
+            check_kwarg(size, "size", integers, ArrayParam, ge=1)
+            check_arg(value, scalars, 0, ArrayParam)
+
+            # Create numpy array based on the passed value
+            # Use intc and float_ to be compatible with c code.
+            value = np.array([value]*size, dtype=np.intc \
+                             if isinstance(value, integers) \
+                             else np.float_)
+
+        # If setting value using only value argument
         else:
-            error("expected a scalar or NumPy array as the first "\
-                  "argument")
+            check_arg(value, nptypes, 0, ArrayParam)
+
+            # Fist check any scalars passed
+            if isinstance(value, integers):
+                value = np.array([value], dtype=np.intc)
+            elif isinstance(value, scalars):
+                value = np.array([value], dtype=np.float_)
+
+            # Then check passed NumPy arrays
+            elif value.dtype in integers:
+                value = value.astype(np.intc)
+            elif value.dtype in scalars:
+                value = value.astype(np.float_)
+            else:
+                error("expected a scalar or a scalar valued np.ndarray "
+                      "as value argument.")
+
+        # Init super class with dummy value
+        super(ArrayParam, self).__init__(value[0], ge, le, gt, lt, unit, \
+                                         name, symname)
+
+        # Assign value
+        self._value = value
+        self.value_type = nptypes
+
+        # Use setvalue to set value using the range
+        self.setvalue(value)
         
-        Param.__init__(self, value, name, symname)
-
-        # Define a 'repr string'
-        self._repr_str = "ArrayParam(%s)"
-
     def setvalue(self, value):
         """
         Set value of ArrayParameter
         """
-        if isinstance(value, _np.ndarray):
+
+        # Tuple means index assignment
+        # FIXME: Add support for slices
+        if isinstance(value, tuple):
+            if len(value) != 2:
+                value_error("expected a tuple of length 2 when assigning "\
+                            "single items")
+            if not isinstance(value[0], integers):
+                value_error("expected first value in index assignment to be"\
+                            " an integer")
+            if not isinstance(value[1], scalar):
+                value_error("expected second value in index assignment to be"\
+                            " an scalar")
+            index = value[0]
+            value = value[1]
+        
+        check_arg(value, nptypes, context=ArrayParam.setvalue)
+        index = slice(0,len(self._value)+1)
+
+        if isinstance(value, np.ndarray):
             if len(value) != len(self._value):
-                raise TypeError, "expected the passed array to be of "\
-                      "size: '%d'"%len(self._value)
-            self._value[:] = value
+                error("expected the passed array to be of "\
+                      "size: '%d'"%len(self._value))
+
+        # Assign value
+        self._value[index] = self.check(value)
         
-        # Set the whole array to value
-        elif isinstance(value, scalars):
-            self._value[:] = value
-        elif isinstance(value, tuple) and len(value)==2:
-            if not(isinstance(value[0], int) and \
-                   isinstance(value[1], scalars)):
-                error("expected a size 2 tuple of an int and"\
-                                " a scalar")
-            self._value[value[0]] = value[1]
-        else:
-            error("expected a scalar, numpy array or a size "\
-                  "2 tuple of an int and a scalar")
-        
+    value = property(Param.getvalue, setvalue)
+
     def resize(self, newsize):
         """
         Change the size of the Array
-        """
-        if not isinstance(newsize, int):
+        ""xo"
+        if not isinstance(newsize, integers):
             error("expected newsize argument to be an int")
+            
+        newsize = int(newsize)
+
+        # Resize array if size is changed
         if len(self._value) != newsize:
-            self._value = _np.resize(self._value, newsize)
+            self._value = np.resize(self._value, newsize)
     
-class SlaveParam(Param):
-    """
-    A slave parameter defined by other parameters
-    """
-    _all_objects = {}
-    def __init__(self, value, name=None):
-        if not isinstance(value, (Param, sympy.Basic)):
-            error("expected a scalar, or expression of "\
-                  "other parameters")
-        if isinstance(value, Param):
-            value = value.sym
-
-        if not all(isinstance(atom, (sympy.Number, ParSymbol))\
-                   for atom in value.atoms()):
-            error("expected expression of other parameters")
-        Param.__init__(self, value, name, symname=name)
-
-        # Store the original expression used to evaluate the value of
-        # the SlaveParam
-        self.symbols = value
-        self.is_array = any(isinstance(atom.param, ArrayParam) for atom in \
-                            self.iter_par_symbols())
-        
-        # If the parameter is not array it is scalar
-        self.is_scalar = not self.is_array
-        self._repr_str = "SlaveParam(%s)"
-
-        # Store object
-        SlaveParam._all_objects[str(self)] = self
-        
-    def check(self, value):
-        "A check function which always fails"
-        error("Cannot assign a value to a 'SlaveParam'")
-
-    def _str_repr(self, op="repr"):
-        assert(op in ["name", "repr", "symb"])
-        return str(self.sym.subs(dict(eval("atom.%s_subs()"%op)\
-                                      for atom in self.sym.atoms()\
-                                      if isinstance(atom, ParSymbol))))
-    def __str__(self):
-        return self._str_repr("name")
-    
-    def __repr__(self):
-        return self._str_repr("name")
-
-    def iter_par_symbols(self):
-        """
-        Return an iterator over all original parameter symbols of the
-        expression
-        """
-        for atom in self.symbols.atoms():
-            if not isinstance(atom, ParSymbol):
-                continue
-            if isinstance(atom.param, SlaveParam):
-                for atom in atom.param.iter_par_symbols():
-                    yield atom
-            yield atom
-                
-    def get(self):
-        """
-        Return a computed value of the Parameters
-        """
-        par_symbols = [atom for atom in self.iter_par_symbols()]
-        
-        # Create name space which the expression will be evaluated in
-        ns = dict((str(sym), sym.value()) for sym in par_symbols)
-        ns.update(_np.__dict__)
-        all_length = [len(sym.param.get()) for sym in par_symbols if \
-                      sym.param.is_array]
-        same_length = all(all_length[0] == l for l in all_length)
-        if not same_length:
-            error("expected all ArrayParams in an expression "\
-                  "to be of equal size.")
-
-        return eval(str(self.symbols), globals(), ns)
-    
-    def format_data(self, value=None, not_in=False, str_length=0):
-        "Print a nice formated version of the value and its range"
-
-        # If no '_in_str' is defined
-        return "%s - SlaveParam(%s)"%(value_formatter(self.get(), str_length), \
-                                    self._str_repr("symb"))
+#class SlaveParam(Param):
+#    """
+#    A slave parameter defined by other parameters
+#    """
+#    _all_objects = {}
+#    def __init__(self, value, name=None):
+#        if not isinstance(value, (Param, sympy.Basic)):
+#            error("expected a scalar, or expression of "\
+#                  "other parameters")
+#        if isinstance(value, Param):
+#            value = value.sym
+#
+#        if not all(isinstance(atom, (sympy.Number, ParSymbol))\
+#                   for atom in value.atoms()):
+#            error("expected expression of other parameters")
+#        Param.__init__(self, value, name, symname=name)
+#
+#        # Store the original expression used to evaluate the value of
+#        # the SlaveParam
+#        self.symbols = value
+#        self.is_array = any(isinstance(atom.param, ArrayParam) for atom in \
+#                            self.iter_par_symbols())
+#        
+#        # If the parameter is not array it is scalar
+#        self.is_scalar = not self.is_array
+#        self._repr_str = "SlaveParam(%s)"
+#
+#        # Store object
+#        SlaveParam._all_objects[str(self)] = self
+#        
+#    def check(self, value):
+#        "A check function which always fails"
+#        error("Cannot assign a value to a 'SlaveParam'")
+#
+#    def _str_repr(self, op="repr"):
+#        assert(op in ["name", "repr", "symb"])
+#        return str(self.sym.subs(dict(eval("atom.%s_subs()"%op)\
+#                                      for atom in self.sym.atoms()\
+#                                      if isinstance(atom, ParSymbol))))
+#    def __str__(self):
+#        return self._str_repr("name")
+#    
+#    def __repr__(self):
+#        return self._str_repr("name")
+#
+#    def iter_par_symbols(self):
+#        """
+#        Return an iterator over all original parameter symbols of the
+#        expression
+#        """
+#        for atom in self.symbols.atoms():
+#            if not isinstance(atom, ParSymbol):
+#                continue
+#            if isinstance(atom.param, SlaveParam):
+#                for atom in atom.param.iter_par_symbols():
+#                    yield atom
+#            yield atom
+#                
+#    def get(self):
+#        """
+#        Return a computed value of the Parameters
+#        """
+#        par_symbols = [atom for atom in self.iter_par_symbols()]
+#        
+#        # Create name space which the expression will be evaluated in
+#        ns = dict((str(sym), sym.value()) for sym in par_symbols)
+#        ns.update(np.__dict__)
+#        all_length = [len(sym.param.get()) for sym in par_symbols if \
+#                      sym.param.is_array]
+#        same_length = all(all_length[0] == l for l in all_length)
+#        if not same_length:
+#            error("expected all ArrayParams in an expression "\
+#                  "to be of equal size.")
+#
+#        return eval(str(self.symbols), globals(), ns)
+#    
+#    def format_data(self, value=None, not_in=False, str_length=0):
+#        "Print a nice formated version of the value and its range"
+#
+#        # If no '_in_str' is defined
+#        return "%s - SlaveParam(%s)"%(value_formatter(self.get(), str_length), \
+#                                    self._str_repr("symb"))
 
 __all__ = [_name for _name in globals().keys() if _name[0] != "_"]
 
@@ -537,7 +598,7 @@ if __name__ == "__main__":
     print a
     a.setvalue(7.)
     print a
-    a.setvalue(_np.arange(10))
+    a.setvalue(np.arange(10))
     print a
     a.resize(20)
     print repr(a)
@@ -561,5 +622,5 @@ if __name__ == "__main__":
     
     print p.get()
     z.resize(11)
-    z.setvalue(_np.linspace(0,1,11))
+    z.setvalue(np.linspace(0,1,11))
     print p.get()

@@ -1,5 +1,5 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2012-06-29 -- 2012-07-09"
+__date__ = "2012-06-29 -- 2012-08-10"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -53,7 +53,7 @@ class SymbolParam(sp.AtomicExpr):
         return super(SymbolParam, self).__hash__()
 
     def _hashable_content(self):
-        return (self.name,self.abbrev)
+        return (self.name, self.abbrev)
 
 def Conditional(cond, true_value, false_value):
     """
@@ -87,7 +87,8 @@ def store_symbol_parameter(param):
 
 def symbol_to_params(sym):
     """
-    Take a symbol or expression of symbols and returns the corresponding Parameters
+    Take a symbol or expression of symbols and returns the corresponding
+    Parameters
     """
     if sp is None:
         error("sympy is neaded for symbol_to_params to work.")
@@ -120,5 +121,6 @@ def symbol_param_value_namespace(expr):
     check_arg(expr, sp.Basic)
     return dict((str(symbol_param), symbol_to_params(symbol_param).value) \
                 for symbol_param in iter_symbol_params_from_expr(expr))
+
 
 __all__ = [_name for _name in globals().keys() if _name[0] != "_"]

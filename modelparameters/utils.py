@@ -1,6 +1,6 @@
 __author__ = "Johan Hake (hake.dev@gmail.com)"
 __copyright__ = "Copyright (C) 2010 " + __author__
-__date__ = "2010-09-22 -- 2012-07-09"
+__date__ = "2010-09-22 -- 2012-08-13"
 __license__  = "GNU LGPL Version 3.0 or later"
 
 # System imports
@@ -9,15 +9,20 @@ __license__  = "GNU LGPL Version 3.0 or later"
 try:
     import numpy as _np
     list_types = (_np.ndarray, list)
-    scalars = tuple(t for t in _np.ScalarType if not issubclass(t, basestring))
+    scalars = tuple(t for t in _np.ScalarType if not (issubclass(t, basestring) or \
+                                                      t is _np.void))
+    integers = tuple(t for t in scalars if "int" in t.__name__) + (int,)
+    nptypes = (scalars, _np.ndarray)
     range_types = scalars + (_np.ndarray,)
     _all = _np.all
 except Exception, e:
     print e
     _np = None
     list_types = (list,)
-    scalars = (int, float, bool)
-    range_types = scalars
+    scalars = (int, float)
+    integers = (int,)
+    nptypes = ()
+    range_types = scalars 
     _all = lambda value : value
 
 import time as _time
@@ -27,6 +32,7 @@ import string as _string
 
 # local imports
 from logger import *
+from config import float_format
 
 _toc_time = 0.0
 
@@ -48,17 +54,30 @@ def value_formatter(value, width=0):
         A min str length value
     """
     ret = None
-    if isinstance(value, list_types) and len(value)>4:
-        if isinstance(value[0], int):
-            formatstr = "[%d, %d, ..., %d, %d]"
-        elif isinstance(value[0], float):
-            formatstr = "[%%.%(ff)s, %%.%(ff)s, ..., %%.%(ff)s, %%.%(ff)s]" % \
-                        float_format()
+    if isinstance(value, list_types):
+        if len(value)>4:
+            if isinstance(value[0], integers):
+                formatstr = "[%d, %d, ..., %d, %d]"
+            elif isinstance(value[0], scalars):
+                formatstr = "[%%.%(ff)s, %%.%(ff)s, ..., %%.%(ff)s, %%.%(ff)s]" % \
+                            float_format()
+            else:
+                formatstr = "[%s, %s, ..., %s, %s]"
+            ret = formatstr % (value[0], value[1], value[-2], value[-1])
+        elif len(value) == 0:
+            ret = "[]"
         else:
-            formatstr = "[%s, %s, ..., %s, %s]"
-        ret = formatstr % (value[0], value[1], value[-2], value[-1])
+            if isinstance(value[0], integers):
+                formatstr = "%d"
+            elif isinstance(value[0], scalars):
+                formatstr = "%%.%(ff)s" % float_format()
+            else:
+                formatstr = "%s"
+
+            formatstr = "[%s]" % (", ".join(formatstr for i in range(len(value))) )
+            ret = formatstr % tuple(value)
     
-    if isinstance(value, float):
+    elif isinstance(value, float):
         if value == inf:
             ret = "\xe2\x88\x9e"
         elif value == -inf:
@@ -383,8 +402,12 @@ def _check_arg(arg, argtype, identifyer, context, itemtypes, ge, le, gt, lt):
         raise_error = type_error
     else:
         argtype = tuplewrap(argtype)
-        if argtype == scalars:
+        if argtype == integers:
+            argtype_str = "integer"
+        elif argtype == scalars:
             argtype_str = "scalar"
+        elif argtype == nptypes:
+            argtype_str = "scalar or np.ndarray"
         else:
             argtype_str = ", ".join(argt.__name__ for argt in argtype)
         message = "expected a '%s' (got '%s' which is '%s')"%\
