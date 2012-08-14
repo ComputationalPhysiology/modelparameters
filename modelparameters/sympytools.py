@@ -1,5 +1,5 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2012-06-29 -- 2012-08-10"
+__date__ = "2012-06-29 -- 2012-08-14"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -10,7 +10,7 @@ from sympy.printing import StrPrinter as _StrPrinter
 
 # Local imports
 from utils import check_arg
-from logger import warning
+from logger import warning, error, value_error, type_error
 
 class _ModelParameterPrinter(_StrPrinter):
     """
@@ -91,13 +91,15 @@ def symbol_to_params(sym):
     Parameters
     """
     if sp is None:
-        error("sympy is neaded for symbol_to_params to work.")
+        error("sympy is needed for symbol_to_params to work.")
         
     check_arg(sym, SymbolParam, context=symbol_to_params)
     param = _all_symbol_parameters.get(sym)
         
     if param is None:
-        error("No parameter with name '{0}' registered".format(sym.abbrev))
+        value_error("No parameter with name '{0}' "\
+                    "registered. Remember to declare Params which should be "\
+                    "used in expression with names.".format(sym.abbrev))
     return param
 
 def symbol_params_from_expr(expr):

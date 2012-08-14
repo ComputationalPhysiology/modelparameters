@@ -1,14 +1,16 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2008-06-22 -- 2012-08-13"
+__date__ = "2008-06-22 -- 2012-08-14"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
-__all__ = ["Param", "ScalarParam", "OptionParam", "ConstParam", "ArrayParam"]
+__all__ = ["Param", "ScalarParam", "OptionParam", "ConstParam", "ArrayParam"\
+           "SlaveParam", "eval_param_expr"]
 
 # System imports
 # Conditional sympy import
 try:
-    from sympytools import sp, SymbolParam, store_symbol_parameter
+    from sympytools import sp, SymbolParam, store_symbol_parameter, \
+         symbol_param_value_namespace
     dummy_sym = SymbolParam("", "")
 except Exception, e:
     raise e
@@ -430,8 +432,8 @@ class ArrayParam(ScalarParam):
             elif value.dtype in scalars:
                 value = value.astype(np.float_)
             else:
-                error("expected a scalar or a scalar valued np.ndarray "
-                      "as value argument.")
+                type_error("expected a scalar or a scalar valued np.ndarray "
+                           "as value argument.")
 
         # Init super class with dummy value
         super(ArrayParam, self).__init__(value[0], ge, le, gt, lt, unit, \
@@ -449,6 +451,9 @@ class ArrayParam(ScalarParam):
         Set value of ArrayParameter
         """
 
+        # An initial slive for the whole array
+        index = slice(0,len(self._value)+1)
+
         # Tuple means index assignment
         # FIXME: Add support for slices
         if isinstance(value, tuple):
@@ -458,19 +463,18 @@ class ArrayParam(ScalarParam):
             if not isinstance(value[0], integers):
                 value_error("expected first value in index assignment to be"\
                             " an integer")
-            if not isinstance(value[1], scalar):
+            if not isinstance(value[1], scalars):
                 value_error("expected second value in index assignment to be"\
                             " an scalar")
             index = value[0]
             value = value[1]
         
         check_arg(value, nptypes, context=ArrayParam.setvalue)
-        index = slice(0,len(self._value)+1)
 
         if isinstance(value, np.ndarray):
             if len(value) != len(self._value):
-                error("expected the passed array to be of "\
-                      "size: '%d'"%len(self._value))
+                value_error("expected the passed array to be of "\
+                            "size: '%d'"%len(self._value))
 
         # Assign value
         self._value[index] = self.check(value)
@@ -480,7 +484,7 @@ class ArrayParam(ScalarParam):
     def resize(self, newsize):
         """
         Change the size of the Array
-        ""xo"
+        """
         if not isinstance(newsize, integers):
             error("expected newsize argument to be an int")
             
@@ -490,88 +494,93 @@ class ArrayParam(ScalarParam):
         if len(self._value) != newsize:
             self._value = np.resize(self._value, newsize)
     
-#class SlaveParam(Param):
-#    """
-#    A slave parameter defined by other parameters
-#    """
-#    _all_objects = {}
-#    def __init__(self, value, name=None):
-#        if not isinstance(value, (Param, sympy.Basic)):
-#            error("expected a scalar, or expression of "\
-#                  "other parameters")
-#        if isinstance(value, Param):
-#            value = value.sym
-#
-#        if not all(isinstance(atom, (sympy.Number, ParSymbol))\
-#                   for atom in value.atoms()):
-#            error("expected expression of other parameters")
-#        Param.__init__(self, value, name, symname=name)
-#
-#        # Store the original expression used to evaluate the value of
-#        # the SlaveParam
-#        self.symbols = value
-#        self.is_array = any(isinstance(atom.param, ArrayParam) for atom in \
-#                            self.iter_par_symbols())
-#        
-#        # If the parameter is not array it is scalar
-#        self.is_scalar = not self.is_array
-#        self._repr_str = "SlaveParam(%s)"
-#
-#        # Store object
-#        SlaveParam._all_objects[str(self)] = self
-#        
-#    def check(self, value):
-#        "A check function which always fails"
-#        error("Cannot assign a value to a 'SlaveParam'")
-#
-#    def _str_repr(self, op="repr"):
-#        assert(op in ["name", "repr", "symb"])
-#        return str(self.sym.subs(dict(eval("atom.%s_subs()"%op)\
-#                                      for atom in self.sym.atoms()\
-#                                      if isinstance(atom, ParSymbol))))
-#    def __str__(self):
-#        return self._str_repr("name")
-#    
-#    def __repr__(self):
-#        return self._str_repr("name")
-#
-#    def iter_par_symbols(self):
-#        """
-#        Return an iterator over all original parameter symbols of the
-#        expression
-#        """
-#        for atom in self.symbols.atoms():
-#            if not isinstance(atom, ParSymbol):
-#                continue
-#            if isinstance(atom.param, SlaveParam):
-#                for atom in atom.param.iter_par_symbols():
-#                    yield atom
-#            yield atom
-#                
-#    def get(self):
-#        """
-#        Return a computed value of the Parameters
-#        """
-#        par_symbols = [atom for atom in self.iter_par_symbols()]
-#        
-#        # Create name space which the expression will be evaluated in
-#        ns = dict((str(sym), sym.value()) for sym in par_symbols)
-#        ns.update(np.__dict__)
-#        all_length = [len(sym.param.get()) for sym in par_symbols if \
-#                      sym.param.is_array]
-#        same_length = all(all_length[0] == l for l in all_length)
-#        if not same_length:
-#            error("expected all ArrayParams in an expression "\
-#                  "to be of equal size.")
-#
-#        return eval(str(self.symbols), globals(), ns)
-#    
-#    def format_data(self, value=None, not_in=False, str_length=0):
-#        "Print a nice formated version of the value and its range"
-#
-#        # If no '_in_str' is defined
-#        return "%s - SlaveParam(%s)"%(value_formatter(self.get(), str_length), \
-#                                    self._str_repr("symb"))
+class SlaveParam(ScalarParam):
+    """
+    A slave parameter defined by other parameters
+    """
+    def __init__(self, expr, name=None):
+
+        if sp is None:
+            error("sympy is not installed so SlaveParam is not available")
+            
+        if not isinstance(expr, (ScalarParam, sp.Basic)):
+            type_error("expected an expression of symbols from "\
+                       "other ScalarParams")
+        
+        if isinstance(expr, ScalarParam):
+            expr = expr.sym
+
+        if not all(isinstance(atom, (sp.Number, SymbolParam))\
+                   for atom in expr.atoms()):
+            type_error("expected expression of other ScalarParams")
+        
+        ScalarParam.__init__(self, 0.0, name=name, symname=name)
+
+        # Store the original expression used to evaluate the value of
+        # the SlaveParam
+        self._expr = expr
+        
+    def setvalue(self, value):
+        """
+        A setvalue method which always fails
+        """
+        type_error("cannot assign to a SlaveParam")
+                
+    def getvalue(self):
+        """
+        Return a computed value of the Parameters
+        """
+        
+        return eval_param_expr(self._expr)
+    
+    value = property(getvalue, setvalue)
+
+    def format_data(self, value=None, not_in=False, str_length=0):
+        "Print a nice formated version of the value and its range"
+
+        # If no '_in_str' is defined
+        return "%s - SlaveParam(%s)"%(value_formatter(self.get(), str_length), \
+                                    self._str_repr("symb"))
+
+def eval_param_expr(expr, ns=None):
+    """
+    Eval an expression of symbols of ScalarParam
+
+    Arguments
+    ---------
+    expr : expression of ParamSymbols
+        The expression to be evaulated
+    ns : dict (optional)
+        A namespace in which the expression will be evaluated in
+    """
+
+    if sp is None:
+        error("sympy is not installed so evaluation of expressions"\
+              " is not available")
+    
+    # Create name space which the expression will be evaluated in
+    ns = symbol_param_value_namespace(expr)
+    
+    # First check if we have numpy arrays
+    if np and any(isinstance(value, np.ndarray) for value in ns.values()):
+
+        # Second check if they have the same length
+        all_length = [len(value) for value in ns.values() \
+                      if isinstance(value, np.ndarray)]
+        same_length = all(all_length[0] == l for l in all_length)
+        if not same_length:
+            value_error("expected all ArrayParams in an expression "\
+                        "to be of equal size.")
+        
+        # Update name space with numpy name space
+        ns.update(np.__dict__)
+        
+    else:
+        import math
+        ns.update(math.__dict__)
+    
+    return eval(str(expr), {}, ns)
+    
 
 __all__ = [_name for _name in globals().keys() if _name[0] != "_"]
 
@@ -617,7 +626,7 @@ if __name__ == "__main__":
     z = ArrayParam(1.)
     n = ArrayParam(1.)
     
-    p = SlaveParam(sympy.exp(-z))
+    p = SlaveParam(sp.exp(-z))
     print p
     
     print p.get()

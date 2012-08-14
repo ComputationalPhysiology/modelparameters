@@ -326,6 +326,46 @@ class TestScalarParam(unittest.TestCase):
         
         self.assertEqual(eval(str(expr), ns), 5*math.exp(5*0.5))
 
+if sp is not None:
+    class TestSlaveParam(unittest.TestCase):
+        def test_init(self):
+            import math
+
+            with self.assertRaises(TypeError) as cm:
+                SlaveParam("jada")
+            self.assertEqual(str(cm.exception), "expected an expression of "\
+                             "symbols from other ScalarParams")
+            
+            p0 = ScalarParam(5, 0, lt=10, name="jada")
+            p1 = ScalarParam(0.5, 0, lt=100, name="bada")
+
+            sp0 = SlaveParam(p0, "slave0")
+            sp1 = SlaveParam(p0.sym*sp.exp(5*p1.sym), "slave1")
+
+            self.assertEqual(sp0.value, p0.value)
+            self.assertEqual(sp1.value, 5*math.exp(5*0.5))
+
+            p0.value = 6
+
+            self.assertEqual(sp0.value, p0.value)
+            self.assertEqual(sp1.value, 6*math.exp(5*0.5))
+
+            if np is None:
+                return
+
+            p2 = ArrayParam(np.array([.2,.3,.4]), ge=0, lt=100, name="bada")
+            
+            sp2 = SlaveParam(p2, "slave2")
+            sp3 = SlaveParam(p0.sym*sp.exp(5*p2.sym), "slave3")
+
+            self.assertTrue(np.all(sp2.value==p2.value))
+            self.assertTrue(np.all(sp3.value==6*np.exp(5*np.array([.2,.3,.4]))))
+
+            p2.value = 1, .6
+
+            self.assertTrue(np.all(sp2.value==p2.value))
+            self.assertTrue(np.all(sp3.value==6*np.exp(5*np.array([.2,.6,.4]))))
+
 if np is not None:
         
     class TestArrayParam(unittest.TestCase):
@@ -411,6 +451,12 @@ if np is not None:
                              "np.ndarray' (got '[]' which is 'list') while "\
                              "calling 'ArrayParam.setvalue'")
         
+            with self.assertRaises(ValueError) as cm:
+                p = ArrayParam(5, 3, ge=0, lt=10)
+                p.value = np.arange(4)
+            self.assertEqual(str(cm.exception), "expected the passed array to "\
+                             "be of size: '3'")
+        
             p = ArrayParam(5., 2, ge=0, lt=10)
             p.value = 6
             self.assertTrue(np.all(p.value==np.array([6.0, 6.0])))
@@ -420,7 +466,11 @@ if np is not None:
             p.value = 6.3
             self.assertTrue(np.all(p.value==np.array([6, 6, 6])))
             self.assertTrue(isinstance(p.value, np.ndarray) and p.value.dtype == np.intc)
-        
+
+            p = ArrayParam(5, 3, ge=0, lt=10)
+            p.value = 2, 6
+            self.assertTrue(np.all(p.value==np.array([5, 5, 6])))
+
         def test_equal(self):
             p0 = ArrayParam(50, 3, ge=0, lt=100, name="bada")
             p1 = ArrayParam(np.array([50]*3), ge=0, lt=100, name="bada")
@@ -447,12 +497,16 @@ if np is not None:
             for symbol_param in iter_symbol_params_from_expr(expr):
                 self.assertTrue(symbol_param in [p0.sym, p1.sym])
             
-            ns = symbol_param_value_namespace(expr)
-            ns.update(np.__dict__)
-            
-            self.assertTrue(np.all(eval(str(expr), ns)==\
+            self.assertTrue(np.all(eval_param_expr(expr)==\
                                    5.0*np.exp(5*np.array([.2,.3,.4]))))
-        
+            
+            with self.assertRaises(ValueError) as cm:
+                p0 = ArrayParam(5, 3, ge=0, lt=10, name="snada")
+                p1 = ArrayParam(6, 4, ge=0, lt=10, name="nada")
+                value = eval_param_expr(p0.sym*p1.sym)
+                
+            self.assertEqual(str(cm.exception), "expected all ArrayParams in "\
+                             "an expression to be of equal size.")
         
 if __name__ == "__main__":
     unittest.main()
