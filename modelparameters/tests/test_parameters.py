@@ -5,7 +5,6 @@ import unittest
 from modelparameters.logger import suppress_logging
 from modelparameters.utils import *
 from modelparameters.parameters import *
-from modelparameters.sympytools import *
 
 try:
     import numpy as np
@@ -13,7 +12,7 @@ except:
     np = None
 
 try:
-    import sympy as sp
+    from modelparameters.sympytools import *
 except:
     sp = None
 
@@ -223,8 +222,10 @@ class TestScalarParam(unittest.TestCase):
                          "ScalarParam(45)")
         self.assertEqual(repr(ScalarParam(45, name="jada")),
                          "ScalarParam(45, name='jada')")
-        self.assertEqual(repr(ScalarParam(45, name="jada", symname="bada.jada")),
-                         "ScalarParam(45, name='jada', symname='bada.jada')")
+        if sp is not None:
+            self.assertEqual(repr(ScalarParam(45, name="jada", \
+                                              symname="bada.jada")),
+                             "ScalarParam(45, name='jada', symname='bada.jada')")
 
         with self.assertRaises(TypeError) as cm:
             ScalarParam(45, symname="jada")
@@ -386,8 +387,11 @@ if np is not None:
                              "ArrayParam([45, 60, 40])")
             self.assertEqual(repr(ArrayParam(45, name="jada")),
                              "ArrayParam([45], name='jada')")
-            self.assertEqual(repr(ArrayParam(45, name="jada", symname="bada.jada")),
-                             "ArrayParam([45], name='jada', symname='bada.jada')")
+            if sp is not None:
+                self.assertEqual(repr(ArrayParam(45, name="jada", \
+                                                 symname="bada.jada")),
+                                 "ArrayParam([45], name='jada', "\
+                                 "symname='bada.jada')")
     
             with self.assertRaises(TypeError) as cm:
                 ArrayParam(45, symname="jada")

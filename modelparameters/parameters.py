@@ -12,8 +12,7 @@ try:
     from sympytools import sp, SymbolParam, store_symbol_parameter, \
          symbol_param_value_namespace
     dummy_sym = SymbolParam("", "")
-except Exception, e:
-    raise e
+except ImportError, e:
     sp = None
     SymbolParam = None
     dummy_sym = None
