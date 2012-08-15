@@ -20,5 +20,5 @@ A module providing parameter structure for physical modeling
       """,
       author = __author__.split("(")[0],
       author_email = __author__.split("(")[1][:-1],
-      packages = ["modelparameters"],
+      packages = ["modelparameters", "modelparameters.tests"],
       )
