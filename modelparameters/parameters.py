@@ -1,5 +1,5 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2008-06-22 -- 2012-08-14"
+__date__ = "2008-06-22 -- 2012-08-15"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -30,7 +30,6 @@ from utils import _np as np
 option_types = scalars + (str,)
 
 class Param(object):
-    _combined_count = 0
     """
     A simple type checking class for a single value
     """
@@ -85,7 +84,8 @@ class Param(object):
         """
         # Fist check if the value is an int or float.
         # (Treat these independently)
-        name_str = "" if not self.name else " '%s'" % self.name
+
+        name_str = " '%s'" % self.name if self.name else ""
         if self.value_type in scalars and \
                isinstance(value, scalars):
             if isinstance(value, float) and self.value_type == int:
@@ -362,6 +362,14 @@ class ScalarParam(Param):
         return name_arg + (", symname='%s'" % (self._sym.abbrev) \
                if self._sym.abbrev and self._sym.abbrev != self._name else "")
 
+    def _check_arg(self):
+        """
+        Return a repr of the check arguments
+        """
+        if self._range.arg_repr_str:
+            return ", " + self._range.arg_repr_str
+        return ""
+
     def __eq__(self, other):
         return isinstance(other, self.__class__) and \
                (self._name == other._name, self._value == other._value, \
@@ -538,8 +546,8 @@ class SlaveParam(ScalarParam):
         "Print a nice formated version of the value and its range"
 
         # If no '_in_str' is defined
-        return "%s - SlaveParam(%s)"%(value_formatter(self.get(), str_length), \
-                                    self._str_repr("symb"))
+        return "%s - SlaveParam(%s)"%(value_formatter(self.getvalue(), str_length), \
+                                      str(self._expr))
 
 def eval_param_expr(expr, ns=None):
     """

@@ -222,6 +222,9 @@ class TestScalarParam(unittest.TestCase):
                          "ScalarParam(45)")
         self.assertEqual(repr(ScalarParam(45, name="jada")),
                          "ScalarParam(45, name='jada')")
+        self.assertEqual(repr(ScalarParam(45, gt=0, le=100)), \
+                         "ScalarParam(45, gt=0, le=100)")
+        
         if sp is not None:
             self.assertEqual(repr(ScalarParam(45, name="jada", \
                                               symname="bada.jada")),
