@@ -9,12 +9,12 @@ __all__ = ["Param", "ScalarParam", "OptionParam", "ConstParam", "ArrayParam"\
 # System imports
 # Conditional sympy import
 try:
-    from sympytools import sp, SymbolParam, store_symbol_parameter, \
+    from sympytools import sp, ModelSymbol, store_symbol_parameter, \
          symbol_param_value_namespace
-    dummy_sym = SymbolParam("", "")
+    dummy_sym = ModelSymbol("", "")
 except ImportError, e:
     sp = None
-    SymbolParam = None
+    ModelSymbol = None
     dummy_sym = None
 
 import types
@@ -304,7 +304,7 @@ class ScalarParam(Param):
         elif sp is None:
             self._sym = None
         else:
-            self._sym = SymbolParam(name, name if symname == "" else symname)
+            self._sym = ModelSymbol(name, name if symname == "" else symname)
 
             # Store parameter 
             store_symbol_parameter(self)
@@ -341,7 +341,7 @@ class ScalarParam(Param):
             return
         
         # Create a new symbol with the updated name
-        self._sym = SymbolParam(name, symname)
+        self._sym = ModelSymbol(name, symname)
 
         # Store parameter 
         store_symbol_parameter(self)
@@ -517,7 +517,7 @@ class SlaveParam(ScalarParam):
         if isinstance(expr, ScalarParam):
             expr = expr.sym
 
-        if not all(isinstance(atom, (sp.Number, SymbolParam))\
+        if not all(isinstance(atom, (sp.Number, ModelSymbol))\
                    for atom in expr.atoms()):
             type_error("expected expression of other ScalarParams")
         

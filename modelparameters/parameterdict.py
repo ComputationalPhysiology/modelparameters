@@ -76,7 +76,7 @@ class ParameterDict(dict):
                 type_error("The name of a parameter cannot be "\
                            "an attribute of 'ParameterDict': %s" % key)
             if sp and isinstance(value, sp.Basic) and \
-                   all(isinstance(atom, (sp.Number, SymbolParam))
+                   all(isinstance(atom, (sp.Number, ModelSymbol))
                        for atom in value.atoms()):
                 params[key] = SlaveParam(value, key)
             elif isinstance(value, Param):

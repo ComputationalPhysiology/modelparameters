@@ -16,7 +16,7 @@ class _ModelParameterPrinter(_StrPrinter):
     """
     Custom printer for sympy expressions
     """
-    def _print_SymbolParam(self, expr):
+    def _print_ModelSymbol(self, expr):
         return expr.abbrev
 
 _printer = _ModelParameterPrinter()
@@ -25,7 +25,7 @@ _printer = _ModelParameterPrinter()
 sp.Basic.__str__ = lambda self: _printer.doprint(self)
 sp.Basic.__repr__ = lambda self: _printer.doprint(self)
 
-class SymbolParam(sp.AtomicExpr):
+class ModelSymbol(sp.AtomicExpr):
     """
     Class for all Symbols used in ScalarParam
     """
@@ -47,10 +47,10 @@ class SymbolParam(sp.AtomicExpr):
         return (self.name, self.abbrev)
 
     def __eq__(self, other):
-        return isinstance(other, SymbolParam) and self.name == other.name
+        return isinstance(other, ModelSymbol) and self.name == other.name
 
     def __hash__(self):
-        return super(SymbolParam, self).__hash__()
+        return super(ModelSymbol, self).__hash__()
 
     def _hashable_content(self):
         return (self.name, self.abbrev)
@@ -93,7 +93,7 @@ def symbol_to_params(sym):
     if sp is None:
         error("sympy is needed for symbol_to_params to work.")
         
-    check_arg(sym, SymbolParam, context=symbol_to_params)
+    check_arg(sym, ModelSymbol, context=symbol_to_params)
     param = _all_symbol_parameters.get(sym)
         
     if param is None:
@@ -104,21 +104,21 @@ def symbol_to_params(sym):
 
 def symbol_params_from_expr(expr):
     """
-    Return a list of SymbolParams from expr
+    Return a list of ModelSymbols from expr
     """
     check_arg(expr, sp.Basic)
-    return [atom for atom in expr.atoms() if isinstance(atom, SymbolParam)]
+    return [atom for atom in expr.atoms() if isinstance(atom, ModelSymbol)]
 
 def iter_symbol_params_from_expr(expr):
     """
-    Return an iterator over SymbolParams from expr
+    Return an iterator over ModelSymbols from expr
     """
     check_arg(expr, sp.Basic)
-    return (atom for atom in expr.atoms() if isinstance(atom, SymbolParam))
+    return (atom for atom in expr.atoms() if isinstance(atom, ModelSymbol))
 
 def symbol_param_value_namespace(expr):
     """
-    Extract a list of SymbolParams from expr
+    Extract a list of ModelSymbols from expr
     """
     check_arg(expr, sp.Basic)
     return dict((str(symbol_param), symbol_to_params(symbol_param).value) \
