@@ -2,7 +2,7 @@
 output messages. These may be redirected by the user of ModelParameters."""
 
 __author__ = "Martin Sandve Alnaes and Anders Logg"
-__date__ = "2005-02-04 -- 2012-06-30"
+__date__ = "2005-02-04 -- 2012-08-15"
 __copyright__ = "Copyright (C) 2005-2009 " + __author__
 __license__  = "GPL version 3 or any later version"
 
@@ -74,6 +74,14 @@ class Logger:
         # Set prefix
         self._prefix = ""
 
+        # Set default Exception
+        self._DefaultException = ModelParametersException
+
+    def set_default_exception(self, exception):
+        if not issubclass(exception, Exception):
+            raise TypeError("Expected a subclass of Exception")
+        self._DefaultException = exception
+
     def add_logfile(self, filename=None, mode="a"):
         if filename is None:
             filename = "%s.log" % self._name
@@ -135,7 +143,7 @@ class Logger:
         "Write error message and raise an exception."
         self.log(ERROR, self._format_raw(*message))
         raise_error = kwargs.get("raise_error", self._raise_error)
-        Exception = kwargs.get("exception", ModelParametersException)
+        Exception = kwargs.get("exception", self._DefaultException)
         
         if raise_error:
             raise Exception(self._format_raw(*message))

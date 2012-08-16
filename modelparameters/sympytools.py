@@ -1,5 +1,5 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2012-06-29 -- 2012-08-14"
+__date__ = "2012-06-29 -- 2012-08-16"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -32,7 +32,7 @@ class SymbolParam(sp.AtomicExpr):
     is_positive = True    # make (m**2)**Rational(1,2) --> m
     is_commutative = True
 
-    __slots__ = ["name", "abbrev"]
+    __slots__ = ("name", "abbrev")
 
     def __new__(cls, name, abbrev, **assumptions):
         obj = sp.AtomicExpr.__new__(cls, **assumptions)
