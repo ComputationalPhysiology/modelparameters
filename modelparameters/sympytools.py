@@ -1,5 +1,5 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2012-06-29 -- 2012-08-16"
+__date__ = "2012-06-29 -- 2012-08-17"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -25,20 +25,17 @@ _printer = _ModelParameterPrinter()
 sp.Basic.__str__ = lambda self: _printer.doprint(self)
 sp.Basic.__repr__ = lambda self: _printer.doprint(self)
 
-class ModelSymbol(sp.AtomicExpr):
+class ModelSymbol(sp.Symbol):
     """
     Class for all Symbols used in ScalarParam
     """
-    is_positive = True    # make (m**2)**Rational(1,2) --> m
-    is_commutative = True
 
-    __slots__ = ("name", "abbrev")
+    __slots__ = ("abbrev",)
 
     def __new__(cls, name, abbrev, **assumptions):
-        obj = sp.AtomicExpr.__new__(cls, **assumptions)
+        obj = sp.Symbol.__new__(cls, name, **assumptions)
         assert isinstance(name, str),repr(type(name))
         assert isinstance(abbrev, str),repr(type(abbrev))
-        obj.name = name
         obj.abbrev = abbrev
 
         return obj
@@ -47,7 +44,7 @@ class ModelSymbol(sp.AtomicExpr):
         return (self.name, self.abbrev)
 
     def __eq__(self, other):
-        return isinstance(other, ModelSymbol) and self.name == other.name
+        return isinstance(other, ModelSymbol) and self.abbrev == other.abbrev
 
     def __hash__(self):
         return super(ModelSymbol, self).__hash__()
@@ -80,7 +77,7 @@ def store_symbol_parameter(param):
     from parameters import ScalarParam
     check_arg(param, ScalarParam)
     sym = param.sym
-    if sym in _all_symbol_parameters:
+    if str(sym) in _all_symbol_parameters:
         warning("Parameter with symbol name '%s' already "\
                 "excist" % sym)
     _all_symbol_parameters[sym] = param
@@ -94,7 +91,7 @@ def symbol_to_params(sym):
         error("sympy is needed for symbol_to_params to work.")
         
     check_arg(sym, ModelSymbol, context=symbol_to_params)
-    param = _all_symbol_parameters.get(sym)
+    param = _all_symbol_parameters.get(str(sym))
         
     if param is None:
         value_error("No parameter with name '{0}' "\
