@@ -1,5 +1,5 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2008-06-22 -- 2012-08-24"
+__date__ = "2008-06-22 -- 2012-08-27"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -591,52 +591,3 @@ def eval_param_expr(expr, ns=None):
 
 __all__ = [_name for _name in globals().keys() if _name[0] != "_"]
 
-# Test code
-if __name__ == "__main__":
-    x = Param(3)
-    print x
-    print repr(x)
-    x.setvalue(5)
-    print x
-    
-    v = ScalarParam(5, 0, 10)
-    print v
-    print repr(v)
-    
-    u = OptionParam("a", ["a", "b", "c", "d"])
-    print u
-    print repr(u)
-
-    a = ArrayParam(5.,10)
-    print a
-    print repr(a)
-    a.setvalue((0, 6.))
-    print a
-    a.setvalue(7.)
-    print a
-    a.setvalue(np.arange(10))
-    print a
-    a.resize(20)
-    print repr(a)
-    for atom in (v*x+v*a).atoms():
-        print atom.param
-    print v*x+v*a
-    p = SlaveParam(v*x+v*a)
-    print p.get()
-    print p
-    print repr(p)
-    a1 = ArrayParam(5.,20)
-    print SlaveParam(a1*p).get()
-
-    x = ArrayParam(1.)
-    y = ArrayParam(1.)
-    z = ArrayParam(1.)
-    n = ArrayParam(1.)
-    
-    p = SlaveParam(sp.exp(-z))
-    print p
-    
-    print p.get()
-    z.resize(11)
-    z.setvalue(np.linspace(0,1,11))
-    print p.get()
