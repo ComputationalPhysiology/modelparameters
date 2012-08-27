@@ -1,5 +1,5 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2012-06-29 -- 2012-08-17"
+__date__ = "2012-06-29 -- 2012-08-27"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -80,7 +80,7 @@ def store_symbol_parameter(param):
     if str(sym) in _all_symbol_parameters:
         warning("Parameter with symbol name '%s' already "\
                 "excist" % sym)
-    _all_symbol_parameters[sym] = param
+    _all_symbol_parameters[str(sym)] = param
 
 def symbol_to_params(sym):
     """
@@ -92,7 +92,7 @@ def symbol_to_params(sym):
         
     check_arg(sym, ModelSymbol, context=symbol_to_params)
     param = _all_symbol_parameters.get(str(sym))
-        
+
     if param is None:
         value_error("No parameter with name '{0}' "\
                     "registered. Remember to declare Params which should be "\
