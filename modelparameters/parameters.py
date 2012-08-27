@@ -1,10 +1,10 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2008-06-22 -- 2012-08-15"
+__date__ = "2008-06-22 -- 2012-08-24"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
 __all__ = ["Param", "ScalarParam", "OptionParam", "ConstParam", "ArrayParam"\
-           "SlaveParam", "eval_param_expr"]
+           "SlaveParam", "eval_param_expr", "dummy_sym"]
 
 # System imports
 # Conditional sympy import
