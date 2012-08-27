@@ -1,6 +1,6 @@
 __author__ = "Johan Hake (hake.dev@gmail.com)"
 __copyright__ = "Copyright (C) 2010 " + __author__
-__date__ = "2010-09-22 -- 2012-08-13"
+__date__ = "2010-09-22 -- 2012-08-23"
 __license__  = "GNU LGPL Version 3.0 or later"
 
 # System imports
@@ -147,10 +147,13 @@ class Range(object):
         range_formats["maxop_format"] = "]" if lt is None else ")"
         range_formats["minformat"] = value_formatter(minval)
         range_formats["maxformat"] = value_formatter(maxval)
+        self.range_formats = range_formats
 
-        self._in_range = eval(("lambda value : _all(value %(minop)s %(minvalue)s) "\
-                               "and _all(value %(maxop)s %(maxvalue)s)")%\
-                              range_formats)
+        self.range_eval_str = "lambda value : _all(value %(minop)s %(minvalue)s) "\
+                              "and _all(value %(maxop)s %(maxvalue)s)"%\
+                              range_formats
+
+        self._in_range = eval(self.range_eval_str)
         
         # Define some string used for pretty print
         self._range_str = "%(minop_format)s%(minformat)s, "\
