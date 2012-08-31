@@ -1,5 +1,5 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2012-06-29 -- 2012-08-27"
+__date__ = "2012-06-29 -- 2012-08-31"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -62,7 +62,7 @@ def Conditional(cond, true_value, false_value):
         The conditional which should be evaluated
     true_value : Any model expression
          Model expression for a true evaluation of the conditional
-    true_value : Any model expression
+    false_value : Any model expression
          Model expression for a false evaluation of the conditional
     """
     return sp.functions.Piecewise((true_value, cond), (false_value, True))
@@ -121,5 +121,10 @@ def symbol_param_value_namespace(expr):
     return dict((str(symbol_param), symbol_to_params(symbol_param).value) \
                 for symbol_param in iter_symbol_params_from_expr(expr))
 
+
+# Create a sympy evaulation namespace
+sp_namespace = {}
+sp_namespace.update(sp.functions.__dict__)
+sp_namespace["Conditional"] = Conditional
 
 __all__ = [_name for _name in globals().keys() if _name[0] != "_"]
