@@ -8,7 +8,7 @@ import sympy as sp
 
 from sympy.printing import StrPrinter as _StrPrinter
 from sympy.printing.ccode import CCodePrinter as _CCodePrinter
-from sympy.printing.precedence import _precedence
+from sympy.printing.precedence import precedence as _precedence
 
 class _CustomPythonPrinter(_StrPrinter):
     
@@ -44,9 +44,9 @@ class _CustomPythonPrinter(_StrPrinter):
             return "(%s)" % ("*".join(self._print(expr.base) \
                                       for i in xrange(int(expr.exp))))
         elif expr.exp == 0.5:
-            return '%ssqrt(%s)' % self._print(expr.base)
+            return 'sqrt(%s)' % self._print(expr.base)
         else:
-            return '%spow(%s, %s)'%(self._print(expr.base),
+            return 'pow(%s, %s)'%(self._print(expr.base),
                                     self._print(expr.exp))
 
 class _CustomCCodePrinter(_CCodePrinter):
@@ -55,7 +55,7 @@ class _CustomCCodePrinter(_CCodePrinter):
     """
     
     def __init__(self, cpp=False, settings={}):
-        super(CustomCCodePrinter, self).__init__(settings=settings)
+        super(_CustomCCodePrinter, self).__init__(settings=settings)
         self._prefix = "std::" if cpp else ""
 
     # Better output to c for conditionals
@@ -93,26 +93,29 @@ class _CustomCCodePrinter(_CCodePrinter):
             return '%spow(%s, %s)'%(self._prefix, self._print(expr.base),
                                     self._print(expr.exp))
 
-_python_code_printer = _CustomPythonPrinter
-_ccode_printer = CustomCCodePrinter()
-_cppcode_printer = CustomCCodePrinter(cpp=True)
+_python_code_printer = _CustomPythonPrinter()
+_ccode_printer = _CustomCCodePrinter()
+_cppcode_printer = _CustomCCodePrinter(cpp=True)
 
 def ccode(expr, assign_to=None):
     """
     Return a C-code representation of a sympy expression
     """
-    _ccode_printer.do_print(expr, assign_to)
+    return _ccode_printer.doprint(expr, assign_to)
 
 def cppcode(expr, assign_to=None):
     """
     Return a C++-code representation of a sympy expression
     """
-    _cppcode_printer.do_print(expr, assign_to)
+    return _cppcode_printer.doprint(expr, assign_to)
 
 def pythoncode(expr, assign_to=None):
     """
     Return a Python-code representation of a sympy expression
     """
-    _python_code_printer.do_print(expr, assign_to)
+    if assign_to is not None:
+        return "{0} = {1}".format(assign_to, \
+                                  _python_code_printer.doprint(expr))
+    return _python_code_printer.doprint(expr)
 
 __all__ = [_name for _name in globals().keys() if _name[0] != "_"]
