@@ -8,6 +8,8 @@ import sympy as sp
 
 from sympy.printing import StrPrinter as _StrPrinter
 
+from sympy.core import relational
+
 # Local imports
 from utils import check_arg
 from logger import warning, error, value_error, type_error
@@ -124,7 +126,10 @@ def symbol_param_value_namespace(expr):
 
 # Create a sympy evaulation namespace
 sp_namespace = {}
-sp_namespace.update(sp.functions.__dict__)
+sp_namespace.update((name, op) for name, op in sp.functions.__dict__.items() \
+                    if name[0] != "_")
 sp_namespace["Conditional"] = Conditional
+sp_namespace.update((name, op) for name, op in relational.__dict__.items() \
+                    if name in ["Eq", "Ne", "Gt", "Ge", "Lt", "Le"])
 
 __all__ = [_name for _name in globals().keys() if _name[0] != "_"]
