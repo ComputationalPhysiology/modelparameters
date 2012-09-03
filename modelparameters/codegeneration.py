@@ -22,6 +22,9 @@ class _CustomPythonPrinter(_StrPrinter):
         last_line = self._print(expr.args[-1].expr) + ")"*num_par
         return result+last_line
     
+    def _print_ModelSymbol(self, expr):
+        return expr.name
+
     def _print_Function(self, expr):
         #print expr.func.__name__, expr.args
         if expr.func.__name__ == "Max":
