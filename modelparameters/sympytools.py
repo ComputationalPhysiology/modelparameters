@@ -1,5 +1,5 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2012-06-29 -- 2012-08-31"
+__date__ = "2012-06-29 -- 2012-09-04"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -35,9 +35,9 @@ class ModelSymbol(sp.Symbol):
     __slots__ = ("abbrev",)
 
     def __new__(cls, name, abbrev, **assumptions):
-        obj = sp.Symbol.__new__(cls, name, **assumptions)
-        assert isinstance(name, str),repr(type(name))
-        assert isinstance(abbrev, str),repr(type(abbrev))
+        obj = sp.Symbol.__new__(cls, name, real=True, finite=True)
+        assert isinstance(name, str), repr(type(name))
+        assert isinstance(abbrev, str), repr(type(abbrev))
         obj.abbrev = abbrev
 
         return obj
@@ -67,7 +67,7 @@ def Conditional(cond, true_value, false_value):
     false_value : Any model expression
          Model expression for a false evaluation of the conditional
     """
-    return sp.functions.Piecewise((true_value, cond), (false_value, True))
+    return sp.functions.Piecewise((true_value, cond), (false_value, sp.sympify(1)))
 
 # Collect all parameters
 _all_symbol_parameters = {}
@@ -79,9 +79,9 @@ def store_symbol_parameter(param):
     from parameters import ScalarParam
     check_arg(param, ScalarParam)
     sym = param.sym
-    if str(sym) in _all_symbol_parameters:
-        warning("Parameter with symbol name '%s' already "\
-                "excist" % sym)
+    #if str(sym) in _all_symbol_parameters:
+    #    warning("Parameter with symbol name '%s' already "\
+    #            "excist" % sym)
     _all_symbol_parameters[str(sym)] = param
 
 def symbol_to_params(sym):
