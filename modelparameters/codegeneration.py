@@ -1,5 +1,5 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2012-06-29 -- 2012-09-04"
+__date__ = "2012-06-29 -- 2012-09-05"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -73,7 +73,7 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
         last_line = self._print(expr.args[-1].expr) + ")"*num_par
         return result+last_line
     
-class _CustomCCodePrinter(_CCodePrinter):
+class _CustomCCodePrinter(_StrPrinter):
     """
     Overload some ccode generation
     """
@@ -83,6 +83,21 @@ class _CustomCCodePrinter(_CCodePrinter):
         self._prefix = "std::" if cpp else ""
 
     # Better output to c for conditionals
+    def _print_Min(self, expr):
+        return "%sfmin(%s)" % (self._prefix, self.stringify(expr.args, ", "))
+
+    def _print_Max(self, expr):
+        return "%sfmax(%s)" % (self._prefix, self.stringify(expr.args, ", "))
+
+    def _print_Ceiling(self, expr):
+        return "%sceil(%s)" % (self._prefix, self.stringify(expr.args, ", "))
+        
+    def _print_Abs(self, expr):
+        return "%sfabs(%s)" % (self._prefix, self.stringify(expr.args, ", "))
+
+    def _print_ModelSymbol(self, expr):
+        return expr.name
+
     def _print_Piecewise(self, expr):
         result = ""
         for e, c in expr.args[:-1]:
@@ -92,17 +107,8 @@ class _CustomCCodePrinter(_CCodePrinter):
     
     def _print_Function(self, expr):
         #print expr.func.__name__, expr.args
-        if expr.func.__name__ == "Max":
-            return "%smax(%s)" % (self._prefix, self.stringify(expr.args, ", "))
-        elif expr.func.__name__ == "Min":
-            return "%smin(%s)" % (self._prefix, self.stringify(expr.args, ", "))
-        elif expr.func.__name__ == "ceiling":
-            return "%sceil(%s)" % (self._prefix, self.stringify(expr.args, ", "))
-        elif expr.func.__name__ == "Abs" and not expr.args[0].is_integer:
-            return "%sfabs(%s)" % (self._prefix, self.stringify(expr.args, ", "))
-        else:
-            return "%s" % self._prefix + expr.func.__name__.lower() + \
-                   "(%s)"%self.stringify(expr.args, ", ")
+        return "%s" % self._prefix + expr.func.__name__.lower() + \
+               "(%s)"%self.stringify(expr.args, ", ")
     
     def _print_Pow(self, expr):
         PREC = _precedence(expr)
@@ -131,13 +137,19 @@ def ccode(expr, assign_to=None):
     """
     Return a C-code representation of a sympy expression
     """
-    return _ccode_printer.doprint(expr, assign_to)
+    ret = _ccode_printer.doprint(expr)
+    if assign_to is None:
+        return ret
+    return "{0} = {1}".format(assign_to, ret)
 
 def cppcode(expr, assign_to=None):
     """
     Return a C++-code representation of a sympy expression
     """
-    return _cppcode_printer.doprint(expr, assign_to)
+    ret = _cppcode_printer.doprint(expr)
+    if assign_to is None:
+        return ret
+    return "{0} = {1}".format(assign_to, ret)
 
 def pythoncode(expr, assign_to=None, namespace="math"):
     """
