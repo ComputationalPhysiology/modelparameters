@@ -1,5 +1,5 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2012-06-29 -- 2012-09-04"
+__date__ = "2012-06-29 -- 2012-09-11"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -131,5 +131,7 @@ sp_namespace.update((name, op) for name, op in sp.functions.__dict__.items() \
 sp_namespace["Conditional"] = Conditional
 sp_namespace.update((name, op) for name, op in relational.__dict__.items() \
                     if name in ["Eq", "Ne", "Gt", "Ge", "Lt", "Le"])
+sp_namespace["pi"] = sp.numbers.pi
+sp_namespace["E"] = sp.numbers.E
 
 __all__ = [_name for _name in globals().keys() if _name[0] != "_"]
