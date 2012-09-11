@@ -1,5 +1,5 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2012-06-29 -- 2012-09-05"
+__date__ = "2012-06-29 -- 2012-09-11"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -18,6 +18,15 @@ class _CustomPythonPrinter(_StrPrinter):
         
     def _print_ModelSymbol(self, expr):
         return expr.name
+
+    def _print_One(self, expr):
+        return "1.0"
+
+    def _print_Integer(self, expr):
+        return str(expr.p) + ".0"
+
+    def _print_NegativeOne(self, expr):
+        return "-1.0"
 
     def _print_Sqrt(self, expr):
         return "{0}sqrt({1})".format(self._namespace,self._print(expr.args[0]))
@@ -83,6 +92,15 @@ class _CustomCCodePrinter(_StrPrinter):
         self._prefix = "std::" if cpp else ""
 
     # Better output to c for conditionals
+    def _print_One(self, expr):
+        return "1.0"
+
+    def _print_Integer(self, expr):
+        return str(expr.p) + ".0"
+
+    def _print_NegativeOne(self, expr):
+        return "-1.0"
+
     def _print_Min(self, expr):
         return "%sfmin(%s)" % (self._prefix, self.stringify(expr.args, ", "))
 
