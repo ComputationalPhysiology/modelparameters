@@ -1,5 +1,5 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2012-06-29 -- 2012-09-11"
+__date__ = "2012-06-29 -- 2012-09-24"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -13,6 +13,9 @@ from sympy.core import relational
 # Local imports
 from utils import check_arg
 from logger import warning, error, value_error, type_error
+#from parameterdict import ParameterDict as _ParameterDict
+#from parameters import OptionParam as _OptionParam
+#from parameters import ScalarParam as _ScalarParam
 
 class _ModelParameterPrinter(_StrPrinter):
     """
@@ -63,12 +66,63 @@ def Conditional(cond, true_value, false_value):
     cond : A conditional
         The conditional which should be evaluated
     true_value : Any model expression
-         Model expression for a true evaluation of the conditional
+        Model expression for a true evaluation of the conditional
     false_value : Any model expression
-         Model expression for a false evaluation of the conditional
+        Model expression for a false evaluation of the conditional
     """
+    cond = sp.sympify(cond)
+    if not(hasattr(cond, "is_Relational") or hasattr(cond, "is_relational")):
+        type_error("Expected sympy object to have is_{r,R}elational "\
+                   "attribute.")
+    
+    if (hasattr(cond, "is_Relational") and not cond.is_Relational) or \
+           (hasattr(cond, "is_relational") and not cond.is_relational):
+        type_error("Expected a Relational as first argument.")
+    
     return sp.functions.Piecewise((true_value, cond), (false_value, sp.sympify(1)))
 
+def ContinuousConditional(cond, true_value, false_value, sigma=1.0):
+    """
+    Declares a continuous conditional. Instead of a either or result the
+    true and false values are weighted with a sigmoidal function which
+    either evaluates to 0 or 1 instead of the true or false. 
+
+    Arguments
+    ---------
+    cond : An InEquality conditional
+        An InEquality conditional which should be evaluated
+    true_value : Any model expression
+        Model expression for a true evaluation of the conditional
+    false_value : Any model expression
+        Model expression for a false evaluation of the conditional
+    sigma : float (optional)
+        Determines the sharpness of the sigmoidal function
+    """
+    
+    cond = sp.sympify(cond)
+    if not(hasattr(cond, "is_Relational") or hasattr(cond, "is_relational")):
+        type_error("Expected sympy object to have is_{r,R}elational "\
+                   "attribute.")
+    
+    if (hasattr(cond, "is_Relational") and not cond.is_Relational) or \
+           (hasattr(cond, "is_relational") and not cond.is_relational):
+        type_error("Expected a Relational as first argument.")
+    
+    # FIXME: Use the rel_op for check, as some changes has been applied
+    # FIXME: in latest sympy making comparision difficult
+    if "<" not in cond.rel_op and ">" not in cond.rel_op:
+        type_error("Expected a lesser or greater than relational for "\
+                   "a continuous conditional .")
+    
+    # Create Heaviside
+    H = 1/(1 + sp.exp((cond.args[0]-cond.args[1])/sigma))
+
+    # Desides which should be weighted with 1 and 0
+    if "<" in cond.rel_op:
+        return true_value*(1-H) + false_value*H
+
+    return true_value*H + false_value*(1-H)
+    
 # Collect all parameters
 _all_symbol_parameters = {}
 
@@ -129,6 +183,7 @@ sp_namespace = {}
 sp_namespace.update((name, op) for name, op in sp.functions.__dict__.items() \
                     if name[0] != "_")
 sp_namespace["Conditional"] = Conditional
+sp_namespace["ContinuousConditional"] = ContinuousConditional
 sp_namespace.update((name, op) for name, op in relational.__dict__.items() \
                     if name in ["Eq", "Ne", "Gt", "Ge", "Lt", "Le"])
 sp_namespace["pi"] = sp.numbers.pi
