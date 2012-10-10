@@ -1,5 +1,5 @@
 __author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2012-06-29 -- 2012-09-11"
+__date__ = "2012-06-29 -- 2012-10-10"
 __copyright__ = "Copyright (C) 2008-2012 " + __author__
 __license__  = "GNU LGPL Version 3.0 or later"
 
@@ -102,10 +102,12 @@ class _CustomCCodePrinter(_StrPrinter):
         return "-1.0"
 
     def _print_Min(self, expr):
-        return "%sfmin(%s)" % (self._prefix, self.stringify(expr.args, ", "))
+        "fmin and fmax is not contained in std namespace untill -ansi g++ 4.7"
+        return "fmin(%s)" % (self.stringify(expr.args, ", "))
 
     def _print_Max(self, expr):
-        return "%sfmax(%s)" % (self._prefix, self.stringify(expr.args, ", "))
+        "fmin and fmax is not contained in std namespace untill -ansi g++ 4.7"
+        return "fmax(%s)" % (self.stringify(expr.args, ", "))
 
     def _print_Ceiling(self, expr):
         return "%sceil(%s)" % (self._prefix, self.stringify(expr.args, ", "))
