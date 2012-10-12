@@ -1,7 +1,19 @@
-__author__ = "Johan Hake (hake.dev@gmail.com)"
-__copyright__ = "Copyright (C) 2010 " + __author__
-__date__ = "2010-01-26 -- 2012-08-15"
-__license__  = "GNU LGPL Version 3.0 or later"
+# Copyright (C) 2012 Johan Hake
+#
+# This file is part of ModelParameters.
+#
+# ModelParameters is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# ModelParameters is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with ModelParameters. If not, see <http://www.gnu.org/licenses/>.
 
 from subprocess import Popen, PIPE, STDOUT
 

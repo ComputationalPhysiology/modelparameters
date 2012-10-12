@@ -1,7 +1,19 @@
-__author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2008-06-22 -- 2012-08-27"
-__copyright__ = "Copyright (C) 2008-2012 " + __author__
-__license__  = "GNU LGPL Version 3.0 or later"
+# Copyright (C) 2008-2012 Johan Hake
+#
+# This file is part of ModelParameters.
+#
+# ModelParameters is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# ModelParameters is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with ModelParameters. If not, see <http://www.gnu.org/licenses/>.
 
 __all__ = ["Param", "ScalarParam", "OptionParam", "ConstParam", "ArrayParam"\
            "SlaveParam", "eval_param_expr", "dummy_sym"]
@@ -33,7 +45,7 @@ class Param(object):
     """
     A simple type checking class for a single value
     """
-    def __init__(self, value, name=""):
+    def __init__(self, value, name="", helptext=""):
         """
         Initialize the Param
         
@@ -44,6 +56,8 @@ class Param(object):
             for future type checks
         name : str (optional)
             The name of the parameter. Used in pretty printing
+        helptext : str (optional)
+            A help text associated with the Parameter
         """
         check_kwarg(name, "name", str)
         self._value = value
@@ -52,7 +66,12 @@ class Param(object):
         self._in_str = None
         self._in_range = None
         self._name = name
+        self._helptext = helptext
 
+    @property
+    def helptext(self):
+        return self._helptext
+    
     def _get_name(self):
         return self._name
     

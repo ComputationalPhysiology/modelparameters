@@ -1,12 +1,25 @@
+# Copyright (C) 2006-2012 Johan Hake
+#
+# This file is part of ModelParameters.
+#
+# ModelParameters is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# ModelParameters is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with ModelParameters. If not, see <http://www.gnu.org/licenses/>.
+
 """
 Contains the ParameterDict class, useful for defining
 recursive dictionaries of parameters and using attribute
 syntax for later access.
 """
-__author__ = "Johan Hake <hake.dev@gmail.com>"
-__date__ = "2008-06-22 -- 2012-08-15"
-__copyright__ = "Copyright (C) 2008-2010 " + __author__
-__license__  = "GNU LGPL Version 3.0 or later"
 
 __all__ = ["Param", "ScalarParam", "OptionParam", "ConstParam", "ArrayParam", \
            "SlaveParam", "inf", "ParameterDict"]
@@ -352,10 +365,13 @@ class ParameterDict(dict):
                 opt_base_copy = opt_base[:]
                 if opt_base != PAR_PREFIX:
                     opt_base_copy += "."
+                    
                 # If the value is a ParameterDict
                 if isinstance(value, ParameterDict):
+
                     # Call the function recursively
                     add_options(value, "%s%s"%(opt_base_copy, key))
+
                 elif isinstance(value, Param):
 
                     # ConstParam, ArrayParam cannot be parsed, yet
@@ -363,6 +379,7 @@ class ParameterDict(dict):
                         continue
                     
                     # If the value is a Param get the value
+                    helptext = value.helptext
                     value = value.getvalue()
                 
                 # Check for available types
@@ -386,7 +403,8 @@ class ParameterDict(dict):
                         callback = callback(\
                                 parent, key, type(value), sequence_type), 
                         type = FORMAT_CONVERTER[type(value)], 
-                        help = "Default: %s"%str(value),
+                        help = "Default(%s)"%(str(value) + \
+                                              (": " + helptext) if helptext else "")
                         )
         
         # Start recursively adding options
