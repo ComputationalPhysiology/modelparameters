@@ -24,13 +24,22 @@ from sympy.printing.precedence import precedence as _precedence
 
 class _CustomPythonPrinter(_StrPrinter):
     def __init__(self, namespace=""):
-        assert(namespace in ["", "math", "np", "numpy"])
+        assert(namespace in ["", "math", "np", "numpy", "ufl"])
         self._namespace = namespace if not namespace else namespace + "."
         _StrPrinter.__init__(self)
         
     def _print_ModelSymbol(self, expr):
         return expr.name
 
+    # Why is this not called!
+    def _print_Log(self, expr):
+        if self._namespace == "ufl.":
+            return "{0}ln({1})".format(self._namespace,
+                                       self._print(expr.base))
+        else:
+            return "{0}log({1})".format(self._namespace,
+                                        self._print(expr.base))
+            
     def _print_One(self, expr):
         return "1.0"
 
@@ -80,6 +89,14 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
         if expr.func.__name__ == "ceiling":
             return "{0}ceil({1})".format(self._namespace, \
                                          self.stringify(expr.args, ", "))
+        elif expr.func.__name__ == "log":
+            if self._namespace == "ufl.":
+                return "{0}ln({1})".format(self._namespace,
+                                           self._print(expr.args[0]))
+            else:
+                return "{0}log({1})".format(self._namespace,
+                                            self._print(expr.args[0]))
+            
         else:
             return "{0}{1}".format(self._namespace, \
                         expr.func.__name__.lower() + \
@@ -159,7 +176,8 @@ class _CustomCCodePrinter(_StrPrinter):
 _python_code_printer = {"":_CustomPythonCodePrinter(""),
                         "np":_CustomPythonCodePrinter("np"),
                         "numpy":_CustomPythonCodePrinter("numpy"),
-                        "math":_CustomPythonCodePrinter("math"),}
+                        "math":_CustomPythonCodePrinter("math"),
+                        "ufl":_CustomPythonCodePrinter("ufl"),}
                         
 _ccode_printer = _CustomCCodePrinter()
 _cppcode_printer = _CustomCCodePrinter(cpp=True)
