@@ -96,11 +96,36 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
             else:
                 return "{0}log({1})".format(self._namespace,
                                             self._print(expr.args[0]))
-            
         else:
             return "{0}{1}".format(self._namespace, \
                         expr.func.__name__.lower() + \
                         "({0})".format(self.stringify(expr.args, ", ")))
+
+    def _print_Pow(self, expr):
+        PREC = _precedence(expr)
+        if expr.exp is sp.S.NegativeOne:
+            return "1.0/{0}".format(self.parenthesize(expr.base, PREC))
+        elif expr.exp.is_integer and int(expr.exp) in [2, 3]:
+            return "({0})".format("*".join(self._print(expr.base) \
+                                           for i in xrange(int(expr.exp))))
+        elif expr.exp.is_integer and int(expr.exp) in [-2, -3]:
+            return "1.0/({0})".format("*".join(self._print(expr.base) \
+                                           for i in xrange(int(expr.exp))))
+        elif expr.exp == 0.5:
+            return "{0}sqrt({1})".format(self._namespace,
+                                         self._print(expr.base))
+        elif expr.exp == -0.5:
+            return "1/{0}sqrt({1})".format(self._namespace,
+                                         self._print(expr.base))
+        else:
+            if self._namespace == "ufl.":
+                return "{0}elem_pow({1}, {2})".format(self._namespace,
+                                                      self._print(expr.base),
+                                                      self._print(expr.exp))
+            else:
+                return "{0}pow({1}, {2})".format(self._namespace,
+                                                 self._print(expr.base),
+                                                 self._print(expr.exp))
 
     def _print_Piecewise(self, expr):
         result = ""
@@ -120,7 +145,6 @@ class _CustomCCodePrinter(_StrPrinter):
         super(_CustomCCodePrinter, self).__init__(settings=settings)
         self._prefix = "std::" if cpp else ""
 
-    # Better output to c for conditionals
     def _print_One(self, expr):
         return "1.0"
 
@@ -172,6 +196,56 @@ class _CustomCCodePrinter(_StrPrinter):
             return '%spow(%s, %s)'%(self._prefix, self._print(expr.base),
                                     self._print(expr.exp))
 
+class _CustomMatlabCodePrinter(_StrPrinter):
+    """
+    Overload some ccode generation
+    """
+    
+    def __init__(self, settings={}):
+        super(_CustomMatlabCodePrinter, self).__init__(settings=settings)
+
+    def _print_One(self, expr):
+        return "1.0"
+
+    def _print_Integer(self, expr):
+        return str(expr.p) + ".0"
+
+    def _print_NegativeOne(self, expr):
+        return "-1.0"
+
+    def _print_Ceiling(self, expr):
+        return "ceil(%s)" % (self.stringify(expr.args, ", "))
+    
+    def _print_ModelSymbol(self, expr):
+        return expr.name
+
+    def _print_Piecewise(self, expr):
+        result = ""
+        for e, c in expr.args[:-1]:
+            result += "((%s)*(%s) + !(%s)*"%(self._print(c), \
+                                             self._print(e), self._print(c))
+        last_line = "(%s))" % self._print(expr.args[-1].expr)
+        return result+last_line
+    
+    def _print_Function(self, expr):
+        #print expr.func.__name__, expr.args
+        return "%s(%s)" % (expr.func.__name__.lower(), self.stringify(\
+            expr.args, ", "))
+    
+    def _print_Pow(self, expr):
+        PREC = _precedence(expr)
+        if expr.exp is sp.S.NegativeOne:
+            return '1.0/%s'%(self.parenthesize(expr.base, PREC))
+        elif expr.exp.is_integer:
+            return "(%s)" % ("*".join(self._print(expr.base) \
+                                      for i in xrange(int(expr.exp))))
+        elif expr.exp == 0.5:
+            return 'sqrt(%s)' % (self._print(expr.base))
+        else:
+            # FIXME: Fix paranthesises
+            return '(%s)^(%s)'%(self._print(expr.base),
+                                  self._print(expr.exp))
+
 # Different math namespace python printer
 _python_code_printer = {"":_CustomPythonCodePrinter(""),
                         "np":_CustomPythonCodePrinter("np"),
@@ -182,6 +256,7 @@ _python_code_printer = {"":_CustomPythonCodePrinter(""),
 _ccode_printer = _CustomCCodePrinter()
 _cppcode_printer = _CustomCCodePrinter(cpp=True)
 _sympy_printer = _CustomPythonPrinter()
+_matlab_printer = _CustomMatlabCodePrinter()
 
 def ccode(expr, assign_to=None):
     """
@@ -216,5 +291,13 @@ def sympycode(expr, assign_to=None):
         return ret
     return "{0} = {1}".format(assign_to, ret)
     
+
+def matlabcode(expr, assign_to=None):
+    ret = _matlab_printer.doprint(expr)
+    if assign_to is None:
+        return ret
+    return "{0} = {1}".format(assign_to, ret)
+
+octavecode = matlabcode
 
 __all__ = [_name for _name in globals().keys() if _name[0] != "_"]
