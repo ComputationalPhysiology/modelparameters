@@ -204,6 +204,12 @@ class _CustomMatlabCodePrinter(_StrPrinter):
     def __init__(self, settings={}):
         super(_CustomMatlabCodePrinter, self).__init__(settings=settings)
 
+    def _print_Min(self, expr):
+        return "min(%s)" % (self.stringify(expr.args, ", "))
+
+    def _print_Max(self, expr):
+        return "max(%s)" % (self.stringify(expr.args, ", "))
+
     def _print_One(self, expr):
         return "1.0"
 
