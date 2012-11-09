@@ -91,7 +91,7 @@ def Conditional(cond, true_value, false_value):
            (hasattr(cond, "is_relational") and not cond.is_relational):
         type_error("Expected a Relational as first argument.")
     
-    return sp.functions.Piecewise((true_value, cond), (false_value, sp.sympify(1)))
+    return sp.functions.Piecewise((true_value, cond), (false_value, sp.sympify(True)))
 
 def ContinuousConditional(cond, true_value, false_value, sigma=1.0):
     """
