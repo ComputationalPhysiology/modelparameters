@@ -561,6 +561,13 @@ class SlaveParam(ScalarParam):
     
     value = property(getvalue, setvalue)
 
+    @property
+    def expr(self):
+        """
+        Return the stored expression
+        """
+        return self._expr
+
     def format_data(self, value=None, not_in=False, str_length=0):
         "Print a nice formated version of the value and its range"
 
