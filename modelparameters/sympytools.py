@@ -194,6 +194,20 @@ def symbol_param_value_namespace(expr):
     return dict((str(symbol_param), symbol_to_params(symbol_param).value) \
                 for symbol_param in iter_symbol_params_from_expr(expr))
 
+def add_pair_to_subs(subs, old, new):
+    """
+    Add a pair of old and new symbols to subs. If a subs with old as a
+    key already excist it will be removed before insertion.
+    """
+    check_arg(subs, list, 0)
+    check_arg(old, sp.Basic, 1)
+    check_arg(new, sp.Basic, 2)
+    
+    for ind, (old0, new0) in enumerate(subs):
+        if old0 == old:
+            subs.pop(ind)
+            break
+    subs.append((old, new))
 
 # Create a sympy evaulation namespace
 sp_namespace = {}
