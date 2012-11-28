@@ -83,6 +83,11 @@ def Conditional(cond, true_value, false_value):
         Model expression for a false evaluation of the conditional
     """
     cond = sp.sympify(cond)
+
+    # If the conditional is a bool it is already evaluated
+    if isinstance(cond, bool):
+        return true_value if cond else false_value
+        
     if not(hasattr(cond, "is_Relational") or hasattr(cond, "is_relational")):
         type_error("Expected sympy object to have is_{r,R}elational "\
                    "attribute.")
