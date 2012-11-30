@@ -34,7 +34,7 @@ class _ModelParameterPrinter(_StrPrinter):
     Custom printer for sympy expressions
     """
     def _print_ModelSymbol(self, expr):
-        return expr.abbrev
+        return expr.name#"{0}.{1}".formate(expr.abrev, expr.name)
 
 _printer = _ModelParameterPrinter()
 
