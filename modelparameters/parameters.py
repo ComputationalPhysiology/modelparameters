@@ -536,8 +536,8 @@ class SlaveParam(ScalarParam):
         if isinstance(expr, ScalarParam):
             expr = expr.sym
 
-        if not all(isinstance(atom, (sp.Number, ModelSymbol, sp.Dummy))\
-                   for atom in expr.atoms()):
+        if not all(isinstance(atom, (sp.NumberSymbol, sp.Number, ModelSymbol, \
+                                     sp.Dummy)) for atom in expr.atoms()):
             type_error("expected expression of model symbols.")
         
         ScalarParam.__init__(self, 0.0, name=name, symname=name)
