@@ -204,6 +204,10 @@ class Logger:
         for h in self._logfiles.values():
             h.setLevel(level)
 
+    def get_log_level(self):
+        "Get log level."
+        return self._level_stack[-1]
+
     def set_log_indent(self, level):
         "Set indentation level."
         self._indent_level = level
