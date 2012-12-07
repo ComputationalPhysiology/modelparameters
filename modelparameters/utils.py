@@ -42,6 +42,8 @@ import math as _math
 import types as _types
 import string as _string
 
+from collections import OrderedDict as _OrderedDict
+
 # local imports
 from logger import *
 from config import float_format
@@ -282,6 +284,48 @@ def format_time(time):
 
     return "%d day%s%s%s%s"%(days, "s" if days>1 else "", hours_str, \
                              minutes_str, seconds_str)
+
+class Timer(object):
+    """
+    Timer class 
+    """
+    __all_timings = _OrderedDict()
+    def __init__(self, task):
+        """
+        Start timing task
+        """
+        check_arg(task, str)
+        self._start_time = _time.time()
+        self._task = task
+
+    def __del__(self):
+        """
+        Called when Timer go out of scope. The timing will be registered
+        """
+        end_time = _time.time()
+        if self._task in Timer.__all_timings:
+            Timer.__all_timings[self._task][0]+=1
+            Timer.__all_timings[self._task][1]+=end_time-self._start_time
+        else:
+            Timer.__all_timings[self._task] = [1, end_time-self._start_time]
+
+    @classmethod
+    def timings(cls):
+        """
+        Return all registered timings
+        """
+        return cls.__all_timings
+
+def list_timings():
+    """
+    List all registered timings
+    """
+    left_size = len(max(Timer.timings().keys(), key=len)) + 1
+    print "task".ljust(left_size)+":  num  : total time : mean time"
+    print "-"*left_size          +"--------------------------------"
+    for task, (num, time) in Timer.timings().items():
+        print task.ljust(left_size)+": {0:5d} : {1:6.3f} s : {2:5.3f} s".format(\
+            num, time, time/num)
 
 def tic():
     """
