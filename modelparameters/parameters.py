@@ -23,6 +23,7 @@ __all__ = ["Param", "ScalarParam", "OptionParam", "ConstParam", "ArrayParam"\
 try:
     from sympytools import sp, ModelSymbol, store_symbol_parameter, \
          symbol_param_value_namespace
+    from codegeneration import pythoncode
     dummy_sym = ModelSymbol("", "")
 except ImportError, e:
     sp = None
@@ -524,21 +525,20 @@ class SlaveParam(ScalarParam):
     """
     A slave parameter defined by other parameters
     """
-    def __init__(self, expr, name=None):
+    def __init__(self, expr, unit="1", name="", symname=""):
 
         if sp is None:
             error("sympy is not installed so SlaveParam is not available")
             
         if not isinstance(expr, (ScalarParam, sp.Basic)):
-            type_error("expected an expression of symbols from "\
-                       "other ScalarParams")
+            type_error("expected an expression of model symbols.")
         
         if isinstance(expr, ScalarParam):
             expr = expr.sym
 
-        if not all(isinstance(atom, (sp.Number, ModelSymbol))\
+        if not all(isinstance(atom, (sp.Number, ModelSymbol, sp.Dummy))\
                    for atom in expr.atoms()):
-            type_error("expected expression of other ScalarParams")
+            type_error("expected expression of model symbols.")
         
         ScalarParam.__init__(self, 0.0, name=name, symname=name)
 
@@ -592,7 +592,7 @@ def eval_param_expr(expr, ns=None):
               " is not available")
     
     # Create name space which the expression will be evaluated in
-    ns = symbol_param_value_namespace(expr)
+    ns = {}
     
     # First check if we have numpy arrays
     if np and any(isinstance(value, np.ndarray) for value in ns.values()):
@@ -604,15 +604,18 @@ def eval_param_expr(expr, ns=None):
         if not same_length:
             value_error("expected all ArrayParams in an expression "\
                         "to be of equal size.")
-        
+
         # Update name space with numpy name space
         ns.update(np.__dict__)
         
     else:
         import math
         ns.update(math.__dict__)
+
+    # Update with symbol namespace
+    ns.update(symbol_param_value_namespace(expr))
     
-    return eval(str(expr), {}, ns)
+    return eval(pythoncode(expr, namespace=""), {}, ns)
     
 
 __all__ = [_name for _name in globals().keys() if _name[0] != "_"]
