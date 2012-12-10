@@ -22,6 +22,15 @@ from sympy.printing import StrPrinter as _StrPrinter
 from sympy.printing.ccode import CCodePrinter as _CCodePrinter
 from sympy.printing.precedence import precedence as _precedence
 
+_relational_map = {
+    "==":"Eq",
+    "!=":"Ne",
+    "<":"Lt",
+    "<=":"Le",
+    ">":"Gt",
+    ">=":"Ge",
+    }
+
 class _CustomPythonPrinter(_StrPrinter):
     def __init__(self, namespace=""):
         assert(namespace in ["", "math", "np", "numpy", "ufl"])
@@ -42,6 +51,9 @@ class _CustomPythonPrinter(_StrPrinter):
             
     def _print_One(self, expr):
         return "1.0"
+
+    def _print_Zero(self, expr):
+        return "0.0"
 
     def _print_Integer(self, expr):
         return str(expr.p) + ".0"
@@ -69,9 +81,12 @@ class _CustomPythonPrinter(_StrPrinter):
             return "1/{0}sqrt({1})".format(self._namespace,
                                          self._print(expr.base))
         else:
-            return "{0}pow({1}, {2})".format(self._namespace,
-                                             self._print(expr.base),
-                                             self._print(expr.exp))
+            return "{0}**{1}".format(self.parenthesize(expr.base, PREC),
+                                     self.parenthesize(expr.exp, PREC))
+        
+    def _print_Relational(self, expr):
+        return '{0}({1}, {2})'.format(_relational_map[expr.rel_op],
+                                      expr.lhs, expr.rhs)
 
 class _CustomPythonCodePrinter(_CustomPythonPrinter):
 

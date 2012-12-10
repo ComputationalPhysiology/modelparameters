@@ -18,29 +18,16 @@
 # System imports
 import sympy as sp
 
-from sympy.printing import StrPrinter as _StrPrinter
-
 from sympy.core import relational
 
 # Local imports
 from utils import check_arg
 from logger import warning, error, value_error, type_error
-#from parameterdict import ParameterDict as _ParameterDict
-#from parameters import OptionParam as _OptionParam
-#from parameters import ScalarParam as _ScalarParam
-
-class _ModelParameterPrinter(_StrPrinter):
-    """
-    Custom printer for sympy expressions
-    """
-    def _print_ModelSymbol(self, expr):
-        return expr.name#"{0}.{1}".formate(expr.abrev, expr.name)
-
-_printer = _ModelParameterPrinter()
+from codegeneration import sympycode
 
 # Update printer
-sp.Basic.__str__ = lambda self: _printer.doprint(self)
-sp.Basic.__repr__ = lambda self: _printer.doprint(self)
+sp.Basic.__str__ = sympycode
+sp.Basic.__repr__ = sympycode
 
 class ModelSymbol(sp.Symbol):
     """
