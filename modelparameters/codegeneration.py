@@ -64,29 +64,19 @@ class _CustomPythonPrinter(_StrPrinter):
     def _print_Sqrt(self, expr):
         return "{0}sqrt({1})".format(self._namespace,self._print(expr.args[0]))
     
-    def _print_Pow(self, expr):
-        PREC = _precedence(expr)
-        if expr.exp is sp.S.NegativeOne:
-            return "1.0/{0}".format(self.parenthesize(expr.base, PREC))
-        elif expr.exp.is_integer and int(expr.exp) in [2, 3]:
-            return "({0})".format("*".join(self._print(expr.base) \
-                                           for i in xrange(int(expr.exp))))
-        elif expr.exp.is_integer and int(expr.exp) in [-2, -3]:
-            return "1.0/({0})".format("*".join(self._print(expr.base) \
-                                           for i in xrange(int(expr.exp))))
-        elif expr.exp == 0.5:
-            return "{0}sqrt({1})".format(self._namespace,
-                                         self._print(expr.base))
-        elif expr.exp == -0.5:
-            return "1/{0}sqrt({1})".format(self._namespace,
-                                         self._print(expr.base))
-        else:
-            return "{0}**{1}".format(self.parenthesize(expr.base, PREC),
-                                     self.parenthesize(expr.exp, PREC))
-        
     def _print_Relational(self, expr):
         return '{0}({1}, {2})'.format(_relational_map[expr.rel_op],
                                       expr.lhs, expr.rhs)
+
+    def _print_Piecewise(self, expr):
+        result = ""
+        num_par = 0
+        for e, c in expr.args[:-1]:
+            num_par += 1
+            result += "Conditional({0}, {1}, ".format(self._print(c), \
+                                                      self._print(e))
+        last_line = self._print(expr.args[-1].expr) + ")"*num_par
+        return result+last_line
 
 class _CustomPythonCodePrinter(_CustomPythonPrinter):
 
