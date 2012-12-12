@@ -140,6 +140,12 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
             result += "(%s if %s else "%(self._print(e), self._print(c))
         last_line = self._print(expr.args[-1].expr) + ")"*num_par
         return result+last_line
+
+    def _print_Relational(self, expr):
+        return '%s %s %s'%(self.parenthesize(expr.lhs, _precedence(expr)),
+                           expr.rel_op,
+                           self.parenthesize(expr.rhs, _precedence(expr)))
+
     
 class _CustomCCodePrinter(_StrPrinter):
     """
