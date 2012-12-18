@@ -169,7 +169,7 @@ class Param(object):
         Returns an executable version of the Param
         """
         return "%s(%s%s%s)" % (self.__class__.__name__, \
-                               value_formatter(self._value), self._check_arg(),\
+                               value_formatter(self.value), self._check_arg(),\
                                self._name_arg())
 
     def _name_arg(self):
