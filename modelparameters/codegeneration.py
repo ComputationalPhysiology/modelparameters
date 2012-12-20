@@ -106,31 +106,29 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
                         expr.func.__name__.lower() + \
                         "({0})".format(self.stringify(expr.args, ", ")))
 
-    def _print_Pow(self, expr):
+    def _print_Pow(self, expr, rational=False):
         PREC = _precedence(expr)
         if expr.exp is sp.S.NegativeOne:
             return "1.0/{0}".format(self.parenthesize(expr.base, PREC))
-        elif expr.exp.is_integer and int(expr.exp) in [2, 3]:
+        if expr.exp.is_integer and int(expr.exp) in [2, 3]:
             return "({0})".format("*".join(self._print(expr.base) \
                                            for i in xrange(int(expr.exp))))
-        elif expr.exp.is_integer and int(expr.exp) in [-2, -3]:
+        if expr.exp.is_integer and int(expr.exp) in [-2, -3]:
             return "1.0/({0})".format("*".join(self._print(expr.base) \
                                            for i in xrange(int(expr.exp))))
-        elif expr.exp == 0.5:
+        if expr.exp is sp.S.Half and not rational:
             return "{0}sqrt({1})".format(self._namespace,
                                          self._print(expr.base))
-        elif expr.exp == -0.5:
+        if expr.exp == -0.5:
             return "1/{0}sqrt({1})".format(self._namespace,
                                          self._print(expr.base))
-        else:
-            if self._namespace == "ufl.":
-                return "{0}elem_pow({1}, {2})".format(self._namespace,
+        if self._namespace == "ufl.":
+            return "{0}elem_pow({1}, {2})".format(self._namespace,
                                                       self._print(expr.base),
                                                       self._print(expr.exp))
-            else:
-                return "{0}pow({1}, {2})".format(self._namespace,
-                                                 self._print(expr.base),
-                                                 self._print(expr.exp))
+        return "{0}pow({1}, {2})".format(self._namespace,
+                                         self._print(expr.base),
+                                         self._print(expr.exp))
 
     def _print_Piecewise(self, expr):
         result = ""
@@ -221,15 +219,6 @@ class _CustomMatlabCodePrinter(_StrPrinter):
     def _print_Max(self, expr):
         return "max(%s)" % (self.stringify(expr.args, ", "))
 
-    def _print_One(self, expr):
-        return "1.0"
-
-    def _print_Integer(self, expr):
-        return str(expr.p) + ".0"
-
-    def _print_NegativeOne(self, expr):
-        return "-1.0"
-
     def _print_Ceiling(self, expr):
         return "ceil(%s)" % (self.stringify(expr.args, ", "))
     
@@ -252,16 +241,17 @@ class _CustomMatlabCodePrinter(_StrPrinter):
     def _print_Pow(self, expr):
         PREC = _precedence(expr)
         if expr.exp is sp.S.NegativeOne:
-            return '1.0/%s'%(self.parenthesize(expr.base, PREC))
-        elif expr.exp.is_integer:
-            return "(%s)" % ("*".join(self._print(expr.base) \
-                                      for i in xrange(int(expr.exp))))
-        elif expr.exp == 0.5:
-            return 'sqrt(%s)' % (self._print(expr.base))
-        else:
-            # FIXME: Fix paranthesises
-            return '(%s)^(%s)'%(self._print(expr.base),
-                                  self._print(expr.exp))
+            return '1.0/{0}'.format(self.parenthesize(expr.base, PREC))
+        
+        if expr.exp.is_integer:
+            return "({0})".format("*".join(self._print(expr.base) \
+                                           for i in xrange(int(expr.exp))))
+        if expr.exp == 0.5:
+            return 'sqrt({0})'.format(self._print(expr.base))
+
+        # FIXME: Fix paranthesises
+        return '{0}^{1}'.format(self.parenthesize(expr.base, PREC),
+                                  self.parenthesize(expr.exp, PREC))
 
 # Different math namespace python printer
 _python_code_printer = {"":_CustomPythonCodePrinter(""),

@@ -136,7 +136,7 @@ something_very_long =    '3'"""
 
         self.assertEqual([param.name for param in p.iterparams()], \
                          ['const', 'other', 'something_very_long', 'zlave'])
-        self.assertEqual([param.name for param in p.iterparams(True)],\
+        self.assertEqual([param.name for param in p.iterparams(recurse=True)],\
                          ['abla', 'abli', 'bblal', 'bling', 'const', 'other', \
                           'something_very_long', 'zlave'])
         self.assertEqual([param for param in p.iterparameterdicts()],\

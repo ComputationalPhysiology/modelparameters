@@ -592,13 +592,16 @@ def eval_param_expr(expr, ns=None):
               " is not available")
     
     # Create name space which the expression will be evaluated in
-    ns = {}
+    ns = ns or {}
     
+    # Get values
+    value_ns = symbol_param_value_namespace(expr)
+
     # First check if we have numpy arrays
-    if np and any(isinstance(value, np.ndarray) for value in ns.values()):
+    if np and any(isinstance(value, np.ndarray) for value in value_ns.values()):
 
         # Second check if they have the same length
-        all_length = [len(value) for value in ns.values() \
+        all_length = [len(value) for value in value_ns.values() \
                       if isinstance(value, np.ndarray)]
         same_length = all(all_length[0] == l for l in all_length)
         if not same_length:
@@ -612,8 +615,8 @@ def eval_param_expr(expr, ns=None):
         import math
         ns.update(math.__dict__)
 
-    # Update with symbol namespace
-    ns.update(symbol_param_value_namespace(expr))
+    # Update namespace with values
+    ns.update(value_ns)
     
     return eval(pythoncode(expr, namespace=""), {}, ns)
     

@@ -270,7 +270,7 @@ class TestScalarParam(unittest.TestCase):
         p0 = ScalarParam(45)
         p0.name = "bada", "bada.sym"
         self.assertEqual(p0.name, "bada")
-        self.assertEqual(str(p0.sym), "bada.sym")
+        self.assertEqual(str(p0.sym), "bada")
 
     def test_value_assign(self):
         with self.assertRaises(ValueError) as cm:
@@ -338,7 +338,7 @@ if sp is not None:
             with self.assertRaises(TypeError) as cm:
                 SlaveParam("jada")
             self.assertEqual(str(cm.exception), "expected an expression of "\
-                             "symbols from other ScalarParams")
+                             "model symbols.")
             
             p0 = ScalarParam(5, 0, lt=10, name="jada")
             p1 = ScalarParam(0.5, 0, lt=100, name="bada")
@@ -442,7 +442,7 @@ if np is not None:
             p0 = ArrayParam(45)
             p0.name = "bada", "bada.sym"
             self.assertEqual(p0.name, "bada")
-            self.assertEqual(str(p0.sym), "bada.sym")
+            self.assertEqual(str(p0.sym), "bada")
         
         def test_value_assign(self):
             with self.assertRaises(ValueError) as cm:

@@ -91,7 +91,7 @@ class ParameterDict(dict):
             if sp and isinstance(value, sp.Basic) and \
                    all(isinstance(atom, (sp.Number, ModelSymbol))
                        for atom in value.atoms()):
-                params[key] = SlaveParam(value, key)
+                params[key] = SlaveParam(value, key, name=key)
             elif isinstance(value, Param):
                 if value.name == "":
                     value.name = key
