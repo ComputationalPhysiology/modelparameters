@@ -228,7 +228,7 @@ class _CustomMatlabCodePrinter(_StrPrinter):
     def _print_Piecewise(self, expr):
         result = ""
         for e, c in expr.args[:-1]:
-            result += "((%s)*(%s) + !(%s)*"%(self._print(c), \
+            result += "((%s)*(%s) + ~(%s)*"%(self._print(c), \
                                              self._print(e), self._print(c))
         last_line = "(%s))" % self._print(expr.args[-1].expr)
         return result+last_line
