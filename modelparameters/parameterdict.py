@@ -296,7 +296,7 @@ class ParameterDict(dict):
             else:
                 self[key] = other_value
 
-    def parse_args(self, options=None):
+    def parse_args(self, options=None, usage=""):
         """
         Parse a list of options. use sys.argv as default
 
@@ -309,7 +309,7 @@ class ParameterDict(dict):
         """
         import optparse
 
-        parser = optparse.OptionParser(usage = "usage: %prog [options]")
+        parser = optparse.OptionParser(usage = usage or "usage: %prog [options]")
         
         def callback(parent, key, value_type, sequence_type=None):
             " Return a callback function that is used to parse the argument"
@@ -379,7 +379,7 @@ class ParameterDict(dict):
                         continue
                     
                     # If the value is a Param get the value
-                    helptext = value.helptext
+                    description = value.description
                     value = value.getvalue()
                 
                 # Check for available types
@@ -403,8 +403,8 @@ class ParameterDict(dict):
                         callback = callback(\
                                 parent, key, type(value), sequence_type), 
                         type = FORMAT_CONVERTER[type(value)], 
-                        help = "Default(%s)"%(str(value) + \
-                                              (": " + helptext) if helptext else "")
+                        help = "Default(%s)%s"%(str(value),\
+                                        (": " + description) if description else "")
                         )
         
         # Start recursively adding options

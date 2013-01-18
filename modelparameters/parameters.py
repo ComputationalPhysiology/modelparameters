@@ -46,7 +46,7 @@ class Param(object):
     """
     A simple type checking class for a single value
     """
-    def __init__(self, value, name="", helptext=""):
+    def __init__(self, value, name="", description=""):
         """
         Initialize the Param
         
@@ -57,8 +57,8 @@ class Param(object):
             for future type checks
         name : str (optional)
             The name of the parameter. Used in pretty printing
-        helptext : str (optional)
-            A help text associated with the Parameter
+        description : str (optional)
+            A description associated with the Parameter
         """
         check_kwarg(name, "name", str)
         self._value = value
@@ -67,11 +67,11 @@ class Param(object):
         self._in_str = None
         self._in_range = None
         self._name = name
-        self._helptext = helptext
+        self._description = description
 
     @property
-    def helptext(self):
-        return self._helptext
+    def description(self):
+        return self._description
     
     def _get_name(self):
         return self._name
@@ -193,7 +193,7 @@ class OptionParam(Param):
     """
     A simple type and options checking class for a single value
     """
-    def __init__(self, value, options, name=""):
+    def __init__(self, value, options, name="", description=""):
         """
         Initialize the OptionParam
         
@@ -206,12 +206,14 @@ class OptionParam(Param):
             A list of acceptable values for the parameter
         name : str (optional)
             The name of the parameter. Used in pretty printing
+        description : str (optional)
+            A description associated with the Parameter
         """
         check_arg(options, list)
         if len(options) < 2:
             value_error("expected the options argument to be at least of length 2")
             
-        super(OptionParam, self).__init__(value, name)
+        super(OptionParam, self).__init__(value, name, description)
         
         # Check valid types for an 'option check'
         for option in options:
@@ -255,7 +257,7 @@ class ConstParam(Param):
     """
     A Constant parameter which prevent any change of values
     """
-    def __init__(self, value, name=""):
+    def __init__(self, value, name="", description=""):
         """
         Initialize the ConstParam
         
@@ -266,8 +268,10 @@ class ConstParam(Param):
             for future type checks
         name : str (optional)
             The name of the parameter. Used in pretty printing
+        description : str (optional)
+            A description associated with the Parameter
         """
-        Param.__init__(self, value, name)
+        Param.__init__(self, value, name, description)
         
         # Define a 'check function'
         self._in_range = lambda x : x == self._value
@@ -282,7 +286,7 @@ class ScalarParam(Param):
     A simple type and range checking class for a scalar value
     """
     def __init__(self, value, ge=None, le=None, gt=None, lt=None, \
-                 unit="1", name="", symname=""):
+                 unit="1", name="", symname="", description=""):
         """
         Creating a ScalarParam
         
@@ -305,9 +309,11 @@ class ScalarParam(Param):
         symname : str (optional, if sympy is available)
             The name of the symbol which will be associated with this
             parameter. Can only be set if name is also set.
+        description : str (optional)
+            A description associated with the Parameter
         """
         check_arg(value, scalars, 0, ScalarParam)
-        super(ScalarParam, self).__init__(value, name)
+        super(ScalarParam, self).__init__(value, name, description)
         
         self._range = Range(ge, le, gt, lt)
         self._in_range = self._range._in_range
@@ -401,7 +407,7 @@ class ArrayParam(ScalarParam):
     A numpy Array based parameter
     """
     def __init__(self, value, size=None, ge=None, le=None, gt=None, lt=None, \
-                 unit="1", name="", symname=""):
+                 unit="1", name="", symname="", description=""):
         """
         Creating an ArrayParam
         
@@ -426,6 +432,8 @@ class ArrayParam(ScalarParam):
         symname : str (optional, if sympy is available)
             The name of the symbol which will be associated with this
             parameter. Can only be set if name is also set.
+        description : str (optional)
+            A description associated with the Parameter
         """
         
         if np is None:
@@ -464,7 +472,7 @@ class ArrayParam(ScalarParam):
 
         # Init super class with dummy value
         super(ArrayParam, self).__init__(value[0], ge, le, gt, lt, unit, \
-                                         name, symname)
+                                         name, symname, description)
 
         # Assign value
         self._value = value
@@ -525,7 +533,7 @@ class SlaveParam(ScalarParam):
     """
     A slave parameter defined by other parameters
     """
-    def __init__(self, expr, unit="1", name="", symname=""):
+    def __init__(self, expr, unit="1", name="", symname="", description=""):
 
         if sp is None:
             error("sympy is not installed so SlaveParam is not available")
@@ -540,7 +548,8 @@ class SlaveParam(ScalarParam):
                                      sp.Dummy)) for atom in expr.atoms()):
             type_error("expected expression of model symbols.")
         
-        ScalarParam.__init__(self, 0.0, name=name, symname=name)
+        ScalarParam.__init__(self, 0.0, name=name, symname=name, \
+                             description=description)
 
         # Store the original expression used to evaluate the value of
         # the SlaveParam
