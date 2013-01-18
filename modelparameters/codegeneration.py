@@ -48,7 +48,12 @@ class _CustomPythonPrinter(_StrPrinter):
         else:
             return "{0}log({1})".format(self._namespace,
                                         self._print(expr.base))
-            
+    def _print_Abs(self, expr):
+        if self._namespace == "math.":
+            return "%sfabs(%s)".format(self._namespace, self.stringify(expr.args, ", "))
+        else:
+            return "%sabs(%s)".format(self._namespace, self.stringify(expr.args, ", "))
+
     def _print_One(self, expr):
         return "1.0"
 
@@ -62,7 +67,7 @@ class _CustomPythonPrinter(_StrPrinter):
         return "-1.0"
 
     def _print_Sqrt(self, expr):
-        return "{0}sqrt({1})".format(self._namespace,self._print(expr.args[0]))
+        return "{0}sqrt({1})".format(self._namespace, self._print(expr.args[0]))
     
     def _print_Relational(self, expr):
         return '{0}({1}, {2})'.format(_relational_map[expr.rel_op],
