@@ -50,9 +50,9 @@ class _CustomPythonPrinter(_StrPrinter):
                                         self._print(expr.base))
     def _print_Abs(self, expr):
         if self._namespace == "math.":
-            return "%sfabs(%s)".format(self._namespace, self.stringify(expr.args, ", "))
+            return "{0}fabs({1})".format(self._namespace, self.stringify(expr.args, ", "))
         else:
-            return "%sabs(%s)".format(self._namespace, self.stringify(expr.args, ", "))
+            return "{0}abs({1})".format(self._namespace, self.stringify(expr.args, ", "))
 
     def _print_One(self, expr):
         return "1.0"
