@@ -116,11 +116,13 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
         if expr.exp is sp.S.NegativeOne:
             return "1.0/{0}".format(self.parenthesize(expr.base, PREC))
         if expr.exp.is_integer and int(expr.exp) in [2, 3]:
-            return "({0})".format("*".join(self._print(expr.base) \
-                                           for i in xrange(int(expr.exp))))
+            return "({0})".format(\
+                "*".join(self.parenthesize(expr.base, PREC) \
+                         for i in xrange(int(expr.exp))), PREC)
         if expr.exp.is_integer and int(expr.exp) in [-2, -3]:
-            return "1.0/({0})".format("*".join(self._print(expr.base) \
-                                           for i in xrange(int(expr.exp))))
+            return "1.0/({0})".format(\
+                "*".join(self.parenthesize(expr.base, PREC) \
+                         for i in xrange(int(expr.exp))), PREC)
         if expr.exp is sp.S.Half and not rational:
             return "{0}sqrt({1})".format(self._namespace,
                                          self._print(expr.base))
@@ -200,10 +202,15 @@ class _CustomCCodePrinter(_StrPrinter):
     def _print_Pow(self, expr):
         PREC = _precedence(expr)
         if expr.exp is sp.S.NegativeOne:
-            return '1.0/%s'%(self.parenthesize(expr.base, PREC))
-        elif expr.exp.is_integer:
-            return "(%s)" % ("*".join(self._print(expr.base) \
-                                      for i in xrange(int(expr.exp))))
+            return '1.0/{0}'.format(self.parenthesize(expr.base, PREC))
+        if expr.exp.is_integer and int(expr.exp) in [2, 3]:
+            return "({0})".format(\
+                "*".join(self.parenthesize(expr.base, PREC) \
+                         for i in xrange(int(expr.exp))), PREC)
+        if expr.exp.is_integer and int(expr.exp) in [-2, -3]:
+            return "1.0/({0})".format(\
+                "*".join(self.parenthesize(expr.base, PREC) \
+                         for i in xrange(int(expr.exp))), PREC)
         elif expr.exp == 0.5:
             return '%ssqrt(%s)' % (self._prefix, self._print(expr.base))
         else:
