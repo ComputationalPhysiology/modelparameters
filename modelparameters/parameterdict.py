@@ -371,6 +371,7 @@ class ParameterDict(dict):
 
                     # Call the function recursively
                     add_options(value, "%s%s"%(opt_base_copy, key))
+                    continue
 
                 elif isinstance(value, Param):
 
@@ -379,31 +380,37 @@ class ParameterDict(dict):
                         continue
                     
                     # If the value is a Param get the value
+                    actuall_value = value.getvalue()
+
+                    # Get description
                     description = value.description
-                    value = value.getvalue()
-                
+
+                    # Check for sequence
+                    if isinstance(actuall_value, (list, tuple)):
+                        # If a default length of the list or tuple is 0, 
+                        # assume sequence type to be int
+                        if len(actuall_value) == 0:
+                            sequence_type = int
+                        else:
+                            # Else assume it to be equal to the first argument
+                            sequence_type = type(actuall_value[0])
+                    else:
+                        sequence_type = None
+
+                    # Nicely formated value
+                    formated_value = value.format_data()
+
                 # Check for available types
-                if not type(value) in FORMAT_CONVERTER.keys():
+                if not type(actuall_value) in FORMAT_CONVERTER.keys():
                     continue
 
-                if isinstance(value, (list, tuple)):
-                    # If a default length of the list or tuple is 0, 
-                    # assume sequence type to be int
-                    if len(value) == 0:
-                        sequence_type = int
-                    else:
-                        # Else assume it to be equal to the first argument
-                        sequence_type = type(value[0])
-                else:
-                    sequence_type = None
-                
                 # Add option with callback function
                 parser.add_option("%s%s"%(opt_base_copy, key), \
                         action = "callback", 
                         callback = callback(\
-                                parent, key, type(value), sequence_type), 
-                        type = FORMAT_CONVERTER[type(value)], 
-                        help = "Default(%s)%s"%(str(value),\
+                                parent, key, type(actuall_value), sequence_type), 
+                        type = FORMAT_CONVERTER[type(actuall_value)], 
+                        help = "Default(%s)%s"%(str(formated_value),\
                                         (": " + description) if description else "")
                         )
         
