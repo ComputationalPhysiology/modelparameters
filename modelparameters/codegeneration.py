@@ -72,7 +72,6 @@ class _CustomPythonPrinter(_StrPrinter):
     def _print_Relational(self, expr):
         return '{0}({1}, {2})'.format(_relational_map[expr.rel_op],
                                       expr.lhs, expr.rhs)
-
     def _print_Piecewise(self, expr):
         result = ""
         num_par = 0
@@ -85,6 +84,15 @@ class _CustomPythonPrinter(_StrPrinter):
 
 class _CustomPythonCodePrinter(_CustomPythonPrinter):
 
+
+    def _print_sign(self, expr):
+        if self._namespace == "ufl.":
+            return "{0}sign({0})".format(self._namespace, \
+                                         self._print(expr.args[0]))
+        elif self._namespace in ["math.", "numpy.", "np."]:
+            return "{0}copysign(1.0, {1})".format(self._namespace,
+                                                  self._print(expr.args[0]))
+        return "sign({0})".format(self._print(expr.args[0]))
 
     def _print_Min(self, expr):
         return "%s" % expr.func.__name__.lower() + \
@@ -216,6 +224,10 @@ class _CustomCCodePrinter(_StrPrinter):
         else:
             return '%spow(%s, %s)'%(self._prefix, self._print(expr.base),
                                     self._print(expr.exp))
+
+    def _print_sign(self, expr):
+        return "{0}copysign(1.0, {1})".format(self._prefix, \
+                                              self._print(expr.base))
 
 class _CustomMatlabCodePrinter(_StrPrinter):
     """
