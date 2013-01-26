@@ -148,9 +148,12 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
     def _print_Piecewise(self, expr):
         result = ""
         num_par = 0
+        cond_str = "{0}all({{0}})".format(self._namespace) \
+                   if self._namespace in ["np.", "numpy."] else "{0}"
         for e, c in expr.args[:-1]:
             num_par += 1
-            result += "(%s if %s else "%(self._print(e), self._print(c))
+            result += "({0} if {1} else ".format(\
+                self._print(e), cond_str.format(self._print(c)))
         last_line = self._print(expr.args[-1].expr) + ")"*num_par
         return result+last_line
 
