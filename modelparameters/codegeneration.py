@@ -162,6 +162,8 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
                            expr.rel_op,
                            self.parenthesize(expr.rhs, _precedence(expr)))
 
+    def _print_Pi(self, expr=None):
+        return "{0}pi".format(self._namespace)
     
 class _CustomCCodePrinter(_StrPrinter):
     """
@@ -232,6 +234,9 @@ class _CustomCCodePrinter(_StrPrinter):
         return "{0}copysign(1.0, {1})".format(self._prefix, \
                                               self._print(expr.base))
 
+    def _print_Pi(self, expr=None):
+        return "{0}pi".format(self._prefix)
+
 class _CustomMatlabCodePrinter(_StrPrinter):
     """
     Overload some ccode generation
@@ -270,9 +275,6 @@ class _CustomMatlabCodePrinter(_StrPrinter):
         if expr.exp is sp.S.NegativeOne:
             return '1.0/{0}'.format(self.parenthesize(expr.base, PREC))
         
-        if expr.exp.is_integer:
-            return "({0})".format("*".join(self._print(expr.base) \
-                                           for i in xrange(int(expr.exp))))
         if expr.exp == 0.5:
             return 'sqrt({0})'.format(self._print(expr.base))
 
