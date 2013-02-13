@@ -235,7 +235,7 @@ class _CustomCCodePrinter(_StrPrinter):
                                               self._print(expr.base))
 
     def _print_Pi(self, expr=None):
-        return "{0}pi".format(self._prefix)
+        return "M_PI"
 
 class _CustomMatlabCodePrinter(_StrPrinter):
     """
