@@ -318,6 +318,9 @@ class ScalarParam(Param):
         self._range = Range(ge, le, gt, lt)
         self._in_range = self._range._in_range
 
+        check_kwarg(unit, "unit", str)
+        self._unit = unit
+
         # Define some string used for pretty print
         self._in_str = self._range._in_str
         self._not_in_str = self._range._not_in_str
@@ -377,6 +380,13 @@ class ScalarParam(Param):
     
     name = property(_get_name, _set_name)
     sym = property(get_sym)
+
+    @property
+    def unit(self):
+        """
+        Return the unit
+        """
+        return self._unit
     
     def _name_arg(self):
         """
@@ -549,7 +559,7 @@ class SlaveParam(ScalarParam):
             type_error("expected expression of model symbols.")
         
         ScalarParam.__init__(self, 0.0, name=name, symname=name, \
-                             description=description)
+                             description=description, unit=unit)
 
         # Store the original expression used to evaluate the value of
         # the SlaveParam

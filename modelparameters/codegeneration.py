@@ -232,7 +232,7 @@ class _CustomCCodePrinter(_StrPrinter):
 
     def _print_sign(self, expr):
         return "{0}copysign(1.0, {1})".format(self._prefix, \
-                                              self._print(expr.base))
+                                              self._print(expr.args[0]))
 
     def _print_Pi(self, expr=None):
         return "M_PI"
