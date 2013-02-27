@@ -20,7 +20,10 @@ import sympy as sp
 
 from sympy.printing import StrPrinter as _StrPrinter
 from sympy.printing.ccode import CCodePrinter as _CCodePrinter
+from sympy.printing.latex import LatexPrinter as _LatexPrinter
+from sympy.printing.latex import latex as _sympy_latex
 from sympy.printing.precedence import precedence as _precedence
+from sympy.core.function import _coeff_isneg
 
 _relational_map = {
     "==":"Eq",
@@ -35,7 +38,7 @@ class _CustomPythonPrinter(_StrPrinter):
     def __init__(self, namespace=""):
         assert(namespace in ["", "math", "np", "numpy", "ufl"])
         self._namespace = namespace if not namespace else namespace + "."
-        _StrPrinter.__init__(self)
+        _StrPrinter.__init__(self, settings=dict(order="none"))
         
     def _print_ModelSymbol(self, expr):
         return expr.name
@@ -82,8 +85,93 @@ class _CustomPythonPrinter(_StrPrinter):
         last_line = self._print(expr.args[-1].expr) + ")"*num_par
         return result+last_line
 
-class _CustomPythonCodePrinter(_CustomPythonPrinter):
+    def _print_Pow(self, expr, rational=False):
+        PREC = _precedence(expr)
+        if expr.exp.is_integer and int(expr.exp) == 1:
+            return self.parenthesize(expr.base, PREC)
+        if expr.exp is sp.S.NegativeOne:
+            return "1.0/{0}".format(self.parenthesize(expr.base, PREC))
+        if expr.exp.is_integer and int(expr.exp) in [2, 3]:
+            return "({0})".format(\
+                "*".join(self.parenthesize(expr.base, PREC) \
+                         for i in xrange(int(expr.exp))), PREC)
+        if expr.exp.is_integer and int(expr.exp) in [-2, -3]:
+            return "1.0/({0})".format(\
+                "*".join(self.parenthesize(expr.base, PREC) \
+                         for i in xrange(int(expr.exp))), PREC)
+        if expr.exp is sp.S.Half and not rational:
+            return "{0}sqrt({1})".format(self._namespace,
+                                         self._print(expr.base))
+        if expr.exp == -0.5:
+            return "1/{0}sqrt({1})".format(self._namespace,
+                                         self._print(expr.base))
+        if self._namespace == "ufl.":
+            return "{0}elem_pow({1}, {2})".format(self._namespace,
+                                                      self._print(expr.base),
+                                                      self._print(expr.exp))
+        return "{0}pow({1}, {2})".format(self._namespace,
+                                         self._print(expr.base),
+                                         self._print(expr.exp))
 
+    def _print_Mul(self, expr):
+        from sympytools import ModelSymbol as _ModelSymbol
+
+        prec = _precedence(expr)
+        
+        if self.order not in ('old', 'none'):
+            args = expr.as_ordered_factors()
+        else:
+            # use make_args in case expr was something like -x -> x
+            args = sp.Mul.make_args(expr)
+
+        if _coeff_isneg(expr):
+            # If negative and -1 is the first arg: remove it
+            if args[0].is_integer and int(args[0]) == 1:
+                args = args[1:]
+            else:
+                args = (-args[0],) + args[1:]
+            sign = "-"
+        else:
+            sign = ""
+        
+            # If first argument is Mul we do not want to add a parentesize
+            if isinstance(args[0], sp.Mul):
+                prec -= 1
+
+        a = [] # items in the numerator
+        b = [] # items that are in the denominator (if any)
+
+        # Gather args for numerator/denominator
+        for item in args:
+            if item.is_commutative and item.is_Pow and item.exp.is_Rational and item.exp.is_negative:
+                if item.exp != -1:
+                    b.append(sp.Pow(item.base, -item.exp, evaluate=False))
+                else:
+                    b.append(sp.Pow(item.base, -item.exp))
+            elif item.is_Rational and item is not sp.S.Infinity:
+                if item.p != 1:
+                    a.append(sp.Rational(item.p))
+                if item.q != 1:
+                    b.append(sp.Rational(item.q))
+            else:
+                a.append(item)
+
+        a = a or [sp.S.One]
+
+        a_str = map(lambda x:self.parenthesize(x, prec), a)
+        b_str = map(lambda x:self.parenthesize(x, prec), b)
+
+        if len(b) == 0:
+            return sign + '*'.join(a_str)
+        elif len(b) == 1:
+            if len(a) == 1 and not (a[0].is_Atom or a[0].is_Add):
+                return sign + "%s/"%a_str[0] + '*'.join(b_str)
+            else:
+                return sign + '*'.join(a_str) + "/%s"%b_str[0]
+        else:
+            return sign + '*'.join(a_str) + "/(%s)"%'*'.join(b_str)
+
+class _CustomPythonCodePrinter(_CustomPythonPrinter):
 
     def _print_sign(self, expr):
         if self._namespace == "ufl.":
@@ -119,32 +207,6 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
                         expr.func.__name__.lower() + \
                         "({0})".format(self.stringify(expr.args, ", ")))
 
-    def _print_Pow(self, expr, rational=False):
-        PREC = _precedence(expr)
-        if expr.exp is sp.S.NegativeOne:
-            return "1.0/{0}".format(self.parenthesize(expr.base, PREC))
-        if expr.exp.is_integer and int(expr.exp) in [2, 3]:
-            return "({0})".format(\
-                "*".join(self.parenthesize(expr.base, PREC) \
-                         for i in xrange(int(expr.exp))), PREC)
-        if expr.exp.is_integer and int(expr.exp) in [-2, -3]:
-            return "1.0/({0})".format(\
-                "*".join(self.parenthesize(expr.base, PREC) \
-                         for i in xrange(int(expr.exp))), PREC)
-        if expr.exp is sp.S.Half and not rational:
-            return "{0}sqrt({1})".format(self._namespace,
-                                         self._print(expr.base))
-        if expr.exp == -0.5:
-            return "1/{0}sqrt({1})".format(self._namespace,
-                                         self._print(expr.base))
-        if self._namespace == "ufl.":
-            return "{0}elem_pow({1}, {2})".format(self._namespace,
-                                                      self._print(expr.base),
-                                                      self._print(expr.exp))
-        return "{0}pow({1}, {2})".format(self._namespace,
-                                         self._print(expr.base),
-                                         self._print(expr.exp))
-
     def _print_Piecewise(self, expr):
         result = ""
         num_par = 0
@@ -170,7 +232,7 @@ class _CustomCCodePrinter(_StrPrinter):
     Overload some ccode generation
     """
     
-    def __init__(self, cpp=False, settings={}):
+    def __init__(self, cpp=False, **settings):
         super(_CustomCCodePrinter, self).__init__(settings=settings)
         self._prefix = "std::" if cpp else ""
 
@@ -214,6 +276,8 @@ class _CustomCCodePrinter(_StrPrinter):
     
     def _print_Pow(self, expr):
         PREC = _precedence(expr)
+        if expr.exp.is_integer and int(expr.exp) == 1:
+            return self.parenthesize(expr.base, PREC)
         if expr.exp is sp.S.NegativeOne:
             return '1.0/{0}'.format(self.parenthesize(expr.base, PREC))
         if expr.exp.is_integer and int(expr.exp) in [2, 3]:
@@ -242,7 +306,7 @@ class _CustomMatlabCodePrinter(_StrPrinter):
     Overload some ccode generation
     """
     
-    def __init__(self, settings={}):
+    def __init__(self, **settings):
         super(_CustomMatlabCodePrinter, self).__init__(settings=settings)
 
     def _print_Min(self, expr):
@@ -272,6 +336,8 @@ class _CustomMatlabCodePrinter(_StrPrinter):
     
     def _print_Pow(self, expr):
         PREC = _precedence(expr)
+        if expr.exp.is_integer and int(expr.exp) == 1:
+            return self.parenthesize(expr.base, PREC)
         if expr.exp is sp.S.NegativeOne:
             return '1.0/{0}'.format(self.parenthesize(expr.base, PREC))
         
@@ -282,17 +348,32 @@ class _CustomMatlabCodePrinter(_StrPrinter):
         return '{0}^{1}'.format(self.parenthesize(expr.base, PREC),
                                   self.parenthesize(expr.exp, PREC))
 
+
+class _CustomLatexPrinter(_LatexPrinter):
+    def _print_Add(self, expr):
+        terms = list(expr.args)
+        tex = self._print(terms[0])
+
+        for term in terms[1:]:
+            out = self._print(term)
+            if out and out[0] != "-":
+                tex += " +"
+
+            tex += " " + out
+
+        return tex
+
 # Different math namespace python printer
-_python_code_printer = {"":_CustomPythonCodePrinter(""),
+_python_code_printer = {"":_CustomPythonCodePrinter("", ),
                         "np":_CustomPythonCodePrinter("np"),
                         "numpy":_CustomPythonCodePrinter("numpy"),
                         "math":_CustomPythonCodePrinter("math"),
                         "ufl":_CustomPythonCodePrinter("ufl"),}
                         
-_ccode_printer = _CustomCCodePrinter()
-_cppcode_printer = _CustomCCodePrinter(cpp=True)
+_ccode_printer = _CustomCCodePrinter(order="none")
+_cppcode_printer = _CustomCCodePrinter(cpp=True, order="none")
 _sympy_printer = _CustomPythonPrinter()
-_matlab_printer = _CustomMatlabCodePrinter()
+_matlab_printer = _CustomMatlabCodePrinter(order="none")
 
 def ccode(expr, assign_to=None):
     """
@@ -333,6 +414,21 @@ def matlabcode(expr, assign_to=None):
     if assign_to is None:
         return ret
     return "{0} = {1}".format(assign_to, ret)
+
+def ccode(expr, assign_to=None):
+    """
+    Return a C-code representation of a sympy expression
+    """
+    ret = _ccode_printer.doprint(expr)
+    if assign_to is None:
+        return ret
+    return "{0} = {1}".format(assign_to, ret)
+
+def latex(expr, **settings):
+    settings["order"] = "none"
+    return _CustomLatexPrinter(settings).doprint(expr)
+
+latex.__doc__ = _sympy_latex.__doc__
 
 octavecode = matlabcode
 

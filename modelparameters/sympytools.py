@@ -29,6 +29,79 @@ from codegeneration import sympycode
 sp.Basic.__str__ = sympycode
 sp.Basic.__repr__ = sympycode
 
+# A hack to get around evaluation of SymPy expressions
+from sympy.core.operations import AssocOp as _AssocOp
+from sympy.core.power import Pow as _Pow
+from sympy.core.expr import Expr as _Expr
+from sympy.core.add import Add as _Add
+from sympy.core.cache import cacheit as _cacheit
+from sympy.core.assumptions import ManagedProperties as _ManagedProperties
+import types
+
+_evaluate = False
+
+def enable_evaluation():
+    """
+    Enable Add, Mul and Pow contractions
+    """
+    global _evaluate
+    _evaluate = True
+    
+def disable_evaluation():
+    """
+    Disable Add, Mul and Pow contractions
+    """
+    global _evaluate
+    _evaluate = False
+
+def _assocop_new(cls, *args, **options):
+    args = map(sp.sympify, args)
+    args = [a for a in args if a is not cls.identity]
+
+    if not options.pop('evaluate', _evaluate):
+        return cls._from_args(args)
+
+    if len(args) == 0:
+        return cls.identity
+    if len(args) == 1:
+        return args[0]
+
+    c_part, nc_part, order_symbols = cls.flatten(args)
+    is_commutative = not nc_part
+    obj = cls._from_args(c_part + nc_part, is_commutative)
+
+    if order_symbols is not None:
+        return C.Order(obj, *order_symbols)
+    return obj
+
+def _pow_new(cls, b, e, evaluate=False):
+    # don't optimize "if e==0; return 1" here; it's better to handle that
+    # in the calling routine so this doesn't get called
+    b = sp.sympify(b)
+    e = sp.sympify(e)
+    if _evaluate or evaluate:
+        if e is sp.S.Zero:
+            return sp.S.One
+        elif e is sp.S.One:
+            return b
+        elif sp.S.NaN in (b, e):
+            if b is sp.S.One: # already handled e == 0 above
+                return sp.S.One
+            return sp.S.NaN
+        else:
+            obj = b._eval_power(e)
+            if obj is not None:
+                return obj
+    
+    obj = _Expr.__new__(cls, b, e)
+    obj.is_commutative = (b.is_commutative and e.is_commutative)
+    return obj
+
+# Overload new method with none evaluating one
+if not _evaluate:
+    _AssocOp.__new__ = types.MethodType(_cacheit(_assocop_new), None, _ManagedProperties)
+    _Pow.__new__ = types.MethodType(_cacheit(_pow_new), None, _ManagedProperties)
+
 class ModelSymbol(sp.Symbol):
     """
     Class for all Symbols used in ScalarParam
@@ -83,7 +156,8 @@ def Conditional(cond, true_value, false_value):
            (hasattr(cond, "is_relational") and not cond.is_relational):
         type_error("Expected a Relational as first argument.")
     
-    return sp.functions.Piecewise((true_value, cond), (false_value, sp.sympify(True)))
+    return sp.functions.Piecewise((true_value, cond), (false_value, sp.sympify(True)),
+                                  evaluate=True)
 
 def ContinuousConditional(cond, true_value, false_value, sigma=1.0):
     """
