@@ -35,6 +35,7 @@ from sympy.core.power import Pow as _Pow
 from sympy.core.expr import Expr as _Expr
 from sympy.core.add import Add as _Add
 from sympy.core.cache import cacheit as _cacheit
+from sympy.core import function as _function
 from sympy.core.assumptions import ManagedProperties as _ManagedProperties
 import types
 
@@ -74,6 +75,44 @@ def _assocop_new(cls, *args, **options):
         return C.Order(obj, *order_symbols)
     return obj
 
+def _function_new(cls, *args, **options):
+    # Handle calls like Function('f')
+    if cls is _function.Function:
+        return _function.UndefinedFunction(*args)
+
+    if cls.nargs is not None:
+        if isinstance(cls.nargs, tuple):
+            nargs = cls.nargs
+        else:
+            nargs = (cls.nargs,)
+
+        n = len(args)
+
+        if n not in nargs:
+            # XXX: exception message must be in exactly this format to make
+            # it work with NumPy's functions like vectorize(). The ideal
+            # solution would be just to attach metadata to the exception
+            # and change NumPy to take advantage of this.
+            temp = ('%(name)s takes exactly %(args)s '
+                   'argument%(plural)s (%(given)s given)')
+            raise TypeError(temp %
+                {
+                'name': cls,
+                'args': cls.nargs,
+                'plural': 's'*(n != 1),
+                'given': n})
+
+    evaluate = options.get('evaluate', _evaluate)
+    result = super(_function.Function, cls).__new__(cls, *args, **options)
+    if not evaluate or not isinstance(result, cls):
+        return result
+
+    pr = max(cls._should_evalf(a) for a in result.args)
+    pr2 = min(cls._should_evalf(a) for a in result.args)
+    if pr2 > 0:
+        return result.evalf(mlib.libmpf.prec_to_dps(pr))
+    return result
+
 def _pow_new(cls, b, e, evaluate=False):
     # don't optimize "if e==0; return 1" here; it's better to handle that
     # in the calling routine so this doesn't get called
@@ -98,10 +137,9 @@ def _pow_new(cls, b, e, evaluate=False):
     return obj
 
 # Overload new method with none evaluating one
-if not _evaluate:
-    _AssocOp.__new__ = types.MethodType(_cacheit(_assocop_new), None, _ManagedProperties)
-    _Pow.__new__ = types.MethodType(_cacheit(_pow_new), None, _ManagedProperties)
-
+_AssocOp.__new__ = types.MethodType(_cacheit(_assocop_new), None, _ManagedProperties)
+_Pow.__new__ = types.MethodType(_cacheit(_pow_new), None, _ManagedProperties)
+_function.Function.__new__ = types.MethodType(_cacheit(_function_new), None, _ManagedProperties)
 class ModelSymbol(sp.Symbol):
     """
     Class for all Symbols used in ScalarParam
