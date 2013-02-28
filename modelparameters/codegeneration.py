@@ -34,6 +34,66 @@ _relational_map = {
     ">=":"Ge",
     }
 
+def _print_Mul(self, expr):
+    from sympytools import ModelSymbol as _ModelSymbol
+
+    prec = _precedence(expr)
+    
+    if self.order not in ('old', 'none'):
+        args = expr.as_ordered_factors()
+    else:
+        # use make_args in case expr was something like -x -> x
+        args = sp.Mul.make_args(expr)
+
+    if _coeff_isneg(expr):
+        # If negative and -1 is the first arg: remove it
+        if args[0].is_integer and int(args[0]) == 1:
+            args = args[1:]
+        else:
+            args = (-args[0],) + args[1:]
+        sign = "-"
+    else:
+        sign = ""
+    
+        # If first argument is Mul we do not want to add a parentesize
+        if isinstance(args[0], sp.Mul):
+            prec -= 1
+
+    a = [] # items in the numerator
+    b = [] # items that are in the denominator (if any)
+
+    # Gather args for numerator/denominator
+    for item in args:
+        if item.is_commutative and item.is_Pow and item.exp.is_Rational and item.exp.is_negative:
+            if item.exp != -1:
+                b.append(sp.Pow(item.base, -item.exp, evaluate=False))
+            else:
+                b.append(sp.Pow(item.base, -item.exp))
+        elif item.is_Rational and item is not sp.S.Infinity:
+            if item.p != 1:
+                a.append(sp.Rational(item.p))
+            if item.q != 1:
+                b.append(sp.Rational(item.q))
+        else:
+            a.append(item)
+
+    a = a or [sp.S.One]
+
+    a_str = map(lambda x:self.parenthesize(x, prec), a)
+    b_str = map(lambda x:self.parenthesize(x, prec), b)
+
+    if len(b) == 0:
+        return sign + '*'.join(a_str)
+    elif len(b) == 1:
+        if len(a) == 1 and not (a[0].is_Atom or a[0].is_Add):
+            return sign + "%s/"%a_str[0] + '*'.join(b_str)
+        else:
+            return sign + '*'.join(a_str) + "/%s"%b_str[0]
+    else:
+        return sign + '*'.join(a_str) + "/(%s)"%'*'.join(b_str)
+
+
+
 class _CustomPythonPrinter(_StrPrinter):
     def __init__(self, namespace=""):
         assert(namespace in ["", "math", "np", "numpy", "ufl"])
@@ -113,63 +173,7 @@ class _CustomPythonPrinter(_StrPrinter):
                                          self._print(expr.base),
                                          self._print(expr.exp))
 
-    def _print_Mul(self, expr):
-        from sympytools import ModelSymbol as _ModelSymbol
-
-        prec = _precedence(expr)
-        
-        if self.order not in ('old', 'none'):
-            args = expr.as_ordered_factors()
-        else:
-            # use make_args in case expr was something like -x -> x
-            args = sp.Mul.make_args(expr)
-
-        if _coeff_isneg(expr):
-            # If negative and -1 is the first arg: remove it
-            if args[0].is_integer and int(args[0]) == 1:
-                args = args[1:]
-            else:
-                args = (-args[0],) + args[1:]
-            sign = "-"
-        else:
-            sign = ""
-        
-            # If first argument is Mul we do not want to add a parentesize
-            if isinstance(args[0], sp.Mul):
-                prec -= 1
-
-        a = [] # items in the numerator
-        b = [] # items that are in the denominator (if any)
-
-        # Gather args for numerator/denominator
-        for item in args:
-            if item.is_commutative and item.is_Pow and item.exp.is_Rational and item.exp.is_negative:
-                if item.exp != -1:
-                    b.append(sp.Pow(item.base, -item.exp, evaluate=False))
-                else:
-                    b.append(sp.Pow(item.base, -item.exp))
-            elif item.is_Rational and item is not sp.S.Infinity:
-                if item.p != 1:
-                    a.append(sp.Rational(item.p))
-                if item.q != 1:
-                    b.append(sp.Rational(item.q))
-            else:
-                a.append(item)
-
-        a = a or [sp.S.One]
-
-        a_str = map(lambda x:self.parenthesize(x, prec), a)
-        b_str = map(lambda x:self.parenthesize(x, prec), b)
-
-        if len(b) == 0:
-            return sign + '*'.join(a_str)
-        elif len(b) == 1:
-            if len(a) == 1 and not (a[0].is_Atom or a[0].is_Add):
-                return sign + "%s/"%a_str[0] + '*'.join(b_str)
-            else:
-                return sign + '*'.join(a_str) + "/%s"%b_str[0]
-        else:
-            return sign + '*'.join(a_str) + "/(%s)"%'*'.join(b_str)
+    _print_Mul = _print_Mul
 
 class _CustomPythonCodePrinter(_CustomPythonPrinter):
 
@@ -301,6 +305,8 @@ class _CustomCCodePrinter(_StrPrinter):
     def _print_Pi(self, expr=None):
         return "M_PI"
 
+    _print_Mul = _print_Mul
+
 class _CustomMatlabCodePrinter(_StrPrinter):
     """
     Overload some ccode generation
@@ -347,7 +353,7 @@ class _CustomMatlabCodePrinter(_StrPrinter):
         # FIXME: Fix paranthesises
         return '{0}^{1}'.format(self.parenthesize(expr.base, PREC),
                                   self.parenthesize(expr.exp, PREC))
-
+    _print_Mul = _print_Mul
 
 class _CustomLatexPrinter(_LatexPrinter):
     def _print_Add(self, expr):
