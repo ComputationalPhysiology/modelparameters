@@ -37,6 +37,7 @@ from sympy.core.add import Add as _Add
 from sympy.core.cache import cacheit as _cacheit
 from sympy.core import function as _function
 from sympy.core.assumptions import ManagedProperties as _ManagedProperties
+import sympy.mpmath.libmp as _mlib
 import types
 
 _evaluate = False
@@ -110,15 +111,15 @@ def _function_new(cls, *args, **options):
     pr = max(cls._should_evalf(a) for a in result.args)
     pr2 = min(cls._should_evalf(a) for a in result.args)
     if pr2 > 0:
-        return result.evalf(mlib.libmpf.prec_to_dps(pr))
+        return result.evalf(_mlib.libmpf.prec_to_dps(pr))
     return result
 
-def _pow_new(cls, b, e, evaluate=False):
+def _pow_new(cls, b, e, evaluate=True):
     # don't optimize "if e==0; return 1" here; it's better to handle that
     # in the calling routine so this doesn't get called
     b = sp.sympify(b)
     e = sp.sympify(e)
-    if _evaluate or evaluate:
+    if _evaluate and evaluate:
         if e is sp.S.Zero:
             return sp.S.One
         elif e is sp.S.One:
@@ -137,6 +138,7 @@ def _pow_new(cls, b, e, evaluate=False):
     return obj
 
 # Overload new method with none evaluating one
+# FIXME: Need to look at inheritance
 _AssocOp.__new__ = types.MethodType(_cacheit(_assocop_new), None, _ManagedProperties)
 _Pow.__new__ = types.MethodType(_cacheit(_pow_new), None, _ManagedProperties)
 _function.Function.__new__ = types.MethodType(_cacheit(_function_new), None, _ManagedProperties)
