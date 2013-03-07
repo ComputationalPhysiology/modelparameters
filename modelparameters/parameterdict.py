@@ -307,9 +307,15 @@ class ParameterDict(dict):
             is mostly for debugging.
         
         """
-        import optparse
+        import optparse, sys
 
-        parser = optparse.OptionParser(usage = usage or "usage: %prog [options]")
+        # Fixing bug for unicode help output
+        class OptionParser(optparse.OptionParser):
+            def print_help(self, f=None):
+                if f is None:
+                    f = sys.stdout
+                f.write(self.format_help().encode(f.encoding, 'replace'))
+        parser = OptionParser(usage = usage or "usage: %prog [options]")
         
         def callback(parent, key, value_type, sequence_type=None):
             " Return a callback function that is used to parse the argument"

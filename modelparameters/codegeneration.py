@@ -92,8 +92,6 @@ def _print_Mul(self, expr):
     else:
         return sign + '*'.join(a_str) + "/(%s)"%'*'.join(b_str)
 
-
-
 class _CustomPythonPrinter(_StrPrinter):
     def __init__(self, namespace=""):
         assert(namespace in ["", "math", "np", "numpy", "ufl"])
