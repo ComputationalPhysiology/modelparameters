@@ -71,18 +71,17 @@ def Conditional(cond, true_value, false_value):
     """
     cond = sp.sympify(cond)
 
+    from sympy.core.relational import Equality, Relational
+    from sympy.logic.boolalg import Boolean
+
     # If the conditional is a bool it is already evaluated
     if isinstance(cond, bool):
         return true_value if cond else false_value
-        
-    if not(hasattr(cond, "is_Relational") or hasattr(cond, "is_relational")):
-        type_error("Expected sympy object to have is_{r,R}elational "\
-                   "attribute.")
-    
-    if (hasattr(cond, "is_Relational") and not cond.is_Relational) or \
-           (hasattr(cond, "is_relational") and not cond.is_relational):
-        type_error("Expected a Relational as first argument.")
-    
+
+    if not isinstance(cond, (Relational, Boolean)):
+        raise type_error("Cond %s is of type %s, but must be a Relational" \
+                         " or Boolean." % (cond, type(cond)))
+
     return sp.functions.Piecewise((true_value, cond), (false_value, sp.sympify(True)),
                                   evaluate=True)
 
