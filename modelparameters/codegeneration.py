@@ -156,7 +156,7 @@ class _CustomPythonPrinter(_StrPrinter):
         if expr.exp.is_integer and int(expr.exp) in [-2, -3]:
             return "1.0/({0})".format(\
                 "*".join(self.parenthesize(expr.base, PREC) \
-                         for i in xrange(int(expr.exp))), PREC)
+                         for i in xrange(-int(expr.exp))), PREC)
         if expr.exp is sp.S.Half and not rational:
             return "{0}sqrt({1})".format(self._namespace,
                                          self._print(expr.base))
@@ -212,16 +212,26 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
     def _print_Piecewise(self, expr):
         result = ""
         num_par = 0
-        cond_str = "{0}all({{0}})".format(self._namespace) \
-                   if self._namespace in ["np.", "numpy."] else "{0}"
-        for e, c in expr.args[:-1]:
-            num_par += 1
-            result += "({0} if {1} else ".format(\
-                self._print(e), cond_str.format(self._print(c)))
-        last_line = self._print(expr.args[-1].expr) + ")"*num_par
+        if self._namespace == "ufl.":
+            for e, c in expr.args[:-1]:
+                num_par += 1
+                result += "ufl.conditional({0}, {1} ".format(self._print(c), \
+                                                             self._print(e))
+        else:
+            cond_str = "{0}all({{0}})".format(self._namespace) \
+                       if self._namespace in ["np.", "numpy."] else "{0}"
+            for e, c in expr.args[:-1]:
+                num_par += 1
+                result += "({0} if {1} else ".format(\
+                    self._print(e), cond_str.format(self._print(c)))
+                
+        last_line = ", " + self._print(expr.args[-1].expr) + ")"*num_par
         return result+last_line
 
     def _print_Relational(self, expr):
+        if self._namespace == "ufl.":
+            return 'ufl.{0}({1}, {2})'.format(_relational_map[expr.rel_op].lower(),
+                                              expr.lhs, expr.rhs)
         return '%s %s %s'%(self.parenthesize(expr.lhs, _precedence(expr)),
                            expr.rel_op,
                            self.parenthesize(expr.rhs, _precedence(expr)))
@@ -285,11 +295,11 @@ class _CustomCCodePrinter(_StrPrinter):
         if expr.exp.is_integer and int(expr.exp) in [2, 3]:
             return "({0})".format(\
                 "*".join(self.parenthesize(expr.base, PREC) \
-                         for i in xrange(int(expr.exp))), PREC)
+                         for i in range(int(expr.exp))), PREC)
         if expr.exp.is_integer and int(expr.exp) in [-2, -3]:
             return "1.0/({0})".format(\
                 "*".join(self.parenthesize(expr.base, PREC) \
-                         for i in xrange(int(expr.exp))), PREC)
+                         for i in range(-int(expr.exp))), PREC)
         elif expr.exp == 0.5:
             return '%ssqrt(%s)' % (self._prefix, self._print(expr.base))
         else:
