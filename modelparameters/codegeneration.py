@@ -86,11 +86,11 @@ def _print_Mul(self, expr):
         return sign + '*'.join(a_str)
     elif len(b) == 1:
         if len(a) == 1 and not (a[0].is_Atom or a[0].is_Add):
-            return sign + "%s/"%a_str[0] + '*'.join(b_str)
+            return sign + "{0}/".format(a_str[0]) + '*'.join(b_str)
         else:
-            return sign + '*'.join(a_str) + "/%s"%b_str[0]
+            return sign + '*'.join(a_str) + "/{0}".format(b_str[0])
     else:
-        return sign + '*'.join(a_str) + "/(%s)"%'*'.join(b_str)
+        return sign + '*'.join(a_str) + "/({0})".format('*'.join(b_str))
 
 class _CustomPythonPrinter(_StrPrinter):
     def __init__(self, namespace=""):
@@ -132,7 +132,7 @@ class _CustomPythonPrinter(_StrPrinter):
     
     def _print_Relational(self, expr):
         return '{0}({1}, {2})'.format(_relational_map[expr.rel_op],
-                                      expr.lhs, expr.rhs)
+                                      self._print(expr.lhs), self._print(expr.rhs))
     def _print_Piecewise(self, expr):
         result = ""
         num_par = 0
@@ -142,6 +142,16 @@ class _CustomPythonPrinter(_StrPrinter):
                                                       self._print(e))
         last_line = self._print(expr.args[-1].expr) + ")"*num_par
         return result+last_line
+
+    def _print_And(self, expr):
+        PREC = _precedence(expr)
+        return "{0} and {1}".format(self.parenthesize(expr.args[0], PREC),
+                                    self.parenthesize(expr.args[1], PREC))
+
+    def _print_Or(self, expr):
+        PREC = _precedence(expr)
+        return "{0} or {1}".format(self.parenthesize(expr.args[0], PREC),
+                                   self.parenthesize(expr.args[1], PREC))
 
     def _print_Pow(self, expr, rational=False):
         PREC = _precedence(expr)
@@ -185,12 +195,12 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
         return "sign({0})".format(self._print(expr.args[0]))
 
     def _print_Min(self, expr):
-        return "%s" % expr.func.__name__.lower() + \
-               "(%s)"%self.stringify(expr.args, ", ")
+        return "{0}({1})".format(expr.func.__name__.lower(),\
+                                 self.stringify(expr.args, ", "))
 
     def _print_Max(self, expr):
-        return "%s" % expr.func.__name__.lower() + \
-               "(%s)"%self.stringify(expr.args, ", ")
+        return "{0}({1})".format(expr.func.__name__.lower(),\
+                                 self.stringify(expr.args, ", "))
 
     def _print_Function(self, expr):
         #print expr.func.__name__, expr.args
@@ -215,7 +225,7 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
         if self._namespace == "ufl.":
             for e, c in expr.args[:-1]:
                 num_par += 1
-                result += "ufl.conditional({0}, {1} ".format(self._print(c), \
+                result += "ufl.conditional({0}, {1}, ".format(self._print(c), \
                                                              self._print(e))
         else:
             cond_str = "{0}all({{0}})".format(self._namespace) \
@@ -224,17 +234,17 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
                 num_par += 1
                 result += "({0} if {1} else ".format(\
                     self._print(e), cond_str.format(self._print(c)))
-                
-        last_line = ", " + self._print(expr.args[-1].expr) + ")"*num_par
+
+        last_line = self._print(expr.args[-1].expr) + ")"*num_par
         return result+last_line
 
     def _print_Relational(self, expr):
         if self._namespace == "ufl.":
             return 'ufl.{0}({1}, {2})'.format(_relational_map[expr.rel_op].lower(),
-                                              expr.lhs, expr.rhs)
-        return '%s %s %s'%(self.parenthesize(expr.lhs, _precedence(expr)),
-                           expr.rel_op,
-                           self.parenthesize(expr.rhs, _precedence(expr)))
+                                              self._print(expr.lhs), self._print(expr.rhs))
+        return "{0} {1} {2}".format(self.parenthesize(expr.lhs, _precedence(expr)),
+                                    expr.rel_op,
+                                    self.parenthesize(expr.rhs, _precedence(expr)))
 
     def _print_Pi(self, expr=None):
         return "{0}pi".format(self._namespace)
@@ -259,17 +269,17 @@ class _CustomCCodePrinter(_StrPrinter):
 
     def _print_Min(self, expr):
         "fmin and fmax is not contained in std namespace untill -ansi g++ 4.7"
-        return "fmin(%s)" % (self.stringify(expr.args, ", "))
+        return "fmin({0})".format(self.stringify(expr.args, ", "))
 
     def _print_Max(self, expr):
         "fmin and fmax is not contained in std namespace untill -ansi g++ 4.7"
-        return "fmax(%s)" % (self.stringify(expr.args, ", "))
+        return "fmax({0})".format(self.stringify(expr.args, ", "))
 
     def _print_Ceiling(self, expr):
-        return "%sceil(%s)" % (self._prefix, self.stringify(expr.args, ", "))
+        return "{0}ceil({1})".format(self._prefix, self.stringify(expr.args, ", "))
         
     def _print_Abs(self, expr):
-        return "%sfabs(%s)" % (self._prefix, self.stringify(expr.args, ", "))
+        return "{0}fabs({1})".format(self._prefix, self.stringify(expr.args, ", "))
 
     def _print_ModelSymbol(self, expr):
         return expr.name
@@ -277,8 +287,8 @@ class _CustomCCodePrinter(_StrPrinter):
     def _print_Piecewise(self, expr):
         result = ""
         for e, c in expr.args[:-1]:
-            result += "(%s ? %s : "%(self._print(c), self._print(e))
-        last_line = "%s)" % self._print(expr.args[-1].expr)
+            result += "({0} ? {1} : ".format(self._print(c), self._print(e))
+        last_line = "{0})".format(self._print(expr.args[-1].expr))
         return result+last_line
     
     def _print_Function(self, expr):
@@ -312,6 +322,16 @@ class _CustomCCodePrinter(_StrPrinter):
 
     def _print_Pi(self, expr=None):
         return "M_PI"
+
+    def _print_And(self, expr):
+        PREC = _precedence(expr)
+        return "{0} && {1}".format(self.parenthesize(expr.args[0], PREC),
+                                   self.parenthesize(expr.args[1], PREC))
+
+    def _print_Or(self, expr):
+        PREC = _precedence(expr)
+        return "{0} || {1}".format(self.parenthesize(expr.args[0], PREC),
+                                   self.parenthesize(expr.args[1], PREC))
 
     _print_Mul = _print_Mul
 
@@ -361,6 +381,16 @@ class _CustomMatlabCodePrinter(_StrPrinter):
         # FIXME: Fix paranthesises
         return '{0}^{1}'.format(self.parenthesize(expr.base, PREC),
                                   self.parenthesize(expr.exp, PREC))
+    def _print_And(self, expr):
+        PREC = _precedence(expr)
+        return "{0} & {1}".format(self.parenthesize(expr.args[0], PREC),
+                                   self.parenthesize(expr.args[1], PREC))
+
+    def _print_Or(self, expr):
+        PREC = _precedence(expr)
+        return "{0} | {1}".format(self.parenthesize(expr.args[0], PREC),
+                                   self.parenthesize(expr.args[1], PREC))
+
     _print_Mul = _print_Mul
 
 class _CustomLatexPrinter(_LatexPrinter):
