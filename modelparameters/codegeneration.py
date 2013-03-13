@@ -145,11 +145,17 @@ class _CustomPythonPrinter(_StrPrinter):
 
     def _print_And(self, expr):
         PREC = _precedence(expr)
+        if self._namespace == "ufl.":
+            return "ufl.And({0}, {1})".format(self._print(expr.args[0]),
+                                              self._print(expr.args[1]))
         return "{0} and {1}".format(self.parenthesize(expr.args[0], PREC),
                                     self.parenthesize(expr.args[1], PREC))
 
     def _print_Or(self, expr):
         PREC = _precedence(expr)
+        if self._namespace == "ufl.":
+            return "ufl.Or({0}, {1})".format(self._print(expr.args[0]),
+                                             self._print(expr.args[1]))
         return "{0} or {1}".format(self.parenthesize(expr.args[0], PREC),
                                    self.parenthesize(expr.args[1], PREC))
 
