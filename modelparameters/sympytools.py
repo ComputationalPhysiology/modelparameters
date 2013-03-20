@@ -211,7 +211,7 @@ sp_namespace["one"] = sp.sympify(1)
 sp_namespace["two"] = sp.sympify(2)
 sp_namespace["three"] = sp.sympify(3)
 sp_namespace["four"] = sp.sympify(4)
-sp_namespace["five"] = sp.sympify(4)
+sp_namespace["five"] = sp.sympify(5)
 sp_namespace["ten"] = sp.sympify(10)
 
 __all__ = [_name for _name in globals().keys() if _name[0] != "_"]
