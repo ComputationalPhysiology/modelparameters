@@ -18,7 +18,7 @@
 # System imports
 import sympy as sp
 
-from sympy.core import relational
+from sympy.core import relational as _relational
 
 # Local imports
 from utils import check_arg
@@ -202,8 +202,9 @@ sp_namespace.update((name, op) for name, op in sp.functions.__dict__.items() \
                     if name[0] != "_")
 sp_namespace["Conditional"] = Conditional
 sp_namespace["ContinuousConditional"] = ContinuousConditional
-sp_namespace.update((name, op) for name, op in relational.__dict__.items() \
+sp_namespace.update((name, op) for name, op in _relational.__dict__.items() \
                     if name in ["Eq", "Ne", "Gt", "Ge", "Lt", "Le"])
+sp_namespace.update((name, getattr(sp, name)) for name in ["And", "Or"])
 sp_namespace["pi"] = sp.numbers.pi
 sp_namespace["E"] = sp.numbers.E
 
