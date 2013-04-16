@@ -23,7 +23,39 @@ from sympy.printing.ccode import CCodePrinter as _CCodePrinter
 from sympy.printing.latex import LatexPrinter as _LatexPrinter
 from sympy.printing.latex import latex as _sympy_latex
 from sympy.printing.precedence import precedence as _precedence
-from sympy.core.function import _coeff_isneg
+
+from distutils.version import LooseVersion as _V
+
+_current_sympy_version = _V(sp.__version__)
+
+# Check version for order arguments
+if _current_sympy_version >= _V("0.7.2"):
+    _order = "none"
+else:
+    _order = None
+
+def _coeff_isneg(a):
+    """Return True if the leading Number is negative.
+
+    Examples
+    ========
+
+    >>> from sympy.core.function import _coeff_isneg
+    >>> from sympy import S, Symbol, oo, pi
+    >>> _coeff_isneg(-3*pi)
+    True
+    >>> _coeff_isneg(S(3))
+    False
+    >>> _coeff_isneg(-oo)
+    True
+    >>> _coeff_isneg(Symbol('n', negative=True)) # coeff is 1
+    False
+
+    """
+
+    if a.is_Mul:
+        a = a.args[0]
+    return a.is_Number and a.is_negative
 
 _relational_map = {
     "==":"Eq",
@@ -44,6 +76,8 @@ def _print_Mul(self, expr):
     else:
         # use make_args in case expr was something like -x -> x
         args = sp.Mul.make_args(expr)
+
+    args = tuple(args)
 
     if _coeff_isneg(expr):
         # If negative and -1 is the first arg: remove it
@@ -96,7 +130,7 @@ class _CustomPythonPrinter(_StrPrinter):
     def __init__(self, namespace=""):
         assert(namespace in ["", "math", "np", "numpy", "ufl"])
         self._namespace = namespace if not namespace else namespace + "."
-        _StrPrinter.__init__(self, settings=dict(order="none"))
+        _StrPrinter.__init__(self, settings=dict(order=_order))
         
     def _print_ModelSymbol(self, expr):
         return expr.name
@@ -419,11 +453,12 @@ _python_code_printer = {"":_CustomPythonCodePrinter("", ),
                         "numpy":_CustomPythonCodePrinter("numpy"),
                         "math":_CustomPythonCodePrinter("math"),
                         "ufl":_CustomPythonCodePrinter("ufl"),}
-                        
-_ccode_printer = _CustomCCodePrinter(order="none")
-_cppcode_printer = _CustomCCodePrinter(cpp=True, order="none")
+
+# FIXME: What on earth is ordered used for?!?
+_ccode_printer = _CustomCCodePrinter(order=_order)
+_cppcode_printer = _CustomCCodePrinter(cpp=True, order=_order)
 _sympy_printer = _CustomPythonPrinter()
-_matlab_printer = _CustomMatlabCodePrinter(order="none")
+_matlab_printer = _CustomMatlabCodePrinter(order=_order)
 
 def ccode(expr, assign_to=None):
     """
