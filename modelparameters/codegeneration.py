@@ -34,6 +34,53 @@ if _current_sympy_version >= _V("0.7.2"):
 else:
     _order = None
 
+# A collection of language specific keywords
+_cpp_keywords = ["auto", "const", "double", "float", "int", "short", "struct", 
+                 "break", "continue", "else", "for", "long", "signed", "switch", 
+                 "case", "default", "enum", "goto", "register", "sizeof", "typedef",
+                 "char", "do", "extern", "if", "return", "static", "union", "while",
+                 "asm", "dynamic_cast", "namespace", "reinterpret_cast", "try",
+                 "bool", "explicit", "new", "static_cast", "typeid", "volatile",
+                 "catch", "operator", "template", "typename",
+                 "class", "friend", "private", "this", "using",
+                 "const_cast", "inline", "public", "throw", "virtual",
+                 "delete", "mutable", "protected", "wchar_t",
+                 "or", "and", "xor", "not", "unsigned", "void"]
+
+_python_keywords = ["and", "del", "from", "not", "while", "as", "elif", "global",
+                    "or", "with", "assert", "else", "if", "pass", "yield",
+                    "break", "except", "import", "print", "class", "exec",
+                    "in", "raise", "continue", "finally", "is", "return", "def",
+                    "for", "lambda", "try"]
+
+_matlab_keywords = ["break", "case", "catch", "classdef", "continue", "else",
+                    "elseif", "end", "for", "function", "global", "if", "otherwise",
+                    "parfor", "persistent", "return", "spmd", "switch", "try", "while"]
+
+_fortran_keywords = ["assign", "backspace", "block data", "call", "close", "common",
+                     "continue", "data", "dimension", "do", "else", "else if", "end",
+                     "endfile", "endif", "entry", "equivalence", "external", "format",
+                     "function", "goto", "if", "implicit", "inquire", "intrinsic",
+                     "open", "parameter", "pause", "print", "program", "read",
+                     "return", "rewind", "rewrite", "save", "stop", "subroutine",
+                     "then", "write"] + \
+                     ["allocate", "allocatable", "case", "contains", "cycle",
+                      "deallocate", "elsewhere", "exit", "include", "interface",
+                      "intent", "module", "namelist", "nullify", "only", "operator",
+                      "optional", "pointer", "private", "procedure", "public",
+                      "result", "recursive", "select", "sequence", "target", "use",
+                      "while", "where"] + \
+                      ["forall", "pure"] + \
+                      ["abstract", "associate", "asynchronous", "bind", "class",
+                       "deferred", "enum", "enumerator", "extends", "final", "flush",
+                       "generic", "import", "non_overridable", "nopass", "pass",
+                       "protected", "value", "volatile", "wait"] + \
+                       ["block", "codimension", "do concurrent", "contiguous",
+                        "critical", "error stop", "submodule", "sync all",
+                        "sync images", "sync memory", "lock", "unlock"]
+
+_all_keywords = set(_cpp_keywords+_python_keywords+_matlab_keywords+_fortran_keywords)
+
 def _coeff_isneg(a):
     """Return True if the leading Number is negative.
 
@@ -180,16 +227,22 @@ class _CustomPythonPrinter(_StrPrinter):
     def _print_And(self, expr):
         PREC = _precedence(expr)
         if self._namespace == "ufl.":
+            if len(expr.args) != 2:
+                error("UFL does not support more than 2 operands to And")
             return "ufl.And({0}, {1})".format(self._print(expr.args[0]),
                                               self._print(expr.args[1]))
+        return " and ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
         return "{0} and {1}".format(self.parenthesize(expr.args[0], PREC),
                                     self.parenthesize(expr.args[1], PREC))
 
     def _print_Or(self, expr):
         PREC = _precedence(expr)
         if self._namespace == "ufl.":
+            if len(expr.args) != 2:
+                error("UFL does not support more than 2 operands to Or")
             return "ufl.Or({0}, {1})".format(self._print(expr.args[0]),
                                              self._print(expr.args[1]))
+        return " or ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
         return "{0} or {1}".format(self.parenthesize(expr.args[0], PREC),
                                    self.parenthesize(expr.args[1], PREC))
 
@@ -215,8 +268,8 @@ class _CustomPythonPrinter(_StrPrinter):
                                          self._print(expr.base))
         if self._namespace == "ufl.":
             return "{0}elem_pow({1}, {2})".format(self._namespace,
-                                                      self._print(expr.base),
-                                                      self._print(expr.exp))
+                                                  self._print(expr.base),
+                                                  self._print(expr.exp))
         return "{0}pow({1}, {2})".format(self._namespace,
                                          self._print(expr.base),
                                          self._print(expr.exp))
@@ -307,6 +360,9 @@ class _CustomCCodePrinter(_StrPrinter):
     def _print_NegativeOne(self, expr):
         return "-1.0"
 
+    def _print_Rational(self, expr):
+        return "{0}.0/{1}".format(expr.p, expr.q)
+
     def _print_Min(self, expr):
         "fmin and fmax is not contained in std namespace untill -ansi g++ 4.7"
         return "fmin({0})".format(self.stringify(expr.args, ", "))
@@ -336,26 +392,29 @@ class _CustomCCodePrinter(_StrPrinter):
         return "%s" % self._prefix + expr.func.__name__.lower() + \
                "(%s)"%self.stringify(expr.args, ", ")
     
-    def _print_Pow(self, expr):
+    def _print_Pow(self, expr, rational=False):
         PREC = _precedence(expr)
         if expr.exp.is_integer and int(expr.exp) == 1:
             return self.parenthesize(expr.base, PREC)
         if expr.exp is sp.S.NegativeOne:
-            return '1.0/{0}'.format(self.parenthesize(expr.base, PREC))
+            return "1.0/{0}".format(self.parenthesize(expr.base, PREC))
         if expr.exp.is_integer and int(expr.exp) in [2, 3]:
             return "({0})".format(\
                 "*".join(self.parenthesize(expr.base, PREC) \
-                         for i in range(int(expr.exp))), PREC)
+                         for i in xrange(int(expr.exp))), PREC)
         if expr.exp.is_integer and int(expr.exp) in [-2, -3]:
             return "1.0/({0})".format(\
                 "*".join(self.parenthesize(expr.base, PREC) \
-                         for i in range(-int(expr.exp))), PREC)
-        elif expr.exp == 0.5:
-            return '%ssqrt(%s)' % (self._prefix, self._print(expr.base))
-        else:
-            return '%spow(%s, %s)'%(self._prefix, self._print(expr.base),
-                                    self._print(expr.exp))
-
+                         for i in xrange(-int(expr.exp))), PREC)
+        if expr.exp is sp.S.Half and not rational:
+            return "{0}sqrt({1})".format(self._prefix,
+                                         self._print(expr.base))
+        if expr.exp == -0.5:
+            return "1/{0}sqrt({1})".format(self._prefix,
+                                           self._print(expr.base))
+        return "{0}pow({1}, {2})".format(self._prefix,
+                                         self._print(expr.base),
+                                         self._print(expr.exp))
     def _print_sign(self, expr):
         return "{0}copysign(1.0, {1})".format(self._prefix, \
                                               self._print(expr.args[0]))

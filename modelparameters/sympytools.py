@@ -15,9 +15,11 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with ModelParameters. If not, see <http://www.gnu.org/licenses/>.
 
+# Use truediv
+from __future__ import division
+
 # System imports
 import sympy as sp
-
 from sympy.core import relational as _relational
 
 # Local imports
