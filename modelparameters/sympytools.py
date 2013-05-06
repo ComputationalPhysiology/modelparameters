@@ -124,7 +124,7 @@ def ContinuousConditional(cond, true_value, false_value, sigma=1.0):
     H = 1/(1 + sp.exp((cond.args[0]-cond.args[1])/sigma))
 
     # Desides which should be weighted with 1 and 0
-    if "<" in cond.rel_op:
+    if ">" in cond.rel_op:
         return true_value*(1-H) + false_value*H
 
     return true_value*H + false_value*(1-H)
