@@ -297,10 +297,11 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
 
     def _print_Function(self, expr):
         #print expr.func.__name__, expr.args
-        if expr.func.__name__ == "ceiling":
+        func_name = expr.func.__name__
+        if func_name == "ceiling":
             return "{0}ceil({1})".format(self._namespace, \
                                          self.stringify(expr.args, ", "))
-        elif expr.func.__name__ == "log":
+        elif func_name == "log":
             if self._namespace == "ufl.":
                 return "{0}ln({1})".format(self._namespace,
                                            self._print(expr.args[0]))
@@ -309,8 +310,16 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
                                             self._print(expr.args[0]))
         else:
             return "{0}{1}".format(self._namespace, \
-                        expr.func.__name__.lower() + \
+                        func_name.lower() + \
                         "({0})".format(self.stringify(expr.args, ", ")))
+
+    def _print_re(self, expr):
+        assert len(expr.args) == 1
+        return "({0}).real".format(self._print(expr.args[0]))
+
+    def _print_im(self, expr):
+        assert len(expr.args) == 1
+        return "({0}).imag".format(self._print(expr.args[0]))
 
     def _print_Piecewise(self, expr):
         result = ""
@@ -432,6 +441,16 @@ class _CustomCCodePrinter(_StrPrinter):
         return "{0} || {1}".format(self.parenthesize(expr.args[0], PREC),
                                    self.parenthesize(expr.args[1], PREC))
 
+    def _print_re(self, expr):
+        assert len(expr.args) == 1
+        return "{0}creal({1})".format(self._prefix,
+                                      self._print(expr.args[0]))
+
+    def _print_im(self, expr):
+        assert len(expr.args) == 1
+        return "{0}cimag({1})".format(self._prefix,
+                                      self._print(expr.args[0]))
+
     _print_Mul = _print_Mul
 
 class _CustomMatlabCodePrinter(_StrPrinter):
@@ -489,6 +508,14 @@ class _CustomMatlabCodePrinter(_StrPrinter):
         PREC = _precedence(expr)
         return "{0} | {1}".format(self.parenthesize(expr.args[0], PREC),
                                    self.parenthesize(expr.args[1], PREC))
+
+    def _print_re(self, expr):
+        assert len(expr.args) == 1
+        return "real({0})".format(self._print(expr.args[0]))
+
+    def _print_im(self, expr):
+        assert len(expr.args) == 1
+        return "imag({0})".format(self._print(expr.args[0]))
 
     _print_Mul = _print_Mul
 
