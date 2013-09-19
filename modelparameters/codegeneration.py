@@ -451,6 +451,11 @@ class _CustomCCodePrinter(_StrPrinter):
         return "{0}cimag({1})".format(self._prefix,
                                       self._print(expr.args[0]))
 
+    def _print_ModelSymbol(self, expr):
+        if expr.name == "I":
+            return "I_"
+        return expr.name
+
     _print_Mul = _print_Mul
 
 class _CustomMatlabCodePrinter(_StrPrinter):
@@ -593,6 +598,8 @@ def ccode(expr, assign_to=None):
     ret = _ccode_printer.doprint(expr)
     if assign_to is None:
         return ret
+    if assign_to == "I":
+        assign_to = "I_"
     return "{0} = {1}".format(assign_to, ret)
 
 def latex(expr, **settings):
