@@ -314,7 +314,7 @@ class ParameterDict(dict):
             def print_help(self, f=None):
                 if f is None:
                     f = sys.stdout
-                f.write(self.format_help().encode(f.encoding, 'replace'))
+                f.write(self.format_help())
         parser = OptionParser(usage = usage or "usage: %prog [options]")
         
         def callback(parent, key, value_type, sequence_type=None):
