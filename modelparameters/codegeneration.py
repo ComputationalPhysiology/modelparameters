@@ -114,7 +114,6 @@ _relational_map = {
     }
 
 def _print_Mul(self, expr):
-    from sympytools import ModelSymbol as _ModelSymbol
 
     prec = _precedence(expr)
     
@@ -179,9 +178,6 @@ class _CustomPythonPrinter(_StrPrinter):
         self._namespace = namespace if not namespace else namespace + "."
         _StrPrinter.__init__(self, settings=dict(order=_order))
         
-    def _print_ModelSymbol(self, expr):
-        return expr.name
-
     # Why is this not called!
     def _print_Log(self, expr):
         if self._namespace == "ufl.":
@@ -386,9 +382,6 @@ class _CustomCCodePrinter(_StrPrinter):
     def _print_Abs(self, expr):
         return "{0}fabs({1})".format(self._prefix, self.stringify(expr.args, ", "))
 
-    def _print_ModelSymbol(self, expr):
-        return expr.name
-
     def _print_Piecewise(self, expr):
         result = ""
         for e, c in expr.args[:-1]:
@@ -451,7 +444,7 @@ class _CustomCCodePrinter(_StrPrinter):
         return "{0}cimag({1})".format(self._prefix,
                                       self._print(expr.args[0]))
 
-    def _print_ModelSymbol(self, expr):
+    def _print_Symbol(self, expr):
         if expr.name == "I":
             return "I_"
         return expr.name
@@ -475,9 +468,6 @@ class _CustomMatlabCodePrinter(_StrPrinter):
     def _print_Ceiling(self, expr):
         return "ceil(%s)" % (self.stringify(expr.args, ", "))
     
-    def _print_ModelSymbol(self, expr):
-        return expr.name
-
     def _print_Piecewise(self, expr):
         result = ""
         for e, c in expr.args[:-1]:

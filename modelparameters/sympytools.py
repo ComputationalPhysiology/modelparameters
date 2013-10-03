@@ -31,33 +31,6 @@ from codegeneration import sympycode
 sp.Basic.__str__ = sympycode
 sp.Basic.__repr__ = sympycode
 
-class ModelSymbol(sp.Symbol):
-    """
-    Class for all Symbols used in ScalarParam
-    """
-
-    __slots__ = ("abbrev",)
-
-    def __new__(cls, name, abbrev, **assumptions):
-        obj = sp.Symbol.__new__(cls, name, real=True, finite=True)
-        assert isinstance(name, str), repr(type(name))
-        assert isinstance(abbrev, str), repr(type(abbrev))
-        obj.abbrev = abbrev
-
-        return obj
-
-    def __getnewargs__(self):
-        return (self.name, self.abbrev)
-
-    def __eq__(self, other):
-        return isinstance(other, ModelSymbol) and self.abbrev == other.abbrev
-
-    def __hash__(self):
-        return super(ModelSymbol, self).__hash__()
-
-    def _hashable_content(self):
-        return (self.name, self.abbrev)
-
 def Conditional(cond, true_value, false_value):
     """
     Declares a conditional
@@ -152,7 +125,7 @@ def symbol_to_params(sym):
     if sp is None:
         error("sympy is needed for symbol_to_params to work.")
         
-    check_arg(sym, ModelSymbol, context=symbol_to_params)
+    check_arg(sym, sp.Symbol, context=symbol_to_params)
     param = _all_symbol_parameters.get(str(sym))
 
     if param is None:
@@ -163,21 +136,21 @@ def symbol_to_params(sym):
 
 def symbol_params_from_expr(expr):
     """
-    Return a list of ModelSymbols from expr
+    Return a list of Symbols from expr
     """
     check_arg(expr, sp.Basic)
-    return [atom for atom in expr.atoms() if isinstance(atom, ModelSymbol)]
+    return [atom for atom in expr.atoms() if isinstance(atom, sp.Symbol)]
 
 def iter_symbol_params_from_expr(expr):
     """
-    Return an iterator over ModelSymbols from expr
+    Return an iterator over sp.Symbols from expr
     """
     check_arg(expr, sp.Basic)
-    return (atom for atom in expr.atoms() if isinstance(atom, ModelSymbol))
+    return (atom for atom in expr.atoms() if isinstance(atom, sp.Symbol))
 
 def symbol_param_value_namespace(expr):
     """
-    Extract a list of ModelSymbols from expr
+    Extract a list of Symbols from expr
     """
     check_arg(expr, sp.Basic)
     return dict((str(symbol_param), symbol_to_params(symbol_param).value) \

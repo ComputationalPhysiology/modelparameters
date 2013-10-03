@@ -226,15 +226,9 @@ class TestScalarParam(unittest.TestCase):
                          "ScalarParam(45, gt=0, le=100)")
         
         if sp is not None:
-            self.assertEqual(repr(ScalarParam(45, name="jada", \
-                                              symname="bada.jada")),
-                             "ScalarParam(45, name='jada', symname='bada.jada')")
+            self.assertEqual(repr(ScalarParam(45, name="jada")),
+                             "ScalarParam(45, name='jada')")
 
-        with self.assertRaises(TypeError) as cm:
-            ScalarParam(45, symname="jada")
-        self.assertEqual(str(cm.exception), "expected no symname when name "\
-                         "is not set")
-        
         with self.assertRaises(ValueError) as cm:
             ScalarParam(45, ge=0, gt=0)
         self.assertEqual(str(cm.exception), "Cannot create a 'Range' "\
@@ -268,7 +262,7 @@ class TestScalarParam(unittest.TestCase):
             return
         
         p0 = ScalarParam(45)
-        p0.name = "bada", "bada.sym"
+        p0.name = "bada"
         self.assertEqual(p0.name, "bada")
         self.assertEqual(str(p0.sym), "bada")
 
@@ -391,16 +385,9 @@ if np is not None:
             self.assertEqual(repr(ArrayParam(45, name="jada")),
                              "ArrayParam([45], name='jada')")
             if sp is not None:
-                self.assertEqual(repr(ArrayParam(45, name="jada", \
-                                                 symname="bada.jada")),
-                                 "ArrayParam([45], name='jada', "\
-                                 "symname='bada.jada')")
+                self.assertEqual(repr(ArrayParam(45, name="jada")),
+                                 "ArrayParam([45], name='jada')")
     
-            with self.assertRaises(TypeError) as cm:
-                ArrayParam(45, symname="jada")
-                self.assertEqual(str(cm.exception), "expected no symname when name "\
-                                 "is not set")
-            
             with self.assertRaises(ValueError) as cm:
                 ArrayParam(45, 0)
             self.assertEqual(str(cm.exception), "0 \xe2\x88\x89 [1, "\
@@ -440,7 +427,7 @@ if np is not None:
                 return
             
             p0 = ArrayParam(45)
-            p0.name = "bada", "bada.sym"
+            p0.name = "bada"
             self.assertEqual(p0.name, "bada")
             self.assertEqual(str(p0.sym), "bada")
         

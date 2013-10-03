@@ -21,13 +21,12 @@ __all__ = ["Param", "ScalarParam", "OptionParam", "ConstParam", "ArrayParam"\
 # System imports
 # Conditional sympy import
 try:
-    from sympytools import sp, ModelSymbol, store_symbol_parameter, \
+    from sympytools import sp, store_symbol_parameter, \
          symbol_param_value_namespace
     from codegeneration import pythoncode
-    dummy_sym = ModelSymbol("", "")
+    dummy_sym = sp.Symbol("")
 except ImportError, e:
     sp = None
-    ModelSymbol = None
     dummy_sym = None
 
 import types
@@ -286,7 +285,7 @@ class ScalarParam(Param):
     A simple type and range checking class for a scalar value
     """
     def __init__(self, value, ge=None, le=None, gt=None, lt=None, \
-                 unit="1", name="", symname="", description=""):
+                 unit="1", name="", description=""):
         """
         Creating a ScalarParam
         
@@ -306,9 +305,6 @@ class ScalarParam(Param):
             The unit of the scalar parameter
         name : str (optional)
             The name of the parameter. Used in pretty printing
-        symname : str (optional, if sympy is available)
-            The name of the symbol which will be associated with this
-            parameter. Can only be set if name is also set.
         description : str (optional)
             A description associated with the Parameter
         """
@@ -327,13 +323,11 @@ class ScalarParam(Param):
 
         # Create symbol
         if name == "":
-            if symname != "":
-                type_error("expected no symname when name is not set")
             self._sym = dummy_sym
         elif sp is None:
             self._sym = None
         else:
-            self._sym = ModelSymbol(name, name if symname == "" else symname)
+            self._sym = sp.Symbol(name)
 
             # Store parameter 
             store_symbol_parameter(self)
@@ -350,27 +344,15 @@ class ScalarParam(Param):
         """
         Set the name. Can only be done if not set during instantiation
         """
-        name = tuplewrap(name)
-        check_kwarg(name, "name", tuple, itemtypes=str)
+        check_arg(name, str)
 
-        if len(name) == 1:
-            name = name[0]
-            symname = name
-        elif len(name) == 2:
-            if sp is None:
-                error("sympy is not installed so setting symname is not "\
-                      "supported")
-            name, symname = name
-        else:
-            value_error("expected 1 or 2 name arguments")
-        
         super(ScalarParam, self)._set_name(name)
 
         if sp is None:
             return
         
         # Create a new symbol with the updated name
-        self._sym = ModelSymbol(name, symname)
+        self._sym = sp.Symbol(name)
 
         # Store parameter 
         store_symbol_parameter(self)
@@ -388,16 +370,6 @@ class ScalarParam(Param):
         """
         return self._unit
     
-    def _name_arg(self):
-        """
-        Return a repr of the name arguments for a ScalarParam
-        """
-        name_arg = super(ScalarParam, self)._name_arg()
-        if sp is None:
-            return name_arg
-        return name_arg + (", symname='%s'" % (self._sym.abbrev) \
-               if self._sym.abbrev and self._sym.abbrev != self._name else "")
-
     def _check_arg(self):
         """
         Return a repr of the check arguments
@@ -417,7 +389,7 @@ class ArrayParam(ScalarParam):
     A numpy Array based parameter
     """
     def __init__(self, value, size=None, ge=None, le=None, gt=None, lt=None, \
-                 unit="1", name="", symname="", description=""):
+                 unit="1", name="", description=""):
         """
         Creating an ArrayParam
         
@@ -439,9 +411,6 @@ class ArrayParam(ScalarParam):
             The unit of the scalar parameter
         name : str (optional)
             The name of the parameter. Used in pretty printing
-        symname : str (optional, if sympy is available)
-            The name of the symbol which will be associated with this
-            parameter. Can only be set if name is also set.
         description : str (optional)
             A description associated with the Parameter
         """
@@ -482,7 +451,7 @@ class ArrayParam(ScalarParam):
 
         # Init super class with dummy value
         super(ArrayParam, self).__init__(value[0], ge, le, gt, lt, unit, \
-                                         name, symname, description)
+                                         name, description)
 
         # Assign value
         self._value = value
@@ -543,7 +512,7 @@ class SlaveParam(ScalarParam):
     """
     A slave parameter defined by other parameters
     """
-    def __init__(self, expr, unit="1", name="", symname="", description=""):
+    def __init__(self, expr, unit="1", name="", description=""):
 
         if sp is None:
             error("sympy is not installed so SlaveParam is not available")
@@ -554,12 +523,12 @@ class SlaveParam(ScalarParam):
         if isinstance(expr, ScalarParam):
             expr = expr.sym
 
-        if not all(isinstance(atom, (sp.NumberSymbol, sp.Number, ModelSymbol, \
+        if not all(isinstance(atom, (sp.NumberSymbol, sp.Number, sp.Symbol, \
                                      sp.Dummy)) for atom in expr.atoms()):
             type_error("expected expression of model symbols.")
         
-        ScalarParam.__init__(self, 0.0, name=name, symname=name, \
-                             description=description, unit=unit)
+        ScalarParam.__init__(self, 0.0, name=name, description=description, \
+                             unit=unit)
 
         # Store the original expression used to evaluate the value of
         # the SlaveParam
