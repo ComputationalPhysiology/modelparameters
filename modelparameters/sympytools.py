@@ -134,19 +134,21 @@ def symbol_to_params(sym):
                     "used in expression with names.".format(sym.abbrev))
     return param
 
-def symbol_params_from_expr(expr):
-    """
-    Return a list of Symbols from expr
-    """
-    check_arg(expr, sp.Basic)
-    return [atom for atom in expr.atoms() if isinstance(atom, sp.Symbol)]
-
 def iter_symbol_params_from_expr(expr):
     """
     Return an iterator over sp.Symbols from expr
     """
     check_arg(expr, sp.Basic)
-    return (atom for atom in expr.atoms() if isinstance(atom, sp.Symbol))
+    
+    # Filter out dummy symbols
+    return (atom for atom in expr.atoms() if isinstance(atom, sp.Symbol) \
+            and not isinstance(atom, sp.Dummy) and atom.name)
+
+def symbol_params_from_expr(expr):
+    """
+    Return a list of Symbols from expr
+    """
+    return [sym for sym in iter_symbol_params_from_expr(expr)]
 
 def symbol_param_value_namespace(expr):
     """

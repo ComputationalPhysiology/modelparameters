@@ -24,7 +24,7 @@ try:
     from sympytools import sp, store_symbol_parameter, \
          symbol_param_value_namespace
     from codegeneration import pythoncode
-    dummy_sym = sp.Symbol("")
+    dummy_sym = sp.Dummy("")
 except ImportError, e:
     sp = None
     dummy_sym = None
