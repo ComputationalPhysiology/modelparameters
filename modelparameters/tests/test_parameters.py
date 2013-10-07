@@ -28,6 +28,10 @@ class TestParam(unittest.TestCase):
                          "which is 'int') as the 'name' argument")
         self.assertEqual(repr(Param(45, "jada")), "Param(45, name='jada')")
         self.assertEqual(str(Param(45, "jada")), "45")
+        self.assertEqual(repr(Param(45)), \
+                         repr(Param(45, "jada").copy(include_name=False)))
+        self.assertEqual(repr(Param(45, description="BADA")), \
+                         "Param(45, description='BADA')")
         
     def test_name_assign(self):
         with self.assertRaises(ValueError) as cm:
@@ -225,6 +229,10 @@ class TestScalarParam(unittest.TestCase):
         self.assertEqual(repr(ScalarParam(45, gt=0, le=100)), \
                          "ScalarParam(45, gt=0, le=100)")
         
+        self.assertEqual(repr(ScalarParam(45, name="jada")), \
+                         repr(ScalarParam(45, gt=0, le=100, name="jada").copy(
+                             include_checkarg=False)))
+
         if sp is not None:
             self.assertEqual(repr(ScalarParam(45, name="jada")),
                              "ScalarParam(45, name='jada')")

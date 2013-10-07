@@ -68,6 +68,23 @@ class Param(object):
         self._name = name
         self._description = description
 
+    def copy(self, include_checkarg=True, include_name=True, \
+             include_description=True):
+        """
+        Return a copy of the parameter
+
+        Arguments
+        ---------
+        include_checkarg : bool
+            If include checkargs in new Param
+        include_name : bool
+            If include name in new Param
+        include_description : bool
+            If include description in new Param
+        """
+        return eval(self._repr(include_checkarg, include_name, \
+                               include_description))
+
     @property
     def description(self):
         return self._description
@@ -167,12 +184,35 @@ class Param(object):
         """
         Returns an executable version of the Param
         """
-        return "%s(%s%s%s)" % (self.__class__.__name__, \
-                               value_formatter(self.value), self._check_arg(),\
-                               self._name_arg())
+        return self._repr()
+
+    def _repr(self, include_checkarg=True, include_name=True, \
+              include_description=True):
+        """
+        Returns an executable version of the Param including optional arguments
+
+        Arguments
+        ---------
+        include_checkarg : bool
+            If include checkargs in new Param
+        include_name : bool
+            If include name in new Param
+        include_description : bool
+            If include description in new Param
+        """
+        return "%s(%s%s%s%s)" % (\
+            self.__class__.__name__, \
+            value_formatter(self.value), \
+            self._check_arg() if include_checkarg else "", \
+            self._name_arg() if include_name else "", \
+            self._description_arg() if include_description else "")
 
     def _name_arg(self):
         return ", name='%s'" % self._name if self._name else ""
+
+    def _description_arg(self):
+        return ", description='%s'" % self._description \
+               if self._description else ""
     
     def _check_arg(self):
         return ""
@@ -251,6 +291,27 @@ class OptionParam(Param):
                (self._name == other._name, self._value == other._value, \
                 self.__class__ == other.__class__, \
                 self._options == other._options)
+    
+    def _repr(self, include_checkarg=True, include_name=True, \
+              include_description=True):
+        """
+        Returns an executable version of the Param including optional arguments
+
+        Arguments
+        ---------
+        include_checkarg : bool
+            If include checkargs in new Param
+        include_name : bool
+            If include name in new Param
+        include_description : bool
+            If include description in new Param
+        """
+        if not include_checkarg:
+            warning("'include_checkarg' must be 'True' in OptionParam._repr.")
+            include_checkarg = True
+        
+        return super(OptionParam, self)._repr(include_checkarg, include_name, \
+              include_description)
 
 class ConstParam(Param):
     """
