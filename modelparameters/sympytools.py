@@ -28,8 +28,8 @@ from logger import warning, error, value_error, type_error
 from codegeneration import sympycode
 
 # Update printer
-sp.Basic.__str__ = sympycode
-sp.Basic.__repr__ = sympycode
+#sp.Basic.__str__ = sympycode
+#sp.Basic.__repr__ = sympycode
 
 def Conditional(cond, true_value, false_value):
     """
