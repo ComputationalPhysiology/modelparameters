@@ -17,6 +17,7 @@
 
 # System imports
 import sympy as sp
+from sympy.core.function import AppliedUndef as _AppliedUndef
 
 from sympy.printing import StrPrinter as _StrPrinter
 from sympy.printing.ccode import CCodePrinter as _CCodePrinter
@@ -201,6 +202,17 @@ class _CustomPythonPrinter(_StrPrinter):
     def _print_Integer(self, expr):
         return str(expr.p) + ".0"
 
+    def _print_Function(self, expr):
+        if isinstance(expr, _AppliedUndef):
+            return expr.func.__name__
+        return _StrPrinter._print_Function(self, expr)
+
+    def _print_Derivative(self, expr):
+        if isinstance(expr.args[0], _AppliedUndef):
+            return "d%s_d%s" % (expr.args[0].func.__name__, "_".join(\
+                self._print(arg) for arg in expr.args[1:]))
+        return _StrPrinter._print_Derivative(self, expr)
+
     def _print_NegativeOne(self, expr):
         return "-1.0"
 
@@ -294,7 +306,11 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
     def _print_Function(self, expr):
         #print expr.func.__name__, expr.args
         func_name = expr.func.__name__
-        if func_name == "ceiling":
+
+        if isinstance(expr, _AppliedUndef):
+            return func_name
+        
+        elif func_name == "ceiling":
             return "{0}ceil({1})".format(self._namespace, \
                                          self.stringify(expr.args, ", "))
         elif func_name == "log":
@@ -391,6 +407,9 @@ class _CustomCCodePrinter(_StrPrinter):
     
     def _print_Function(self, expr):
         #print expr.func.__name__, expr.args
+        if isinstance(expr, _AppliedUndef):
+            return expr.func.__name__
+        
         return "%s" % self._prefix + expr.func.__name__.lower() + \
                "(%s)"%self.stringify(expr.args, ", ")
     
@@ -478,6 +497,9 @@ class _CustomMatlabCodePrinter(_StrPrinter):
     
     def _print_Function(self, expr):
         #print expr.func.__name__, expr.args
+        if isinstance(expr, _AppliedUndef):
+            return expr.func.__name__
+        
         return "%s(%s)" % (expr.func.__name__.lower(), self.stringify(\
             expr.args, ", "))
     
@@ -515,6 +537,12 @@ class _CustomMatlabCodePrinter(_StrPrinter):
     _print_Mul = _print_Mul
 
 class _CustomLatexPrinter(_LatexPrinter):
+    def _print_Function(self, expr):
+        if isinstance(expr, _AppliedUndef):
+            return expr.func.__name__
+
+        return _LatexPrinter._print_Function(self, expr)
+
     def _print_Add(self, expr):
         terms = list(expr.args)
         tex = self._print(terms[0])
