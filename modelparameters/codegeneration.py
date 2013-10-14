@@ -213,6 +213,12 @@ class _CustomPythonPrinter(_StrPrinter):
                 self._print(arg) for arg in expr.args[1:]))
         return _StrPrinter._print_Derivative(self, expr)
 
+    def _print_Subs(self, expr):
+        # Execute subsitution
+        orig_expr=expr.expr
+        subs = dict((key,value) for key, value in zip(expr.variables, expr.point))
+        return self._print(orig_expr.xreplace(subs))
+
     def _print_NegativeOne(self, expr):
         return "-1.0"
 
