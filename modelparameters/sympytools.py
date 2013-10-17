@@ -20,10 +20,11 @@ from __future__ import division
 
 # System imports
 import sympy as sp
+
 from sympy.core import relational as _relational
 
 # Local imports
-from utils import check_arg
+from utils import check_arg, deprecated
 from logger import warning, error, value_error, type_error
 from codegeneration import sympycode
 
@@ -115,25 +116,62 @@ def store_symbol_parameter(param):
     #if str(sym) in _all_symbol_parameters:
     #    warning("Parameter with symbol name '%s' already "\
     #            "excist" % sym)
-    _all_symbol_parameters[str(sym)] = param
+    _all_symbol_parameters[sympycode(sym)] = param
 
+@deprecated
 def symbol_to_params(sym):
+    return symbol_to_param(sym)
+
+def symbol_to_param(sym):
     """
     Take a symbol or expression of symbols and returns the corresponding
     Parameters
     """
+    from sympy.core.function import AppliedUndef
+
     if sp is None:
         error("sympy is needed for symbol_to_params to work.")
         
-    check_arg(sym, sp.Symbol, context=symbol_to_params)
-    param = _all_symbol_parameters.get(str(sym))
+    check_arg(sym, (sp.Symbol, AppliedUndef), context=symbol_to_params)
+    param = _all_symbol_parameters.get(sympycode(sym))
 
     if param is None:
         value_error("No parameter with name '{0}' "\
                     "registered. Remember to declare Params which should be "\
-                    "used in expression with names.".format(sym.abbrev))
+                    "used in expression with names.".format(sympycode(sym)))
     return param
 
+def symbols_from_expr(expr):
+    """
+    Returns a set of all symbols of an expression
+
+    Arguments:
+    ----------
+    expr : sympy expression
+        A sympy expression containing sympy.Symbols or sympy.AppliedUndef
+        functions.
+    """
+    from sympy.core.function import AppliedUndef
+
+    symbols = set()
+    
+    pt = sp.preorder_traversal(expr)
+    
+    for node in pt:
+        
+        # Do not traverse AppliedUndef
+        if isinstance(node, AppliedUndef):
+            pt.skip()
+            symbols.add(node)
+        
+        elif(isinstance(node, sp.Symbol) and not isinstance(node, sp.Dummy) \
+             and node.name):
+            symbols.add(node)
+            
+    return symbols
+
+
+@deprecated
 def iter_symbol_params_from_expr(expr):
     """
     Return an iterator over sp.Symbols from expr
@@ -144,6 +182,7 @@ def iter_symbol_params_from_expr(expr):
     return (atom for atom in expr.atoms() if isinstance(atom, sp.Symbol) \
             and not isinstance(atom, sp.Dummy) and atom.name)
 
+@deprecated
 def symbol_params_from_expr(expr):
     """
     Return a list of Symbols from expr

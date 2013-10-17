@@ -558,5 +558,23 @@ def quote_join(list_of_str):
     assert(all(isinstance(item, str) for item in list_of_str))
     return ", ".join(["'%s'"%item for item in list_of_str])
 
+
+def deprecated(func):
+    """
+    This is a decorator which can be used to mark functions
+    as deprecated. It will result in a warning being emitted
+    when the function is used.
+    """
+    import functools
+    
+    @functools.wraps(func)
+    def new_func(*args, **kwargs):
+        warning("Call to deprecated function {0} (filename={1}, "\
+                "lineno={2})".format(func.__name__, \
+                                    func.func_code.co_filename,
+                                    func.func_code.co_firstlineno + 1))
+        return func(*args, **kwargs)
+    return new_func
+
 __all__ = [_name for _name in globals().keys() if _name[0] != "_"]
 
