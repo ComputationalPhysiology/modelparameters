@@ -556,6 +556,8 @@ class _CustomLatexPrinter(_LatexPrinter):
 
         return tex
 
+    _print_Mul = _print_Mul
+
 # Different math namespace python printer
 _python_code_printer = {"":_CustomPythonCodePrinter("", ),
                         "np":_CustomPythonCodePrinter("np"),
