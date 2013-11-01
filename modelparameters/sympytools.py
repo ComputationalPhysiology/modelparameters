@@ -141,7 +141,7 @@ def symbol_to_param(sym):
                     "used in expression with names.".format(sympycode(sym)))
     return param
 
-def symbols_from_expr(expr):
+def symbols_from_expr(expr, include_numbers=False):
     """
     Returns a set of all symbols of an expression
 
@@ -150,6 +150,8 @@ def symbols_from_expr(expr):
     expr : sympy expression
         A sympy expression containing sympy.Symbols or sympy.AppliedUndef
         functions.
+    include_numbers : bool
+        If True numbers will also be returned
     """
     from sympy.core.function import AppliedUndef
 
@@ -164,12 +166,14 @@ def symbols_from_expr(expr):
             pt.skip()
             symbols.add(node)
         
-        elif(isinstance(node, sp.Symbol) and not isinstance(node, sp.Dummy) \
-             and node.name):
+        elif isinstance(node, sp.Symbol) and not isinstance(node, sp.Dummy) \
+                 and node.name:
+            symbols.add(node)
+
+        elif include_numbers and isinstance(node, sp.Number):
             symbols.add(node)
             
     return symbols
-
 
 @deprecated
 def iter_symbol_params_from_expr(expr):
@@ -189,13 +193,22 @@ def symbol_params_from_expr(expr):
     """
     return [sym for sym in iter_symbol_params_from_expr(expr)]
 
+@deprecated
 def symbol_param_value_namespace(expr):
     """
-    Extract a list of Symbols from expr
+    Create a value name space for the included symbols in the expression
     """
     check_arg(expr, sp.Basic)
     return dict((str(symbol_param), symbol_to_params(symbol_param).value) \
                 for symbol_param in iter_symbol_params_from_expr(expr))
+
+def value_namespace(expr):
+    """
+    Create a value name space for the included symbols in the expression
+    """
+    check_arg(expr, sp.Basic)
+    return dict((sympycode(symbol), symbol_to_params(symbol).value) \
+                for symbol in symbols_from_expr(expr))
 
 def add_pair_to_subs(subs, old, new):
     """

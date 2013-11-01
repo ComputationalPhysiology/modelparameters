@@ -22,7 +22,7 @@ __all__ = ["Param", "ScalarParam", "OptionParam", "ConstParam", "ArrayParam"\
 # Conditional sympy import
 try:
     from sympytools import sp, store_symbol_parameter, \
-         symbol_param_value_namespace
+         value_namespace
     from codegeneration import pythoncode
     dummy_sym = sp.Dummy("")
 except ImportError, e:
@@ -644,7 +644,7 @@ def eval_param_expr(expr, ns=None):
     ns = ns or {}
     
     # Get values
-    value_ns = symbol_param_value_namespace(expr)
+    value_ns = value_namespace(expr)
 
     # First check if we have numpy arrays
     if np and any(isinstance(value, np.ndarray) for value in value_ns.values()):
