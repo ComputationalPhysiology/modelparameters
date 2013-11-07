@@ -132,7 +132,8 @@ def symbol_to_param(sym):
     if sp is None:
         error("sympy is needed for symbol_to_params to work.")
         
-    check_arg(sym, (sp.Symbol, AppliedUndef), context=symbol_to_params)
+    check_arg(sym, (sp.Symbol, AppliedUndef, sp.Derivative),
+              context=symbol_to_params)
     param = _all_symbol_parameters.get(sympycode(sym))
 
     if param is None:
@@ -141,7 +142,7 @@ def symbol_to_param(sym):
                     "used in expression with names.".format(sympycode(sym)))
     return param
 
-def symbols_from_expr(expr, include_numbers=False):
+def symbols_from_expr(expr, include_numbers=False, include_derivatives=False):
     """
     Returns a set of all symbols of an expression
 
@@ -152,6 +153,8 @@ def symbols_from_expr(expr, include_numbers=False):
         functions.
     include_numbers : bool
         If True numbers will also be returned
+    include_derivatives : bool
+        If True derivatives will be returned instead of its variables
     """
     from sympy.core.function import AppliedUndef
 
@@ -171,6 +174,11 @@ def symbols_from_expr(expr, include_numbers=False):
             symbols.add(node)
 
         elif include_numbers and isinstance(node, sp.Number):
+            symbols.add(node)
+
+        elif include_derivatives and isinstance(node, sp.Derivative):
+            # Do not traverse Derivative
+            pt.skip()
             symbols.add(node)
             
     return symbols
@@ -202,13 +210,14 @@ def symbol_param_value_namespace(expr):
     return dict((str(symbol_param), symbol_to_params(symbol_param).value) \
                 for symbol_param in iter_symbol_params_from_expr(expr))
 
-def value_namespace(expr):
+def value_namespace(expr, include_derivatives=False):
     """
     Create a value name space for the included symbols in the expression
     """
     check_arg(expr, sp.Basic)
     return dict((sympycode(symbol), symbol_to_params(symbol).value) \
-                for symbol in symbols_from_expr(expr))
+                for symbol in symbols_from_expr(\
+                    expr, include_derivatives=include_derivatives))
 
 def add_pair_to_subs(subs, old, new):
     """

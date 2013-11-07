@@ -606,7 +606,7 @@ class SlaveParam(ScalarParam):
         Return a computed value of the Parameters
         """
         
-        return eval_param_expr(self._expr)
+        return eval_param_expr(self._expr, include_derivatives=True)
     
     value = property(getvalue, setvalue)
 
@@ -624,7 +624,7 @@ class SlaveParam(ScalarParam):
         return "%s - SlaveParam(%s)"%(value_formatter(self.getvalue(), str_length), \
                                       str(self._expr))
 
-def eval_param_expr(expr, ns=None):
+def eval_param_expr(expr, include_derivatives=False, ns=None):
     """
     Eval an expression of symbols of ScalarParam
 
@@ -632,6 +632,8 @@ def eval_param_expr(expr, ns=None):
     ---------
     expr : expression of ParamSymbols
         The expression to be evaulated
+    include_derivatives : bool (optional)
+        If True not only symbols are evaulated but also derivatives
     ns : dict (optional)
         A namespace in which the expression will be evaluated in
     """
@@ -644,7 +646,7 @@ def eval_param_expr(expr, ns=None):
     ns = ns or {}
     
     # Get values
-    value_ns = value_namespace(expr)
+    value_ns = value_namespace(expr, include_derivatives=include_derivatives)
 
     # First check if we have numpy arrays
     if np and any(isinstance(value, np.ndarray) for value in value_ns.values()):
