@@ -208,6 +208,10 @@ class _CustomPythonPrinter(_StrPrinter):
         return _StrPrinter._print_Function(self, expr)
 
     def _print_Derivative(self, expr):
+        if not isinstance(expr.args[1], (_AppliedUndef, sp.Symbol)):
+            error("Can only print Derivative code with a single dependent "\
+                  "variabe. Got: {0}".format(sympycode(expr.args[1])))
+        
         if isinstance(expr.args[0], _AppliedUndef):
             return "d%s_d%s" % (expr.args[0].func.__name__, "_".join(\
                 self._print(arg) for arg in expr.args[1:]))
