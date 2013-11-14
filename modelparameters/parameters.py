@@ -31,6 +31,7 @@ except ImportError, e:
 
 import types
 import operator
+import copy
 
 # local imports
 from config import *
@@ -82,8 +83,20 @@ class Param(object):
         include_description : bool
             If include description in new Param
         """
-        return eval(self._repr(include_checkarg, include_name, \
-                               include_description))
+        repr_str = "%s(value%s%s%s)" % (\
+            self.__class__.__name__, \
+            self._check_arg() if include_checkarg else "", \
+            self._name_arg() if include_name else "", \
+            self._description_arg() if include_description else "")
+
+        # FIXME: Over load copy in SlaveParam instead?
+        if isinstance(self, SlaveParam):
+            value = copy.copy(self._expr)
+        else:
+            value = copy.copy(self._value)
+
+        # Evaluate the repr str with a copy of the value
+        return eval(repr_str, globals(), dict(value=value))
 
     @property
     def description(self):
@@ -184,10 +197,10 @@ class Param(object):
         """
         Returns an executable version of the Param
         """
-        return self._repr()
+        return self.repr()
 
-    def _repr(self, include_checkarg=True, include_name=True, \
-              include_description=True):
+    def repr(self, include_checkarg=True, include_name=True, \
+             include_description=True):
         """
         Returns an executable version of the Param including optional arguments
 
@@ -292,7 +305,7 @@ class OptionParam(Param):
                 self.__class__ == other.__class__, \
                 self._options == other._options)
     
-    def _repr(self, include_checkarg=True, include_name=True, \
+    def repr(self, include_checkarg=True, include_name=True, \
               include_description=True):
         """
         Returns an executable version of the Param including optional arguments
@@ -307,10 +320,10 @@ class OptionParam(Param):
             If include description in new Param
         """
         if not include_checkarg:
-            warning("'include_checkarg' must be 'True' in OptionParam._repr.")
+            warning("'include_checkarg' must be 'True' in OptionParam.repr.")
             include_checkarg = True
         
-        return super(OptionParam, self)._repr(include_checkarg, include_name, \
+        return super(OptionParam, self).repr(include_checkarg, include_name, \
               include_description)
 
 class ConstParam(Param):
@@ -493,6 +506,14 @@ class ArrayParam(ScalarParam):
 
         # If setting value using only value argument
         else:
+
+            # Allow using list of scalars
+            if isinstance(value, list):
+                check_arg(value, list, 0, ArrayParam, scalars)
+                if len(value)==0:
+                    value_error("expected a list with at least 1 element")
+                value = np.fromiter(value, dtype=type(value[0]))
+            
             check_arg(value, nptypes, 0, ArrayParam)
 
             # Fist check any scalars passed
@@ -507,8 +528,8 @@ class ArrayParam(ScalarParam):
             elif value.dtype in scalars:
                 value = value.astype(np.float_)
             else:
-                type_error("expected a scalar or a scalar valued np.ndarray "
-                           "as value argument.")
+                type_error("expected a scalar or a scalar valued np.ndarray"
+                           "or list as value argument.")
 
         # Init super class with dummy value
         super(ArrayParam, self).__init__(value[0], ge, le, gt, lt, unit, \

@@ -371,6 +371,7 @@ if sp is not None:
 
             self.assertTrue(np.all(sp2.value==p2.value))
             self.assertTrue(np.all(sp3.value==6*np.exp(5*np.array([.2,.6,.4]))))
+            self.assertTrue(sp3, sp3.copy())
 
 if np is not None:
         
@@ -388,6 +389,10 @@ if np is not None:
                              "ArrayParam([45, 45, ..., 45, 45])")
             self.assertEqual(repr(ArrayParam(5.1, 4)),
                              "ArrayParam([5.1, 5.1, 5.1, 5.1])")
+            self.assertEqual(repr(ArrayParam([45, 60, 40])),
+                             "ArrayParam([45, 60, 40])")
+            self.assertEqual(repr(ArrayParam([45., 60., 40.])),
+                             "ArrayParam([45, 60, 40])")
             self.assertEqual(repr(ArrayParam(np.array([45, 60, 40]))),
                              "ArrayParam([45, 60, 40])")
             self.assertEqual(repr(ArrayParam(45, name="jada")),
