@@ -213,10 +213,13 @@ class Param(object):
         include_description : bool
             If include description in new Param
         """
+
+        value_str = str(self._expr) if isinstance(self, SlaveParam) else \
+                    value_formatter(self.value)
+        
         return "%s(%s%s%s%s)" % (\
             self.__class__.__name__, \
-            value_formatter(self.value), \
-            self._check_arg() if include_checkarg else "", \
+            value_str, self._check_arg() if include_checkarg else "", \
             self._name_arg() if include_name else "", \
             self._description_arg() if include_description else "")
 

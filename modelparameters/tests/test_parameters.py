@@ -351,6 +351,8 @@ if sp is not None:
             self.assertEqual(sp0.value, p0.value)
             self.assertEqual(sp1.value, 5*math.exp(5*0.5))
 
+            self.assertEqual(repr(sp1), "SlaveParam(jada*exp(5*bada))")
+
             p0.value = 6
 
             self.assertEqual(sp0.value, p0.value)
@@ -372,6 +374,7 @@ if sp is not None:
             self.assertTrue(np.all(sp2.value==p2.value))
             self.assertTrue(np.all(sp3.value==6*np.exp(5*np.array([.2,.6,.4]))))
             self.assertTrue(sp3, sp3.copy())
+            
 
 if np is not None:
         
