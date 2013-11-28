@@ -560,8 +560,6 @@ class _CustomLatexPrinter(_LatexPrinter):
     def _print_Mul(self, expr):
         coeff, _ = expr.as_coeff_Mul()
 
-        print expr
-
         if self.order not in ('old', 'none'):
             args = expr.as_ordered_factors()
         else:
@@ -570,8 +568,6 @@ class _CustomLatexPrinter(_LatexPrinter):
     
         args = tuple(args)
 
-        print args, type(args[0])
-    
         if _coeff_isneg(expr):
             # If negative and -1 is the first arg: remove it
             if args[0].is_integer and int(args[0]) == 1:
