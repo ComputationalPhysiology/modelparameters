@@ -70,7 +70,7 @@ class Param(object):
         self._description = description
 
     def copy(self, include_checkarg=True, include_name=True, \
-             include_description=True):
+             include_description=True, include_unit=True):
         """
         Return a copy of the parameter
 
@@ -82,10 +82,13 @@ class Param(object):
             If include name in new Param
         include_description : bool
             If include description in new Param
+        include_unit : bool
+            If include unit in new Param
         """
-        repr_str = "%s(value%s%s%s)" % (\
+        repr_str = "%s(value%s%s%s%s)" % (\
             self.__class__.__name__, \
             self._check_arg() if include_checkarg else "", \
+            self._unit_arg() if include_unit else "", \
             self._name_arg() if include_name else "", \
             self._description_arg() if include_description else "")
 
@@ -200,7 +203,7 @@ class Param(object):
         return self.repr()
 
     def repr(self, include_checkarg=True, include_name=True, \
-             include_description=True):
+             include_description=True, include_unit=True):
         """
         Returns an executable version of the Param including optional arguments
 
@@ -212,17 +215,23 @@ class Param(object):
             If include name in new Param
         include_description : bool
             If include description in new Param
+        include_unit : bool
+            If include unit in new Param
         """
 
         value_str = str(self._expr) if isinstance(self, SlaveParam) else \
                     value_formatter(self.value)
         
-        return "%s(%s%s%s%s)" % (\
+        return "%s(%s%s%s%s%s)" % (\
             self.__class__.__name__, \
             value_str, self._check_arg() if include_checkarg else "", \
+            self._unit_arg() if include_unit else "", \
             self._name_arg() if include_name else "", \
             self._description_arg() if include_description else "")
 
+    def _unit_arg(self):
+        return ", unit='%s'"%self._unit if self._unit != "1" else ""
+    
     def _name_arg(self):
         return ", name='%s'" % self._name if self._name else ""
 

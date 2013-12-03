@@ -26,6 +26,9 @@ from sympy.printing.latex import LatexPrinter as _LatexPrinter
 from sympy.printing.latex import latex as _sympy_latex
 from sympy.printing.precedence import precedence as _precedence
 
+from modelparameters.utils import check_arg as _check_arg
+from modelparameters.utils import scalars as _scalars
+
 from distutils.version import LooseVersion as _V
 
 _current_sympy_version = _V(sp.__version__)
@@ -207,6 +210,30 @@ def _print_Mul(self, expr):
             return sign + '*'.join(a_str) + "/{0}".format(b_str[0])
     else:
         return sign + '*'.join(a_str) + "/({0})".format('*'.join(b_str))
+
+
+_unit_template = re.compile(r"([a-zA-Z]+\*\*[\-0-9]+|[a-zA-Z]+)")
+def latex_unit(unit):
+    """
+    Return sympified and LaTeX-formatted string describing given unit.
+    E.g.:
+    >>> LatexCodeGenerator.format_unit("m/s**2")
+    '\\mathrm{\\frac{m}{s^{2}}}'
+    """
+    _check_arg(unit, str)
+    if unit == "1":
+        return ""
+    atomic_units =[] 
+    
+    for unit in re.findall(_unit_template, unit):
+        if "u" == unit[0]:
+            unit = "\\mu{}"+unit[1:]
+        if "**" in unit:
+            unit, exp = unit.split("**")
+            unit += "^{{{0}}}".format(exp)
+        atomic_units.append(unit)
+    
+    return "\\mathrm{{{0}}}".format("\\,".join(atomic_units))
 
 class _CustomPythonPrinter(_StrPrinter):
     def __init__(self, namespace=""):
@@ -640,11 +667,12 @@ class _CustomLatexPrinter(_LatexPrinter):
 
         return self._number_to_latex(expr.evalf())
     
-    def _print_Function(self, expr):
+    def _print_Function(self, expr, *args, **kwargs):
         if isinstance(expr, _AppliedUndef):
+            return self._print_Symbol(sp.Symbol(expr.func.__name__))
             return expr.func.__name__
 
-        return _LatexPrinter._print_Function(self, expr)
+        return _LatexPrinter._print_Function(self, expr, *args, **kwargs)
 
     def _print_Add(self, expr):
         terms = list(expr.args)
@@ -882,6 +910,14 @@ def ccode(expr, assign_to=None):
 
 def latex(expr, **settings):
     settings["order"] = "none"
+    if isinstance(expr, str):
+        if expr in sp.__dict__:
+            return expr
+        else:
+            expr = sp.sympify(expr)
+    elif isinstance(expr, _scalars):
+        expr = sp.sympify(expr)
+        
     return _CustomLatexPrinter(settings).doprint(expr)
 
 latex.__doc__ = _sympy_latex.__doc__
