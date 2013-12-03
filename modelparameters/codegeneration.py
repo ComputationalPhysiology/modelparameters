@@ -226,14 +226,29 @@ def latex_unit(unit):
     atomic_units =[] 
     
     for unit in re.findall(_unit_template, unit):
+        micro = False
+        exp = 0
+
+        # Check for usage of micro
         if "u" == unit[0]:
-            unit = "\\mu{}"+unit[1:]
+            unit = unit[1:]
+            micro = True
+
+        # Check for exponent
         if "**" in unit:
             unit, exp = unit.split("**")
+
+        # Wrap text in mathrm
+        unit = "\\mathrm{{{0}}}".format(unit)
+        if exp:
             unit += "^{{{0}}}".format(exp)
+
+        if micro:
+            unit = "\\mu"+unit
+            
         atomic_units.append(unit)
-    
-    return "\\mathrm{{{0}}}".format("\\,".join(atomic_units))
+
+    return "\\,".join(atomic_units)
 
 class _CustomPythonPrinter(_StrPrinter):
     def __init__(self, namespace=""):
