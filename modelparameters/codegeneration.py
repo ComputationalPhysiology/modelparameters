@@ -614,7 +614,7 @@ class _CustomLatexPrinter(_LatexPrinter):
         if exponent == 0:
             return sign+form%rest
         
-        return r"%s\times 10 ^{%d}"%(sign+form%rest, exponent)
+        return r"%s\!\times\!10 ^{%d}"%(sign+form%rest, exponent)
     
     def _print_Integer(self, expr):
         return self._print_Float(expr.evalf())
