@@ -83,6 +83,40 @@ _fortran_keywords = ["assign", "backspace", "block data", "call", "close", "comm
 
 _all_keywords = set(_cpp_keywords+_python_keywords+_matlab_keywords+_fortran_keywords)
 
+def _get_potence(value):
+    import math
+    exponent = int(math.log10(value))/3*3
+    rest = _round2(float(value)/10**exponent, 3)
+    if rest < 1:
+        exponent -= 3
+        rest *= 1e3
+    return rest, exponent
+
+def _round2(x, n=0, sigs4n=1):
+    """
+    Return x rounded to the specified number of significant digits, n, as
+    counted from the first non-zero digit. 
+	
+    If n=0 (the default value for round2) then the magnitude of the
+    number will be returned (e.g. round2(12) returns 10.0).  
+    
+    If n<0 then x will be rounded to the nearest multiple of n which, by 
+    default, will be rounded to 1 digit (e.g. round2(1.23,-.28) will round 
+    1.23 to the nearest multiple of 0.3.
+    
+    Regardless of n, if x=0, 0 will be returned.
+    """
+    import math
+	
+    if x==0:
+        return x
+    if n<0:
+        n=_round2(-n, sigs4n)
+        return n*int(x/n+.5)
+    if n==0:
+        return 10.**(int(math.floor(math.log10(abs(x)))))
+    return round(x, int(n) - 1 - int(math.floor(math.log10(abs(x)))))
+
 def _coeff_isneg(a):
     """Return True if the leading Number is negative.
 
@@ -548,6 +582,64 @@ class _CustomMatlabCodePrinter(_StrPrinter):
     _print_Mul = _print_Mul
 
 class _CustomLatexPrinter(_LatexPrinter):
+
+    @staticmethod
+    def _number_to_latex(value):
+
+        if value < 0:
+            sign = "-"
+            value = -value
+        else:
+            sign = ""
+
+        if abs(value) < 1e-32:
+            rest, exponent = 0., 0
+        else:
+            rest, exponent = _get_potence(value)
+
+        # If formating 0.322
+        if exponent == -3 and int(rest) / 100 > 0:
+            exponent = 0
+            rest = float(rest)/1000
+
+        # Format rest
+        if rest >= 100:
+            form = "%d"
+            rest = int(rest)
+        elif rest >=10:
+            if rest % 1 > 0:
+                form = "%.1f"
+            else:
+                form = "%d"
+                rest = int(rest)
+        else:
+            if rest % 1 > 0:
+                if (rest*10) % 1 > 0:
+                    form = "%.2f"
+                else:
+                    form = "%.1f"
+            else :
+                form = "%d"
+                rest = int(rest)
+        if exponent == 0:
+            return sign+form%rest
+        
+        return r"%s\!\times\!10 ^{%d}"%(sign+form%rest, exponent)
+    
+    def _print_Integer(self, expr):
+        return self._print_Float(expr.evalf())
+    
+    def _print_Float(self, expr):
+
+        # If not finite we use parent printer
+        if expr.is_zero:
+            return "0"
+        
+        if not expr.is_finite:
+            return _LatexPrinter._print_Float(self, expr)
+
+        return self._number_to_latex(expr.evalf())
+    
     def _print_Function(self, expr):
         if isinstance(expr, _AppliedUndef):
             return expr.func.__name__
