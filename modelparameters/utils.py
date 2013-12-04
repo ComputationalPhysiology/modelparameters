@@ -327,6 +327,12 @@ def list_timings():
         print task.ljust(left_size)+": {0:5d} : {1:6.3f} s : {2:5.3f} s".format(\
             num, time, time/num)
 
+def clear_timings():
+    """
+    Clear all registered timings
+    """
+    Timer._Timer__all_timings.clear()
+
 def tic():
     """
     Start timing
