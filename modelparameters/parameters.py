@@ -70,7 +70,7 @@ class Param(object):
         self._description = description
 
     def copy(self, include_checkarg=True, include_name=True, \
-             include_description=True, include_unit=True):
+             include_description=True):
         """
         Return a copy of the parameter
 
@@ -82,13 +82,10 @@ class Param(object):
             If include name in new Param
         include_description : bool
             If include description in new Param
-        include_unit : bool
-            If include unit in new Param
         """
-        repr_str = "%s(value%s%s%s%s)" % (\
+        repr_str = "%s(value%s%s%s)" % (\
             self.__class__.__name__, \
             self._check_arg() if include_checkarg else "", \
-            self._unit_arg() if include_unit else "", \
             self._name_arg() if include_name else "", \
             self._description_arg() if include_description else "")
 
@@ -203,7 +200,7 @@ class Param(object):
         return self.repr()
 
     def repr(self, include_checkarg=True, include_name=True, \
-             include_description=True, include_unit=True):
+             include_description=True):
         """
         Returns an executable version of the Param including optional arguments
 
@@ -215,23 +212,17 @@ class Param(object):
             If include name in new Param
         include_description : bool
             If include description in new Param
-        include_unit : bool
-            If include unit in new Param
         """
 
         value_str = str(self._expr) if isinstance(self, SlaveParam) else \
                     value_formatter(self.value)
         
-        return "%s(%s%s%s%s%s)" % (\
+        return "%s(%s%s%s%s)" % (\
             self.__class__.__name__, \
             value_str, self._check_arg() if include_checkarg else "", \
-            self._unit_arg() if include_unit else "", \
             self._name_arg() if include_name else "", \
             self._description_arg() if include_description else "")
 
-    def _unit_arg(self):
-        return ", unit='%s'"%self._unit if self._unit != "1" else ""
-    
     def _name_arg(self):
         return ", name='%s'" % self._name if self._name else ""
 
@@ -443,6 +434,68 @@ class ScalarParam(Param):
         # Store parameter 
         store_symbol_parameter(self)
 
+    def copy(self, include_checkarg=True, include_name=True, \
+             include_description=True, include_unit=True):
+        """
+        Return a copy of the parameter
+
+        Arguments
+        ---------
+        include_checkarg : bool
+            If include checkargs in new Param
+        include_name : bool
+            If include name in new Param
+        include_description : bool
+            If include description in new Param
+        include_unit : bool
+            If include unit in new Param
+        """
+        repr_str = "%s(value%s%s%s%s)" % (\
+            self.__class__.__name__, \
+            self._check_arg() if include_checkarg else "", \
+            self._unit_arg() if include_unit else "", \
+            self._name_arg() if include_name else "", \
+            self._description_arg() if include_description else "")
+
+        # FIXME: Over load copy in SlaveParam instead?
+        if isinstance(self, SlaveParam):
+            value = copy.copy(self._expr)
+        else:
+            value = copy.copy(self._value)
+
+        # Evaluate the repr str with a copy of the value
+        return eval(repr_str, globals(), dict(value=value))
+
+    def repr(self, include_checkarg=True, include_name=True, \
+             include_description=True, include_unit=True):
+        """
+        Returns an executable version of the Param including optional arguments
+
+        Arguments
+        ---------
+        include_checkarg : bool
+            If include checkargs in new Param
+        include_name : bool
+            If include name in new Param
+        include_description : bool
+            If include description in new Param
+        include_unit : bool
+            If include unit in new Param
+        """
+
+        value_str = str(self._expr) if isinstance(self, SlaveParam) else \
+                    value_formatter(self.value)
+        
+        return "%s(%s%s%s%s%s)" % (\
+            self.__class__.__name__, \
+            value_str, self._check_arg() if include_checkarg else "", \
+            self._unit_arg() if include_unit else "", \
+            self._name_arg() if include_name else "", \
+            self._description_arg() if include_description else "")
+
+    def _unit_arg(self):
+        return ", unit='%s'"%self._unit if self._unit != "1" else ""
+    
     def get_sym(self):
         return self._sym
     

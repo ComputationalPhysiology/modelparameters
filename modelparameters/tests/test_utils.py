@@ -67,31 +67,31 @@ class CheckArgs(unittest.TestCase):
         with self.assertRaises(TypeError) as cm:
             check_arg(1, str)
         self.assertEqual(str(cm.exception), \
-                         "expected a 'str' (got '1' which is 'int')")
+                         "expected 'str' (got '1' which is 'int')")
 
         with self.assertRaises(TypeError) as cm:
             check_arg(1, str, 0)
-        self.assertEqual(str(cm.exception), "expected a 'str' (got '1' which is "\
+        self.assertEqual(str(cm.exception), "expected 'str' (got '1' which is "\
                          "'int') as the first argument")
 
         with self.assertRaises(TypeError) as cm:
             check_arg(["s"], list, itemtypes=int)
-        self.assertEqual(str(cm.exception), "expected a 'list' of 'int'")
+        self.assertEqual(str(cm.exception), "expected 'list' of 'int'")
 
         with self.assertRaises(TypeError) as cm:
             check_arg(1, str, 2)
-        self.assertEqual(str(cm.exception), "expected a 'str' (got '1' which is "\
+        self.assertEqual(str(cm.exception), "expected 'str' (got '1' which is "\
                          "'int') as the third argument")
 
         with self.assertRaises(TypeError) as cm:
             check_arg(1, str, 2, CheckArgs.test_check_arg)
-        self.assertEqual(str(cm.exception), "expected a 'str' (got '1' which is "\
+        self.assertEqual(str(cm.exception), "expected 'str' (got '1' which is "\
                          "'int') as the third argument while calling "\
                          "'CheckArgs.test_check_arg'")
 
         with self.assertRaises(TypeError) as cm:
             check_arg(1, str, 2, CheckArgs)
-        self.assertEqual(str(cm.exception), "expected a 'str' (got '1' which is "\
+        self.assertEqual(str(cm.exception), "expected 'str' (got '1' which is "\
                          "'int') as the third argument while instantiating "\
                          "'CheckArgs'")
 
@@ -126,23 +126,23 @@ class CheckArgs(unittest.TestCase):
         with self.assertRaises(TypeError) as cm:
             check_kwarg(1, "jada", str)
         self.assertEqual(str(cm.exception), \
-                         "expected a 'str' (got '1' which is 'int') "\
+                         "expected 'str' (got '1' which is 'int') "\
                          "as the 'jada' argument")
 
         with self.assertRaises(TypeError) as cm:
             check_kwarg(["s"], "jada", list, itemtypes=int)
-        self.assertEqual(str(cm.exception), "expected a 'list' of 'int' "\
+        self.assertEqual(str(cm.exception), "expected 'list' of 'int' "\
                          "as the 'jada' argument")
 
         with self.assertRaises(TypeError) as cm:
             check_kwarg(1, "jada", str, CheckArgs.test_check_arg)
-        self.assertEqual(str(cm.exception), "expected a 'str' (got '1' which is "\
+        self.assertEqual(str(cm.exception), "expected 'str' (got '1' which is "\
                          "'int') as the 'jada' argument while calling "\
                          "'CheckArgs.test_check_arg'")
 
         with self.assertRaises(TypeError) as cm:
             check_kwarg(1, "bada", str, CheckArgs)
-        self.assertEqual(str(cm.exception), "expected a 'str' (got '1' which is "\
+        self.assertEqual(str(cm.exception), "expected 'str' (got '1' which is "\
                          "'int') as the 'bada' argument while instantiating "\
                          "'CheckArgs'")
 

@@ -24,7 +24,7 @@ class TestParam(unittest.TestCase):
     def test_init(self):
         with self.assertRaises(TypeError) as cm:
             Param(45, 56)
-        self.assertEqual(str(cm.exception), "expected a 'str' (got '56' "\
+        self.assertEqual(str(cm.exception), "expected 'str' (got '56' "\
                          "which is 'int') as the 'name' argument")
         self.assertEqual(repr(Param(45, "jada")), "Param(45, name='jada')")
         self.assertEqual(str(Param(45, "jada")), "45")
@@ -88,7 +88,7 @@ class TestOptionParam(unittest.TestCase):
     def test_init(self):
         with self.assertRaises(TypeError) as cm:
             OptionParam(45, [45, 56], 56)
-        self.assertEqual(str(cm.exception), "expected a 'str' (got '56' "\
+        self.assertEqual(str(cm.exception), "expected 'str' (got '56' "\
                          "which is 'int') as the 'name' argument")
 
         with self.assertRaises(ValueError) as cm:
@@ -180,7 +180,7 @@ class TestConstParam(unittest.TestCase):
     def test_init(self):
         with self.assertRaises(TypeError) as cm:
             ConstParam(45, 56)
-        self.assertEqual(str(cm.exception), "expected a 'str' (got '56' "\
+        self.assertEqual(str(cm.exception), "expected 'str' (got '56' "\
                          "which is 'int') as the 'name' argument")
         self.assertEqual(repr(ConstParam(45)),
                          "ConstParam(45)")
@@ -218,7 +218,7 @@ class TestScalarParam(unittest.TestCase):
     def test_init(self):
         with self.assertRaises(TypeError) as cm:
             ScalarParam("jada")
-        self.assertEqual(str(cm.exception), "expected a 'scalar' (got 'jada' "\
+        self.assertEqual(str(cm.exception), "expected 'scalars' (got 'jada' "\
                          "which is 'str') as the first argument while "\
                          "instantiating 'ScalarParam'")
 
@@ -346,12 +346,12 @@ if sp is not None:
             p1 = ScalarParam(0.5, 0, lt=100, name="bada")
 
             sp0 = SlaveParam(p0, "slave0")
-            sp1 = SlaveParam(p0.sym*sp.exp(5*p1.sym), "slave1")
+            sp1 = SlaveParam(p0.sym*sp.exp(5*p1.sym), name="slave1")
 
             self.assertEqual(sp0.value, p0.value)
             self.assertEqual(sp1.value, 5*math.exp(5*0.5))
 
-            self.assertEqual(repr(sp1), "SlaveParam(jada*exp(5*bada))")
+            self.assertEqual(repr(sp1), "SlaveParam(jada*exp(5*bada), name='slave1')")
 
             p0.value = 6
 
@@ -382,7 +382,7 @@ if np is not None:
         def test_init(self):
             with self.assertRaises(TypeError) as cm:
                 ArrayParam("jada")
-            self.assertEqual(str(cm.exception), "expected a 'scalar or np.ndarray'"
+            self.assertEqual(str(cm.exception), "expected 'scalars or np.ndarray'"
                              " (got 'jada' which is 'str') as the first argument "
                              "while instantiating 'ArrayParam'")
     
@@ -457,7 +457,7 @@ if np is not None:
             with self.assertRaises(TypeError) as cm:
                 p = ArrayParam(5, ge=0, lt=10)
                 p.value = []
-            self.assertEqual(str(cm.exception), "expected a 'scalar or "\
+            self.assertEqual(str(cm.exception), "expected 'scalars or "\
                              "np.ndarray' (got '[]' which is 'list') while "\
                              "calling 'ArrayParam.setvalue'")
         

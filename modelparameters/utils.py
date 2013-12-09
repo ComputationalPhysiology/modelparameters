@@ -418,7 +418,7 @@ def _context_message(context):
 
     return " while calling '{0}'".format(context.func_name)
 
-def _range_check(arg, argtype, ge, le, gt, lt):
+def _range_check(arg, argtypes, ge, le, gt, lt):
 
     # First check if we are interested in any range check
     if all(comp is None for comp in [ge, le, gt, lt]):
@@ -427,32 +427,32 @@ def _range_check(arg, argtype, ge, le, gt, lt):
         return ""
 
     # Check we want a scalar
-    if isinstance(argtype, tuple):
-        assert(all(argtype_item in range_types for argtype_item in argtype))
+    if isinstance(argtypes, tuple):
+        assert(all(argtypes_item in range_types for argtypes_item in argtypes))
     else:
-        assert(argtype in range_types)
+        assert(argtypes in range_types)
 
     range_checker = Range(ge, le, gt, lt)
     if arg in range_checker:
         return ""
     return range_checker.format_not_in(arg)
 
-def _check_arg(arg, argtype, identifyer, context, itemtypes, ge, le, gt, lt):
+def _check_arg(arg, argtypes, identifyer, context, itemtypes, ge, le, gt, lt):
     """
     Helper function for arg checking
     """
-    assert(isinstance(argtype, (tuple, type)))
-
+    assert(isinstance(argtypes, (tuple, type)))
+    argtypes = tuplewrap(argtypes)
+    
     # First check for correct range
-    message = _range_check(arg, argtype, ge, le, gt, lt)
+    message = _range_check(arg, argtypes, ge, le, gt, lt)
     
     # If we have a message we failed the range check
     if message:
-
         raise_error = value_error
         
     # Check the argument
-    elif isinstance(arg, argtype):
+    elif isinstance(arg, argtypes):
         if itemtypes is None or not isinstance(arg, (list, tuple)):
             return
         iterativetype = type(arg).__name__
@@ -462,21 +462,31 @@ def _check_arg(arg, argtype, identifyer, context, itemtypes, ge, le, gt, lt):
         
         itemtypes = tuplewrap(itemtypes)
         
-        message = "expected a '%s' of '%s'"%(iterativetype,\
+        message = "expected '%s' of '%s'"%(iterativetype,\
                                 ", ".join(argt.__name__ for argt in itemtypes))
         raise_error = type_error
     else:
-        argtype = tuplewrap(argtype)
-        if argtype == integers:
-            argtype_str = "integer"
-        elif argtype == scalars:
-            argtype_str = "scalar"
-        elif argtype == nptypes:
-            argtype_str = "scalar or np.ndarray"
+        argtypes = list(argtypes)
+        argtypes_strs = []
+        if all(argt in argtypes for argt in nptypes):
+            argtypes_strs = ["scalars", "np.ndarray"]
+            argtypes = [argt for argt in argtypes if argt not in nptypes]
+        elif all(argt in argtypes for argt in scalars):
+            argtypes_strs = ["scalars"]
+            argtypes = [argt for argt in argtypes if argt not in scalars]
+        elif all(argt in argtypes for argt in integers):
+            argtypes_strs = ["integers"]
+            argtypes = [argt for argt in argtypes if argt not in integers]
+
+        argtypes_strs.extend(argt.__name__ for argt in argtypes)
+        if len(argtypes_strs) > 1:
+            argtypes_str = ", ".join(argtypes_strs[:-1])+" or " + \
+                           argtypes_strs[-1]
         else:
-            argtype_str = ", ".join(argt.__name__ for argt in argtype)
-        message = "expected a '%s' (got '%s' which is '%s')"%\
-                  (argtype_str, arg, type(arg).__name__)
+            argtypes_str = argtypes_strs[0]
+        
+        message = "expected '%s' (got '%s' which is '%s')"%\
+                  (argtypes_str, arg, type(arg).__name__)
         raise_error = type_error
 
     # Add identifyer information if passed
@@ -491,7 +501,7 @@ def _check_arg(arg, argtype, identifyer, context, itemtypes, ge, le, gt, lt):
     # Display error message
     raise_error(message)
 
-def check_arg(arg, argtype, num=-1, context=None, itemtypes=None,
+def check_arg(arg, argtypes, num=-1, context=None, itemtypes=None,
               ge=None, le=None, gt=None, lt=None):
     """
     Type check for positional arguments
@@ -500,7 +510,7 @@ def check_arg(arg, argtype, num=-1, context=None, itemtypes=None,
     ---------
     arg : any
         The argument to be checked
-    argtype : type, tuple
+    argtypes : type, tuple
         The type of which arg should be
     num : int (optional)
         The argument positional number
@@ -509,7 +519,7 @@ def check_arg(arg, argtype, num=-1, context=None, itemtypes=None,
         assumed to be during creation. If a function/method the contex is
         assumed to be a call to that function/method
     itemtypes : type (optional)
-        If given argtype must be a tuple or list and itemtypes forces each item
+        If given argtypes must be a tuple or list and itemtypes forces each item
         to be a certain type
     ge : scalar (optional)
         Greater than or equal, range control of argument
@@ -521,10 +531,10 @@ def check_arg(arg, argtype, num=-1, context=None, itemtypes=None,
         Lesser than, range control of argument
     """
     assert(isinstance(num, int))
-    _check_arg(arg, argtype, num, context, itemtypes, ge, le, gt, lt)
+    _check_arg(arg, argtypes, num, context, itemtypes, ge, le, gt, lt)
 
 
-def check_kwarg(kwarg, name, argtype, context=None, itemtypes=None,
+def check_kwarg(kwarg, name, argtypes, context=None, itemtypes=None,
                 ge=None, le=None, gt=None, lt=None):
     """
     Type check for keyword arguments
@@ -535,14 +545,14 @@ def check_kwarg(kwarg, name, argtype, context=None, itemtypes=None,
         The keyword argument to be checked
     name : str
         The name of the keyword argument
-    argtype : type, tuple
+    argtypes : type, tuple
         The type of which arg should be
     context : type, function/method (optional)
         The context of the check. If context is a class the check is
         assumed to be during creation. If a function/method the contex is
         assumed to be a call to that function/method
     itemtypes : type (optional)
-        If given argtype must be a tuple or list and itemtypes forces each item
+        If given argtypes must be a tuple or list and itemtypes forces each item
         to be a certain type
     ge : scalar (optional)
         Greater than or equal, range control of argument
@@ -554,7 +564,7 @@ def check_kwarg(kwarg, name, argtype, context=None, itemtypes=None,
         Lesser than, range control of argument
     """
     assert(isinstance(name, str) and len(name)>0)
-    _check_arg(kwarg, argtype, name, context, itemtypes, ge, le, gt, lt)
+    _check_arg(kwarg, argtypes, name, context, itemtypes, ge, le, gt, lt)
 
 def quote_join(list_of_str):
     """
