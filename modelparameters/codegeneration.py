@@ -276,6 +276,16 @@ class _CustomPythonPrinter(_StrPrinter):
     def _print_Zero(self, expr):
         return "0.0"
 
+    def _print_Float(self, expr):
+
+        # If not finite we use parent printer
+        if expr.is_zero:
+            return "0"
+        
+        if not expr.is_finite:
+            return _StrPrinter._print_Float(self, expr)
+
+        return str(float(expr))
     def _print_Integer(self, expr):
         return str(expr.p) + ".0"
 
@@ -565,6 +575,17 @@ class _CustomMatlabCodePrinter(_StrPrinter):
     def __init__(self, **settings):
         super(_CustomMatlabCodePrinter, self).__init__(settings=settings)
 
+    def _print_Float(self, expr):
+
+        # If not finite we use parent printer
+        if expr.is_zero:
+            return "0"
+        
+        if not expr.is_finite:
+            return _StrPrinter._print_Float(self, expr)
+
+        return str(float(expr))
+            
     def _print_Min(self, expr):
         return "min(%s)" % (self.stringify(expr.args, ", "))
 
