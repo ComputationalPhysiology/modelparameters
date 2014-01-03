@@ -211,6 +211,14 @@ def _print_Mul(self, expr):
     else:
         return sign + '*'.join(a_str) + "/({0})".format('*'.join(b_str))
 
+# Patch sympy print Function
+_old_print_Function = _StrPrinter._print_Function
+def _print_Function(self, expr):
+    if isinstance(expr, _AppliedUndef):
+        return expr.func.__name__
+    return _old_print_Function(self, expr)
+
+_StrPrinter._print_Function = _print_Function
 
 _unit_template = re.compile(r"([a-zA-Z]+\*\*[\-0-9]+|[a-zA-Z]+)")
 def latex_unit(unit):
@@ -270,11 +278,11 @@ class _CustomPythonPrinter(_StrPrinter):
         else:
             return "{0}abs({1})".format(self._namespace, self.stringify(expr.args, ", "))
 
-    def _print_One(self, expr):
-        return "1.0"
+    #def _print_One(self, expr):
+    #    return "1.0"
 
-    def _print_Zero(self, expr):
-        return "0.0"
+    #def _print_Zero(self, expr):
+    #    return "0.0"
 
     def _print_Float(self, expr):
 
@@ -286,13 +294,8 @@ class _CustomPythonPrinter(_StrPrinter):
             return _StrPrinter._print_Float(self, expr)
 
         return str(float(expr))
-    def _print_Integer(self, expr):
-        return str(expr.p) + ".0"
-
-    def _print_Function(self, expr):
-        if isinstance(expr, _AppliedUndef):
-            return expr.func.__name__
-        return _StrPrinter._print_Function(self, expr)
+    #def _print_Integer(self, expr):
+    #    return str(expr.p) + ".0"
 
     def _print_Derivative(self, expr):
         if not isinstance(expr.args[1], (_AppliedUndef, sp.Symbol)):
@@ -310,8 +313,8 @@ class _CustomPythonPrinter(_StrPrinter):
         subs = dict((key,value) for key, value in zip(expr.variables, expr.point))
         return self._print(orig_expr.xreplace(subs))
 
-    def _print_NegativeOne(self, expr):
-        return "-1.0"
+    #def _print_NegativeOne(self, expr):
+    #    return "-1.0"
 
     def _print_Sqrt(self, expr):
         return "{0}sqrt({1})".format(self._namespace, self._print(expr.args[0]))
