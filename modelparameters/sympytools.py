@@ -133,7 +133,7 @@ def symbol_to_param(sym):
         error("sympy is needed for symbol_to_params to work.")
         
     check_arg(sym, (sp.Symbol, AppliedUndef, sp.Derivative),
-              context=symbol_to_params)
+              context=symbol_to_param)
     param = _all_symbol_parameters.get(sympycode(sym))
 
     if param is None:
@@ -207,7 +207,7 @@ def symbol_param_value_namespace(expr):
     Create a value name space for the included symbols in the expression
     """
     check_arg(expr, sp.Basic)
-    return dict((str(symbol_param), symbol_to_params(symbol_param).value) \
+    return dict((str(symbol_param), symbol_to_param(symbol_param).value) \
                 for symbol_param in iter_symbol_params_from_expr(expr))
 
 def value_namespace(expr, include_derivatives=False):
@@ -215,7 +215,7 @@ def value_namespace(expr, include_derivatives=False):
     Create a value name space for the included symbols in the expression
     """
     check_arg(expr, sp.Basic)
-    return dict((sympycode(symbol), symbol_to_params(symbol).value) \
+    return dict((sympycode(symbol), symbol_to_param(symbol).value) \
                 for symbol in symbols_from_expr(\
                     expr, include_derivatives=include_derivatives))
 
