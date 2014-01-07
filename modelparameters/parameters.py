@@ -22,8 +22,8 @@ __all__ = ["Param", "ScalarParam", "OptionParam", "ConstParam", "ArrayParam"\
 # Conditional sympy import
 try:
     from sympytools import sp, store_symbol_parameter, \
-         value_namespace
-    from codegeneration import pythoncode
+         value_namespace, symbols_from_expr, symbol_to_param
+    from codegeneration import pythoncode, sympycode
     dummy_sym = sp.Dummy("")
 except ImportError, e:
     sp = None
@@ -680,6 +680,15 @@ class SlaveParam(ScalarParam):
         # Store the original expression used to evaluate the value of
         # the SlaveParam
         self._expr = expr
+
+        # Store parameters that are available at the time of construction
+        # FIXME: Does not work...
+        #self._param_ns = {}
+        #for symbol in symbols_from_expr(expr, include_derivatives=True):
+        #    try:
+        #        self._param_ns[sympycode(symbol)] = symbol_to_param(symbol)
+        #    except:
+        #        pass
         
     def setvalue(self, value):
         """
@@ -693,6 +702,10 @@ class SlaveParam(ScalarParam):
         """
         
         return eval_param_expr(self._expr, include_derivatives=True)
+
+        # FIXME: Does not work...
+        #return eval_param_expr(self._expr, param_ns=self._param_ns, \
+        #                       include_derivatives=True)
     
     value = property(getvalue, setvalue)
 
@@ -710,7 +723,7 @@ class SlaveParam(ScalarParam):
         return "%s - SlaveParam(%s)"%(value_formatter(self.getvalue(), str_length), \
                                       str(self._expr))
 
-def eval_param_expr(expr, include_derivatives=False, ns=None):
+def eval_param_expr(expr, param_ns=None, include_derivatives=False, ns=None):
     """
     Eval an expression of symbols of ScalarParam
 
@@ -718,6 +731,9 @@ def eval_param_expr(expr, include_derivatives=False, ns=None):
     ---------
     expr : expression of ParamSymbols
         The expression to be evaulated
+    param_ns : dict (optional)
+        A namespace containing the parameters for which the expr should be
+        evaluated with.
     include_derivatives : bool (optional)
         If True not only symbols are evaulated but also derivatives
     ns : dict (optional)
@@ -732,8 +748,29 @@ def eval_param_expr(expr, include_derivatives=False, ns=None):
     ns = ns or {}
     
     # Get values
-    value_ns = value_namespace(expr, include_derivatives=include_derivatives)
+    if param_ns is None:
+        value_ns = value_namespace(expr, include_derivatives=include_derivatives)
+    else:
 
+        value_ns = {}
+        for symbol in symbols_from_expr(expr, \
+                                        include_derivatives=include_derivatives):
+
+            sym_name = sympycode(symbol)
+
+            # First try to get param from passed param_ns
+            param = param_ns.get(sym_name)
+
+            # If not available try to get it from the global dict
+            if param is None:
+                param = symbol_to_param(symbol)
+
+                # And store it for future usage
+                #param_ns[sym_name] = param
+
+            # Store value
+            value_ns[sym_name] = param.value
+        
     # First check if we have numpy arrays
     if np and any(isinstance(value, np.ndarray) for value in value_ns.values()):
 
@@ -749,6 +786,8 @@ def eval_param_expr(expr, include_derivatives=False, ns=None):
         ns.update(np.__dict__)
         
     else:
+        
+        # No numpy arrays and we choose math name space to evaulate expression
         import math
         ns.update(math.__dict__)
 
