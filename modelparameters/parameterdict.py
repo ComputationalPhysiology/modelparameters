@@ -68,7 +68,7 @@ class ParameterDict(dict):
         # Generate a sub class of ParameterDict which sets the slots.
         # This is nice so the parameters show up in IPython tab completion 
         class SubParameterDict(ParameterDict):
-            __slots__ = tuple(params.keys())
+            __slots__ = tuple(params.keys()+["_members"])
 
         return dict.__new__(SubParameterDict, **params)
     
@@ -84,8 +84,10 @@ class ParameterDict(dict):
         """
 
         # Init the dict with the provided parameters
+        self._members = sorted(set(list(dict.__dict__) + \
+                                   list(ParameterDict.__dict__)))+["_members"]
         for key, value in params.items():
-            if key in list(dict.__dict__) + list(ParameterDict.__dict__):
+            if key in self._members:
                 type_error("The name of a parameter cannot be "\
                            "an attribute of 'ParameterDict': %s" % key)
             if sp and isinstance(value, sp.Basic) and \
@@ -97,6 +99,8 @@ class ParameterDict(dict):
                     value.name = key
             elif not isinstance(value, ParameterDict):
                 params[key] = Param(value, key)
+
+            self._members.append(key)
 
         # Initialize base class
         dict.__init__(self, **params)
@@ -133,7 +137,11 @@ class ParameterDict(dict):
     def __setattr__(self, key, value):
 
         check_arg(key, str, 0, ParameterDict.__setattr__)
-        
+
+        if key == "_members":
+            dict.__setattr__(self, key, value)
+            return
+
         # Check if key is a registered parameter
         if not dict.__contains__(self, key):
             error("'%s' is not an item in this ParameterDict." % key, \
@@ -154,6 +162,10 @@ class ParameterDict(dict):
     def __getattr__(self, key):
         check_arg(key, str, 0, ParameterDict.__getattr__)
 
+        # Fix for newer ipython
+        if key in ["__dict__", "__methods__", "trait_names", "_getAttributeNames"]:
+            return 
+            
         if not dict.__contains__(self, key):
             error("'%s' is not an item in this ParameterDict." % key, \
                   exception=AttributeError)
@@ -169,6 +181,9 @@ class ParameterDict(dict):
 
     def __getitem__(self, key):
         return self.__getattr__(key)
+
+    def __members__(self):
+        return self._members
 
     def iterparams(self, recurse=False):
         """
