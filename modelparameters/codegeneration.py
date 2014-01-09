@@ -218,7 +218,7 @@ def _print_Function(self, expr):
         return expr.func.__name__
     return _old_print_Function(self, expr)
 
-_StrPrinter._print_Function = _print_Function
+#_StrPrinter._print_Function = _print_Function
 
 _unit_template = re.compile(r"([a-zA-Z]+\*\*[\-0-9]+|[a-zA-Z]+)")
 def latex_unit(unit):
@@ -382,6 +382,7 @@ class _CustomPythonPrinter(_StrPrinter):
                                          self._print(expr.base),
                                          self._print(expr.exp))
 
+    _print_Function = _print_Function
     _print_Mul = _print_Mul
 
 class _CustomPythonCodePrinter(_CustomPythonPrinter):
