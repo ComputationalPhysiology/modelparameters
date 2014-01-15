@@ -469,18 +469,23 @@ class _CustomCCodePrinter(_StrPrinter):
     Overload some ccode generation
     """
     
-    def __init__(self, cpp=False, **settings):
+    def __init__(self, cpp=False, float_precision="double", **settings):
         super(_CustomCCodePrinter, self).__init__(settings=settings)
         self._prefix = "std::" if cpp else ""
+        self._float_postfix = "" if float_precision == "double" else "f"
+
+    def _print_Float(self, expr):
+        f_str = _StrPrinter._print_Float(self, expr)
+        return f_str + self._float_postfix
 
     def _print_One(self, expr):
-        return "1.0"
+        return "1"
 
     def _print_Integer(self, expr):
-        return str(expr.p) + ".0"
+        return str(expr.p)
 
     def _print_NegativeOne(self, expr):
-        return "-1.0"
+        return "-1"
 
     def _print_Rational(self, expr):
         return "{0}.0/{1}".format(expr.p, expr.q)
@@ -894,6 +899,8 @@ _python_code_printer = {"":_CustomPythonCodePrinter("", ),
 # FIXME: What on earth is ordered used for?!?
 _ccode_printer = _CustomCCodePrinter(order=_order)
 _cppcode_printer = _CustomCCodePrinter(cpp=True, order=_order)
+_ccode_float_printer = _CustomCCodePrinter(float_precision="single", order=_order)
+_cppcode_float_printer = _CustomCCodePrinter(cpp=True, float_precision="single", order=_order)
 _sympy_printer = _CustomPythonPrinter()
 _matlab_printer = _CustomMatlabCodePrinter(order=_order)
 
@@ -906,11 +913,15 @@ def ccode(expr, assign_to=None):
         return ret
     return "{0} = {1}".format(assign_to, ret)
 
-def cppcode(expr, assign_to=None):
+def cppcode(expr, assign_to=None, float_precision="double"):
     """
     Return a C++-code representation of a sympy expression
     """
-    ret = _cppcode_printer.doprint(expr)
+    if float_precision == "double":
+        ret = _cppcode_printer.doprint(expr)
+    else:
+        ret = _cppcode_float_printer.doprint(expr)
+        
     if assign_to is None:
         return ret
     return "{0} = {1}".format(assign_to, ret)
@@ -937,11 +948,14 @@ def matlabcode(expr, assign_to=None):
         return ret
     return "{0} = {1}".format(assign_to, ret)
 
-def ccode(expr, assign_to=None):
+def ccode(expr, assign_to=None, float_precision="double"):
     """
     Return a C-code representation of a sympy expression
     """
-    ret = _ccode_printer.doprint(expr)
+    if float_precision == "double":
+        ret = _ccode_printer.doprint(expr)
+    else:
+        ret = _ccode_float_printer.doprint(expr)
     if assign_to is None:
         return ret
     if assign_to == "I":
