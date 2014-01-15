@@ -37,7 +37,7 @@ import copy
 from config import *
 from logger import *
 from utils import check_arg,  check_kwarg, scalars, value_formatter,\
-     Range, tuplewrap, integers, nptypes
+     Range, tuplewrap, integers, nptypes, Timer
 from utils import _np as np
 
 option_types = scalars + (str,)
@@ -700,6 +700,7 @@ class SlaveParam(ScalarParam):
         """
         Return a computed value of the Parameters
         """
+        timer = Timer("Eval Slave parameter")
         
         return eval_param_expr(self._expr, include_derivatives=True)
 

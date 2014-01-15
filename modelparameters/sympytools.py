@@ -20,6 +20,7 @@ from __future__ import division
 
 # System imports
 import sympy as sp
+import re
 
 from sympy.core import relational as _relational
 
@@ -102,6 +103,8 @@ def ContinuousConditional(cond, true_value, false_value, sigma=1.0):
 # Collect all parameters
 _all_symbol_parameters = {}
 
+_indexed_format = re.compile("\A([a-zA-Z]\w*)\[([\d,]+)\]\Z")
+
 def store_symbol_parameter(param):
     """
     Store a symbol parameter
@@ -112,7 +115,22 @@ def store_symbol_parameter(param):
     #if str(sym) in _all_symbol_parameters:
     #    warning("Parameter with symbol name '%s' already "\
     #            "excist" % sym)
-    _all_symbol_parameters[sympycode(sym)] = param
+
+    param_str = sympycode(sym)
+    indexed = re.search(_indexed_format, param_str)
+    if indexed:
+        name, indices = indexed.groups()
+
+        # Get dict
+        param_dict = _all_symbol_parameters.get(name)
+        if param_dict is None:
+            param_dict = {}
+            _all_symbol_parameters[name] = param_dict
+
+        param_dict[eval("({0})".format(indices))] = param
+        
+    else:
+        _all_symbol_parameters[param_str] = param
 
 @deprecated
 def symbol_to_params(sym):
@@ -130,7 +148,19 @@ def symbol_to_param(sym):
         
     check_arg(sym, (sp.Symbol, AppliedUndef, sp.Derivative),
               context=symbol_to_param)
-    param = _all_symbol_parameters.get(sympycode(sym))
+    
+    param_str = sympycode(sym)
+    indexed = re.search(_indexed_format, param_str)
+    if indexed:
+        name, indices = indexed.groups()
+
+        # Get dict
+        param = _all_symbol_parameters.get(name)
+        if param is not None:
+            param = param.get(eval("({0})".format(indices)))
+    else:
+            
+        param = _all_symbol_parameters.get(sympycode(sym))
 
     if param is None:
         value_error("No parameter with name '{0}' "\
@@ -211,6 +241,25 @@ def value_namespace(expr, include_derivatives=False):
     Create a value name space for the included symbols in the expression
     """
     check_arg(expr, sp.Basic)
+    ns = {}
+    for sym in symbols_from_expr(expr, \
+                        include_derivatives=include_derivatives):
+
+        # Get value
+        value = symbol_to_param(sym).value
+
+        # Check for indexed parameters
+        param_str = sympycode(sym)
+        indexed = re.search(_indexed_format, param_str)
+        if indexed:
+            name, indices = indexed.groups()
+            if name not in ns:
+                ns[name] = {}
+            ns[name][eval(indices)] = value
+        else:
+            ns[param_str] = value
+            
+    return ns
     return dict((sympycode(symbol), symbol_to_param(symbol).value) \
                 for symbol in symbols_from_expr(\
                     expr, include_derivatives=include_derivatives))
