@@ -658,16 +658,19 @@ def eval_param_expr(expr, ns=None):
                         "to be of equal size.")
 
         # Update name space with numpy name space
-        ns.update(np.__dict__)
+        namespace = "np"
+        ns["np"] = np
         
-    else:
+    else: 
         import math
-        ns.update(math.__dict__)
+        namespace = "math"
+        ns["math"] = math
+        #ns.update(math.__dict__)
 
     # Update namespace with values
     ns.update(value_ns)
-    
-    return eval(pythoncode(expr, namespace=""), {}, ns)
+
+    return eval(pythoncode(expr, namespace=namespace), {}, ns)
     
 
 __all__ = [_name for _name in globals().keys() if _name[0] != "_"]

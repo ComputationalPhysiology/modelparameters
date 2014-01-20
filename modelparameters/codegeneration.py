@@ -316,6 +316,11 @@ class _CustomPythonPrinter(_StrPrinter):
             return "{0}elem_pow({1}, {2})".format(self._namespace,
                                                   self._print(expr.base),
                                                   self._print(expr.exp))
+        if self._namespace in ["np.", "numpy."]:
+            return "{0}power({1}, {2})".format(self._namespace,
+                                               self._print(expr.base),
+                                               self._print(expr.exp))
+        
         return "{0}pow({1}, {2})".format(self._namespace,
                                          self._print(expr.base),
                                          self._print(expr.exp))
