@@ -214,6 +214,9 @@ class _CustomPythonPrinter(_StrPrinter):
         self._namespace = namespace if not namespace else namespace + "."
         _StrPrinter.__init__(self, settings=dict(order=_order))
         
+    def _print_Mod(self, expr):
+        return "({0} % {1})".format(expr.args[0], expr.args[1])
+        
     # Why is this not called!
     def _print_Log(self, expr):
         if self._namespace == "ufl.":
@@ -323,13 +326,21 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
 
     def _print_sign(self, expr):
         if self._namespace == "ufl.":
-            return "{0}sign({0})".format(self._namespace, \
+            return "{0}sign({1})".format(self._namespace, \
                                          self._print(expr.args[0]))
         elif self._namespace in ["math.", "numpy.", "np."]:
             return "{0}copysign(1.0, {1})".format(self._namespace,
                                                   self._print(expr.args[0]))
         return "sign({0})".format(self._print(expr.args[0]))
 
+    def _print_Mod(self, expr):
+        if self._namespace == "math.":
+            return "{0}fmod({1})".format(self._namespace, \
+                                         self.stringify(expr.args, ", "))
+        else:
+            return "{0}mod({1})".format(self._namespace,
+                                        self.stringify(expr.args, ", "))
+        
     def _print_Min(self, expr):
         return "{0}({1})".format(expr.func.__name__.lower(),\
                                  self.stringify(expr.args, ", "))
