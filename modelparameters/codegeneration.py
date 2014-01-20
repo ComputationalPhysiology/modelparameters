@@ -444,6 +444,9 @@ class _CustomCCodePrinter(_StrPrinter):
     def _print_Abs(self, expr):
         return "{0}fabs({1})".format(self._prefix, self.stringify(expr.args, ", "))
 
+    def _print_Mod(self, expr):
+        return "{0}fmod({1})".format(self._prefix, self.stringify(expr.args, ", "))
+
     def _print_Piecewise(self, expr):
         result = ""
         for e, c in expr.args[:-1]:
