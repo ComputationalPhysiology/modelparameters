@@ -784,18 +784,20 @@ def eval_param_expr(expr, param_ns=None, include_derivatives=False, ns=None):
                         "to be of equal size.")
 
         # Update name space with numpy name space
-        ns.update(np.__dict__)
+        namespace = "np"
+        ns["np"] = np
         
     else:
         
         # No numpy arrays and we choose math name space to evaulate expression
         import math
-        ns.update(math.__dict__)
+        namespace = "math"
+        ns["math"] = math
 
     # Update namespace with values
     ns.update(value_ns)
-    
-    return eval(pythoncode(expr, namespace=""), {}, ns)
+
+    return eval(pythoncode(expr, namespace=namespace), {}, ns)
     
 
 __all__ = [_name for _name in globals().keys() if _name[0] != "_"]
