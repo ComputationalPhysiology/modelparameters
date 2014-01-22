@@ -717,6 +717,16 @@ class _CustomLatexPrinter(_LatexPrinter):
         
         return r"%s\!\times\!10 ^{%d}"%(sign+form%rest, exponent)
     
+    def _needs_brackets(self, expr):
+        """
+        Returns True if the expression needs to be wrapped in brackets when
+        printed, False otherwise. For example: a + b => True; a => False;
+        10 => False; -10 => True.
+        """
+        return not ((expr.is_Integer and expr.is_nonnegative)
+                    or (expr.is_Atom and expr is not sp.S.NegativeOne)
+                    or (isinstance(expr, _AppliedUndef) and expr is not sp.S.NegativeOne))
+    
     def _print_Integer(self, expr):
         return self._print_Float(expr.evalf())
     
@@ -886,7 +896,7 @@ class _CustomLatexPrinter(_LatexPrinter):
             # Things like 1/x
             return self._print_Mul(expr)
         else:
-            if expr.base.is_Function:
+            if expr.base.is_Function and not isinstance(expr.base, _AppliedUndef):
                 return self._print(expr.base, self._print(expr.exp))
             else:
                 if expr.is_commutative and expr.exp == -1:
