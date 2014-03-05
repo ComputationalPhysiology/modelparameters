@@ -19,15 +19,23 @@
 from __future__ import division
 
 # System imports
+import types
 import sympy as sp
 import re
 
 from sympy.core import relational as _relational
+from sympy.core.function import AppliedUndef as _AppliedUndef
 
 # Local imports
 from utils import check_arg, deprecated
 from logger import warning, error, value_error, type_error
 from codegeneration import sympycode
+
+# Patch Sympy
+_AppliedUndef.is_real = True
+_AppliedUndef.is_imaginary = False
+_AppliedUndef.is_commutative = True
+_AppliedUndef.is_hermitian = True
 
 def Conditional(cond, true_value, false_value):
     """
