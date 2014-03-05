@@ -278,6 +278,8 @@ class _CustomPythonPrinter(_StrPrinter):
     def _print_Abs(self, expr):
         if self._namespace == "math.":
             return "{0}fabs({1})".format(self._namespace, self.stringify(expr.args, ", "))
+        elif self._namespace == "ufl.":
+            return "abs({0})".format(self.stringify(expr.args, ", "))
         else:
             return "{0}abs({1})".format(self._namespace, self.stringify(expr.args, ", "))
 
@@ -413,10 +415,16 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
                                         self.stringify(expr.args, ", "))
         
     def _print_Min(self, expr):
+        if self._namespace == "ufl.":
+            return "ufl.{0}({1})".format(expr.func.__name__,\
+                                     self.stringify(expr.args, ", "))
         return "{0}({1})".format(expr.func.__name__.lower(),\
                                  self.stringify(expr.args, ", "))
 
     def _print_Max(self, expr):
+        if self._namespace == "ufl.":
+            return "ufl.{0}({1})".format(expr.func.__name__,\
+                                     self.stringify(expr.args, ", "))
         return "{0}({1})".format(expr.func.__name__.lower(),\
                                  self.stringify(expr.args, ", "))
 
