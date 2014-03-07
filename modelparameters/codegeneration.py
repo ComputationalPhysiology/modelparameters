@@ -594,13 +594,11 @@ class _CustomCCodePrinter(_StrPrinter):
 
     def _print_And(self, expr):
         PREC = _precedence(expr)
-        return "{0} && {1}".format(self.parenthesize(expr.args[0], PREC),
-                                   self.parenthesize(expr.args[1], PREC))
+        return " && ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
 
     def _print_Or(self, expr):
         PREC = _precedence(expr)
-        return "{0} || {1}".format(self.parenthesize(expr.args[0], PREC),
-                                   self.parenthesize(expr.args[1], PREC))
+        return " || ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
 
     def _print_re(self, expr):
         assert len(expr.args) == 1
@@ -678,13 +676,11 @@ class _CustomMatlabCodePrinter(_StrPrinter):
                                   self.parenthesize(expr.exp, PREC))
     def _print_And(self, expr):
         PREC = _precedence(expr)
-        return "{0} & {1}".format(self.parenthesize(expr.args[0], PREC),
-                                   self.parenthesize(expr.args[1], PREC))
+        return " & ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
 
     def _print_Or(self, expr):
         PREC = _precedence(expr)
-        return "{0} | {1}".format(self.parenthesize(expr.args[0], PREC),
-                                   self.parenthesize(expr.args[1], PREC))
+        return " | ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
 
     def _print_re(self, expr):
         assert len(expr.args) == 1
