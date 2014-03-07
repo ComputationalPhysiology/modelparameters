@@ -546,6 +546,22 @@ class _CustomCCodePrinter(_StrPrinter):
         return "%s" % self._prefix + expr.func.__name__.lower() + \
                "(%s)"%self.stringify(expr.args, ", ")
     
+    def _print_Subs(self, expr):
+        # Execute subsitution
+        orig_expr=expr.expr
+        subs = dict((key,value) for key, value in zip(expr.variables, expr.point))
+        return self._print(orig_expr.xreplace(subs))
+
+    def _print_Derivative(self, expr):
+        if not isinstance(expr.args[1], (_AppliedUndef, sp.Symbol)):
+            error("Can only print Derivative code with a single dependent "\
+                  "variabe. Got: {0}".format(sympycode(expr.args[1])))
+        
+        if isinstance(expr.args[0], _AppliedUndef):
+            return "d%s_d%s" % (expr.args[0].func.__name__, "_".join(\
+                self._print(arg) for arg in expr.args[1:]))
+        return _StrPrinter._print_Derivative(self, expr)
+
     def _print_Pow(self, expr, rational=False):
         PREC = _precedence(expr)
         if expr.exp.is_integer and int(expr.exp) == 1:
