@@ -85,6 +85,8 @@ def value_formatter(value, width=0):
                 formatstr = "%d"
             elif isinstance(value[0], scalars):
                 formatstr = "%%.%(ff)s" % float_format()
+            elif isinstance(value[0], str):
+                formatstr = "'%s'"
             else:
                 formatstr = "%s"
 
