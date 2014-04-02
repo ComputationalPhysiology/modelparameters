@@ -503,16 +503,16 @@ class _CustomCCodePrinter(_StrPrinter):
         return f_str + self._float_postfix
 
     def _print_One(self, expr):
-        return "1"
+        return "1."+self._float_postfix
 
     def _print_Integer(self, expr):
-        return str(expr.p)
+        return "{0}.{1}".format(expr.p, self._float_postfix)
 
     def _print_NegativeOne(self, expr):
-        return "-1"
+        return "-1."+self._float_postfix
 
     def _print_Rational(self, expr):
-        return "{0}.0/{1}".format(expr.p, expr.q)
+        return "{0}.{2}/{1}.{2}".format(expr.p, expr.q, self._float_postfix)
 
     def _print_Min(self, expr):
         "fmin and fmax is not contained in std namespace untill -ansi g++ 4.7"
