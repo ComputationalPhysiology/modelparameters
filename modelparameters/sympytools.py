@@ -29,7 +29,6 @@ from sympy.core.function import AppliedUndef as _AppliedUndef
 # Local imports
 from utils import check_arg, deprecated
 from logger import warning, error, value_error, type_error
-from codegeneration import sympycode
 
 # Patch Sympy
 _AppliedUndef.is_real = True
@@ -117,6 +116,7 @@ def store_symbol_parameter(param):
     """
     Store a symbol parameter
     """
+    from codegeneration import sympycode
     from parameters import ScalarParam
     check_arg(param, ScalarParam)
     sym = param.sym
@@ -150,6 +150,7 @@ def symbol_to_param(sym):
     Parameters
     """
     from sympy.core.function import AppliedUndef
+    from codegeneration import sympycode
 
     if sp is None:
         error("sympy is needed for symbol_to_params to work.")
@@ -248,6 +249,7 @@ def value_namespace(expr, include_derivatives=False):
     """
     Create a value name space for the included symbols in the expression
     """
+    from codegeneration import sympycode
     check_arg(expr, sp.Basic)
     ns = {}
     for sym in symbols_from_expr(expr, \
@@ -307,3 +309,4 @@ sp_namespace["five"] = sp.sympify(5)
 sp_namespace["ten"] = sp.sympify(10)
 
 __all__ = [_name for _name in globals().keys() if _name[0] != "_"]
+
