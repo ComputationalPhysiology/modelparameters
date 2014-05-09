@@ -505,6 +505,9 @@ class _CustomCCodePrinter(_StrPrinter):
     def _print_One(self, expr):
         return "1."+self._float_postfix
 
+    def _print_Zero(self, expr):
+        return "0."+self._float_postfix
+
     def _print_Integer(self, expr):
         return "{0}.{1}".format(expr.p, self._float_postfix)
 
