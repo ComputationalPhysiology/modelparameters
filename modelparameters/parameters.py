@@ -49,7 +49,7 @@ class Param(object):
     def __init__(self, value, name="", description=""):
         """
         Initialize the Param
-        
+
         Arguments
         ---------
         value : any
@@ -101,32 +101,32 @@ class Param(object):
     @property
     def description(self):
         return self._description
-    
+
     def _get_name(self):
         return self._name
-    
+
     def _set_name(self, name):
         check_arg(name, str)
         if self._name:
             value_error("Cannot set name attribute of %s, it is already set "\
                   "to '%s'" % (self.__class__.__name__, self._name))
         self._name = name
-        
+
     def setvalue(self, value):
         """
         Try to set the value using the check
         """
         self._value = self.check(value)
-        
+
     def getvalue(self):
         """
         Return the value
         """
         return self._value
-    
+
     name = property(_get_name, _set_name)
     value = property(getvalue, setvalue)
-    
+
     def check(self, value):
         """
         Check the value using the type and any range check
@@ -141,13 +141,13 @@ class Param(object):
                 info("Converting %s to %d%s", value, int(value), \
                      name_str)
             value = self.value_type(value)
-            
+
         if self.value_type in [bool] and isinstance(value, int) and \
                not isinstance(value, bool):
             info("Converting %s to '%s' while setting parameter%s", \
                  value, bool(value), name_str)
             value = self.value_type(value)
-            
+
         if not isinstance(value, self.value_type):
             if self.value_type == nptypes:
                 type_name = "scalar or np.ndarray"
@@ -160,7 +160,7 @@ class Param(object):
                 value_error("Illegal value%s: %s"%\
                             (name_str, self.format_data(value, True)))
         return value
-    
+
     def format_data(self, value=None, not_in=False, str_length=0):
         """
         Print a nice formated version of the value and its range
@@ -181,7 +181,7 @@ class Param(object):
         # If no '_in_str' is defined
         if self._in_str is None:
             return value_formatter(self._value, str_length)
-        
+
         if not_in:
             return self._not_in_str%(value_formatter(value, str_length))
         else:
@@ -216,7 +216,7 @@ class Param(object):
 
         value_str = str(self._expr) if isinstance(self, SlaveParam) else \
                     value_formatter(self.value)
-        
+
         return "%s(%s%s%s%s)" % (\
             self.__class__.__name__, \
             value_str, self._check_arg() if include_checkarg else "", \
@@ -229,10 +229,10 @@ class Param(object):
     def _description_arg(self):
         return ", description='%s'" % self._description \
                if self._description else ""
-    
+
     def _check_arg(self):
         return ""
-    
+
     def __str__(self):
         """
         Returns a nice representation of the Param
@@ -251,7 +251,7 @@ class OptionParam(Param):
     def __init__(self, value, options, name="", description=""):
         """
         Initialize the OptionParam
-        
+
         Arguments
         ---------
         value : scalars or str
@@ -267,26 +267,26 @@ class OptionParam(Param):
         check_arg(options, list)
         if len(options) < 2:
             value_error("expected the options argument to be at least of length 2")
-            
+
         super(OptionParam, self).__init__(value, name, description)
-        
+
         # Check valid types for an 'option check'
         for option in options:
             if not isinstance(option, option_types):
                 type_error("options can only be 'str' and scalars got: '%s'" % \
                            type(option).__name__)
-        
+
         # Define a 'check function'
         self._in_range = lambda value : value in options
-        
+
         # Define some string used for pretty print
         self._in_str = "%%s \xe2\x88\x88 %s" % repr(options)
-        
+
         self._not_in_str = "%%s \xe2\x88\x89 %s" % repr(options)
-        
+
         # Define a 'repr string'
         #self._repr_str = "OptionParam(%%s, %s)" % repr(options)
-        
+
         # Set the value using the check functionality
         self.setvalue(value)
 
@@ -295,10 +295,10 @@ class OptionParam(Param):
             if not isinstance(val, self.value_type):
                 type_error("All values of the 'option check' " +\
                            "need to be of type: '%s'" % type(self._value).__name__)
-        
+
         # Store options
         self._options = options
-        
+
     def _check_arg(self):
         return ", %s" % repr(self._options)
 
@@ -307,7 +307,7 @@ class OptionParam(Param):
                (self._name == other._name, self._value == other._value, \
                 self.__class__ == other.__class__, \
                 self._options == other._options)
-    
+
     def repr(self, include_checkarg=True, include_name=True, \
               include_description=True):
         """
@@ -325,7 +325,7 @@ class OptionParam(Param):
         if not include_checkarg:
             warning("'include_checkarg' must be 'True' in OptionParam.repr.")
             include_checkarg = True
-        
+
         return super(OptionParam, self).repr(include_checkarg, include_name, \
               include_description)
 
@@ -336,7 +336,7 @@ class ConstParam(Param):
     def __init__(self, value, name="", description=""):
         """
         Initialize the ConstParam
-        
+
         Arguments
         ---------
         value : scalars or str
@@ -348,14 +348,37 @@ class ConstParam(Param):
             A description associated with the Parameter
         """
         Param.__init__(self, value, name, description)
-        
+
         # Define a 'check function'
         self._in_range = lambda x : x == self._value
-        
+
         # Define some string used for pretty print
         self._in_str = "%s - Constant"
         self._not_in_str = "%%s != %s" % self._value
         self.setvalue(value)
+
+class TypelessParam(Param):
+    """
+    A Typeless parameter allowing any change of value, including type changes
+    """
+    def __init__(self, value, name="", description=""):
+        """
+        Initialize the TypelessParam
+
+        Arguments
+        ---------
+        value : scalars or str
+            The initial value of this parameter. The type of value is stored
+            for future type checks
+        name : str (optional)
+            The name of the parameter. Used in pretty printing
+        description : str (optional)
+            A description associated with the Parameter
+        """
+        Param.__init__(self, value, name, description)
+
+        # Set allowed types to all Python objects
+        self.value_type = object
 
 class ScalarParam(Param):
     """
@@ -365,7 +388,7 @@ class ScalarParam(Param):
                  unit="1", name="", description=""):
         """
         Creating a ScalarParam
-        
+
         Arguments
         ---------
         value : scalar
@@ -387,7 +410,7 @@ class ScalarParam(Param):
         """
         check_arg(value, scalars, 0, ScalarParam)
         super(ScalarParam, self).__init__(value, name, description)
-        
+
         self._range = Range(ge, le, gt, lt)
         self._in_range = self._range._in_range
 
@@ -407,7 +430,7 @@ class ScalarParam(Param):
             self._sym = sp.Symbol(name, real=True, imaginary=False,
                                   commutative=True, hermitian=True)
 
-            # Store parameter 
+            # Store parameter
             store_symbol_parameter(self)
 
         # Set the value using the check functionality
@@ -417,7 +440,7 @@ class ScalarParam(Param):
 
     def _get_name(self):
         return self._name
-    
+
     def _set_name(self, name):
         """
         Set the name. Can only be done if not set during instantiation
@@ -428,12 +451,12 @@ class ScalarParam(Param):
 
         if sp is None:
             return
-        
+
         # Create a new symbol with the updated name
         self._sym = sp.Symbol(name, real=True, imaginary=False,
                               commutative=True, hermitian=True)
 
-        # Store parameter 
+        # Store parameter
         store_symbol_parameter(self)
 
     def copy(self, include_checkarg=True, include_name=True, \
@@ -487,7 +510,7 @@ class ScalarParam(Param):
 
         value_str = str(self._expr) if isinstance(self, SlaveParam) else \
                     value_formatter(self.value)
-        
+
         return "%s(%s%s%s%s%s)" % (\
             self.__class__.__name__, \
             value_str, self._check_arg() if include_checkarg else "", \
@@ -497,10 +520,10 @@ class ScalarParam(Param):
 
     def _unit_arg(self):
         return ", unit='%s'"%self._unit if self._unit != "1" else ""
-    
+
     def get_sym(self):
         return self._sym
-    
+
     name = property(_get_name, _set_name)
     sym = property(get_sym)
 
@@ -510,7 +533,7 @@ class ScalarParam(Param):
         Return the unit
         """
         return self._unit
-    
+
     def _check_arg(self):
         """
         Return a repr of the check arguments
@@ -533,7 +556,7 @@ class ArrayParam(ScalarParam):
                  unit="1", name="", description=""):
         """
         Creating an ArrayParam
-        
+
         Arguments
         ---------
         value : scalar, np.ndarray
@@ -555,7 +578,7 @@ class ArrayParam(ScalarParam):
         description : str (optional)
             A description associated with the Parameter
         """
-        
+
         if np is None:
             error("numpy is not installed so ArrayParam is not available")
 
@@ -580,7 +603,7 @@ class ArrayParam(ScalarParam):
                 if len(value)==0:
                     value_error("expected a list with at least 1 element")
                 value = np.fromiter(value, dtype=type(value[0]))
-            
+
             check_arg(value, nptypes, 0, ArrayParam)
 
             # Fist check any scalars passed
@@ -608,7 +631,7 @@ class ArrayParam(ScalarParam):
 
         # Use setvalue to set value using the range
         self.setvalue(value)
-        
+
     def setvalue(self, value):
         """
         Set value of ArrayParameter
@@ -631,7 +654,7 @@ class ArrayParam(ScalarParam):
                             " an scalar")
             index = value[0]
             value = value[1]
-        
+
         check_arg(value, nptypes, context=ArrayParam.setvalue)
 
         if isinstance(value, np.ndarray):
@@ -641,7 +664,7 @@ class ArrayParam(ScalarParam):
 
         # Assign value
         self._value[index] = self.check(value)
-        
+
     value = property(Param.getvalue, setvalue)
 
     def resize(self, newsize):
@@ -650,13 +673,13 @@ class ArrayParam(ScalarParam):
         """
         if not isinstance(newsize, integers):
             error("expected newsize argument to be an int")
-            
+
         newsize = int(newsize)
 
         # Resize array if size is changed
         if len(self._value) != newsize:
             self._value = np.resize(self._value, newsize)
-    
+
 class SlaveParam(ScalarParam):
     """
     A slave parameter defined by other parameters
@@ -665,17 +688,17 @@ class SlaveParam(ScalarParam):
 
         if sp is None:
             error("sympy is not installed so SlaveParam is not available")
-            
+
         if not isinstance(expr, (ScalarParam, sp.Basic)):
             type_error("expected an expression of model symbols.")
-        
+
         if isinstance(expr, ScalarParam):
             expr = expr.sym
 
         if not all(isinstance(atom, (sp.NumberSymbol, sp.Number, sp.Symbol, \
                                      sp.Dummy)) for atom in expr.atoms()):
             type_error("expected expression of model symbols.")
-        
+
         ScalarParam.__init__(self, 0.0, name=name, description=description, \
                              unit=unit)
 
@@ -691,25 +714,25 @@ class SlaveParam(ScalarParam):
         #        self._param_ns[sympycode(symbol)] = symbol_to_param(symbol)
         #    except:
         #        pass
-        
+
     def setvalue(self, value):
         """
         A setvalue method which always fails
         """
         type_error("cannot assign to a SlaveParam")
-                
+
     def getvalue(self):
         """
         Return a computed value of the Parameters
         """
         timer = Timer("Eval Slave parameter")
-        
+
         return eval_param_expr(self._expr, include_derivatives=True)
 
         # FIXME: Does not work...
         #return eval_param_expr(self._expr, param_ns=self._param_ns, \
         #                       include_derivatives=True)
-    
+
     value = property(getvalue, setvalue)
 
     @property
@@ -746,10 +769,10 @@ def eval_param_expr(expr, param_ns=None, include_derivatives=False, ns=None):
     if sp is None:
         error("sympy is not installed so evaluation of expressions"\
               " is not available")
-    
+
     # Create name space which the expression will be evaluated in
     ns = ns or {}
-    
+
     # Get values
     if param_ns is None:
         value_ns = value_namespace(expr, include_derivatives=include_derivatives)
@@ -773,7 +796,7 @@ def eval_param_expr(expr, param_ns=None, include_derivatives=False, ns=None):
 
             # Store value
             value_ns[sym_name] = param.value
-        
+
     # First check if we have numpy arrays
     if np and any(isinstance(value, np.ndarray) for value in value_ns.values()):
 
@@ -788,9 +811,9 @@ def eval_param_expr(expr, param_ns=None, include_derivatives=False, ns=None):
         # Update name space with numpy name space
         namespace = "np"
         ns["np"] = np
-        
+
     else:
-        
+
         # No numpy arrays and we choose math name space to evaulate expression
         import math
         namespace = "math"
@@ -800,7 +823,7 @@ def eval_param_expr(expr, param_ns=None, include_derivatives=False, ns=None):
     ns.update(value_ns)
 
     return eval(pythoncode(expr, namespace=namespace), {}, ns)
-    
+
 
 __all__ = [_name for _name in globals().keys() if _name[0] != "_"]
 
