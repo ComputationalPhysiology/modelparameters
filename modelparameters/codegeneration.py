@@ -153,12 +153,12 @@ _relational_map = {
     }
 
 _relational_map_matlab = {
-    "==":"Eq",
-    "~=":"Ne",
-    "<":"Lt",
-    "<=":"Le",
-    ">":"Gt",
-    ">=":"Ge",
+    "==":"==",
+    "!=":"~=",
+    "<":"<",
+    "<=":"<=",
+    ">":">",
+    ">=":">=",
     }
 
 def _print_Mul(self, expr):
@@ -695,6 +695,10 @@ class _CustomMatlabCodePrinter(_StrPrinter):
         return "~" + self.parenthesize(expr.args[0], PREC)
 
     def _print_Relational(self, expr):
+        return "{0} {1} {2}".format(self.parenthesize(expr.lhs, _precedence(expr)),
+                                    _relational_map_matlab[expr.rel_op],
+                                    self.parenthesize(expr.rhs, _precedence(expr)))
+
         return '{0}({1}, {2})'.format(_relational_map_matlab[expr.rel_op],
                                       self._print(expr.lhs), self._print(expr.rhs))
     def _print_Or(self, expr):
