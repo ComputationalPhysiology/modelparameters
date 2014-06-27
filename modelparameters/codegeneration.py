@@ -152,6 +152,15 @@ _relational_map = {
     ">=":"Ge",
     }
 
+_relational_map_matlab = {
+    "==":"Eq",
+    "~=":"Ne",
+    "<":"Lt",
+    "<=":"Le",
+    ">":"Gt",
+    ">=":"Ge",
+    }
+
 def _print_Mul(self, expr):
 
     prec = _precedence(expr)
@@ -681,6 +690,13 @@ class _CustomMatlabCodePrinter(_StrPrinter):
         PREC = _precedence(expr)
         return " & ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
 
+    def _print_Not(self, expr):
+        PREC = _precedence(expr)
+        return "~" + self.parenthesize(expr.args[0], PREC)
+
+    def _print_Relational(self, expr):
+        return '{0}({1}, {2})'.format(_relational_map_matlab[expr.rel_op],
+                                      self._print(expr.lhs), self._print(expr.rhs))
     def _print_Or(self, expr):
         PREC = _precedence(expr)
         return " | ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
@@ -939,7 +955,6 @@ class _CustomLatexPrinter(_LatexPrinter):
 
                 return tex % (self._print(expr.base),
                               self._print(expr.exp))
-
 
 # Different math namespace python printer
 _python_code_printer = {"":_CustomPythonCodePrinter("", ),
