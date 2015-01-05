@@ -428,7 +428,7 @@ class ScalarParam(Param):
             self._sym = None
         else:
             self._sym = sp.Symbol(name, real=True, imaginary=False,
-                                  commutative=True, hermitian=True)
+                                  commutative=True, hermitian=True, complex=True)
 
             # Store parameter
             store_symbol_parameter(self)
@@ -454,7 +454,7 @@ class ScalarParam(Param):
 
         # Create a new symbol with the updated name
         self._sym = sp.Symbol(name, real=True, imaginary=False,
-                              commutative=True, hermitian=True)
+                              commutative=True, hermitian=True, complex=True)
 
         # Store parameter
         store_symbol_parameter(self)
