@@ -1,36 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 __author__ = "Johan Hake (hake.dev@gmail.com)"
-__copyright__ = "Copyright (C) 2012 " + __author__
-__date__ = "2012-05-07 -- 2012-08-15"
+__copyright__ = "Copyright (C) 2012-2015 " + __author__
+__date__ = "2012-05-07 -- 2015-01-09"
 __license__  = "GNU LGPL Version 3.0 or later"
 
-
 # System imports
-from distutils.core import setup
-from distutils.core import Command
-
-class clean(Command):
-    """
-    Cleans *.pyc so you should get the same copy as is in the VCS.
-    """
-
-    description = "remove build files"
-    user_options = [("all","a","the same")]
-
-    def initialize_options(self):
-        self.all = None
-
-    def finalize_options(self):
-        pass
-
-    def run(self):
-        import os
-        os.system("py.cleanup")
-        os.system("rm -f MANIFEST")
-        os.system("rm -rf build")
-        os.system("rm -rf dist")
-        os.system("rm -rf doc/_build")
+from setuptools import setup, Command
 
 class run_tests(Command):
     """
@@ -54,6 +30,31 @@ class run_tests(Command):
         import os
         os.system("python utils/run_tests.py")
         
+class clean(Command):
+    """Cleans *.pyc and debian trashs, so you should get the same copy as
+    is in the VCS.
+    """
+
+    description = "remove build files"
+    user_options = [("all", "a", "the same")]
+
+    def initialize_options(self):
+        self.all = None
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        import os
+        os.system("find . -name '*.pyc' | xargs rm -f")
+        os.system("find . -name '*~' | xargs rm -f")
+        os.system("rm -f python-build-stamp-2.4")
+        os.system("rm -f MANIFEST")
+        os.system("rm -rf modelparameters.egg-info")
+        os.system("rm -rf build")
+        os.system("rm -rf dist")
+        os.system("rm -rf doc/_build")
+
 # Version number
 major = 0
 minor = 1
@@ -66,7 +67,8 @@ A module providing parameter structure for physical modeling
       author = __author__.split("(")[0],
       author_email = __author__.split("(")[1][:-1],
       packages = ["modelparameters", "modelparameters.tests"],
-      cmdclass    = {'test': run_tests,
-                     'clean': clean,
+      cmdclass    = {'test' : run_tests,
+                     'clean' : clean,
                      },
+      install_requires=["sympy>=0.7.5", "numpy>=1.5"],
       )
