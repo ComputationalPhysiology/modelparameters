@@ -353,9 +353,7 @@ class _CustomPythonPrinter(_StrPrinter):
                 error("UFL does not support more than 2 operands to And")
             return "ufl.And({0}, {1})".format(self._print(expr.args[0]),
                                               self._print(expr.args[1]))
-        return " and ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
-        return "{0} and {1}".format(self.parenthesize(expr.args[0], PREC),
-                                    self.parenthesize(expr.args[1], PREC))
+        return "And({0})".format(", ".join(self._print(arg) for arg in expr.args[::-1]))
 
     def _print_Or(self, expr):
         PREC = _precedence(expr)
@@ -364,9 +362,7 @@ class _CustomPythonPrinter(_StrPrinter):
                 error("UFL does not support more than 2 operands to Or")
             return "ufl.Or({0}, {1})".format(self._print(expr.args[0]),
                                              self._print(expr.args[1]))
-        return " or ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
-        return "{0} or {1}".format(self.parenthesize(expr.args[0], PREC),
-                                   self.parenthesize(expr.args[1], PREC))
+        return "Or({0})".format(", ".join(self._print(arg) for arg in expr.args[::-1]))
 
     def _print_Pow(self, expr, rational=False):
         PREC = _precedence(expr)
@@ -496,6 +492,29 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
 
     def _print_Pi(self, expr=None):
         return "{0}pi".format(self._namespace)
+
+    def _print_And(self, expr):
+        PREC = _precedence(expr)
+        if self._namespace == "ufl.":
+            if len(expr.args) != 2:
+                error("UFL does not support more than 2 operands to And")
+            return "ufl.And({0}, {1})".format(self._print(expr.args[0]),
+                                              self._print(expr.args[1]))
+        return " and ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
+        return "{0} and {1}".format(self.parenthesize(expr.args[0], PREC),
+                                    self.parenthesize(expr.args[1], PREC))
+
+    def _print_Or(self, expr):
+        PREC = _precedence(expr)
+        if self._namespace == "ufl.":
+            if len(expr.args) != 2:
+                error("UFL does not support more than 2 operands to Or")
+            return "ufl.Or({0}, {1})".format(self._print(expr.args[0]),
+                                             self._print(expr.args[1]))
+        return " or ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
+        return "{0} or {1}".format(self.parenthesize(expr.args[0], PREC),
+                                   self.parenthesize(expr.args[1], PREC))
+
     
 class _CustomCCodePrinter(_StrPrinter):
     """
