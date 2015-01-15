@@ -31,12 +31,12 @@ class run_tests(Command):
         os.system("python utils/run_tests.py")
         
 class clean(Command):
-    """Cleans *.pyc and debian trashs, so you should get the same copy as
-    is in the VCS.
+    """
+    Cleans *.pyc so you should get the same copy as is in the VCS.
     """
 
     description = "remove build files"
-    user_options = [("all", "a", "the same")]
+    user_options = [("all","a","the same")]
 
     def initialize_options(self):
         self.all = None
@@ -46,14 +46,8 @@ class clean(Command):
 
     def run(self):
         import os
-        os.system("find . -name '*.pyc' | xargs rm -f")
-        os.system("find . -name '*~' | xargs rm -f")
-        os.system("rm -f python-build-stamp-2.4")
-        os.system("rm -f MANIFEST")
-        os.system("rm -rf modelparameters.egg-info")
-        os.system("rm -rf build")
-        os.system("rm -rf dist")
-        os.system("rm -rf doc/_build")
+        os.system("utils/clean-files")
+
 
 # Version number
 major = 0
@@ -67,8 +61,8 @@ A module providing parameter structure for physical modeling
       author = __author__.split("(")[0],
       author_email = __author__.split("(")[1][:-1],
       packages = ["modelparameters", "modelparameters.tests"],
-      cmdclass    = {'test' : run_tests,
-                     'clean' : clean,
-                     },
+      cmdclass = {'test' : run_tests,
+                  'clean' : clean,
+                  },
       install_requires=["sympy>=0.7.5", "numpy>=1.5"],
       )
