@@ -36,10 +36,6 @@ _AppliedUndef.is_imaginary = False
 _AppliedUndef.is_commutative = True
 _AppliedUndef.is_hermitian = True
 
-# Check sympy version
-from distutils.version import StrictVersion
-if StrictVersion(sp.__version__) < StrictVersion('0.7.5'):
-    raise ImportError("model parameters requires sympy version 0.7.5 or higher.")
 
 def Conditional(cond, true_value, false_value):
     """
