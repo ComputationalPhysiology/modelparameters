@@ -503,6 +503,14 @@ def _check_arg(arg, argtypes, identifyer, context, itemtypes, ge, le, gt, lt):
     # Display error message
     raise_error(message)
 
+def check_arginlist(arg, lst, name="arg"):
+    """
+    Check that arg is in lst
+    """
+    check_arg(lst, list)
+    msg="Argument {} must be one of {}, got {}".format(name, lst, arg)
+    assert(arg in lst), msg
+    
 def check_arg(arg, argtypes, num=-1, context=None, itemtypes=None,
               ge=None, le=None, gt=None, lt=None):
     """
@@ -535,7 +543,7 @@ def check_arg(arg, argtypes, num=-1, context=None, itemtypes=None,
     assert(isinstance(num, int))
     _check_arg(arg, argtypes, num, context, itemtypes, ge, le, gt, lt)
 
-
+    
 def check_kwarg(kwarg, name, argtypes, context=None, itemtypes=None,
                 ge=None, le=None, gt=None, lt=None):
     """
