@@ -36,9 +36,11 @@ import copy
 # local imports
 from config import *
 from logger import *
+from units import *
 from utils import check_arg,  check_kwarg, scalars, value_formatter,\
      Range, tuplewrap, integers, nptypes, Timer
 from utils import _np as np
+
 
 option_types = scalars + (str,)
 
@@ -112,12 +114,18 @@ class Param(object):
                   "to '%s'" % (self.__class__.__name__, self._name))
         self._name = name
 
-    def setvalue(self, value):
+    def update(self, value):
+        self.setvalue(value, False)
+
+    def setvalue(self, value, check=True):
         """
         Try to set the value using the check
         """
-        self._value = self.check(value)
-
+        if check:
+            self._value = self.check(value)
+        else:
+            self._value = value
+            
     def getvalue(self):
         """
         Return the value
@@ -518,6 +526,66 @@ class ScalarParam(Param):
             self._name_arg() if include_name else "", \
             self._description_arg() if include_description else "")
 
+    def update(self, param):
+        """
+        Update parameter with value of new parameter.
+        Take into account unit conversion if applicable. 
+
+        Arguments
+        ---------
+        param : ScalarParameter or scalar
+            The parameter with the new value
+        """
+
+        check_arg(param, scalars + (ScalarParam,))
+    
+        msg="Update parameter {}. ".format(self._get_name())
+
+        if type(param) in scalars:
+            msg+=("\nGiven parameter does not have unit. "+
+                  "Assume same unit.")
+            value = param
+        else:
+           
+            if param.unit == self.unit:
+                value = param.value
+
+            else:
+
+                # Get factor for unit conversion to units without prefixes
+                target_factor, target_unit = get_unit_conversion_factor(param.unit, True)
+                this_factor, this_unit = get_unit_conversion_factor(self.unit, True)
+
+                # Get factor for unit conversion to this unit
+                factor =  target_factor / float(this_factor)
+                
+                print "this unit = ", this_unit, " target unit = ", target_unit
+                if this_unit != target_unit:
+                    # There are a few cases to check
+                    print "JA"
+                    
+                    if this_unit == "l" and target_unit == "m**3":
+                        print "JAJAJ"
+                        #1 m3 = 1000 l
+                        factor /= 1000
+                        
+                    elif this_unit == "m**3" and target_unit == "l":
+                        factor *= 1000
+                
+            
+                value = param.value * factor
+
+        msg+="\nOld value={}\tNew value={}\n".format(self.getvalue(), value)
+        debug(msg)
+        print(msg)
+        return self.setvalue(value, False)
+        
+
+
+        # from IPython import embed; embed()
+        # exit()
+        
+
     def _unit_arg(self):
         return ", unit='%s'"%self._unit if self._unit != "1" else ""
 
@@ -541,6 +609,7 @@ class ScalarParam(Param):
         if self._range.arg_repr_str:
             return ", " + self._range.arg_repr_str
         return ""
+
 
     def __eq__(self, other):
         return isinstance(other, self.__class__) and \
