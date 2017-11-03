@@ -60,7 +60,6 @@ class Unit(object):
     """
     def __init__(self, unit_str):
 
-        print unit_str
         unit_str = _clean_unit(unit_str)
         self._unit_str=unit_str
         self._factor, self._base_unit = self._remove_prefixes()
