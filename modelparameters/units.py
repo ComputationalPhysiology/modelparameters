@@ -21,9 +21,9 @@ si_units = ["kg", "m", "s", "A", "mole", "K", "cd", "1"]
 
 to_si_units = {"V": "kg*m**2*s**-3*A**-1",
                "F": "s**4*A**2*m**-2*kg**-1",
-               "S": "kg**-1*m**-2*s**3*A",
+               "S": "kg**-1*m**-2*s**3*A**2",
                "Hz": "s**-1",
-               "l":"mm**3",
+               "l":"cm**3",
                "C": "A*s",
                "I": "1",
                "J": "kg*m**2*s**-2",
@@ -72,6 +72,10 @@ class Unit(object):
         prefixes
         """
         return self._factor
+
+    @property
+    def unit(self):
+        return self._unit_str
 
     @property
     def base_unit(self):
@@ -171,7 +175,7 @@ class Unit(object):
 
     def __str__(self):
         return self._unit_str
-    
+
 
 
 def get_single_unit_conversion_factor(unit, excluded_kg=False):
@@ -314,6 +318,7 @@ def _test1():
     p1.update(p2)
 
 
+    
 if __name__ == "__main__":
 
     unit = 'mV*mS*uF**-1'
