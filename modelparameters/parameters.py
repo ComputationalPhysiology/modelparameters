@@ -559,13 +559,10 @@ class ScalarParam(Param):
                 # Get factor for unit conversion to this unit
                 factor =  target_factor / float(this_factor)
                 
-                print "this unit = ", this_unit, " target unit = ", target_unit
+                debug("this unit = {}, target unit = {}".format(this_unit,target_unit))
                 if this_unit != target_unit:
                     # There are a few cases to check
-                    print "JA"
-                    
                     if this_unit == "l" and target_unit == "m**3":
-                        print "JAJAJ"
                         #1 m3 = 1000 l
                         factor /= 1000
                         
@@ -577,13 +574,8 @@ class ScalarParam(Param):
 
         msg+="\nOld value={}\tNew value={}\n".format(self.getvalue(), value)
         debug(msg)
-        print(msg)
         return self.setvalue(value, False)
         
-
-
-        # from IPython import embed; embed()
-        # exit()
         
 
     def _unit_arg(self):
