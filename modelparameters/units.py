@@ -32,10 +32,49 @@ to_si_units = {"V": "kg*m**2*s**-3*A**-1",
 for u in si_units:
     to_si_units[u] = u
 
-prefix_factor = {"da":10, "h": 100, "k": 1000, "M": 1000**2, "G":1000**3,
-                 "T":1000**4, "P":1000**5, "E":1000**6, "Z":1000**7, "Y":1000**8,
-                 "d":0.1, "c":0.01, "m":0.001, "u":0.001**2, "n":0.001**3,
-                 "p":0.001**4, "f":0.001**5, "a":0.001**6, "z":0.001**7, "y":0.001**8}
+prefix_factor \
+    = {"da":10,
+       "h": 100,
+       "k": 1000,
+       "M": 1000**2,
+       "G":1000**3,
+       "T":1000**4,
+       "P":1000**5,
+       "E":1000**6,
+       "Z":1000**7,
+       "Y":1000**8,
+       "d":0.1,
+       "c":0.01,
+       "m":0.001,
+       "u":0.001**2,
+       "n":0.001**3,
+       "p":0.001**4,
+       "f":0.001**5,
+       "a":0.001**6,
+       "z":0.001**7,
+       "y":0.001**8}
+
+prefix_factor_to_key \
+    = {1.0000000000000001e-24: 'y',
+       1.0000000000000001e-21: 'z',
+       1e-18: 'a',
+       1e-15: 'f',
+       1e-12: 'p',
+       1e-09: 'n',
+       1e-06: 'u',
+       0.001: 'm',
+       0.01: 'c',
+       0.1: 'd',
+       10: 'da',
+       100: 'h',
+       1000: 'k',
+       1000000: 'M',
+       1000000000: 'G',
+       1000000000000: 'T',
+       1000000000000000: 'P',
+       1000000000000000000: 'E',
+       1000000000000000000000L: 'Z',
+       1000000000000000000000000L: 'Y'}
 
 
 def _clean_unit(unit):
@@ -44,7 +83,7 @@ def _clean_unit(unit):
     if "**1/2" in unit:
         unit = "*".join(["*".join(u.split("*")[:-1]) for \
                          u in unit.split("**1/2")]).strip("*")
-
+        
     return unit
 
 
@@ -62,7 +101,7 @@ class Unit(object):
 
         unit_str = _clean_unit(unit_str)
         self._unit_str=unit_str
-        self._factor, self._base_unit = self._remove_prefixes()
+        self._factor, self._base_unit, self._prefixes = self._remove_prefixes()
 
 
     @property
@@ -74,6 +113,17 @@ class Unit(object):
         return self._factor
 
     @property
+    def prefix(self):
+        """
+        Return the unit prefix (if any), e.g 'm'
+        if the unit is ms
+        """
+        if len(self._prefixes) == 1:
+            return self._prefixes[0]
+        else:
+            return self._prefixes
+
+    @property
     def unit(self):
         return self._unit_str
 
@@ -83,6 +133,41 @@ class Unit(object):
         Return unit without prefixes
         """
         return self._base_unit
+
+    @property
+    def reciprocal(self):
+        """
+        Return the reciprocal of the unit
+        
+        Example
+        -------
+    
+        >>> ...
+            >>> unit = Unit("s**-1")
+            >>> unit.reciprocal
+            "s"
+            >>> ...
+
+        """
+        # Get the base units and exponents
+        if not hasattr(self, "_base_si_exponents"):
+            self._process_si_unit()
+
+        # Collect the terms and use the negative exponent
+        reciprocals = []
+        for b, e, p in zip(self._base_si_units,
+                           self._base_si_exponents, self._prefixes):
+
+            
+            if e == -1:
+                # Do not include any exponents
+                reciprocals.append("{}{}".format(p, b))
+            else:
+                # Include exponent
+                reciprocals.append("{}{}**{}".format(p, b, -e))
+            
+        return "*".join(reciprocals)
+    
     
     @property
     def si_unit(self):
@@ -132,8 +217,8 @@ class Unit(object):
             u_si_ = to_si_units[u_[0]]
             
             # Remove possible prefixes from SI unit
-            factor_, u_si = get_unit_conversion_factor(u_si_, True,
-                                                       excluded_kg=True)
+            factor_, u_si, prefix_ = get_unit_conversion_factor(u_si_, True,
+                                                                   excluded_kg=True)
             factor *= factor_
             
             # Convert to SI
@@ -141,10 +226,13 @@ class Unit(object):
             units.append(si_unit_)
 
             # Get exponent
-            exponent = None if len(u_) == 1 else sp.sympify(u_[1])
+            exponent = 1 if len(u_) == 1 else sp.sympify(u_[1])
             exponents.append(exponent)
 
 
+        self._base_si_units = units
+        self._base_si_exponents = exponents
+        
         # Collect all subunits
         f = None
         for q,e in zip(units, exponents):
@@ -154,7 +242,6 @@ class Unit(object):
                 f = f*u_
             else:
                 f = u_
-
 
         self._si_unit = str(f)
         self._si_unit_factor = factor
@@ -194,6 +281,8 @@ def get_single_unit_conversion_factor(unit, excluded_kg=False):
         The unit without prefixes
     factor : float
         The factor to multiply to get the correct unit
+    prefix : str:
+        The prefi
     
     """
 
@@ -201,12 +290,10 @@ def get_single_unit_conversion_factor(unit, excluded_kg=False):
         # There are no prefix
         new_unit = unit
         factor = 1.0
+        prefix = ""
         
     else:
         
-        
-
-
         prefix = unit[0]
         new_unit = unit[1:]
 
@@ -226,7 +313,7 @@ def get_single_unit_conversion_factor(unit, excluded_kg=False):
         factor = prefix_factor[prefix]
 
         
-    return new_unit, factor
+    return new_unit, factor, prefix
 
 def get_unit_conversion_factor(unit, return_new_unit=False, excluded_kg=False):
     """
@@ -262,15 +349,16 @@ def get_unit_conversion_factor(unit, return_new_unit=False, excluded_kg=False):
 
     factor = 1
     new_units = []
+    prefixes = []
 
     for u in u1:
     
         # For each unit extract the exponent
         u0 = u.split("^")
-        new_unit , factor_ = get_single_unit_conversion_factor(u0[0],
+        new_unit , factor_, prefix_ = get_single_unit_conversion_factor(u0[0],
                                                                excluded_kg)
       
-        
+        prefixes.append(prefix_)
         if len(u0) == 1:
             # There are no exponent
             new_units.append(new_unit)
@@ -284,7 +372,7 @@ def get_unit_conversion_factor(unit, return_new_unit=False, excluded_kg=False):
             factor /= factor_
 
     if return_new_unit:
-        return factor, "*".join(new_units)
+        return factor, "*".join(new_units), prefixes
     
     return factor
 
