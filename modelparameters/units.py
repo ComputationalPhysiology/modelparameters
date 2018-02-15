@@ -247,7 +247,38 @@ class Unit(object):
         self._si_unit_factor = factor
         
         return self._si_unit
+
+    def get_factor(self, unit):
+        """
+        Return the factor needed to multiply with 
+        the current unit in order to get the argument unit
         
+        Arugments
+        ---------
+        unit : str
+            A unit
+
+
+        Returns
+        .......
+        factor : float
+            Return the factor needed to multiply with 
+            the current unit in order to get the argument unit
+
+
+        Example
+        -------
+        
+            >>> unit = Unit("dm")
+            >>> unit.get_factor("m")
+            10
+            >>> unit.get_factor("mm")
+            0.01
+
+        
+        """
+        factor = Unit(unit).factor
+        return factor / float(self.factor)
 
         
     def _remove_prefixes(self):
