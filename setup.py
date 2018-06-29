@@ -64,5 +64,4 @@ A module providing parameter structure for physical modeling
       cmdclass = {'test' : run_tests,
                   'clean' : clean,
                   },
-      install_requires=["sympy>=0.7.5", "numpy>=1.5"],
       )
