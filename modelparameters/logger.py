@@ -60,7 +60,7 @@ class Logger:
         #%(pathname)s, line %(lineno)s, in %(module)s\n    %(message)s\n"))
         
         # Override emit() in handler for indentation
-        h.emit = types.MethodType(emit, h, h.__class__)
+        h.emit = types.MethodType(emit, h) #, h.__class__)
         self._handler = h
 
         # Set up logger
@@ -201,7 +201,7 @@ class Logger:
         self._level_stack[-1] = level
         self._log.setLevel(level)
         self._handler.setLevel(level)
-        for h in self._logfiles.values():
+        for h in list(self._logfiles.values()):
             h.setLevel(level)
 
     def get_log_level(self):

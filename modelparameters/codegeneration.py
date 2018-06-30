@@ -207,8 +207,8 @@ def _print_Mul(self, expr):
 
     a = a or [sp.S.One]
 
-    a_str = map(lambda x:self.parenthesize(x, prec), a)
-    b_str = map(lambda x:self.parenthesize(x, prec), b)
+    a_str = [self.parenthesize(x, prec) for x in a]
+    b_str = [self.parenthesize(x, prec) for x in b]
 
     if len(b) == 0:
         return sign + '*'.join(a_str)
@@ -373,11 +373,11 @@ class _CustomPythonPrinter(_StrPrinter):
         if expr.exp.is_integer and int(expr.exp) in [2, 3]:
             return "({0})".format(\
                 "*".join(self.parenthesize(expr.base, PREC) \
-                         for i in xrange(int(expr.exp))), PREC)
+                         for i in range(int(expr.exp))), PREC)
         if expr.exp.is_integer and int(expr.exp) in [-2, -3]:
             return "1.0/({0})".format(\
                 "*".join(self.parenthesize(expr.base, PREC) \
-                         for i in xrange(-int(expr.exp))), PREC)
+                         for i in range(-int(expr.exp))), PREC)
         if expr.exp is sp.S.Half and not rational:
             return "{0}sqrt({1})".format(self._namespace,
                                          self._print(expr.base))
@@ -602,11 +602,11 @@ class _CustomCCodePrinter(_StrPrinter):
         if expr.exp.is_integer and int(expr.exp) in [2, 3]:
             return "({0})".format(\
                 "*".join(self.parenthesize(expr.base, PREC) \
-                         for i in xrange(int(expr.exp))), PREC)
+                         for i in range(int(expr.exp))), PREC)
         if expr.exp.is_integer and int(expr.exp) in [-2, -3]:
             return "1.0/({0})".format(\
                 "*".join(self.parenthesize(expr.base, PREC) \
-                         for i in xrange(-int(expr.exp))), PREC)
+                         for i in range(-int(expr.exp))), PREC)
         if expr.exp is sp.S.Half and not rational:
             return "{0}sqrt({1})".format(self._prefix,
                                          self._print(expr.base))
@@ -1068,4 +1068,4 @@ latex.__doc__ = _sympy_latex.__doc__
 
 octavecode = matlabcode
 
-__all__ = [_name for _name in globals().keys() if _name[0] != "_"]
+__all__ = [_name for _name in list(globals().keys()) if _name[0] != "_"]

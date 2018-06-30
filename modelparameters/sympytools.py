@@ -16,7 +16,7 @@
 # along with ModelParameters. If not, see <http://www.gnu.org/licenses/>.
 
 # Use truediv
-from __future__ import division
+
 
 # System imports
 import types
@@ -27,8 +27,8 @@ from sympy.core import relational as _relational
 from sympy.core.function import AppliedUndef as _AppliedUndef
 
 # Local imports
-from utils import check_arg, deprecated
-from logger import warning, error, value_error, type_error
+from .utils import check_arg, deprecated
+from .logger import warning, error, value_error, type_error
 
 # Patch Sympy
 _AppliedUndef.is_real = True
@@ -117,8 +117,8 @@ def store_symbol_parameter(param):
     """
     Store a symbol parameter
     """
-    from codegeneration import sympycode
-    from parameters import ScalarParam
+    from .codegeneration import sympycode
+    from .parameters import ScalarParam
     check_arg(param, ScalarParam)
     sym = param.sym
     #if str(sym) in _all_symbol_parameters:
@@ -151,7 +151,7 @@ def symbol_to_param(sym):
     Parameters
     """
     from sympy.core.function import AppliedUndef
-    from codegeneration import sympycode
+    from .codegeneration import sympycode
 
     if sp is None:
         error("sympy is needed for symbol_to_params to work.")
@@ -250,7 +250,7 @@ def value_namespace(expr, include_derivatives=False):
     """
     Create a value name space for the included symbols in the expression
     """
-    from codegeneration import sympycode
+    from .codegeneration import sympycode
     check_arg(expr, sp.Basic)
     ns = {}
     for sym in symbols_from_expr(expr, \
@@ -292,11 +292,11 @@ def add_pair_to_subs(subs, old, new):
 
 # Create a sympy evaulation namespace
 sp_namespace = {}
-sp_namespace.update((name, op) for name, op in sp.functions.__dict__.items() \
+sp_namespace.update((name, op) for name, op in list(sp.functions.__dict__.items()) \
                     if name[0] != "_")
 sp_namespace["Conditional"] = Conditional
 sp_namespace["ContinuousConditional"] = ContinuousConditional
-sp_namespace.update((name, op) for name, op in _relational.__dict__.items() \
+sp_namespace.update((name, op) for name, op in list(_relational.__dict__.items()) \
                     if name in ["Eq", "Ne", "Gt", "Ge", "Lt", "Le"])
 sp_namespace.update((name, getattr(sp, name)) for name in ["And", "Or"])
 sp_namespace["pi"] = sp.numbers.pi
@@ -309,5 +309,5 @@ sp_namespace["four"] = sp.sympify(4)
 sp_namespace["five"] = sp.sympify(5)
 sp_namespace["ten"] = sp.sympify(10)
 
-__all__ = [_name for _name in globals().keys() if _name[0] != "_"]
+__all__ = [_name for _name in list(globals().keys()) if _name[0] != "_"]
 

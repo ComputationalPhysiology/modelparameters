@@ -87,7 +87,7 @@ class CheckArgs(unittest.TestCase):
             check_arg(1, str, 2, CheckArgs.test_check_arg)
         self.assertEqual(str(cm.exception), "expected 'str' (got '1' which is "\
                          "'int') as the third argument while calling "\
-                         "'CheckArgs.test_check_arg'")
+                         "'test_check_arg'")
 
         with self.assertRaises(TypeError) as cm:
             check_arg(1, str, 2, CheckArgs)
@@ -138,7 +138,7 @@ class CheckArgs(unittest.TestCase):
             check_kwarg(1, "jada", str, CheckArgs.test_check_arg)
         self.assertEqual(str(cm.exception), "expected 'str' (got '1' which is "\
                          "'int') as the 'jada' argument while calling "\
-                         "'CheckArgs.test_check_arg'")
+                         "'test_check_arg'")
 
         with self.assertRaises(TypeError) as cm:
             check_kwarg(1, "bada", str, CheckArgs)

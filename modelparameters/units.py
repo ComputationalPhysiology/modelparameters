@@ -1,4 +1,4 @@
-from sympytools import *
+from .sympytools import *
 
 
 si_unit_map = {"ampere":"A", "becquerel":"Bq", "candela":"cd", "celsius":"gradC",
@@ -73,8 +73,8 @@ prefix_factor_to_key \
        1000000000000: 'T',
        1000000000000000: 'P',
        1000000000000000000: 'E',
-       1000000000000000000000L: 'Z',
-       1000000000000000000000000L: 'Y'}
+       1000000000000000000000: 'Z',
+       1000000000000000000000000: 'Y'}
 
 
 def _clean_unit(unit):
@@ -211,8 +211,8 @@ class Unit(object):
 
             # Convert to SI
             msg = ("Unit {} if not found in SI-unit map".format(u_[0])+
-                   "\nPossible units are {}".format(to_si_units.keys()))
-            assert u_[0] in to_si_units.keys(), msg
+                   "\nPossible units are {}".format(list(to_si_units.keys())))
+            assert u_[0] in list(to_si_units.keys()), msg
             
             u_si_ = to_si_units[u_[0]]
             
@@ -317,7 +317,7 @@ def get_single_unit_conversion_factor(unit, excluded_kg=False):
     
     """
 
-    if unit in si_unit_map.values():
+    if unit in list(si_unit_map.values()):
         # There are no prefix
         new_unit = unit
         factor = 1.0
@@ -331,14 +331,14 @@ def get_single_unit_conversion_factor(unit, excluded_kg=False):
         # print prefix
         # print new_unit
         msg="Invalid unit {}".format(new_unit)
-        assert new_unit in si_unit_map.values(), msg
+        assert new_unit in list(si_unit_map.values()), msg
         
         if excluded_kg and new_unit == "g":
             return unit, 1.0
      
       
         msg="Prefix {} if not standardized".format(prefix)
-        assert prefix in prefix_factor.keys(), msg
+        assert prefix in list(prefix_factor.keys()), msg
     
       
         factor = prefix_factor[prefix]
@@ -418,7 +418,7 @@ def _test1():
 
 
     Cai2.update(Cai1)
-    print Cai2
+    print(Cai2)
     exit()
             
             

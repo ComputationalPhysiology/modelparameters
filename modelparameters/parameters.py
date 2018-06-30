@@ -21,11 +21,11 @@ __all__ = ["Param", "ScalarParam", "OptionParam", "ConstParam", "ArrayParam"\
 # System imports
 # Conditional sympy import
 try:
-    from sympytools import sp, store_symbol_parameter, \
+    from .sympytools import sp, store_symbol_parameter, \
          value_namespace, symbols_from_expr, symbol_to_param
-    from codegeneration import pythoncode, sympycode
+    from .codegeneration import pythoncode, sympycode
     dummy_sym = sp.Dummy("")
-except ImportError, e:
+except ImportError as e:
     sp = None
     dummy_sym = None
 
@@ -34,15 +34,23 @@ import operator
 import copy
 
 # local imports
-from config import *
-from logger import *
-from units import *
-from utils import check_arg,  check_kwarg, scalars, value_formatter,\
+from .config import *
+from .logger import *
+from .units import *
+from .utils import check_arg,  check_kwarg, scalars, value_formatter,\
      Range, tuplewrap, integers, nptypes, Timer
-from utils import _np as np
+from .utils import _np as np
 
 
 option_types = scalars + (str,)
+
+
+def _eq(eq):
+    if len(eq) <= 1:
+        return eq
+    else:
+        return(all(np.hstack(eq)))
+        
 
 class Param(object):
     """
@@ -248,9 +256,10 @@ class Param(object):
         return self.format_data()
 
     def __eq__(self, other):
-        return isinstance(other, self.__class__) and \
-               (self._name == other._name, self._value == other._value, \
-                self.__class__ == other.__class__)
+        return _eq(isinstance(other, self.__class__) and \
+                   (self._name == other._name, self._value == other._value, \
+                    self.__class__ == other.__class__))
+
 
 class OptionParam(Param):
     """
@@ -311,10 +320,10 @@ class OptionParam(Param):
         return ", %s" % repr(self._options)
 
     def __eq__(self, other):
-        return isinstance(other, self.__class__) and \
-               (self._name == other._name, self._value == other._value, \
-                self.__class__ == other.__class__, \
-                self._options == other._options)
+        return _eq(isinstance(other, self.__class__) and \
+                   (self._name == other._name, self._value == other._value, \
+                    self.__class__ == other.__class__, \
+                    self._options == other._options))
 
     def repr(self, include_checkarg=True, include_name=True, \
               include_description=True):
@@ -604,10 +613,10 @@ class ScalarParam(Param):
 
 
     def __eq__(self, other):
-        return isinstance(other, self.__class__) and \
-               (self._name == other._name, self._value == other._value, \
-                self.__class__ == other.__class__, \
-                self._range == other._range)
+        return _eq(isinstance(other, self.__class__) and \
+                   (self._name == other._name, self._value == other._value, \
+                    self.__class__ == other.__class__, \
+                    self._range == other._range))
 
 class ArrayParam(ScalarParam):
     """
@@ -859,10 +868,10 @@ def eval_param_expr(expr, param_ns=None, include_derivatives=False, ns=None):
             value_ns[sym_name] = param.value
 
     # First check if we have numpy arrays
-    if np and any(isinstance(value, np.ndarray) for value in value_ns.values()):
+    if np and any(isinstance(value, np.ndarray) for value in list(value_ns.values())):
 
         # Second check if they have the same length
-        all_length = [len(value) for value in value_ns.values() \
+        all_length = [len(value) for value in list(value_ns.values()) \
                       if isinstance(value, np.ndarray)]
         same_length = all(all_length[0] == l for l in all_length)
         if not same_length:
@@ -886,5 +895,5 @@ def eval_param_expr(expr, param_ns=None, include_derivatives=False, ns=None):
     return eval(pythoncode(expr, namespace=namespace), {}, ns)
 
 
-__all__ = [_name for _name in globals().keys() if _name[0] != "_"]
+__all__ = [_name for _name in list(globals().keys()) if _name[0] != "_"]
 

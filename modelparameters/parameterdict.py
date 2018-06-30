@@ -23,19 +23,27 @@ syntax for later access.
 
 __all__ = ["Param", "ScalarParam", "OptionParam", "ConstParam", "ArrayParam", \
            "SlaveParam", "inf", "ParameterDict"]
-
+import six
+cmp = lambda x, y: (x > y) - (x < y)
 # System imports
 try:
-    from sympytools import sp
-except ImportError, e:
+    from .sympytools import sp
+except ImportError as e:
     sp = None
 
-from string import ljust, rjust, center
+def rjust(s, *args, **kwargs):
+    return s.rjust(*args, **kwargs)
+def ljust(s, *args, **kwargs):
+    return s.ljust(*args, **kwargs)
+def center(s, *args, **kwargs):
+    return s.center(*args, **kwargs)
+
+
 
 # local imports
-from parameters import *
-from logger import *
-from utils import check_arg,  check_kwarg, scalars, value_formatter,\
+from .parameters import *
+from .logger import *
+from .utils import check_arg,  check_kwarg, scalars, value_formatter,\
      Range, tuplewrap, integers, nptypes, inf, VALUE_JUST
 
 KEY_JUST = ljust
@@ -43,7 +51,29 @@ PAR_PREFIX = "--"
 FORMAT_CONVERTER = {int:"int", float:"float", str:"string", \
                     list:None, tuple:None, bool:"int"}
 
-def par_cmp(obj1, obj2):
+def cmp_to_key(mycmp):
+    'Convert a cmp= function into a key= function'
+    class K(object):
+        def __init__(self, obj, *args):
+            self.obj = obj
+        def __lt__(self, other):
+            return mycmp(self.obj, other.obj) < 0
+        def __gt__(self, other):
+            return mycmp(self.obj, other.obj) > 0
+        def __eq__(self, other):
+            return mycmp(self.obj, other.obj) == 0
+        def __le__(self, other):
+            return mycmp(self.obj, other.obj) <= 0  
+        def __ge__(self, other):
+            return mycmp(self.obj, other.obj) >= 0
+        def __ne__(self, other):
+            return mycmp(self.obj, other.obj) != 0
+    return K
+
+def _par_cmp(obj1, obj2):
+    """
+    Original par_cmp
+    """
     assert(isinstance(obj1, tuple))
     assert(isinstance(obj2, tuple))
     assert(isinstance(obj1[0], str))
@@ -55,7 +85,8 @@ def par_cmp(obj1, obj2):
            isinstance(obj2[1], ParameterDict):
         return 1
     return cmp(obj1[0], obj2[0])
-        
+
+par_cmp = cmp_to_key(_par_cmp)
 
 class ParameterDict(dict):
     """
@@ -68,7 +99,7 @@ class ParameterDict(dict):
         # Generate a sub class of ParameterDict which sets the slots.
         # This is nice so the parameters show up in IPython tab completion 
         class SubParameterDict(ParameterDict):
-            __slots__ = tuple(params.keys()+["_members"])
+            __slots__ = tuple(list(params.keys())+["_members"])
 
         return dict.__new__(SubParameterDict, **params)
     
@@ -86,7 +117,7 @@ class ParameterDict(dict):
         # Init the dict with the provided parameters
         self._members = sorted(set(list(dict.__dict__) + \
                                    list(ParameterDict.__dict__)))+["_members"]
-        for key, value in params.items():
+        for key, value in list(params.items()):
             if key in self._members:
                 type_error("The name of a parameter cannot be "\
                            "an attribute of 'ParameterDict': %s" % key)
@@ -106,7 +137,7 @@ class ParameterDict(dict):
         dict.__init__(self, **params)
         
     def __getstate__(self):
-        return self.__dict__.items()
+        return list(self.__dict__.items())
     
     def __setstate__(self, items):
         for key, val in items:
@@ -120,7 +151,7 @@ class ParameterDict(dict):
     
     def __repr__(self):
         return "ParameterDict(%s)"%(", ".join("%s=%s" %\
-            (k, repr(v)) for k, v in sorted(dict.iteritems(self), par_cmp)))
+            (k, repr(v)) for k, v in sorted(six.iteritems(self), key=par_cmp)))
     
     def __delitem__(self, key):
         type_error("ParameterDict does not support item deletion")
@@ -195,7 +226,7 @@ class ParameterDict(dict):
             If True each encountered ParameterDict will be entered
             
         """
-        for key, value in sorted(dict.iteritems(self), par_cmp):
+        for key, value in sorted(six.iteritems(self), key=par_cmp):
             if isinstance(value, ParameterDict) and recurse:
                 for new_value in value.iterparams(recurse):
                     yield new_value
@@ -212,7 +243,7 @@ class ParameterDict(dict):
             If True each encountered ParameterDict will also be entered
             
         """
-        for key, value in sorted(dict.iteritems(self), par_cmp):
+        for key, value in sorted(six.iteritems(self), key=par_cmp):
             if isinstance(value, ParameterDict):
                 yield value
 
@@ -227,7 +258,7 @@ class ParameterDict(dict):
         max_key_length   = 0
         max_value_length = 0
         max_length       = 15
-        for key, value in dict.iteritems(self):
+        for key, value in six.iteritems(self):
             if not isinstance(value, ParameterDict):
                 if len(key) > max_key_length:
                     max_key_length = min(len(key), max_length)
@@ -237,7 +268,7 @@ class ParameterDict(dict):
                 if value_length > max_value_length:
                     max_value_length = min(value_length, max_length)
         s = []
-        for key, value in sorted(dict.iteritems(self), par_cmp):
+        for key, value in sorted(six.iteritems(self), key=par_cmp):
             
             # If the value is a ParameterDict
             if isinstance(value, ParameterDict):
@@ -267,7 +298,7 @@ class ParameterDict(dict):
             Parameters
         """
         items = {}
-        for key in dict.iterkeys(self):
+        for key in six.iterkeys(self):
             value = dict.__getitem__(self, key)
 
             # If the value is a ParameterDict
@@ -297,7 +328,7 @@ class ParameterDict(dict):
         """
         check_arg(other, dict, 0, ParameterDict.update)
         
-        for key in dict.iterkeys(other):
+        for key in six.iterkeys(other):
             if key not in self:
                 continue
             self_value  = self[key]
@@ -341,7 +372,7 @@ class ParameterDict(dict):
                         parent[key] = value
                         #debug("Setting parameter %s to %s"%\
                         # (opt_str.replace(PAR_PREFIX, ""), str(value)))
-                    except ValueError, e:
+                    except ValueError as e:
                         value_error("Trying to set '%s' while parsing "\
                                     "command line, but %s" % (key, str(e)))
 
@@ -362,7 +393,7 @@ class ParameterDict(dict):
                                 # Convert the value
                                 item = sequence_type(arg)
                                 value.append(item)
-                            except  ValueError, e:
+                            except  ValueError as e:
                                 value_error(\
                                     "Could not convert %s to '%s', while "\
                                     "setting parameter %s; %s"%\
@@ -375,14 +406,14 @@ class ParameterDict(dict):
                         parent[key] = value_type(value)
                         #debug("Setting parameter %s to %s"%\
                         #(opt_str.replace(PAR_PREFIX, ""), str(value)))
-                    except ValueError, e:
+                    except ValueError as e:
                         value_error("Trying to set '%s' while parsing "\
                                     "command line, but %s" % (key, str(e)))
                 
             return par_setter
         
         def add_options(parent, opt_base):
-            for key, value in sorted(dict.iteritems(parent), par_cmp):
+            for key, value in sorted(six.iteritems(parent), key=par_cmp):
                 opt_base_copy = opt_base[:]
                 if opt_base != PAR_PREFIX:
                     opt_base_copy += "."
@@ -422,7 +453,7 @@ class ParameterDict(dict):
                     formated_value = value.format_data()
 
                 # Check for available types
-                if not type(actuall_value) in FORMAT_CONVERTER.keys():
+                if not type(actuall_value) in list(FORMAT_CONVERTER.keys()):
                     continue
 
                 # Add option with callback function
@@ -456,7 +487,7 @@ class ParameterDict(dict):
             opt_base_copy = opt_base[:]
             if opt_base != PAR_PREFIX:
                 opt_base_copy += "."
-            for key, value in sorted(dict.iteritems(parent), par_cmp):
+            for key, value in sorted(six.iteritems(parent), key=par_cmp):
                 # If the value is a ParameterDict
                 if isinstance(value, ParameterDict):
                     # Call the function recursively
@@ -469,7 +500,7 @@ class ParameterDict(dict):
                     value = value.getvalue()
                     
                 # Check for available types
-                if not type(value) in FORMAT_CONVERTER.keys():
+                if not type(value) in list(FORMAT_CONVERTER.keys()):
                     continue
 
                 ret_list.append("%s%s"%(opt_base_copy, key))

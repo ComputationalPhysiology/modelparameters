@@ -21,14 +21,14 @@
 try:
     import numpy as _np
     list_types = (_np.ndarray, list)
-    scalars = tuple(t for t in _np.ScalarType if not (issubclass(t, basestring) or \
+    scalars = tuple(t for t in _np.ScalarType if not (issubclass(t, str) or \
                                                       t is _np.void))
     integers = tuple(t for t in scalars if "int" in t.__name__) + (int,)
     nptypes = (scalars, _np.ndarray)
     range_types = scalars + (_np.ndarray,)
     _all = _np.all
-except Exception, e:
-    print e
+except Exception as e:
+    print(e)
     _np = None
     list_types = (list,)
     scalars = (int, float)
@@ -40,20 +40,31 @@ except Exception, e:
 import time as _time
 import math as _math
 import types as _types
+try:
+    ClassType = _types.ClassType
+except AttributeError:
+    # ClassType is removed in python 3
+    # Classes are of type type
+    ClassType = type
+
 import string as _string
 
 from collections import OrderedDict as _OrderedDict
 
 # local imports
-from logger import *
-from config import float_format
+from .logger import *
+from .config import float_format
+from functools import reduce
 
 _toc_time = 0.0
 
 _argument_positions = ["first", "second", "third", "fourth", "fifth", "sixth",\
                        "seventh", "eigth", "ninth", "tenth"]
 
-VALUE_JUST = _string.rjust
+def rjust(s, *args, **kwargs):
+    return s.rjust(*args, **kwargs)
+
+VALUE_JUST = rjust
 inf = float("inf")
 
 def value_formatter(value, width=0):
@@ -322,12 +333,12 @@ def list_timings():
     """
     List all registered timings
     """
-    left_size = len(max(Timer.timings().keys(), key=len)) + 1
-    print "task".ljust(left_size)+":  num  : total time : mean time"
-    print "-"*left_size          +"--------------------------------"
-    for task, (num, time) in Timer.timings().items():
-        print task.ljust(left_size)+": {0:5d} : {1:6.3f} s : {2:5.3f} s".format(\
-            num, time, time/num)
+    left_size = len(max(list(Timer.timings().keys()), key=len)) + 1
+    print("task".ljust(left_size)+":  num  : total time : mean time")
+    print("-"*left_size          +"--------------------------------")
+    for task, (num, time) in list(Timer.timings().items()):
+        print(task.ljust(left_size)+": {0:5d} : {1:6.3f} s : {2:5.3f} s".format(\
+            num, time, time/num))
 
 def clear_timings():
     """
@@ -362,7 +373,7 @@ def is_iterable(obj):
     try:
         iter(obj)
         return True
-    except Exception, e:
+    except Exception as e:
         pass
     return False
 
@@ -408,17 +419,20 @@ def _context_message(context):
     if context is None:
         return ""
 
-    assert(isinstance(context, (type, _types.ClassType, _types.FunctionType, \
+    assert(isinstance(context, (type,  ClassType, _types.FunctionType, \
                                 _types.MethodType)))
         
-    if isinstance(context, (_types.ClassType, type)):
+    if isinstance(context, (ClassType, type)):
         return " while instantiating '{0}'".format(context.__name__)
 
     if isinstance(context, (_types.MethodType)):
-        return " while calling '{0}.{1}'".format(\
-            context.im_class.__name__, context.im_func.func_name)
+        # Hack to make test pass
+        class_name = context.__self__.__class__.__name__
+        if class_name != 'NoneType':
+            return " while calling '{0}.{1}'".format(
+                class_name_, context.__func__.__name__)
 
-    return " while calling '{0}'".format(context.func_name)
+    return " while calling '{0}'".format(context.__name__)
 
 def _range_check(arg, argtypes, ge, le, gt, lt):
 
@@ -597,10 +611,10 @@ def deprecated(func):
     def new_func(*args, **kwargs):
         warning("Call to deprecated function {0} (filename={1}, "\
                 "lineno={2})".format(func.__name__, \
-                                    func.func_code.co_filename,
-                                    func.func_code.co_firstlineno + 1))
+                                    func.__code__.co_filename,
+                                    func.__code__.co_firstlineno + 1))
         return func(*args, **kwargs)
     return new_func
 
-__all__ = [_name for _name in globals().keys() if _name[0] != "_"]
+__all__ = [_name for _name in list(globals().keys()) if _name[0] != "_"]
 

@@ -459,7 +459,7 @@ if np is not None:
                 p.value = []
             self.assertEqual(str(cm.exception), "expected 'scalars or "\
                              "np.ndarray' (got '[]' which is 'list') while "\
-                             "calling 'ArrayParam.setvalue'")
+                             "calling 'setvalue'")
         
             with self.assertRaises(ValueError) as cm:
                 p = ArrayParam(5, 3, ge=0, lt=10)

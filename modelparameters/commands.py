@@ -19,24 +19,24 @@ from subprocess import Popen, PIPE, STDOUT
 
 __all__ = ['get_output', 'get_status_output', 'get_status_output_errors']
 
-def get_status_output_errors(cmd, input=None, cwd=None, env=None):
+def get_status_output_errors(cmd, inp=None, cwd=None, env=None):
     pipe = Popen(cmd, shell=True, cwd=cwd, env=env, stdout=PIPE, stderr=PIPE)
 
-    (output, errout) = pipe.communicate(input=input)
+    (output, errout) = pipe.communicate(input=inp)
 
     status = pipe.returncode
 
     return (status, output, errout)
 
-def get_status_output(cmd, input=None, cwd=None, env=None):
+def get_status_output(cmd, inp=None, cwd=None, env=None):
     pipe = Popen(cmd, shell=True, cwd=cwd, env=env, stdout=PIPE, stderr=STDOUT)
 
-    (output, errout) = pipe.communicate(input=input)
+    (output, errout) = pipe.communicate(input=inp)
     assert not errout
 
     status = pipe.returncode
 
     return (status, output)
 
-def get_output(cmd, input=None, cwd=None, env=None):
-    return get_status_output(cmd, input, cwd, env)[1]
+def get_output(cmd, inp=None, cwd=None, env=None):
+    return get_status_output(cmd, inp, cwd, env)[1]
