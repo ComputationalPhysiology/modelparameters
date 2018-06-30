@@ -3,7 +3,7 @@
 # Only use spaces to indent your .yml configuration.
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: parsys/python2-python3-pil-supervisord-redis
+image: python:3.6
 
 pipelines:
   default:
@@ -11,6 +11,8 @@ pipelines:
         caches:
           - pip
         script: # Modify the commands below to build your repository.
-          - pip install -U tox
           - pip install -r requirements.txt
-          - tox
+          - pip install -U tox
+          - pip --version
+          - tox --version
+          - tox -r -e py27,py36
