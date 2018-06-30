@@ -17,7 +17,7 @@ timing = 0.0
 python3 = sys.version.startswith('3')
 
 # Run tests
-for dirpath, dirnames, filenames in os.walk("../modelparameters"):
+for dirpath, dirnames, filenames in os.walk("modelparameters"):
     if '.tox' in dirpath:
         continue
     
