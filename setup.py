@@ -51,7 +51,7 @@ class clean(Command):
 
 # Version number
 major = 0
-minor = 1
+minor = 2
 
 setup(name = "modelparameters",
       version = "{0}.{1}".format(major, minor),
