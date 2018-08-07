@@ -60,7 +60,7 @@ A module providing parameter structure for physical modeling
       """,
       author = __author__.split("(")[0],
       author_email = __author__.split("(")[1][:-1],
-      install_requires=["sympy===0.7.6.1",
+      install_requires=["sympy==0.7.6.1",
                         "numpy>=1.5",
                         "six"],
       packages = ["modelparameters", "modelparameters.tests"],
