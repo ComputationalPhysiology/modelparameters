@@ -366,7 +366,8 @@ def is_iterable(obj):
     """
     Test for iterable
 
-    Argument:
+    Arguments
+    ---------
     obj : any
         Object which is beeing tested
     """

@@ -182,8 +182,8 @@ def symbols_from_expr(expr, include_numbers=False, include_derivatives=False):
     """
     Returns a set of all symbols of an expression
 
-    Arguments:
-    ----------
+    Arguments
+    ---------
     expr : sympy expression
         A sympy expression containing sympy.Symbols or sympy.AppliedUndef
         functions.
