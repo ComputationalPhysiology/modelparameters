@@ -32,6 +32,7 @@ except ImportError as e:
 import types
 import operator
 import copy
+import six
 
 # local imports
 from .config import *
@@ -41,8 +42,43 @@ from .utils import check_arg,  check_kwarg, scalars, value_formatter,\
      Range, tuplewrap, integers, nptypes, Timer
 from .utils import _np as np
 
+import pint
+ureg = pint.UnitRegistry()
 
 option_types = scalars + (str,)
+
+
+def _process_other(other):
+    """Helper function for magic methods
+    in ScalarParam. 
+
+    Arguments
+    ---------
+    other : scalar or Param
+        Either a scalar (int , float, ...) of a parameter
+        (Param, ScalarParam, ...) that also holds info about
+        `name`, and `unit`.
+
+    Returns
+    -------
+    value : float
+        The value of other
+    name : str
+        The name of other (if not available name = "")
+    unit : str
+        The unit of other (if not available unit = "1")
+    """
+    if isinstance(other, scalars):
+        return (other, "", "1")
+
+    elif isinstance(other, Param):
+        value = other.value
+        name = other.name
+        unit = getattr(other, 'unit', '1')
+        return (value, name, unit)
+
+    else:
+        raise ValueError('Unknown type {}'.format(type(other)))
 
 
 def _eq(eq):
@@ -260,7 +296,118 @@ class Param(object):
                    (self._name == other._name, self._value == other._value, \
                     self.__class__ == other.__class__))
 
+    def _op(self, other, operator, reverse=False, check_units=False):
+        """
+        Compute `self [op] other`.
+        For example if op = * if will return
+        the product in a pint Quantity object.
+        
 
+        Arguments
+        ---------
+        other : scalar or Param
+            The other parameter
+        operator : str
+            The operator to apply
+        reverse : bool
+            Reverse the argumnents to the operator, i.e instead
+            of `self [op] other` you return `other [op] self`.
+            If operator is commutative then this is redundant.
+        check_units: bool
+            If you are trying to add together quantities with different
+            units you are in trouble, but if you are adding a scalar you
+            might don't want to throw an exception. Set this to true and
+            scalars will be treated as if they had same units. 
+
+        Returns
+        -------
+        results : ScalarParam
+            Returns `self [op] other` with correct units and value
+        """
+        other_value, other_name, other_unit = \
+            _process_other(other)
+
+        self_value, self_name, self_unit = \
+            _process_other(self)
+
+        assert isinstance(operator, str)
+
+        if check_units:
+            # Check if units match up
+            if not (ureg(self_unit) == ureg(other_unit)):
+                warning('Units does not match: {} != {}'.format(self_unit,
+                                                                other_unit))
+                # If one is dimensionless assume that it is OK,
+                # and keep the unit of the other
+                if self_unit == "1":
+                    self_unit = other_unit
+                elif other_unit == "1":
+                    other_unit = self_unit
+
+        equation = ('({self_value}*{self_unit})'
+                    '{operator}'
+                    '({other_value}*{other_unit})')
+        if reverse:
+            kwargs = dict(other_value=self_value,
+                          other_unit=self_unit,
+                          self_value=other_value,
+                          self_unit=other_unit)
+        else:
+            kwargs = dict(other_value=other_value,
+                          other_unit=other_unit,
+                          self_value=self_value,
+                          self_unit=self_unit)
+
+        kwargs['operator'] = operator
+
+        new = ureg(equation.format(**kwargs))
+        return ScalarParam(value=new.magnitude, unit=new.u.format_babel())
+
+    def __truediv__(self, other):
+        # Python 3
+        return self._op(other, '/')
+
+    def __rtruediv__(self, other):
+        # Python 3
+        return self._op(other, '/', reverse=True)
+
+    def __div__(self, other):
+        # Python 2
+        return self._op(other, '/')
+
+    def __rdiv__(self, other):
+        # Python 2
+        return self._op(other, '/', reverse=True)
+
+    def __mul__(self, other):
+        return self._op(other, '*')
+
+    def __rmul__(self, other):
+        return self._op(other, '*', reverse=True)
+
+    def __add__(self, other):
+        return self._op(other, '+', check_units=True)
+
+    def __radd__(self, other):
+        return self._op(other, '+', reverse=True, check_units=True)
+
+    def __sub__(self, other):
+        return self._op(other, '-', check_units=True)
+
+    def __rsub__(self, other):
+        return self._op(other, '-', reverse=True, check_units=True)
+
+    def __pow__(self, other):
+        other_value, other_name, other_unit = \
+            _process_other(other)
+        assert other_unit == "1", "Exponents cannot have unit"
+
+        self_value, self_name, self_unit = \
+            _process_other(self)
+        new = ureg("({}*{})**{}".format(self_value, self_unit, other_value))
+        return ScalarParam(value=new.magnitude, unit=new.u.format_babel())
+    
+    
 class OptionParam(Param):
     """
     A simple type and options checking class for a single value
@@ -430,8 +577,8 @@ class ScalarParam(Param):
 
         self._range = Range(ge, le, gt, lt)
         self._in_range = self._range._in_range
-
-        check_kwarg(unit, "unit", str)
+        
+        check_kwarg(unit, "unit", six.string_types)
         self._unit = unit
 
         # Define some string used for pretty print
@@ -454,7 +601,7 @@ class ScalarParam(Param):
         # (Only if not called from derived class)
         if type(self) == ScalarParam:
             self.setvalue(value)
-
+        
     def _get_name(self):
         return self._name
 
@@ -584,6 +731,7 @@ class ScalarParam(Param):
         msg+="\nOld value={}\tNew value={}\n".format(self.getvalue(), value)
         debug(msg)
         return self.setvalue(value, False)
+
         
         
 

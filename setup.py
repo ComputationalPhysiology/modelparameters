@@ -62,7 +62,7 @@ A module providing parameter structure for physical modeling
       author_email = __author__.split("(")[1][:-1],
       install_requires=["sympy<=0.7.7",
                         "numpy>=1.5",
-                        "six"],
+                        "six", "pint"],
       packages = ["modelparameters", "modelparameters.tests"],
       cmdclass = {'test' : run_tests,
                   'clean' : clean,

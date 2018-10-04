@@ -18,7 +18,7 @@ Will come later!
 
 Installation
 ------------
-You can install model parameters either with `pip
+You can install modelparameters either with `pip
 <https://pypi.org/project/modelparameters/>`_:
 
 .. code:: shell
