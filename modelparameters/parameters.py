@@ -37,7 +37,6 @@ import six
 # local imports
 from .config import *
 from .logger import *
-from .units import *
 from .utils import check_arg,  check_kwarg, scalars, value_formatter,\
      Range, tuplewrap, integers, nptypes, Timer
 from .utils import _np as np
