@@ -12,6 +12,25 @@ structure for physical models. It is mainly developed as a tool for
 `gotran <https://bitbucket.org/finsberg/gotran>`_, but certainly not
 limited to that.
 
+.. code:: python
+
+    from modelparameters import ScalarParam
+    # Define the gravitational acceleration
+    g = ScalarParam(9.81, name="g", unit="m/s**2",
+                    description="gravitational acceleration")
+    # Define the time (in milliseconds)
+    t = ScalarParam(100.0, unit="ms",
+                    description="Time spent")
+    # Compute the distance travelled in free fall
+    s = 0.5 * g * t**2
+    print(s)
+
+Output:
+
+.. code:: shell
+
+    49050.0 ∈ [-∞, ∞]
+
 Demos
 -----
 Will come later!

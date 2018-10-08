@@ -4,8 +4,9 @@ try:
     import numpy as np
 except:
     np = None
-    
+
 import unittest
+import six
 
 from modelparameters.logger import suppress_logging
 from modelparameters.utils import *
@@ -36,19 +37,19 @@ class RangeTests(unittest.TestCase):
     def test_comp(self):
         self.assertEqual(Range(gt=0), Range(gt=0))
         self.assertEqual(repr(Range(gt=0)), "Range(gt=0)")
-        self.assertEqual(str(Range(gt=0)), "(0, \xe2\x88\x9e]")
-        
+        self.assertEqual(six.text_type(Range(gt=0)), b"(0, \xe2\x88\x9e]".decode('utf-8'))
+
     def test_range_check(self):
         self.assertTrue(0.1 in Range(gt=0))
         self.assertTrue(0.1 in Range(gt=0, lt=0.2))
         self.assertTrue(0.1 in Range(0, 0.2))
         self.assertTrue(0.1 in Range(le=0.2))
         self.assertEqual(Range(le=0.2).format(0.1),
-                         "0.1 \xe2\x88\x88 [-\xe2\x88\x9e, 0.2]")
+                         b"0.1 \xe2\x88\x88 [-\xe2\x88\x9e, 0.2]".decode('utf-8'))
         self.assertEqual(Range(gt=0).format(inf),
-                         "\xe2\x88\x9e \xe2\x88\x88 (0, \xe2\x88\x9e]")
+                         b"\xe2\x88\x9e \xe2\x88\x88 (0, \xe2\x88\x9e]".decode('utf-8'))
         self.assertEqual(Range(gt=-0.2).format(-1),
-                         "-1 \xe2\x88\x89 (-0.2, \xe2\x88\x9e]")
+                         b"-1 \xe2\x88\x89 (-0.2, \xe2\x88\x9e]".decode('utf-8'))
 
         if np is None:
             return
@@ -59,8 +60,8 @@ class RangeTests(unittest.TestCase):
         self.assertTrue(array in Range(0, 20))
         self.assertTrue(array in Range(le=20))
         self.assertEqual(Range(le=20).format(array),
-                         "[2, 3, ..., 8, 9] \xe2\x88\x88 [-\xe2\x88\x9e, 20]")
-        
+                         b"[2, 3, ..., 8, 9] \xe2\x88\x88 [-\xe2\x88\x9e, 20]".decode('utf-8'))
+
 class CheckArgs(unittest.TestCase):
     def test_check_arg(self):
 
@@ -97,16 +98,16 @@ class CheckArgs(unittest.TestCase):
 
         with self.assertRaises(ValueError) as cm:
             check_arg(1, int, context=dummy, gt=2)
-        self.assertEqual(str(cm.exception), "1 \xe2\x88\x89 (2, \xe2\x88\x9e] "\
-                         "while calling 'dummy'")
+        self.assertEqual(six.text_type(cm.exception), b"1 \xe2\x88\x89 (2, \xe2\x88\x9e] ".decode('utf-8')
+                         + "while calling 'dummy'")
 
         with self.assertRaises(ValueError) as cm:
             check_arg(1, int, gt=2, le=3)
-        self.assertEqual(str(cm.exception), "1 \xe2\x88\x89 (2, 3]")
+        self.assertEqual(six.text_type(cm.exception), b"1 \xe2\x88\x89 (2, 3]".decode('utf-8'))
 
         with self.assertRaises(ValueError) as cm:
             check_arg(5, int, ge=2, lt=3)
-        self.assertEqual(str(cm.exception), "5 \xe2\x88\x89 [2, 3)")
+        self.assertEqual(six.text_type(cm.exception), b"5 \xe2\x88\x89 [2, 3)".decode('utf-8'))
 
         self.assertIsNone(check_arg(1, int))
         self.assertIsNone(check_arg(1, scalars))
@@ -148,18 +149,18 @@ class CheckArgs(unittest.TestCase):
 
         with self.assertRaises(ValueError) as cm:
             check_kwarg(1, "bada", int, context=dummy, gt=2)
-        self.assertEqual(str(cm.exception), "1 \xe2\x88\x89 (2, \xe2\x88\x9e] "\
-                         "as the 'bada' argument while calling 'dummy'")
+        self.assertEqual(six.text_type(cm.exception), b"1 \xe2\x88\x89 (2, \xe2\x88\x9e] ".decode('utf-8')\
+                         + "as the 'bada' argument while calling 'dummy'")
 
         with self.assertRaises(ValueError) as cm:
             check_kwarg(1, "bada", int, gt=2, le=3)
-        self.assertEqual(str(cm.exception), "1 \xe2\x88\x89 (2, 3] "\
-                         "as the 'bada' argument")
+        self.assertEqual(six.text_type(cm.exception), b"1 \xe2\x88\x89 (2, 3] ".decode('utf-8')\
+                         + "as the 'bada' argument")
 
         with self.assertRaises(ValueError) as cm:
             check_kwarg(5, "bada", int, ge=2, lt=3)
-        self.assertEqual(str(cm.exception), "5 \xe2\x88\x89 [2, 3) "\
-                         "as the 'bada' argument")
+        self.assertEqual(six.text_type(cm.exception), b"5 \xe2\x88\x89 [2, 3) ".decode('utf-8')\
+                         + "as the 'bada' argument")
 
         self.assertIsNone(check_kwarg(1, "bada", int))
         self.assertIsNone(check_kwarg(1, "bada", scalars))
@@ -181,7 +182,7 @@ class BasicUtils(unittest.TestCase):
         self.assertTrue(is_iterable("jada"))
         self.assertFalse(is_iterable(None))
         self.assertFalse(is_iterable(1))
-        
+
     def test_string_utils(self):
         self.assertEqual(camel_capitalize("jada_bada_snada"), "JadaBadaSnada")
         self.assertEqual(camel_capitalize("_jada_bada_snada"), "JadaBadaSnada")
@@ -207,6 +208,6 @@ class BasicUtils(unittest.TestCase):
         t0 = tic()
         time.sleep(0.1)
         self.assertTrue(.1<toc()<.2)
-    
+
 if __name__ == "__main__":
     unittest.main()

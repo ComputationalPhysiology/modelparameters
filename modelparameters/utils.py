@@ -34,7 +34,7 @@ except Exception as e:
     scalars = (int, float)
     integers = (int,)
     nptypes = ()
-    range_types = scalars 
+    range_types = scalars
     _all = lambda value : value
 
 import time as _time
@@ -103,19 +103,19 @@ def value_formatter(value, width=0):
 
             formatstr = "[%s]" % (", ".join(formatstr for i in range(len(value))) )
             ret = formatstr % tuple(value)
-    
+
     elif isinstance(value, float):
         if value == inf:
-            ret = "\xe2\x88\x9e"
+            ret = b"\xe2\x88\x9e".decode('utf-8')
         elif value == -inf:
-            ret = "-\xe2\x88\x9e"
-    
+            ret = b"-\xe2\x88\x9e".decode('utf-8')
+
     elif isinstance(value, str):
         ret = repr(value)
-        
+
     if ret is None:
         ret = str(value)
-    
+
     if width == 0:
         return ret
     return VALUE_JUST(ret, width)
@@ -149,7 +149,7 @@ class Range(object):
         if ge is not None and gt is not None:
             value_error("Cannot create a 'Range' including "\
                         "both 'ge' and 'gt'")
-        
+
         # Checking valid types for 'RangeChecks'
         for op, opname in zip(ops, opnames):
             if not (op is None or isinstance(op, scalars)):
@@ -168,7 +168,7 @@ class Range(object):
         range_formats["maxop"] = "<=" if lt is None else "<"
         range_formats["minvalue"] = str(minval)
         range_formats["maxvalue"] = str(maxval)
-        
+
         # Dict for pretty print
         range_formats["minop_format"] = "[" if gt is None else "("
         range_formats["maxop_format"] = "]" if lt is None else ")"
@@ -181,14 +181,13 @@ class Range(object):
                               range_formats
 
         self._in_range = eval(self.range_eval_str)
-        
+
         # Define some string used for pretty print
         self._range_str = "%(minop_format)s%(minformat)s, "\
                           "%(maxformat)s%(maxop_format)s" % range_formats
-        
-        self._in_str = "%%s \xe2\x88\x88 %s" % self._range_str
-        
-        self._not_in_str = "%%s \xe2\x88\x89 %s" % self._range_str
+
+        self._in_str = b"%%s \xe2\x88\x88 %s".decode('utf-8') % self._range_str
+        self._not_in_str = b"%%s \xe2\x88\x89 %s".decode('utf-8') % self._range_str
 
         self.arg_repr_str = ", ".join("%s=%s" % (opname, op) \
                                       for op, opname in zip(ops, opnames) \
@@ -230,14 +229,14 @@ class Range(object):
             A min str length value
         """
         in_range = self.__contains__(value)
-        
+
         if value in self:
             return self.format_in(value, width)
         return self.format_not_in(value, width)
-        
+
     def format_in(self, value, width=0):
         """
-        Return a formated range check 
+        Return a formated range check
 
         Arguments
         ---------
@@ -246,7 +245,7 @@ class Range(object):
         width : int
             A min str length value
         """
-        
+
         return self._in_str % value_formatter(value, width)
 
     def format_not_in(self, value, width=0):
@@ -260,10 +259,10 @@ class Range(object):
         width : int
             A min str length value
         """
-        
+
         return self._not_in_str % value_formatter(value, width)
-        
-    
+
+
 def _floor(value):
     return int(_math.floor(value))
 
@@ -290,7 +289,7 @@ def format_time(time):
 
     days = _floor(hours/24)
     hours = _floor(hours%24)
-    
+
     if days == 0:
         return "%d h%s%s"%(hours, minutes_str, seconds_str)
     hours_str =  " %d h" % hours if hours else ""
@@ -300,7 +299,7 @@ def format_time(time):
 
 class Timer(object):
     """
-    Timer class 
+    Timer class
     """
     __all_timings = _OrderedDict()
     def __init__(self, task):
@@ -403,7 +402,7 @@ def tuplewrap(arg):
     if arg is None:
         return ()
     return arg if isinstance(arg, tuple) else (arg,)
-    
+
 def listwrap(arg):
     """
     Wrap the argument to a list if it is not a list
@@ -422,7 +421,7 @@ def _context_message(context):
 
     assert(isinstance(context, (type,  ClassType, _types.FunctionType, \
                                 _types.MethodType)))
-        
+
     if isinstance(context, (ClassType, type)):
         return " while instantiating '{0}'".format(context.__name__)
 
@@ -440,7 +439,7 @@ def _range_check(arg, argtypes, ge, le, gt, lt):
     # First check if we are interested in any range check
     if all(comp is None for comp in [ge, le, gt, lt]):
 
-        # Return empty string 
+        # Return empty string
         return ""
 
     # Check we want a scalar
@@ -460,14 +459,14 @@ def _check_arg(arg, argtypes, identifyer, context, itemtypes, ge, le, gt, lt):
     """
     assert(isinstance(argtypes, (tuple, type)))
     argtypes = tuplewrap(argtypes)
-    
+
     # First check for correct range
     message = _range_check(arg, argtypes, ge, le, gt, lt)
-    
+
     # If we have a message we failed the range check
     if message:
         raise_error = value_error
-        
+
     # Check the argument
     elif isinstance(arg, argtypes):
         if itemtypes is None or not isinstance(arg, (list, tuple)):
@@ -476,9 +475,9 @@ def _check_arg(arg, argtypes, identifyer, context, itemtypes, ge, le, gt, lt):
         assert(isinstance(itemtypes, (type, tuple)))
         if all(isinstance(item, itemtypes) for item in arg):
             return
-        
+
         itemtypes = tuplewrap(itemtypes)
-        
+
         message = "expected '%s' of '%s'"%(iterativetype,\
                                 ", ".join(argt.__name__ for argt in itemtypes))
         raise_error = type_error
@@ -501,7 +500,7 @@ def _check_arg(arg, argtypes, identifyer, context, itemtypes, ge, le, gt, lt):
                            argtypes_strs[-1]
         else:
             argtypes_str = argtypes_strs[0]
-        
+
         message = "expected '%s' (got '%s' which is '%s')"%\
                   (argtypes_str, arg, type(arg).__name__)
         raise_error = type_error
@@ -525,7 +524,7 @@ def check_arginlist(arg, lst, name="arg"):
     check_arg(lst, list)
     msg="Argument {} must be one of {}, got {}".format(name, lst, arg)
     assert(arg in lst), msg
-    
+
 def check_arg(arg, argtypes, num=-1, context=None, itemtypes=None,
               ge=None, le=None, gt=None, lt=None):
     """
@@ -558,7 +557,7 @@ def check_arg(arg, argtypes, num=-1, context=None, itemtypes=None,
     assert(isinstance(num, int))
     _check_arg(arg, argtypes, num, context, itemtypes, ge, le, gt, lt)
 
-    
+
 def check_kwarg(kwarg, name, argtypes, context=None, itemtypes=None,
                 ge=None, le=None, gt=None, lt=None):
     """
@@ -607,7 +606,7 @@ def deprecated(func):
     when the function is used.
     """
     import functools
-    
+
     @functools.wraps(func)
     def new_func(*args, **kwargs):
         warning("Call to deprecated function {0} (filename={1}, "\
@@ -618,4 +617,3 @@ def deprecated(func):
     return new_func
 
 __all__ = [_name for _name in list(globals().keys()) if _name[0] != "_"]
-

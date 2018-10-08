@@ -50,7 +50,7 @@ option_types = scalars + (str,)
 
 def _process_other(other):
     """Helper function for magic methods
-    in ScalarParam. 
+    in ScalarParam.
 
     Arguments
     ---------
@@ -68,16 +68,25 @@ def _process_other(other):
     unit : str
         The unit of other (if not available unit = "1")
     """
+    def from_param(other_):
+        value = other_.value
+        name = other_.name
+        unit = getattr(other_, 'unit', '1')
+        return (value, name, unit)
+
     if isinstance(other, scalars):
         return (other, "", "1")
 
     elif isinstance(other, Param):
-        value = other.value
-        name = other.name
-        unit = getattr(other, 'unit', '1')
-        return (value, name, unit)
+        return from_param(other)
 
     else:
+        # Check it other has an attribute called param
+        # which is the case for gotran.Paramerter
+        if hasattr(other, 'param'):
+            return from_param(other.param)
+
+        # I don't know how to handle this
         raise ValueError('Unknown type {}'.format(type(other)))
 
 
@@ -86,7 +95,7 @@ def _eq(eq):
         return eq
     else:
         return(all(np.hstack(eq)))
-        
+
 
 class Param(object):
     """
@@ -169,7 +178,7 @@ class Param(object):
             self._value = self.check(value)
         else:
             self._value = value
-            
+
     def getvalue(self):
         """
         Return the value
@@ -301,7 +310,7 @@ class Param(object):
         Compute `self [op] other`.
         For example if op = * if will return
         the product in a pint Quantity object.
-        
+
 
         Arguments
         ---------
@@ -317,7 +326,7 @@ class Param(object):
             If you are trying to add together quantities with different
             units you are in trouble, but if you are adding a scalar you
             might don't want to throw an exception. Set this to true and
-            scalars will be treated as if they had same units. 
+            scalars will be treated as if they had same units.
 
         Returns
         -------
@@ -359,9 +368,8 @@ class Param(object):
                           self_unit=self_unit)
 
         kwargs['operator'] = operator
-
         new = ureg(equation.format(**kwargs))
-        return ScalarParam(value=new.magnitude, unit=new.u.format_babel())
+        return self.__class__(value=new.magnitude, unit=new.u.format_babel())
 
     def __truediv__(self, other):
         # Python 3
@@ -406,8 +414,8 @@ class Param(object):
             _process_other(self)
         new = ureg("({}*{})**{}".format(self_value, self_unit, other_value))
         return ScalarParam(value=new.magnitude, unit=new.u.format_babel())
-    
-    
+
+
 class OptionParam(Param):
     """
     A simple type and options checking class for a single value
@@ -444,9 +452,8 @@ class OptionParam(Param):
         self._in_range = lambda value : value in options
 
         # Define some string used for pretty print
-        self._in_str = "%%s \xe2\x88\x88 %s" % repr(options)
-
-        self._not_in_str = "%%s \xe2\x88\x89 %s" % repr(options)
+        self._in_str = b"%%s \xe2\x88\x88 %s".decode('utf-8') % repr(options)
+        self._not_in_str = b"%%s \xe2\x88\x89 %s".decode('utf-8') % repr(options)
 
         # Define a 'repr string'
         #self._repr_str = "OptionParam(%%s, %s)" % repr(options)
@@ -572,12 +579,19 @@ class ScalarParam(Param):
         description : str (optional)
             A description associated with the Parameter
         """
+        if isinstance(value, Param):
+            param_value, param_name, param_unit = \
+                _process_other(value)
+            if unit == "1":
+                unit = param_unit
+            value = param_value
+
         check_arg(value, scalars, 0, ScalarParam)
         super(ScalarParam, self).__init__(value, name, description)
 
         self._range = Range(ge, le, gt, lt)
         self._in_range = self._range._in_range
-        
+
         check_kwarg(unit, "unit", six.string_types)
         self._unit = unit
 
@@ -601,7 +615,7 @@ class ScalarParam(Param):
         # (Only if not called from derived class)
         if type(self) == ScalarParam:
             self.setvalue(value)
-        
+
     def _get_name(self):
         return self._name
 
@@ -685,7 +699,7 @@ class ScalarParam(Param):
     def update(self, param):
         """
         Update parameter with value of new parameter.
-        Take into account unit conversion if applicable. 
+        Take into account unit conversion if applicable.
 
         Arguments
         ---------
@@ -693,47 +707,26 @@ class ScalarParam(Param):
             The parameter with the new value
         """
 
+
         check_arg(param, scalars + (ScalarParam,))
-    
+
         msg="Update parameter {}. ".format(self._get_name())
+        self_value, self_name, self_unit = \
+            _process_other(self)
+        param_value, param_name, param_unit = \
+            _process_other(param)
 
-        if type(param) in scalars:
-            msg+=("\nGiven parameter does not have unit. "+
-                  "Assume same unit.")
-            value = param
-        else:
-           
-            if param.unit == self.unit:
-                value = param.value
+        if param_unit == "1":
+            # Assume same Units
+            param_unit = self_unit
+        if self_unit == "1":
+            # Make the new unit the same as the given paramevter
+            self_unit = param_unit
 
-            else:
+        # Convert to same unit as self
+        quantity = ureg('{}*{}'.format(param_value, param_unit)).to(self_unit)
 
-                # Get factor for unit conversion to units without prefixes
-                target_factor, target_unit = get_unit_conversion_factor(param.unit, True)
-                this_factor, this_unit = get_unit_conversion_factor(self.unit, True)
-
-                # Get factor for unit conversion to this unit
-                factor =  target_factor / float(this_factor)
-                
-                debug("this unit = {}, target unit = {}".format(this_unit,target_unit))
-                if this_unit != target_unit:
-                    # There are a few cases to check
-                    if this_unit == "l" and target_unit == "m**3":
-                        #1 m3 = 1000 l
-                        factor /= 1000
-                        
-                    elif this_unit == "m**3" and target_unit == "l":
-                        factor *= 1000
-                
-            
-                value = param.value * factor
-
-        msg+="\nOld value={}\tNew value={}\n".format(self.getvalue(), value)
-        debug(msg)
-        return self.setvalue(value, False)
-
-        
-        
+        return self.setvalue(quantity.m)
 
     def _unit_arg(self):
         return ", unit='%s'"%self._unit if self._unit != "1" else ""
@@ -1044,4 +1037,3 @@ def eval_param_expr(expr, param_ns=None, include_derivatives=False, ns=None):
 
 
 __all__ = [_name for _name in list(globals().keys()) if _name[0] != "_"]
-

@@ -60,14 +60,6 @@ modelparameters.sympytools module
     :undoc-members:
     :show-inheritance:
 
-modelparameters.units module
-----------------------------
-
-.. automodule:: modelparameters.units
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 modelparameters.utils module
 ----------------------------
 
