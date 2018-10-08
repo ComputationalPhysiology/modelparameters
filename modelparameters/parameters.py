@@ -29,8 +29,6 @@ except ImportError as e:
     sp = None
     dummy_sym = None
 
-import types
-import operator
 import copy
 import six
 
@@ -303,6 +301,30 @@ class Param(object):
         return _eq(isinstance(other, self.__class__) and \
                    (self._name == other._name, self._value == other._value, \
                     self.__class__ == other.__class__))
+
+    def convert_to(self, unit):
+        """Convert parameter to a different unit than the current one.
+
+        Parameters
+        ----------
+        unit : str
+            The new unit
+
+        Returns
+        -------
+        Param
+            Return the same prameter with the new unit
+
+        Example
+        -------
+
+        >>> p_s = ScalarParam(1.0, unit="s")
+        >>> p_ms = p_s.convert_to('ms')
+        >>> print('value = {}, unit = {}'.format(p_ms.value), p_ms.unit))
+        value = 1000.0, unit = 'milliseconds'
+        """
+        new = ureg('{}*{}'.format(self.value, self.unit)).to(unit)
+        return self.__class__(value=new.magnitude, unit=new.u.format_babel())
 
     def _op(self, other, operator, reverse=False, check_units=False):
         """

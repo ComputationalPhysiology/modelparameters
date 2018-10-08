@@ -67,6 +67,16 @@ def rjust(s, *args, **kwargs):
 VALUE_JUST = rjust
 inf = float("inf")
 
+
+def param2value(param):
+    if isinstance(param, scalars):
+        return param
+    elif hasattr(param, 'value'):
+        return param.value
+    else:
+        raise ValueError('Unable to get value of parameters {}'.format(param))
+
+
 def value_formatter(value, width=0):
     """
     Return a formated string of a value
