@@ -29,7 +29,7 @@ class run_tests(Command):
     def run(self):
         import os
         os.system("python utils/run_tests.py")
-        
+
 class clean(Command):
     """
     Cleans *.pyc so you should get the same copy as is in the VCS.
@@ -51,7 +51,7 @@ class clean(Command):
 
 # Version number
 major = 1
-minor = 0
+minor = 1
 
 setup(name = "modelparameters",
       version = "{0}.{1}".format(major, minor),
