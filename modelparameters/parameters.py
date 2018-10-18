@@ -98,7 +98,7 @@ class Param(object):
     """
     A simple type checking class for a single value
     """
-    def __init__(self, value, name="", description=""):
+    def __init__(self, value, name="", description="", **kwargs):
         """
         Initialize the Param
 
@@ -297,11 +297,6 @@ class Param(object):
         """
         return self.format_data()
 
-    def __eq__(self, other):
-        return _eq(isinstance(other, self.__class__) and \
-                   (self._name == other._name, self._value == other._value, \
-                    self.__class__ == other.__class__))
-
     def convert_to(self, unit):
         """Convert parameter to a different unit than the current one.
 
@@ -365,8 +360,9 @@ class Param(object):
         if check_units:
             # Check if units match up
             if not (ureg(self_unit) == ureg(other_unit)):
-                warning('Units does not match: {} != {}'.format(self_unit,
-                                                                other_unit))
+                msg = ('Units does not match when computing {} {} {}: '
+                       '{} != {}'.format(self, operator, other,
+                                         self_unit, other_unit))
                 # If one is dimensionless assume that it is OK,
                 # and keep the unit of the other
                 if self_unit == "1":
@@ -391,6 +387,78 @@ class Param(object):
         kwargs['operator'] = operator
         new = ureg(equation.format(**kwargs))
         return self.__class__(value=new.magnitude, unit=new.u.format_babel())
+
+    def _cmp(self, other, cmp_op, check_units=True):
+        """Compare self and other with custom
+        comparison operator
+
+
+        Parameters
+        ----------
+        other : Param or scalar
+            The parameter you want to compare self to
+        cmp_op : str
+            Comparison operator
+
+        Returns
+        -------
+        bool
+            Returns the value of `self cmp_op other`.
+
+        """
+        other_value, other_name, other_unit = \
+            _process_other(other)
+
+        self_value, self_name, self_unit = \
+            _process_other(self)
+
+        if check_units:
+            # Check if units match up
+            if not (ureg(self_unit) == ureg(other_unit)):
+                msg = ('Units does not match when comparing {} {} {}: '
+                       '{} != {}'.format(self, cmp_op, other,
+                                         self_unit, other_unit))
+                warning(msg)
+                # If one is dimensionless assume that it is OK,
+                # and keep the unit of the other
+                if self_unit == "1":
+                    self_unit = other_unit
+                elif other_unit == "1":
+                    other_unit = self_unit
+
+        self_ureg = ureg('{}*{}'.format(self_value, self_unit))
+        other_ureg = ureg('{}*{}'.format(other_value, other_unit))
+        return eval('self_ureg {} other_ureg'.format(cmp_op))
+
+    def __getstate__(self):
+        """This is what is saved when you pickle this object.
+        """
+        unit = '1' if not hasattr(self, 'unit') else self.unit
+        return dict(name=self.name, unit=unit, value=self.value,
+                    description=self.description)
+
+    def __setstate__(self, state):
+        """This is how we retrieve the pickled object.
+        """
+        self.__class__.__init__(self, **state)
+
+    def __eq__(self, other):
+        # return self._cmp(other, "==")
+        return _eq(isinstance(other, self.__class__) and \
+                   (self._name == other._name, self._value == other._value, \
+                    self.__class__ == other.__class__))
+
+    def __lt__(self, other):
+        return self._cmp(other, "<")
+
+    def __gt__(self, other):
+        return self._cmp(other, ">")
+
+    def __le__(self, other):
+        return self._cmp(other, "<=")
+
+    def __ge__(self, other):
+        return self._cmp(other, ">=")
 
     def __truediv__(self, other):
         # Python 3
@@ -434,7 +502,10 @@ class Param(object):
         self_value, self_name, self_unit = \
             _process_other(self)
         new = ureg("({}*{})**{}".format(self_value, self_unit, other_value))
-        return ScalarParam(value=new.magnitude, unit=new.u.format_babel())
+        return self.__class__(value=new.magnitude, unit=new.u.format_babel())
+
+    def __abs__(self):
+        return abs(self.value)
 
 
 class OptionParam(Param):

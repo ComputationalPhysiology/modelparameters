@@ -20,7 +20,7 @@ class TestUnits(unittest.TestCase):
     p4 = ScalarParam(0.5, name="unitless parameter")
     v1 = 2.0
     v2 = -2.0
-    
+
 
     def test_division(self):
 
@@ -31,10 +31,10 @@ class TestUnits(unittest.TestCase):
 
         for p1, p2 in pairs:
             p = p1 / p2
-            
+
             p1_value, p1_unit = get_unit_and_value(p1)
             p2_value, p2_unit = get_unit_and_value(p2)
-            
+
             self.assertEqual(p.value, p1_value / p2_value)
             self.assertEqual(ureg(p.unit).u, ureg("{}/{}".format(p1_unit,
                                                                  p2_unit)).u)
@@ -48,7 +48,7 @@ class TestUnits(unittest.TestCase):
 
         for p1, p2 in pairs:
             p = p1 * p2
-            
+
             p1_value, p1_unit = get_unit_and_value(p1)
             p2_value, p2_unit = get_unit_and_value(p2)
 
@@ -65,7 +65,7 @@ class TestUnits(unittest.TestCase):
 
         for p1, p2 in pairs:
             p = p1 + p2
-            
+
             p1_value, p1_unit = get_unit_and_value(p1)
             p2_value, p2_unit = get_unit_and_value(p2)
 
@@ -92,7 +92,7 @@ class TestUnits(unittest.TestCase):
 
         for p1, p2 in pairs:
             p = p1 - p2
-            
+
             p1_value, p1_unit = get_unit_and_value(p1)
             p2_value, p2_unit = get_unit_and_value(p2)
 
@@ -118,7 +118,7 @@ class TestUnits(unittest.TestCase):
 
         for p1, p2 in pairs:
             p = p1 ** p2
-            
+
             p1_value, p1_unit = get_unit_and_value(p1)
             p2_value, p2_unit = get_unit_and_value(p2)
 
@@ -127,6 +127,75 @@ class TestUnits(unittest.TestCase):
 
         with self.assertRaises(AssertionError):
             p = self.p1**self.p2
+
+
+class TestCmp(unittest.TestCase):
+
+    p1 = ScalarParam(2000.0, unit="ms")
+    p2 = ScalarParam(2.0, unit="s")
+    p3 = ScalarParam(1.0, unit="s")
+    p4 = ScalarParam(0.5)
+    p5 = ScalarParam(2.0, unit="m")
+    v1 = 2.0
+    v2 = 0.0
+
+    def test_eq(self):
+
+        self.assertGreaterEqual(self.p1, self.p2)
+        self.assertGreaterEqual(self.p2, self.v1)
+        self.assertGreaterEqual(self.v1, self.p2)
+        self.assertLessEqual(self.p1, self.p2)
+        self.assertLessEqual(self.p2, self.v1)
+        self.assertLessEqual(self.v1, self.p2)
+
+    def test_lt(self):
+
+        self.assertLess(self.p3, self.p1)
+        self.assertLess(self.p3, self.p2)
+        self.assertLess(self.p4, self.p2)
+        self.assertLess(self.p4, self.p5)
+        self.assertLess(self.p4, self.p3)
+        self.assertLess(self.v2, self.p4)
+        self.assertLess(self.v2, self.p3)
+
+    def test_gt(self):
+
+        self.assertGreater(self.p1, self.p3)
+        self.assertGreater(self.p2, self.p3)
+        self.assertGreater(self.p2, self.p4)
+        self.assertGreater(self.p5, self.p4)
+        self.assertGreater(self.p3, self.p4)
+        self.assertGreater(self.p4, self.v2)
+        self.assertGreater(self.p3, self.v2)
+
+    def test_le(self):
+
+        self.assertLessEqual(self.p1, self.p2)
+        self.assertLessEqual(self.p2, self.v1)
+        self.assertLessEqual(self.v1, self.p2)
+        self.assertLessEqual(self.p3, self.p1)
+        self.assertLessEqual(self.p3, self.p2)
+        self.assertLessEqual(self.p4, self.p2)
+        self.assertLessEqual(self.p4, self.p5)
+        self.assertLessEqual(self.p4, self.p3)
+        self.assertLessEqual(self.v2, self.p4)
+        self.assertLessEqual(self.v2, self.p3)
+
+    def test_ge(self):
+
+        self.assertGreaterEqual(self.p1, self.p2)
+        self.assertGreaterEqual(self.p2, self.v1)
+        self.assertGreaterEqual(self.v1, self.p2)
+        self.assertGreaterEqual(self.p1, self.p3)
+        self.assertGreaterEqual(self.p2, self.p3)
+        self.assertGreaterEqual(self.p2, self.p4)
+        self.assertGreaterEqual(self.p5, self.p4)
+        self.assertGreaterEqual(self.p3, self.p4)
+        self.assertGreaterEqual(self.p4, self.v2)
+        self.assertGreaterEqual(self.p3, self.v2)
+
+
+
 
 
 if __name__ == "__main__":
