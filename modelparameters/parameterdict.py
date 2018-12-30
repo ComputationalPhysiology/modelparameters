@@ -464,8 +464,8 @@ class ParameterDict(dict):
                                   callback = callback(\
                                   parent, key, type(actuall_value), sequence_type),
                                   type = FORMAT_CONVERTER[type(actuall_value)],
-                                  help = "Default(%s)%s" % str(formated_value)
-                                  (": " + description) if description else "")
+                                  help = "Default(%s)%s" % (str(formated_value),
+                                        (": " + description) if description else ""))
 
         # Start recursively adding options
         add_options(self, PAR_PREFIX)
