@@ -40,8 +40,8 @@ else:
     _order = None
 
 # A collection of language specific keywords
-_cpp_keywords = ["auto", "const", "double", "float", "int", "short", "struct", 
-                 "break", "continue", "else", "for", "long", "signed", "switch", 
+_cpp_keywords = ["auto", "const", "double", "float", "int", "short", "struct",
+                 "break", "continue", "else", "for", "long", "signed", "switch",
                  "case", "default", "enum", "goto", "register", "sizeof", "typedef",
                  "char", "do", "extern", "if", "return", "static", "union", "while",
                  "asm", "dynamic_cast", "namespace", "reinterpret_cast", "try",
@@ -61,6 +61,9 @@ _python_keywords = ["and", "del", "from", "not", "while", "as", "elif", "global"
 _matlab_keywords = ["break", "case", "catch", "classdef", "continue", "else",
                     "elseif", "end", "for", "function", "global", "if", "otherwise",
                     "parfor", "persistent", "return", "spmd", "switch", "try", "while"]
+
+_julia_keywords = ["break", "continue", "if", "elseif", "else", "global", "@assert"
+                   "for", "while", "end", "function", "in", "using", "nothing"]
 
 _fortran_keywords = ["assign", "backspace", "block data", "call", "close", "common",
                      "continue", "data", "dimension", "do", "else", "else if", "end",
@@ -84,7 +87,8 @@ _fortran_keywords = ["assign", "backspace", "block data", "call", "close", "comm
                         "critical", "error stop", "submodule", "sync all",
                         "sync images", "sync memory", "lock", "unlock"]
 
-_all_keywords = set(_cpp_keywords+_python_keywords+_matlab_keywords+_fortran_keywords)
+_all_keywords = set(_cpp_keywords+_python_keywords+_matlab_keywords+
+                    _fortran_keywords+_julia_keywords)
 
 def _get_potence(value):
     import math
@@ -98,19 +102,19 @@ def _get_potence(value):
 def _round2(x, n=0, sigs4n=1):
     """
     Return x rounded to the specified number of significant digits, n, as
-    counted from the first non-zero digit. 
-	
+    counted from the first non-zero digit.
+
     If n=0 (the default value for round2) then the magnitude of the
-    number will be returned (e.g. round2(12) returns 10.0).  
-    
-    If n<0 then x will be rounded to the nearest multiple of n which, by 
-    default, will be rounded to 1 digit (e.g. round2(1.23,-.28) will round 
+    number will be returned (e.g. round2(12) returns 10.0).
+
+    If n<0 then x will be rounded to the nearest multiple of n which, by
+    default, will be rounded to 1 digit (e.g. round2(1.23,-.28) will round
     1.23 to the nearest multiple of 0.3.
-    
+
     Regardless of n, if x=0, 0 will be returned.
     """
     import math
-	
+
     if x==0:
         return x
     if n<0:
@@ -164,7 +168,7 @@ _relational_map_matlab = {
 def _print_Mul(self, expr):
 
     prec = _precedence(expr)
-    
+
     if self.order not in ('old', 'none'):
         args = expr.as_ordered_factors()
     else:
@@ -182,7 +186,7 @@ def _print_Mul(self, expr):
         sign = "-"
     else:
         sign = ""
-    
+
         # If first argument is Mul we do not want to add a parentesize
         if isinstance(args[0], sp.Mul):
             prec -= 1
@@ -240,8 +244,8 @@ def latex_unit(unit):
     _check_arg(unit, str)
     if unit == "1":
         return ""
-    atomic_units =[] 
-    
+    atomic_units =[]
+
     for unit in re.findall(_unit_template, unit):
         micro = False
         exp = 0
@@ -262,7 +266,7 @@ def latex_unit(unit):
 
         if micro:
             unit = "\\mu"+unit
-            
+
         atomic_units.append(unit)
 
     return "\\,".join(atomic_units)
@@ -272,10 +276,10 @@ class _CustomPythonPrinter(_StrPrinter):
         assert(namespace in ["", "math", "np", "numpy", "ufl"])
         self._namespace = namespace if not namespace else namespace + "."
         _StrPrinter.__init__(self, settings=dict(order=_order))
-        
+
     def _print_Mod(self, expr):
         return "({0} % {1})".format(expr.args[0], expr.args[1])
-        
+
     # Why is this not called!
     def _print_Log(self, expr):
         if self._namespace == "ufl.":
@@ -303,7 +307,7 @@ class _CustomPythonPrinter(_StrPrinter):
         # If not finite we use parent printer
         if expr.is_zero:
             return "0"
-        
+
         if not expr.is_finite:
             return _StrPrinter._print_Float(self, expr)
 
@@ -315,7 +319,7 @@ class _CustomPythonPrinter(_StrPrinter):
         if not isinstance(expr.args[1], (_AppliedUndef, sp.Symbol)):
             error("Can only print Derivative code with a single dependent "\
                   "variabe. Got: {0}".format(sympycode(expr.args[1])))
-        
+
         if isinstance(expr.args[0], _AppliedUndef):
             return "d%s_d%s" % (expr.args[0].func.__name__, "_".join(\
                 self._print(arg) for arg in expr.args[1:]))
@@ -332,7 +336,7 @@ class _CustomPythonPrinter(_StrPrinter):
 
     def _print_Sqrt(self, expr):
         return "{0}sqrt({1})".format(self._namespace, self._print(expr.args[0]))
-    
+
     def _print_Relational(self, expr):
         return '{0}({1}, {2})'.format(_relational_map[expr.rel_op],
                                       self._print(expr.lhs), self._print(expr.rhs))
@@ -392,7 +396,7 @@ class _CustomPythonPrinter(_StrPrinter):
             return "{0}power({1}, {2})".format(self._namespace,
                                                self._print(expr.base),
                                                self._print(expr.exp))
-        
+
         return "{0}pow({1}, {2})".format(self._namespace,
                                          self._print(expr.base),
                                          self._print(expr.exp))
@@ -418,7 +422,7 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
         else:
             return "{0}mod({1})".format(self._namespace,
                                         self.stringify(expr.args, ", "))
-        
+
     def _print_Min(self, expr):
         if self._namespace == "ufl.":
             return "ufl.{0}({1})".format(expr.func.__name__,\
@@ -439,7 +443,7 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
 
         if isinstance(expr, _AppliedUndef):
             return func_name
-        
+
         elif func_name == "ceiling":
             return "{0}ceil({1})".format(self._namespace, \
                                          self.stringify(expr.args, ", "))
@@ -515,12 +519,12 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
         return "{0} or {1}".format(self.parenthesize(expr.args[0], PREC),
                                    self.parenthesize(expr.args[1], PREC))
 
-    
+
 class _CustomCCodePrinter(_StrPrinter):
     """
     Overload some ccode generation
     """
-    
+
     def __init__(self, cpp=False, float_precision="double", **settings):
         super(_CustomCCodePrinter, self).__init__(settings=settings)
         self._prefix = "std::" if cpp else ""
@@ -555,7 +559,7 @@ class _CustomCCodePrinter(_StrPrinter):
 
     def _print_Ceiling(self, expr):
         return "{0}ceil({1})".format(self._prefix, self.stringify(expr.args, ", "))
-        
+
     def _print_Abs(self, expr):
         return "{0}fabs({1})".format(self._prefix, self.stringify(expr.args, ", "))
 
@@ -568,15 +572,15 @@ class _CustomCCodePrinter(_StrPrinter):
             result += "({0} ? {1} : ".format(self._print(c), self._print(e))
         last_line = "{0})".format(self._print(expr.args[-1].expr))
         return result+last_line
-    
+
     def _print_Function(self, expr):
         #print expr.func.__name__, expr.args
         if isinstance(expr, _AppliedUndef):
             return expr.func.__name__
-        
+
         return "%s" % self._prefix + expr.func.__name__.lower() + \
                "(%s)"%self.stringify(expr.args, ", ")
-    
+
     def _print_Subs(self, expr):
         # Execute subsitution
         orig_expr=expr.expr
@@ -587,7 +591,7 @@ class _CustomCCodePrinter(_StrPrinter):
         if not isinstance(expr.args[1], (_AppliedUndef, sp.Symbol)):
             error("Can only print Derivative code with a single dependent "\
                   "variabe. Got: {0}".format(sympycode(expr.args[1])))
-        
+
         if isinstance(expr.args[0], _AppliedUndef):
             return "d%s_d%s" % (expr.args[0].func.__name__, "_".join(\
                 self._print(arg) for arg in expr.args[1:]))
@@ -652,7 +656,7 @@ class _CustomMatlabCodePrinter(_StrPrinter):
     """
     Overload some ccode generation
     """
-    
+
     def __init__(self, **settings):
         super(_CustomMatlabCodePrinter, self).__init__(settings=settings)
 
@@ -661,12 +665,12 @@ class _CustomMatlabCodePrinter(_StrPrinter):
         # If not finite we use parent printer
         if expr.is_zero:
             return "0"
-        
+
         if not expr.is_finite:
             return _StrPrinter._print_Float(self, expr)
 
         return str(float(expr))
-            
+
     def _print_Min(self, expr):
         return "min(%s)" % (self.stringify(expr.args, ", "))
 
@@ -675,7 +679,7 @@ class _CustomMatlabCodePrinter(_StrPrinter):
 
     def _print_Ceiling(self, expr):
         return "ceil(%s)" % (self.stringify(expr.args, ", "))
-    
+
     def _print_Piecewise(self, expr):
         result = ""
         for e, c in expr.args[:-1]:
@@ -683,22 +687,22 @@ class _CustomMatlabCodePrinter(_StrPrinter):
                                              self._print(e), self._print(c))
         last_line = "(%s))" % self._print(expr.args[-1].expr)
         return result+last_line
-    
+
     def _print_Function(self, expr):
         #print expr.func.__name__, expr.args
         if isinstance(expr, _AppliedUndef):
             return expr.func.__name__
-        
+
         return "%s(%s)" % (expr.func.__name__.lower(), self.stringify(\
             expr.args, ", "))
-    
+
     def _print_Pow(self, expr):
         PREC = _precedence(expr)
         if expr.exp.is_integer and int(expr.exp) == 1:
             return self.parenthesize(expr.base, PREC)
         if expr.exp is sp.S.NegativeOne:
             return '1.0/{0}'.format(self.parenthesize(expr.base, PREC))
-        
+
         if expr.exp == 0.5:
             return 'sqrt({0})'.format(self._print(expr.base))
 
@@ -733,6 +737,94 @@ class _CustomMatlabCodePrinter(_StrPrinter):
         return "imag({0})".format(self._print(expr.args[0]))
 
     _print_Mul = _print_Mul
+
+
+class _CustomJuliaCodePrinter(_StrPrinter):
+    """
+    Overload some ccode generation
+    """
+
+    def __init__(self, **settings):
+        super(_CustomJuliaCodePrinter, self).__init__(settings=settings)
+
+    def _print_Float(self, expr):
+
+        # If not finite we use parent printer
+        if expr.is_zero:
+            return "0"
+
+        if not expr.is_finite:
+            return _StrPrinter._print_Float(self, expr)
+
+        return str(float(expr))
+
+    def _print_Min(self, expr):
+        return "min(%s)" % (self.stringify(expr.args, ", "))
+
+    def _print_Max(self, expr):
+        return "max(%s)" % (self.stringify(expr.args, ", "))
+
+    def _print_Ceiling(self, expr):
+        return "ceil(%s)" % (self.stringify(expr.args, ", "))
+
+    def _print_Piecewise(self, expr):
+        result = ""
+        for e, c in expr.args[:-1]:
+            result += "((%s)*(%s) + ~(%s)*"%(self._print(c), \
+                                             self._print(e), self._print(c))
+        last_line = "(%s))" % self._print(expr.args[-1].expr)
+        return result+last_line
+
+    def _print_Function(self, expr):
+        #print expr.func.__name__, expr.args
+        if isinstance(expr, _AppliedUndef):
+            return expr.func.__name__
+
+        return "%s(%s)" % (expr.func.__name__.lower(), self.stringify(\
+            expr.args, ", "))
+
+    def _print_Pow(self, expr):
+        PREC = _precedence(expr)
+        if expr.exp.is_integer and int(expr.exp) == 1:
+            return self.parenthesize(expr.base, PREC)
+        if expr.exp is sp.S.NegativeOne:
+            return '1.0/{0}'.format(self.parenthesize(expr.base, PREC))
+
+        if expr.exp == 0.5:
+            return 'sqrt({0})'.format(self._print(expr.base))
+
+        # FIXME: Fix paranthesises
+        return '{0}^{1}'.format(self.parenthesize(expr.base, PREC),
+                                  self.parenthesize(expr.exp, PREC))
+    def _print_And(self, expr):
+        PREC = _precedence(expr)
+        return " & ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
+
+    def _print_Not(self, expr):
+        PREC = _precedence(expr)
+        return "~" + self.parenthesize(expr.args[0], PREC)
+
+    def _print_Relational(self, expr):
+        return "{0} {1} {2}".format(self.parenthesize(expr.lhs, _precedence(expr)),
+                                    _relational_map_matlab[expr.rel_op],
+                                    self.parenthesize(expr.rhs, _precedence(expr)))
+
+        return '{0}({1}, {2})'.format(_relational_map_matlab[expr.rel_op],
+                                      self._print(expr.lhs), self._print(expr.rhs))
+    def _print_Or(self, expr):
+        PREC = _precedence(expr)
+        return " | ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
+
+    def _print_re(self, expr):
+        assert len(expr.args) == 1
+        return "real({0})".format(self._print(expr.args[0]))
+
+    def _print_im(self, expr):
+        assert len(expr.args) == 1
+        return "imag({0})".format(self._print(expr.args[0]))
+
+    _print_Mul = _print_Mul
+
 
 class _CustomLatexPrinter(_LatexPrinter):
 
@@ -771,14 +863,14 @@ class _CustomLatexPrinter(_LatexPrinter):
                     form = "%.2f"
                 else:
                     form = "%.1f"
-            else :
+            else:
                 form = "%d"
                 rest = int(rest)
         if exponent == 0:
             return sign+form%rest
-        
+
         return r"%s\!\times\!10 ^{%d}"%(sign+form%rest, exponent)
-    
+
     def _needs_brackets(self, expr):
         """
         Returns True if the expression needs to be wrapped in brackets when
@@ -788,21 +880,21 @@ class _CustomLatexPrinter(_LatexPrinter):
         return not ((expr.is_Integer and expr.is_nonnegative)
                     or (expr.is_Atom and expr is not sp.S.NegativeOne)
                     or (isinstance(expr, _AppliedUndef) and expr is not sp.S.NegativeOne))
-    
+
     def _print_Integer(self, expr):
         return self._print_Float(expr.evalf())
-    
+
     def _print_Float(self, expr):
 
         # If not finite we use parent printer
         if expr.is_zero:
             return "0"
-        
+
         if not expr.is_finite:
             return _LatexPrinter._print_Float(self, expr)
 
         return self._number_to_latex(expr.evalf())
-    
+
     def _print_Function(self, expr, *args, **kwargs):
         if isinstance(expr, _AppliedUndef):
             return self._print_Symbol(sp.Symbol(expr.func.__name__))
@@ -831,7 +923,7 @@ class _CustomLatexPrinter(_LatexPrinter):
         else:
             # use make_args in case expr was something like -x -> x
             args = sp.Mul.make_args(expr)
-    
+
         args = tuple(args)
 
         if _coeff_isneg(expr):
@@ -845,7 +937,7 @@ class _CustomLatexPrinter(_LatexPrinter):
             tex = ""
 
         expr = sp.Mul(*args)
-        
+
         from sympy.simplify import fraction
         numer, denom = fraction(expr, exact=True)
         separator = self._settings['mul_symbol_latex']
@@ -857,7 +949,7 @@ class _CustomLatexPrinter(_LatexPrinter):
             if expr.is_Pow and expr.exp.is_Rational and\
                    expr.exp.is_negative and expr.base is sp.S.One:
                 expr = sp.S.One
-                
+
             if not expr.is_Mul:
                 return str(self._print(expr))
             else:
@@ -993,6 +1085,7 @@ _ccode_float_printer = _CustomCCodePrinter(float_precision="single", order=_orde
 _cppcode_float_printer = _CustomCCodePrinter(cpp=True, float_precision="single", order=_order)
 _sympy_printer = _CustomPythonPrinter()
 _matlab_printer = _CustomMatlabCodePrinter(order=_order)
+_julia_printer = _CustomJuliaCodePrinter(order=_order)
 
 def ccode(expr, assign_to=None):
     """
@@ -1011,7 +1104,7 @@ def cppcode(expr, assign_to=None, float_precision="double"):
         ret = _cppcode_printer.doprint(expr)
     else:
         ret = _cppcode_float_printer.doprint(expr)
-        
+
     if assign_to is None:
         return ret
     return "{0} = {1}".format(assign_to, ret)
@@ -1030,10 +1123,16 @@ def sympycode(expr, assign_to=None):
     if assign_to is None:
         return ret
     return "{0} = {1}".format(assign_to, ret)
-    
+
 
 def matlabcode(expr, assign_to=None):
     ret = _matlab_printer.doprint(expr)
+    if assign_to is None:
+        return ret
+    return "{0} = {1}".format(assign_to, ret)
+
+def juliacode(expr, assign_to=None):
+    ret = _julia_printer.doprint(expr)
     if assign_to is None:
         return ret
     return "{0} = {1}".format(assign_to, ret)
@@ -1061,7 +1160,7 @@ def latex(expr, **settings):
             expr = sp.sympify(expr)
     elif isinstance(expr, _scalars):
         expr = sp.sympify(expr)
-        
+
     return _CustomLatexPrinter(settings).doprint(expr)
 
 latex.__doc__ = _sympy_latex.__doc__
