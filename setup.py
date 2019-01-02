@@ -50,8 +50,8 @@ class clean(Command):
 
 
 # Version number
-major = 1
-minor = 1
+major = 2019
+minor = 0.0
 
 setup(name = "modelparameters",
       version = "{0}.{1}".format(major, minor),
