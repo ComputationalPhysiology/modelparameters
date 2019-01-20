@@ -156,6 +156,8 @@ _relational_map = {
     ">=":"Ge",
     }
 
+
+
 _relational_map_matlab = {
     "==":"==",
     "!=":"~=",
@@ -164,6 +166,7 @@ _relational_map_matlab = {
     ">":">",
     ">=":">=",
     }
+
 
 def _print_Mul(self, expr):
 
@@ -530,6 +533,15 @@ class _CustomCCodePrinter(_StrPrinter):
         self._prefix = "std::" if cpp else ""
         self._float_postfix = "" if float_precision == "double" else "f"
 
+
+    def _print_Relational(self, expr):
+        return "{0} {1} {2}".format(self.parenthesize(expr.lhs, _precedence(expr)),
+                                    _relational_map_matlab[expr.rel_op],
+                                    self.parenthesize(expr.rhs, _precedence(expr)))
+
+        return '{0}({1}, {2})'.format(_relational_map_matlab[expr.rel_op],
+                                      self._print(expr.lhs), self._print(expr.rhs))
+        
     def _print_Float(self, expr):
         f_str = _StrPrinter._print_Float(self, expr)
         return f_str + self._float_postfix

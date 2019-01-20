@@ -30,6 +30,7 @@ from sympy.core.function import AppliedUndef as _AppliedUndef
 from .utils import check_arg, deprecated
 from .logger import warning, error, value_error, type_error
 
+
 # Patch Sympy
 _AppliedUndef.is_real = True
 _AppliedUndef.is_imaginary = False

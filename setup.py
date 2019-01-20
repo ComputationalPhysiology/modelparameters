@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 __author__ = "Johan Hake (hake.dev@gmail.com)"
-__copyright__ = "Copyright (C) 2012-2015 " + __author__
-__date__ = "2012-05-07 -- 2015-01-09"
 __license__  = "GNU LGPL Version 3.0 or later"
 
 # System imports
@@ -51,16 +49,22 @@ class clean(Command):
 
 # Version number
 major = 2019
-minor = 0.0
+minor = 1.0
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
 setup(name = "modelparameters",
       version = "{0}.{1}".format(major, minor),
       description = """
 A module providing parameter structure for physical modeling
       """,
-      author = __author__.split("(")[0],
-      author_email = __author__.split("(")[1][:-1],
-      install_requires=["sympy<=0.7.7",
+      long_description=long_description,
+      long_description_content_type="text/markdown",
+      url="https://bitbucket.org/finsberg/modelparameters",
+      author = __author__.split("(")[0] + 'and Henrik Finsberg',
+      author_email = __author__.split("(")[1][:-1] + 'and henriknf@simula.no',
+      install_requires=["sympy<=1.1.1",
                         "numpy>=1.5",
                         "six", "pint"],
       packages = ["modelparameters", "modelparameters.tests"],
