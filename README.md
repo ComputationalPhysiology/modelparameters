@@ -12,6 +12,9 @@ ModelParameters:
 Check out the documentation at
 [modelparameters.readthedocs.io](https://modelparameters.readthedocs.io/en/latest/). 
 
+The source code is hosted as 
+[bitbucket.org/finsberg/modelparameters](https://bitbucket.org/finsberg/modelparameters)
+
 ## License
 modelparameters is free software: you can redistribute it and/or modify it
 under the terms of the GNU Lesser General Public License as published
@@ -27,4 +30,4 @@ License along with modelparameters. If not, see http://www.gnu.org/licenses/.
 ## Contributors
 Modelparameters is developed by Johan Hake. The version of modelparameters found in this
 repository is maintained by Henrik Finsberg. Issues can be reported to
-henriknf@simula.noc 
+henriknf@simula.no

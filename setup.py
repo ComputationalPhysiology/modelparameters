@@ -56,14 +56,12 @@ with open("README.md", "r") as fh:
 
 setup(name = "modelparameters",
       version = "{0}.{1}".format(major, minor),
-      description = """
-A module providing parameter structure for physical modeling
-      """,
+      description = "A module providing parameter structure for physical modeling",
       long_description=long_description,
       long_description_content_type="text/markdown",
       url="https://bitbucket.org/finsberg/modelparameters",
       author = __author__.split("(")[0] + 'and Henrik Finsberg',
-      author_email = __author__.split("(")[1][:-1] + 'and henriknf@simula.no',
+      author_email = 'henriknf@simula.no',
       install_requires=["sympy<=1.1.1",
                         "numpy>=1.5",
                         "six", "pint"],
