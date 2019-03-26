@@ -478,9 +478,14 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
                 num_par += 1
                 result += "ufl.conditional({0}, {1}, ".format(self._print(c), \
                                                              self._print(e))
+        elif self._namespace in ("numpy.", "np."):
+            for e, c in expr.args[:-1]:
+                num_par += 1
+                result += self._namespace
+                result += "where({0}, {1}, ".format(self._print(c), \
+                                                          self._print(e))
         else:
-            cond_str = "{0}all({{0}})".format(self._namespace) \
-                       if self._namespace in ["np.", "numpy."] else "{0}"
+            cond_str = "{0}"
             for e, c in expr.args[:-1]:
                 num_par += 1
                 result += "({0} if {1} else ".format(\
@@ -541,7 +546,7 @@ class _CustomCCodePrinter(_StrPrinter):
 
         return '{0}({1}, {2})'.format(_relational_map_matlab[expr.rel_op],
                                       self._print(expr.lhs), self._print(expr.rhs))
-        
+
     def _print_Float(self, expr):
         f_str = _StrPrinter._print_Float(self, expr)
         return f_str + self._float_postfix
