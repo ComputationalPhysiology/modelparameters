@@ -814,11 +814,11 @@ class _CustomJuliaCodePrinter(_StrPrinter):
                                   self.parenthesize(expr.exp, PREC))
     def _print_And(self, expr):
         PREC = _precedence(expr)
-        return " & ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
+        return " && ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
 
     def _print_Not(self, expr):
         PREC = _precedence(expr)
-        return "~" + self.parenthesize(expr.args[0], PREC)
+        return "!" + self.parenthesize(expr.args[0], PREC)
 
     def _print_Relational(self, expr):
         return "{0} {1} {2}".format(self.parenthesize(expr.lhs, _precedence(expr)),
@@ -829,7 +829,7 @@ class _CustomJuliaCodePrinter(_StrPrinter):
                                       self._print(expr.lhs), self._print(expr.rhs))
     def _print_Or(self, expr):
         PREC = _precedence(expr)
-        return " | ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
+        return " || ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
 
     def _print_re(self, expr):
         assert len(expr.args) == 1
