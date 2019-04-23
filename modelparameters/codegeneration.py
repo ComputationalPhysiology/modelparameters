@@ -787,9 +787,8 @@ class _CustomJuliaCodePrinter(_StrPrinter):
     def _print_Piecewise(self, expr):
         result = ""
         for e, c in expr.args[:-1]:
-            result += "((%s)*(%s) + ~(%s)*"%(self._print(c), \
-                                             self._print(e), self._print(c))
-        last_line = "(%s))" % self._print(expr.args[-1].expr)
+            result += "({0} ? {1} : ".format(self._print(c), self._print(e))
+        last_line = "{0})".format(self._print(expr.args[-1].expr))
         return result+last_line
 
     def _print_Function(self, expr):
