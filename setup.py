@@ -49,7 +49,7 @@ class clean(Command):
 
 # Version number
 major = 2019
-minor = 1.0
+minor = 2.0
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
