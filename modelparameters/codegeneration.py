@@ -512,6 +512,16 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
                 error("UFL does not support more than 2 operands to And")
             return "ufl.And({0}, {1})".format(self._print(expr.args[0]),
                                               self._print(expr.args[1]))
+        elif self._namespace in ("numpy.", "np."):
+            result = self._namespace
+            if len(expr.args) == 2:
+                result += "logical_and({0}, {1})".format(self._print(expr.args[0]),
+                                                      self._print(expr.args[1]))
+            else:
+                result += "logical_and({0}, {1})".format(self._print(expr.args[0]),
+                                                      self._print(sp.And(*expr.args[1:])))
+            return result
+
         return " and ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
         return "{0} and {1}".format(self.parenthesize(expr.args[0], PREC),
                                     self.parenthesize(expr.args[1], PREC))
@@ -523,6 +533,15 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
                 error("UFL does not support more than 2 operands to Or")
             return "ufl.Or({0}, {1})".format(self._print(expr.args[0]),
                                              self._print(expr.args[1]))
+        elif self._namespace in ("numpy.", "np."):
+            result = self._namespace
+            if len(expr.args) == 2:
+                result += "logical_or({0}, {1})".format(self._print(expr.args[0]),
+                                                      self._print(expr.args[1]))
+            else:
+                result += "logical_or({0}, {1})".format(self._print(expr.args[0]),
+                                                      self._print(sp.Or(*expr.args[1:])))
+            return result
         return " or ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
         return "{0} or {1}".format(self.parenthesize(expr.args[0], PREC),
                                    self.parenthesize(expr.args[1], PREC))
