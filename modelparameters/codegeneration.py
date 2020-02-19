@@ -643,6 +643,13 @@ class _CustomCCodePrinter(_StrPrinter):
             return "({0})".format(\
                 "*".join(self.parenthesize(expr.base, PREC) \
                          for i in range(int(expr.exp))), PREC)
+        if expr.exp.is_integer and int(expr.exp) == 4:
+            # Use parentheses strategically to facilitate expression reuse
+            # pow(a, 4) = pow(a, 2) * pow(a, 2)
+            # pow(a, 2) = a * a
+            return "(({0})*({0}))".format(
+                "({0})*({0})".format(self.parenthesize(expr.base, PREC))
+            )
         if expr.exp.is_integer and int(expr.exp) in [-2, -3]:
             return "1.0/({0})".format(\
                 "*".join(self.parenthesize(expr.base, PREC) \
