@@ -635,6 +635,23 @@ class _CustomCCodePrinter(_StrPrinter):
         last_line = "{0})".format(self._print(expr.args[-1].expr))
         return result+last_line
 
+    def _print_Add(self, expr):
+        args = expr.args
+
+        # Special treatment of (exp(a) - 1), where we should use expm1
+        if len(args) == 2:
+            a, b = args
+            if type(b) == sp.exp:
+                a, b = b, a
+
+            if type(a) is sp.exp and type(b) is sp.numbers.NegativeOne:
+                return self.__print_math_function(
+                    "expm1",
+                    self.stringify(a.args, ", ")
+                )
+
+        return super()._print_Add(expr)
+
     def _print_Function(self, expr):
         #print expr.func.__name__, expr.args
         if isinstance(expr, _AppliedUndef):
