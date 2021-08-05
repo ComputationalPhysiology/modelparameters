@@ -641,17 +641,59 @@ class _CustomCCodePrinter(_StrPrinter):
             return expr.func.__name__
 
         # add special case for math functions
-        math_functions = [
-            "exp",
-            "log",
-            "pow",
-            "sqrt",
+        math_functions_with_float_variant = [
             "fabs",
-            "floor",
-            "ceil",
             "fmod",
+            "remainder",
+            "remquo",
+            "fma",
+            "fmax",
+            "fmin",
+            "fdim",
+
+            "exp",
+            "exp2",
+            "expm1",
+            "log",
+            "log2",
+            "log10",
+            "log1p",
+            "ilogb",
+            "logb",
+
+            "hypot",
+            "cbrt",
+            "sqrt",
+            "pow",
+
+            "sin",
+            "cos",
+            "tan",
+            "asin",
+            "acos",
+            "atan",
+            "atan2",
+
+            "sinh",
+            "cosh",
+            "tanh",
+            "asinh",
+            "acosh",
+            "atanh",
+
+            "erf",
+            "erfc",
+            "lgamma",
+            "tgamma",
+
+            "ceil",
+            "floor",
+            "trunc",
+            "round",
+            "nearbyint",
+            "rint",
         ]
-        if expr.func.__name__.lower() in math_functions:
+        if expr.func.__name__.lower() in math_functions_with_float_variant:
             return self.__print_math_function(
                 expr.func.__name__.lower(),
                 self.stringify(expr.args, ", ")
