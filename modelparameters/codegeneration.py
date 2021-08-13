@@ -740,7 +740,7 @@ class _CustomCCodePrinter(_StrPrinter):
         if expr.exp.is_integer and int(expr.exp) == 1:
             return self.parenthesize(expr.base, PREC)
         if expr.exp is sp.S.NegativeOne:
-            return "1.0{1}/{0}".format(self.parenthesize(expr.base, PREC), self._float_postfix)
+            return "1.0{0}/{1}".format(self._float_postfix, self.parenthesize(expr.base, PREC))
         if expr.exp.is_integer and int(expr.exp) in [2, 3]:
             return "({0})".format(\
                 "*".join(self.parenthesize(expr.base, PREC) \
