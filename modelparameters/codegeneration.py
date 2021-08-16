@@ -560,7 +560,8 @@ class _CustomCCodePrinter(_StrPrinter):
         self._math_suffix = "" if float_precision == "double" else "f"
         self._float_postfix = "" if float_precision == "double" else "f"
 
-    def __print_math_function(self, function_name, arguments_str):
+    def _print_math_function(self, function_name, arguments_str):
+        # add the appropriate namespace and suffix for math functions
         return "{namespace}{name}{suffix}({arguments})".format(
             namespace = self._prefix,
             name = function_name,
@@ -598,32 +599,32 @@ class _CustomCCodePrinter(_StrPrinter):
 
     def _print_Min(self, expr):
         "fmin and fmax is not contained in std namespace untill -ansi g++ 4.7"
-        return self.__print_math_function(
+        return self._print_math_function(
             "fmin",
             self.stringify(expr.args, ", ")
         )
 
     def _print_Max(self, expr):
         "fmin and fmax is not contained in std namespace untill -ansi g++ 4.7"
-        return self.__print_math_function(
+        return self._print_math_function(
             "fmax",
             self.stringify(expr.args, ", ")
         )
 
     def _print_Ceiling(self, expr):
-        return self.__print_math_function(
+        return self._print_math_function(
             "ceil",
             self.stringify(expr.args, ", ")
         )
 
     def _print_Abs(self, expr):
-        return self.__print_math_function(
+        return self._print_math_function(
             "fabs",
             self.stringify(expr.args, ", ")
         )
 
     def _print_Mod(self, expr):
-        return self.__print_math_function(
+        return self._print_math_function(
             "fmod",
             self.stringify(expr.args, ", ")
         )
@@ -645,7 +646,7 @@ class _CustomCCodePrinter(_StrPrinter):
                 a, b = b, a
 
             if type(a) is sp.exp and type(b) is sp.numbers.NegativeOne:
-                return self.__print_math_function(
+                return self._print_math_function(
                     "expm1",
                     self.stringify(a.args, ", ")
                 )
@@ -711,7 +712,7 @@ class _CustomCCodePrinter(_StrPrinter):
             "rint",
         ]
         if expr.func.__name__.lower() in math_functions_with_float_variant:
-            return self.__print_math_function(
+            return self._print_math_function(
                 expr.func.__name__.lower(),
                 self.stringify(expr.args, ", ")
             )
@@ -757,18 +758,18 @@ class _CustomCCodePrinter(_StrPrinter):
                 "*".join(self.parenthesize(expr.base, PREC) \
                          for i in range(-int(expr.exp))), self._float_postfix)
         if expr.exp is sp.S.Half and not rational:
-            return self.__print_math_function(
+            return self._print_math_function(
                 "sqrt",
                 self._print(expr.base)
             )
         if expr.exp == -0.5:
             return "1/{}".format(
-                self.__print_math_function(
+                self._print_math_function(
                     "sqrt",
                     self._print(expr.base)
                 )
             )
-        return self.__print_math_function(
+        return self._print_math_function(
                 "pow",
                 "{0}, {1}".format(self._print(expr.base), self._print(expr.exp))
             )
