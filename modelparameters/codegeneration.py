@@ -555,7 +555,19 @@ class _CustomCCodePrinter(_StrPrinter):
     def __init__(self, cpp=False, float_precision="double", **settings):
         super(_CustomCCodePrinter, self).__init__(settings=settings)
         self._prefix = "std::" if cpp else ""
+        # for single precision we need to suffix float literals with "f"
+        # and we also need to suffix math library function calls with "f"
+        self._math_suffix = "" if float_precision == "double" else "f"
         self._float_postfix = "" if float_precision == "double" else "f"
+
+    def _print_math_function(self, function_name, arguments_str):
+        # add the appropriate namespace and suffix for math functions
+        return "{namespace}{name}{suffix}({arguments})".format(
+            namespace = self._prefix,
+            name = function_name,
+            suffix = self._math_suffix,
+            arguments = arguments_str,
+        )
 
 
     def _print_Relational(self, expr):
@@ -587,20 +599,35 @@ class _CustomCCodePrinter(_StrPrinter):
 
     def _print_Min(self, expr):
         "fmin and fmax is not contained in std namespace untill -ansi g++ 4.7"
-        return "fmin({0})".format(self.stringify(expr.args, ", "))
+        return self._print_math_function(
+            "fmin",
+            self.stringify(expr.args, ", ")
+        )
 
     def _print_Max(self, expr):
         "fmin and fmax is not contained in std namespace untill -ansi g++ 4.7"
-        return "fmax({0})".format(self.stringify(expr.args, ", "))
+        return self._print_math_function(
+            "fmax",
+            self.stringify(expr.args, ", ")
+        )
 
     def _print_Ceiling(self, expr):
-        return "{0}ceil({1})".format(self._prefix, self.stringify(expr.args, ", "))
+        return self._print_math_function(
+            "ceil",
+            self.stringify(expr.args, ", ")
+        )
 
     def _print_Abs(self, expr):
-        return "{0}fabs({1})".format(self._prefix, self.stringify(expr.args, ", "))
+        return self._print_math_function(
+            "fabs",
+            self.stringify(expr.args, ", ")
+        )
 
     def _print_Mod(self, expr):
-        return "{0}fmod({1})".format(self._prefix, self.stringify(expr.args, ", "))
+        return self._print_math_function(
+            "fmod",
+            self.stringify(expr.args, ", ")
+        )
 
     def _print_Piecewise(self, expr):
         result = ""
@@ -609,10 +636,86 @@ class _CustomCCodePrinter(_StrPrinter):
         last_line = "{0})".format(self._print(expr.args[-1].expr))
         return result+last_line
 
+    def _print_Add(self, expr):
+        args = expr.args
+
+        # Special treatment of (exp(a) - 1), where we should use expm1
+        if len(args) == 2:
+            a, b = args
+            if type(b) == sp.exp:
+                a, b = b, a
+
+            if type(a) is sp.exp and type(b) is sp.numbers.NegativeOne:
+                return self._print_math_function(
+                    "expm1",
+                    self.stringify(a.args, ", ")
+                )
+
+        return super()._print_Add(expr)
+
     def _print_Function(self, expr):
         #print expr.func.__name__, expr.args
         if isinstance(expr, _AppliedUndef):
             return expr.func.__name__
+
+        # add special case for math functions
+        math_functions_with_float_variant = [
+            "fabs",
+            "fmod",
+            "remainder",
+            "remquo",
+            "fma",
+            "fmax",
+            "fmin",
+            "fdim",
+
+            "exp",
+            "exp2",
+            "expm1",
+            "log",
+            "log2",
+            "log10",
+            "log1p",
+            "ilogb",
+            "logb",
+
+            "hypot",
+            "cbrt",
+            "sqrt",
+            "pow",
+
+            "sin",
+            "cos",
+            "tan",
+            "asin",
+            "acos",
+            "atan",
+            "atan2",
+
+            "sinh",
+            "cosh",
+            "tanh",
+            "asinh",
+            "acosh",
+            "atanh",
+
+            "erf",
+            "erfc",
+            "lgamma",
+            "tgamma",
+
+            "ceil",
+            "floor",
+            "trunc",
+            "round",
+            "nearbyint",
+            "rint",
+        ]
+        if expr.func.__name__.lower() in math_functions_with_float_variant:
+            return self._print_math_function(
+                expr.func.__name__.lower(),
+                self.stringify(expr.args, ", ")
+            )
 
         return "%s" % self._prefix + expr.func.__name__.lower() + \
                "(%s)"%self.stringify(expr.args, ", ")
@@ -638,7 +741,7 @@ class _CustomCCodePrinter(_StrPrinter):
         if expr.exp.is_integer and int(expr.exp) == 1:
             return self.parenthesize(expr.base, PREC)
         if expr.exp is sp.S.NegativeOne:
-            return "1.0/{0}".format(self.parenthesize(expr.base, PREC))
+            return "1.0{0}/{1}".format(self._float_postfix, self.parenthesize(expr.base, PREC))
         if expr.exp.is_integer and int(expr.exp) in [2, 3]:
             return "({0})".format(\
                 "*".join(self.parenthesize(expr.base, PREC) \
@@ -651,18 +754,26 @@ class _CustomCCodePrinter(_StrPrinter):
                 "({0})*({0})".format(self.parenthesize(expr.base, PREC))
             )
         if expr.exp.is_integer and int(expr.exp) in [-2, -3]:
-            return "1.0/({0})".format(\
+            return "1.0{1}/({0})".format(\
                 "*".join(self.parenthesize(expr.base, PREC) \
-                         for i in range(-int(expr.exp))), PREC)
+                         for i in range(-int(expr.exp))), self._float_postfix)
         if expr.exp is sp.S.Half and not rational:
-            return "{0}sqrt({1})".format(self._prefix,
-                                         self._print(expr.base))
+            return self._print_math_function(
+                "sqrt",
+                self._print(expr.base)
+            )
         if expr.exp == -0.5:
-            return "1/{0}sqrt({1})".format(self._prefix,
-                                           self._print(expr.base))
-        return "{0}pow({1}, {2})".format(self._prefix,
-                                         self._print(expr.base),
-                                         self._print(expr.exp))
+            return "1/{}".format(
+                self._print_math_function(
+                    "sqrt",
+                    self._print(expr.base)
+                )
+            )
+        return self._print_math_function(
+                "pow",
+                "{0}, {1}".format(self._print(expr.base), self._print(expr.exp))
+            )
+
     def _print_sign(self, expr):
         return "{0}copysign(1.0, {1})".format(self._prefix, \
                                               self._print(expr.args[0]))
