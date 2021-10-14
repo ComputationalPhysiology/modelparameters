@@ -300,8 +300,8 @@ sp_namespace["ContinuousConditional"] = ContinuousConditional
 sp_namespace.update((name, op) for name, op in list(_relational.__dict__.items()) \
                     if name in ["Eq", "Ne", "Gt", "Ge", "Lt", "Le"])
 sp_namespace.update((name, getattr(sp, name)) for name in ["And", "Or"])
-sp_namespace["pi"] = sp.numbers.pi
-sp_namespace["E"] = sp.numbers.E
+sp_namespace["pi"] = sp.pi
+sp_namespace["E"] = sp.E
 
 sp_namespace["one"] = sp.sympify(1)
 sp_namespace["two"] = sp.sympify(2)

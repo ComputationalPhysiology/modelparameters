@@ -20,8 +20,7 @@ import sympy as sp
 import re
 from sympy.core.function import AppliedUndef as _AppliedUndef
 
-from sympy.printing import StrPrinter as _StrPrinter
-from sympy.printing.ccode import CCodePrinter as _CCodePrinter
+from sympy.printing.str import StrPrinter as _StrPrinter
 from sympy.printing.latex import LatexPrinter as _LatexPrinter
 from sympy.printing.latex import latex as _sympy_latex
 from sympy.printing.precedence import precedence as _precedence
