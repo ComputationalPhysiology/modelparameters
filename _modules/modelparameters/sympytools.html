@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympytools &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/nature.css" />
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympytools</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympytools</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright (C) 2012 Johan Hake</span>
+<span class="c1">#</span>
+<span class="c1"># This file is part of ModelParameters.</span>
+<span class="c1">#</span>
+<span class="c1"># ModelParameters is free software: you can redistribute it and/or modify</span>
+<span class="c1"># it under the terms of the GNU Lesser General Public License as published by</span>
+<span class="c1"># the Free Software Foundation, either version 3 of the License, or</span>
+<span class="c1"># (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1"># ModelParameters is distributed in the hope that it will be useful,</span>
+<span class="c1"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the</span>
+<span class="c1"># GNU Lesser General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1"># You should have received a copy of the GNU Lesser General Public License</span>
+<span class="c1"># along with ModelParameters. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="c1"># Use truediv</span>
+<span class="c1"># System imports</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">from</span> <span class="nn">sympy.core</span> <span class="kn">import</span> <span class="n">relational</span> <span class="k">as</span> <span class="n">_relational</span>
+<span class="kn">from</span> <span class="nn">sympy.core.function</span> <span class="kn">import</span> <span class="n">AppliedUndef</span> <span class="k">as</span> <span class="n">_AppliedUndef</span>
+
+<span class="kn">from</span> <span class="nn">.logger</span> <span class="kn">import</span> <span class="n">error</span>
+<span class="kn">from</span> <span class="nn">.logger</span> <span class="kn">import</span> <span class="n">type_error</span>
+<span class="kn">from</span> <span class="nn">.logger</span> <span class="kn">import</span> <span class="n">value_error</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">check_arg</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">deprecated</span>
+
+<span class="c1"># Local imports</span>
+
+
+<span class="c1"># Patch Sympy</span>
+<span class="n">_AppliedUndef</span><span class="o">.</span><span class="n">is_real</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">_AppliedUndef</span><span class="o">.</span><span class="n">is_imaginary</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">_AppliedUndef</span><span class="o">.</span><span class="n">is_commutative</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">_AppliedUndef</span><span class="o">.</span><span class="n">is_hermitian</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+<div class="viewcode-block" id="Conditional"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.Conditional">[docs]</a><span class="k">def</span> <span class="nf">Conditional</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">true_value</span><span class="p">,</span> <span class="n">false_value</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Declares a conditional</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    cond : A conditional</span>
+<span class="sd">        The conditional which should be evaluated</span>
+<span class="sd">    true_value : Any model expression</span>
+<span class="sd">        Model expression for a true evaluation of the conditional</span>
+<span class="sd">    false_value : Any model expression</span>
+<span class="sd">        Model expression for a false evaluation of the conditional</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cond</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">cond</span><span class="p">)</span>
+
+    <span class="kn">from</span> <span class="nn">sympy.core.relational</span> <span class="kn">import</span> <span class="n">Relational</span>
+    <span class="kn">from</span> <span class="nn">sympy.logic.boolalg</span> <span class="kn">import</span> <span class="n">Boolean</span>
+
+    <span class="c1"># If the conditional is a bool it is already evaluated</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">true_value</span> <span class="k">if</span> <span class="n">cond</span> <span class="k">else</span> <span class="n">false_value</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="p">(</span><span class="n">Relational</span><span class="p">,</span> <span class="n">Boolean</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="n">type_error</span><span class="p">(</span>
+            <span class="s2">&quot;Cond </span><span class="si">%s</span><span class="s2"> is of type </span><span class="si">%s</span><span class="s2">, but must be a Relational&quot;</span>
+            <span class="s2">&quot; or Boolean.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">cond</span><span class="p">)),</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">sp</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">Piecewise</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">true_value</span><span class="p">,</span> <span class="n">cond</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">false_value</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="kc">True</span><span class="p">)),</span>
+        <span class="n">evaluate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ContinuousConditional"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.ContinuousConditional">[docs]</a><span class="k">def</span> <span class="nf">ContinuousConditional</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">true_value</span><span class="p">,</span> <span class="n">false_value</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Declares a continuous conditional. Instead of a either or result the</span>
+<span class="sd">    true and false values are weighted with a sigmoidal function which</span>
+<span class="sd">    either evaluates to 0 or 1 instead of the true or false.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    cond : An InEquality conditional</span>
+<span class="sd">        An InEquality conditional which should be evaluated</span>
+<span class="sd">    true_value : Any model expression</span>
+<span class="sd">        Model expression for a true evaluation of the conditional</span>
+<span class="sd">    false_value : Any model expression</span>
+<span class="sd">        Model expression for a false evaluation of the conditional</span>
+<span class="sd">    sigma : float (optional)</span>
+<span class="sd">        Determines the sharpness of the sigmoidal function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">cond</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">cond</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="s2">&quot;is_Relational&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="s2">&quot;is_relational&quot;</span><span class="p">)):</span>
+        <span class="n">type_error</span><span class="p">(</span><span class="s2">&quot;Expected sympy object to have is_{r,R}elational &quot;</span> <span class="s2">&quot;attribute.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="s2">&quot;is_Relational&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">cond</span><span class="o">.</span><span class="n">is_Relational</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
+        <span class="nb">hasattr</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="s2">&quot;is_relational&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">cond</span><span class="o">.</span><span class="n">is_relational</span>
+    <span class="p">):</span>
+        <span class="n">type_error</span><span class="p">(</span><span class="s2">&quot;Expected a Relational as first argument.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># FIXME: Use the rel_op for check, as some changes has been applied</span>
+    <span class="c1"># FIXME: in latest sympy making comparision difficult</span>
+    <span class="k">if</span> <span class="s2">&quot;&lt;&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cond</span><span class="o">.</span><span class="n">rel_op</span> <span class="ow">and</span> <span class="s2">&quot;&gt;&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cond</span><span class="o">.</span><span class="n">rel_op</span><span class="p">:</span>
+        <span class="n">type_error</span><span class="p">(</span>
+            <span class="s2">&quot;Expected a lesser or greater than relational for &quot;</span>
+            <span class="s2">&quot;a continuous conditional .&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Create Heaviside</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">exp</span><span class="p">((</span><span class="n">cond</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">cond</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">))</span>
+
+    <span class="c1"># Desides which should be weighted with 1 and 0</span>
+    <span class="k">if</span> <span class="s2">&quot;&gt;&quot;</span> <span class="ow">in</span> <span class="n">cond</span><span class="o">.</span><span class="n">rel_op</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">true_value</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">H</span><span class="p">)</span> <span class="o">+</span> <span class="n">false_value</span> <span class="o">*</span> <span class="n">H</span>
+
+    <span class="k">return</span> <span class="n">true_value</span> <span class="o">*</span> <span class="n">H</span> <span class="o">+</span> <span class="n">false_value</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">H</span><span class="p">)</span></div>
+
+
+<span class="c1"># Collect all parameters</span>
+<span class="n">_all_symbol_parameters</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">_indexed_format</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\A([a-zA-Z]\w*)\[([\d,]+)\]\Z&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="store_symbol_parameter"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.store_symbol_parameter">[docs]</a><span class="k">def</span> <span class="nf">store_symbol_parameter</span><span class="p">(</span><span class="n">param</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Store a symbol parameter</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">.codegeneration</span> <span class="kn">import</span> <span class="n">sympycode</span>
+    <span class="kn">from</span> <span class="nn">.parameters</span> <span class="kn">import</span> <span class="n">ScalarParam</span>
+
+    <span class="n">check_arg</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">ScalarParam</span><span class="p">)</span>
+    <span class="n">sym</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">sym</span>
+    <span class="c1"># if str(sym) in _all_symbol_parameters:</span>
+    <span class="c1">#    warning(&quot;Parameter with symbol name &#39;%s&#39; already &quot;\</span>
+    <span class="c1">#            &quot;excist&quot; % sym)</span>
+
+    <span class="n">param_str</span> <span class="o">=</span> <span class="n">sympycode</span><span class="p">(</span><span class="n">sym</span><span class="p">)</span>
+    <span class="n">indexed</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">_indexed_format</span><span class="p">,</span> <span class="n">param_str</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">indexed</span><span class="p">:</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">indexed</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+
+        <span class="c1"># Get dict</span>
+        <span class="n">param_dict</span> <span class="o">=</span> <span class="n">_all_symbol_parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">param_dict</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">param_dict</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">_all_symbol_parameters</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">param_dict</span>
+
+        <span class="n">param_dict</span><span class="p">[</span><span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">indices</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">param</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_all_symbol_parameters</span><span class="p">[</span><span class="n">param_str</span><span class="p">]</span> <span class="o">=</span> <span class="n">param</span></div>
+
+
+<div class="viewcode-block" id="symbol_to_params"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.symbol_to_params">[docs]</a><span class="nd">@deprecated</span>
+<span class="k">def</span> <span class="nf">symbol_to_params</span><span class="p">(</span><span class="n">sym</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">symbol_to_param</span><span class="p">(</span><span class="n">sym</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="symbol_to_param"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.symbol_to_param">[docs]</a><span class="k">def</span> <span class="nf">symbol_to_param</span><span class="p">(</span><span class="n">sym</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Take a symbol or expression of symbols and returns the corresponding</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">sympy.core.function</span> <span class="kn">import</span> <span class="n">AppliedUndef</span>
+    <span class="kn">from</span> <span class="nn">.codegeneration</span> <span class="kn">import</span> <span class="n">sympycode</span>
+
+    <span class="k">if</span> <span class="n">sp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">error</span><span class="p">(</span><span class="s2">&quot;sympy is needed for symbol_to_params to work.&quot;</span><span class="p">)</span>
+
+    <span class="n">check_arg</span><span class="p">(</span><span class="n">sym</span><span class="p">,</span> <span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">AppliedUndef</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Derivative</span><span class="p">),</span> <span class="n">context</span><span class="o">=</span><span class="n">symbol_to_param</span><span class="p">)</span>
+
+    <span class="n">param_str</span> <span class="o">=</span> <span class="n">sympycode</span><span class="p">(</span><span class="n">sym</span><span class="p">)</span>
+    <span class="n">indexed</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">_indexed_format</span><span class="p">,</span> <span class="n">param_str</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">indexed</span><span class="p">:</span>
+        <span class="n">name</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">indexed</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+
+        <span class="c1"># Get dict</span>
+        <span class="n">param</span> <span class="o">=</span> <span class="n">_all_symbol_parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">param</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">param</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">indices</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="n">param</span> <span class="o">=</span> <span class="n">_all_symbol_parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sympycode</span><span class="p">(</span><span class="n">sym</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">param</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">value_error</span><span class="p">(</span>
+            <span class="s2">&quot;No parameter with name &#39;</span><span class="si">{0}</span><span class="s2">&#39; &quot;</span>
+            <span class="s2">&quot;registered. Remember to declare Params which should be &quot;</span>
+            <span class="s2">&quot;used in expression with names.&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sympycode</span><span class="p">(</span><span class="n">sym</span><span class="p">)),</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">param</span></div>
+
+
+<div class="viewcode-block" id="symbols_from_expr"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.symbols_from_expr">[docs]</a><span class="k">def</span> <span class="nf">symbols_from_expr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">include_numbers</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_derivatives</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a set of all symbols of an expression</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    expr : sympy expression</span>
+<span class="sd">        A sympy expression containing sympy.Symbols or sympy.AppliedUndef</span>
+<span class="sd">        functions.</span>
+<span class="sd">    include_numbers : bool</span>
+<span class="sd">        If True numbers will also be returned</span>
+<span class="sd">    include_derivatives : bool</span>
+<span class="sd">        If True derivatives will be returned instead of its variables</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">sympy.core.function</span> <span class="kn">import</span> <span class="n">AppliedUndef</span>
+
+    <span class="n">symbols</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="n">pt</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">preorder_traversal</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">pt</span><span class="p">:</span>
+
+        <span class="c1"># Do not traverse AppliedUndef</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">AppliedUndef</span><span class="p">):</span>
+            <span class="n">pt</span><span class="o">.</span><span class="n">skip</span><span class="p">()</span>
+            <span class="n">symbols</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="p">(</span>
+            <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Dummy</span><span class="p">)</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">name</span>
+        <span class="p">):</span>
+            <span class="n">symbols</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">include_numbers</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Number</span><span class="p">):</span>
+            <span class="n">symbols</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">include_derivatives</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Derivative</span><span class="p">):</span>
+            <span class="c1"># Do not traverse Derivative</span>
+            <span class="n">pt</span><span class="o">.</span><span class="n">skip</span><span class="p">()</span>
+            <span class="n">symbols</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">symbols</span></div>
+
+
+<div class="viewcode-block" id="iter_symbol_params_from_expr"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.iter_symbol_params_from_expr">[docs]</a><span class="nd">@deprecated</span>
+<span class="k">def</span> <span class="nf">iter_symbol_params_from_expr</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return an iterator over sp.Symbols from expr</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">check_arg</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Basic</span><span class="p">)</span>
+
+    <span class="c1"># Filter out dummy symbols</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">atom</span>
+        <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">atoms</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">atom</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Symbol</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">atom</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Dummy</span><span class="p">)</span> <span class="ow">and</span> <span class="n">atom</span><span class="o">.</span><span class="n">name</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="symbol_params_from_expr"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.symbol_params_from_expr">[docs]</a><span class="nd">@deprecated</span>
+<span class="k">def</span> <span class="nf">symbol_params_from_expr</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a list of Symbols from expr</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">sym</span> <span class="k">for</span> <span class="n">sym</span> <span class="ow">in</span> <span class="n">iter_symbol_params_from_expr</span><span class="p">(</span><span class="n">expr</span><span class="p">)]</span></div>
+
+
+<div class="viewcode-block" id="symbol_param_value_namespace"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.symbol_param_value_namespace">[docs]</a><span class="nd">@deprecated</span>
+<span class="k">def</span> <span class="nf">symbol_param_value_namespace</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a value name space for the included symbols in the expression</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">check_arg</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Basic</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">symbol_param</span><span class="p">),</span> <span class="n">symbol_to_param</span><span class="p">(</span><span class="n">symbol_param</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">symbol_param</span> <span class="ow">in</span> <span class="n">iter_symbol_params_from_expr</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="value_namespace"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.value_namespace">[docs]</a><span class="k">def</span> <span class="nf">value_namespace</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">include_derivatives</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a value name space for the included symbols in the expression</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">.codegeneration</span> <span class="kn">import</span> <span class="n">sympycode</span>
+
+    <span class="n">check_arg</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Basic</span><span class="p">)</span>
+    <span class="n">ns</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">sym</span> <span class="ow">in</span> <span class="n">symbols_from_expr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">include_derivatives</span><span class="o">=</span><span class="n">include_derivatives</span><span class="p">):</span>
+
+        <span class="c1"># Get value</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">symbol_to_param</span><span class="p">(</span><span class="n">sym</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="c1"># Check for indexed parameters</span>
+        <span class="n">param_str</span> <span class="o">=</span> <span class="n">sympycode</span><span class="p">(</span><span class="n">sym</span><span class="p">)</span>
+        <span class="n">indexed</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">_indexed_format</span><span class="p">,</span> <span class="n">param_str</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">indexed</span><span class="p">:</span>
+            <span class="n">name</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="n">indexed</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ns</span><span class="p">:</span>
+                <span class="n">ns</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">ns</span><span class="p">[</span><span class="n">name</span><span class="p">][</span><span class="nb">eval</span><span class="p">(</span><span class="n">indices</span><span class="p">)]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ns</span><span class="p">[</span><span class="n">param_str</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">return</span> <span class="n">ns</span>
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">sympycode</span><span class="p">(</span><span class="n">symbol</span><span class="p">),</span> <span class="n">symbol_to_param</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">symbols_from_expr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">include_derivatives</span><span class="o">=</span><span class="n">include_derivatives</span><span class="p">)</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="add_pair_to_subs"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.add_pair_to_subs">[docs]</a><span class="k">def</span> <span class="nf">add_pair_to_subs</span><span class="p">(</span><span class="n">subs</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Add a pair of old and new symbols to subs. If a subs with old as a</span>
+<span class="sd">    key already excist it will be removed before insertion.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">check_arg</span><span class="p">(</span><span class="n">subs</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">check_arg</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Basic</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">check_arg</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">Basic</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="p">(</span><span class="n">old0</span><span class="p">,</span> <span class="n">new0</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">subs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">old0</span> <span class="o">==</span> <span class="n">old</span><span class="p">:</span>
+            <span class="n">subs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">ind</span><span class="p">)</span>
+            <span class="k">break</span>
+    <span class="n">subs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">))</span></div>
+
+
+<span class="c1"># Create a sympy evaulation namespace</span>
+<span class="n">sp_namespace</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">sp_namespace</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">op</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="k">if</span> <span class="n">name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;_&quot;</span>
+<span class="p">)</span>
+<span class="n">sp_namespace</span><span class="p">[</span><span class="s2">&quot;Conditional&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Conditional</span>
+<span class="n">sp_namespace</span><span class="p">[</span><span class="s2">&quot;ContinuousConditional&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ContinuousConditional</span>
+<span class="n">sp_namespace</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">op</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">_relational</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Eq&quot;</span><span class="p">,</span> <span class="s2">&quot;Ne&quot;</span><span class="p">,</span> <span class="s2">&quot;Gt&quot;</span><span class="p">,</span> <span class="s2">&quot;Ge&quot;</span><span class="p">,</span> <span class="s2">&quot;Lt&quot;</span><span class="p">,</span> <span class="s2">&quot;Le&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">sp_namespace</span><span class="o">.</span><span class="n">update</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;And&quot;</span><span class="p">,</span> <span class="s2">&quot;Or&quot;</span><span class="p">])</span>
+<span class="n">sp_namespace</span><span class="p">[</span><span class="s2">&quot;pi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">numbers</span><span class="o">.</span><span class="n">pi</span>
+<span class="n">sp_namespace</span><span class="p">[</span><span class="s2">&quot;E&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">numbers</span><span class="o">.</span><span class="n">E</span>
+
+<span class="n">sp_namespace</span><span class="p">[</span><span class="s2">&quot;one&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sp_namespace</span><span class="p">[</span><span class="s2">&quot;two&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sp_namespace</span><span class="p">[</span><span class="s2">&quot;three&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">sp_namespace</span><span class="p">[</span><span class="s2">&quot;four&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">sp_namespace</span><span class="p">[</span><span class="s2">&quot;five&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">sp_namespace</span><span class="p">[</span><span class="s2">&quot;ten&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="n">_name</span> <span class="k">for</span> <span class="n">_name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">globals</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="k">if</span> <span class="n">_name</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;_&quot;</span><span class="p">]</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympytools</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+    </div>
+  </body>
+</html>

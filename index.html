@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Welcome to modelparameters’s documentation! &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="modelparameters package" href="modelparameters.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.html" title="modelparameters package"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">modelparameters 1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to modelparameters’s documentation!</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="welcome-to-modelparameters-s-documentation">
+<h1>Welcome to modelparameters’s documentation!<a class="headerlink" href="#welcome-to-modelparameters-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Modelparameters is a lightweight library to declare nested parameters
+in Python, and can be used as a module for providing parameter
+structure for physical models. It is mainly developed as a tool for
+<a class="reference external" href="https://bitbucket.org/finsberg/gotran">gotran</a>, but certainly not
+limited to that.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">modelparameters</span> <span class="kn">import</span> <span class="n">ScalarParam</span>
+<span class="c1"># Define the gravitational acceleration</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">ScalarParam</span><span class="p">(</span><span class="mf">9.81</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;m/s**2&quot;</span><span class="p">,</span>
+                <span class="n">description</span><span class="o">=</span><span class="s2">&quot;gravitational acceleration&quot;</span><span class="p">)</span>
+<span class="c1"># Define the time (in milliseconds)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">ScalarParam</span><span class="p">(</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;ms&quot;</span><span class="p">,</span>
+                <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Time spent&quot;</span><span class="p">)</span>
+<span class="c1"># Compute the distance travelled in free fall</span>
+<span class="n">s</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Output:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="m">49050</span>.0 ∈ <span class="o">[</span>-∞, ∞<span class="o">]</span>
+</pre></div>
+</div>
+<section id="demos">
+<h2>Demos<a class="headerlink" href="#demos" title="Permalink to this headline">¶</a></h2>
+<p>Will come later!</p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>You can install modelparameters either with <a class="reference external" href="https://pypi.org/project/modelparameters/">pip</a>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install modelparameters
+</pre></div>
+</div>
+<p>or if you want the latest features, you can install from <a class="reference external" href="https://bitbucket.org/finsberg/modelparameters">source</a>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip install git+https://finsberg@bitbucket.org/finsberg/modelparameters.git
+</pre></div>
+</div>
+</section>
+<section id="source-code">
+<h2>Source code<a class="headerlink" href="#source-code" title="Permalink to this headline">¶</a></h2>
+<p>Modelparmeters is orginally developed by Johan Hake, and the original
+source code can be found in his <a class="reference external" href="https://bitbucket.org/johanhake/modelparameters">repoistory</a>.
+The current maintained version can be foud <a class="reference external" href="https://bitbucket.org/finsberg/modelparameters">here</a>.</p>
+</section>
+<section id="contributors">
+<h2>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">¶</a></h2>
+<p>The main contributors are</p>
+<ul class="simple">
+<li><p>Henrik Finsberg (<a class="reference external" href="mailto:henriknf&#37;&#52;&#48;simula&#46;no">henriknf<span>&#64;</span>simula<span>&#46;</span>no</a>)</p></li>
+<li><p>Johan Hake (<a class="reference external" href="mailto:hake&#46;dev&#37;&#52;&#48;gmail&#46;com">hake<span>&#46;</span>dev<span>&#64;</span>gmail<span>&#46;</span>com</a>)</p></li>
+</ul>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>GNU GPLv3</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Programmers reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.html">modelparameters package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.html#module-modelparameters.codegeneration">modelparameters.codegeneration module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.html#module-modelparameters.commands">modelparameters.commands module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.html#module-modelparameters.config">modelparameters.config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.html#module-modelparameters.logger">modelparameters.logger module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.html#module-modelparameters.parameterdict">modelparameters.parameterdict module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.html#module-modelparameters.parameters">modelparameters.parameters module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.html#module-modelparameters.sympytools">modelparameters.sympytools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.html#module-modelparameters.utils">modelparameters.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.html#module-modelparameters">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Welcome to modelparameters’s documentation!</a><ul>
+<li><a class="reference internal" href="#demos">Demos</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#source-code">Source code</a></li>
+<li><a class="reference internal" href="#contributors">Contributors</a></li>
+<li><a class="reference internal" href="#license">License</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modelparameters.html"
+                        title="next chapter">modelparameters package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.html" title="modelparameters package"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">modelparameters 1.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Welcome to modelparameters’s documentation!</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+    </div>
+  </body>
+</html>
