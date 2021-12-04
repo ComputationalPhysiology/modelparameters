@@ -24,6 +24,7 @@ __all__ = [
     "eval_param_expr",
     "dummy_sym",
 ]
+import os
 
 # System imports
 # Conditional sympy import
@@ -61,7 +62,7 @@ from .utils import _np as np
 
 import pint
 
-ureg = pint.UnitRegistry()
+ureg = pint.UnitRegistry(fmt_locale=os.getenv("LC_ALL", "en_US.UTF-8"))
 
 option_types = scalars + (str,)
 
@@ -350,7 +351,7 @@ class Param(object):
         value = 1000.0, unit = 'milliseconds'
         """
         new = ureg(f"{self.value}*{self.unit}").to(unit)
-        return self.__class__(value=new.magnitude, unit=new.u.format_babel())
+        return self.__class__(value=new.magnitude, unit=format_babel(new))
 
     def _op(self, other, operator, reverse=False, check_units=False):
         """
@@ -421,7 +422,8 @@ class Param(object):
 
         kwargs["operator"] = operator
         new = ureg(equation.format(**kwargs))
-        return self.__class__(value=new.magnitude, unit=new.u.format_babel())
+
+        return self.__class__(value=new.magnitude, unit=format_babel(new))
 
     def _cmp(self, other, cmp_op, check_units=True):
         """Compare self and other with custom
@@ -542,10 +544,17 @@ class Param(object):
 
         self_value, self_name, self_unit = _process_other(self)
         new = ureg(f"({self_value}*{self_unit})**{other_value}")
-        return self.__class__(value=new.magnitude, unit=new.u.format_babel())
+        return self.__class__(value=new.magnitude, unit=format_babel(new))
 
     def __abs__(self):
         return abs(self.value)
+
+
+def format_babel(new):
+    try:
+        return new.u.format_babel()
+    except TypeError:
+        return str(new.u)
 
 
 class OptionParam(Param):
