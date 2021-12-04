@@ -14,22 +14,20 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with ModelParameters. If not, see <http://www.gnu.org/licenses/>.
-
 # System imports
-import sympy as sp
 import re
-from sympy.core.function import AppliedUndef as _AppliedUndef
+from distutils.version import LooseVersion as _V
 
+import sympy as sp
+from sympy.core.function import AppliedUndef as _AppliedUndef
 from sympy.printing import StrPrinter as _StrPrinter
 from sympy.printing.ccode import CCodePrinter as _CCodePrinter
-from sympy.printing.latex import LatexPrinter as _LatexPrinter
 from sympy.printing.latex import latex as _sympy_latex
+from sympy.printing.latex import LatexPrinter as _LatexPrinter
 from sympy.printing.precedence import precedence as _precedence
 
 from modelparameters.utils import check_arg as _check_arg
 from modelparameters.utils import scalars as _scalars
-
-from distutils.version import LooseVersion as _V
 
 _current_sympy_version = _V(sp.__version__)
 
@@ -40,64 +38,277 @@ else:
     _order = None
 
 # A collection of language specific keywords
-_cpp_keywords = ["auto", "const", "double", "float", "int", "short", "struct",
-                 "break", "continue", "else", "for", "long", "signed", "switch",
-                 "case", "default", "enum", "goto", "register", "sizeof", "typedef",
-                 "char", "do", "extern", "if", "return", "static", "union", "while",
-                 "asm", "dynamic_cast", "namespace", "reinterpret_cast", "try",
-                 "bool", "explicit", "new", "static_cast", "typeid", "volatile",
-                 "catch", "operator", "template", "typename",
-                 "class", "friend", "private", "this", "using",
-                 "const_cast", "inline", "public", "throw", "virtual",
-                 "delete", "mutable", "protected", "wchar_t",
-                 "or", "and", "xor", "not", "unsigned", "void"]
+_cpp_keywords = [
+    "auto",
+    "const",
+    "double",
+    "float",
+    "int",
+    "short",
+    "struct",
+    "break",
+    "continue",
+    "else",
+    "for",
+    "long",
+    "signed",
+    "switch",
+    "case",
+    "default",
+    "enum",
+    "goto",
+    "register",
+    "sizeof",
+    "typedef",
+    "char",
+    "do",
+    "extern",
+    "if",
+    "return",
+    "static",
+    "union",
+    "while",
+    "asm",
+    "dynamic_cast",
+    "namespace",
+    "reinterpret_cast",
+    "try",
+    "bool",
+    "explicit",
+    "new",
+    "static_cast",
+    "typeid",
+    "volatile",
+    "catch",
+    "operator",
+    "template",
+    "typename",
+    "class",
+    "friend",
+    "private",
+    "this",
+    "using",
+    "const_cast",
+    "inline",
+    "public",
+    "throw",
+    "virtual",
+    "delete",
+    "mutable",
+    "protected",
+    "wchar_t",
+    "or",
+    "and",
+    "xor",
+    "not",
+    "unsigned",
+    "void",
+]
 
-_python_keywords = ["and", "del", "from", "not", "while", "as", "elif", "global",
-                    "or", "with", "assert", "else", "if", "pass", "yield",
-                    "break", "except", "import", "print", "class", "exec",
-                    "in", "raise", "continue", "finally", "is", "return", "def",
-                    "for", "lambda", "try"]
+_python_keywords = [
+    "and",
+    "del",
+    "from",
+    "not",
+    "while",
+    "as",
+    "elif",
+    "global",
+    "or",
+    "with",
+    "assert",
+    "else",
+    "if",
+    "pass",
+    "yield",
+    "break",
+    "except",
+    "import",
+    "print",
+    "class",
+    "exec",
+    "in",
+    "raise",
+    "continue",
+    "finally",
+    "is",
+    "return",
+    "def",
+    "for",
+    "lambda",
+    "try",
+]
 
-_matlab_keywords = ["break", "case", "catch", "classdef", "continue", "else",
-                    "elseif", "end", "for", "function", "global", "if", "otherwise",
-                    "parfor", "persistent", "return", "spmd", "switch", "try", "while"]
+_matlab_keywords = [
+    "break",
+    "case",
+    "catch",
+    "classdef",
+    "continue",
+    "else",
+    "elseif",
+    "end",
+    "for",
+    "function",
+    "global",
+    "if",
+    "otherwise",
+    "parfor",
+    "persistent",
+    "return",
+    "spmd",
+    "switch",
+    "try",
+    "while",
+]
 
-_julia_keywords = ["break", "continue", "if", "elseif", "else", "global", "@assert"
-                   "for", "while", "end", "function", "in", "using", "nothing"]
+_julia_keywords = [
+    "break",
+    "continue",
+    "if",
+    "elseif",
+    "else",
+    "global",
+    "@assert" "for",
+    "while",
+    "end",
+    "function",
+    "in",
+    "using",
+    "nothing",
+]
 
-_fortran_keywords = ["assign", "backspace", "block data", "call", "close", "common",
-                     "continue", "data", "dimension", "do", "else", "else if", "end",
-                     "endfile", "endif", "entry", "equivalence", "external", "format",
-                     "function", "goto", "if", "implicit", "inquire", "intrinsic",
-                     "open", "parameter", "pause", "print", "program", "read",
-                     "return", "rewind", "rewrite", "save", "stop", "subroutine",
-                     "then", "write"] + \
-                     ["allocate", "allocatable", "case", "contains", "cycle",
-                      "deallocate", "elsewhere", "exit", "include", "interface",
-                      "intent", "module", "namelist", "nullify", "only", "operator",
-                      "optional", "pointer", "private", "procedure", "public",
-                      "result", "recursive", "select", "sequence", "target", "use",
-                      "while", "where"] + \
-                      ["forall", "pure"] + \
-                      ["abstract", "associate", "asynchronous", "bind", "class",
-                       "deferred", "enum", "enumerator", "extends", "final", "flush",
-                       "generic", "import", "non_overridable", "nopass", "pass",
-                       "protected", "value", "volatile", "wait"] + \
-                       ["block", "codimension", "do concurrent", "contiguous",
-                        "critical", "error stop", "submodule", "sync all",
-                        "sync images", "sync memory", "lock", "unlock"]
+_fortran_keywords = (
+    [
+        "assign",
+        "backspace",
+        "block data",
+        "call",
+        "close",
+        "common",
+        "continue",
+        "data",
+        "dimension",
+        "do",
+        "else",
+        "else if",
+        "end",
+        "endfile",
+        "endif",
+        "entry",
+        "equivalence",
+        "external",
+        "format",
+        "function",
+        "goto",
+        "if",
+        "implicit",
+        "inquire",
+        "intrinsic",
+        "open",
+        "parameter",
+        "pause",
+        "print",
+        "program",
+        "read",
+        "return",
+        "rewind",
+        "rewrite",
+        "save",
+        "stop",
+        "subroutine",
+        "then",
+        "write",
+    ]
+    + [
+        "allocate",
+        "allocatable",
+        "case",
+        "contains",
+        "cycle",
+        "deallocate",
+        "elsewhere",
+        "exit",
+        "include",
+        "interface",
+        "intent",
+        "module",
+        "namelist",
+        "nullify",
+        "only",
+        "operator",
+        "optional",
+        "pointer",
+        "private",
+        "procedure",
+        "public",
+        "result",
+        "recursive",
+        "select",
+        "sequence",
+        "target",
+        "use",
+        "while",
+        "where",
+    ]
+    + ["forall", "pure"]
+    + [
+        "abstract",
+        "associate",
+        "asynchronous",
+        "bind",
+        "class",
+        "deferred",
+        "enum",
+        "enumerator",
+        "extends",
+        "final",
+        "flush",
+        "generic",
+        "import",
+        "non_overridable",
+        "nopass",
+        "pass",
+        "protected",
+        "value",
+        "volatile",
+        "wait",
+    ]
+    + [
+        "block",
+        "codimension",
+        "do concurrent",
+        "contiguous",
+        "critical",
+        "error stop",
+        "submodule",
+        "sync all",
+        "sync images",
+        "sync memory",
+        "lock",
+        "unlock",
+    ]
+)
 
-_all_keywords = set(_cpp_keywords+_python_keywords+_matlab_keywords+
-                    _fortran_keywords+_julia_keywords)
+_all_keywords = set(
+    _cpp_keywords
+    + _python_keywords
+    + _matlab_keywords
+    + _fortran_keywords
+    + _julia_keywords,
+)
+
 
 def _get_potence(value):
     import math
-    exponent = int(math.log10(value))/3*3
-    rest = _round2(float(value)/10**exponent, 3)
+
+    exponent = int(math.log10(value)) / 3 * 3
+    rest = _round2(float(value) / 10 ** exponent, 3)
     if rest < 1:
         exponent -= 3
         rest *= 1e3
     return rest, exponent
+
 
 def _round2(x, n=0, sigs4n=1):
     """
@@ -115,14 +326,15 @@ def _round2(x, n=0, sigs4n=1):
     """
     import math
 
-    if x==0:
+    if x == 0:
         return x
-    if n<0:
-        n=_round2(-n, sigs4n)
-        return n*int(x/n+.5)
-    if n==0:
-        return 10.**(int(math.floor(math.log10(abs(x)))))
+    if n < 0:
+        n = _round2(-n, sigs4n)
+        return n * int(x / n + 0.5)
+    if n == 0:
+        return 10.0 ** (int(math.floor(math.log10(abs(x)))))
     return round(x, int(n) - 1 - int(math.floor(math.log10(abs(x)))))
+
 
 def _coeff_isneg(a):
     """Return True if the leading Number is negative.
@@ -147,32 +359,32 @@ def _coeff_isneg(a):
         a = a.args[0]
     return a.is_Number and a.is_negative
 
-_relational_map = {
-    "==":"Eq",
-    "!=":"Ne",
-    "<":"Lt",
-    "<=":"Le",
-    ">":"Gt",
-    ">=":"Ge",
-    }
 
+_relational_map = {
+    "==": "Eq",
+    "!=": "Ne",
+    "<": "Lt",
+    "<=": "Le",
+    ">": "Gt",
+    ">=": "Ge",
+}
 
 
 _relational_map_matlab = {
-    "==":"==",
-    "!=":"~=",
-    "<":"<",
-    "<=":"<=",
-    ">":">",
-    ">=":">=",
-    }
+    "==": "==",
+    "!=": "~=",
+    "<": "<",
+    "<=": "<=",
+    ">": ">",
+    ">=": ">=",
+}
 
 
 def _print_Mul(self, expr):
 
     prec = _precedence(expr)
 
-    if self.order not in ('old', 'none'):
+    if self.order not in ("old", "none"):
         args = expr.as_ordered_factors()
     else:
         # use make_args in case expr was something like -x -> x
@@ -194,12 +406,17 @@ def _print_Mul(self, expr):
         if isinstance(args[0], sp.Mul):
             prec -= 1
 
-    a = [] # items in the numerator
-    b = [] # items that are in the denominator (if any)
+    a = []  # items in the numerator
+    b = []  # items that are in the denominator (if any)
 
     # Gather args for numerator/denominator
     for item in args:
-        if item.is_commutative and item.is_Pow and item.exp.is_Rational and item.exp.is_negative:
+        if (
+            item.is_commutative
+            and item.is_Pow
+            and item.exp.is_Rational
+            and item.exp.is_negative
+        ):
             if item.exp != -1:
                 b.append(sp.Pow(item.base, -item.exp, evaluate=False))
             else:
@@ -218,25 +435,31 @@ def _print_Mul(self, expr):
     b_str = [self.parenthesize(x, prec) for x in b]
 
     if len(b) == 0:
-        return sign + '*'.join(a_str)
+        return sign + "*".join(a_str)
     elif len(b) == 1:
         if len(a) == 1 and not (a[0].is_Atom or a[0].is_Add):
-            return sign + "{0}/".format(a_str[0]) + '*'.join(b_str)
+            return sign + f"{a_str[0]}/" + "*".join(b_str)
         else:
-            return sign + '*'.join(a_str) + "/{0}".format(b_str[0])
+            return sign + "*".join(a_str) + f"/{b_str[0]}"
     else:
-        return sign + '*'.join(a_str) + "/({0})".format('*'.join(b_str))
+        return sign + "*".join(a_str) + f"/({'*'.join(b_str)})"
+
 
 # Patch sympy print Function
 _old_print_Function = _StrPrinter._print_Function
+
+
 def _print_Function(self, expr):
     if isinstance(expr, _AppliedUndef):
         return expr.func.__name__
     return _old_print_Function(self, expr)
 
-#_StrPrinter._print_Function = _print_Function
+
+# _StrPrinter._print_Function = _print_Function
 
 _unit_template = re.compile(r"([a-zA-Z]+\*\*[\-0-9]+|[a-zA-Z]+)")
+
+
 def latex_unit(unit):
     """
     Return sympified and LaTeX-formatted string describing given unit.
@@ -247,7 +470,7 @@ def latex_unit(unit):
     _check_arg(unit, str)
     if unit == "1":
         return ""
-    atomic_units =[]
+    atomic_units = []
 
     for unit in re.findall(_unit_template, unit):
         micro = False
@@ -263,46 +486,46 @@ def latex_unit(unit):
             unit, exp = unit.split("**")
 
         # Wrap text in mathrm
-        unit = "\\mathrm{{{0}}}".format(unit)
+        unit = f"\\mathrm{{{unit}}}"
         if exp:
-            unit += "^{{{0}}}".format(exp)
+            unit += f"^{{{exp}}}"
 
         if micro:
-            unit = "\\mu"+unit
+            unit = "\\mu" + unit
 
         atomic_units.append(unit)
 
     return "\\,".join(atomic_units)
 
+
 class _CustomPythonPrinter(_StrPrinter):
     def __init__(self, namespace=""):
-        assert(namespace in ["", "math", "np", "numpy", "ufl"])
+        assert namespace in ["", "math", "np", "numpy", "ufl"]
         self._namespace = namespace if not namespace else namespace + "."
         _StrPrinter.__init__(self, settings=dict(order=_order))
 
     def _print_Mod(self, expr):
-        return "({0} % {1})".format(expr.args[0], expr.args[1])
+        return f"({expr.args[0]} % {expr.args[1]})"
 
     # Why is this not called!
     def _print_Log(self, expr):
         if self._namespace == "ufl.":
-            return "{0}ln({1})".format(self._namespace,
-                                       self._print(expr.base))
+            return f"{self._namespace}ln({self._print(expr.base)})"
         else:
-            return "{0}log({1})".format(self._namespace,
-                                        self._print(expr.base))
+            return f"{self._namespace}log({self._print(expr.base)})"
+
     def _print_Abs(self, expr):
         if self._namespace == "math.":
-            return "{0}fabs({1})".format(self._namespace, self.stringify(expr.args, ", "))
+            return f"{self._namespace}fabs({self.stringify(expr.args, ', ')})"
         elif self._namespace == "ufl.":
-            return "abs({0})".format(self.stringify(expr.args, ", "))
+            return f"abs({self.stringify(expr.args, ', ')})"
         else:
-            return "{0}abs({1})".format(self._namespace, self.stringify(expr.args, ", "))
+            return f"{self._namespace}abs({self.stringify(expr.args, ', ')})"
 
-    #def _print_One(self, expr):
+    # def _print_One(self, expr):
     #    return "1.0"
 
-    #def _print_Zero(self, expr):
+    # def _print_Zero(self, expr):
     #    return "0.0"
 
     def _print_Float(self, expr):
@@ -315,160 +538,166 @@ class _CustomPythonPrinter(_StrPrinter):
             return _StrPrinter._print_Float(self, expr)
 
         return str(float(expr))
-    #def _print_Integer(self, expr):
+
+    # def _print_Integer(self, expr):
     #    return str(expr.p) + ".0"
 
     def _print_Derivative(self, expr):
         if not isinstance(expr.args[1], (_AppliedUndef, sp.Symbol)):
-            error("Can only print Derivative code with a single dependent "\
-                  "variabe. Got: {0}".format(sympycode(expr.args[1])))
+            error(
+                "Can only print Derivative code with a single dependent "
+                "variabe. Got: {0}".format(sympycode(expr.args[1])),
+            )
 
         if isinstance(expr.args[0], _AppliedUndef):
-            return "d%s_d%s" % (expr.args[0].func.__name__, "_".join(\
-                self._print(arg) for arg in expr.args[1:]))
+            return "d%s_d%s" % (
+                expr.args[0].func.__name__,
+                "_".join(self._print(arg) for arg in expr.args[1:]),
+            )
         return _StrPrinter._print_Derivative(self, expr)
 
     def _print_Subs(self, expr):
         # Execute subsitution
-        orig_expr=expr.expr
-        subs = dict((key,value) for key, value in zip(expr.variables, expr.point))
+        orig_expr = expr.expr
+        subs = dict((key, value) for key, value in zip(expr.variables, expr.point))
         return self._print(orig_expr.xreplace(subs))
 
-    #def _print_NegativeOne(self, expr):
+    # def _print_NegativeOne(self, expr):
     #    return "-1.0"
 
     def _print_Sqrt(self, expr):
-        return "{0}sqrt({1})".format(self._namespace, self._print(expr.args[0]))
+        return f"{self._namespace}sqrt({self._print(expr.args[0])})"
 
     def _print_Relational(self, expr):
-        return '{0}({1}, {2})'.format(_relational_map[expr.rel_op],
-                                      self._print(expr.lhs), self._print(expr.rhs))
+        return "{0}({1}, {2})".format(
+            _relational_map[expr.rel_op],
+            self._print(expr.lhs),
+            self._print(expr.rhs),
+        )
+
     def _print_Piecewise(self, expr):
         result = ""
         num_par = 0
         for e, c in expr.args[:-1]:
             num_par += 1
-            result += "Conditional({0}, {1}, ".format(self._print(c), \
-                                                      self._print(e))
-        last_line = self._print(expr.args[-1].expr) + ")"*num_par
-        return result+last_line
+            result += f"Conditional({self._print(c)}, {self._print(e)}, "
+        last_line = self._print(expr.args[-1].expr) + ")" * num_par
+        return result + last_line
 
     def _print_And(self, expr):
         PREC = _precedence(expr)
         if self._namespace == "ufl.":
             if len(expr.args) != 2:
                 error("UFL does not support more than 2 operands to And")
-            return "ufl.And({0}, {1})".format(self._print(expr.args[0]),
-                                              self._print(expr.args[1]))
-        return "And({0})".format(", ".join(self._print(arg) for arg in expr.args[::-1]))
+            return f"ufl.And({self._print(expr.args[0])}, {self._print(expr.args[1])})"
+        return f"And({', '.join(self._print(arg) for arg in expr.args[::-1])})"
 
     def _print_Or(self, expr):
         PREC = _precedence(expr)
         if self._namespace == "ufl.":
             if len(expr.args) != 2:
                 error("UFL does not support more than 2 operands to Or")
-            return "ufl.Or({0}, {1})".format(self._print(expr.args[0]),
-                                             self._print(expr.args[1]))
-        return "Or({0})".format(", ".join(self._print(arg) for arg in expr.args[::-1]))
+            return f"ufl.Or({self._print(expr.args[0])}, {self._print(expr.args[1])})"
+        return f"Or({', '.join(self._print(arg) for arg in expr.args[::-1])})"
 
     def _print_Pow(self, expr, rational=False):
         PREC = _precedence(expr)
         if expr.exp.is_integer and int(expr.exp) == 1:
             return self.parenthesize(expr.base, PREC)
         if expr.exp is sp.S.NegativeOne:
-            return "1.0/{0}".format(self.parenthesize(expr.base, PREC))
+            return f"1.0/{self.parenthesize(expr.base, PREC)}"
         if expr.exp.is_integer and int(expr.exp) in [2, 3]:
-            return "({0})".format(\
-                "*".join(self.parenthesize(expr.base, PREC) \
-                         for i in range(int(expr.exp))), PREC)
+            return "({0})".format(
+                "*".join(
+                    self.parenthesize(expr.base, PREC) for i in range(int(expr.exp))
+                ),
+                PREC,
+            )
         if expr.exp.is_integer and int(expr.exp) in [-2, -3]:
-            return "1.0/({0})".format(\
-                "*".join(self.parenthesize(expr.base, PREC) \
-                         for i in range(-int(expr.exp))), PREC)
+            return "1.0/({0})".format(
+                "*".join(
+                    self.parenthesize(expr.base, PREC) for i in range(-int(expr.exp))
+                ),
+                PREC,
+            )
         if expr.exp is sp.S.Half and not rational:
-            return "{0}sqrt({1})".format(self._namespace,
-                                         self._print(expr.base))
+            return f"{self._namespace}sqrt({self._print(expr.base)})"
         if expr.exp == -0.5:
-            return "1/{0}sqrt({1})".format(self._namespace,
-                                         self._print(expr.base))
+            return f"1/{self._namespace}sqrt({self._print(expr.base)})"
         if self._namespace == "ufl.":
-            return "{0}elem_pow({1}, {2})".format(self._namespace,
-                                                  self._print(expr.base),
-                                                  self._print(expr.exp))
+            return "{0}elem_pow({1}, {2})".format(
+                self._namespace,
+                self._print(expr.base),
+                self._print(expr.exp),
+            )
         if self._namespace in ["np.", "numpy."]:
-            return "{0}power({1}, {2})".format(self._namespace,
-                                               self._print(expr.base),
-                                               self._print(expr.exp))
+            return "{0}power({1}, {2})".format(
+                self._namespace,
+                self._print(expr.base),
+                self._print(expr.exp),
+            )
 
-        return "{0}pow({1}, {2})".format(self._namespace,
-                                         self._print(expr.base),
-                                         self._print(expr.exp))
+        return "{0}pow({1}, {2})".format(
+            self._namespace,
+            self._print(expr.base),
+            self._print(expr.exp),
+        )
 
     _print_Function = _print_Function
     _print_Mul = _print_Mul
 
-class _CustomPythonCodePrinter(_CustomPythonPrinter):
 
+class _CustomPythonCodePrinter(_CustomPythonPrinter):
     def _print_sign(self, expr):
         if self._namespace == "ufl.":
-            return "{0}sign({1})".format(self._namespace, \
-                                         self._print(expr.args[0]))
+            return f"{self._namespace}sign({self._print(expr.args[0])})"
         elif self._namespace in ["math.", "numpy.", "np."]:
-            return "{0}copysign(1.0, {1})".format(self._namespace,
-                                                  self._print(expr.args[0]))
-        return "sign({0})".format(self._print(expr.args[0]))
+            return f"{self._namespace}copysign(1.0, {self._print(expr.args[0])})"
+        return f"sign({self._print(expr.args[0])})"
 
     def _print_Mod(self, expr):
         if self._namespace == "math.":
-            return "{0}fmod({1})".format(self._namespace, \
-                                         self.stringify(expr.args, ", "))
+            return f"{self._namespace}fmod({self.stringify(expr.args, ', ')})"
         else:
-            return "{0}mod({1})".format(self._namespace,
-                                        self.stringify(expr.args, ", "))
+            return f"{self._namespace}mod({self.stringify(expr.args, ', ')})"
 
     def _print_Min(self, expr):
         if self._namespace == "ufl.":
-            return "ufl.{0}({1})".format(expr.func.__name__,\
-                                     self.stringify(expr.args, ", "))
-        return "{0}({1})".format(expr.func.__name__.lower(),\
-                                 self.stringify(expr.args, ", "))
+            return f"ufl.{expr.func.__name__}({self.stringify(expr.args, ', ')})"
+        return f"{expr.func.__name__.lower()}({self.stringify(expr.args, ', ')})"
 
     def _print_Max(self, expr):
         if self._namespace == "ufl.":
-            return "ufl.{0}({1})".format(expr.func.__name__,\
-                                     self.stringify(expr.args, ", "))
-        return "{0}({1})".format(expr.func.__name__.lower(),\
-                                 self.stringify(expr.args, ", "))
+            return f"ufl.{expr.func.__name__}({self.stringify(expr.args, ', ')})"
+        return f"{expr.func.__name__.lower()}({self.stringify(expr.args, ', ')})"
 
     def _print_Function(self, expr):
-        #print expr.func.__name__, expr.args
+        # print expr.func.__name__, expr.args
         func_name = expr.func.__name__
 
         if isinstance(expr, _AppliedUndef):
             return func_name
 
         elif func_name == "ceiling":
-            return "{0}ceil({1})".format(self._namespace, \
-                                         self.stringify(expr.args, ", "))
+            return f"{self._namespace}ceil({self.stringify(expr.args, ', ')})"
         elif func_name == "log":
             if self._namespace == "ufl.":
-                return "{0}ln({1})".format(self._namespace,
-                                           self._print(expr.args[0]))
+                return f"{self._namespace}ln({self._print(expr.args[0])})"
             else:
-                return "{0}log({1})".format(self._namespace,
-                                            self._print(expr.args[0]))
+                return f"{self._namespace}log({self._print(expr.args[0])})"
         else:
-            return "{0}{1}".format(self._namespace, \
-                        func_name.lower() + \
-                        "({0})".format(self.stringify(expr.args, ", ")))
+            return "{0}{1}".format(
+                self._namespace,
+                func_name.lower() + "({0})".format(self.stringify(expr.args, ", ")),
+            )
 
     def _print_re(self, expr):
         assert len(expr.args) == 1
-        return "({0}).real".format(self._print(expr.args[0]))
+        return f"({self._print(expr.args[0])}).real"
 
     def _print_im(self, expr):
         assert len(expr.args) == 1
-        return "({0}).imag".format(self._print(expr.args[0]))
+        return f"({self._print(expr.args[0])}).imag"
 
     def _print_Piecewise(self, expr):
         result = ""
@@ -476,75 +705,90 @@ class _CustomPythonCodePrinter(_CustomPythonPrinter):
         if self._namespace == "ufl.":
             for e, c in expr.args[:-1]:
                 num_par += 1
-                result += "ufl.conditional({0}, {1}, ".format(self._print(c), \
-                                                             self._print(e))
+                result += f"ufl.conditional({self._print(c)}, {self._print(e)}, "
         elif self._namespace in ("numpy.", "np."):
             for e, c in expr.args[:-1]:
                 num_par += 1
                 result += self._namespace
-                result += "where({0}, {1}, ".format(self._print(c), \
-                                                          self._print(e))
+                result += f"where({self._print(c)}, {self._print(e)}, "
         else:
             cond_str = "{0}"
             for e, c in expr.args[:-1]:
                 num_par += 1
-                result += "({0} if {1} else ".format(\
-                    self._print(e), cond_str.format(self._print(c)))
+                result += "({0} if {1} else ".format(
+                    self._print(e),
+                    cond_str.format(self._print(c)),
+                )
 
-        last_line = self._print(expr.args[-1].expr) + ")"*num_par
-        return result+last_line
+        last_line = self._print(expr.args[-1].expr) + ")" * num_par
+        return result + last_line
 
     def _print_Relational(self, expr):
         if self._namespace == "ufl.":
-            return 'ufl.{0}({1}, {2})'.format(_relational_map[expr.rel_op].lower(),
-                                              self._print(expr.lhs), self._print(expr.rhs))
-        return "{0} {1} {2}".format(self.parenthesize(expr.lhs, _precedence(expr)),
-                                    expr.rel_op,
-                                    self.parenthesize(expr.rhs, _precedence(expr)))
+            return "ufl.{0}({1}, {2})".format(
+                _relational_map[expr.rel_op].lower(),
+                self._print(expr.lhs),
+                self._print(expr.rhs),
+            )
+        return "{0} {1} {2}".format(
+            self.parenthesize(expr.lhs, _precedence(expr)),
+            expr.rel_op,
+            self.parenthesize(expr.rhs, _precedence(expr)),
+        )
 
     def _print_Pi(self, expr=None):
-        return "{0}pi".format(self._namespace)
+        return f"{self._namespace}pi"
 
     def _print_And(self, expr):
         PREC = _precedence(expr)
         if self._namespace == "ufl.":
             if len(expr.args) != 2:
                 error("UFL does not support more than 2 operands to And")
-            return "ufl.And({0}, {1})".format(self._print(expr.args[0]),
-                                              self._print(expr.args[1]))
+            return f"ufl.And({self._print(expr.args[0])}, {self._print(expr.args[1])})"
         elif self._namespace in ("numpy.", "np."):
             result = self._namespace
             if len(expr.args) == 2:
-                result += "logical_and({0}, {1})".format(self._print(expr.args[0]),
-                                                      self._print(expr.args[1]))
+                result += "logical_and({0}, {1})".format(
+                    self._print(expr.args[0]),
+                    self._print(expr.args[1]),
+                )
             else:
-                result += "logical_and({0}, {1})".format(self._print(expr.args[0]),
-                                                      self._print(sp.And(*expr.args[1:])))
+                result += "logical_and({0}, {1})".format(
+                    self._print(expr.args[0]),
+                    self._print(sp.And(*expr.args[1:])),
+                )
             return result
 
         return " and ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
-        return "{0} and {1}".format(self.parenthesize(expr.args[0], PREC),
-                                    self.parenthesize(expr.args[1], PREC))
+        return "{0} and {1}".format(
+            self.parenthesize(expr.args[0], PREC),
+            self.parenthesize(expr.args[1], PREC),
+        )
 
     def _print_Or(self, expr):
         PREC = _precedence(expr)
         if self._namespace == "ufl.":
             if len(expr.args) != 2:
                 error("UFL does not support more than 2 operands to Or")
-            return "ufl.Or({0}, {1})".format(self._print(expr.args[0]),
-                                             self._print(expr.args[1]))
+            return f"ufl.Or({self._print(expr.args[0])}, {self._print(expr.args[1])})"
         elif self._namespace in ("numpy.", "np."):
             result = self._namespace
             if len(expr.args) == 2:
-                result += "logical_or({0}, {1})".format(self._print(expr.args[0]),
-                                                      self._print(expr.args[1]))
+                result += "logical_or({0}, {1})".format(
+                    self._print(expr.args[0]),
+                    self._print(expr.args[1]),
+                )
             else:
-                result += "logical_or({0}, {1})".format(self._print(expr.args[0]),
-                                                      self._print(sp.Or(*expr.args[1:])))
+                result += "logical_or({0}, {1})".format(
+                    self._print(expr.args[0]),
+                    self._print(sp.Or(*expr.args[1:])),
+                )
             return result
         return " or ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
-        return "{0} or {1}".format(self.parenthesize(expr.args[0], PREC),
-                                   self.parenthesize(expr.args[1], PREC))
+        return "{0} or {1}".format(
+            self.parenthesize(expr.args[0], PREC),
+            self.parenthesize(expr.args[1], PREC),
+        )
 
 
 class _CustomCCodePrinter(_StrPrinter):
@@ -562,79 +806,63 @@ class _CustomCCodePrinter(_StrPrinter):
 
     def _print_math_function(self, function_name, arguments_str):
         # add the appropriate namespace and suffix for math functions
-        return "{namespace}{name}{suffix}({arguments})".format(
-            namespace = self._prefix,
-            name = function_name,
-            suffix = self._math_suffix,
-            arguments = arguments_str,
-        )
-
+        return f"{self._prefix}{function_name}{self._math_suffix}({arguments_str})"
 
     def _print_Relational(self, expr):
-        return "{0} {1} {2}".format(self.parenthesize(expr.lhs, _precedence(expr)),
-                                    _relational_map_matlab[expr.rel_op],
-                                    self.parenthesize(expr.rhs, _precedence(expr)))
+        return "{0} {1} {2}".format(
+            self.parenthesize(expr.lhs, _precedence(expr)),
+            _relational_map_matlab[expr.rel_op],
+            self.parenthesize(expr.rhs, _precedence(expr)),
+        )
 
-        return '{0}({1}, {2})'.format(_relational_map_matlab[expr.rel_op],
-                                      self._print(expr.lhs), self._print(expr.rhs))
+        return "{0}({1}, {2})".format(
+            _relational_map_matlab[expr.rel_op],
+            self._print(expr.lhs),
+            self._print(expr.rhs),
+        )
 
     def _print_Float(self, expr):
         f_str = _StrPrinter._print_Float(self, expr)
         return f_str + self._float_postfix
 
     def _print_One(self, expr):
-        return "1."+self._float_postfix
+        return "1." + self._float_postfix
 
     def _print_Zero(self, expr):
-        return "0."+self._float_postfix
+        return "0." + self._float_postfix
 
     def _print_Integer(self, expr):
-        return "{0}.{1}".format(expr.p, self._float_postfix)
+        return f"{expr.p}.{self._float_postfix}"
 
     def _print_NegativeOne(self, expr):
-        return "-1."+self._float_postfix
+        return "-1." + self._float_postfix
 
     def _print_Rational(self, expr):
         return "{0}.{2}/{1}.{2}".format(expr.p, expr.q, self._float_postfix)
 
     def _print_Min(self, expr):
         "fmin and fmax is not contained in std namespace untill -ansi g++ 4.7"
-        return self._print_math_function(
-            "fmin",
-            self.stringify(expr.args, ", ")
-        )
+        return self._print_math_function("fmin", self.stringify(expr.args, ", "))
 
     def _print_Max(self, expr):
         "fmin and fmax is not contained in std namespace untill -ansi g++ 4.7"
-        return self._print_math_function(
-            "fmax",
-            self.stringify(expr.args, ", ")
-        )
+        return self._print_math_function("fmax", self.stringify(expr.args, ", "))
 
     def _print_Ceiling(self, expr):
-        return self._print_math_function(
-            "ceil",
-            self.stringify(expr.args, ", ")
-        )
+        return self._print_math_function("ceil", self.stringify(expr.args, ", "))
 
     def _print_Abs(self, expr):
-        return self._print_math_function(
-            "fabs",
-            self.stringify(expr.args, ", ")
-        )
+        return self._print_math_function("fabs", self.stringify(expr.args, ", "))
 
     def _print_Mod(self, expr):
-        return self._print_math_function(
-            "fmod",
-            self.stringify(expr.args, ", ")
-        )
+        return self._print_math_function("fmod", self.stringify(expr.args, ", "))
 
     def _print_Piecewise(self, expr):
         result = ""
         for e, c in expr.args[:-1]:
-            result += "({0} ? {1} : ".format(self._print(c), self._print(e))
-        last_line = "{0})".format(self._print(expr.args[-1].expr))
-        return result+last_line
+            result += f"({self._print(c)} ? {self._print(e)} : "
+        last_line = f"{self._print(expr.args[-1].expr)})"
+        return result + last_line
 
     def _print_Add(self, expr):
         args = expr.args
@@ -646,15 +874,12 @@ class _CustomCCodePrinter(_StrPrinter):
                 a, b = b, a
 
             if type(a) is sp.exp and type(b) is sp.numbers.NegativeOne:
-                return self._print_math_function(
-                    "expm1",
-                    self.stringify(a.args, ", ")
-                )
+                return self._print_math_function("expm1", self.stringify(a.args, ", "))
 
         return super()._print_Add(expr)
 
     def _print_Function(self, expr):
-        #print expr.func.__name__, expr.args
+        # print expr.func.__name__, expr.args
         if isinstance(expr, _AppliedUndef):
             return expr.func.__name__
 
@@ -668,7 +893,6 @@ class _CustomCCodePrinter(_StrPrinter):
             "fmax",
             "fmin",
             "fdim",
-
             "exp",
             "exp2",
             "expm1",
@@ -678,12 +902,10 @@ class _CustomCCodePrinter(_StrPrinter):
             "log1p",
             "ilogb",
             "logb",
-
             "hypot",
             "cbrt",
             "sqrt",
             "pow",
-
             "sin",
             "cos",
             "tan",
@@ -691,19 +913,16 @@ class _CustomCCodePrinter(_StrPrinter):
             "acos",
             "atan",
             "atan2",
-
             "sinh",
             "cosh",
             "tanh",
             "asinh",
             "acosh",
             "atanh",
-
             "erf",
             "erfc",
             "lgamma",
             "tgamma",
-
             "ceil",
             "floor",
             "trunc",
@@ -714,26 +933,33 @@ class _CustomCCodePrinter(_StrPrinter):
         if expr.func.__name__.lower() in math_functions_with_float_variant:
             return self._print_math_function(
                 expr.func.__name__.lower(),
-                self.stringify(expr.args, ", ")
+                self.stringify(expr.args, ", "),
             )
 
-        return "%s" % self._prefix + expr.func.__name__.lower() + \
-               "(%s)"%self.stringify(expr.args, ", ")
+        return (
+            f"{self._prefix}"
+            + expr.func.__name__.lower()
+            + f"({self.stringify(expr.args, ', ')})"
+        )
 
     def _print_Subs(self, expr):
         # Execute subsitution
-        orig_expr=expr.expr
-        subs = dict((key,value) for key, value in zip(expr.variables, expr.point))
+        orig_expr = expr.expr
+        subs = dict((key, value) for key, value in zip(expr.variables, expr.point))
         return self._print(orig_expr.xreplace(subs))
 
     def _print_Derivative(self, expr):
         if not isinstance(expr.args[1], (_AppliedUndef, sp.Symbol)):
-            error("Can only print Derivative code with a single dependent "\
-                  "variabe. Got: {0}".format(sympycode(expr.args[1])))
+            error(
+                "Can only print Derivative code with a single dependent "
+                "variabe. Got: {0}".format(sympycode(expr.args[1])),
+            )
 
         if isinstance(expr.args[0], _AppliedUndef):
-            return "d%s_d%s" % (expr.args[0].func.__name__, "_".join(\
-                self._print(arg) for arg in expr.args[1:]))
+            return "d%s_d%s" % (
+                expr.args[0].func.__name__,
+                "_".join(self._print(arg) for arg in expr.args[1:]),
+            )
         return _StrPrinter._print_Derivative(self, expr)
 
     def _print_Pow(self, expr, rational=False):
@@ -741,42 +967,39 @@ class _CustomCCodePrinter(_StrPrinter):
         if expr.exp.is_integer and int(expr.exp) == 1:
             return self.parenthesize(expr.base, PREC)
         if expr.exp is sp.S.NegativeOne:
-            return "1.0{0}/{1}".format(self._float_postfix, self.parenthesize(expr.base, PREC))
+            return f"1.0{self._float_postfix}/{self.parenthesize(expr.base, PREC)}"
         if expr.exp.is_integer and int(expr.exp) in [2, 3]:
-            return "({0})".format(\
-                "*".join(self.parenthesize(expr.base, PREC) \
-                         for i in range(int(expr.exp))), PREC)
+            return "({0})".format(
+                "*".join(
+                    self.parenthesize(expr.base, PREC) for i in range(int(expr.exp))
+                ),
+                PREC,
+            )
         if expr.exp.is_integer and int(expr.exp) == 4:
             # Use parentheses strategically to facilitate expression reuse
             # pow(a, 4) = pow(a, 2) * pow(a, 2)
             # pow(a, 2) = a * a
             return "(({0})*({0}))".format(
-                "({0})*({0})".format(self.parenthesize(expr.base, PREC))
+                "({0})*({0})".format(self.parenthesize(expr.base, PREC)),
             )
         if expr.exp.is_integer and int(expr.exp) in [-2, -3]:
-            return "1.0{1}/({0})".format(\
-                "*".join(self.parenthesize(expr.base, PREC) \
-                         for i in range(-int(expr.exp))), self._float_postfix)
+            return "1.0{1}/({0})".format(
+                "*".join(
+                    self.parenthesize(expr.base, PREC) for i in range(-int(expr.exp))
+                ),
+                self._float_postfix,
+            )
         if expr.exp is sp.S.Half and not rational:
-            return self._print_math_function(
-                "sqrt",
-                self._print(expr.base)
-            )
+            return self._print_math_function("sqrt", self._print(expr.base))
         if expr.exp == -0.5:
-            return "1/{}".format(
-                self._print_math_function(
-                    "sqrt",
-                    self._print(expr.base)
-                )
-            )
+            return f"1/{self._print_math_function('sqrt', self._print(expr.base))}"
         return self._print_math_function(
-                "pow",
-                "{0}, {1}".format(self._print(expr.base), self._print(expr.exp))
-            )
+            "pow",
+            f"{self._print(expr.base)}, {self._print(expr.exp)}",
+        )
 
     def _print_sign(self, expr):
-        return "{0}copysign(1.0, {1})".format(self._prefix, \
-                                              self._print(expr.args[0]))
+        return f"{self._prefix}copysign(1.0, {self._print(expr.args[0])})"
 
     def _print_Pi(self, expr=None):
         return "M_PI"
@@ -791,13 +1014,11 @@ class _CustomCCodePrinter(_StrPrinter):
 
     def _print_re(self, expr):
         assert len(expr.args) == 1
-        return "{0}creal({1})".format(self._prefix,
-                                      self._print(expr.args[0]))
+        return f"{self._prefix}creal({self._print(expr.args[0])})"
 
     def _print_im(self, expr):
         assert len(expr.args) == 1
-        return "{0}cimag({1})".format(self._prefix,
-                                      self._print(expr.args[0]))
+        return f"{self._prefix}cimag({self._print(expr.args[0])})"
 
     def _print_Symbol(self, expr):
         if expr.name == "I":
@@ -805,6 +1026,7 @@ class _CustomCCodePrinter(_StrPrinter):
         return expr.name
 
     _print_Mul = _print_Mul
+
 
 class _CustomMatlabCodePrinter(_StrPrinter):
     """
@@ -826,43 +1048,44 @@ class _CustomMatlabCodePrinter(_StrPrinter):
         return str(float(expr))
 
     def _print_Min(self, expr):
-        return "min(%s)" % (self.stringify(expr.args, ", "))
+        return f"min({self.stringify(expr.args, ', ')})"
 
     def _print_Max(self, expr):
-        return "max(%s)" % (self.stringify(expr.args, ", "))
+        return f"max({self.stringify(expr.args, ', ')})"
 
     def _print_Ceiling(self, expr):
-        return "ceil(%s)" % (self.stringify(expr.args, ", "))
+        return f"ceil({self.stringify(expr.args, ', ')})"
 
     def _print_Piecewise(self, expr):
         result = ""
         for e, c in expr.args[:-1]:
-            result += "((%s)*(%s) + ~(%s)*"%(self._print(c), \
-                                             self._print(e), self._print(c))
-        last_line = "(%s))" % self._print(expr.args[-1].expr)
-        return result+last_line
+            result += f"(({self._print(c)})*({self._print(e)}) + ~({self._print(c)})*"
+        last_line = f"({self._print(expr.args[-1].expr)}))"
+        return result + last_line
 
     def _print_Function(self, expr):
-        #print expr.func.__name__, expr.args
+        # print expr.func.__name__, expr.args
         if isinstance(expr, _AppliedUndef):
             return expr.func.__name__
 
-        return "%s(%s)" % (expr.func.__name__.lower(), self.stringify(\
-            expr.args, ", "))
+        return f"{expr.func.__name__.lower()}({self.stringify(expr.args, ', ')})"
 
     def _print_Pow(self, expr):
         PREC = _precedence(expr)
         if expr.exp.is_integer and int(expr.exp) == 1:
             return self.parenthesize(expr.base, PREC)
         if expr.exp is sp.S.NegativeOne:
-            return '1.0/{0}'.format(self.parenthesize(expr.base, PREC))
+            return f"1.0/{self.parenthesize(expr.base, PREC)}"
 
         if expr.exp == 0.5:
-            return 'sqrt({0})'.format(self._print(expr.base))
+            return f"sqrt({self._print(expr.base)})"
 
         # FIXME: Fix paranthesises
-        return '{0}^{1}'.format(self.parenthesize(expr.base, PREC),
-                                  self.parenthesize(expr.exp, PREC))
+        return "{0}^{1}".format(
+            self.parenthesize(expr.base, PREC),
+            self.parenthesize(expr.exp, PREC),
+        )
+
     def _print_And(self, expr):
         PREC = _precedence(expr)
         return " & ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
@@ -872,23 +1095,29 @@ class _CustomMatlabCodePrinter(_StrPrinter):
         return "~" + self.parenthesize(expr.args[0], PREC)
 
     def _print_Relational(self, expr):
-        return "{0} {1} {2}".format(self.parenthesize(expr.lhs, _precedence(expr)),
-                                    _relational_map_matlab[expr.rel_op],
-                                    self.parenthesize(expr.rhs, _precedence(expr)))
+        return "{0} {1} {2}".format(
+            self.parenthesize(expr.lhs, _precedence(expr)),
+            _relational_map_matlab[expr.rel_op],
+            self.parenthesize(expr.rhs, _precedence(expr)),
+        )
 
-        return '{0}({1}, {2})'.format(_relational_map_matlab[expr.rel_op],
-                                      self._print(expr.lhs), self._print(expr.rhs))
+        return "{0}({1}, {2})".format(
+            _relational_map_matlab[expr.rel_op],
+            self._print(expr.lhs),
+            self._print(expr.rhs),
+        )
+
     def _print_Or(self, expr):
         PREC = _precedence(expr)
         return " | ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
 
     def _print_re(self, expr):
         assert len(expr.args) == 1
-        return "real({0})".format(self._print(expr.args[0]))
+        return f"real({self._print(expr.args[0])})"
 
     def _print_im(self, expr):
         assert len(expr.args) == 1
-        return "imag({0})".format(self._print(expr.args[0]))
+        return f"imag({self._print(expr.args[0])})"
 
     _print_Mul = _print_Mul
 
@@ -913,42 +1142,44 @@ class _CustomJuliaCodePrinter(_StrPrinter):
         return str(float(expr))
 
     def _print_Min(self, expr):
-        return "min(%s)" % (self.stringify(expr.args, ", "))
+        return f"min({self.stringify(expr.args, ', ')})"
 
     def _print_Max(self, expr):
-        return "max(%s)" % (self.stringify(expr.args, ", "))
+        return f"max({self.stringify(expr.args, ', ')})"
 
     def _print_Ceiling(self, expr):
-        return "ceil(%s)" % (self.stringify(expr.args, ", "))
+        return f"ceil({self.stringify(expr.args, ', ')})"
 
     def _print_Piecewise(self, expr):
         result = ""
         for e, c in expr.args[:-1]:
-            result += "({0} ? {1} : ".format(self._print(c), self._print(e))
-        last_line = "{0})".format(self._print(expr.args[-1].expr))
-        return result+last_line
+            result += f"({self._print(c)} ? {self._print(e)} : "
+        last_line = f"{self._print(expr.args[-1].expr)})"
+        return result + last_line
 
     def _print_Function(self, expr):
-        #print expr.func.__name__, expr.args
+        # print expr.func.__name__, expr.args
         if isinstance(expr, _AppliedUndef):
             return expr.func.__name__
 
-        return "%s(%s)" % (expr.func.__name__.lower(), self.stringify(\
-            expr.args, ", "))
+        return f"{expr.func.__name__.lower()}({self.stringify(expr.args, ', ')})"
 
     def _print_Pow(self, expr):
         PREC = _precedence(expr)
         if expr.exp.is_integer and int(expr.exp) == 1:
             return self.parenthesize(expr.base, PREC)
         if expr.exp is sp.S.NegativeOne:
-            return '1.0/{0}'.format(self.parenthesize(expr.base, PREC))
+            return f"1.0/{self.parenthesize(expr.base, PREC)}"
 
         if expr.exp == 0.5:
-            return 'sqrt({0})'.format(self._print(expr.base))
+            return f"sqrt({self._print(expr.base)})"
 
         # FIXME: Fix paranthesises
-        return '{0}^{1}'.format(self.parenthesize(expr.base, PREC),
-                                  self.parenthesize(expr.exp, PREC))
+        return "{0}^{1}".format(
+            self.parenthesize(expr.base, PREC),
+            self.parenthesize(expr.exp, PREC),
+        )
+
     def _print_And(self, expr):
         PREC = _precedence(expr)
         return " && ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
@@ -958,29 +1189,34 @@ class _CustomJuliaCodePrinter(_StrPrinter):
         return "!" + self.parenthesize(expr.args[0], PREC)
 
     def _print_Relational(self, expr):
-        return "{0} {1} {2}".format(self.parenthesize(expr.lhs, _precedence(expr)),
-                                    _relational_map_matlab[expr.rel_op],
-                                    self.parenthesize(expr.rhs, _precedence(expr)))
+        return "{0} {1} {2}".format(
+            self.parenthesize(expr.lhs, _precedence(expr)),
+            _relational_map_matlab[expr.rel_op],
+            self.parenthesize(expr.rhs, _precedence(expr)),
+        )
 
-        return '{0}({1}, {2})'.format(_relational_map_matlab[expr.rel_op],
-                                      self._print(expr.lhs), self._print(expr.rhs))
+        return "{0}({1}, {2})".format(
+            _relational_map_matlab[expr.rel_op],
+            self._print(expr.lhs),
+            self._print(expr.rhs),
+        )
+
     def _print_Or(self, expr):
         PREC = _precedence(expr)
         return " || ".join(self.parenthesize(arg, PREC) for arg in expr.args[::-1])
 
     def _print_re(self, expr):
         assert len(expr.args) == 1
-        return "real({0})".format(self._print(expr.args[0]))
+        return f"real({self._print(expr.args[0])})"
 
     def _print_im(self, expr):
         assert len(expr.args) == 1
-        return "imag({0})".format(self._print(expr.args[0]))
+        return f"imag({self._print(expr.args[0])})"
 
     _print_Mul = _print_Mul
 
 
 class _CustomLatexPrinter(_LatexPrinter):
-
     @staticmethod
     def _number_to_latex(value):
 
@@ -991,20 +1227,20 @@ class _CustomLatexPrinter(_LatexPrinter):
             sign = ""
 
         if abs(value) < 1e-32:
-            rest, exponent = 0., 0
+            rest, exponent = 0.0, 0
         else:
             rest, exponent = _get_potence(value)
 
         # If formating 0.322
         if exponent == -3 and int(rest) / 100 > 0:
             exponent = 0
-            rest = float(rest)/1000
+            rest = float(rest) / 1000
 
         # Format rest
         if rest >= 100:
             form = "%d"
             rest = int(rest)
-        elif rest >=10:
+        elif rest >= 10:
             if rest % 1 > 0:
                 form = "%.1f"
             else:
@@ -1012,7 +1248,7 @@ class _CustomLatexPrinter(_LatexPrinter):
                 rest = int(rest)
         else:
             if rest % 1 > 0:
-                if (rest*10) % 1 > 0:
+                if (rest * 10) % 1 > 0:
                     form = "%.2f"
                 else:
                     form = "%.1f"
@@ -1020,9 +1256,9 @@ class _CustomLatexPrinter(_LatexPrinter):
                 form = "%d"
                 rest = int(rest)
         if exponent == 0:
-            return sign+form%rest
+            return sign + form % rest
 
-        return r"%s\!\times\!10 ^{%d}"%(sign+form%rest, exponent)
+        return r"%s\!\times\!10 ^{%d}" % (sign + form % rest, exponent)
 
     def _needs_brackets(self, expr):
         """
@@ -1030,9 +1266,11 @@ class _CustomLatexPrinter(_LatexPrinter):
         printed, False otherwise. For example: a + b => True; a => False;
         10 => False; -10 => True.
         """
-        return not ((expr.is_Integer and expr.is_nonnegative)
-                    or (expr.is_Atom and expr is not sp.S.NegativeOne)
-                    or (isinstance(expr, _AppliedUndef) and expr is not sp.S.NegativeOne))
+        return not (
+            (expr.is_Integer and expr.is_nonnegative)
+            or (expr.is_Atom and expr is not sp.S.NegativeOne)
+            or (isinstance(expr, _AppliedUndef) and expr is not sp.S.NegativeOne)
+        )
 
     def _print_Integer(self, expr):
         return self._print_Float(expr.evalf())
@@ -1071,7 +1309,7 @@ class _CustomLatexPrinter(_LatexPrinter):
     def _print_Mul(self, expr):
         coeff, _ = expr.as_coeff_Mul()
 
-        if self.order not in ('old', 'none'):
+        if self.order not in ("old", "none"):
             args = expr.as_ordered_factors()
         else:
             # use make_args in case expr was something like -x -> x
@@ -1092,15 +1330,20 @@ class _CustomLatexPrinter(_LatexPrinter):
         expr = sp.Mul(*args)
 
         from sympy.simplify import fraction
+
         numer, denom = fraction(expr, exact=True)
-        separator = self._settings['mul_symbol_latex']
-        numbersep = self._settings['mul_symbol_latex_numbers']
+        separator = self._settings["mul_symbol_latex"]
+        numbersep = self._settings["mul_symbol_latex_numbers"]
 
         def convert(expr):
 
             # if expr is 1/1
-            if expr.is_Pow and expr.exp.is_Rational and\
-                   expr.exp.is_negative and expr.base is sp.S.One:
+            if (
+                expr.is_Pow
+                and expr.exp.is_Rational
+                and expr.exp.is_negative
+                and expr.base is sp.S.One
+            ):
                 expr = sp.S.One
 
             if not expr.is_Mul:
@@ -1108,7 +1351,7 @@ class _CustomLatexPrinter(_LatexPrinter):
             else:
                 _tex = last_term_tex = ""
 
-                if self.order not in ('old', 'none'):
+                if self.order not in ("old", "none"):
                     args = expr.as_ordered_factors()
                 else:
                     args = expr.args
@@ -1119,8 +1362,10 @@ class _CustomLatexPrinter(_LatexPrinter):
                     if self._needs_mul_brackets(term, last=(i == len(args) - 1)):
                         term_tex = r"\left(%s\right)" % term_tex
 
-                    if re.search("[0-9][} ]*$", last_term_tex) and \
-                            re.match("[{ ]*[-+0-9]", term_tex):
+                    if re.search("[0-9][} ]*$", last_term_tex) and re.match(
+                        "[{ ]*[-+0-9]",
+                        term_tex,
+                    ):
                         # between two numbers
                         _tex += numbersep
                     elif _tex:
@@ -1136,36 +1381,48 @@ class _CustomLatexPrinter(_LatexPrinter):
             snumer = convert(numer)
             sdenom = convert(denom)
             ldenom = len(sdenom.split())
-            ratio = self._settings['long_frac_ratio']
-            if self._settings['fold_short_frac'] \
-                    and ldenom <= 2 and not "^" in sdenom:
+            ratio = self._settings["long_frac_ratio"]
+            if self._settings["fold_short_frac"] and ldenom <= 2 and not "^" in sdenom:
                 # handle short fractions
                 if self._needs_mul_brackets(numer, last=False):
                     tex += r"\left(%s\right) / %s" % (snumer, sdenom)
                 else:
                     tex += r"%s / %s" % (snumer, sdenom)
-            elif len(snumer.split()) > ratio*ldenom:
+            elif len(snumer.split()) > ratio * ldenom:
                 # handle long fractions
                 if self._needs_mul_brackets(numer, last=True):
-                    tex += r"\frac{1}{%s}%s\left(%s\right)" \
-                        % (sdenom, separator, snumer)
+                    tex += r"\frac{1}{%s}%s\left(%s\right)" % (
+                        sdenom,
+                        separator,
+                        snumer,
+                    )
                 elif numer.is_Mul:
                     # split a long numerator
                     a = sp.S.One
                     b = sp.S.One
                     for x in numer.args:
-                        if self._needs_mul_brackets(x, last=False) or \
-                                len(convert(a*x).split()) > ratio*ldenom or \
-                                (b.is_commutative is x.is_commutative is False):
+                        if (
+                            self._needs_mul_brackets(x, last=False)
+                            or len(convert(a * x).split()) > ratio * ldenom
+                            or (b.is_commutative is x.is_commutative is False)
+                        ):
                             b *= x
                         else:
                             a *= x
                     if self._needs_mul_brackets(b, last=True):
-                        tex += r"\frac{%s}{%s}%s\left(%s\right)" \
-                            % (convert(a), sdenom, separator, convert(b))
+                        tex += r"\frac{%s}{%s}%s\left(%s\right)" % (
+                            convert(a),
+                            sdenom,
+                            separator,
+                            convert(b),
+                        )
                     else:
-                        tex += r"\frac{%s}{%s}%s%s" \
-                            % (convert(a), sdenom, separator, convert(b))
+                        tex += r"\frac{%s}{%s}%s%s" % (
+                            convert(a),
+                            sdenom,
+                            separator,
+                            convert(b),
+                        )
                 else:
                     tex += r"\frac{1}{%s}%s%s" % (sdenom, separator, snumer)
             else:
@@ -1181,7 +1438,7 @@ class _CustomLatexPrinter(_LatexPrinter):
 
             if expq == 2:
                 tex = r"\sqrt{%s}" % base
-            elif self._settings['itex']:
+            elif self._settings["itex"]:
                 tex = r"\root{%d}{%s}" % (expq, base)
             else:
                 tex = r"\sqrt[%d]{%s}" % (expq, base)
@@ -1190,12 +1447,14 @@ class _CustomLatexPrinter(_LatexPrinter):
                 return r"\frac{1}{%s}" % tex
             else:
                 return tex
-        elif self._settings['fold_frac_powers'] \
-            and expr.exp.is_Rational \
-                and expr.exp.q != 1:
+        elif (
+            self._settings["fold_frac_powers"]
+            and expr.exp.is_Rational
+            and expr.exp.q != 1
+        ):
             base, p, q = self._print(expr.base), expr.exp.p, expr.exp.q
             if expr.base.is_Function:
-                return self._print(expr.base, "%s/%s" % (p, q))
+                return self._print(expr.base, f"{p}/{q}")
             if self._needs_brackets(expr.base):
                 return r"\left(%s\right)^{%s/%s}" % (base, p, q)
             return r"%s^{%s/%s}" % (base, p, q)
@@ -1207,13 +1466,13 @@ class _CustomLatexPrinter(_LatexPrinter):
                 return self._print(expr.base, self._print(expr.exp))
             else:
                 if expr.is_commutative and expr.exp == -1:
-                    #solves issue 1030
-                    #As Mul always simplify 1/x to x**-1
-                    #The objective is achieved with this hack
-                    #first we get the latex for -1 * expr,
-                    #which is a Mul expression
+                    # solves issue 1030
+                    # As Mul always simplify 1/x to x**-1
+                    # The objective is achieved with this hack
+                    # first we get the latex for -1 * expr,
+                    # which is a Mul expression
                     tex = self._print(S.NegativeOne * expr).strip()
-                    #the result comes with a minus and a space, so we remove
+                    # the result comes with a minus and a space, so we remove
                     if tex[:1] == "-":
                         return tex[1:].strip()
                 if self._needs_brackets(expr.base):
@@ -1221,24 +1480,33 @@ class _CustomLatexPrinter(_LatexPrinter):
                 else:
                     tex = r"%s^{%s}"
 
-                return tex % (self._print(expr.base),
-                              self._print(expr.exp))
+                return tex % (self._print(expr.base), self._print(expr.exp))
+
 
 # Different math namespace python printer
-_python_code_printer = {"":_CustomPythonCodePrinter("", ),
-                        "np":_CustomPythonCodePrinter("np"),
-                        "numpy":_CustomPythonCodePrinter("numpy"),
-                        "math":_CustomPythonCodePrinter("math"),
-                        "ufl":_CustomPythonCodePrinter("ufl"),}
+_python_code_printer = {
+    "": _CustomPythonCodePrinter(
+        "",
+    ),
+    "np": _CustomPythonCodePrinter("np"),
+    "numpy": _CustomPythonCodePrinter("numpy"),
+    "math": _CustomPythonCodePrinter("math"),
+    "ufl": _CustomPythonCodePrinter("ufl"),
+}
 
 # FIXME: What on earth is ordered used for?!?
 _ccode_printer = _CustomCCodePrinter(order=_order)
 _cppcode_printer = _CustomCCodePrinter(cpp=True, order=_order)
 _ccode_float_printer = _CustomCCodePrinter(float_precision="single", order=_order)
-_cppcode_float_printer = _CustomCCodePrinter(cpp=True, float_precision="single", order=_order)
+_cppcode_float_printer = _CustomCCodePrinter(
+    cpp=True,
+    float_precision="single",
+    order=_order,
+)
 _sympy_printer = _CustomPythonPrinter()
 _matlab_printer = _CustomMatlabCodePrinter(order=_order)
 _julia_printer = _CustomJuliaCodePrinter(order=_order)
+
 
 def ccode(expr, assign_to=None):
     """
@@ -1247,7 +1515,8 @@ def ccode(expr, assign_to=None):
     ret = _ccode_printer.doprint(expr)
     if assign_to is None:
         return ret
-    return "{0} = {1}".format(assign_to, ret)
+    return f"{assign_to} = {ret}"
+
 
 def cppcode(expr, assign_to=None, float_precision="double"):
     """
@@ -1260,7 +1529,8 @@ def cppcode(expr, assign_to=None, float_precision="double"):
 
     if assign_to is None:
         return ret
-    return "{0} = {1}".format(assign_to, ret)
+    return f"{assign_to} = {ret}"
+
 
 def pythoncode(expr, assign_to=None, namespace="math"):
     """
@@ -1269,26 +1539,29 @@ def pythoncode(expr, assign_to=None, namespace="math"):
     ret = _python_code_printer[namespace].doprint(expr)
     if assign_to is None:
         return ret
-    return "{0} = {1}".format(assign_to, ret)
+    return f"{assign_to} = {ret}"
+
 
 def sympycode(expr, assign_to=None):
     ret = _sympy_printer.doprint(expr)
     if assign_to is None:
         return ret
-    return "{0} = {1}".format(assign_to, ret)
+    return f"{assign_to} = {ret}"
 
 
 def matlabcode(expr, assign_to=None):
     ret = _matlab_printer.doprint(expr)
     if assign_to is None:
         return ret
-    return "{0} = {1}".format(assign_to, ret)
+    return f"{assign_to} = {ret}"
+
 
 def juliacode(expr, assign_to=None):
     ret = _julia_printer.doprint(expr)
     if assign_to is None:
         return ret
-    return "{0} = {1}".format(assign_to, ret)
+    return f"{assign_to} = {ret}"
+
 
 def ccode(expr, assign_to=None, float_precision="double"):
     """
@@ -1302,7 +1575,8 @@ def ccode(expr, assign_to=None, float_precision="double"):
         return ret
     if assign_to == "I":
         assign_to = "I_"
-    return "{0} = {1}".format(assign_to, ret)
+    return f"{assign_to} = {ret}"
+
 
 def latex(expr, **settings):
     settings["order"] = "none"
@@ -1315,6 +1589,7 @@ def latex(expr, **settings):
         expr = sp.sympify(expr)
 
     return _CustomLatexPrinter(settings).doprint(expr)
+
 
 latex.__doc__ = _sympy_latex.__doc__
 

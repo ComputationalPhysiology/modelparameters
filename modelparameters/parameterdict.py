@@ -14,16 +14,24 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with ModelParameters. If not, see <http://www.gnu.org/licenses/>.
-
 """
 Contains the ParameterDict class, useful for defining
 recursive dictionaries of parameters and using attribute
 syntax for later access.
 """
 
-__all__ = ["Param", "ScalarParam", "OptionParam", "ConstParam", "ArrayParam", \
-           "SlaveParam", "inf", "ParameterDict"]
+__all__ = [
+    "Param",
+    "ScalarParam",
+    "OptionParam",
+    "ConstParam",
+    "ArrayParam",
+    "SlaveParam",
+    "inf",
+    "ParameterDict",
+]
 import six
+
 cmp = lambda x, y: (x > y) - (x < y)
 # System imports
 try:
@@ -31,75 +39,107 @@ try:
 except ImportError as e:
     sp = None
 
+
 def rjust(s, *args, **kwargs):
     return s.rjust(*args, **kwargs)
+
+
 def ljust(s, *args, **kwargs):
     return s.ljust(*args, **kwargs)
+
+
 def center(s, *args, **kwargs):
     return s.center(*args, **kwargs)
-
 
 
 # local imports
 from .parameters import *
 from .logger import *
-from .utils import check_arg,  check_kwarg, scalars, value_formatter,\
-     Range, tuplewrap, integers, nptypes, inf, VALUE_JUST
+from .utils import (
+    check_arg,
+    check_kwarg,
+    scalars,
+    value_formatter,
+    Range,
+    tuplewrap,
+    integers,
+    nptypes,
+    inf,
+    VALUE_JUST,
+)
 
 KEY_JUST = ljust
 PAR_PREFIX = "--"
-FORMAT_CONVERTER = {int:"int", float:"float", str:"string", \
-                    list:None, tuple:None, bool:"int"}
+FORMAT_CONVERTER = {
+    int: "int",
+    float: "float",
+    str: "string",
+    list: None,
+    tuple: None,
+    bool: "int",
+}
+
 
 def cmp_to_key(mycmp):
-    'Convert a cmp= function into a key= function'
+    "Convert a cmp= function into a key= function"
+
     class K(object):
         def __init__(self, obj, *args):
             self.obj = obj
+
         def __lt__(self, other):
             return mycmp(self.obj, other.obj) < 0
+
         def __gt__(self, other):
             return mycmp(self.obj, other.obj) > 0
+
         def __eq__(self, other):
             return mycmp(self.obj, other.obj) == 0
+
         def __le__(self, other):
             return mycmp(self.obj, other.obj) <= 0
+
         def __ge__(self, other):
             return mycmp(self.obj, other.obj) >= 0
+
         def __ne__(self, other):
             return mycmp(self.obj, other.obj) != 0
+
     return K
+
 
 def _par_cmp(obj1, obj2):
     """
     Original par_cmp
     """
-    assert(isinstance(obj1, tuple))
-    assert(isinstance(obj2, tuple))
-    assert(isinstance(obj1[0], str))
-    assert(isinstance(obj2[0], str))
-    if isinstance(obj1[1], ParameterDict) and \
-           not isinstance(obj2[1], ParameterDict):
+    assert isinstance(obj1, tuple)
+    assert isinstance(obj2, tuple)
+    assert isinstance(obj1[0], str)
+    assert isinstance(obj2[0], str)
+    if isinstance(obj1[1], ParameterDict) and not isinstance(obj2[1], ParameterDict):
         return -1
-    if not isinstance(obj1[1], ParameterDict) and \
-           isinstance(obj2[1], ParameterDict):
+    if not isinstance(obj1[1], ParameterDict) and isinstance(obj2[1], ParameterDict):
         return 1
     return cmp(obj1[0], obj2[0])
 
+
 par_cmp = cmp_to_key(_par_cmp)
+
 
 class ParameterDict(dict):
     """
     A dictionary with attribute-style access,
     that maps attribute access to the real dictionary.
     """
+
     __slots__ = ()
+
     def __new__(cls, **params):
 
         # Generate a sub class of ParameterDict which sets the slots.
         # This is nice so the parameters show up in IPython tab completion
         class SubParameterDict(ParameterDict):
-            __slots__ = tuple(list(params.keys())+["_members"])
+            __slots__ = tuple(list(params.keys()) + ["_members"])
 
         return dict.__new__(SubParameterDict, **params)
 
@@ -115,15 +155,25 @@ class ParameterDict(dict):
         """
 
         # Init the dict with the provided parameters
-        self._members = sorted(set(list(dict.__dict__) + \
-                                   list(ParameterDict.__dict__)))+["_members"]
+        self._members = (
+            sorted(
+                set(list(dict.__dict__) + list(ParameterDict.__dict__)),
+            )
+            + ["_members"]
+        )
         for key, value in list(params.items()):
             if key in self._members:
-                type_error("The name of a parameter cannot be "\
-                           "an attribute of 'ParameterDict': %s" % key)
-            if sp and isinstance(value, sp.Basic) and \
-                   all(isinstance(atom, (sp.Number, sp.Symbol))
-                       for atom in value.atoms()):
+                type_error(
+                    "The name of a parameter cannot be "
+                    "an attribute of 'ParameterDict': %s" % key,
+                )
+            if (
+                sp
+                and isinstance(value, sp.Basic)
+                and all(
+                    isinstance(atom, (sp.Number, sp.Symbol)) for atom in value.atoms()
+                )
+            ):
                 params[key] = SlaveParam(value, key, name=key)
             elif isinstance(value, Param):
                 if value.name == "":
@@ -150,8 +200,12 @@ class ParameterDict(dict):
         return self.format_data()
 
     def __repr__(self):
-        return "ParameterDict(%s)"%(", ".join("%s=%s" %\
-            (k, repr(v)) for k, v in sorted(six.iteritems(self), key=par_cmp)))
+        return "ParameterDict(%s)" % (
+            ", ".join(
+                "%s=%s" % (k, repr(v))
+                for k, v in sorted(six.iteritems(self), key=par_cmp)
+            )
+        )
 
     def __delitem__(self, key):
         type_error("ParameterDict does not support item deletion")
@@ -175,8 +229,10 @@ class ParameterDict(dict):
 
         # Check if key is a registered parameter
         if not dict.__contains__(self, key):
-            error("'%s' is not an item in this ParameterDict." % key, \
-                  exception=AttributeError)
+            error(
+                f"'{key}' is not an item in this ParameterDict.",
+                exception=AttributeError,
+            )
 
         # Get the original value, used for checks
         org_value = dict.__getitem__(self, key)
@@ -198,8 +254,10 @@ class ParameterDict(dict):
             return
 
         if not dict.__contains__(self, key):
-            error("'%s' is not an item in this ParameterDict." % key, \
-                  exception=AttributeError)
+            error(
+                f"'{key}' is not an item in this ParameterDict.",
+                exception=AttributeError,
+            )
 
         value = dict.__getitem__(self, key)
 
@@ -255,16 +313,18 @@ class ParameterDict(dict):
         """
         if indent is None:
             indent = 0
-        max_key_length   = 0
+        max_key_length = 0
         max_value_length = 0
-        max_length       = 15
+        max_length = 15
         for key, value in six.iteritems(self):
             if not isinstance(value, ParameterDict):
                 if len(key) > max_key_length:
                     max_key_length = min(len(key), max_length)
-                value_length = value.format_width() \
-                               if isinstance(value, Param) \
-                               else len(six.text_type(value))
+                value_length = (
+                    value.format_width()
+                    if isinstance(value, Param)
+                    else len(six.text_type(value))
+                )
                 if value_length > max_value_length:
                     max_value_length = min(value_length, max_length)
         s = []
@@ -272,17 +332,27 @@ class ParameterDict(dict):
 
             # If the value is a ParameterDict
             if isinstance(value, ParameterDict):
-                s.append("    "*indent + "%s = {"%key)
-                s.append(value.format_data(indent+1))
-                s.append("    "*indent + "}")
+                s.append("    " * indent + "%s = {" % key)
+                s.append(value.format_data(indent + 1))
+                s.append("    " * indent + "}")
             elif isinstance(value, Param):
-                s.append("    "*indent + "%s = %s"%\
-                     (KEY_JUST(key, max_key_length), \
-                      value.format_data(str_length=max_value_length)))
+                s.append(
+                    "    " * indent
+                    + "%s = %s"
+                    % (
+                        KEY_JUST(key, max_key_length),
+                        value.format_data(str_length=max_value_length),
+                    ),
+                )
             else:
-                s.append("    "*indent + "%s = %s"%\
-                     (KEY_JUST(key, max_key_length), \
-                      VALUE_JUST(six.text_type(value), max_value_length)))
+                s.append(
+                    "    " * indent
+                    + "%s = %s"
+                    % (
+                        KEY_JUST(key, max_key_length),
+                        VALUE_JUST(six.text_type(value), max_value_length),
+                    ),
+                )
 
         return "\n".join(s)
 
@@ -331,7 +401,7 @@ class ParameterDict(dict):
         for key in six.iterkeys(other):
             if key not in self:
                 continue
-            self_value  = self[key]
+            self_value = self[key]
             other_value = other[key]
             if isinstance(self_value, dict):
                 # Update my own subdict with others subdict
@@ -361,22 +431,27 @@ class ParameterDict(dict):
                 if f is None:
                     f = sys.stdout
                 f.write(self.format_help())
-        parser = OptionParser(usage = usage or "usage: %prog [options]")
+
+        parser = OptionParser(usage=usage or "usage: %prog [options]")
 
         def callback(parent, key, value_type, sequence_type=None):
-            " Return a callback function that is used to parse the argument"
+            "Return a callback function that is used to parse the argument"
             if value_type in [int, float, str, bool]:
+
                 def par_setter(option, opt_str, value, parser):
-                    " Callback function to set the parameter from the options."
+                    "Callback function to set the parameter from the options."
                     try:
                         parent[key] = value
-                        #debug("Setting parameter %s to %s"%\
+                        # debug("Setting parameter %s to %s"%\
                         # (opt_str.replace(PAR_PREFIX, ""), str(value)))
                     except ValueError as e:
-                        value_error("Trying to set '%s' while parsing "\
-                                    "command line, but %s" % (key, six.text_type(e)))
+                        value_error(
+                            "Trying to set '%s' while parsing "
+                            "command line, but %s" % (key, six.text_type(e)),
+                        )
 
             else:
+
                 def par_setter(option, opt_str, value, parser):
                     assert value is None
                     done = 0
@@ -393,24 +468,30 @@ class ParameterDict(dict):
                                 # Convert the value
                                 item = sequence_type(arg)
                                 value.append(item)
-                            except  ValueError as e:
-                                value_error(\
-                                    "Could not convert %s to '%s', while "\
-                                    "setting parameter %s; %s"%\
-                                    (arg, sequence_type.__name__, key,
-                                     six.text_type(e)))
+                            except ValueError as e:
+                                value_error(
+                                    "Could not convert %s to '%s', while "
+                                    "setting parameter %s; %s"
+                                    % (
+                                        arg,
+                                        sequence_type.__name__,
+                                        key,
+                                        six.text_type(e),
+                                    ),
+                                )
 
                             del rargs[0]
 
                     try:
                         # Changing a list to a tuple if needed
                         parent[key] = value_type(value)
-                        #debug("Setting parameter %s to %s"%\
-                        #(opt_str.replace(PAR_PREFIX, ""), str(value)))
+                        # debug("Setting parameter %s to %s"%\
+                        # (opt_str.replace(PAR_PREFIX, ""), str(value)))
                     except ValueError as e:
-                        value_error("Trying to set '%s' while parsing "\
-                                    "command line, but %s" % (key,
-                                                              six.text_type(e)))
+                        value_error(
+                            "Trying to set '%s' while parsing "
+                            "command line, but %s" % (key, six.text_type(e)),
+                        )
 
             return par_setter
 
@@ -424,7 +505,7 @@ class ParameterDict(dict):
                 if isinstance(value, ParameterDict):
 
                     # Call the function recursively
-                    add_options(value, "%s%s"%(opt_base_copy, key))
+                    add_options(value, f"{opt_base_copy}{key}")
                     continue
 
                 elif isinstance(value, Param):
@@ -459,13 +540,17 @@ class ParameterDict(dict):
                     continue
 
                 # Add option with callback function
-                parser.add_option("%s%s"%(opt_base_copy, key), \
-                                  action = "callback",
-                                  callback = callback(\
-                                  parent, key, type(actuall_value), sequence_type),
-                                  type = FORMAT_CONVERTER[type(actuall_value)],
-                                  help = "Default(%s)%s" % (str(formated_value),
-                                        (": " + description) if description else ""))
+                parser.add_option(
+                    f"{opt_base_copy}{key}",
+                    action="callback",
+                    callback=callback(parent, key, type(actuall_value), sequence_type),
+                    type=FORMAT_CONVERTER[type(actuall_value)],
+                    help="Default(%s)%s"
+                    % (
+                        str(formated_value),
+                        (": " + description) if description else "",
+                    ),
+                )
 
         # Start recursively adding options
         add_options(self, PAR_PREFIX)
@@ -483,6 +568,7 @@ class ParameterDict(dict):
         An option string can be sent to a script using a parameter dict
         to set its parameters from command line options
         """
+
         def option_list(parent, opt_base):
             ret_list = []
             opt_base_copy = opt_base[:]
@@ -492,8 +578,7 @@ class ParameterDict(dict):
                 # If the value is a ParameterDict
                 if isinstance(value, ParameterDict):
                     # Call the function recursively
-                    ret_list.extend(\
-                        option_list(value, "%s%s"%(opt_base_copy, key)))
+                    ret_list.extend(option_list(value, f"{opt_base_copy}{key}"))
                 elif isinstance(value, Param):
                     if isinstance(value, (ConstParam, SlaveParam)):
                         continue
@@ -504,7 +589,7 @@ class ParameterDict(dict):
                 if not type(value) in list(FORMAT_CONVERTER.keys()):
                     continue
 
-                ret_list.append("%s%s"%(opt_base_copy, key))
+                ret_list.append(f"{opt_base_copy}{key}")
                 if type(value) in [list, tuple]:
                     for item in value:
                         ret_list.append(six.text_type(item))

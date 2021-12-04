@@ -14,15 +14,13 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with ModelParameters. If not, see <http://www.gnu.org/licenses/>.
-
 # Modified by Johan Hake, 2009-2012.
-
+import inspect
+import logging
 import sys
 import types
-import logging
-import inspect
 
-__all__ = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL", "Logger"] 
+__all__ = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL", "Logger"]
 
 # Import default log levels
 from logging import DEBUG, INFO, WARNING, ERROR, CRITICAL
@@ -32,6 +30,7 @@ class ModelParametersException(Exception):
     "Base class for ModelParameters exceptions"
     pass
 
+
 # This is used to override emit() in StreamHandler for printing without newline
 def emit(self, record):
     message = self.format(record)
@@ -39,14 +38,14 @@ def emit(self, record):
     self.stream.write(format_string % message)
     self.flush()
 
+
 # Colors
-RED   = "\033[1;37;31m%s\033[0m"
-BLUE  = "\033[1;37;34m%s\033[0m"
+RED = "\033[1;37;31m%s\033[0m"
+BLUE = "\033[1;37;34m%s\033[0m"
 GREEN = "\033[1;37;32m%s\033[0m"
 
 # Logger class
 class Logger:
-
     def __init__(self, name):
         "Create logger instance."
         self._name = name
@@ -56,11 +55,11 @@ class Logger:
 
         sys.stdout.flush()
         h.setLevel(WARNING)
-        #h.setFormatter(logging.Formatter("%(levelname)s, %(name)s,
+        # h.setFormatter(logging.Formatter("%(levelname)s, %(name)s,
         #%(pathname)s, line %(lineno)s, in %(module)s\n    %(message)s\n"))
-        
+
         # Override emit() in handler for indentation
-        h.emit = types.MethodType(emit, h) #, h.__class__)
+        h.emit = types.MethodType(emit, h)  # , h.__class__)
         self._handler = h
 
         # Set up logger
@@ -93,9 +92,9 @@ class Logger:
 
     def add_logfile(self, filename=None, mode="a"):
         if filename is None:
-            filename = "%s.log" % self._name
+            filename = f"{self._name}.log"
         if filename in self._logfiles:
-            self.warning("Trying to add logfile %s multiple times." % filename)
+            self.warning(f"Trying to add logfile {filename} multiple times.")
             return
         h = logging.FileHandler(filename, mode)
         h.emit = types.MethodType(emit, h, h.__class__)
@@ -119,8 +118,7 @@ class Logger:
         "Write a log message on given log level"
         text = self._format_raw(*message)
         if len(text) >= 3 and text[-3:] == "...":
-            self._log.log(level, self._format(*message), \
-                          extra={"continued": True})
+            self._log.log(level, self._format(*message), extra={"continued": True})
         else:
             self._log.log(level, self._format(*message))
 
@@ -153,7 +151,7 @@ class Logger:
         self.log(ERROR, self._format_raw(*message))
         raise_error = kwargs.get("raise_error", self._raise_error)
         Exception = kwargs.get("exception", self._DefaultException)
-        
+
         if raise_error:
             raise Exception(self._format_raw(*message))
 
@@ -170,7 +168,7 @@ class Logger:
     def begin_log(self, *message):
         "Begin task: write message and increase indentation level."
         self.info(*message)
-        #self.info("-"*len(self._format_raw(*message)))
+        # self.info("-"*len(self._format_raw(*message)))
         self.add_log_indent()
 
     def end_log(self):
@@ -194,7 +192,7 @@ class Logger:
 
     def suppress_logging(self):
         "Suppress all logging"
-        self.set_log_level(CRITICAL+1)
+        self.set_log_level(CRITICAL + 1)
 
     def set_log_level(self, level):
         "Set log level."
@@ -237,8 +235,7 @@ class Logger:
         self._log.removeHandler(self._handler)
         self._log.addHandler(handler)
         self._handler = handler
-        handler.emit = types.MethodType(emit, self._handler, \
-                                        self._handler.__class__)
+        handler.emit = types.MethodType(emit, self._handler, self._handler.__class__)
 
     def get_logger(self):
         "Return message logger."
@@ -249,13 +246,13 @@ class Logger:
         self._prefix = prefix
 
     def wrap_log_message(self, message, symbol="*"):
-        message = "%s %s %s"%(symbol, message, symbol)
-        wrapping = symbol*len(message)
+        message = f"{symbol} {message} {symbol}"
+        wrapping = symbol * len(message)
         return "\n".join(["", wrapping, message, wrapping, ""])
-    
+
     def _format(self, *message):
         "Format message including indentation."
-        indent = self._prefix + 2*self._indent_level*" "
+        indent = self._prefix + 2 * self._indent_level * " "
         message = message[0] if len(message) == 1 else message[0] % message[1:]
         return "\n".join([indent + line for line in message.split("\n")])
 
@@ -264,12 +261,13 @@ class Logger:
         message = message[0] if len(message) == 1 else message[0] % message[1:]
         return message
 
-#--- Set up global log functions ---
+
+# --- Set up global log functions ---
 
 _logger = Logger("ModelParameters")
 
 for name, func in inspect.getmembers(_logger):
-    if name[0] == "_":continue
+    if name[0] == "_":
+        continue
     globals()[name] = func
     __all__.append(name)
-

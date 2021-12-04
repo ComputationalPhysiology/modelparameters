@@ -15,15 +15,28 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with ModelParameters. If not, see <http://www.gnu.org/licenses/>.
 
-__all__ = ["Param", "ScalarParam", "OptionParam", "ConstParam", "ArrayParam"\
-           "SlaveParam", "eval_param_expr", "dummy_sym"]
+__all__ = [
+    "Param",
+    "ScalarParam",
+    "OptionParam",
+    "ConstParam",
+    "ArrayParam" "SlaveParam",
+    "eval_param_expr",
+    "dummy_sym",
+]
 
 # System imports
 # Conditional sympy import
 try:
-    from .sympytools import sp, store_symbol_parameter, \
-         value_namespace, symbols_from_expr, symbol_to_param
+    from .sympytools import (
+        sp,
+        store_symbol_parameter,
+        value_namespace,
+        symbols_from_expr,
+        symbol_to_param,
+    )
     from .codegeneration import pythoncode, sympycode
+
     dummy_sym = sp.Dummy("")
 except ImportError as e:
     sp = None
@@ -35,11 +48,21 @@ import six
 # local imports
 from .config import *
 from .logger import *
-from .utils import check_arg,  check_kwarg, scalars, value_formatter,\
-     Range, tuplewrap, integers, nptypes, Timer
+from .utils import (
+    check_arg,
+    check_kwarg,
+    scalars,
+    value_formatter,
+    Range,
+    tuplewrap,
+    integers,
+    nptypes,
+    Timer,
+)
 from .utils import _np as np
 
 import pint
+
 ureg = pint.UnitRegistry()
 
 option_types = scalars + (str,)
@@ -65,10 +88,11 @@ def _process_other(other):
     unit : str
         The unit of other (if not available unit = "1")
     """
+
     def from_param(other_):
         value = other_.value
         name = other_.name
-        unit = getattr(other_, 'unit', '1')
+        unit = getattr(other_, "unit", "1")
         return (value, name, unit)
 
     if isinstance(other, scalars):
@@ -80,24 +104,25 @@ def _process_other(other):
     else:
         # Check it other has an attribute called param
         # which is the case for gotran.Paramerter
-        if hasattr(other, 'param'):
+        if hasattr(other, "param"):
             return from_param(other.param)
 
         # I don't know how to handle this
-        raise ValueError('Unknown type {}'.format(type(other)))
+        raise ValueError(f"Unknown type {type(other)}")
 
 
 def _eq(eq):
     if len(eq) <= 1:
         return eq
     else:
-        return(all(np.hstack(eq)))
+        return all(np.hstack(eq))
 
 
 class Param(object):
     """
     A simple type checking class for a single value
     """
+
     def __init__(self, value, name="", description="", **kwargs):
         """
         Initialize the Param
@@ -121,8 +146,7 @@ class Param(object):
         self._name = name
         self._description = description
 
-    def copy(self, include_checkarg=True, include_name=True, \
-             include_description=True):
+    def copy(self, include_checkarg=True, include_name=True, include_description=True):
         """
         Return a copy of the parameter
 
@@ -135,11 +159,12 @@ class Param(object):
         include_description : bool
             If include description in new Param
         """
-        repr_str = "%s(value%s%s%s)" % (\
-            self.__class__.__name__, \
-            self._check_arg() if include_checkarg else "", \
-            self._name_arg() if include_name else "", \
-            self._description_arg() if include_description else "")
+        repr_str = "%s(value%s%s%s)" % (
+            self.__class__.__name__,
+            self._check_arg() if include_checkarg else "",
+            self._name_arg() if include_name else "",
+            self._description_arg() if include_description else "",
+        )
 
         # FIXME: Over load copy in SlaveParam instead?
         if isinstance(self, SlaveParam):
@@ -160,8 +185,10 @@ class Param(object):
     def _set_name(self, name):
         check_arg(name, str)
         if self._name:
-            value_error("Cannot set name attribute of %s, it is already set "\
-                  "to '%s'" % (self.__class__.__name__, self._name))
+            value_error(
+                "Cannot set name attribute of %s, it is already set "
+                "to '%s'" % (self.__class__.__name__, self._name),
+            )
         self._name = name
 
     def update(self, value):
@@ -192,18 +219,23 @@ class Param(object):
         # Fist check if the value is an int or float.
         # (Treat these independently)
 
-        name_str = " '%s'" % self.name if self.name else ""
-        if self.value_type in scalars and \
-               isinstance(value, scalars):
+        name_str = f" '{self.name}'" if self.name else ""
+        if self.value_type in scalars and isinstance(value, scalars):
             if isinstance(value, float) and self.value_type == int:
-                info("Converting %s to %d%s", value, int(value), \
-                     name_str)
+                info("Converting %s to %d%s", value, int(value), name_str)
             value = self.value_type(value)
 
-        if self.value_type in [bool] and isinstance(value, int) and \
-               not isinstance(value, bool):
-            info("Converting %s to '%s' while setting parameter%s", \
-                 value, bool(value), name_str)
+        if (
+            self.value_type in [bool]
+            and isinstance(value, int)
+            and not isinstance(value, bool)
+        ):
+            info(
+                "Converting %s to '%s' while setting parameter%s",
+                value,
+                bool(value),
+                name_str,
+            )
             value = self.value_type(value)
 
         if not isinstance(value, self.value_type):
@@ -211,12 +243,10 @@ class Param(object):
                 type_name = "scalar or np.ndarray"
             else:
                 type_name = self.value_type.__name__
-            type_error("expected '%s' while setting parameter%s"%\
-                       (type_name, name_str))
+            type_error(f"expected '{type_name}' while setting parameter{name_str}")
         if self._in_range is not None:
             if not self._in_range(value):
-                value_error("Illegal value%s: %s"%\
-                            (name_str, self.format_data(value, True)))
+                value_error(f"Illegal value{name_str}: {self.format_data(value, True)}")
         return value
 
     def format_data(self, value=None, not_in=False, str_length=0):
@@ -241,7 +271,7 @@ class Param(object):
             return value_formatter(self._value, str_length)
 
         if not_in:
-            return self._not_in_str%(value_formatter(value, str_length))
+            return self._not_in_str % (value_formatter(value, str_length))
         else:
             return self._in_str % value_formatter(value, str_length)
 
@@ -257,8 +287,7 @@ class Param(object):
         """
         return self.repr()
 
-    def repr(self, include_checkarg=True, include_name=True, \
-             include_description=True):
+    def repr(self, include_checkarg=True, include_name=True, include_description=True):
         """
         Returns an executable version of the Param including optional arguments
 
@@ -272,21 +301,25 @@ class Param(object):
             If include description in new Param
         """
 
-        value_str = str(self._expr) if isinstance(self, SlaveParam) else \
-                    value_formatter(self.value)
+        value_str = (
+            str(self._expr)
+            if isinstance(self, SlaveParam)
+            else value_formatter(self.value)
+        )
 
-        return "%s(%s%s%s%s)" % (\
-            self.__class__.__name__, \
-            value_str, self._check_arg() if include_checkarg else "", \
-            self._name_arg() if include_name else "", \
-            self._description_arg() if include_description else "")
+        return "%s(%s%s%s%s)" % (
+            self.__class__.__name__,
+            value_str,
+            self._check_arg() if include_checkarg else "",
+            self._name_arg() if include_name else "",
+            self._description_arg() if include_description else "",
+        )
 
     def _name_arg(self):
-        return ", name='%s'" % self._name if self._name else ""
+        return f", name='{self._name}'" if self._name else ""
 
     def _description_arg(self):
-        return ", description='%s'" % self._description \
-               if self._description else ""
+        return f", description='{self._description}'" if self._description else ""
 
     def _check_arg(self):
         return ""
@@ -318,7 +351,7 @@ class Param(object):
         >>> print('value = {}, unit = {}'.format(p_ms.value), p_ms.unit))
         value = 1000.0, unit = 'milliseconds'
         """
-        new = ureg('{}*{}'.format(self.value, self.unit)).to(unit)
+        new = ureg(f"{self.value}*{self.unit}").to(unit)
         return self.__class__(value=new.magnitude, unit=new.u.format_babel())
 
     def _op(self, other, operator, reverse=False, check_units=False):
@@ -349,20 +382,19 @@ class Param(object):
         results : ScalarParam
             Returns `self [op] other` with correct units and value
         """
-        other_value, other_name, other_unit = \
-            _process_other(other)
+        other_value, other_name, other_unit = _process_other(other)
 
-        self_value, self_name, self_unit = \
-            _process_other(self)
+        self_value, self_name, self_unit = _process_other(self)
 
         assert isinstance(operator, str)
 
         if check_units:
             # Check if units match up
             if not (ureg(self_unit) == ureg(other_unit)):
-                msg = ('Units does not match when computing {} {} {}: '
-                       '{} != {}'.format(self, operator, other,
-                                         self_unit, other_unit))
+                msg = (
+                    "Units does not match when computing {} {} {}: "
+                    "{} != {}".format(self, operator, other, self_unit, other_unit)
+                )
                 # If one is dimensionless assume that it is OK,
                 # and keep the unit of the other
                 if self_unit == "1":
@@ -370,21 +402,25 @@ class Param(object):
                 elif other_unit == "1":
                     other_unit = self_unit
 
-        equation = ('({self_value}*{self_unit})'
-                    '{operator}'
-                    '({other_value}*{other_unit})')
+        equation = (
+            "({self_value}*{self_unit})" "{operator}" "({other_value}*{other_unit})"
+        )
         if reverse:
-            kwargs = dict(other_value=self_value,
-                          other_unit=self_unit,
-                          self_value=other_value,
-                          self_unit=other_unit)
+            kwargs = dict(
+                other_value=self_value,
+                other_unit=self_unit,
+                self_value=other_value,
+                self_unit=other_unit,
+            )
         else:
-            kwargs = dict(other_value=other_value,
-                          other_unit=other_unit,
-                          self_value=self_value,
-                          self_unit=self_unit)
+            kwargs = dict(
+                other_value=other_value,
+                other_unit=other_unit,
+                self_value=self_value,
+                self_unit=self_unit,
+            )
 
-        kwargs['operator'] = operator
+        kwargs["operator"] = operator
         new = ureg(equation.format(**kwargs))
         return self.__class__(value=new.magnitude, unit=new.u.format_babel())
 
@@ -406,18 +442,17 @@ class Param(object):
             Returns the value of `self cmp_op other`.
 
         """
-        other_value, other_name, other_unit = \
-            _process_other(other)
+        other_value, other_name, other_unit = _process_other(other)
 
-        self_value, self_name, self_unit = \
-            _process_other(self)
+        self_value, self_name, self_unit = _process_other(self)
 
         if check_units:
             # Check if units match up
             if not (ureg(self_unit) == ureg(other_unit)):
-                msg = ('Units does not match when comparing {} {} {}: '
-                       '{} != {}'.format(self, cmp_op, other,
-                                         self_unit, other_unit))
+                msg = (
+                    "Units does not match when comparing {} {} {}: "
+                    "{} != {}".format(self, cmp_op, other, self_unit, other_unit)
+                )
                 warning(msg)
                 # If one is dimensionless assume that it is OK,
                 # and keep the unit of the other
@@ -426,27 +461,34 @@ class Param(object):
                 elif other_unit == "1":
                     other_unit = self_unit
 
-        self_ureg = ureg('{}*{}'.format(self_value, self_unit))
-        other_ureg = ureg('{}*{}'.format(other_value, other_unit))
-        return eval('self_ureg {} other_ureg'.format(cmp_op))
+        self_ureg = ureg(f"{self_value}*{self_unit}")
+        other_ureg = ureg(f"{other_value}*{other_unit}")
+        return eval(f"self_ureg {cmp_op} other_ureg")
 
     def __getstate__(self):
-        """This is what is saved when you pickle this object.
-        """
-        unit = '1' if not hasattr(self, 'unit') else self.unit
-        return dict(name=self.name, unit=unit, value=self.value,
-                    description=self.description)
+        """This is what is saved when you pickle this object."""
+        unit = "1" if not hasattr(self, "unit") else self.unit
+        return dict(
+            name=self.name,
+            unit=unit,
+            value=self.value,
+            description=self.description,
+        )
 
     def __setstate__(self, state):
-        """This is how we retrieve the pickled object.
-        """
+        """This is how we retrieve the pickled object."""
         self.__class__.__init__(self, **state)
 
     def __eq__(self, other):
         # return self._cmp(other, "==")
-        return _eq(isinstance(other, self.__class__) and \
-                   (self._name == other._name, self._value == other._value, \
-                    self.__class__ == other.__class__))
+        return _eq(
+            isinstance(other, self.__class__)
+            and (
+                self._name == other._name,
+                self._value == other._value,
+                self.__class__ == other.__class__,
+            ),
+        )
 
     def __lt__(self, other):
         return self._cmp(other, "<")
@@ -462,46 +504,44 @@ class Param(object):
 
     def __truediv__(self, other):
         # Python 3
-        return self._op(other, '/')
+        return self._op(other, "/")
 
     def __rtruediv__(self, other):
         # Python 3
-        return self._op(other, '/', reverse=True)
+        return self._op(other, "/", reverse=True)
 
     def __div__(self, other):
         # Python 2
-        return self._op(other, '/')
+        return self._op(other, "/")
 
     def __rdiv__(self, other):
         # Python 2
-        return self._op(other, '/', reverse=True)
+        return self._op(other, "/", reverse=True)
 
     def __mul__(self, other):
-        return self._op(other, '*')
+        return self._op(other, "*")
 
     def __rmul__(self, other):
-        return self._op(other, '*', reverse=True)
+        return self._op(other, "*", reverse=True)
 
     def __add__(self, other):
-        return self._op(other, '+', check_units=True)
+        return self._op(other, "+", check_units=True)
 
     def __radd__(self, other):
-        return self._op(other, '+', reverse=True, check_units=True)
+        return self._op(other, "+", reverse=True, check_units=True)
 
     def __sub__(self, other):
-        return self._op(other, '-', check_units=True)
+        return self._op(other, "-", check_units=True)
 
     def __rsub__(self, other):
-        return self._op(other, '-', reverse=True, check_units=True)
+        return self._op(other, "-", reverse=True, check_units=True)
 
     def __pow__(self, other):
-        other_value, other_name, other_unit = \
-            _process_other(other)
+        other_value, other_name, other_unit = _process_other(other)
         assert other_unit == "1", "Exponents cannot have unit"
 
-        self_value, self_name, self_unit = \
-            _process_other(self)
-        new = ureg("({}*{})**{}".format(self_value, self_unit, other_value))
+        self_value, self_name, self_unit = _process_other(self)
+        new = ureg(f"({self_value}*{self_unit})**{other_value}")
         return self.__class__(value=new.magnitude, unit=new.u.format_babel())
 
     def __abs__(self):
@@ -512,6 +552,7 @@ class OptionParam(Param):
     """
     A simple type and options checking class for a single value
     """
+
     def __init__(self, value, options, name="", description=""):
         """
         Initialize the OptionParam
@@ -537,18 +578,20 @@ class OptionParam(Param):
         # Check valid types for an 'option check'
         for option in options:
             if not isinstance(option, option_types):
-                type_error("options can only be 'str' and scalars got: '%s'" % \
-                           type(option).__name__)
+                type_error(
+                    "options can only be 'str' and scalars got: '%s'"
+                    % type(option).__name__,
+                )
 
         # Define a 'check function'
-        self._in_range = lambda value : value in options
+        self._in_range = lambda value: value in options
 
         # Define some string used for pretty print
-        self._in_str = b"%%s \xe2\x88\x88 %s".decode('utf-8') % repr(options)
-        self._not_in_str = b"%%s \xe2\x88\x89 %s".decode('utf-8') % repr(options)
+        self._in_str = b"%%s \xe2\x88\x88 %s".decode("utf-8") % repr(options)
+        self._not_in_str = b"%%s \xe2\x88\x89 %s".decode("utf-8") % repr(options)
 
         # Define a 'repr string'
-        #self._repr_str = "OptionParam(%%s, %s)" % repr(options)
+        # self._repr_str = "OptionParam(%%s, %s)" % repr(options)
 
         # Set the value using the check functionality
         self.setvalue(value)
@@ -556,23 +599,29 @@ class OptionParam(Param):
         # Check that all values in options has the same type
         for val in options:
             if not isinstance(val, self.value_type):
-                type_error("All values of the 'option check' " +\
-                           "need to be of type: '%s'" % type(self._value).__name__)
+                type_error(
+                    "All values of the 'option check' "
+                    + f"need to be of type: '{type(self._value).__name__}'",
+                )
 
         # Store options
         self._options = options
 
     def _check_arg(self):
-        return ", %s" % repr(self._options)
+        return f", {repr(self._options)}"
 
     def __eq__(self, other):
-        return _eq(isinstance(other, self.__class__) and \
-                   (self._name == other._name, self._value == other._value, \
-                    self.__class__ == other.__class__, \
-                    self._options == other._options))
+        return _eq(
+            isinstance(other, self.__class__)
+            and (
+                self._name == other._name,
+                self._value == other._value,
+                self.__class__ == other.__class__,
+                self._options == other._options,
+            ),
+        )
 
-    def repr(self, include_checkarg=True, include_name=True, \
-              include_description=True):
+    def repr(self, include_checkarg=True, include_name=True, include_description=True):
         """
         Returns an executable version of the Param including optional arguments
 
@@ -589,13 +638,18 @@ class OptionParam(Param):
             warning("'include_checkarg' must be 'True' in OptionParam.repr.")
             include_checkarg = True
 
-        return super(OptionParam, self).repr(include_checkarg, include_name, \
-              include_description)
+        return super(OptionParam, self).repr(
+            include_checkarg,
+            include_name,
+            include_description,
+        )
+
 
 class ConstParam(Param):
     """
     A Constant parameter which prevent any change of values
     """
+
     def __init__(self, value, name="", description=""):
         """
         Initialize the ConstParam
@@ -613,17 +667,19 @@ class ConstParam(Param):
         Param.__init__(self, value, name, description)
 
         # Define a 'check function'
-        self._in_range = lambda x : x == self._value
+        self._in_range = lambda x: x == self._value
 
         # Define some string used for pretty print
         self._in_str = "%s - Constant"
         self._not_in_str = "%%s != %s" % self._value
         self.setvalue(value)
 
+
 class TypelessParam(Param):
     """
     A Typeless parameter allowing any change of value, including type changes
     """
+
     def __init__(self, value, name="", description=""):
         """
         Initialize the TypelessParam
@@ -643,12 +699,23 @@ class TypelessParam(Param):
         # Set allowed types to all Python objects
         self.value_type = object
 
+
 class ScalarParam(Param):
     """
     A simple type and range checking class for a scalar value
     """
-    def __init__(self, value, ge=None, le=None, gt=None, lt=None, \
-                 unit="1", name="", description=""):
+
+    def __init__(
+        self,
+        value,
+        ge=None,
+        le=None,
+        gt=None,
+        lt=None,
+        unit="1",
+        name="",
+        description="",
+    ):
         """
         Creating a ScalarParam
 
@@ -672,8 +739,7 @@ class ScalarParam(Param):
             A description associated with the Parameter
         """
         if isinstance(value, Param):
-            param_value, param_name, param_unit = \
-                _process_other(value)
+            param_value, param_name, param_unit = _process_other(value)
             if unit == "1":
                 unit = param_unit
             value = param_value
@@ -697,8 +763,14 @@ class ScalarParam(Param):
         elif sp is None:
             self._sym = None
         else:
-            self._sym = sp.Symbol(name, real=True, imaginary=False,
-                                  commutative=True, hermitian=True, complex=True)
+            self._sym = sp.Symbol(
+                name,
+                real=True,
+                imaginary=False,
+                commutative=True,
+                hermitian=True,
+                complex=True,
+            )
 
             # Store parameter
             store_symbol_parameter(self)
@@ -723,14 +795,25 @@ class ScalarParam(Param):
             return
 
         # Create a new symbol with the updated name
-        self._sym = sp.Symbol(name, real=True, imaginary=False,
-                              commutative=True, hermitian=True, complex=True)
+        self._sym = sp.Symbol(
+            name,
+            real=True,
+            imaginary=False,
+            commutative=True,
+            hermitian=True,
+            complex=True,
+        )
 
         # Store parameter
         store_symbol_parameter(self)
 
-    def copy(self, include_checkarg=True, include_name=True, \
-             include_description=True, include_unit=True):
+    def copy(
+        self,
+        include_checkarg=True,
+        include_name=True,
+        include_description=True,
+        include_unit=True,
+    ):
         """
         Return a copy of the parameter
 
@@ -745,12 +828,13 @@ class ScalarParam(Param):
         include_unit : bool
             If include unit in new Param
         """
-        repr_str = "%s(value%s%s%s%s)" % (\
-            self.__class__.__name__, \
-            self._check_arg() if include_checkarg else "", \
-            self._unit_arg() if include_unit else "", \
-            self._name_arg() if include_name else "", \
-            self._description_arg() if include_description else "")
+        repr_str = "%s(value%s%s%s%s)" % (
+            self.__class__.__name__,
+            self._check_arg() if include_checkarg else "",
+            self._unit_arg() if include_unit else "",
+            self._name_arg() if include_name else "",
+            self._description_arg() if include_description else "",
+        )
 
         # FIXME: Over load copy in SlaveParam instead?
         if isinstance(self, SlaveParam):
@@ -761,8 +845,13 @@ class ScalarParam(Param):
         # Evaluate the repr str with a copy of the value
         return eval(repr_str, globals(), dict(value=value))
 
-    def repr(self, include_checkarg=True, include_name=True, \
-             include_description=True, include_unit=True):
+    def repr(
+        self,
+        include_checkarg=True,
+        include_name=True,
+        include_description=True,
+        include_unit=True,
+    ):
         """
         Returns an executable version of the Param including optional arguments
 
@@ -778,15 +867,20 @@ class ScalarParam(Param):
             If include unit in new Param
         """
 
-        value_str = str(self._expr) if isinstance(self, SlaveParam) else \
-                    value_formatter(self.value)
+        value_str = (
+            str(self._expr)
+            if isinstance(self, SlaveParam)
+            else value_formatter(self.value)
+        )
 
-        return "%s(%s%s%s%s%s)" % (\
-            self.__class__.__name__, \
-            value_str, self._check_arg() if include_checkarg else "", \
-            self._unit_arg() if include_unit else "", \
-            self._name_arg() if include_name else "", \
-            self._description_arg() if include_description else "")
+        return "%s(%s%s%s%s%s)" % (
+            self.__class__.__name__,
+            value_str,
+            self._check_arg() if include_checkarg else "",
+            self._unit_arg() if include_unit else "",
+            self._name_arg() if include_name else "",
+            self._description_arg() if include_description else "",
+        )
 
     def update(self, param):
         """
@@ -799,14 +893,11 @@ class ScalarParam(Param):
             The parameter with the new value
         """
 
-
         check_arg(param, scalars + (ScalarParam,))
 
-        msg="Update parameter {}. ".format(self._get_name())
-        self_value, self_name, self_unit = \
-            _process_other(self)
-        param_value, param_name, param_unit = \
-            _process_other(param)
+        msg = f"Update parameter {self._get_name()}. "
+        self_value, self_name, self_unit = _process_other(self)
+        param_value, param_name, param_unit = _process_other(param)
 
         if param_unit == "1":
             # Assume same Units
@@ -816,12 +907,12 @@ class ScalarParam(Param):
             self_unit = param_unit
 
         # Convert to same unit as self
-        quantity = ureg('{}*{}'.format(param_value, param_unit)).to(self_unit)
+        quantity = ureg(f"{param_value}*{param_unit}").to(self_unit)
 
         return self.setvalue(quantity.m)
 
     def _unit_arg(self):
-        return ", unit='%s'"%self._unit if self._unit != "1" else ""
+        return f", unit='{self._unit}'" if self._unit != "1" else ""
 
     def get_sym(self):
         return self._sym
@@ -844,19 +935,35 @@ class ScalarParam(Param):
             return ", " + self._range.arg_repr_str
         return ""
 
-
     def __eq__(self, other):
-        return _eq(isinstance(other, self.__class__) and \
-                   (self._name == other._name, self._value == other._value, \
-                    self.__class__ == other.__class__, \
-                    self._range == other._range))
+        return _eq(
+            isinstance(other, self.__class__)
+            and (
+                self._name == other._name,
+                self._value == other._value,
+                self.__class__ == other.__class__,
+                self._range == other._range,
+            ),
+        )
+
 
 class ArrayParam(ScalarParam):
     """
     A numpy Array based parameter
     """
-    def __init__(self, value, size=None, ge=None, le=None, gt=None, lt=None, \
-                 unit="1", name="", description=""):
+
+    def __init__(
+        self,
+        value,
+        size=None,
+        ge=None,
+        le=None,
+        gt=None,
+        lt=None,
+        unit="1",
+        name="",
+        description="",
+    ):
         """
         Creating an ArrayParam
 
@@ -893,9 +1000,10 @@ class ArrayParam(ScalarParam):
 
             # Create numpy array based on the passed value
             # Use intc and float_ to be compatible with c code.
-            value = np.array([value]*size, dtype=np.intc \
-                             if isinstance(value, integers) \
-                             else np.float_)
+            value = np.array(
+                [value] * size,
+                dtype=np.intc if isinstance(value, integers) else np.float_,
+            )
 
         # If setting value using only value argument
         else:
@@ -903,7 +1011,7 @@ class ArrayParam(ScalarParam):
             # Allow using list of scalars
             if isinstance(value, list):
                 check_arg(value, list, 0, ArrayParam, scalars)
-                if len(value)==0:
+                if len(value) == 0:
                     value_error("expected a list with at least 1 element")
                 value = np.fromiter(value, dtype=type(value[0]))
 
@@ -921,12 +1029,22 @@ class ArrayParam(ScalarParam):
             elif value.dtype in scalars:
                 value = value.astype(np.float_)
             else:
-                type_error("expected a scalar or a scalar valued np.ndarray"
-                           "or list as value argument.")
+                type_error(
+                    "expected a scalar or a scalar valued np.ndarray"
+                    "or list as value argument.",
+                )
 
         # Init super class with dummy value
-        super(ArrayParam, self).__init__(value[0], ge, le, gt, lt, unit, \
-                                         name, description)
+        super(ArrayParam, self).__init__(
+            value[0],
+            ge,
+            le,
+            gt,
+            lt,
+            unit,
+            name,
+            description,
+        )
 
         # Assign value
         self._value = value
@@ -941,20 +1059,23 @@ class ArrayParam(ScalarParam):
         """
 
         # An initial slive for the whole array
-        index = slice(0,len(self._value)+1)
+        index = slice(0, len(self._value) + 1)
 
         # Tuple means index assignment
         # FIXME: Add support for slices
         if isinstance(value, tuple):
             if len(value) != 2:
-                value_error("expected a tuple of length 2 when assigning "\
-                            "single items")
+                value_error(
+                    "expected a tuple of length 2 when assigning " "single items",
+                )
             if not isinstance(value[0], integers):
-                value_error("expected first value in index assignment to be"\
-                            " an integer")
+                value_error(
+                    "expected first value in index assignment to be" " an integer",
+                )
             if not isinstance(value[1], scalars):
-                value_error("expected second value in index assignment to be"\
-                            " an scalar")
+                value_error(
+                    "expected second value in index assignment to be" " an scalar",
+                )
             index = value[0]
             value = value[1]
 
@@ -962,8 +1083,10 @@ class ArrayParam(ScalarParam):
 
         if isinstance(value, np.ndarray):
             if len(value) != len(self._value):
-                value_error("expected the passed array to be of "\
-                            "size: '%d'"%len(self._value))
+                value_error(
+                    "expected the passed array to be of "
+                    "size: '%d'" % len(self._value),
+                )
 
         # Assign value
         self._value[index] = self.check(value)
@@ -983,10 +1106,12 @@ class ArrayParam(ScalarParam):
         if len(self._value) != newsize:
             self._value = np.resize(self._value, newsize)
 
+
 class SlaveParam(ScalarParam):
     """
     A slave parameter defined by other parameters
     """
+
     def __init__(self, expr, unit="1", name="", description=""):
 
         if sp is None:
@@ -998,12 +1123,13 @@ class SlaveParam(ScalarParam):
         if isinstance(expr, ScalarParam):
             expr = expr.sym
 
-        if not all(isinstance(atom, (sp.NumberSymbol, sp.Number, sp.Symbol, \
-                                     sp.Dummy)) for atom in expr.atoms()):
+        if not all(
+            isinstance(atom, (sp.NumberSymbol, sp.Number, sp.Symbol, sp.Dummy))
+            for atom in expr.atoms()
+        ):
             type_error("expected expression of model symbols.")
 
-        ScalarParam.__init__(self, 0.0, name=name, description=description, \
-                             unit=unit)
+        ScalarParam.__init__(self, 0.0, name=name, description=description, unit=unit)
 
         # Store the original expression used to evaluate the value of
         # the SlaveParam
@@ -1011,8 +1137,8 @@ class SlaveParam(ScalarParam):
 
         # Store parameters that are available at the time of construction
         # FIXME: Does not work...
-        #self._param_ns = {}
-        #for symbol in symbols_from_expr(expr, include_derivatives=True):
+        # self._param_ns = {}
+        # for symbol in symbols_from_expr(expr, include_derivatives=True):
         #    try:
         #        self._param_ns[sympycode(symbol)] = symbol_to_param(symbol)
         #    except:
@@ -1033,7 +1159,7 @@ class SlaveParam(ScalarParam):
         return eval_param_expr(self._expr, include_derivatives=True)
 
         # FIXME: Does not work...
-        #return eval_param_expr(self._expr, param_ns=self._param_ns, \
+        # return eval_param_expr(self._expr, param_ns=self._param_ns, \
         #                       include_derivatives=True)
 
     value = property(getvalue, setvalue)
@@ -1049,8 +1175,11 @@ class SlaveParam(ScalarParam):
         "Print a nice formated version of the value and its range"
 
         # If no '_in_str' is defined
-        return "%s - SlaveParam(%s)"%(value_formatter(self.getvalue(), str_length), \
-                                      str(self._expr))
+        return "%s - SlaveParam(%s)" % (
+            value_formatter(self.getvalue(), str_length),
+            str(self._expr),
+        )
+
 
 def eval_param_expr(expr, param_ns=None, include_derivatives=False, ns=None):
     """
@@ -1070,8 +1199,7 @@ def eval_param_expr(expr, param_ns=None, include_derivatives=False, ns=None):
     """
 
     if sp is None:
-        error("sympy is not installed so evaluation of expressions"\
-              " is not available")
+        error("sympy is not installed so evaluation of expressions" " is not available")
 
     # Create name space which the expression will be evaluated in
     ns = ns or {}
@@ -1082,8 +1210,7 @@ def eval_param_expr(expr, param_ns=None, include_derivatives=False, ns=None):
     else:
 
         value_ns = {}
-        for symbol in symbols_from_expr(expr, \
-                                        include_derivatives=include_derivatives):
+        for symbol in symbols_from_expr(expr, include_derivatives=include_derivatives):
 
             sym_name = sympycode(symbol)
 
@@ -1095,7 +1222,7 @@ def eval_param_expr(expr, param_ns=None, include_derivatives=False, ns=None):
                 param = symbol_to_param(symbol)
 
                 # And store it for future usage
-                #param_ns[sym_name] = param
+                # param_ns[sym_name] = param
 
             # Store value
             value_ns[sym_name] = param.value
@@ -1104,12 +1231,16 @@ def eval_param_expr(expr, param_ns=None, include_derivatives=False, ns=None):
     if np and any(isinstance(value, np.ndarray) for value in list(value_ns.values())):
 
         # Second check if they have the same length
-        all_length = [len(value) for value in list(value_ns.values()) \
-                      if isinstance(value, np.ndarray)]
+        all_length = [
+            len(value)
+            for value in list(value_ns.values())
+            if isinstance(value, np.ndarray)
+        ]
         same_length = all(all_length[0] == l for l in all_length)
         if not same_length:
-            value_error("expected all ArrayParams in an expression "\
-                        "to be of equal size.")
+            value_error(
+                "expected all ArrayParams in an expression " "to be of equal size.",
+            )
 
         # Update name space with numpy name space
         namespace = "np"
@@ -1119,6 +1250,7 @@ def eval_param_expr(expr, param_ns=None, include_derivatives=False, ns=None):
 
         # No numpy arrays and we choose math name space to evaulate expression
         import math
+
         namespace = "math"
         ns["math"] = math
 

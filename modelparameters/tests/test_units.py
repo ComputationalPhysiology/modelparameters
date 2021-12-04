@@ -1,14 +1,17 @@
 import unittest
 
-from modelparameters.logger import suppress_logging
 import pint
-from modelparameters.parameters import ScalarParam, ureg
+
+from modelparameters.logger import suppress_logging
+from modelparameters.parameters import ScalarParam
+from modelparameters.parameters import ureg
 
 suppress_logging()
 
+
 def get_unit_and_value(p):
-    p_value = p if not hasattr(p, 'value') else p.value
-    p_unit = "1" if not hasattr(p, 'unit') else p.unit
+    p_value = p if not hasattr(p, "value") else p.value
+    p_unit = "1" if not hasattr(p, "unit") else p.unit
     return p_value, p_unit
 
 
@@ -21,13 +24,18 @@ class TestUnits(unittest.TestCase):
     v1 = 2.0
     v2 = -2.0
 
-
     def test_division(self):
 
-        pairs = [(self.p1, self.p2), (self.p2, self.p1),
-                 (self.p1, self.v1), (self.v1, self.p1),
-                 (self.p1, self.v2), (self.v2, self.p1),
-                 (self.p1, self.p4), (self.p4, self.p1)]
+        pairs = [
+            (self.p1, self.p2),
+            (self.p2, self.p1),
+            (self.p1, self.v1),
+            (self.v1, self.p1),
+            (self.p1, self.v2),
+            (self.v2, self.p1),
+            (self.p1, self.p4),
+            (self.p4, self.p1),
+        ]
 
         for p1, p2 in pairs:
             p = p1 / p2
@@ -36,15 +44,20 @@ class TestUnits(unittest.TestCase):
             p2_value, p2_unit = get_unit_and_value(p2)
 
             self.assertEqual(p.value, p1_value / p2_value)
-            self.assertEqual(ureg(p.unit).u, ureg("{}/{}".format(p1_unit,
-                                                                 p2_unit)).u)
+            self.assertEqual(ureg(p.unit).u, ureg(f"{p1_unit}/{p2_unit}").u)
 
     def test_multiplication(self):
 
-        pairs = [(self.p1, self.p2), (self.p2, self.p1),
-                 (self.p1, self.v1), (self.v1, self.p1),
-                 (self.p1, self.v2), (self.v2, self.p1),
-                 (self.p1, self.p4), (self.p4, self.p1)]
+        pairs = [
+            (self.p1, self.p2),
+            (self.p2, self.p1),
+            (self.p1, self.v1),
+            (self.v1, self.p1),
+            (self.p1, self.v2),
+            (self.v2, self.p1),
+            (self.p1, self.p4),
+            (self.p4, self.p1),
+        ]
 
         for p1, p2 in pairs:
             p = p1 * p2
@@ -53,15 +66,20 @@ class TestUnits(unittest.TestCase):
             p2_value, p2_unit = get_unit_and_value(p2)
 
             self.assertEqual(p.value, p1_value * p2_value)
-            self.assertEqual(ureg(p.unit).u, ureg("{}*{}".format(p1_unit,
-                                                                 p2_unit)).u)
+            self.assertEqual(ureg(p.unit).u, ureg(f"{p1_unit}*{p2_unit}").u)
 
     def test_addition(self):
 
-        pairs = [(self.p1, self.v1), (self.v1, self.p1),
-                 (self.p1, self.v2), (self.v2, self.p1),
-                 (self.p1, self.p3), (self.p3, self.p1),
-                 (self.p1, self.p4), (self.p4, self.p1)]
+        pairs = [
+            (self.p1, self.v1),
+            (self.v1, self.p1),
+            (self.p1, self.v2),
+            (self.v2, self.p1),
+            (self.p1, self.p3),
+            (self.p3, self.p1),
+            (self.p1, self.p4),
+            (self.p4, self.p1),
+        ]
 
         for p1, p2 in pairs:
             p = p1 + p2
@@ -75,8 +93,7 @@ class TestUnits(unittest.TestCase):
                 p2_unit = p1_unit
 
             self.assertEqual(p.value, p1_value + p2_value)
-            self.assertEqual(ureg(p.unit).u, ureg("{}+{}".format(p1_unit,
-                                                                 p2_unit)).u)
+            self.assertEqual(ureg(p.unit).u, ureg(f"{p1_unit}+{p2_unit}").u)
 
         pairs = [(self.p1, self.p2), (self.p2, self.p1)]
         with self.assertRaises(pint.errors.DimensionalityError):
@@ -85,10 +102,16 @@ class TestUnits(unittest.TestCase):
 
     def test_subtraction(self):
 
-        pairs = [(self.p1, self.v1), (self.v1, self.p1),
-                 (self.p1, self.v2), (self.v2, self.p1),
-                 (self.p1, self.p3), (self.p3, self.p1),
-                 (self.p1, self.p4), (self.p4, self.p1)]
+        pairs = [
+            (self.p1, self.v1),
+            (self.v1, self.p1),
+            (self.p1, self.v2),
+            (self.v2, self.p1),
+            (self.p1, self.p3),
+            (self.p3, self.p1),
+            (self.p1, self.p4),
+            (self.p4, self.p1),
+        ]
 
         for p1, p2 in pairs:
             p = p1 - p2
@@ -102,8 +125,7 @@ class TestUnits(unittest.TestCase):
                 p2_unit = p1_unit
 
             self.assertEqual(p.value, p1_value - p2_value)
-            self.assertEqual(ureg(p.unit).u, ureg("{}-{}".format(p1_unit,
-                                                                 p2_unit)).u)
+            self.assertEqual(ureg(p.unit).u, ureg(f"{p1_unit}-{p2_unit}").u)
 
         pairs = [(self.p1, self.p2), (self.p2, self.p1)]
         with self.assertRaises(pint.errors.DimensionalityError):
@@ -112,9 +134,7 @@ class TestUnits(unittest.TestCase):
 
     def test_power(self):
 
-        pairs = [(self.p1, self.v1),
-                 (self.p1, self.v2),
-                 (self.p1, self.p4)]
+        pairs = [(self.p1, self.v1), (self.p1, self.v2), (self.p1, self.p4)]
 
         for p1, p2 in pairs:
             p = p1 ** p2
@@ -123,10 +143,10 @@ class TestUnits(unittest.TestCase):
             p2_value, p2_unit = get_unit_and_value(p2)
 
             self.assertEqual(p.value, p1_value ** p2_value)
-            self.assertEqual(ureg(p.unit).u, ureg("({})**{}".format(p1_unit, p2_value)).u)
+            self.assertEqual(ureg(p.unit).u, ureg(f"({p1_unit})**{p2_value}").u)
 
         with self.assertRaises(AssertionError):
-            p = self.p1**self.p2
+            p = self.p1 ** self.p2
 
 
 class TestCmp(unittest.TestCase):
@@ -193,9 +213,6 @@ class TestCmp(unittest.TestCase):
         self.assertGreaterEqual(self.p3, self.p4)
         self.assertGreaterEqual(self.p4, self.v2)
         self.assertGreaterEqual(self.p3, self.v2)
-
-
-
 
 
 if __name__ == "__main__":

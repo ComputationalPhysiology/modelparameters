@@ -14,15 +14,15 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with ModelParameters. If not, see <http://www.gnu.org/licenses/>.
-
 # System imports
-
 # Conditional numpy dependency
 try:
     import numpy as _np
+
     list_types = (_np.ndarray, list)
-    scalars = tuple(t for t in _np.ScalarType if not (issubclass(t, str) or \
-                                                      t is _np.void))
+    scalars = tuple(
+        t for t in _np.ScalarType if not (issubclass(t, str) or t is _np.void)
+    )
     integers = tuple(t for t in scalars if "int" in t.__name__) + (int,)
     nptypes = (scalars, _np.ndarray)
     range_types = scalars + (_np.ndarray,)
@@ -35,11 +35,12 @@ except Exception as e:
     integers = (int,)
     nptypes = ()
     range_types = scalars
-    _all = lambda value : value
+    _all = lambda value: value
 
 import time as _time
 import math as _math
 import types as _types
+
 try:
     ClassType = _types.ClassType
 except AttributeError:
@@ -58,11 +59,23 @@ from functools import reduce
 
 _toc_time = 0.0
 
-_argument_positions = ["first", "second", "third", "fourth", "fifth", "sixth",\
-                       "seventh", "eigth", "ninth", "tenth"]
+_argument_positions = [
+    "first",
+    "second",
+    "third",
+    "fourth",
+    "fifth",
+    "sixth",
+    "seventh",
+    "eigth",
+    "ninth",
+    "tenth",
+]
+
 
 def rjust(s, *args, **kwargs):
     return s.rjust(*args, **kwargs)
+
 
 VALUE_JUST = rjust
 inf = float("inf")
@@ -71,10 +84,10 @@ inf = float("inf")
 def param2value(param):
     if isinstance(param, scalars):
         return param
-    elif hasattr(param, 'value'):
+    elif hasattr(param, "value"):
         return param.value
     else:
-        raise ValueError('Unable to get value of parameters {}'.format(param))
+        raise ValueError(f"Unable to get value of parameters {param}")
 
 
 def value_formatter(value, width=0):
@@ -90,12 +103,13 @@ def value_formatter(value, width=0):
     """
     ret = None
     if isinstance(value, list_types):
-        if len(value)>4:
+        if len(value) > 4:
             if isinstance(value[0], integers):
                 formatstr = "[%d, %d, ..., %d, %d]"
             elif isinstance(value[0], scalars):
-                formatstr = "[%%.%(ff)s, %%.%(ff)s, ..., %%.%(ff)s, %%.%(ff)s]" % \
-                            float_format()
+                formatstr = (
+                    "[%%.%(ff)s, %%.%(ff)s, ..., %%.%(ff)s, %%.%(ff)s]" % float_format()
+                )
             else:
                 formatstr = "[%s, %s, ..., %s, %s]"
             ret = formatstr % (value[0], value[1], value[-2], value[-1])
@@ -105,20 +119,20 @@ def value_formatter(value, width=0):
             if isinstance(value[0], integers):
                 formatstr = "%d"
             elif isinstance(value[0], scalars):
-                formatstr = "%%.%(ff)s" % float_format()
+                formatstr = f"%.{float_format()['ff']}"
             elif isinstance(value[0], str):
                 formatstr = "'%s'"
             else:
                 formatstr = "%s"
 
-            formatstr = "[%s]" % (", ".join(formatstr for i in range(len(value))) )
+            formatstr = f"[{', '.join(formatstr for i in range(len(value)))}]"
             ret = formatstr % tuple(value)
 
     elif isinstance(value, float):
         if value == inf:
-            ret = b"\xe2\x88\x9e".decode('utf-8')
+            ret = b"\xe2\x88\x9e".decode("utf-8")
         elif value == -inf:
-            ret = b"-\xe2\x88\x9e".decode('utf-8')
+            ret = b"-\xe2\x88\x9e".decode("utf-8")
 
     elif isinstance(value, str):
         ret = repr(value)
@@ -130,10 +144,12 @@ def value_formatter(value, width=0):
         return ret
     return VALUE_JUST(ret, width)
 
+
 class Range(object):
     """
     A simple class for helping checking a given value is within a certain range
     """
+
     def __init__(self, ge=None, le=None, gt=None, lt=None):
         """
         Create a Range
@@ -154,16 +170,14 @@ class Range(object):
 
         # Checking valid combinations of kwargs
         if le is not None and lt is not None:
-            value_error("Cannot create a 'Range' including "\
-                        "both 'le' and 'lt'")
+            value_error("Cannot create a 'Range' including " "both 'le' and 'lt'")
         if ge is not None and gt is not None:
-            value_error("Cannot create a 'Range' including "\
-                        "both 'ge' and 'gt'")
+            value_error("Cannot create a 'Range' including " "both 'ge' and 'gt'")
 
         # Checking valid types for 'RangeChecks'
         for op, opname in zip(ops, opnames):
             if not (op is None or isinstance(op, scalars)):
-                type_error("expected a scalar for the '%s' arg" % opname)
+                type_error(f"expected a scalar for the '{opname}' arg")
 
         # get limits
         minval = gt if gt is not None else ge if ge is not None else -inf
@@ -186,45 +200,49 @@ class Range(object):
         range_formats["maxformat"] = value_formatter(maxval)
         self.range_formats = range_formats
 
-        self.range_eval_str = "lambda value : _all(value %(minop)s %(minvalue)s) "\
-                              "and _all(value %(maxop)s %(maxvalue)s)"%\
-                              range_formats
+        self.range_eval_str = (
+            "lambda value : _all(value %(minop)s %(minvalue)s) "
+            "and _all(value %(maxop)s %(maxvalue)s)" % range_formats
+        )
 
         self._in_range = eval(self.range_eval_str)
 
         # Define some string used for pretty print
-        self._range_str = "%(minop_format)s%(minformat)s, "\
-                          "%(maxformat)s%(maxop_format)s" % range_formats
+        self._range_str = (
+            "%(minop_format)s%(minformat)s, "
+            "%(maxformat)s%(maxop_format)s" % range_formats
+        )
 
-        self._in_str = b"%%s \xe2\x88\x88 %s".decode('utf-8') % self._range_str
-        self._not_in_str = b"%%s \xe2\x88\x89 %s".decode('utf-8') % self._range_str
+        self._in_str = b"%%s \xe2\x88\x88 %s".decode("utf-8") % self._range_str
+        self._not_in_str = b"%%s \xe2\x88\x89 %s".decode("utf-8") % self._range_str
 
-        self.arg_repr_str = ", ".join("%s=%s" % (opname, op) \
-                                      for op, opname in zip(ops, opnames) \
-                                      if op is not None)
+        self.arg_repr_str = ", ".join(
+            f"{opname}={op}" for op, opname in zip(ops, opnames) if op is not None
+        )
 
     def __repr__(self):
-        return "%s(%s)" % (self.__class__.__name__, self.arg_repr_str)
+        return f"{self.__class__.__name__}({self.arg_repr_str})"
 
     def __str__(self):
         return self._range_str
 
     def __eq__(self, other):
-        return isinstance(other, self.__class__) and \
-               self._in_str == other._in_str
+        return isinstance(other, self.__class__) and self._in_str == other._in_str
 
     def __contains__(self, value):
-        """
+        f"""
         Return True of value is in range
 
         Arguments
         ---------
-        value : scalar%s
+        value : scalar{'' if _np is None else ' and np.ndarray'}
             A value to be used in checking range
-        """ % ("" if _np is None else " and np.ndarray")
+        """
         if not isinstance(value, range_types):
-            type_error("only scalars%s can be ranged checked" % \
-                       ("" if _np is None else " and np.ndarray"))
+            type_error(
+                "only scalars%s can be ranged checked"
+                % ("" if _np is None else " and np.ndarray"),
+            )
         return self._in_range(value)
 
     def format(self, value, width=0):
@@ -276,6 +294,7 @@ class Range(object):
 def _floor(value):
     return int(_math.floor(value))
 
+
 def format_time(time):
     """
     Return a formated version of the time argument
@@ -285,33 +304,41 @@ def format_time(time):
     time : float
         Time given in sections
     """
-    minutes = _floor(time/60)
-    seconds = _floor(time%60)
+    minutes = _floor(time / 60)
+    seconds = _floor(time % 60)
     if minutes == 0:
-        return "%d s"%seconds
-    seconds_str =  " %d s" % seconds if seconds else ""
+        return "%d s" % seconds
+    seconds_str = " %d s" % seconds if seconds else ""
 
-    hours = _floor(minutes/60)
-    minutes = _floor(minutes%60)
+    hours = _floor(minutes / 60)
+    minutes = _floor(minutes % 60)
     if hours == 0:
-        return "%d m%s"%(minutes, seconds_str)
-    minutes_str =  " %d m" % minutes if minutes else ""
+        return "%d m%s" % (minutes, seconds_str)
+    minutes_str = " %d m" % minutes if minutes else ""
 
-    days = _floor(hours/24)
-    hours = _floor(hours%24)
+    days = _floor(hours / 24)
+    hours = _floor(hours % 24)
 
     if days == 0:
-        return "%d h%s%s"%(hours, minutes_str, seconds_str)
-    hours_str =  " %d h" % hours if hours else ""
+        return "%d h%s%s" % (hours, minutes_str, seconds_str)
+    hours_str = " %d h" % hours if hours else ""
 
-    return "%d day%s%s%s%s"%(days, "s" if days>1 else "", hours_str, \
-                             minutes_str, seconds_str)
+    return "%d day%s%s%s%s" % (
+        days,
+        "s" if days > 1 else "",
+        hours_str,
+        minutes_str,
+        seconds_str,
+    )
+
 
 class Timer(object):
     """
     Timer class
     """
+
     __all_timings = _OrderedDict()
+
     def __init__(self, task):
         """
         Start timing task
@@ -326,10 +353,10 @@ class Timer(object):
         """
         end_time = _time.time()
         if self._task in Timer.__all_timings:
-            Timer.__all_timings[self._task][0]+=1
-            Timer.__all_timings[self._task][1]+=end_time-self._start_time
+            Timer.__all_timings[self._task][0] += 1
+            Timer.__all_timings[self._task][1] += end_time - self._start_time
         else:
-            Timer.__all_timings[self._task] = [1, end_time-self._start_time]
+            Timer.__all_timings[self._task] = [1, end_time - self._start_time]
 
     @classmethod
     def timings(cls):
@@ -338,16 +365,19 @@ class Timer(object):
         """
         return cls.__all_timings
 
+
 def list_timings():
     """
     List all registered timings
     """
     left_size = len(max(list(Timer.timings().keys()), key=len)) + 1
-    print("task".ljust(left_size)+":  num  : total time : mean time")
-    print("-"*left_size          +"--------------------------------")
+    print("task".ljust(left_size) + ":  num  : total time : mean time")
+    print("-" * left_size + "--------------------------------")
     for task, (num, time) in list(Timer.timings().items()):
-        print(task.ljust(left_size)+": {0:5d} : {1:6.3f} s : {2:5.3f} s".format(\
-            num, time, time/num))
+        print(
+            task.ljust(left_size) + f": {num:5d} : {time:6.3f} s : {time / num:5.3f} s",
+        )
+
 
 def clear_timings():
     """
@@ -355,12 +385,14 @@ def clear_timings():
     """
     Timer._Timer__all_timings.clear()
 
+
 def tic():
     """
     Start timing
     """
     global _toc_time
     _toc_time = _time.time()
+
 
 def toc():
     """
@@ -370,6 +402,7 @@ def toc():
     old_toc_time = _toc_time
     _toc_time = _time.time()
     return _toc_time - old_toc_time
+
 
 def is_iterable(obj):
     """
@@ -387,16 +420,19 @@ def is_iterable(obj):
         pass
     return False
 
+
 def add_iterable(iterable, initial=None):
     """
     Sum the content of an iterable
     """
     from operator import add
+
     if not is_iterable(iterable):
         error("expected an iterable")
     if initial is None:
         return reduce(add, iterable)
     return reduce(add, iterable, initial)
+
 
 def camel_capitalize(name):
     """
@@ -404,6 +440,7 @@ def camel_capitalize(name):
     """
     check_arg(name, str, context=camel_capitalize)
     return "".join(n.capitalize() for n in name.split("_"))
+
 
 def tuplewrap(arg):
     """
@@ -413,13 +450,21 @@ def tuplewrap(arg):
         return ()
     return arg if isinstance(arg, tuple) else (arg,)
 
+
 def listwrap(arg):
     """
     Wrap the argument to a list if it is not a list
     """
     if arg is None:
         return []
-    return arg if isinstance(arg, list) else [arg,]
+    return (
+        arg
+        if isinstance(arg, list)
+        else [
+            arg,
+        ]
+    )
+
 
 def _context_message(context):
     """
@@ -429,20 +474,22 @@ def _context_message(context):
     if context is None:
         return ""
 
-    assert(isinstance(context, (type,  ClassType, _types.FunctionType, \
-                                _types.MethodType)))
+    assert isinstance(
+        context,
+        (type, ClassType, _types.FunctionType, _types.MethodType),
+    )
 
     if isinstance(context, (ClassType, type)):
-        return " while instantiating '{0}'".format(context.__name__)
+        return f" while instantiating '{context.__name__}'"
 
     if isinstance(context, (_types.MethodType)):
         # Hack to make test pass
         class_name = context.__self__.__class__.__name__
-        if class_name != 'NoneType':
-            return " while calling '{0}.{1}'".format(
-                class_name_, context.__func__.__name__)
+        if class_name != "NoneType":
+            return f" while calling '{class_name_}.{context.__func__.__name__}'"
 
-    return " while calling '{0}'".format(context.__name__)
+    return f" while calling '{context.__name__}'"
+
 
 def _range_check(arg, argtypes, ge, le, gt, lt):
 
@@ -454,20 +501,21 @@ def _range_check(arg, argtypes, ge, le, gt, lt):
 
     # Check we want a scalar
     if isinstance(argtypes, tuple):
-        assert(all(argtypes_item in range_types for argtypes_item in argtypes))
+        assert all(argtypes_item in range_types for argtypes_item in argtypes)
     else:
-        assert(argtypes in range_types)
+        assert argtypes in range_types
 
     range_checker = Range(ge, le, gt, lt)
     if arg in range_checker:
         return ""
     return range_checker.format_not_in(arg)
 
+
 def _check_arg(arg, argtypes, identifyer, context, itemtypes, ge, le, gt, lt):
     """
     Helper function for arg checking
     """
-    assert(isinstance(argtypes, (tuple, type)))
+    assert isinstance(argtypes, (tuple, type))
     argtypes = tuplewrap(argtypes)
 
     # First check for correct range
@@ -482,14 +530,16 @@ def _check_arg(arg, argtypes, identifyer, context, itemtypes, ge, le, gt, lt):
         if itemtypes is None or not isinstance(arg, (list, tuple)):
             return
         iterativetype = type(arg).__name__
-        assert(isinstance(itemtypes, (type, tuple)))
+        assert isinstance(itemtypes, (type, tuple))
         if all(isinstance(item, itemtypes) for item in arg):
             return
 
         itemtypes = tuplewrap(itemtypes)
 
-        message = "expected '%s' of '%s'"%(iterativetype,\
-                                ", ".join(argt.__name__ for argt in itemtypes))
+        message = "expected '%s' of '%s'" % (
+            iterativetype,
+            ", ".join(argt.__name__ for argt in itemtypes),
+        )
         raise_error = type_error
     else:
         argtypes = list(argtypes)
@@ -506,20 +556,22 @@ def _check_arg(arg, argtypes, identifyer, context, itemtypes, ge, le, gt, lt):
 
         argtypes_strs.extend(argt.__name__ for argt in argtypes)
         if len(argtypes_strs) > 1:
-            argtypes_str = ", ".join(argtypes_strs[:-1])+" or " + \
-                           argtypes_strs[-1]
+            argtypes_str = ", ".join(argtypes_strs[:-1]) + " or " + argtypes_strs[-1]
         else:
             argtypes_str = argtypes_strs[0]
 
-        message = "expected '%s' (got '%s' which is '%s')"%\
-                  (argtypes_str, arg, type(arg).__name__)
+        message = "expected '%s' (got '%s' which is '%s')" % (
+            argtypes_str,
+            arg,
+            type(arg).__name__,
+        )
         raise_error = type_error
 
     # Add identifyer information if passed
     if isinstance(identifyer, int) and identifyer != -1:
-        message += " as the %s argument" % _argument_positions[identifyer]
+        message += f" as the {_argument_positions[identifyer]} argument"
     elif isinstance(identifyer, str):
-        message += " as the '%s' argument" % identifyer
+        message += f" as the '{identifyer}' argument"
 
     # Add context message
     message += _context_message(context)
@@ -527,16 +579,27 @@ def _check_arg(arg, argtypes, identifyer, context, itemtypes, ge, le, gt, lt):
     # Display error message
     raise_error(message)
 
+
 def check_arginlist(arg, lst, name="arg"):
     """
     Check that arg is in lst
     """
     check_arg(lst, list)
-    msg="Argument {} must be one of {}, got {}".format(name, lst, arg)
-    assert(arg in lst), msg
+    msg = f"Argument {name} must be one of {lst}, got {arg}"
+    assert arg in lst, msg
 
-def check_arg(arg, argtypes, num=-1, context=None, itemtypes=None,
-              ge=None, le=None, gt=None, lt=None):
+
+def check_arg(
+    arg,
+    argtypes,
+    num=-1,
+    context=None,
+    itemtypes=None,
+    ge=None,
+    le=None,
+    gt=None,
+    lt=None,
+):
     """
     Type check for positional arguments
 
@@ -564,12 +627,21 @@ def check_arg(arg, argtypes, num=-1, context=None, itemtypes=None,
     lt : scalar (optional)
         Lesser than, range control of argument
     """
-    assert(isinstance(num, int))
+    assert isinstance(num, int)
     _check_arg(arg, argtypes, num, context, itemtypes, ge, le, gt, lt)
 
 
-def check_kwarg(kwarg, name, argtypes, context=None, itemtypes=None,
-                ge=None, le=None, gt=None, lt=None):
+def check_kwarg(
+    kwarg,
+    name,
+    argtypes,
+    context=None,
+    itemtypes=None,
+    ge=None,
+    le=None,
+    gt=None,
+    lt=None,
+):
     """
     Type check for keyword arguments
 
@@ -597,16 +669,17 @@ def check_kwarg(kwarg, name, argtypes, context=None, itemtypes=None,
     lt : scalar (optional)
         Lesser than, range control of argument
     """
-    assert(isinstance(name, str) and len(name)>0)
+    assert isinstance(name, str) and len(name) > 0
     _check_arg(kwarg, argtypes, name, context, itemtypes, ge, le, gt, lt)
+
 
 def quote_join(list_of_str):
     """
     Join a list of strings with quotes and commans
     """
-    assert(isinstance(list_of_str, (tuple, list)))
-    assert(all(isinstance(item, str) for item in list_of_str))
-    return ", ".join(["'%s'"%item for item in list_of_str])
+    assert isinstance(list_of_str, (tuple, list))
+    assert all(isinstance(item, str) for item in list_of_str)
+    return ", ".join([f"'{item}'" for item in list_of_str])
 
 
 def deprecated(func):
@@ -619,11 +692,17 @@ def deprecated(func):
 
     @functools.wraps(func)
     def new_func(*args, **kwargs):
-        warning("Call to deprecated function {0} (filename={1}, "\
-                "lineno={2})".format(func.__name__, \
-                                    func.__code__.co_filename,
-                                    func.__code__.co_firstlineno + 1))
+        warning(
+            "Call to deprecated function {0} (filename={1}, "
+            "lineno={2})".format(
+                func.__name__,
+                func.__code__.co_filename,
+                func.__code__.co_firstlineno + 1,
+            ),
+        )
         return func(*args, **kwargs)
+
     return new_func
+
 
 __all__ = [_name for _name in list(globals().keys()) if _name[0] != "_"]

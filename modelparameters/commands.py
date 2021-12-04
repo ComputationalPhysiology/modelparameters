@@ -14,10 +14,12 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with ModelParameters. If not, see <http://www.gnu.org/licenses/>.
+from subprocess import PIPE
+from subprocess import Popen
+from subprocess import STDOUT
 
-from subprocess import Popen, PIPE, STDOUT
+__all__ = ["get_output", "get_status_output", "get_status_output_errors"]
 
-__all__ = ['get_output', 'get_status_output', 'get_status_output_errors']
 
 def get_status_output_errors(cmd, inp=None, cwd=None, env=None):
     pipe = Popen(cmd, shell=True, cwd=cwd, env=env, stdout=PIPE, stderr=PIPE)
@@ -28,6 +30,7 @@ def get_status_output_errors(cmd, inp=None, cwd=None, env=None):
 
     return (status, output, errout)
 
+
 def get_status_output(cmd, inp=None, cwd=None, env=None):
     pipe = Popen(cmd, shell=True, cwd=cwd, env=env, stdout=PIPE, stderr=STDOUT)
 
@@ -37,6 +40,7 @@ def get_status_output(cmd, inp=None, cwd=None, env=None):
     status = pipe.returncode
 
     return (status, output)
+
 
 def get_output(cmd, inp=None, cwd=None, env=None):
     return get_status_output(cmd, inp, cwd, env)[1]
