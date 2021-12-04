@@ -62,7 +62,10 @@ from .utils import _np as np
 
 import pint
 
-ureg = pint.UnitRegistry(fmt_locale=os.getenv("LC_ALL", "en_US.UTF-8"))
+try:
+    ureg = pint.UnitRegistry(fmt_locale=os.getenv("LC_ALL", "en_US.UTF-8"))
+except Exception:
+    ureg = pint.UnitRegistry()
 
 option_types = scalars + (str,)
 
@@ -553,7 +556,11 @@ class Param(object):
 def format_babel(new):
     try:
         return new.u.format_babel()
+    except ValueError:
+        # Babel is not installed
+        return str(new.u)
     except TypeError:
+        # Babel is not able to format the expression
         return str(new.u)
 
 
