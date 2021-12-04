@@ -24,3 +24,5 @@ __all__ = [
     "ParameterDict",
     "utils",
 ]
+
+__version__ = "2021.0.0"
