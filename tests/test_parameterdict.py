@@ -4,17 +4,19 @@ import unittest
 import six
 
 from modelparameters.logger import suppress_logging
-from modelparameters.parameterdict import *
-from modelparameters.utils import *
+from modelparameters.parameterdict import ParameterDict
+from modelparameters.parameters import ConstParam
+from modelparameters.parameters import OptionParam
+from modelparameters.parameters import ScalarParam
 
 try:
     import numpy as np
-except:
+except ImportError:
     np = None
 
 try:
-    from modelparameters.sympytools import *
-except:
+    from modelparameters.sympytools import sp
+except ImportError:
     sp = None
 
 suppress_logging()

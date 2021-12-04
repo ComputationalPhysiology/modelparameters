@@ -4,17 +4,28 @@ import unittest
 import six
 
 from modelparameters.logger import suppress_logging
-from modelparameters.parameters import *
-from modelparameters.utils import *
+from modelparameters.parameters import ArrayParam
+from modelparameters.parameters import ConstParam
+from modelparameters.parameters import eval_param_expr
+from modelparameters.parameters import OptionParam
+from modelparameters.parameters import Param
+from modelparameters.parameters import ScalarParam
+from modelparameters.parameters import SlaveParam
+
 
 try:
     import numpy as np
-except:
+except ImportError:
     np = None
 
 try:
-    from modelparameters.sympytools import *
-except:
+    from modelparameters.sympytools import (
+        symbol_params_from_expr,
+        symbol_param_value_namespace,
+        iter_symbol_params_from_expr,
+    )
+
+except ImportError:
     sp = None
 
 suppress_logging()
@@ -143,7 +154,7 @@ class TestOptionParam(unittest.TestCase):
         )
 
         with self.assertRaises(TypeError) as cm:
-            p = OptionParam(45, [45, "bada"], "jada")
+            OptionParam(45, [45, "bada"], "jada")
         self.assertEqual(
             str(cm.exception),
             "All values of the 'option check' " "need to be of type: 'int'",
@@ -644,7 +655,7 @@ if np is not None:
             with self.assertRaises(ValueError) as cm:
                 p0 = ArrayParam(5, 3, ge=0, lt=10, name="snada")
                 p1 = ArrayParam(6, 4, ge=0, lt=10, name="nada")
-                value = eval_param_expr(p0.sym * p1.sym)
+                eval_param_expr(p0.sym * p1.sym)
 
             self.assertEqual(
                 str(cm.exception),

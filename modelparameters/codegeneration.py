@@ -21,13 +21,13 @@ from distutils.version import LooseVersion as _V
 import sympy as sp
 from sympy.core.function import AppliedUndef as _AppliedUndef
 from sympy.printing import StrPrinter as _StrPrinter
-from sympy.printing.ccode import CCodePrinter as _CCodePrinter
 from sympy.printing.latex import latex as _sympy_latex
 from sympy.printing.latex import LatexPrinter as _LatexPrinter
 from sympy.printing.precedence import precedence as _precedence
 
-from modelparameters.utils import check_arg as _check_arg
-from modelparameters.utils import scalars as _scalars
+from .logger import error
+from .utils import check_arg as _check_arg
+from .utils import scalars as _scalars
 
 _current_sympy_version = _V(sp.__version__)
 
@@ -585,7 +585,6 @@ class _CustomPythonPrinter(_StrPrinter):
         return result + last_line
 
     def _print_And(self, expr):
-        PREC = _precedence(expr)
         if self._namespace == "ufl.":
             if len(expr.args) != 2:
                 error("UFL does not support more than 2 operands to And")
@@ -593,7 +592,6 @@ class _CustomPythonPrinter(_StrPrinter):
         return f"And({', '.join(self._print(arg) for arg in expr.args[::-1])})"
 
     def _print_Or(self, expr):
-        PREC = _precedence(expr)
         if self._namespace == "ufl.":
             if len(expr.args) != 2:
                 error("UFL does not support more than 2 operands to Or")
@@ -611,14 +609,12 @@ class _CustomPythonPrinter(_StrPrinter):
                 "*".join(
                     self.parenthesize(expr.base, PREC) for i in range(int(expr.exp))
                 ),
-                PREC,
             )
         if expr.exp.is_integer and int(expr.exp) in [-2, -3]:
             return "1.0/({0})".format(
                 "*".join(
                     self.parenthesize(expr.base, PREC) for i in range(-int(expr.exp))
                 ),
-                PREC,
             )
         if expr.exp is sp.S.Half and not rational:
             return f"{self._namespace}sqrt({self._print(expr.base)})"
@@ -973,7 +969,6 @@ class _CustomCCodePrinter(_StrPrinter):
                 "*".join(
                     self.parenthesize(expr.base, PREC) for i in range(int(expr.exp))
                 ),
-                PREC,
             )
         if expr.exp.is_integer and int(expr.exp) == 4:
             # Use parentheses strategically to facilitate expression reuse
@@ -1382,7 +1377,7 @@ class _CustomLatexPrinter(_LatexPrinter):
             sdenom = convert(denom)
             ldenom = len(sdenom.split())
             ratio = self._settings["long_frac_ratio"]
-            if self._settings["fold_short_frac"] and ldenom <= 2 and not "^" in sdenom:
+            if self._settings["fold_short_frac"] and ldenom <= 2 and "^" not in sdenom:
                 # handle short fractions
                 if self._needs_mul_brackets(numer, last=False):
                     tex += r"\left(%s\right) / %s" % (snumer, sdenom)
@@ -1471,7 +1466,7 @@ class _CustomLatexPrinter(_LatexPrinter):
                     # The objective is achieved with this hack
                     # first we get the latex for -1 * expr,
                     # which is a Mul expression
-                    tex = self._print(S.NegativeOne * expr).strip()
+                    tex = self._print(sp.S.NegativeOne * expr).strip()
                     # the result comes with a minus and a space, so we remove
                     if tex[:1] == "-":
                         return tex[1:].strip()
@@ -1508,13 +1503,18 @@ _matlab_printer = _CustomMatlabCodePrinter(order=_order)
 _julia_printer = _CustomJuliaCodePrinter(order=_order)
 
 
-def ccode(expr, assign_to=None):
+def ccode(expr, assign_to=None, float_precision="double"):
     """
     Return a C-code representation of a sympy expression
     """
-    ret = _ccode_printer.doprint(expr)
+    if float_precision == "double":
+        ret = _ccode_printer.doprint(expr)
+    else:
+        ret = _ccode_float_printer.doprint(expr)
     if assign_to is None:
         return ret
+    if assign_to == "I":
+        assign_to = "I_"
     return f"{assign_to} = {ret}"
 
 
@@ -1560,21 +1560,6 @@ def juliacode(expr, assign_to=None):
     ret = _julia_printer.doprint(expr)
     if assign_to is None:
         return ret
-    return f"{assign_to} = {ret}"
-
-
-def ccode(expr, assign_to=None, float_precision="double"):
-    """
-    Return a C-code representation of a sympy expression
-    """
-    if float_precision == "double":
-        ret = _ccode_printer.doprint(expr)
-    else:
-        ret = _ccode_float_printer.doprint(expr)
-    if assign_to is None:
-        return ret
-    if assign_to == "I":
-        assign_to = "I_"
     return f"{assign_to} = {ret}"
 
 

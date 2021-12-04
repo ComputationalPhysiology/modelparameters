@@ -48,12 +48,11 @@ except AttributeError:
     # Classes are of type type
     ClassType = type
 
-import string as _string
 
 from collections import OrderedDict as _OrderedDict
 
 # local imports
-from .logger import *
+from .logger import value_error, type_error, error, warning
 from .config import float_format
 from functools import reduce
 
@@ -107,9 +106,7 @@ def value_formatter(value, width=0):
             if isinstance(value[0], integers):
                 formatstr = "[%d, %d, ..., %d, %d]"
             elif isinstance(value[0], scalars):
-                formatstr = (
-                    "[%%.%(ff)s, %%.%(ff)s, ..., %%.%(ff)s, %%.%(ff)s]" % float_format()
-                )
+                formatstr = f"[%.{float_format()['ff']}, %.{float_format()['ff']}, ..., %.{float_format()['ff']}, %.{float_format()['ff']}]"
             else:
                 formatstr = "[%s, %s, ..., %s, %s]"
             ret = formatstr % (value[0], value[1], value[-2], value[-1])
@@ -256,7 +253,7 @@ class Range(object):
         width : int
             A min str length value
         """
-        in_range = self.__contains__(value)
+        self.__contains__(value)
 
         if value in self:
             return self.format_in(value, width)
@@ -416,7 +413,7 @@ def is_iterable(obj):
     try:
         iter(obj)
         return True
-    except Exception as e:
+    except Exception:
         pass
     return False
 
@@ -486,7 +483,7 @@ def _context_message(context):
         # Hack to make test pass
         class_name = context.__self__.__class__.__name__
         if class_name != "NoneType":
-            return f" while calling '{class_name_}.{context.__func__.__name__}'"
+            return f" while calling '{class_name}.{context.__func__.__name__}'"
 
     return f" while calling '{context.__name__}'"
 

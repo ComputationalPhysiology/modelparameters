@@ -38,7 +38,7 @@ try:
     from .codegeneration import pythoncode, sympycode
 
     dummy_sym = sp.Dummy("")
-except ImportError as e:
+except ImportError:
     sp = None
     dummy_sym = None
 
@@ -46,15 +46,13 @@ import copy
 import six
 
 # local imports
-from .config import *
-from .logger import *
+from .logger import value_error, error, type_error, info, warning, debug
 from .utils import (
     check_arg,
     check_kwarg,
     scalars,
     value_formatter,
     Range,
-    tuplewrap,
     integers,
     nptypes,
     Timer,
@@ -395,6 +393,7 @@ class Param(object):
                     "Units does not match when computing {} {} {}: "
                     "{} != {}".format(self, operator, other, self_unit, other_unit)
                 )
+                warning(msg)
                 # If one is dimensionless assume that it is OK,
                 # and keep the unit of the other
                 if self_unit == "1":
@@ -463,7 +462,7 @@ class Param(object):
 
         self_ureg = ureg(f"{self_value}*{self_unit}")
         other_ureg = ureg(f"{other_value}*{other_unit}")
-        return eval(f"self_ureg {cmp_op} other_ureg")
+        return eval(f"{self_ureg} {cmp_op} {other_ureg}")
 
     def __getstate__(self):
         """This is what is saved when you pickle this object."""
@@ -896,6 +895,7 @@ class ScalarParam(Param):
         check_arg(param, scalars + (ScalarParam,))
 
         msg = f"Update parameter {self._get_name()}. "
+        debug(msg)
         self_value, self_name, self_unit = _process_other(self)
         param_value, param_name, param_unit = _process_other(param)
 
@@ -1154,7 +1154,7 @@ class SlaveParam(ScalarParam):
         """
         Return a computed value of the Parameters
         """
-        timer = Timer("Eval Slave parameter")
+        timer = Timer("Eval Slave parameter")  # noqa: F841
 
         return eval_param_expr(self._expr, include_derivatives=True)
 
@@ -1236,7 +1236,7 @@ def eval_param_expr(expr, param_ns=None, include_derivatives=False, ns=None):
             for value in list(value_ns.values())
             if isinstance(value, np.ndarray)
         ]
-        same_length = all(all_length[0] == l for l in all_length)
+        same_length = all(all_length[0] == l_ for l_ in all_length)
         if not same_length:
             value_error(
                 "expected all ArrayParams in an expression " "to be of equal size.",

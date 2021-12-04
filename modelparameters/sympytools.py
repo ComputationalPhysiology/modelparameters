@@ -17,7 +17,6 @@
 # Use truediv
 # System imports
 import re
-import types
 
 import sympy as sp
 from sympy.core import relational as _relational
@@ -26,7 +25,6 @@ from sympy.core.function import AppliedUndef as _AppliedUndef
 from .logger import error
 from .logger import type_error
 from .logger import value_error
-from .logger import warning
 from .utils import check_arg
 from .utils import deprecated
 
@@ -55,7 +53,7 @@ def Conditional(cond, true_value, false_value):
     """
     cond = sp.sympify(cond)
 
-    from sympy.core.relational import Equality, Relational
+    from sympy.core.relational import Relational
     from sympy.logic.boolalg import Boolean
 
     # If the conditional is a bool it is already evaluated
@@ -123,7 +121,7 @@ def ContinuousConditional(cond, true_value, false_value, sigma=1.0):
 # Collect all parameters
 _all_symbol_parameters = {}
 
-_indexed_format = re.compile("\A([a-zA-Z]\w*)\[([\d,]+)\]\Z")
+_indexed_format = re.compile(r"\A([a-zA-Z]\w*)\[([\d,]+)\]\Z")
 
 
 def store_symbol_parameter(param):

@@ -15,7 +15,6 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with ModelParameters. If not, see <http://www.gnu.org/licenses/>.
 # Modified by Johan Hake, 2009-2012.
-import inspect
 import logging
 import sys
 import types
@@ -24,6 +23,7 @@ __all__ = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL", "Logger"]
 
 # Import default log levels
 from logging import DEBUG, INFO, WARNING, ERROR, CRITICAL
+
 
 # Base class for ModelParameters exceptions
 class ModelParametersException(Exception):
@@ -44,6 +44,7 @@ RED = "\033[1;37;31m%s\033[0m"
 BLUE = "\033[1;37;34m%s\033[0m"
 GREEN = "\033[1;37;32m%s\033[0m"
 
+
 # Logger class
 class Logger:
     def __init__(self, name):
@@ -56,7 +57,7 @@ class Logger:
         sys.stdout.flush()
         h.setLevel(WARNING)
         # h.setFormatter(logging.Formatter("%(levelname)s, %(name)s,
-        #%(pathname)s, line %(lineno)s, in %(module)s\n    %(message)s\n"))
+        # %(pathname)s, line %(lineno)s, in %(module)s\n    %(message)s\n"))
 
         # Override emit() in handler for indentation
         h.emit = types.MethodType(emit, h)  # , h.__class__)
@@ -266,8 +267,155 @@ class Logger:
 
 _logger = Logger("ModelParameters")
 
-for name, func in inspect.getmembers(_logger):
-    if name[0] == "_":
-        continue
-    globals()[name] = func
-    __all__.append(name)
+
+def set_default_exception(exception):
+    _logger.set_default_exception(exception)
+
+
+def add_logfile(filename=None, mode="a"):
+    _logger.add_logfile(filename, mode)
+
+
+def remove_logfile(filename):
+    _logger.remove_logfile(filename)
+
+
+def set_raise_error(value):
+    _logger.set_raise_error(value)
+
+
+def get_logfile_handler(filename):
+    _logger.get_log_handler(filename)
+
+
+def log(level, *message):
+    _logger.log(level, *message)
+
+
+def debug(*message):
+    "Write debug message."
+    _logger.debug(*message)
+
+
+def info(*message):
+    "Write info message."
+    _logger.info(*message)
+
+
+def info_red(*message):
+    "Write info message in red."
+    _logger.info_red(*message)
+
+
+def info_green(*message):
+    "Write info message in green."
+    _logger.info_green(*message)
+
+
+def info_blue(*message):
+    "Write info message in blue."
+    _logger.info_blue(*message)
+
+
+def warning(*message):
+    "Write warning message."
+    _logger.warning(*message)
+
+
+def error(*message, **kwargs):
+    "Write error message and raise an exception."
+    _logger.error(*message, **kwargs)
+
+
+def type_error(*message, **kwargs):
+    "Write error message and raise a type error exception."
+    _logger.type_error(*message, **kwargs)
+
+
+def value_error(*message, **kwargs):
+    "Write error message and raise a value error exception."
+    _logger.value_error(*message, **kwargs)
+
+
+def begin_log(*message):
+    "Begin task: write message and increase indentation level."
+    _logger.begin_log(*message)
+
+
+def end_log():
+    "End task: write a newline and decrease indentation level."
+    _logger.end_log()
+
+
+def push_log_level(level):
+    "Push a log level on the level stack."
+    _logger.push_log_level(level)
+
+
+def pop_log_level():
+    """
+    Pop log level from the level stack, reverting to before
+    the last push_level.
+    """
+    _logger.pop_log_level()
+
+
+def suppress_logging():
+    "Suppress all logging"
+    _logger.suppress_logging()
+
+
+def set_log_level(level):
+    "Set log level."
+    _logger.set_log_level(level)
+
+
+def get_log_level():
+    "Get log level."
+    _logger.get_log_level()
+
+
+def set_log_indent(level):
+    "Set indentation level."
+    _logger.set_log_indent(level)
+
+
+def add_log_indent(increment=1):
+    "Add to indentation level."
+    _logger.add_log_indent(increment)
+
+
+def get_log_handler():
+    "Get handler for logging."
+    _logger.get_log_handler()
+
+
+def flush_logger():
+    "Flush the log handler"
+    _logger.flush_logger()
+
+
+def set_log_handler(handler):
+    """
+    Replace handler for logging.
+
+    To add additional handlers instead of replacing the existing, use
+    log.get_logger().addHandler(myhandler).
+
+    See the logging module for more details.
+    """
+    _logger.set_log_handler(handler)
+
+
+def get_logger():
+    "Return message logger."
+    _logger.get_logger()
+
+
+def set_log_prefix(prefix):
+    "Set prefix for log messages."
+    _logger.set_log_prefix(prefix)
+
+
+def wrap_log_message(message, symbol="*"):
+    _logger.wrap_log_message(message, symbol)

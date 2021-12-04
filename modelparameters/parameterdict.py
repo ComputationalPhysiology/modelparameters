@@ -19,6 +19,32 @@ Contains the ParameterDict class, useful for defining
 recursive dictionaries of parameters and using attribute
 syntax for later access.
 """
+import six
+
+
+# System imports
+try:
+    from .sympytools import sp
+except ImportError:
+    sp = None
+
+
+# local imports
+from .parameters import (
+    Param,
+    ScalarParam,
+    OptionParam,
+    ConstParam,
+    ArrayParam,
+    SlaveParam,
+)
+from .logger import value_error, type_error, error
+from .utils import (
+    check_arg,
+    inf,
+    VALUE_JUST,
+)
+
 
 __all__ = [
     "Param",
@@ -30,14 +56,6 @@ __all__ = [
     "inf",
     "ParameterDict",
 ]
-import six
-
-cmp = lambda x, y: (x > y) - (x < y)
-# System imports
-try:
-    from .sympytools import sp
-except ImportError as e:
-    sp = None
 
 
 def rjust(s, *args, **kwargs):
@@ -52,21 +70,7 @@ def center(s, *args, **kwargs):
     return s.center(*args, **kwargs)
 
 
-# local imports
-from .parameters import *
-from .logger import *
-from .utils import (
-    check_arg,
-    check_kwarg,
-    scalars,
-    value_formatter,
-    Range,
-    tuplewrap,
-    integers,
-    nptypes,
-    inf,
-    VALUE_JUST,
-)
+cmp = lambda x, y: (x > y) - (x < y)
 
 KEY_JUST = ljust
 PAR_PREFIX = "--"
@@ -423,7 +427,8 @@ class ParameterDict(dict):
             is mostly for debugging.
 
         """
-        import optparse, sys
+        import optparse
+        import sys
 
         # Fixing bug for unicode help output
         class OptionParser(optparse.OptionParser):
@@ -454,7 +459,7 @@ class ParameterDict(dict):
 
                 def par_setter(option, opt_str, value, parser):
                     assert value is None
-                    done = 0
+
                     value = []
                     rargs = parser.rargs
                     while rargs:

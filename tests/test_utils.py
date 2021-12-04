@@ -2,14 +2,29 @@
 
 try:
     import numpy as np
-except:
+except ImportError:
     np = None
 
 import unittest
 import six
 
 from modelparameters.logger import suppress_logging
-from modelparameters.utils import *
+from modelparameters.utils import (
+    Range,
+    check_arg,
+    check_kwarg,
+    format_time,
+    is_iterable,
+    tuplewrap,
+    listwrap,
+    add_iterable,
+    scalars,
+    camel_capitalize,
+    quote_join,
+    tic,
+    toc,
+    inf,
+)
 
 suppress_logging()
 
@@ -280,7 +295,7 @@ class BasicUtils(unittest.TestCase):
     def test_tic(self):
         import time
 
-        t0 = tic()
+        tic()
         time.sleep(0.1)
         self.assertTrue(0.1 < toc() < 0.2)
 
