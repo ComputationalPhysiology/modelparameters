@@ -14,21 +14,21 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with ModelParameters. If not, see <http://www.gnu.org/licenses/>.
-
 # Use truediv
-
-
 # System imports
-import types
-import sympy as sp
 import re
 
+import sympy as sp
 from sympy.core import relational as _relational
 from sympy.core.function import AppliedUndef as _AppliedUndef
 
+from .logger import error
+from .logger import type_error
+from .logger import value_error
+from .utils import check_arg
+from .utils import deprecated
+
 # Local imports
-from .utils import check_arg, deprecated
-from .logger import warning, error, value_error, type_error
 
 
 # Patch Sympy
@@ -53,7 +53,7 @@ def Conditional(cond, true_value, false_value):
     """
     cond = sp.sympify(cond)
 
-    from sympy.core.relational import Equality, Relational
+    from sympy.core.relational import Relational
     from sympy.logic.boolalg import Boolean
 
     # If the conditional is a bool it is already evaluated
@@ -61,17 +61,23 @@ def Conditional(cond, true_value, false_value):
         return true_value if cond else false_value
 
     if not isinstance(cond, (Relational, Boolean)):
-        raise type_error("Cond %s is of type %s, but must be a Relational" \
-                         " or Boolean." % (cond, type(cond)))
+        raise type_error(
+            "Cond %s is of type %s, but must be a Relational"
+            " or Boolean." % (cond, type(cond)),
+        )
 
-    return sp.functions.Piecewise((true_value, cond), (false_value, sp.sympify(True)),
-                                  evaluate=True)
+    return sp.functions.Piecewise(
+        (true_value, cond),
+        (false_value, sp.sympify(True)),
+        evaluate=True,
+    )
+
 
 def ContinuousConditional(cond, true_value, false_value, sigma=1.0):
     """
     Declares a continuous conditional. Instead of a either or result the
     true and false values are weighted with a sigmoidal function which
-    either evaluates to 0 or 1 instead of the true or false. 
+    either evaluates to 0 or 1 instead of the true or false.
 
     Arguments
     ---------
@@ -84,35 +90,39 @@ def ContinuousConditional(cond, true_value, false_value, sigma=1.0):
     sigma : float (optional)
         Determines the sharpness of the sigmoidal function
     """
-    
+
     cond = sp.sympify(cond)
-    if not(hasattr(cond, "is_Relational") or hasattr(cond, "is_relational")):
-        type_error("Expected sympy object to have is_{r,R}elational "\
-                   "attribute.")
-    
-    if (hasattr(cond, "is_Relational") and not cond.is_Relational) or \
-           (hasattr(cond, "is_relational") and not cond.is_relational):
+    if not (hasattr(cond, "is_Relational") or hasattr(cond, "is_relational")):
+        type_error("Expected sympy object to have is_{r,R}elational " "attribute.")
+
+    if (hasattr(cond, "is_Relational") and not cond.is_Relational) or (
+        hasattr(cond, "is_relational") and not cond.is_relational
+    ):
         type_error("Expected a Relational as first argument.")
-    
+
     # FIXME: Use the rel_op for check, as some changes has been applied
     # FIXME: in latest sympy making comparision difficult
     if "<" not in cond.rel_op and ">" not in cond.rel_op:
-        type_error("Expected a lesser or greater than relational for "\
-                   "a continuous conditional .")
-    
+        type_error(
+            "Expected a lesser or greater than relational for "
+            "a continuous conditional .",
+        )
+
     # Create Heaviside
-    H = 1/(1 + sp.exp((cond.args[0]-cond.args[1])/sigma))
+    H = 1 / (1 + sp.exp((cond.args[0] - cond.args[1]) / sigma))
 
     # Desides which should be weighted with 1 and 0
     if ">" in cond.rel_op:
-        return true_value*(1-H) + false_value*H
+        return true_value * (1 - H) + false_value * H
 
-    return true_value*H + false_value*(1-H)
-    
+    return true_value * H + false_value * (1 - H)
+
+
 # Collect all parameters
 _all_symbol_parameters = {}
 
-_indexed_format = re.compile("\A([a-zA-Z]\w*)\[([\d,]+)\]\Z")
+_indexed_format = re.compile(r"\A([a-zA-Z]\w*)\[([\d,]+)\]\Z")
+
 
 def store_symbol_parameter(param):
     """
@@ -120,9 +130,10 @@ def store_symbol_parameter(param):
     """
     from .codegeneration import sympycode
     from .parameters import ScalarParam
+
     check_arg(param, ScalarParam)
     sym = param.sym
-    #if str(sym) in _all_symbol_parameters:
+    # if str(sym) in _all_symbol_parameters:
     #    warning("Parameter with symbol name '%s' already "\
     #            "excist" % sym)
 
@@ -137,14 +148,16 @@ def store_symbol_parameter(param):
             param_dict = {}
             _all_symbol_parameters[name] = param_dict
 
-        param_dict[eval("({0})".format(indices))] = param
-        
+        param_dict[eval(f"({indices})")] = param
+
     else:
         _all_symbol_parameters[param_str] = param
+
 
 @deprecated
 def symbol_to_params(sym):
     return symbol_to_param(sym)
+
 
 def symbol_to_param(sym):
     """
@@ -156,10 +169,9 @@ def symbol_to_param(sym):
 
     if sp is None:
         error("sympy is needed for symbol_to_params to work.")
-        
-    check_arg(sym, (sp.Symbol, AppliedUndef, sp.Derivative),
-              context=symbol_to_param)
-    
+
+    check_arg(sym, (sp.Symbol, AppliedUndef, sp.Derivative), context=symbol_to_param)
+
     param_str = sympycode(sym)
     indexed = re.search(_indexed_format, param_str)
     if indexed:
@@ -168,16 +180,19 @@ def symbol_to_param(sym):
         # Get dict
         param = _all_symbol_parameters.get(name)
         if param is not None:
-            param = param.get(eval("({0})".format(indices)))
+            param = param.get(eval(f"({indices})"))
     else:
-            
+
         param = _all_symbol_parameters.get(sympycode(sym))
 
     if param is None:
-        value_error("No parameter with name '{0}' "\
-                    "registered. Remember to declare Params which should be "\
-                    "used in expression with names.".format(sympycode(sym)))
+        value_error(
+            "No parameter with name '{0}' "
+            "registered. Remember to declare Params which should be "
+            "used in expression with names.".format(sympycode(sym)),
+        )
     return param
+
 
 def symbols_from_expr(expr, include_numbers=False, include_derivatives=False):
     """
@@ -196,18 +211,19 @@ def symbols_from_expr(expr, include_numbers=False, include_derivatives=False):
     from sympy.core.function import AppliedUndef
 
     symbols = set()
-    
+
     pt = sp.preorder_traversal(expr)
-    
+
     for node in pt:
-        
+
         # Do not traverse AppliedUndef
         if isinstance(node, AppliedUndef):
             pt.skip()
             symbols.add(node)
-        
-        elif isinstance(node, sp.Symbol) and not isinstance(node, sp.Dummy) \
-                 and node.name:
+
+        elif (
+            isinstance(node, sp.Symbol) and not isinstance(node, sp.Dummy) and node.name
+        ):
             symbols.add(node)
 
         elif include_numbers and isinstance(node, sp.Number):
@@ -217,8 +233,9 @@ def symbols_from_expr(expr, include_numbers=False, include_derivatives=False):
             # Do not traverse Derivative
             pt.skip()
             symbols.add(node)
-            
+
     return symbols
+
 
 @deprecated
 def iter_symbol_params_from_expr(expr):
@@ -226,10 +243,14 @@ def iter_symbol_params_from_expr(expr):
     Return an iterator over sp.Symbols from expr
     """
     check_arg(expr, sp.Basic)
-    
+
     # Filter out dummy symbols
-    return (atom for atom in expr.atoms() if isinstance(atom, sp.Symbol) \
-            and not isinstance(atom, sp.Dummy) and atom.name)
+    return (
+        atom
+        for atom in expr.atoms()
+        if isinstance(atom, sp.Symbol) and not isinstance(atom, sp.Dummy) and atom.name
+    )
+
 
 @deprecated
 def symbol_params_from_expr(expr):
@@ -238,24 +259,28 @@ def symbol_params_from_expr(expr):
     """
     return [sym for sym in iter_symbol_params_from_expr(expr)]
 
+
 @deprecated
 def symbol_param_value_namespace(expr):
     """
     Create a value name space for the included symbols in the expression
     """
     check_arg(expr, sp.Basic)
-    return dict((str(symbol_param), symbol_to_param(symbol_param).value) \
-                for symbol_param in iter_symbol_params_from_expr(expr))
+    return dict(
+        (str(symbol_param), symbol_to_param(symbol_param).value)
+        for symbol_param in iter_symbol_params_from_expr(expr)
+    )
+
 
 def value_namespace(expr, include_derivatives=False):
     """
     Create a value name space for the included symbols in the expression
     """
     from .codegeneration import sympycode
+
     check_arg(expr, sp.Basic)
     ns = {}
-    for sym in symbols_from_expr(expr, \
-                        include_derivatives=include_derivatives):
+    for sym in symbols_from_expr(expr, include_derivatives=include_derivatives):
 
         # Get value
         value = symbol_to_param(sym).value
@@ -270,11 +295,13 @@ def value_namespace(expr, include_derivatives=False):
             ns[name][eval(indices)] = value
         else:
             ns[param_str] = value
-            
+
     return ns
-    return dict((sympycode(symbol), symbol_to_param(symbol).value) \
-                for symbol in symbols_from_expr(\
-                    expr, include_derivatives=include_derivatives))
+    return dict(
+        (sympycode(symbol), symbol_to_param(symbol).value)
+        for symbol in symbols_from_expr(expr, include_derivatives=include_derivatives)
+    )
+
 
 def add_pair_to_subs(subs, old, new):
     """
@@ -284,21 +311,26 @@ def add_pair_to_subs(subs, old, new):
     check_arg(subs, list, 0)
     check_arg(old, sp.Basic, 1)
     check_arg(new, sp.Basic, 2)
-    
+
     for ind, (old0, new0) in enumerate(subs):
         if old0 == old:
             subs.pop(ind)
             break
     subs.append((old, new))
 
+
 # Create a sympy evaulation namespace
 sp_namespace = {}
-sp_namespace.update((name, op) for name, op in list(sp.functions.__dict__.items()) \
-                    if name[0] != "_")
+sp_namespace.update(
+    (name, op) for name, op in list(sp.functions.__dict__.items()) if name[0] != "_"
+)
 sp_namespace["Conditional"] = Conditional
 sp_namespace["ContinuousConditional"] = ContinuousConditional
-sp_namespace.update((name, op) for name, op in list(_relational.__dict__.items()) \
-                    if name in ["Eq", "Ne", "Gt", "Ge", "Lt", "Le"])
+sp_namespace.update(
+    (name, op)
+    for name, op in list(_relational.__dict__.items())
+    if name in ["Eq", "Ne", "Gt", "Ge", "Lt", "Le"]
+)
 sp_namespace.update((name, getattr(sp, name)) for name in ["And", "Or"])
 sp_namespace["pi"] = sp.numbers.pi
 sp_namespace["E"] = sp.numbers.E
@@ -311,4 +343,3 @@ sp_namespace["five"] = sp.sympify(5)
 sp_namespace["ten"] = sp.sympify(10)
 
 __all__ = [_name for _name in list(globals().keys()) if _name[0] != "_"]
-
