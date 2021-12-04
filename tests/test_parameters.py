@@ -23,6 +23,7 @@ try:
         symbol_params_from_expr,
         symbol_param_value_namespace,
         iter_symbol_params_from_expr,
+        sp,
     )
 
 except ImportError:

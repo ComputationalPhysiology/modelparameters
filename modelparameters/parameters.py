@@ -460,9 +460,10 @@ class Param(object):
                 elif other_unit == "1":
                     other_unit = self_unit
 
-        self_ureg = ureg(f"{self_value}*{self_unit}")
-        other_ureg = ureg(f"{other_value}*{other_unit}")
-        return eval(f"{self_ureg} {cmp_op} {other_ureg}")
+        self_ureg = ureg(f"{self_value}*{self_unit}")  # noqa: F841
+        other_ureg = ureg(f"{other_value}*{other_unit}")  # noqa: F841
+
+        return eval(f"self_ureg {cmp_op} other_ureg")
 
     def __getstate__(self):
         """This is what is saved when you pickle this object."""
