@@ -1,13 +1,21 @@
 """Base class for all the objects in SymPy"""
 from __future__ import print_function, division
-from collections import Mapping, defaultdict
+from collections import defaultdict
+from collections.abc import Mapping
 from itertools import chain
 
 from .assumptions import BasicMeta, ManagedProperties
 from .cache import cacheit
 from .sympify import _sympify, sympify, SympifyError
-from .compatibility import (iterable, Iterator, ordered,
-    string_types, with_metaclass, zip_longest, range)
+from .compatibility import (
+    iterable,
+    Iterator,
+    ordered,
+    string_types,
+    with_metaclass,
+    zip_longest,
+    range,
+)
 from .singleton import S
 
 from inspect import getmro
@@ -43,10 +51,8 @@ class Basic(with_metaclass(ManagedProperties)):
         (x,)
 
     """
-    __slots__ = ['_mhash',              # hash value
-                 '_args',               # arguments
-                 '_assumptions'
-                ]
+
+    __slots__ = ["_mhash", "_args", "_assumptions"]  # hash value  # arguments
 
     # To be overridden with True in the appropriate subclasses
     is_number = False
@@ -90,7 +96,7 @@ class Basic(with_metaclass(ManagedProperties)):
         return self.func(*self.args)
 
     def __reduce_ex__(self, proto):
-        """ Pickling support."""
+        """Pickling support."""
         return type(self), self.__getnewargs__(), self.__getstate__()
 
     def __getnewargs__(self):
@@ -201,6 +207,7 @@ class Basic(with_metaclass(ManagedProperties)):
     @staticmethod
     def _compare_pretty(a, b):
         from ..series.order import Order
+
         if isinstance(a, Order) and not isinstance(b, Order):
             return 1
         if not isinstance(a, Order) and isinstance(b, Order):
@@ -212,11 +219,12 @@ class Basic(with_metaclass(ManagedProperties)):
             return (l > r) - (l < r)
         else:
             from .symbol import Wild
+
             p1, p2, p3 = Wild("p1"), Wild("p2"), Wild("p3")
-            r_a = a.match(p1 * p2**p3)
+            r_a = a.match(p1 * p2 ** p3)
             if r_a and p3 in r_a:
                 a3 = r_a[p3]
-                r_b = b.match(p1 * p2**p3)
+                r_b = b.match(p1 * p2 ** p3)
                 if r_b and p3 in r_b:
                     b3 = r_b[p3]
                     c = Basic.compare(a3, b3)
@@ -245,7 +253,7 @@ class Basic(with_metaclass(ManagedProperties)):
 
     @classmethod
     def class_key(cls):
-        """Nice order of classes. """
+        """Nice order of classes."""
         return 5, 0, cls.__name__
 
     @cacheit
@@ -301,6 +309,7 @@ class Basic(with_metaclass(ManagedProperties)):
         from http://docs.python.org/dev/reference/datamodel.html#object.__hash__
         """
         from .. import Pow
+
         if self is other:
             return True
 
@@ -320,10 +329,9 @@ class Basic(with_metaclass(ManagedProperties)):
             try:
                 other = _sympify(other)
             except SympifyError:
-                return False    # sympy != other
+                return False  # sympy != other
 
-            if isinstance(self, AppliedUndef) and isinstance(other,
-                                                             AppliedUndef):
+            if isinstance(self, AppliedUndef) and isinstance(other, AppliedUndef):
                 if self.class_key() != other.class_key():
                     return False
             elif type(self) is not type(other):
@@ -334,11 +342,11 @@ class Basic(with_metaclass(ManagedProperties)):
     def __ne__(self, other):
         """a != b  -> Compare two symbolic trees and see whether they are different
 
-           this is the same as:
+        this is the same as:
 
-             a.compare(b) != 0
+          a.compare(b) != 0
 
-           but faster
+        but faster
         """
         return not self.__eq__(other)
 
@@ -372,8 +380,7 @@ class Basic(with_metaclass(ManagedProperties)):
         elif len(dummy_symbols) == 1:
             dummy = dummy_symbols.pop()
         else:
-            raise ValueError(
-                "only one dummy symbol allowed on the left-hand side")
+            raise ValueError("only one dummy symbol allowed on the left-hand side")
 
         if symbol is None:
             symbols = other.free_symbols
@@ -383,7 +390,9 @@ class Basic(with_metaclass(ManagedProperties)):
             elif len(symbols) == 1:
                 symbol = symbols.pop()
             else:
-                raise ValueError("specify a symbol in which expressions should be compared")
+                raise ValueError(
+                    "specify a symbol in which expressions should be compared"
+                )
 
         tmp = dummy.__class__()
 
@@ -396,87 +405,88 @@ class Basic(with_metaclass(ManagedProperties)):
         Return the expression as a string.
         """
         from ..printing import sstr
+
         return sstr(self, order=None)
 
     def __str__(self):
         from ..printing import sstr
+
         return sstr(self, order=None)
 
     def atoms(self, *types):
         """Returns the atoms that form the current object.
 
-           By default, only objects that are truly atomic and can't
-           be divided into smaller pieces are returned: symbols, numbers,
-           and number symbols like I and pi. It is possible to request
-           atoms of any type, however, as demonstrated below.
+        By default, only objects that are truly atomic and can't
+        be divided into smaller pieces are returned: symbols, numbers,
+        and number symbols like I and pi. It is possible to request
+        atoms of any type, however, as demonstrated below.
 
-           Examples
-           ========
+        Examples
+        ========
 
-           >>> from .. import I, pi, sin
-           >>> from ..abc import x, y
-           >>> (1 + x + 2*sin(y + I*pi)).atoms()
-           {1, 2, I, pi, x, y}
+        >>> from .. import I, pi, sin
+        >>> from ..abc import x, y
+        >>> (1 + x + 2*sin(y + I*pi)).atoms()
+        {1, 2, I, pi, x, y}
 
-           If one or more types are given, the results will contain only
-           those types of atoms.
+        If one or more types are given, the results will contain only
+        those types of atoms.
 
-           Examples
-           ========
+        Examples
+        ========
 
-           >>> from .. import Number, NumberSymbol, Symbol
-           >>> (1 + x + 2*sin(y + I*pi)).atoms(Symbol)
-           {x, y}
+        >>> from .. import Number, NumberSymbol, Symbol
+        >>> (1 + x + 2*sin(y + I*pi)).atoms(Symbol)
+        {x, y}
 
-           >>> (1 + x + 2*sin(y + I*pi)).atoms(Number)
-           {1, 2}
+        >>> (1 + x + 2*sin(y + I*pi)).atoms(Number)
+        {1, 2}
 
-           >>> (1 + x + 2*sin(y + I*pi)).atoms(Number, NumberSymbol)
-           {1, 2, pi}
+        >>> (1 + x + 2*sin(y + I*pi)).atoms(Number, NumberSymbol)
+        {1, 2, pi}
 
-           >>> (1 + x + 2*sin(y + I*pi)).atoms(Number, NumberSymbol, I)
-           {1, 2, I, pi}
+        >>> (1 + x + 2*sin(y + I*pi)).atoms(Number, NumberSymbol, I)
+        {1, 2, I, pi}
 
-           Note that I (imaginary unit) and zoo (complex infinity) are special
-           types of number symbols and are not part of the NumberSymbol class.
+        Note that I (imaginary unit) and zoo (complex infinity) are special
+        types of number symbols and are not part of the NumberSymbol class.
 
-           The type can be given implicitly, too:
+        The type can be given implicitly, too:
 
-           >>> (1 + x + 2*sin(y + I*pi)).atoms(x) # x is a Symbol
-           {x, y}
+        >>> (1 + x + 2*sin(y + I*pi)).atoms(x) # x is a Symbol
+        {x, y}
 
-           Be careful to check your assumptions when using the implicit option
-           since ``S(1).is_Integer = True`` but ``type(S(1))`` is ``One``, a special type
-           of sympy atom, while ``type(S(2))`` is type ``Integer`` and will find all
-           integers in an expression:
+        Be careful to check your assumptions when using the implicit option
+        since ``S(1).is_Integer = True`` but ``type(S(1))`` is ``One``, a special type
+        of sympy atom, while ``type(S(2))`` is type ``Integer`` and will find all
+        integers in an expression:
 
-           >>> from .. import S
-           >>> (1 + x + 2*sin(y + I*pi)).atoms(S(1))
-           {1}
+        >>> from .. import S
+        >>> (1 + x + 2*sin(y + I*pi)).atoms(S(1))
+        {1}
 
-           >>> (1 + x + 2*sin(y + I*pi)).atoms(S(2))
-           {1, 2}
+        >>> (1 + x + 2*sin(y + I*pi)).atoms(S(2))
+        {1, 2}
 
-           Finally, arguments to atoms() can select more than atomic atoms: any
-           sympy type (loaded in core/__init__.py) can be listed as an argument
-           and those types of "atoms" as found in scanning the arguments of the
-           expression recursively:
+        Finally, arguments to atoms() can select more than atomic atoms: any
+        sympy type (loaded in core/__init__.py) can be listed as an argument
+        and those types of "atoms" as found in scanning the arguments of the
+        expression recursively:
 
-           >>> from .. import Function, Mul
-           >>> from .function import AppliedUndef
-           >>> f = Function('f')
-           >>> (1 + f(x) + 2*sin(y + I*pi)).atoms(Function)
-           {f(x), sin(y + I*pi)}
-           >>> (1 + f(x) + 2*sin(y + I*pi)).atoms(AppliedUndef)
-           {f(x)}
+        >>> from .. import Function, Mul
+        >>> from .function import AppliedUndef
+        >>> f = Function('f')
+        >>> (1 + f(x) + 2*sin(y + I*pi)).atoms(Function)
+        {f(x), sin(y + I*pi)}
+        >>> (1 + f(x) + 2*sin(y + I*pi)).atoms(AppliedUndef)
+        {f(x)}
 
-           >>> (1 + x + 2*sin(y + I*pi)).atoms(Mul)
-           {I*pi, 2*sin(y + I*pi)}
+        >>> (1 + x + 2*sin(y + I*pi)).atoms(Mul)
+        {I*pi, 2*sin(y + I*pi)}
 
         """
         if types:
-            types = tuple(
-                [t if isinstance(t, type) else type(t) for t in types])
+            types = tuple([t if isinstance(t, type) else type(t) for t in types])
         else:
             types = (Atom,)
         result = set()
@@ -517,15 +527,17 @@ class Basic(with_metaclass(ManagedProperties)):
         {x: 0_}
         """
         from .. import Symbol
-        if not hasattr(self, 'variables'):
+
+        if not hasattr(self, "variables"):
             return {}
         u = "_"
         while any(s.name.endswith(u) for s in self.free_symbols):
             u += "_"
-        name = '%%i%s' % u
+        name = "%%i%s" % u
         V = self.variables
-        return dict(list(zip(V, [Symbol(name % i, **v.assumptions0)
-            for i, v in enumerate(V)])))
+        return dict(
+            list(zip(V, [Symbol(name % i, **v.assumptions0) for i, v in enumerate(V)]))
+        )
 
     def rcall(self, *args):
         """Apply on the argument recursively through the expression tree.
@@ -546,28 +558,28 @@ class Basic(with_metaclass(ManagedProperties)):
 
     @staticmethod
     def _recursive_call(expr_to_call, on_args):
-        """Helper for rcall method.
-        """
+        """Helper for rcall method."""
         from .. import Symbol
+
         def the_call_method_is_overridden(expr):
             for cls in getmro(type(expr)):
-                if '__call__' in cls.__dict__:
+                if "__call__" in cls.__dict__:
                     return cls != Basic
 
         if callable(expr_to_call) and the_call_method_is_overridden(expr_to_call):
             if isinstance(expr_to_call, Symbol):  # XXX When you call a Symbol it is
-                return expr_to_call               # transformed into an UndefFunction
+                return expr_to_call  # transformed into an UndefFunction
             else:
                 return expr_to_call(*on_args)
         elif expr_to_call.args:
-            args = [Basic._recursive_call(
-                sub, on_args) for sub in expr_to_call.args]
+            args = [Basic._recursive_call(sub, on_args) for sub in expr_to_call.args]
             return type(expr_to_call)(*args)
         else:
             return expr_to_call
 
     def is_hypergeometric(self, k):
         from ..simplify import hypersimp
+
         return hypersimp(self, k) is not None
 
     @property
@@ -603,8 +615,7 @@ class Basic(with_metaclass(ManagedProperties)):
         is_number = self.is_number
         if is_number is False:
             return False
-        n, i = [p.evalf(2) if not p.is_Number else p
-            for p in self.as_real_imag()]
+        n, i = [p.evalf(2) if not p.is_Number else p for p in self.as_real_imag()]
         if not i.is_Number or not n.is_Number:
             return False
         if i:
@@ -683,21 +694,20 @@ class Basic(with_metaclass(ManagedProperties)):
         """
         return self.args
 
-
     def as_poly(self, *gens, **args):
         """Converts ``self`` to a polynomial or returns ``None``.
 
-           >>> from .. import sin
-           >>> from ..abc import x, y
+        >>> from .. import sin
+        >>> from ..abc import x, y
 
-           >>> print((x**2 + x*y).as_poly())
-           Poly(x**2 + x*y, x, y, domain='ZZ')
+        >>> print((x**2 + x*y).as_poly())
+        Poly(x**2 + x*y, x, y, domain='ZZ')
 
-           >>> print((x**2 + x*y).as_poly(x, y))
-           Poly(x**2 + x*y, x, y, domain='ZZ')
+        >>> print((x**2 + x*y).as_poly(x, y))
+        Poly(x**2 + x*y, x, y, domain='ZZ')
 
-           >>> print((x**2 + sin(y)).as_poly(x, y))
-           None
+        >>> print((x**2 + sin(y)).as_poly(x, y))
+        None
 
         """
         from ..polys import Poly, PolynomialError
@@ -847,10 +857,15 @@ class Basic(with_metaclass(ManagedProperties)):
                 sequence = sequence.items()
             elif not iterable(sequence):
                 from ..utilities.misc import filldedent
-                raise ValueError(filldedent("""
+
+                raise ValueError(
+                    filldedent(
+                        """
                    When a single argument is passed to subs
                    it should be a dictionary of old: new pairs or an iterable
-                   of (old, new) tuples."""))
+                   of (old, new) tuples."""
+                    )
+                )
         elif len(args) == 2:
             sequence = [args]
         else:
@@ -886,25 +901,27 @@ class Basic(with_metaclass(ManagedProperties)):
                     d.setdefault(ops, []).append((o, n))
                 newseq = []
                 for k in sorted(d.keys(), reverse=True):
-                    newseq.extend(
-                        sorted([v[0] for v in d[k]], key=default_sort_key))
+                    newseq.extend(sorted([v[0] for v in d[k]], key=default_sort_key))
                 sequence = [(k, sequence[k]) for k in newseq]
                 del newseq, d
             else:
-                sequence = sorted([(k, v) for (k, v) in sequence.items()],
-                                  key=default_sort_key)
+                sequence = sorted(
+                    [(k, v) for (k, v) in sequence.items()], key=default_sort_key
+                )
 
-        if kwargs.pop('simultaneous', False):  # XXX should this be the default for dict subs?
+        if kwargs.pop(
+            "simultaneous", False
+        ):  # XXX should this be the default for dict subs?
             reps = {}
             rv = self
-            kwargs['hack2'] = True
+            kwargs["hack2"] = True
             m = Dummy()
             for old, new in sequence:
                 d = Dummy(commutative=new.is_commutative)
                 # using d*m so Subs will be used on dummy variables
                 # in things like Derivative(f(x, y), x) in which x
                 # is both free and bound
-                rv = rv._subs(old, d*m, **kwargs)
+                rv = rv._subs(old, d * m, **kwargs)
                 if not isinstance(rv, Basic):
                     break
                 reps[d] = new
@@ -997,7 +1014,7 @@ class Basic(with_metaclass(ManagedProperties)):
             hit = False
             args = list(self.args)
             for i, arg in enumerate(args):
-                if not hasattr(arg, '_eval_subs'):
+                if not hasattr(arg, "_eval_subs"):
                     continue
                 arg = arg._subs(old, new, **hints)
                 if not _aresame(arg, args[i]):
@@ -1005,7 +1022,7 @@ class Basic(with_metaclass(ManagedProperties)):
                     args[i] = arg
             if hit:
                 rv = self.func(*args)
-                hack2 = hints.get('hack2', False)
+                hack2 = hints.get("hack2", False)
                 if hack2 and self.is_Mul and not rv.is_Mul:  # 2-arg hack
                     coeff = S.One
                     nonnumber = []
@@ -1174,14 +1191,16 @@ class Basic(with_metaclass(ManagedProperties)):
     def _has(self, pattern):
         """Helper for .has()"""
         from .function import UndefinedFunction, Function
+
         if isinstance(pattern, UndefinedFunction):
-            return any(f.func == pattern or f == pattern
-            for f in self.atoms(Function, UndefinedFunction))
+            return any(
+                f.func == pattern or f == pattern
+                for f in self.atoms(Function, UndefinedFunction)
+            )
 
         pattern = sympify(pattern)
         if isinstance(pattern, BasicMeta):
-            return any(isinstance(arg, pattern)
-            for arg in preorder_traversal(self))
+            return any(isinstance(arg, pattern) for arg in preorder_traversal(self))
 
         try:
             match = pattern._has_matcher()
@@ -1336,8 +1355,8 @@ class Basic(with_metaclass(ManagedProperties)):
                 _value = lambda expr, result: value(*expr.args)
             else:
                 raise TypeError(
-                    "given a type, replace() expects another "
-                    "type or a callable")
+                    "given a type, replace() expects another " "type or a callable"
+                )
         elif isinstance(query, Basic):
             _query = lambda expr: expr.match(query)
 
@@ -1350,8 +1369,11 @@ class Basic(with_metaclass(ManagedProperties)):
             # parameters it has.
             if isinstance(value, Basic):
                 if exact:
-                    _value = lambda expr, result: (value.subs(result)
-                        if all(val for val in result.values()) else expr)
+                    _value = lambda expr, result: (
+                        value.subs(result)
+                        if all(val for val in result.values())
+                        else expr
+                    )
                 else:
                     _value = lambda expr, result: value.subs(result)
             elif callable(value):
@@ -1360,16 +1382,24 @@ class Basic(with_metaclass(ManagedProperties)):
                 # if ``exact`` is True, only accept match if there are no null
                 # values amongst those matched.
                 if exact:
-                    _value = lambda expr, result: (value(**dict([(
-                        str(key)[:-1], val) for key, val in result.items()]))
-                        if all(val for val in result.values()) else expr)
+                    _value = lambda expr, result: (
+                        value(
+                            **dict(
+                                [(str(key)[:-1], val) for key, val in result.items()]
+                            )
+                        )
+                        if all(val for val in result.values())
+                        else expr
+                    )
                 else:
-                    _value = lambda expr, result: value(**dict([(
-                        str(key)[:-1], val) for key, val in result.items()]))
+                    _value = lambda expr, result: value(
+                        **dict([(str(key)[:-1], val) for key, val in result.items()])
+                    )
             else:
                 raise TypeError(
                     "given an expression, replace() expects "
-                    "another expression or a callable")
+                    "another expression or a callable"
+                )
         elif callable(query):
             _query = query
 
@@ -1377,12 +1407,13 @@ class Basic(with_metaclass(ManagedProperties)):
                 _value = lambda expr, result: value(expr)
             else:
                 raise TypeError(
-                    "given a callable, replace() expects "
-                    "another callable")
+                    "given a callable, replace() expects " "another callable"
+                )
         else:
             raise TypeError(
                 "first argument to replace() must be a "
-                "type, an expression or a callable")
+                "type, an expression or a callable"
+            )
 
         mapping = {}  # changes that took place
         mask = []  # the dummies that were used as change placeholders
@@ -1395,7 +1426,7 @@ class Basic(with_metaclass(ManagedProperties)):
                     mapping[expr] = new
                     if simultaneous:
                         # don't let this expression be changed during rebuilding
-                        com = getattr(new, 'is_commutative', True)
+                        com = getattr(new, "is_commutative", True)
                         if com is None:
                             com = True
                         d = Dummy(commutative=com)
@@ -1421,12 +1452,11 @@ class Basic(with_metaclass(ManagedProperties)):
                 # restore subexpressions in mapping
                 for o, n in mask:
                     r = {o: n}
-                    mapping = {k.xreplace(r): v.xreplace(r)
-                        for k, v in mapping.items()}
+                    mapping = {k.xreplace(r): v.xreplace(r) for k, v in mapping.items()}
             return rv, mapping
 
     def find(self, query, group=False):
-        """Find all subexpressions matching a query. """
+        """Find all subexpressions matching a query."""
         query = _make_find_query(query)
         results = list(filter(query, preorder_traversal(self)))
 
@@ -1444,7 +1474,7 @@ class Basic(with_metaclass(ManagedProperties)):
             return groups
 
     def count(self, query):
-        """Count the number of matching subexpressions. """
+        """Count the number of matching subexpressions."""
         query = _make_find_query(query)
         return sum(bool(query(sub)) for sub in preorder_traversal(self))
 
@@ -1529,30 +1559,33 @@ class Basic(with_metaclass(ManagedProperties)):
     def count_ops(self, visual=None):
         """wrapper for count_ops that returns the operation count."""
         from .. import count_ops
+
         return count_ops(self, visual)
 
     def doit(self, **hints):
         """Evaluate objects that are not evaluated by default like limits,
-           integrals, sums and products. All objects of this kind will be
-           evaluated recursively, unless some species were excluded via 'hints'
-           or unless the 'deep' hint was set to 'False'.
+        integrals, sums and products. All objects of this kind will be
+        evaluated recursively, unless some species were excluded via 'hints'
+        or unless the 'deep' hint was set to 'False'.
 
-           >>> from .. import Integral
-           >>> from ..abc import x
+        >>> from .. import Integral
+        >>> from ..abc import x
 
-           >>> 2*Integral(x, x)
-           2*Integral(x, x)
+        >>> 2*Integral(x, x)
+        2*Integral(x, x)
 
-           >>> (2*Integral(x, x)).doit()
-           x**2
+        >>> (2*Integral(x, x)).doit()
+        x**2
 
-           >>> (2*Integral(x, x)).doit(deep=False)
-           2*Integral(x, x)
+        >>> (2*Integral(x, x)).doit(deep=False)
+        2*Integral(x, x)
 
         """
-        if hints.get('deep', True):
-            terms = [term.doit(**hints) if isinstance(term, Basic) else term
-                                         for term in self.args]
+        if hints.get("deep", True):
+            terms = [
+                term.doit(**hints) if isinstance(term, Basic) else term
+                for term in self.args
+            ]
             return self.func(*terms)
         else:
             return self
@@ -1563,10 +1596,11 @@ class Basic(with_metaclass(ManagedProperties)):
                 return getattr(self, rule)()
             return self
 
-        if hints.get('deep', True):
-            args = [a._eval_rewrite(pattern, rule, **hints)
-                        if isinstance(a, Basic) else a
-                        for a in self.args]
+        if hints.get("deep", True):
+            args = [
+                a._eval_rewrite(pattern, rule, **hints) if isinstance(a, Basic) else a
+                for a in self.args
+            ]
         else:
             args = self.args
 
@@ -1578,7 +1612,7 @@ class Basic(with_metaclass(ManagedProperties)):
         return self.func(*args)
 
     def rewrite(self, *args, **hints):
-        """ Rewrite functions in terms of other functions.
+        """Rewrite functions in terms of other functions.
 
         Rewrites expression containing applications of functions
         of one kind in terms of functions of different kind. For
@@ -1622,12 +1656,12 @@ class Basic(with_metaclass(ManagedProperties)):
         else:
             pattern = args[:-1]
             if isinstance(args[-1], string_types):
-                rule = '_eval_rewrite_as_' + args[-1]
+                rule = "_eval_rewrite_as_" + args[-1]
             else:
                 try:
-                    rule = '_eval_rewrite_as_' + args[-1].__name__
+                    rule = "_eval_rewrite_as_" + args[-1].__name__
                 except:
-                    rule = '_eval_rewrite_as_' + args[-1].__class__.__name__
+                    rule = "_eval_rewrite_as_" + args[-1].__class__.__name__
 
             if not pattern:
                 return self._eval_rewrite(None, rule, **hints)
@@ -1660,7 +1694,9 @@ class Basic(with_metaclass(ManagedProperties)):
             try:
                 if i in Basic._constructor_postprocessor_mapping:
                     for k, v in Basic._constructor_postprocessor_mapping[i].items():
-                        postprocessors[k].extend([j for j in v if j not in postprocessors[k]])
+                        postprocessors[k].extend(
+                            [j for j in v if j not in postprocessors[k]]
+                        )
                 else:
                     postprocessor_mappings = (
                         Basic._constructor_postprocessor_mapping[cls].items()
@@ -1668,13 +1704,18 @@ class Basic(with_metaclass(ManagedProperties)):
                         if cls in Basic._constructor_postprocessor_mapping
                     )
                     for k, v in chain.from_iterable(postprocessor_mappings):
-                        postprocessors[k].extend([j for j in v if j not in postprocessors[k]])
+                        postprocessors[k].extend(
+                            [j for j in v if j not in postprocessors[k]]
+                        )
             except TypeError:
                 pass
 
         for f in postprocessors.get(clsname, []):
             obj = f(obj)
-        if len(postprocessors) > 0 and obj not in Basic._constructor_postprocessor_mapping:
+        if (
+            len(postprocessors) > 0
+            and obj not in Basic._constructor_postprocessor_mapping
+        ):
             Basic._constructor_postprocessor_mapping[obj] = postprocessors
 
         return obj
@@ -1722,8 +1763,10 @@ class Atom(Basic):
         # on Atoms -- they cannot be rebuilt as atom.func(*atom._sorted_args)
         # since there are no args. So the calling routine should be checking
         # to see that this property is not called for Atoms.
-        raise AttributeError('Atoms have no args. It might be necessary'
-        ' to make a check for Atoms in the calling code.')
+        raise AttributeError(
+            "Atoms have no args. It might be necessary"
+            " to make a check for Atoms in the calling code."
+        )
 
 
 def _aresame(a, b):
@@ -1747,10 +1790,12 @@ def _aresame(a, b):
 
     """
     from .function import AppliedUndef, UndefinedFunction as UndefFunc
+
     for i, j in zip_longest(preorder_traversal(a), preorder_traversal(b)):
         if i != j or type(i) != type(j):
-            if ((isinstance(i, UndefFunc) and isinstance(j, UndefFunc)) or
-                (isinstance(i, AppliedUndef) and isinstance(j, AppliedUndef))):
+            if (isinstance(i, UndefFunc) and isinstance(j, UndefFunc)) or (
+                isinstance(i, AppliedUndef) and isinstance(j, AppliedUndef)
+            ):
                 if i.class_key() != j.class_key():
                     return False
             else:
@@ -1781,6 +1826,7 @@ def _atomic(e):
 
     """
     from .. import Derivative, Function, Symbol
+
     pot = preorder_traversal(e)
     seen = set()
     try:
@@ -1847,6 +1893,7 @@ class preorder_traversal(Iterator):
     [z*(x + y), z, x + y, x, y]
 
     """
+
     def __init__(self, node, keys=None):
         self._skip_flag = False
         self._pt = self._preorder_traversal(node, keys)
@@ -1857,7 +1904,7 @@ class preorder_traversal(Iterator):
             self._skip_flag = False
             return
         if isinstance(node, Basic):
-            if not keys and hasattr(node, '_argset'):
+            if not keys and hasattr(node, "_argset"):
                 # LatticeOp keeps args as a set. We should use this if we
                 # don't care about the order, to prevent unnecessary sorting.
                 args = node._argset

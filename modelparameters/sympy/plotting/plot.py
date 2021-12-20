@@ -25,7 +25,7 @@ every time you call ``show()`` and the old one is left to the garbage collector.
 from __future__ import print_function, division
 
 import inspect
-from collections import Callable
+from collections.abc import Callable
 import warnings
 import sys
 
@@ -34,7 +34,7 @@ from ..external import import_module
 from ..core.compatibility import range
 from ..utilities.decorator import doctest_depends_on
 from ..utilities.iterables import is_sequence
-from .experimental_lambdify import (vectorized_lambdify, lambdify)
+from .experimental_lambdify import vectorized_lambdify, lambdify
 
 # N.B.
 # When changing the minimum module version for matplotlib, please change
@@ -52,9 +52,11 @@ def unset_show():
     global _show
     _show = False
 
+
 ##############################################################################
 # The public interface
 ##############################################################################
+
 
 def _arity(f):
     """
@@ -63,8 +65,8 @@ def _arity(f):
     if sys.version_info < (3,):
         return len(inspect.getargspec(f)[0])
     else:
-       param = inspect.signature(f).parameters.values()
-       return len([p for p in param if p.kind == p.POSITIONAL_OR_KEYWORD])
+        param = inspect.signature(f).parameters.values()
+        return len([p for p in param if p.kind == p.POSITIONAL_OR_KEYWORD])
 
 
 class Plot(object):
@@ -162,13 +164,13 @@ class Plot(object):
         self.title = None
         self.xlabel = None
         self.ylabel = None
-        self.aspect_ratio = 'auto'
+        self.aspect_ratio = "auto"
         self.xlim = None
         self.ylim = None
-        self.axis_center = 'auto'
+        self.axis_center = "auto"
         self.axis = True
-        self.xscale = 'linear'
-        self.yscale = 'linear'
+        self.xscale = "linear"
+        self.yscale = "linear"
         self.legend = False
         self.autoscale = True
         self.margin = 0
@@ -190,21 +192,20 @@ class Plot(object):
 
     def show(self):
         # TODO move this to the backend (also for save)
-        if hasattr(self, '_backend'):
+        if hasattr(self, "_backend"):
             self._backend.close()
         self._backend = self.backend(self)
         self._backend.show()
 
     def save(self, path):
-        if hasattr(self, '_backend'):
+        if hasattr(self, "_backend"):
             self._backend.close()
         self._backend = self.backend(self)
         self._backend.save(path)
 
     def __str__(self):
-        series_strs = [('[%d]: ' % i) + str(s)
-                       for i, s in enumerate(self._series)]
-        return 'Plot object containing:\n' + '\n'.join(series_strs)
+        series_strs = [("[%d]: " % i) + str(s) for i, s in enumerate(self._series)]
+        return "Plot object containing:\n" + "\n".join(series_strs)
 
     def __getitem__(self, index):
         return self._series[index]
@@ -216,7 +217,12 @@ class Plot(object):
     def __delitem__(self, index):
         del self._series[index]
 
-    @doctest_depends_on(modules=('numpy', 'matplotlib',))
+    @doctest_depends_on(
+        modules=(
+            "numpy",
+            "matplotlib",
+        )
+    )
     def append(self, arg):
         """Adds an element from a plot's series to an existing plot.
 
@@ -246,9 +252,14 @@ class Plot(object):
         if isinstance(arg, BaseSeries):
             self._series.append(arg)
         else:
-            raise TypeError('Must specify element of plot to append.')
+            raise TypeError("Must specify element of plot to append.")
 
-    @doctest_depends_on(modules=('numpy', 'matplotlib',))
+    @doctest_depends_on(
+        modules=(
+            "numpy",
+            "matplotlib",
+        )
+    )
     def extend(self, arg):
         """Adds all series from another plot.
 
@@ -275,13 +286,13 @@ class Plot(object):
         elif is_sequence(arg):
             self._series.extend(arg)
         else:
-            raise TypeError('Expecting Plot or sequence of BaseSeries')
+            raise TypeError("Expecting Plot or sequence of BaseSeries")
 
 
 ##############################################################################
 # Data Series
 ##############################################################################
-#TODO more general way to calculate aesthetics (see get_color_array)
+# TODO more general way to calculate aesthetics (see get_color_array)
 
 ### The base class for all series
 class BaseSeries(object):
@@ -332,8 +343,8 @@ class BaseSeries(object):
     #   - get_meshes returning mesh_x (1D array), mesh_y(1D array,
     #     mesh_z (2D np.arrays)
     #   - get_points an alias for get_meshes
-    #Different from is_contour as the colormap in backend will be
-    #different
+    # Different from is_contour as the colormap in backend will be
+    # different
 
     is_parametric = False
     # The calculation of aesthetics expects:
@@ -345,18 +356,12 @@ class BaseSeries(object):
 
     @property
     def is_3D(self):
-        flags3D = [
-            self.is_3Dline,
-            self.is_3Dsurface
-        ]
+        flags3D = [self.is_3Dline, self.is_3Dsurface]
         return any(flags3D)
 
     @property
     def is_line(self):
-        flagslines = [
-            self.is_2Dline,
-            self.is_3Dline
-        ]
+        flagslines = [self.is_2Dline, self.is_3Dline]
         return any(flagslines)
 
 
@@ -381,7 +386,7 @@ class Line2DBaseSeries(BaseSeries):
         self.line_color = None
 
     def get_segments(self):
-        np = import_module('numpy')
+        np = import_module("numpy")
         points = self.get_points()
         if self.steps is True:
             x = np.array((points[0], points[0])).T.flatten()[1:]
@@ -391,9 +396,9 @@ class Line2DBaseSeries(BaseSeries):
         return np.ma.concatenate([points[:-1], points[1:]], axis=1)
 
     def get_color_array(self):
-        np = import_module('numpy')
+        np = import_module("numpy")
         c = self.line_color
-        if hasattr(c, '__call__'):
+        if hasattr(c, "__call__"):
             f = np.vectorize(c)
             arity = _arity(c)
             if arity == 1 and self.is_parametric:
@@ -408,21 +413,21 @@ class Line2DBaseSeries(BaseSeries):
                 else:  # only if the line is 3D (otherwise raises an error)
                     return f(*variables)
         else:
-            return c*np.ones(self.nb_of_points)
+            return c * np.ones(self.nb_of_points)
 
 
 class List2DSeries(Line2DBaseSeries):
     """Representation for a line consisting of list of points."""
 
     def __init__(self, list_x, list_y):
-        np = import_module('numpy')
+        np = import_module("numpy")
         super(List2DSeries, self).__init__()
         self.list_x = np.array(list_x)
         self.list_y = np.array(list_y)
-        self.label = 'list'
+        self.label = "list"
 
     def __str__(self):
-        return 'list plot'
+        return "list plot"
 
     def get_points(self):
         return (self.list_x, self.list_y)
@@ -438,14 +443,17 @@ class LineOver1DRangeSeries(Line2DBaseSeries):
         self.var = sympify(var_start_end[0])
         self.start = float(var_start_end[1])
         self.end = float(var_start_end[2])
-        self.nb_of_points = kwargs.get('nb_of_points', 300)
-        self.adaptive = kwargs.get('adaptive', True)
-        self.depth = kwargs.get('depth', 12)
-        self.line_color = kwargs.get('line_color', None)
+        self.nb_of_points = kwargs.get("nb_of_points", 300)
+        self.adaptive = kwargs.get("adaptive", True)
+        self.depth = kwargs.get("depth", 12)
+        self.line_color = kwargs.get("line_color", None)
 
     def __str__(self):
-        return 'cartesian line: %s for %s over %s' % (
-            str(self.expr), str(self.var), str((self.start, self.end)))
+        return "cartesian line: %s for %s over %s" % (
+            str(self.expr),
+            str(self.var),
+            str((self.start, self.end)),
+        )
 
     def get_segments(self):
         """
@@ -468,44 +476,51 @@ class LineOver1DRangeSeries(Line2DBaseSeries):
             list_segments = []
 
             def sample(p, q, depth):
-                """ Samples recursively if three points are almost collinear.
+                """Samples recursively if three points are almost collinear.
                 For depth < 6, points are added irrespective of whether they
                 satisfy the collinearity condition or not. The maximum depth
                 allowed is 12.
                 """
-                np = import_module('numpy')
-                #Randomly sample to avoid aliasing.
+                np = import_module("numpy")
+                # Randomly sample to avoid aliasing.
                 random = 0.45 + np.random.rand() * 0.1
                 xnew = p[0] + random * (q[0] - p[0])
                 ynew = f(xnew)
                 new_point = np.array([xnew, ynew])
 
-                #Maximum depth
+                # Maximum depth
                 if depth > self.depth:
                     list_segments.append([p, q])
 
-                #Sample irrespective of whether the line is flat till the
-                #depth of 6. We are not using linspace to avoid aliasing.
+                # Sample irrespective of whether the line is flat till the
+                # depth of 6. We are not using linspace to avoid aliasing.
                 elif depth < 6:
                     sample(p, new_point, depth + 1)
                     sample(new_point, q, depth + 1)
 
-                #Sample ten points if complex values are encountered
-                #at both ends. If there is a real value in between, then
-                #sample those points further.
+                # Sample ten points if complex values are encountered
+                # at both ends. If there is a real value in between, then
+                # sample those points further.
                 elif p[1] is None and q[1] is None:
                     xarray = np.linspace(p[0], q[0], 10)
                     yarray = list(map(f, xarray))
                     if any(y is not None for y in yarray):
                         for i in range(len(yarray) - 1):
                             if yarray[i] is not None or yarray[i + 1] is not None:
-                                sample([xarray[i], yarray[i]],
-                                    [xarray[i + 1], yarray[i + 1]], depth + 1)
+                                sample(
+                                    [xarray[i], yarray[i]],
+                                    [xarray[i + 1], yarray[i + 1]],
+                                    depth + 1,
+                                )
 
-                #Sample further if one of the end points in None( i.e. a complex
-                #value) or the three points are not almost collinear.
-                elif (p[1] is None or q[1] is None or new_point[1] is None
-                        or not flat(p, new_point, q)):
+                # Sample further if one of the end points in None( i.e. a complex
+                # value) or the three points are not almost collinear.
+                elif (
+                    p[1] is None
+                    or q[1] is None
+                    or new_point[1] is None
+                    or not flat(p, new_point, q)
+                ):
                     sample(p, new_point, depth + 1)
                     sample(new_point, q, depth + 1)
                 else:
@@ -517,10 +532,11 @@ class LineOver1DRangeSeries(Line2DBaseSeries):
             return list_segments
 
     def get_points(self):
-        np = import_module('numpy')
+        np = import_module("numpy")
         if self.only_integers is True:
-            list_x = np.linspace(int(self.start), int(self.end),
-                    num=int(self.end) - int(self.start) + 1)
+            list_x = np.linspace(
+                int(self.start), int(self.end), num=int(self.end) - int(self.start) + 1
+            )
         else:
             list_x = np.linspace(self.start, self.end, num=self.nb_of_points)
         f = vectorized_lambdify([self.var], self.expr)
@@ -542,18 +558,21 @@ class Parametric2DLineSeries(Line2DBaseSeries):
         self.var = sympify(var_start_end[0])
         self.start = float(var_start_end[1])
         self.end = float(var_start_end[2])
-        self.nb_of_points = kwargs.get('nb_of_points', 300)
-        self.adaptive = kwargs.get('adaptive', True)
-        self.depth = kwargs.get('depth', 12)
-        self.line_color = kwargs.get('line_color', None)
+        self.nb_of_points = kwargs.get("nb_of_points", 300)
+        self.adaptive = kwargs.get("adaptive", True)
+        self.depth = kwargs.get("depth", 12)
+        self.line_color = kwargs.get("line_color", None)
 
     def __str__(self):
-        return 'parametric cartesian line: (%s, %s) for %s over %s' % (
-            str(self.expr_x), str(self.expr_y), str(self.var),
-            str((self.start, self.end)))
+        return "parametric cartesian line: (%s, %s) for %s over %s" % (
+            str(self.expr_x),
+            str(self.expr_y),
+            str(self.var),
+            str((self.start, self.end)),
+        )
 
     def get_parameter_points(self):
-        np = import_module('numpy')
+        np = import_module("numpy")
         return np.linspace(self.start, self.end, num=self.nb_of_points)
 
     def get_points(self):
@@ -586,52 +605,62 @@ class Parametric2DLineSeries(Line2DBaseSeries):
         list_segments = []
 
         def sample(param_p, param_q, p, q, depth):
-            """ Samples recursively if three points are almost collinear.
+            """Samples recursively if three points are almost collinear.
             For depth < 6, points are added irrespective of whether they
             satisfy the collinearity condition or not. The maximum depth
             allowed is 12.
             """
-            #Randomly sample to avoid aliasing.
-            np = import_module('numpy')
+            # Randomly sample to avoid aliasing.
+            np = import_module("numpy")
             random = 0.45 + np.random.rand() * 0.1
             param_new = param_p + random * (param_q - param_p)
             xnew = f_x(param_new)
             ynew = f_y(param_new)
             new_point = np.array([xnew, ynew])
 
-            #Maximum depth
+            # Maximum depth
             if depth > self.depth:
                 list_segments.append([p, q])
 
-            #Sample irrespective of whether the line is flat till the
-            #depth of 6. We are not using linspace to avoid aliasing.
+            # Sample irrespective of whether the line is flat till the
+            # depth of 6. We are not using linspace to avoid aliasing.
             elif depth < 6:
                 sample(param_p, param_new, p, new_point, depth + 1)
                 sample(param_new, param_q, new_point, q, depth + 1)
 
-            #Sample ten points if complex values are encountered
-            #at both ends. If there is a real value in between, then
-            #sample those points further.
-            elif ((p[0] is None and q[1] is None) or
-                    (p[1] is None and q[1] is None)):
+            # Sample ten points if complex values are encountered
+            # at both ends. If there is a real value in between, then
+            # sample those points further.
+            elif (p[0] is None and q[1] is None) or (p[1] is None and q[1] is None):
                 param_array = np.linspace(param_p, param_q, 10)
                 x_array = list(map(f_x, param_array))
                 y_array = list(map(f_y, param_array))
-                if any(x is not None and y is not None
-                        for x, y in zip(x_array, y_array)):
+                if any(
+                    x is not None and y is not None for x, y in zip(x_array, y_array)
+                ):
                     for i in range(len(y_array) - 1):
-                        if ((x_array[i] is not None and y_array[i] is not None) or
-                                (x_array[i + 1] is not None and y_array[i + 1] is not None)):
+                        if (x_array[i] is not None and y_array[i] is not None) or (
+                            x_array[i + 1] is not None and y_array[i + 1] is not None
+                        ):
                             point_a = [x_array[i], y_array[i]]
                             point_b = [x_array[i + 1], y_array[i + 1]]
-                            sample(param_array[i], param_array[i], point_a,
-                                   point_b, depth + 1)
+                            sample(
+                                param_array[i],
+                                param_array[i],
+                                point_a,
+                                point_b,
+                                depth + 1,
+                            )
 
-            #Sample further if one of the end points in None( ie a complex
-            #value) or the three points are not almost collinear.
-            elif (p[0] is None or p[1] is None
-                    or q[1] is None or q[0] is None
-                    or not flat(p, new_point, q)):
+            # Sample further if one of the end points in None( ie a complex
+            # value) or the three points are not almost collinear.
+            elif (
+                p[0] is None
+                or p[1] is None
+                or q[1] is None
+                or q[0] is None
+                or not flat(p, new_point, q)
+            ):
                 sample(param_p, param_new, p, new_point, depth + 1)
                 sample(param_new, param_q, new_point, q, depth + 1)
             else:
@@ -674,16 +703,20 @@ class Parametric3DLineSeries(Line3DBaseSeries):
         self.var = sympify(var_start_end[0])
         self.start = float(var_start_end[1])
         self.end = float(var_start_end[2])
-        self.nb_of_points = kwargs.get('nb_of_points', 300)
-        self.line_color = kwargs.get('line_color', None)
+        self.nb_of_points = kwargs.get("nb_of_points", 300)
+        self.line_color = kwargs.get("line_color", None)
 
     def __str__(self):
-        return '3D parametric cartesian line: (%s, %s, %s) for %s over %s' % (
-            str(self.expr_x), str(self.expr_y), str(self.expr_z),
-            str(self.var), str((self.start, self.end)))
+        return "3D parametric cartesian line: (%s, %s, %s) for %s over %s" % (
+            str(self.expr_x),
+            str(self.expr_y),
+            str(self.expr_z),
+            str(self.var),
+            str((self.start, self.end)),
+        )
 
     def get_parameter_points(self):
-        np = import_module('numpy')
+        np = import_module("numpy")
         return np.linspace(self.start, self.end, num=self.nb_of_points)
 
     def get_points(self):
@@ -708,7 +741,7 @@ class SurfaceBaseSeries(BaseSeries):
         self.surface_color = None
 
     def get_color_array(self):
-        np = import_module('numpy')
+        np = import_module("numpy")
         c = self.surface_color
         if isinstance(c, Callable):
             f = np.vectorize(c)
@@ -727,12 +760,13 @@ class SurfaceBaseSeries(BaseSeries):
             else:
                 return f(*variables)
         else:
-            return c*np.ones(self.nb_of_points)
+            return c * np.ones(self.nb_of_points)
 
 
 class SurfaceOver2DRangeSeries(SurfaceBaseSeries):
     """Representation for a 3D surface consisting of a sympy expression and 2D
     range."""
+
     def __init__(self, expr, var_start_end_x, var_start_end_y, **kwargs):
         super(SurfaceOver2DRangeSeries, self).__init__()
         self.expr = sympify(expr)
@@ -742,25 +776,25 @@ class SurfaceOver2DRangeSeries(SurfaceBaseSeries):
         self.var_y = sympify(var_start_end_y[0])
         self.start_y = float(var_start_end_y[1])
         self.end_y = float(var_start_end_y[2])
-        self.nb_of_points_x = kwargs.get('nb_of_points_x', 50)
-        self.nb_of_points_y = kwargs.get('nb_of_points_y', 50)
-        self.surface_color = kwargs.get('surface_color', None)
+        self.nb_of_points_x = kwargs.get("nb_of_points_x", 50)
+        self.nb_of_points_y = kwargs.get("nb_of_points_y", 50)
+        self.surface_color = kwargs.get("surface_color", None)
 
     def __str__(self):
-        return ('cartesian surface: %s for'
-                ' %s over %s and %s over %s') % (
-                    str(self.expr),
-                    str(self.var_x),
-                    str((self.start_x, self.end_x)),
-                    str(self.var_y),
-                    str((self.start_y, self.end_y)))
+        return ("cartesian surface: %s for" " %s over %s and %s over %s") % (
+            str(self.expr),
+            str(self.var_x),
+            str((self.start_x, self.end_x)),
+            str(self.var_y),
+            str((self.start_y, self.end_y)),
+        )
 
     def get_meshes(self):
-        np = import_module('numpy')
-        mesh_x, mesh_y = np.meshgrid(np.linspace(self.start_x, self.end_x,
-                                                 num=self.nb_of_points_x),
-                                     np.linspace(self.start_y, self.end_y,
-                                                 num=self.nb_of_points_y))
+        np = import_module("numpy")
+        mesh_x, mesh_y = np.meshgrid(
+            np.linspace(self.start_x, self.end_x, num=self.nb_of_points_x),
+            np.linspace(self.start_y, self.end_y, num=self.nb_of_points_y),
+        )
         f = vectorized_lambdify((self.var_x, self.var_y), self.expr)
         return (mesh_x, mesh_y, f(mesh_x, mesh_y))
 
@@ -772,8 +806,8 @@ class ParametricSurfaceSeries(SurfaceBaseSeries):
     is_parametric = True
 
     def __init__(
-        self, expr_x, expr_y, expr_z, var_start_end_u, var_start_end_v,
-            **kwargs):
+        self, expr_x, expr_y, expr_z, var_start_end_u, var_start_end_v, **kwargs
+    ):
         super(ParametricSurfaceSeries, self).__init__()
         self.expr_x = sympify(expr_x)
         self.expr_y = sympify(expr_y)
@@ -784,27 +818,30 @@ class ParametricSurfaceSeries(SurfaceBaseSeries):
         self.var_v = sympify(var_start_end_v[0])
         self.start_v = float(var_start_end_v[1])
         self.end_v = float(var_start_end_v[2])
-        self.nb_of_points_u = kwargs.get('nb_of_points_u', 50)
-        self.nb_of_points_v = kwargs.get('nb_of_points_v', 50)
-        self.surface_color = kwargs.get('surface_color', None)
+        self.nb_of_points_u = kwargs.get("nb_of_points_u", 50)
+        self.nb_of_points_v = kwargs.get("nb_of_points_v", 50)
+        self.surface_color = kwargs.get("surface_color", None)
 
     def __str__(self):
-        return ('parametric cartesian surface: (%s, %s, %s) for'
-                ' %s over %s and %s over %s') % (
-                    str(self.expr_x),
-                    str(self.expr_y),
-                    str(self.expr_z),
-                    str(self.var_u),
-                    str((self.start_u, self.end_u)),
-                    str(self.var_v),
-                    str((self.start_v, self.end_v)))
+        return (
+            "parametric cartesian surface: (%s, %s, %s) for"
+            " %s over %s and %s over %s"
+        ) % (
+            str(self.expr_x),
+            str(self.expr_y),
+            str(self.expr_z),
+            str(self.var_u),
+            str((self.start_u, self.end_u)),
+            str(self.var_v),
+            str((self.start_v, self.end_v)),
+        )
 
     def get_parameter_meshes(self):
-        np = import_module('numpy')
-        return np.meshgrid(np.linspace(self.start_u, self.end_u,
-                                       num=self.nb_of_points_u),
-                           np.linspace(self.start_v, self.end_v,
-                                       num=self.nb_of_points_v))
+        np = import_module("numpy")
+        return np.meshgrid(
+            np.linspace(self.start_u, self.end_u, num=self.nb_of_points_u),
+            np.linspace(self.start_v, self.end_v, num=self.nb_of_points_v),
+        )
 
     def get_meshes(self):
         mesh_u, mesh_v = self.get_parameter_meshes()
@@ -817,9 +854,10 @@ class ParametricSurfaceSeries(SurfaceBaseSeries):
 ### Contours
 class ContourSeries(BaseSeries):
     """Representation for a contour plot."""
-    #The code is mostly repetition of SurfaceOver2DRange.
-    #XXX: Presently not used in any of those functions.
-    #XXX: Add contour plot and use this seties.
+
+    # The code is mostly repetition of SurfaceOver2DRange.
+    # XXX: Presently not used in any of those functions.
+    # XXX: Add contour plot and use this seties.
 
     is_contour = True
 
@@ -838,20 +876,20 @@ class ContourSeries(BaseSeries):
         self.get_points = self.get_meshes
 
     def __str__(self):
-        return ('contour: %s for '
-                '%s over %s and %s over %s') % (
-                    str(self.expr),
-                    str(self.var_x),
-                    str((self.start_x, self.end_x)),
-                    str(self.var_y),
-                    str((self.start_y, self.end_y)))
+        return ("contour: %s for " "%s over %s and %s over %s") % (
+            str(self.expr),
+            str(self.var_x),
+            str((self.start_x, self.end_x)),
+            str(self.var_y),
+            str((self.start_y, self.end_y)),
+        )
 
     def get_meshes(self):
-        np = import_module('numpy')
-        mesh_x, mesh_y = np.meshgrid(np.linspace(self.start_x, self.end_x,
-                                                 num=self.nb_of_points_x),
-                                     np.linspace(self.start_y, self.end_y,
-                                                 num=self.nb_of_points_y))
+        np = import_module("numpy")
+        mesh_x, mesh_y = np.meshgrid(
+            np.linspace(self.start_x, self.end_x, num=self.nb_of_points_x),
+            np.linspace(self.start_y, self.end_y, num=self.nb_of_points_y),
+        )
         f = vectorized_lambdify((self.var_x, self.var_y), self.expr)
         return (mesh_x, mesh_y, f(mesh_x, mesh_y))
 
@@ -859,6 +897,7 @@ class ContourSeries(BaseSeries):
 ##############################################################################
 # Backends
 ##############################################################################
+
 
 class BaseBackend(object):
     def __init__(self, parent):
@@ -872,32 +911,36 @@ class MatplotlibBackend(BaseBackend):
     def __init__(self, parent):
         super(MatplotlibBackend, self).__init__(parent)
         are_3D = [s.is_3D for s in self.parent._series]
-        self.matplotlib = import_module('matplotlib',
-            __import__kwargs={'fromlist': ['pyplot', 'cm', 'collections']},
-            min_module_version='1.1.0', catch=(RuntimeError,))
+        self.matplotlib = import_module(
+            "matplotlib",
+            __import__kwargs={"fromlist": ["pyplot", "cm", "collections"]},
+            min_module_version="1.1.0",
+            catch=(RuntimeError,),
+        )
         self.plt = self.matplotlib.pyplot
         self.cm = self.matplotlib.cm
         self.LineCollection = self.matplotlib.collections.LineCollection
         if any(are_3D) and not all(are_3D):
-            raise ValueError('The matplotlib backend can not mix 2D and 3D.')
+            raise ValueError("The matplotlib backend can not mix 2D and 3D.")
         elif not any(are_3D):
             self.fig = self.plt.figure()
             self.ax = self.fig.add_subplot(111)
-            self.ax.spines['left'].set_position('zero')
-            self.ax.spines['right'].set_color('none')
-            self.ax.spines['bottom'].set_position('zero')
-            self.ax.spines['top'].set_color('none')
-            self.ax.spines['left'].set_smart_bounds(True)
-            self.ax.spines['bottom'].set_smart_bounds(False)
-            self.ax.xaxis.set_ticks_position('bottom')
-            self.ax.yaxis.set_ticks_position('left')
+            self.ax.spines["left"].set_position("zero")
+            self.ax.spines["right"].set_color("none")
+            self.ax.spines["bottom"].set_position("zero")
+            self.ax.spines["top"].set_color("none")
+            self.ax.spines["left"].set_smart_bounds(True)
+            self.ax.spines["bottom"].set_smart_bounds(False)
+            self.ax.xaxis.set_ticks_position("bottom")
+            self.ax.yaxis.set_ticks_position("left")
         elif all(are_3D):
             ## mpl_toolkits.mplot3d is necessary for
             ##      projection='3d'
-            mpl_toolkits = import_module('mpl_toolkits',
-                                     __import__kwargs={'fromlist': ['mplot3d']})
+            mpl_toolkits = import_module(
+                "mpl_toolkits", __import__kwargs={"fromlist": ["mplot3d"]}
+            )
             self.fig = self.plt.figure()
-            self.ax = self.fig.add_subplot(111, projection='3d')
+            self.ax = self.fig.add_subplot(111, projection="3d")
 
     def process_series(self):
         parent = self.parent
@@ -911,8 +954,9 @@ class MatplotlibBackend(BaseBackend):
                 self.ax.contour(*s.get_meshes())
             elif s.is_3Dline:
                 # TODO too complicated, I blame matplotlib
-                mpl_toolkits = import_module('mpl_toolkits',
-                    __import__kwargs={'fromlist': ['mplot3d']})
+                mpl_toolkits = import_module(
+                    "mpl_toolkits", __import__kwargs={"fromlist": ["mplot3d"]}
+                )
                 art3d = mpl_toolkits.mplot3d.art3d
                 collection = art3d.Line3DCollection(s.get_segments())
                 self.ax.add_collection(collection)
@@ -922,49 +966,71 @@ class MatplotlibBackend(BaseBackend):
                 self.ax.set_zlim((min(z), max(z)))
             elif s.is_3Dsurface:
                 x, y, z = s.get_meshes()
-                collection = self.ax.plot_surface(x, y, z,
-                    cmap=getattr(self.cm, 'viridis', self.cm.jet),
-                    rstride=1, cstride=1, linewidth=0.1)
+                collection = self.ax.plot_surface(
+                    x,
+                    y,
+                    z,
+                    cmap=getattr(self.cm, "viridis", self.cm.jet),
+                    rstride=1,
+                    cstride=1,
+                    linewidth=0.1,
+                )
             elif s.is_implicit:
-                #Smart bounds have to be set to False for implicit plots.
-                self.ax.spines['left'].set_smart_bounds(False)
-                self.ax.spines['bottom'].set_smart_bounds(False)
+                # Smart bounds have to be set to False for implicit plots.
+                self.ax.spines["left"].set_smart_bounds(False)
+                self.ax.spines["bottom"].set_smart_bounds(False)
                 points = s.get_raster()
                 if len(points) == 2:
-                    #interval math plotting
+                    # interval math plotting
                     x, y = _matplotlib_list(points[0])
-                    self.ax.fill(x, y, facecolor=s.line_color, edgecolor='None')
+                    self.ax.fill(x, y, facecolor=s.line_color, edgecolor="None")
                 else:
                     # use contourf or contour depending on whether it is
                     # an inequality or equality.
-                    #XXX: ``contour`` plots multiple lines. Should be fixed.
+                    # XXX: ``contour`` plots multiple lines. Should be fixed.
                     ListedColormap = self.matplotlib.colors.ListedColormap
                     colormap = ListedColormap(["white", s.line_color])
                     xarray, yarray, zarray, plot_type = points
-                    if plot_type == 'contour':
-                        self.ax.contour(xarray, yarray, zarray,
-                                contours=(0, 0), fill=False, cmap=colormap)
+                    if plot_type == "contour":
+                        self.ax.contour(
+                            xarray,
+                            yarray,
+                            zarray,
+                            contours=(0, 0),
+                            fill=False,
+                            cmap=colormap,
+                        )
                     else:
                         self.ax.contourf(xarray, yarray, zarray, cmap=colormap)
             else:
-                raise ValueError('The matplotlib backend supports only '
-                                 'is_2Dline, is_3Dline, is_3Dsurface and '
-                                 'is_contour objects.')
+                raise ValueError(
+                    "The matplotlib backend supports only "
+                    "is_2Dline, is_3Dline, is_3Dsurface and "
+                    "is_contour objects."
+                )
 
             # Customise the collections with the corresponding per-series
             # options.
-            if hasattr(s, 'label'):
+            if hasattr(s, "label"):
                 collection.set_label(s.label)
             if s.is_line and s.line_color:
-                if isinstance(s.line_color, (float, int)) or isinstance(s.line_color, Callable):
+                if isinstance(s.line_color, (float, int)) or isinstance(
+                    s.line_color, Callable
+                ):
                     color_array = s.get_color_array()
                     collection.set_array(color_array)
                 else:
                     collection.set_color(s.line_color)
             if s.is_3Dsurface and s.surface_color:
-                if self.matplotlib.__version__ < "1.2.0":  # TODO in the distant future remove this check
-                    warnings.warn('The version of matplotlib is too old to use surface coloring.')
-                elif isinstance(s.surface_color, (float, int)) or isinstance(s.surface_color, Callable):
+                if (
+                    self.matplotlib.__version__ < "1.2.0"
+                ):  # TODO in the distant future remove this check
+                    warnings.warn(
+                        "The version of matplotlib is too old to use surface coloring."
+                    )
+                elif isinstance(s.surface_color, (float, int)) or isinstance(
+                    s.surface_color, Callable
+                ):
                     color_array = s.get_color_array()
                     color_array = color_array.reshape(color_array.size)
                     collection.set_array(color_array)
@@ -975,8 +1041,9 @@ class MatplotlibBackend(BaseBackend):
         # TODO The 3D stuff
         # XXX The order of those is important.
 
-        mpl_toolkits = import_module('mpl_toolkits',
-            __import__kwargs={'fromlist': ['mplot3d']})
+        mpl_toolkits = import_module(
+            "mpl_toolkits", __import__kwargs={"fromlist": ["mplot3d"]}
+        )
         Axes3D = mpl_toolkits.mplot3d.Axes3D
         if parent.xscale and not isinstance(self.ax, Axes3D):
             self.ax.set_xscale(parent.xscale)
@@ -991,25 +1058,27 @@ class MatplotlibBackend(BaseBackend):
                 self.ax.set_xlim(min(starts), max(ends))
         if parent.ylim:
             self.ax.set_ylim(parent.ylim)
-        if not isinstance(self.ax, Axes3D) or self.matplotlib.__version__ >= '1.2.0':  # XXX in the distant future remove this check
+        if (
+            not isinstance(self.ax, Axes3D) or self.matplotlib.__version__ >= "1.2.0"
+        ):  # XXX in the distant future remove this check
             self.ax.set_autoscale_on(parent.autoscale)
         if parent.axis_center:
             val = parent.axis_center
             if isinstance(self.ax, Axes3D):
                 pass
-            elif val == 'center':
-                self.ax.spines['left'].set_position('center')
-                self.ax.spines['bottom'].set_position('center')
-            elif val == 'auto':
+            elif val == "center":
+                self.ax.spines["left"].set_position("center")
+                self.ax.spines["bottom"].set_position("center")
+            elif val == "auto":
                 xl, xh = self.ax.get_xlim()
                 yl, yh = self.ax.get_ylim()
-                pos_left = ('data', 0) if xl*xh <= 0 else 'center'
-                pos_bottom = ('data', 0) if yl*yh <= 0 else 'center'
-                self.ax.spines['left'].set_position(pos_left)
-                self.ax.spines['bottom'].set_position(pos_bottom)
+                pos_left = ("data", 0) if xl * xh <= 0 else "center"
+                pos_bottom = ("data", 0) if yl * yh <= 0 else "center"
+                self.ax.spines["left"].set_position(pos_left)
+                self.ax.spines["bottom"].set_position(pos_bottom)
             else:
-                self.ax.spines['left'].set_position(('data', val[0]))
-                self.ax.spines['bottom'].set_position(('data', val[1]))
+                self.ax.spines["left"].set_position(("data", val[0]))
+                self.ax.spines["bottom"].set_position(("data", val[1]))
         if not parent.axis:
             self.ax.set_axis_off()
         if parent.legend:
@@ -1027,9 +1096,9 @@ class MatplotlibBackend(BaseBackend):
 
     def show(self):
         self.process_series()
-        #TODO after fixing https://github.com/ipython/ipython/issues/1255
+        # TODO after fixing https://github.com/ipython/ipython/issues/1255
         # you can uncomment the next line and remove the pyplot.show() call
-        #self.fig.show()
+        # self.fig.show()
         if _show:
             self.plt.show()
 
@@ -1047,11 +1116,11 @@ class TextBackend(BaseBackend):
 
     def show(self):
         if len(self.parent._series) != 1:
-            raise ValueError(
-                'The TextBackend supports only one graph per Plot.')
+            raise ValueError("The TextBackend supports only one graph per Plot.")
         elif not isinstance(self.parent._series[0], LineOver1DRangeSeries):
             raise ValueError(
-                'The TextBackend supports only expressions over a 1D range')
+                "The TextBackend supports only expressions over a 1D range"
+            )
         else:
             ser = self.parent._series[0]
             textplot(ser.expr, ser.start, ser.end)
@@ -1062,7 +1131,9 @@ class TextBackend(BaseBackend):
 
 class DefaultBackend(BaseBackend):
     def __new__(cls, parent):
-        matplotlib = import_module('matplotlib', min_module_version='1.1.0', catch=(RuntimeError,))
+        matplotlib = import_module(
+            "matplotlib", min_module_version="1.1.0", catch=(RuntimeError,)
+        )
         if matplotlib:
             return MatplotlibBackend(parent)
         else:
@@ -1070,9 +1141,9 @@ class DefaultBackend(BaseBackend):
 
 
 plot_backends = {
-    'matplotlib': MatplotlibBackend,
-    'text': TextBackend,
-    'default': DefaultBackend
+    "matplotlib": MatplotlibBackend,
+    "text": TextBackend,
+    "default": DefaultBackend,
 }
 
 
@@ -1080,23 +1151,30 @@ plot_backends = {
 # Finding the centers of line segments or mesh faces
 ##############################################################################
 
+
 def centers_of_segments(array):
-    np = import_module('numpy')
+    np = import_module("numpy")
     return np.mean(np.vstack((array[:-1], array[1:])), 0)
 
 
 def centers_of_faces(array):
-    np = import_module('numpy')
-    return np.mean(np.dstack((array[:-1, :-1],
-                                 array[1:, :-1],
-                                 array[:-1, 1: ],
-                                 array[:-1, :-1],
-                                 )), 2)
+    np = import_module("numpy")
+    return np.mean(
+        np.dstack(
+            (
+                array[:-1, :-1],
+                array[1:, :-1],
+                array[:-1, 1:],
+                array[:-1, :-1],
+            )
+        ),
+        2,
+    )
 
 
 def flat(x, y, z, eps=1e-3):
     """Checks whether three points are almost collinear"""
-    np = import_module('numpy')
+    np = import_module("numpy")
     # Workaround plotting piecewise (#8577):
     #   workaround for `lambdify` in `.experimental_lambdify` fails
     #   to return numerical values in some cases. Lower-level fix
@@ -1121,12 +1199,14 @@ def _matplotlib_list(interval_list):
         for intervals in interval_list:
             intervalx = intervals[0]
             intervaly = intervals[1]
-            xlist.extend([intervalx.start, intervalx.start,
-                          intervalx.end, intervalx.end, None])
-            ylist.extend([intervaly.start, intervaly.end,
-                          intervaly.end, intervaly.start, None])
+            xlist.extend(
+                [intervalx.start, intervalx.start, intervalx.end, intervalx.end, None]
+            )
+            ylist.extend(
+                [intervaly.start, intervaly.end, intervaly.end, intervaly.start, None]
+            )
     else:
-        #XXX Ugly hack. Matplotlib does not accept empty lists for ``fill``
+        # XXX Ugly hack. Matplotlib does not accept empty lists for ``fill``
         xlist.extend([None, None, None, None])
         ylist.extend([None, None, None, None])
     return xlist, ylist
@@ -1138,7 +1218,13 @@ def _matplotlib_list(interval_list):
 # TODO: Add more plotting options for 3d plots.
 # TODO: Adaptive sampling for 3D plots.
 
-@doctest_depends_on(modules=('numpy', 'matplotlib',))
+
+@doctest_depends_on(
+    modules=(
+        "numpy",
+        "matplotlib",
+    )
+)
 def plot(*args, **kwargs):
     """
     Plots a function of a single variable and returns an instance of
@@ -1280,12 +1366,13 @@ def plot(*args, **kwargs):
             free |= a.free_symbols
             if len(free) > 1:
                 raise ValueError(
-                    'The same variable should be used in all '
-                    'univariate expressions being plotted.')
-    x = free.pop() if free else Symbol('x')
-    kwargs.setdefault('xlabel', x.name)
-    kwargs.setdefault('ylabel', 'f(%s)' % x.name)
-    show = kwargs.pop('show', True)
+                    "The same variable should be used in all "
+                    "univariate expressions being plotted."
+                )
+    x = free.pop() if free else Symbol("x")
+    kwargs.setdefault("xlabel", x.name)
+    kwargs.setdefault("ylabel", "f(%s)" % x.name)
+    show = kwargs.pop("show", True)
     series = []
     plot_expr = check_arguments(args, 1, 1)
     series = [LineOver1DRangeSeries(*arg, **kwargs) for arg in plot_expr]
@@ -1296,7 +1383,12 @@ def plot(*args, **kwargs):
     return plots
 
 
-@doctest_depends_on(modules=('numpy', 'matplotlib',))
+@doctest_depends_on(
+    modules=(
+        "numpy",
+        "matplotlib",
+    )
+)
 def plot_parametric(*args, **kwargs):
     """
     Plots a 2D parametric plot.
@@ -1417,7 +1509,7 @@ def plot_parametric(*args, **kwargs):
 
     """
     args = list(map(sympify, args))
-    show = kwargs.pop('show', True)
+    show = kwargs.pop("show", True)
     series = []
     plot_expr = check_arguments(args, 2, 1)
     series = [Parametric2DLineSeries(*arg, **kwargs) for arg in plot_expr]
@@ -1427,7 +1519,12 @@ def plot_parametric(*args, **kwargs):
     return plots
 
 
-@doctest_depends_on(modules=('numpy', 'matplotlib',))
+@doctest_depends_on(
+    modules=(
+        "numpy",
+        "matplotlib",
+    )
+)
 def plot3d_parametric_line(*args, **kwargs):
     """
     Plots a 3D parametric line plot.
@@ -1513,7 +1610,7 @@ def plot3d_parametric_line(*args, **kwargs):
 
     """
     args = list(map(sympify, args))
-    show = kwargs.pop('show', True)
+    show = kwargs.pop("show", True)
     series = []
     plot_expr = check_arguments(args, 3, 1)
     series = [Parametric3DLineSeries(*arg, **kwargs) for arg in plot_expr]
@@ -1523,7 +1620,12 @@ def plot3d_parametric_line(*args, **kwargs):
     return plots
 
 
-@doctest_depends_on(modules=('numpy', 'matplotlib',))
+@doctest_depends_on(
+    modules=(
+        "numpy",
+        "matplotlib",
+    )
+)
 def plot3d(*args, **kwargs):
     """
     Plots a 3D surface plot.
@@ -1625,7 +1727,7 @@ def plot3d(*args, **kwargs):
     """
 
     args = list(map(sympify, args))
-    show = kwargs.pop('show', True)
+    show = kwargs.pop("show", True)
     series = []
     plot_expr = check_arguments(args, 1, 2)
     series = [SurfaceOver2DRangeSeries(*arg, **kwargs) for arg in plot_expr]
@@ -1635,7 +1737,12 @@ def plot3d(*args, **kwargs):
     return plots
 
 
-@doctest_depends_on(modules=('numpy', 'matplotlib',))
+@doctest_depends_on(
+    modules=(
+        "numpy",
+        "matplotlib",
+    )
+)
 def plot3d_parametric_surface(*args, **kwargs):
     """
     Plots a 3D parametric surface plot.
@@ -1720,7 +1827,7 @@ def plot3d_parametric_surface(*args, **kwargs):
     """
 
     args = list(map(sympify, args))
-    show = kwargs.pop('show', True)
+    show = kwargs.pop("show", True)
     series = []
     plot_expr = check_arguments(args, 3, 2)
     series = [ParametricSurfaceSeries(*arg, **kwargs) for arg in plot_expr]
@@ -1762,7 +1869,7 @@ def check_arguments(args, expr_len, nb_of_free_symbols):
         exprs = Tuple(*args[:i])
         free_symbols = list(set().union(*[e.free_symbols for e in exprs]))
         if len(args) == expr_len + nb_of_free_symbols:
-            #Ranges given
+            # Ranges given
             plots = [exprs + Tuple(*args[expr_len:])]
         else:
             default_range = Tuple(-10, 10)
@@ -1775,12 +1882,12 @@ def check_arguments(args, expr_len, nb_of_free_symbols):
             plots = [exprs + Tuple(*ranges)]
         return plots
 
-    if isinstance(args[0], Expr) or (isinstance(args[0], Tuple) and
-                                     len(args[0]) == expr_len and
-                                     expr_len != 3):
+    if isinstance(args[0], Expr) or (
+        isinstance(args[0], Tuple) and len(args[0]) == expr_len and expr_len != 3
+    ):
         # Cannot handle expressions with number of expression = 3. It is
         # not possible to differentiate between expressions and ranges.
-        #Series of plots with same range
+        # Series of plots with same range
         for i in range(len(args)):
             if isinstance(args[i], Tuple) and len(args[i]) != expr_len:
                 break
@@ -1791,19 +1898,23 @@ def check_arguments(args, expr_len, nb_of_free_symbols):
 
         exprs = args[:i]
         assert all(isinstance(e, Expr) for expr in exprs for e in expr)
-        free_symbols = list(set().union(*[e.free_symbols for expr in exprs
-                                        for e in expr]))
+        free_symbols = list(
+            set().union(*[e.free_symbols for expr in exprs for e in expr])
+        )
 
         if len(free_symbols) > nb_of_free_symbols:
-            raise ValueError("The number of free_symbols in the expression "
-                             "is greater than %d" % nb_of_free_symbols)
+            raise ValueError(
+                "The number of free_symbols in the expression "
+                "is greater than %d" % nb_of_free_symbols
+            )
         if len(args) == i + nb_of_free_symbols and isinstance(args[i], Tuple):
-            ranges = Tuple(*[range_expr for range_expr in args[
-                           i:i + nb_of_free_symbols]])
+            ranges = Tuple(
+                *[range_expr for range_expr in args[i : i + nb_of_free_symbols]]
+            )
             plots = [expr + ranges for expr in exprs]
             return plots
         else:
-            #Use default ranges.
+            # Use default ranges.
             default_range = Tuple(-10, 10)
             ranges = []
             for symbol in free_symbols:
@@ -1816,14 +1927,15 @@ def check_arguments(args, expr_len, nb_of_free_symbols):
             return plots
 
     elif isinstance(args[0], Tuple) and len(args[0]) == expr_len + nb_of_free_symbols:
-        #Multiple plots with different ranges.
+        # Multiple plots with different ranges.
         for arg in args:
             for i in range(expr_len):
                 if not isinstance(arg[i], Expr):
-                    raise ValueError("Expected an expression, given %s" %
-                                     str(arg[i]))
+                    raise ValueError("Expected an expression, given %s" % str(arg[i]))
             for i in range(nb_of_free_symbols):
                 if not len(arg[i + expr_len]) == 3:
-                    raise ValueError("The ranges should be a tuple of "
-                                     "length 3, got %s" % str(arg[i + expr_len]))
+                    raise ValueError(
+                        "The ranges should be a tuple of "
+                        "length 3, got %s" % str(arg[i + expr_len])
+                    )
         return args
