@@ -18,12 +18,12 @@
 import re
 from distutils.version import LooseVersion as _V
 
-import sympy as sp
-from sympy.core.function import AppliedUndef as _AppliedUndef
-from sympy.printing import StrPrinter as _StrPrinter
-from sympy.printing.latex import latex as _sympy_latex
-from sympy.printing.latex import LatexPrinter as _LatexPrinter
-from sympy.printing.precedence import precedence as _precedence
+from . import sympy as sp
+from .sympy.core.function import AppliedUndef as _AppliedUndef
+from .sympy.printing import StrPrinter as _StrPrinter
+from .sympy.printing.latex import latex as _sympy_latex
+from .sympy.printing.latex import LatexPrinter as _LatexPrinter
+from .sympy.printing.precedence import precedence as _precedence
 
 from .logger import error
 from .utils import check_arg as _check_arg
@@ -1324,7 +1324,7 @@ class _CustomLatexPrinter(_LatexPrinter):
 
         expr = sp.Mul(*args)
 
-        from sympy.simplify import fraction
+        from .sympy.simplify import fraction
 
         numer, denom = fraction(expr, exact=True)
         separator = self._settings["mul_symbol_latex"]

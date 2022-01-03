@@ -18,9 +18,9 @@
 # System imports
 import re
 
-import sympy as sp
-from sympy.core import relational as _relational
-from sympy.core.function import AppliedUndef as _AppliedUndef
+from . import sympy as sp
+from .sympy.core import relational as _relational
+from .sympy.core.function import AppliedUndef as _AppliedUndef
 
 from .logger import error
 from .logger import type_error
@@ -53,8 +53,8 @@ def Conditional(cond, true_value, false_value):
     """
     cond = sp.sympify(cond)
 
-    from sympy.core.relational import Relational
-    from sympy.logic.boolalg import Boolean
+    from .sympy.core.relational import Relational
+    from .sympy.logic.boolalg import Boolean
 
     # If the conditional is a bool it is already evaluated
     if isinstance(cond, bool):
@@ -164,7 +164,7 @@ def symbol_to_param(sym):
     Take a symbol or expression of symbols and returns the corresponding
     Parameters
     """
-    from sympy.core.function import AppliedUndef
+    from .sympy.core.function import AppliedUndef
     from .codegeneration import sympycode
 
     if sp is None:
@@ -208,7 +208,7 @@ def symbols_from_expr(expr, include_numbers=False, include_derivatives=False):
     include_derivatives : bool
         If True derivatives will be returned instead of its variables
     """
-    from sympy.core.function import AppliedUndef
+    from .sympy.core.function import AppliedUndef
 
     symbols = set()
 
