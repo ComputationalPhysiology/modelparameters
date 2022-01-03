@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.strategies.core &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.strategies.core</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.strategies.core</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; Generic SymPy-Independent Strategies &quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="n">get_function_name</span>
+
+<span class="n">identity</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
+
+<div class="viewcode-block" id="exhaust"><a class="viewcode-back" href="../../../../modelparameters.sympy.strategies.html#modelparameters.sympy.strategies.core.exhaust">[docs]</a><span class="k">def</span> <span class="nf">exhaust</span><span class="p">(</span><span class="n">rule</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Apply a rule repeatedly until it has no effect &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">exhaustive_rl</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+        <span class="n">new</span><span class="p">,</span> <span class="n">old</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">expr</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">new</span> <span class="o">!=</span> <span class="n">old</span><span class="p">):</span>
+            <span class="n">new</span><span class="p">,</span> <span class="n">old</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span><span class="n">new</span><span class="p">),</span> <span class="n">new</span>
+        <span class="k">return</span> <span class="n">new</span>
+    <span class="k">return</span> <span class="n">exhaustive_rl</span></div>
+
+<div class="viewcode-block" id="memoize"><a class="viewcode-back" href="../../../../modelparameters.sympy.strategies.html#modelparameters.sympy.strategies.core.memoize">[docs]</a><span class="k">def</span> <span class="nf">memoize</span><span class="p">(</span><span class="n">rule</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Memoized version of a rule &quot;&quot;&quot;</span>
+    <span class="n">cache</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">def</span> <span class="nf">memoized_rl</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cache</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+            <span class="n">cache</span><span class="p">[</span><span class="n">expr</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+            <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">memoized_rl</span></div>
+
+<div class="viewcode-block" id="condition"><a class="viewcode-back" href="../../../../modelparameters.sympy.strategies.html#modelparameters.sympy.strategies.core.condition">[docs]</a><span class="k">def</span> <span class="nf">condition</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="n">rule</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Only apply rule if condition is true &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">conditioned_rl</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cond</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">rule</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span>      <span class="n">expr</span>
+    <span class="k">return</span> <span class="n">conditioned_rl</span></div>
+
+<div class="viewcode-block" id="chain"><a class="viewcode-back" href="../../../../modelparameters.sympy.strategies.html#modelparameters.sympy.strategies.core.chain">[docs]</a><span class="k">def</span> <span class="nf">chain</span><span class="p">(</span><span class="o">*</span><span class="n">rules</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compose a sequence of rules so that they apply to the expr sequentially</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">chain_rl</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">:</span>
+            <span class="n">expr</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">expr</span>
+    <span class="k">return</span> <span class="n">chain_rl</span></div>
+
+<div class="viewcode-block" id="debug"><a class="viewcode-back" href="../../../../modelparameters.sympy.strategies.html#modelparameters.sympy.strategies.core.debug">[docs]</a><span class="k">def</span> <span class="nf">debug</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Print out before and after expressions each time rule is used &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">file</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">stdout</span>
+        <span class="n">file</span> <span class="o">=</span> <span class="n">stdout</span>
+    <span class="k">def</span> <span class="nf">debug_rl</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">expr</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="n">expr</span><span class="p">:</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Rule: </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">get_function_name</span><span class="p">(</span><span class="n">rule</span><span class="p">))</span>
+            <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;In:   </span><span class="si">%s</span><span class="se">\n</span><span class="s2">Out:  </span><span class="si">%s</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">debug_rl</span></div>
+
+<div class="viewcode-block" id="null_safe"><a class="viewcode-back" href="../../../../modelparameters.sympy.strategies.html#modelparameters.sympy.strategies.core.null_safe">[docs]</a><span class="k">def</span> <span class="nf">null_safe</span><span class="p">(</span><span class="n">rule</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Return original expr if rule returns None &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">null_safe_rl</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">expr</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">null_safe_rl</span></div>
+
+<div class="viewcode-block" id="tryit"><a class="viewcode-back" href="../../../../modelparameters.sympy.strategies.html#modelparameters.sympy.strategies.core.tryit">[docs]</a><span class="k">def</span> <span class="nf">tryit</span><span class="p">(</span><span class="n">rule</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Return original expr if rule raises exception &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">try_rl</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">rule</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">expr</span>
+    <span class="k">return</span> <span class="n">try_rl</span></div>
+
+<div class="viewcode-block" id="do_one"><a class="viewcode-back" href="../../../../modelparameters.sympy.strategies.html#modelparameters.sympy.strategies.core.do_one">[docs]</a><span class="k">def</span> <span class="nf">do_one</span><span class="p">(</span><span class="o">*</span><span class="n">rules</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Try each of the rules until one works. Then stop. &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">do_one_rl</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">rl</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">rl</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="n">expr</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">result</span>
+        <span class="k">return</span> <span class="n">expr</span>
+    <span class="k">return</span> <span class="n">do_one_rl</span></div>
+
+<div class="viewcode-block" id="switch"><a class="viewcode-back" href="../../../../modelparameters.sympy.strategies.html#modelparameters.sympy.strategies.core.switch">[docs]</a><span class="k">def</span> <span class="nf">switch</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">ruledict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Select a rule based on the result of key called on the function &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">switch_rl</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+        <span class="n">rl</span> <span class="o">=</span> <span class="n">ruledict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">identity</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">rl</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">switch_rl</span></div>
+
+<span class="n">identity</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
+
+<div class="viewcode-block" id="minimize"><a class="viewcode-back" href="../../../../modelparameters.sympy.strategies.html#modelparameters.sympy.strategies.core.minimize">[docs]</a><span class="k">def</span> <span class="nf">minimize</span><span class="p">(</span><span class="o">*</span><span class="n">rules</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Select result of rules that minimizes objective</span>
+
+<span class="sd">    &gt;&gt;&gt; from ..strategies import minimize</span>
+<span class="sd">    &gt;&gt;&gt; inc = lambda x: x + 1</span>
+<span class="sd">    &gt;&gt;&gt; dec = lambda x: x - 1</span>
+<span class="sd">    &gt;&gt;&gt; rl = minimize(inc, dec)</span>
+<span class="sd">    &gt;&gt;&gt; rl(4)</span>
+<span class="sd">    3</span>
+
+<span class="sd">    &gt;&gt;&gt; rl = minimize(inc, dec, objective=lambda x: -x)  # maximize</span>
+<span class="sd">    &gt;&gt;&gt; rl(4)</span>
+<span class="sd">    5</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">objective</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;objective&#39;</span><span class="p">,</span> <span class="n">identity</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">minrule</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">min</span><span class="p">([</span><span class="n">rule</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">rules</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="n">objective</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">minrule</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.strategies.core</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

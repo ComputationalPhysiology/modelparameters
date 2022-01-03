@@ -1,0 +1,1036 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>modelparameters.sympy package &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="modelparameters.sympy.assumptions package" href="modelparameters.sympy.assumptions.html" />
+    <link rel="prev" title="modelparameters package" href="modelparameters.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.assumptions.html" title="modelparameters.sympy.assumptions package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.html" title="modelparameters package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" accesskey="U">modelparameters package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="modelparameters-sympy-package">
+<h1>modelparameters.sympy package<a class="headerlink" href="#modelparameters-sympy-package" title="Permalink to this headline">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.assumptions.html">modelparameters.sympy.assumptions package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.assumptions.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.assumptions.handlers.html">modelparameters.sympy.assumptions.handlers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.assumptions.handlers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.assumptions.handlers.html#module-modelparameters.sympy.assumptions.handlers.calculus">modelparameters.sympy.assumptions.handlers.calculus module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.assumptions.handlers.html#module-modelparameters.sympy.assumptions.handlers.common">modelparameters.sympy.assumptions.handlers.common module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.assumptions.handlers.html#module-modelparameters.sympy.assumptions.handlers.matrices">modelparameters.sympy.assumptions.handlers.matrices module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.assumptions.handlers.html#module-modelparameters.sympy.assumptions.handlers.ntheory">modelparameters.sympy.assumptions.handlers.ntheory module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.assumptions.handlers.html#module-modelparameters.sympy.assumptions.handlers.order">modelparameters.sympy.assumptions.handlers.order module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.assumptions.handlers.html#module-modelparameters.sympy.assumptions.handlers.sets">modelparameters.sympy.assumptions.handlers.sets module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.assumptions.handlers.html#module-modelparameters.sympy.assumptions.handlers">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.assumptions.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.assumptions.html#module-modelparameters.sympy.assumptions.ask">modelparameters.sympy.assumptions.ask module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.assumptions.html#module-modelparameters.sympy.assumptions.ask_generated">modelparameters.sympy.assumptions.ask_generated module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.assumptions.html#module-modelparameters.sympy.assumptions.assume">modelparameters.sympy.assumptions.assume module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.assumptions.html#module-modelparameters.sympy.assumptions.refine">modelparameters.sympy.assumptions.refine module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.assumptions.html#module-modelparameters.sympy.assumptions.satask">modelparameters.sympy.assumptions.satask module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.assumptions.html#module-modelparameters.sympy.assumptions.sathandlers">modelparameters.sympy.assumptions.sathandlers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.assumptions.html#module-modelparameters.sympy.assumptions">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.calculus.html">modelparameters.sympy.calculus package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.calculus.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.calculus.html#module-modelparameters.sympy.calculus.euler">modelparameters.sympy.calculus.euler module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.calculus.html#module-modelparameters.sympy.calculus.finite_diff">modelparameters.sympy.calculus.finite_diff module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.calculus.html#finite-difference-weights">Finite difference weights</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.calculus.html#module-modelparameters.sympy.calculus.singularities">modelparameters.sympy.calculus.singularities module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.calculus.html#singularities">Singularities</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.calculus.html#module-modelparameters.sympy.calculus.util">modelparameters.sympy.calculus.util module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.calculus.html#module-modelparameters.sympy.calculus">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.categories.html">modelparameters.sympy.categories package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.categories.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.categories.html#module-modelparameters.sympy.categories.baseclasses">modelparameters.sympy.categories.baseclasses module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.categories.html#module-modelparameters.sympy.categories.diagram_drawing">modelparameters.sympy.categories.diagram_drawing module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.categories.html#layout-algorithm">Layout Algorithm</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.categories.html#module-modelparameters.sympy.categories">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.codegen.html">modelparameters.sympy.codegen package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.codegen.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.codegen.html#module-modelparameters.sympy.codegen.ast">modelparameters.sympy.codegen.ast module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.codegen.html#ast-type-tree">AST Type Tree</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.codegen.html#module-modelparameters.sympy.codegen.cfunctions">modelparameters.sympy.codegen.cfunctions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.codegen.html#module-modelparameters.sympy.codegen.ffunctions">modelparameters.sympy.codegen.ffunctions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.codegen.html#module-modelparameters.sympy.codegen">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.combinatorics.html">modelparameters.sympy.combinatorics package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#module-modelparameters.sympy.combinatorics.fp_groups">modelparameters.sympy.combinatorics.fp_groups module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#module-modelparameters.sympy.combinatorics.free_groups">modelparameters.sympy.combinatorics.free_groups module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#module-modelparameters.sympy.combinatorics.generators">modelparameters.sympy.combinatorics.generators module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#module-modelparameters.sympy.combinatorics.graycode">modelparameters.sympy.combinatorics.graycode module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#module-modelparameters.sympy.combinatorics.group_constructs">modelparameters.sympy.combinatorics.group_constructs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#module-modelparameters.sympy.combinatorics.named_groups">modelparameters.sympy.combinatorics.named_groups module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#module-modelparameters.sympy.combinatorics.partitions">modelparameters.sympy.combinatorics.partitions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#module-modelparameters.sympy.combinatorics.perm_groups">modelparameters.sympy.combinatorics.perm_groups module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#module-modelparameters.sympy.combinatorics.permutations">modelparameters.sympy.combinatorics.permutations module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#module-modelparameters.sympy.combinatorics.polyhedron">modelparameters.sympy.combinatorics.polyhedron module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#module-modelparameters.sympy.combinatorics.prufer">modelparameters.sympy.combinatorics.prufer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#module-modelparameters.sympy.combinatorics.subsets">modelparameters.sympy.combinatorics.subsets module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#module-modelparameters.sympy.combinatorics.tensor_can">modelparameters.sympy.combinatorics.tensor_can module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#module-modelparameters.sympy.combinatorics.testutil">modelparameters.sympy.combinatorics.testutil module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#module-modelparameters.sympy.combinatorics.util">modelparameters.sympy.combinatorics.util module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.combinatorics.html#module-modelparameters.sympy.combinatorics">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.concrete.html">modelparameters.sympy.concrete package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.concrete.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.concrete.html#module-modelparameters.sympy.concrete.delta">modelparameters.sympy.concrete.delta module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.concrete.html#module-modelparameters.sympy.concrete.expr_with_intlimits">modelparameters.sympy.concrete.expr_with_intlimits module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.concrete.html#module-modelparameters.sympy.concrete.expr_with_limits">modelparameters.sympy.concrete.expr_with_limits module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.concrete.html#module-modelparameters.sympy.concrete.gosper">modelparameters.sympy.concrete.gosper module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.concrete.html#module-modelparameters.sympy.concrete.guess">modelparameters.sympy.concrete.guess module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.concrete.html#module-modelparameters.sympy.concrete.products">modelparameters.sympy.concrete.products module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.concrete.html#module-modelparameters.sympy.concrete.summations">modelparameters.sympy.concrete.summations module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.concrete.html#module-modelparameters.sympy.concrete">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.core.html">modelparameters.sympy.core package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.add">modelparameters.sympy.core.add module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.alphabets">modelparameters.sympy.core.alphabets module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.assumptions">modelparameters.sympy.core.assumptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.backend">modelparameters.sympy.core.backend module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.basic">modelparameters.sympy.core.basic module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.cache">modelparameters.sympy.core.cache module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.compatibility">modelparameters.sympy.core.compatibility module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.containers">modelparameters.sympy.core.containers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.core">modelparameters.sympy.core.core module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.coreerrors">modelparameters.sympy.core.coreerrors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.decorators">modelparameters.sympy.core.decorators module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.evalf">modelparameters.sympy.core.evalf module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.evaluate">modelparameters.sympy.core.evaluate module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.expr">modelparameters.sympy.core.expr module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.exprtools">modelparameters.sympy.core.exprtools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.facts">modelparameters.sympy.core.facts module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.core.html#some-references-on-the-topic">Some references on the topic</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.function">modelparameters.sympy.core.function module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.logic">modelparameters.sympy.core.logic module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.mod">modelparameters.sympy.core.mod module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.mul">modelparameters.sympy.core.mul module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.multidimensional">modelparameters.sympy.core.multidimensional module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.numbers">modelparameters.sympy.core.numbers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.operations">modelparameters.sympy.core.operations module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.power">modelparameters.sympy.core.power module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.relational">modelparameters.sympy.core.relational module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.rules">modelparameters.sympy.core.rules module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.singleton">modelparameters.sympy.core.singleton module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.symbol">modelparameters.sympy.core.symbol module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.sympify">modelparameters.sympy.core.sympify module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core.trace">modelparameters.sympy.core.trace module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.core.html#module-modelparameters.sympy.core">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.crypto.html">modelparameters.sympy.crypto package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.crypto.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.crypto.html#module-modelparameters.sympy.crypto.crypto">modelparameters.sympy.crypto.crypto module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.crypto.html#module-modelparameters.sympy.crypto">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.deprecated.html">modelparameters.sympy.deprecated package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.deprecated.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.deprecated.html#module-modelparameters.sympy.deprecated.class_registry">modelparameters.sympy.deprecated.class_registry module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.deprecated.html#module-modelparameters.sympy.deprecated">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.diffgeom.html">modelparameters.sympy.diffgeom package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.diffgeom.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.diffgeom.html#module-modelparameters.sympy.diffgeom.diffgeom">modelparameters.sympy.diffgeom.diffgeom module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.diffgeom.html#module-modelparameters.sympy.diffgeom.rn">modelparameters.sympy.diffgeom.rn module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.diffgeom.html#module-modelparameters.sympy.diffgeom">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.external.html">modelparameters.sympy.external package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.external.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.external.html#module-modelparameters.sympy.external.importtools">modelparameters.sympy.external.importtools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.external.html#module-modelparameters.sympy.external">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.functions.html">modelparameters.sympy.functions package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.functions.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.functions.combinatorial.html">modelparameters.sympy.functions.combinatorial package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.combinatorial.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.combinatorial.html#module-modelparameters.sympy.functions.combinatorial.factorials">modelparameters.sympy.functions.combinatorial.factorials module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.combinatorial.html#module-modelparameters.sympy.functions.combinatorial.numbers">modelparameters.sympy.functions.combinatorial.numbers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.combinatorial.html#module-modelparameters.sympy.functions.combinatorial">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.functions.elementary.html">modelparameters.sympy.functions.elementary package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.elementary.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.elementary.html#module-modelparameters.sympy.functions.elementary.complexes">modelparameters.sympy.functions.elementary.complexes module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.elementary.html#module-modelparameters.sympy.functions.elementary.exponential">modelparameters.sympy.functions.elementary.exponential module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.elementary.html#module-modelparameters.sympy.functions.elementary.hyperbolic">modelparameters.sympy.functions.elementary.hyperbolic module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.elementary.html#module-modelparameters.sympy.functions.elementary.integers">modelparameters.sympy.functions.elementary.integers module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.elementary.html#module-modelparameters.sympy.functions.elementary.miscellaneous">modelparameters.sympy.functions.elementary.miscellaneous module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.elementary.html#module-modelparameters.sympy.functions.elementary.piecewise">modelparameters.sympy.functions.elementary.piecewise module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.elementary.html#module-modelparameters.sympy.functions.elementary.trigonometric">modelparameters.sympy.functions.elementary.trigonometric module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.elementary.html#module-modelparameters.sympy.functions.elementary">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.functions.special.html">modelparameters.sympy.functions.special package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.special.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.special.html#module-modelparameters.sympy.functions.special.bessel">modelparameters.sympy.functions.special.bessel module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.special.html#module-modelparameters.sympy.functions.special.beta_functions">modelparameters.sympy.functions.special.beta_functions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.special.html#module-modelparameters.sympy.functions.special.bsplines">modelparameters.sympy.functions.special.bsplines module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.special.html#module-modelparameters.sympy.functions.special.delta_functions">modelparameters.sympy.functions.special.delta_functions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.special.html#module-modelparameters.sympy.functions.special.elliptic_integrals">modelparameters.sympy.functions.special.elliptic_integrals module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.special.html#module-modelparameters.sympy.functions.special.error_functions">modelparameters.sympy.functions.special.error_functions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.special.html#module-modelparameters.sympy.functions.special.gamma_functions">modelparameters.sympy.functions.special.gamma_functions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.special.html#module-modelparameters.sympy.functions.special.hyper">modelparameters.sympy.functions.special.hyper module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.special.html#module-modelparameters.sympy.functions.special.mathieu_functions">modelparameters.sympy.functions.special.mathieu_functions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.special.html#module-modelparameters.sympy.functions.special.polynomials">modelparameters.sympy.functions.special.polynomials module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.special.html#module-modelparameters.sympy.functions.special.singularity_functions">modelparameters.sympy.functions.special.singularity_functions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.special.html#module-modelparameters.sympy.functions.special.spherical_harmonics">modelparameters.sympy.functions.special.spherical_harmonics module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.special.html#module-modelparameters.sympy.functions.special.tensor_functions">modelparameters.sympy.functions.special.tensor_functions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.special.html#module-modelparameters.sympy.functions.special.zeta_functions">modelparameters.sympy.functions.special.zeta_functions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.functions.special.html#module-modelparameters.sympy.functions.special">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.functions.html#module-modelparameters.sympy.functions">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.geometry.html">modelparameters.sympy.geometry package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.geometry.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.geometry.html#module-modelparameters.sympy.geometry.curve">modelparameters.sympy.geometry.curve module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.geometry.html#contains">Contains</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.geometry.html#module-modelparameters.sympy.geometry.ellipse">modelparameters.sympy.geometry.ellipse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.geometry.html#module-modelparameters.sympy.geometry.entity">modelparameters.sympy.geometry.entity module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.geometry.html#id16">Contains</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.geometry.html#module-modelparameters.sympy.geometry.exceptions">modelparameters.sympy.geometry.exceptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.geometry.html#module-modelparameters.sympy.geometry.line">modelparameters.sympy.geometry.line module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.geometry.html#id17">Contains</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.geometry.html#module-modelparameters.sympy.geometry.parabola">modelparameters.sympy.geometry.parabola module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.geometry.html#module-modelparameters.sympy.geometry.plane">modelparameters.sympy.geometry.plane module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.geometry.html#id39">Contains</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.geometry.html#module-modelparameters.sympy.geometry.point">modelparameters.sympy.geometry.point module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.geometry.html#id42">Contains</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.geometry.html#module-modelparameters.sympy.geometry.polygon">modelparameters.sympy.geometry.polygon module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.geometry.html#module-modelparameters.sympy.geometry.util">modelparameters.sympy.geometry.util module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.geometry.html#id77">Contains</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.geometry.html#module-modelparameters.sympy.geometry">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.geometry.html#usage">Usage:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.holonomic.html">modelparameters.sympy.holonomic package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.holonomic.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.holonomic.html#module-modelparameters.sympy.holonomic.holonomic">modelparameters.sympy.holonomic.holonomic module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.holonomic.html#module-modelparameters.sympy.holonomic.holonomicerrors">modelparameters.sympy.holonomic.holonomicerrors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.holonomic.html#module-modelparameters.sympy.holonomic.linearsolver">modelparameters.sympy.holonomic.linearsolver module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.holonomic.html#module-modelparameters.sympy.holonomic.numerical">modelparameters.sympy.holonomic.numerical module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.holonomic.html#module-modelparameters.sympy.holonomic.recurrence">modelparameters.sympy.holonomic.recurrence module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.holonomic.html#module-modelparameters.sympy.holonomic">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.integrals.html">modelparameters.sympy.integrals package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.integrals.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.integrals.html#module-modelparameters.sympy.integrals.deltafunctions">modelparameters.sympy.integrals.deltafunctions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.integrals.html#module-modelparameters.sympy.integrals.heurisch">modelparameters.sympy.integrals.heurisch module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.integrals.html#module-modelparameters.sympy.integrals.integrals">modelparameters.sympy.integrals.integrals module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.integrals.html#module-modelparameters.sympy.integrals.manualintegrate">modelparameters.sympy.integrals.manualintegrate module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.integrals.html#module-modelparameters.sympy.integrals.meijerint">modelparameters.sympy.integrals.meijerint module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.integrals.html#module-modelparameters.sympy.integrals.meijerint_doc">modelparameters.sympy.integrals.meijerint_doc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.integrals.html#modelparameters-sympy-integrals-prde-module">modelparameters.sympy.integrals.prde module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.integrals.html#module-modelparameters.sympy.integrals.quadrature">modelparameters.sympy.integrals.quadrature module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.integrals.html#module-modelparameters.sympy.integrals.rationaltools">modelparameters.sympy.integrals.rationaltools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.integrals.html#modelparameters-sympy-integrals-rde-module">modelparameters.sympy.integrals.rde module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.integrals.html#modelparameters-sympy-integrals-risch-module">modelparameters.sympy.integrals.risch module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.integrals.html#module-modelparameters.sympy.integrals.singularityfunctions">modelparameters.sympy.integrals.singularityfunctions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.integrals.html#module-modelparameters.sympy.integrals.transforms">modelparameters.sympy.integrals.transforms module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.integrals.html#module-modelparameters.sympy.integrals.trigonometry">modelparameters.sympy.integrals.trigonometry module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.integrals.html#module-modelparameters.sympy.integrals">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.interactive.html">modelparameters.sympy.interactive package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.interactive.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.interactive.html#module-modelparameters.sympy.interactive.ipythonprinting">modelparameters.sympy.interactive.ipythonprinting module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.interactive.html#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.interactive.html#module-modelparameters.sympy.interactive.printing">modelparameters.sympy.interactive.printing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.interactive.html#module-modelparameters.sympy.interactive.session">modelparameters.sympy.interactive.session module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.interactive.html#module-modelparameters.sympy.interactive">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.liealgebras.html">modelparameters.sympy.liealgebras package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.liealgebras.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.liealgebras.html#module-modelparameters.sympy.liealgebras.cartan_matrix">modelparameters.sympy.liealgebras.cartan_matrix module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.liealgebras.html#module-modelparameters.sympy.liealgebras.cartan_type">modelparameters.sympy.liealgebras.cartan_type module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.liealgebras.html#module-modelparameters.sympy.liealgebras.dynkin_diagram">modelparameters.sympy.liealgebras.dynkin_diagram module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.liealgebras.html#module-modelparameters.sympy.liealgebras.root_system">modelparameters.sympy.liealgebras.root_system module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.liealgebras.html#module-modelparameters.sympy.liealgebras.type_a">modelparameters.sympy.liealgebras.type_a module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.liealgebras.html#module-modelparameters.sympy.liealgebras.type_b">modelparameters.sympy.liealgebras.type_b module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.liealgebras.html#module-modelparameters.sympy.liealgebras.type_c">modelparameters.sympy.liealgebras.type_c module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.liealgebras.html#module-modelparameters.sympy.liealgebras.type_d">modelparameters.sympy.liealgebras.type_d module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.liealgebras.html#module-modelparameters.sympy.liealgebras.type_e">modelparameters.sympy.liealgebras.type_e module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.liealgebras.html#module-modelparameters.sympy.liealgebras.type_f">modelparameters.sympy.liealgebras.type_f module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.liealgebras.html#module-modelparameters.sympy.liealgebras.type_g">modelparameters.sympy.liealgebras.type_g module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.liealgebras.html#module-modelparameters.sympy.liealgebras.weyl_group">modelparameters.sympy.liealgebras.weyl_group module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.liealgebras.html#module-modelparameters.sympy.liealgebras">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.logic.html">modelparameters.sympy.logic package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.logic.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html">modelparameters.sympy.logic.algorithms package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#module-modelparameters.sympy.logic.algorithms.dpll">modelparameters.sympy.logic.algorithms.dpll module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#module-modelparameters.sympy.logic.algorithms.dpll2">modelparameters.sympy.logic.algorithms.dpll2 module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#module-modelparameters.sympy.logic.algorithms">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.utilities.html">modelparameters.sympy.logic.utilities package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.logic.utilities.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.logic.utilities.html#module-modelparameters.sympy.logic.utilities.dimacs">modelparameters.sympy.logic.utilities.dimacs module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.logic.utilities.html#module-modelparameters.sympy.logic.utilities">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.logic.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.logic.html#module-modelparameters.sympy.logic.boolalg">modelparameters.sympy.logic.boolalg module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.logic.html#module-modelparameters.sympy.logic.inference">modelparameters.sympy.logic.inference module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.logic.html#module-modelparameters.sympy.logic">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.matrices.html">modelparameters.sympy.matrices package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.matrices.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html">modelparameters.sympy.matrices.expressions package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.adjoint">modelparameters.sympy.matrices.expressions.adjoint module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.blockmatrix">modelparameters.sympy.matrices.expressions.blockmatrix module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.determinant">modelparameters.sympy.matrices.expressions.determinant module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.diagonal">modelparameters.sympy.matrices.expressions.diagonal module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.dotproduct">modelparameters.sympy.matrices.expressions.dotproduct module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.factorizations">modelparameters.sympy.matrices.expressions.factorizations module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.fourier">modelparameters.sympy.matrices.expressions.fourier module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.funcmatrix">modelparameters.sympy.matrices.expressions.funcmatrix module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.hadamard">modelparameters.sympy.matrices.expressions.hadamard module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.inverse">modelparameters.sympy.matrices.expressions.inverse module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.matadd">modelparameters.sympy.matrices.expressions.matadd module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.matexpr">modelparameters.sympy.matrices.expressions.matexpr module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.matmul">modelparameters.sympy.matrices.expressions.matmul module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.matpow">modelparameters.sympy.matrices.expressions.matpow module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.slice">modelparameters.sympy.matrices.expressions.slice module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.trace">modelparameters.sympy.matrices.expressions.trace module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions.transpose">modelparameters.sympy.matrices.expressions.transpose module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#module-modelparameters.sympy.matrices.expressions">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.matrices.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.matrices.html#module-modelparameters.sympy.matrices.common">modelparameters.sympy.matrices.common module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.matrices.html#module-modelparameters.sympy.matrices.dense">modelparameters.sympy.matrices.dense module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.matrices.html#module-modelparameters.sympy.matrices.densearith">modelparameters.sympy.matrices.densearith module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.matrices.html#module-modelparameters.sympy.matrices.densesolve">modelparameters.sympy.matrices.densesolve module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.matrices.html#module-modelparameters.sympy.matrices.densetools">modelparameters.sympy.matrices.densetools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.matrices.html#module-modelparameters.sympy.matrices.immutable">modelparameters.sympy.matrices.immutable module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.matrices.html#module-modelparameters.sympy.matrices.matrices">modelparameters.sympy.matrices.matrices module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.matrices.html#module-modelparameters.sympy.matrices.normalforms">modelparameters.sympy.matrices.normalforms module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.matrices.html#module-modelparameters.sympy.matrices.sparse">modelparameters.sympy.matrices.sparse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.matrices.html#module-modelparameters.sympy.matrices.sparsetools">modelparameters.sympy.matrices.sparsetools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.matrices.html#module-modelparameters.sympy.matrices">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.ntheory.html">modelparameters.sympy.ntheory package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.ntheory.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.ntheory.html#module-modelparameters.sympy.ntheory.bbp_pi">modelparameters.sympy.ntheory.bbp_pi module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.ntheory.html#module-modelparameters.sympy.ntheory.continued_fraction">modelparameters.sympy.ntheory.continued_fraction module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.ntheory.html#module-modelparameters.sympy.ntheory.egyptian_fraction">modelparameters.sympy.ntheory.egyptian_fraction module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.ntheory.html#module-modelparameters.sympy.ntheory.factor_">modelparameters.sympy.ntheory.factor_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.ntheory.html#module-modelparameters.sympy.ntheory.generate">modelparameters.sympy.ntheory.generate module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.ntheory.html#module-modelparameters.sympy.ntheory.modular">modelparameters.sympy.ntheory.modular module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.ntheory.html#module-modelparameters.sympy.ntheory.multinomial">modelparameters.sympy.ntheory.multinomial module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.ntheory.html#module-modelparameters.sympy.ntheory.partitions_">modelparameters.sympy.ntheory.partitions_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.ntheory.html#module-modelparameters.sympy.ntheory.primetest">modelparameters.sympy.ntheory.primetest module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.ntheory.html#module-modelparameters.sympy.ntheory.residue_ntheory">modelparameters.sympy.ntheory.residue_ntheory module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.ntheory.html#module-modelparameters.sympy.ntheory">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.parsing.html">modelparameters.sympy.parsing package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.parsing.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.parsing.html#module-modelparameters.sympy.parsing.ast_parser">modelparameters.sympy.parsing.ast_parser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.parsing.html#module-modelparameters.sympy.parsing.mathematica">modelparameters.sympy.parsing.mathematica module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.parsing.html#module-modelparameters.sympy.parsing.maxima">modelparameters.sympy.parsing.maxima module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.parsing.html#module-modelparameters.sympy.parsing.sympy_parser">modelparameters.sympy.parsing.sympy_parser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.parsing.html#module-modelparameters.sympy.parsing.sympy_tokenize">modelparameters.sympy.parsing.sympy_tokenize module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.parsing.html#module-modelparameters.sympy.parsing">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.physics.html">modelparameters.sympy.physics package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.physics.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.physics.continuum_mechanics.html">modelparameters.sympy.physics.continuum_mechanics package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.continuum_mechanics.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.continuum_mechanics.html#modelparameters-sympy-physics-continuum-mechanics-beam-module">modelparameters.sympy.physics.continuum_mechanics.beam module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.continuum_mechanics.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.physics.hep.html">modelparameters.sympy.physics.hep package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.hep.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.hep.html#modelparameters-sympy-physics-hep-gamma-matrices-module">modelparameters.sympy.physics.hep.gamma_matrices module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.hep.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.physics.mechanics.html">modelparameters.sympy.physics.mechanics package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.mechanics.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.mechanics.html#modelparameters-sympy-physics-mechanics-body-module">modelparameters.sympy.physics.mechanics.body module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.mechanics.html#modelparameters-sympy-physics-mechanics-functions-module">modelparameters.sympy.physics.mechanics.functions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.mechanics.html#modelparameters-sympy-physics-mechanics-kane-module">modelparameters.sympy.physics.mechanics.kane module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.mechanics.html#modelparameters-sympy-physics-mechanics-lagrange-module">modelparameters.sympy.physics.mechanics.lagrange module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.mechanics.html#modelparameters-sympy-physics-mechanics-linearize-module">modelparameters.sympy.physics.mechanics.linearize module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.mechanics.html#modelparameters-sympy-physics-mechanics-models-module">modelparameters.sympy.physics.mechanics.models module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.mechanics.html#modelparameters-sympy-physics-mechanics-particle-module">modelparameters.sympy.physics.mechanics.particle module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.mechanics.html#modelparameters-sympy-physics-mechanics-rigidbody-module">modelparameters.sympy.physics.mechanics.rigidbody module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.mechanics.html#modelparameters-sympy-physics-mechanics-system-module">modelparameters.sympy.physics.mechanics.system module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.mechanics.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.physics.optics.html">modelparameters.sympy.physics.optics package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.optics.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.optics.html#modelparameters-sympy-physics-optics-gaussopt-module">modelparameters.sympy.physics.optics.gaussopt module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.optics.html#modelparameters-sympy-physics-optics-medium-module">modelparameters.sympy.physics.optics.medium module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.optics.html#modelparameters-sympy-physics-optics-utils-module">modelparameters.sympy.physics.optics.utils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.optics.html#modelparameters-sympy-physics-optics-waves-module">modelparameters.sympy.physics.optics.waves module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.optics.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html">modelparameters.sympy.physics.quantum package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-anticommutator-module">modelparameters.sympy.physics.quantum.anticommutator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-boson-module">modelparameters.sympy.physics.quantum.boson module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-cartesian-module">modelparameters.sympy.physics.quantum.cartesian module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-cg-module">modelparameters.sympy.physics.quantum.cg module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-circuitplot-module">modelparameters.sympy.physics.quantum.circuitplot module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-circuitutils-module">modelparameters.sympy.physics.quantum.circuitutils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-commutator-module">modelparameters.sympy.physics.quantum.commutator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-constants-module">modelparameters.sympy.physics.quantum.constants module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-dagger-module">modelparameters.sympy.physics.quantum.dagger module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-density-module">modelparameters.sympy.physics.quantum.density module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-fermion-module">modelparameters.sympy.physics.quantum.fermion module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-gate-module">modelparameters.sympy.physics.quantum.gate module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-grover-module">modelparameters.sympy.physics.quantum.grover module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-hilbert-module">modelparameters.sympy.physics.quantum.hilbert module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-identitysearch-module">modelparameters.sympy.physics.quantum.identitysearch module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-innerproduct-module">modelparameters.sympy.physics.quantum.innerproduct module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-matrixcache-module">modelparameters.sympy.physics.quantum.matrixcache module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-matrixutils-module">modelparameters.sympy.physics.quantum.matrixutils module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-operator-module">modelparameters.sympy.physics.quantum.operator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-operatorordering-module">modelparameters.sympy.physics.quantum.operatorordering module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-operatorset-module">modelparameters.sympy.physics.quantum.operatorset module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-pauli-module">modelparameters.sympy.physics.quantum.pauli module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-piab-module">modelparameters.sympy.physics.quantum.piab module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-qapply-module">modelparameters.sympy.physics.quantum.qapply module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-qasm-module">modelparameters.sympy.physics.quantum.qasm module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-qexpr-module">modelparameters.sympy.physics.quantum.qexpr module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-qft-module">modelparameters.sympy.physics.quantum.qft module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-qubit-module">modelparameters.sympy.physics.quantum.qubit module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-represent-module">modelparameters.sympy.physics.quantum.represent module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-sho1d-module">modelparameters.sympy.physics.quantum.sho1d module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-shor-module">modelparameters.sympy.physics.quantum.shor module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-spin-module">modelparameters.sympy.physics.quantum.spin module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-state-module">modelparameters.sympy.physics.quantum.state module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#modelparameters-sympy-physics-quantum-tensorproduct-module">modelparameters.sympy.physics.quantum.tensorproduct module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.quantum.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.physics.units.html">modelparameters.sympy.physics.units package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.units.html#subpackages">Subpackages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.units.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.units.html#modelparameters-sympy-physics-units-definitions-module">modelparameters.sympy.physics.units.definitions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.units.html#modelparameters-sympy-physics-units-dimensions-module">modelparameters.sympy.physics.units.dimensions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.units.html#modelparameters-sympy-physics-units-prefixes-module">modelparameters.sympy.physics.units.prefixes module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.units.html#modelparameters-sympy-physics-units-quantities-module">modelparameters.sympy.physics.units.quantities module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.units.html#modelparameters-sympy-physics-units-unitsystem-module">modelparameters.sympy.physics.units.unitsystem module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.units.html#modelparameters-sympy-physics-units-util-module">modelparameters.sympy.physics.units.util module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.units.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.physics.vector.html">modelparameters.sympy.physics.vector package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.vector.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.vector.html#modelparameters-sympy-physics-vector-dyadic-module">modelparameters.sympy.physics.vector.dyadic module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.vector.html#modelparameters-sympy-physics-vector-fieldfunctions-module">modelparameters.sympy.physics.vector.fieldfunctions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.vector.html#modelparameters-sympy-physics-vector-frame-module">modelparameters.sympy.physics.vector.frame module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.vector.html#modelparameters-sympy-physics-vector-functions-module">modelparameters.sympy.physics.vector.functions module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.vector.html#modelparameters-sympy-physics-vector-point-module">modelparameters.sympy.physics.vector.point module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.vector.html#modelparameters-sympy-physics-vector-printing-module">modelparameters.sympy.physics.vector.printing module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.vector.html#modelparameters-sympy-physics-vector-vector-module">modelparameters.sympy.physics.vector.vector module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.physics.vector.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.physics.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.physics.html#modelparameters-sympy-physics-gaussopt-module">modelparameters.sympy.physics.gaussopt module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.physics.html#modelparameters-sympy-physics-hydrogen-module">modelparameters.sympy.physics.hydrogen module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.physics.html#modelparameters-sympy-physics-matrices-module">modelparameters.sympy.physics.matrices module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.physics.html#modelparameters-sympy-physics-paulialgebra-module">modelparameters.sympy.physics.paulialgebra module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.physics.html#modelparameters-sympy-physics-pring-module">modelparameters.sympy.physics.pring module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.physics.html#modelparameters-sympy-physics-qho-1d-module">modelparameters.sympy.physics.qho_1d module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.physics.html#modelparameters-sympy-physics-secondquant-module">modelparameters.sympy.physics.secondquant module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.physics.html#modelparameters-sympy-physics-sho-module">modelparameters.sympy.physics.sho module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.physics.html#modelparameters-sympy-physics-unitsystems-module">modelparameters.sympy.physics.unitsystems module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.physics.html#modelparameters-sympy-physics-wigner-module">modelparameters.sympy.physics.wigner module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.physics.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.plotting.html">modelparameters.sympy.plotting package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.plotting.intervalmath.html">modelparameters.sympy.plotting.intervalmath package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.intervalmath.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.intervalmath.html#module-modelparameters.sympy.plotting.intervalmath.interval_arithmetic">modelparameters.sympy.plotting.intervalmath.interval_arithmetic module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.intervalmath.html#module-modelparameters.sympy.plotting.intervalmath.lib_interval">modelparameters.sympy.plotting.intervalmath.lib_interval module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.intervalmath.html#module-modelparameters.sympy.plotting.intervalmath">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html">modelparameters.sympy.plotting.pygletplot package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-color-scheme-module">modelparameters.sympy.plotting.pygletplot.color_scheme module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-managed-window-module">modelparameters.sympy.plotting.pygletplot.managed_window module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-module">modelparameters.sympy.plotting.pygletplot.plot module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-axes-module">modelparameters.sympy.plotting.pygletplot.plot_axes module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-camera-module">modelparameters.sympy.plotting.pygletplot.plot_camera module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-controller-module">modelparameters.sympy.plotting.pygletplot.plot_controller module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-curve-module">modelparameters.sympy.plotting.pygletplot.plot_curve module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#module-modelparameters.sympy.plotting.pygletplot.plot_interval">modelparameters.sympy.plotting.pygletplot.plot_interval module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-mode-module">modelparameters.sympy.plotting.pygletplot.plot_mode module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-mode-base-module">modelparameters.sympy.plotting.pygletplot.plot_mode_base module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-modes-module">modelparameters.sympy.plotting.pygletplot.plot_modes module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#module-modelparameters.sympy.plotting.pygletplot.plot_object">modelparameters.sympy.plotting.pygletplot.plot_object module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-rotation-module">modelparameters.sympy.plotting.pygletplot.plot_rotation module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-surface-module">modelparameters.sympy.plotting.pygletplot.plot_surface module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-window-module">modelparameters.sympy.plotting.pygletplot.plot_window module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-util-module">modelparameters.sympy.plotting.pygletplot.util module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#module-modelparameters.sympy.plotting.pygletplot">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.html#module-modelparameters.sympy.plotting.experimental_lambdify">modelparameters.sympy.plotting.experimental_lambdify module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.html#module-modelparameters.sympy.plotting.plot">modelparameters.sympy.plotting.plot module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.html#module-modelparameters.sympy.plotting.plot_implicit">modelparameters.sympy.plotting.plot_implicit module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.html#module-modelparameters.sympy.plotting.textplot">modelparameters.sympy.plotting.textplot module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.html#module-modelparameters.sympy.plotting">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.polys.html">modelparameters.sympy.polys package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.agca.html">modelparameters.sympy.polys.agca package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.agca.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.agca.html#module-modelparameters.sympy.polys.agca.homomorphisms">modelparameters.sympy.polys.agca.homomorphisms module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.agca.html#module-modelparameters.sympy.polys.agca.ideals">modelparameters.sympy.polys.agca.ideals module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.agca.html#module-modelparameters.sympy.polys.agca.modules">modelparameters.sympy.polys.agca.modules module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.agca.html#module-modelparameters.sympy.polys.agca">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.domains.html">modelparameters.sympy.polys.domains package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.algebraicfield">modelparameters.sympy.polys.domains.algebraicfield module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.characteristiczero">modelparameters.sympy.polys.domains.characteristiczero module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.complexfield">modelparameters.sympy.polys.domains.complexfield module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.compositedomain">modelparameters.sympy.polys.domains.compositedomain module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.domain">modelparameters.sympy.polys.domains.domain module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.domainelement">modelparameters.sympy.polys.domains.domainelement module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.expressiondomain">modelparameters.sympy.polys.domains.expressiondomain module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.field">modelparameters.sympy.polys.domains.field module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.finitefield">modelparameters.sympy.polys.domains.finitefield module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.fractionfield">modelparameters.sympy.polys.domains.fractionfield module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.gmpyfinitefield">modelparameters.sympy.polys.domains.gmpyfinitefield module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.gmpyintegerring">modelparameters.sympy.polys.domains.gmpyintegerring module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.gmpyrationalfield">modelparameters.sympy.polys.domains.gmpyrationalfield module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.groundtypes">modelparameters.sympy.polys.domains.groundtypes module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.integerring">modelparameters.sympy.polys.domains.integerring module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.modularinteger">modelparameters.sympy.polys.domains.modularinteger module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.mpelements">modelparameters.sympy.polys.domains.mpelements module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.old_fractionfield">modelparameters.sympy.polys.domains.old_fractionfield module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.old_polynomialring">modelparameters.sympy.polys.domains.old_polynomialring module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.polynomialring">modelparameters.sympy.polys.domains.polynomialring module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.pythonfinitefield">modelparameters.sympy.polys.domains.pythonfinitefield module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.pythonintegerring">modelparameters.sympy.polys.domains.pythonintegerring module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.pythonrational">modelparameters.sympy.polys.domains.pythonrational module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.pythonrationalfield">modelparameters.sympy.polys.domains.pythonrationalfield module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.quotientring">modelparameters.sympy.polys.domains.quotientring module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.rationalfield">modelparameters.sympy.polys.domains.rationalfield module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.realfield">modelparameters.sympy.polys.domains.realfield module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.ring">modelparameters.sympy.polys.domains.ring module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains.simpledomain">modelparameters.sympy.polys.domains.simpledomain module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.polys.domains.html#module-modelparameters.sympy.polys.domains">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.compatibility">modelparameters.sympy.polys.compatibility module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.constructor">modelparameters.sympy.polys.constructor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.densearith">modelparameters.sympy.polys.densearith module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.densebasic">modelparameters.sympy.polys.densebasic module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.densetools">modelparameters.sympy.polys.densetools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.dispersion">modelparameters.sympy.polys.dispersion module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.distributedmodules">modelparameters.sympy.polys.distributedmodules module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.euclidtools">modelparameters.sympy.polys.euclidtools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.factortools">modelparameters.sympy.polys.factortools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.fglmtools">modelparameters.sympy.polys.fglmtools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.fields">modelparameters.sympy.polys.fields module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.galoistools">modelparameters.sympy.polys.galoistools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.groebnertools">modelparameters.sympy.polys.groebnertools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.heuristicgcd">modelparameters.sympy.polys.heuristicgcd module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.modulargcd">modelparameters.sympy.polys.modulargcd module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.monomials">modelparameters.sympy.polys.monomials module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.numberfields">modelparameters.sympy.polys.numberfields module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.orderings">modelparameters.sympy.polys.orderings module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.orthopolys">modelparameters.sympy.polys.orthopolys module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.partfrac">modelparameters.sympy.polys.partfrac module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.polyclasses">modelparameters.sympy.polys.polyclasses module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.polyconfig">modelparameters.sympy.polys.polyconfig module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.polyerrors">modelparameters.sympy.polys.polyerrors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.polyfuncs">modelparameters.sympy.polys.polyfuncs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.polymatrix">modelparameters.sympy.polys.polymatrix module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.polyoptions">modelparameters.sympy.polys.polyoptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.polyquinticconst">modelparameters.sympy.polys.polyquinticconst module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.polyroots">modelparameters.sympy.polys.polyroots module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.polytools">modelparameters.sympy.polys.polytools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.polyutils">modelparameters.sympy.polys.polyutils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.rationaltools">modelparameters.sympy.polys.rationaltools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.ring_series">modelparameters.sympy.polys.ring_series module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#implementing-a-new-function">Implementing a new function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#extending-rs-series">Extending rs_series</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.rings">modelparameters.sympy.polys.rings module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.rootisolation">modelparameters.sympy.polys.rootisolation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.rootoftools">modelparameters.sympy.polys.rootoftools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.solvers">modelparameters.sympy.polys.solvers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.specialpolys">modelparameters.sympy.polys.specialpolys module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.sqfreetools">modelparameters.sympy.polys.sqfreetools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys.subresultants_qq_zz">modelparameters.sympy.polys.subresultants_qq_zz module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#theoretical-background">1. Theoretical background:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#definition-1">Definition 1:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#definition-2">Definition 2:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#a-euclidean-and-subresultant-prs-s">1A. Euclidean and subresultant prs’s:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#b-sturmian-and-modified-subresultant-prs-s">1B. Sturmian and modified subresultant prs’s:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#c-on-terminology">1C. On terminology:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#functions-in-the-module">2. Functions in the module:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#a-matrices">2A. Matrices:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#b-subresultant-and-modified-subresultant-prs-s-by">2B. Subresultant and modified subresultant prs’s by</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#determinant-evaluation">determinant evaluation:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#c-subresultant-prs-s-by-one-determinant-evaluation">2C. Subresultant prs’s by ONE determinant evaluation:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#e-euclidean-sturmian-prs-s-in-q-x">2E. Euclidean, Sturmian prs’s in Q[x]:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#f-euclidean-sturmian-and-modified-subresultant-prs-s-p-g">2F. Euclidean, Sturmian and (modified) subresultant prs’s P-G:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#g-euclidean-sturmian-and-modified-subresultant-prs-s-a-m-v">2G. Euclidean, Sturmian and (modified) subresultant prs’s A-M-V:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.polys.html#ga-exception">2Ga. Exception:</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.polys.html#module-modelparameters.sympy.polys">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.printing.html">modelparameters.sympy.printing package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html">modelparameters.sympy.printing.pretty package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#module-modelparameters.sympy.printing.pretty.pretty">modelparameters.sympy.printing.pretty.pretty module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#module-modelparameters.sympy.printing.pretty.pretty_symbology">modelparameters.sympy.printing.pretty.pretty_symbology module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#module-modelparameters.sympy.printing.pretty.stringpict">modelparameters.sympy.printing.pretty.stringpict module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#module-modelparameters.sympy.printing.pretty">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.ccode">modelparameters.sympy.printing.ccode module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.codeprinter">modelparameters.sympy.printing.codeprinter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.conventions">modelparameters.sympy.printing.conventions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.cxxcode">modelparameters.sympy.printing.cxxcode module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.defaults">modelparameters.sympy.printing.defaults module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.dot">modelparameters.sympy.printing.dot module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.fcode">modelparameters.sympy.printing.fcode module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.gtk">modelparameters.sympy.printing.gtk module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.jscode">modelparameters.sympy.printing.jscode module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.julia">modelparameters.sympy.printing.julia module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.lambdarepr">modelparameters.sympy.printing.lambdarepr module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.latex">modelparameters.sympy.printing.latex module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.llvmjitcode">modelparameters.sympy.printing.llvmjitcode module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.mathematica">modelparameters.sympy.printing.mathematica module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.mathml">modelparameters.sympy.printing.mathml module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.octave">modelparameters.sympy.printing.octave module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.precedence">modelparameters.sympy.printing.precedence module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.preview">modelparameters.sympy.printing.preview module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.printer">modelparameters.sympy.printing.printer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.python">modelparameters.sympy.printing.python module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.rcode">modelparameters.sympy.printing.rcode module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.repr">modelparameters.sympy.printing.repr module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.rust">modelparameters.sympy.printing.rust module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.str">modelparameters.sympy.printing.str module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.tableform">modelparameters.sympy.printing.tableform module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#modelparameters-sympy-printing-theanocode-module">modelparameters.sympy.printing.theanocode module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing.tree">modelparameters.sympy.printing.tree module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.html#module-modelparameters.sympy.printing">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.sandbox.html">modelparameters.sympy.sandbox package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.sandbox.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.sandbox.html#module-modelparameters.sympy.sandbox.indexed_integrals">modelparameters.sympy.sandbox.indexed_integrals module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.sandbox.html#module-modelparameters.sympy.sandbox">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.series.html">modelparameters.sympy.series package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.series.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.series.html#module-modelparameters.sympy.series.acceleration">modelparameters.sympy.series.acceleration module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.series.html#module-modelparameters.sympy.series.approximants">modelparameters.sympy.series.approximants module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.series.html#module-modelparameters.sympy.series.formal">modelparameters.sympy.series.formal module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.series.html#module-modelparameters.sympy.series.fourier">modelparameters.sympy.series.fourier module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.series.html#module-modelparameters.sympy.series.gruntz">modelparameters.sympy.series.gruntz module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.series.html#limits">Limits</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.series.html#debugging">Debugging</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.series.html#module-modelparameters.sympy.series.kauers">modelparameters.sympy.series.kauers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.series.html#module-modelparameters.sympy.series.limits">modelparameters.sympy.series.limits module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.series.html#module-modelparameters.sympy.series.limitseq">modelparameters.sympy.series.limitseq module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.series.html#module-modelparameters.sympy.series.order">modelparameters.sympy.series.order module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.series.html#module-modelparameters.sympy.series.residues">modelparameters.sympy.series.residues module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.series.html#module-modelparameters.sympy.series.sequences">modelparameters.sympy.series.sequences module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.series.html#module-modelparameters.sympy.series.series">modelparameters.sympy.series.series module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.series.html#module-modelparameters.sympy.series.series_class">modelparameters.sympy.series.series_class module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.series.html#module-modelparameters.sympy.series">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.sets.html">modelparameters.sympy.sets package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.sets.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.sets.html#module-modelparameters.sympy.sets.conditionset">modelparameters.sympy.sets.conditionset module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.sets.html#module-modelparameters.sympy.sets.contains">modelparameters.sympy.sets.contains module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.sets.html#module-modelparameters.sympy.sets.fancysets">modelparameters.sympy.sets.fancysets module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.sets.html#module-modelparameters.sympy.sets.sets">modelparameters.sympy.sets.sets module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.sets.html#module-modelparameters.sympy.sets">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.simplify.html">modelparameters.sympy.simplify package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.simplify.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.simplify.html#module-modelparameters.sympy.simplify.combsimp">modelparameters.sympy.simplify.combsimp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.simplify.html#module-modelparameters.sympy.simplify.cse_main">modelparameters.sympy.simplify.cse_main module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.simplify.html#module-modelparameters.sympy.simplify.cse_opts">modelparameters.sympy.simplify.cse_opts module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.simplify.html#module-modelparameters.sympy.simplify.epathtools">modelparameters.sympy.simplify.epathtools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.simplify.html#module-modelparameters.sympy.simplify.fu">modelparameters.sympy.simplify.fu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.simplify.html#module-modelparameters.sympy.simplify.hyperexpand">modelparameters.sympy.simplify.hyperexpand module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.simplify.html#modelparameters-sympy-simplify-hyperexpand-doc-module">modelparameters.sympy.simplify.hyperexpand_doc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.simplify.html#module-modelparameters.sympy.simplify.powsimp">modelparameters.sympy.simplify.powsimp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.simplify.html#module-modelparameters.sympy.simplify.radsimp">modelparameters.sympy.simplify.radsimp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.simplify.html#module-modelparameters.sympy.simplify.ratsimp">modelparameters.sympy.simplify.ratsimp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.simplify.html#module-modelparameters.sympy.simplify.simplify">modelparameters.sympy.simplify.simplify module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.simplify.html#module-modelparameters.sympy.simplify.sqrtdenest">modelparameters.sympy.simplify.sqrtdenest module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.simplify.html#module-modelparameters.sympy.simplify.traversaltools">modelparameters.sympy.simplify.traversaltools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.simplify.html#module-modelparameters.sympy.simplify.trigsimp">modelparameters.sympy.simplify.trigsimp module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.simplify.html#module-modelparameters.sympy.simplify">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.solvers.html">modelparameters.sympy.solvers package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.solvers.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.solvers.html#module-modelparameters.sympy.solvers.bivariate">modelparameters.sympy.solvers.bivariate module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.solvers.html#module-modelparameters.sympy.solvers.decompogen">modelparameters.sympy.solvers.decompogen module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.solvers.html#module-modelparameters.sympy.solvers.deutils">modelparameters.sympy.solvers.deutils module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.solvers.html#contains">Contains</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.solvers.html#module-modelparameters.sympy.solvers.diophantine">modelparameters.sympy.solvers.diophantine module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.solvers.html#module-modelparameters.sympy.solvers.inequalities">modelparameters.sympy.solvers.inequalities module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.solvers.html#module-modelparameters.sympy.solvers.ode">modelparameters.sympy.solvers.ode module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.solvers.html#module-modelparameters.sympy.solvers.pde">modelparameters.sympy.solvers.pde module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.solvers.html#module-modelparameters.sympy.solvers.polysys">modelparameters.sympy.solvers.polysys module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.solvers.html#module-modelparameters.sympy.solvers.recurr">modelparameters.sympy.solvers.recurr module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.solvers.html#module-modelparameters.sympy.solvers.solvers">modelparameters.sympy.solvers.solvers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.solvers.html#module-modelparameters.sympy.solvers.solveset">modelparameters.sympy.solvers.solveset module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.solvers.html#module-modelparameters.sympy.solvers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.stats.html">modelparameters.sympy.stats package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.stats.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.stats.html#modelparameters-sympy-stats-crv-module">modelparameters.sympy.stats.crv module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.stats.html#modelparameters-sympy-stats-crv-types-module">modelparameters.sympy.stats.crv_types module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.stats.html#modelparameters-sympy-stats-drv-module">modelparameters.sympy.stats.drv module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.stats.html#modelparameters-sympy-stats-drv-types-module">modelparameters.sympy.stats.drv_types module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.stats.html#modelparameters-sympy-stats-error-prop-module">modelparameters.sympy.stats.error_prop module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.stats.html#modelparameters-sympy-stats-frv-module">modelparameters.sympy.stats.frv module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.stats.html#modelparameters-sympy-stats-frv-types-module">modelparameters.sympy.stats.frv_types module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.stats.html#modelparameters-sympy-stats-rv-module">modelparameters.sympy.stats.rv module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.stats.html#modelparameters-sympy-stats-rv-interface-module">modelparameters.sympy.stats.rv_interface module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.stats.html#modelparameters-sympy-stats-symbolic-probability-module">modelparameters.sympy.stats.symbolic_probability module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.stats.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.strategies.html">modelparameters.sympy.strategies package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.strategies.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.strategies.branch.html">modelparameters.sympy.strategies.branch package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.strategies.branch.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.strategies.branch.html#module-modelparameters.sympy.strategies.branch.core">modelparameters.sympy.strategies.branch.core module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.strategies.branch.html#module-modelparameters.sympy.strategies.branch.tools">modelparameters.sympy.strategies.branch.tools module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.strategies.branch.html#module-modelparameters.sympy.strategies.branch.traverse">modelparameters.sympy.strategies.branch.traverse module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.strategies.branch.html#module-modelparameters.sympy.strategies.branch">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.strategies.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.strategies.html#module-modelparameters.sympy.strategies.core">modelparameters.sympy.strategies.core module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.strategies.html#module-modelparameters.sympy.strategies.rl">modelparameters.sympy.strategies.rl module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.strategies.html#module-modelparameters.sympy.strategies.tools">modelparameters.sympy.strategies.tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.strategies.html#module-modelparameters.sympy.strategies.traverse">modelparameters.sympy.strategies.traverse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.strategies.html#module-modelparameters.sympy.strategies.tree">modelparameters.sympy.strategies.tree module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.strategies.html#module-modelparameters.sympy.strategies.util">modelparameters.sympy.strategies.util module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.strategies.html#module-modelparameters.sympy.strategies">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.tensor.html">modelparameters.sympy.tensor package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.tensor.array.html">modelparameters.sympy.tensor.array package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array.arrayop">modelparameters.sympy.tensor.array.arrayop module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array.dense_ndim_array">modelparameters.sympy.tensor.array.dense_ndim_array module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array.mutable_ndim_array">modelparameters.sympy.tensor.array.mutable_ndim_array module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array.ndim_array">modelparameters.sympy.tensor.array.ndim_array module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array.sparse_ndim_array">modelparameters.sympy.tensor.array.sparse_ndim_array module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.html#module-modelparameters.sympy.tensor.index_methods">modelparameters.sympy.tensor.index_methods module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.html#module-modelparameters.sympy.tensor.indexed">modelparameters.sympy.tensor.indexed module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.html#module-modelparameters.sympy.tensor.tensor">modelparameters.sympy.tensor.tensor module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.html#module-modelparameters.sympy.tensor">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.unify.html">modelparameters.sympy.unify package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.unify.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.unify.html#module-modelparameters.sympy.unify.core">modelparameters.sympy.unify.core module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.unify.html#module-modelparameters.sympy.unify.rewrite">modelparameters.sympy.unify.rewrite module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.unify.html#module-modelparameters.sympy.unify.usympy">modelparameters.sympy.unify.usympy module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.unify.html#module-modelparameters.sympy.unify">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.utilities.html">modelparameters.sympy.utilities package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.utilities.mathml.html">modelparameters.sympy.utilities.mathml package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.utilities.mathml.html#module-modelparameters.sympy.utilities.mathml">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities.autowrap">modelparameters.sympy.utilities.autowrap module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#modelparameters-sympy-utilities-benchmarking-module">modelparameters.sympy.utilities.benchmarking module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities.codegen">modelparameters.sympy.utilities.codegen module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities.decorator">modelparameters.sympy.utilities.decorator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities.enumerative">modelparameters.sympy.utilities.enumerative module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities.exceptions">modelparameters.sympy.utilities.exceptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities.iterables">modelparameters.sympy.utilities.iterables module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities.lambdify">modelparameters.sympy.utilities.lambdify module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities.magic">modelparameters.sympy.utilities.magic module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities.memoization">modelparameters.sympy.utilities.memoization module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities.misc">modelparameters.sympy.utilities.misc module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities.pkgdata">modelparameters.sympy.utilities.pkgdata module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities.pytest">modelparameters.sympy.utilities.pytest module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities.randtest">modelparameters.sympy.utilities.randtest module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities.runtests">modelparameters.sympy.utilities.runtests module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities.source">modelparameters.sympy.utilities.source module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities.timeutils">modelparameters.sympy.utilities.timeutils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.utilities.html#module-modelparameters.sympy.utilities">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.vector.html">modelparameters.sympy.vector package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.vector.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.vector.html#modelparameters-sympy-vector-basisdependent-module">modelparameters.sympy.vector.basisdependent module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.vector.html#modelparameters-sympy-vector-coordsysrect-module">modelparameters.sympy.vector.coordsysrect module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.vector.html#modelparameters-sympy-vector-deloperator-module">modelparameters.sympy.vector.deloperator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.vector.html#modelparameters-sympy-vector-dyadic-module">modelparameters.sympy.vector.dyadic module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.vector.html#modelparameters-sympy-vector-functions-module">modelparameters.sympy.vector.functions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.vector.html#modelparameters-sympy-vector-operators-module">modelparameters.sympy.vector.operators module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.vector.html#modelparameters-sympy-vector-orienters-module">modelparameters.sympy.vector.orienters module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.vector.html#modelparameters-sympy-vector-point-module">modelparameters.sympy.vector.point module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.vector.html#modelparameters-sympy-vector-scalar-module">modelparameters.sympy.vector.scalar module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.vector.html#modelparameters-sympy-vector-vector-module">modelparameters.sympy.vector.vector module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.vector.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modelparameters-sympy-abc-module">
+<h2>modelparameters.sympy.abc module<a class="headerlink" href="#modelparameters-sympy-abc-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modelparameters-sympy-conftest-module">
+<h2>modelparameters.sympy.conftest module<a class="headerlink" href="#modelparameters-sympy-conftest-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modelparameters-sympy-galgebra-module">
+<h2>modelparameters.sympy.galgebra module<a class="headerlink" href="#modelparameters-sympy-galgebra-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-modelparameters.sympy.release">
+<span id="modelparameters-sympy-release-module"></span><h2>modelparameters.sympy.release module<a class="headerlink" href="#module-modelparameters.sympy.release" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-modelparameters.sympy">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy" title="Permalink to this headline">¶</a></h2>
+<p>SymPy is a Python library for symbolic mathematics. It aims to become a
+full-featured computer algebra system (CAS) while keeping the code as simple
+as possible in order to be comprehensible and easily extensible.  SymPy is
+written entirely in Python. It depends on mpmath, and other external libraries
+may be optionally for things like plotting support.</p>
+<p>See the webpage for more information and documentation:</p>
+<blockquote>
+<div><p><a class="reference external" href="http://sympy.org">http://sympy.org</a></p>
+</div></blockquote>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">modelparameters.sympy package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-abc-module">modelparameters.sympy.abc module</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-conftest-module">modelparameters.sympy.conftest module</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-galgebra-module">modelparameters.sympy.galgebra module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.release">modelparameters.sympy.release module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modelparameters.html"
+                        title="previous chapter">modelparameters package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.assumptions.html"
+                        title="next chapter">modelparameters.sympy.assumptions package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modelparameters.sympy.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.assumptions.html" title="modelparameters.sympy.assumptions package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.html" title="modelparameters package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,408 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>modelparameters.sympy.unify package &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="modelparameters.sympy.utilities package" href="modelparameters.sympy.utilities.html" />
+    <link rel="prev" title="modelparameters.sympy.tensor.array package" href="modelparameters.sympy.tensor.array.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.utilities.html" title="modelparameters.sympy.utilities package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.tensor.array.html" title="modelparameters.sympy.tensor.array package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" accesskey="U">modelparameters.sympy package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.unify package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="modelparameters-sympy-unify-package">
+<h1>modelparameters.sympy.unify package<a class="headerlink" href="#modelparameters-sympy-unify-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-modelparameters.sympy.unify.core">
+<span id="modelparameters-sympy-unify-core-module"></span><h2>modelparameters.sympy.unify.core module<a class="headerlink" href="#module-modelparameters.sympy.unify.core" title="Permalink to this headline">¶</a></h2>
+<p>Generic Unification algorithm for expression trees with lists of children</p>
+<p>This implementation is a direct translation of</p>
+<p>Artificial Intelligence: A Modern Approach by Stuart Russel and Peter Norvig
+Second edition, section 9.2, page 276</p>
+<p>It is modified in the following ways:</p>
+<ol class="arabic simple">
+<li><p>We allow associative and commutative Compound expressions. This results in
+combinatorial blowup.</p></li>
+<li><p>We explore the tree lazily.</p></li>
+<li><p>We provide generic interfaces to symbolic algebra libraries in Python.</p></li>
+</ol>
+<p>A more traditional version can be found here
+<a class="reference external" href="http://aima.cs.berkeley.edu/python/logic.html">http://aima.cs.berkeley.edu/python/logic.html</a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.core.Compound">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.core.</span></span><span class="sig-name descname"><span class="pre">Compound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/core.html#Compound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.core.Compound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A little class to represent an interior node in the tree</p>
+<p>This is analagous to SymPy.Basic for non-Atoms</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.core.CondVariable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.core.</span></span><span class="sig-name descname"><span class="pre">CondVariable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/core.html#CondVariable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.core.CondVariable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A wild token that matches conditionally</p>
+<p>arg   - a wild token
+valid - an additional constraining function on a match</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.core.Variable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.core.</span></span><span class="sig-name descname"><span class="pre">Variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/core.html#Variable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.core.Variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A Wild token</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.core.allcombinations">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.core.</span></span><span class="sig-name descname"><span class="pre">allcombinations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordered</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/core.html#allcombinations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.core.allcombinations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restructure A and B to have the same number of elements</p>
+<p>ordered must be either ‘commutative’ or ‘associative’</p>
+<p>A and B can be rearranged so that the larger of the two lists is
+reorganized into smaller sublists.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.core</span> <span class="kn">import</span> <span class="n">allcombinations</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">allcombinations</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="s1">&#39;associative&#39;</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">(((1,), (2, 3)), ((5,), (6,)))</span>
+<span class="go">(((1, 2), (3,)), ((5,), (6,)))</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">allcombinations</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="s1">&#39;commutative&#39;</span><span class="p">):</span> <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">    (((1,), (2, 3)), ((5,), (6,)))</span>
+<span class="go">    (((1, 2), (3,)), ((5,), (6,)))</span>
+<span class="go">    (((1,), (3, 2)), ((5,), (6,)))</span>
+<span class="go">    (((1, 3), (2,)), ((5,), (6,)))</span>
+<span class="go">    (((2,), (1, 3)), ((5,), (6,)))</span>
+<span class="go">    (((2, 1), (3,)), ((5,), (6,)))</span>
+<span class="go">    (((2,), (3, 1)), ((5,), (6,)))</span>
+<span class="go">    (((2, 3), (1,)), ((5,), (6,)))</span>
+<span class="go">    (((3,), (1, 2)), ((5,), (6,)))</span>
+<span class="go">    (((3, 1), (2,)), ((5,), (6,)))</span>
+<span class="go">    (((3,), (2, 1)), ((5,), (6,)))</span>
+<span class="go">    (((3, 2), (1,)), ((5,), (6,)))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.core.assoc">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.core.</span></span><span class="sig-name descname"><span class="pre">assoc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/core.html#assoc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.core.assoc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return copy of d with key associated to val</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.core.index">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.core.</span></span><span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">it</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ind</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/core.html#index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.core.index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fancy indexing into an indexable iterable (tuple, list)</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.core</span> <span class="kn">import</span> <span class="n">index</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="go">[20, 30, 10]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.core.is_args">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.core.</span></span><span class="sig-name descname"><span class="pre">is_args</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/core.html#is_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.core.is_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Is x a traditional iterable?</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.core.occur_check">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.core.</span></span><span class="sig-name descname"><span class="pre">occur_check</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/core.html#occur_check"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.core.occur_check" title="Permalink to this definition">¶</a></dt>
+<dd><p>var occurs in subtree owned by x?</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.core.partition">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.core.</span></span><span class="sig-name descname"><span class="pre">partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">it</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">part</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/core.html#partition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.core.partition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Partition a tuple/list into pieces defined by indices</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.core</span> <span class="kn">import</span> <span class="n">partition</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">partition</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]])</span>
+<span class="go">((10, 20, 30), (40,))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.core.unify">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.core.</span></span><span class="sig-name descname"><span class="pre">unify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fns</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/core.html#unify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.core.unify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unify two expressions</p>
+<dl class="simple">
+<dt>inputs:</dt><dd><p>x, y - expression trees containing leaves, Compounds and Variables
+s    - a mapping of variables to subtrees</p>
+</dd>
+<dt>outputs:</dt><dd><p>lazy sequence of mappings {Variable: subtree}</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.core</span> <span class="kn">import</span> <span class="n">unify</span><span class="p">,</span> <span class="n">Compound</span><span class="p">,</span> <span class="n">Variable</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span>    <span class="o">=</span> <span class="n">Compound</span><span class="p">(</span><span class="s2">&quot;Add&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pattern</span> <span class="o">=</span> <span class="n">Compound</span><span class="p">(</span><span class="s2">&quot;Add&quot;</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">Variable</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">unify</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="p">{}))</span>
+<span class="go">{Variable(a): &#39;y&#39;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.core.unify_var">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.core.</span></span><span class="sig-name descname"><span class="pre">unify_var</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fns</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/core.html#unify_var"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.core.unify_var" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.core.unpack">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.core.</span></span><span class="sig-name descname"><span class="pre">unpack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/core.html#unpack"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.core.unpack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.unify.rewrite">
+<span id="modelparameters-sympy-unify-rewrite-module"></span><h2>modelparameters.sympy.unify.rewrite module<a class="headerlink" href="#module-modelparameters.sympy.unify.rewrite" title="Permalink to this headline">¶</a></h2>
+<p>Functions to support rewriting of SymPy expressions</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.rewrite.rewriterule">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.rewrite.</span></span><span class="sig-name descname"><span class="pre">rewriterule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/rewrite.html#rewriterule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.rewrite.rewriterule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rewrite rule</p>
+<p>Transform expressions that match source into expressions that match target
+treating all <cite>variables</cite> as wilds.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..abc</span> <span class="kn">import</span> <span class="n">w</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.rewrite</span> <span class="kn">import</span> <span class="n">rewriterule</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..utilities</span> <span class="kn">import</span> <span class="n">default_sort_key</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rl</span> <span class="o">=</span> <span class="n">rewriterule</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">sorted</span><span class="p">(</span><span class="n">rl</span><span class="p">(</span><span class="n">z</span> <span class="o">+</span> <span class="mi">3</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="n">default_sort_key</span><span class="p">)</span>
+<span class="go">[3**z, z**3]</span>
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">condition</span></code> to specify additional requirements.  Inputs are taken in
+the same order as is found in variables.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rl</span> <span class="o">=</span> <span class="n">rewriterule</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">is_integer</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">rl</span><span class="p">(</span><span class="n">z</span> <span class="o">+</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">[3**z]</span>
+</pre></div>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">assume</span></code> to specify additional requirements using new assumptions.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..assumptions</span> <span class="kn">import</span> <span class="n">Q</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rl</span> <span class="o">=</span> <span class="n">rewriterule</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="n">y</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">assume</span><span class="o">=</span><span class="n">Q</span><span class="o">.</span><span class="n">integer</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">rl</span><span class="p">(</span><span class="n">z</span> <span class="o">+</span> <span class="mi">3</span><span class="p">))</span>
+<span class="go">[3**z]</span>
+</pre></div>
+</div>
+<p>Assumptions for the local context are provided at rule runtime</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">rl</span><span class="p">(</span><span class="n">w</span> <span class="o">+</span> <span class="n">z</span><span class="p">,</span> <span class="n">Q</span><span class="o">.</span><span class="n">integer</span><span class="p">(</span><span class="n">z</span><span class="p">)))</span>
+<span class="go">[z**w]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.unify.usympy">
+<span id="modelparameters-sympy-unify-usympy-module"></span><h2>modelparameters.sympy.unify.usympy module<a class="headerlink" href="#module-modelparameters.sympy.unify.usympy" title="Permalink to this headline">¶</a></h2>
+<p>SymPy interface to Unification engine</p>
+<p>See sympy.unify for module level docstring
+See sympy.unify.core for algorithmic docstring</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.usympy.construct">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.usympy.</span></span><span class="sig-name descname"><span class="pre">construct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/usympy.html#construct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.usympy.construct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn a Compound into a SymPy object</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.usympy.deconstruct">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.usympy.</span></span><span class="sig-name descname"><span class="pre">deconstruct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/usympy.html#deconstruct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.usympy.deconstruct" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn a SymPy object into a Compound</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.usympy.is_associative">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.usympy.</span></span><span class="sig-name descname"><span class="pre">is_associative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/usympy.html#is_associative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.usympy.is_associative" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.usympy.is_commutative">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.usympy.</span></span><span class="sig-name descname"><span class="pre">is_commutative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/usympy.html#is_commutative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.usympy.is_commutative" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.usympy.mk_matchtype">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.usympy.</span></span><span class="sig-name descname"><span class="pre">mk_matchtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">typ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/usympy.html#mk_matchtype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.usympy.mk_matchtype" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.usympy.rebuild">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.usympy.</span></span><span class="sig-name descname"><span class="pre">rebuild</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/usympy.html#rebuild"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.usympy.rebuild" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rebuild a SymPy expression</p>
+<p>This removes harm caused by Expr-Rules interactions</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.usympy.sympy_associative">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.usympy.</span></span><span class="sig-name descname"><span class="pre">sympy_associative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/usympy.html#sympy_associative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.usympy.sympy_associative" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.usympy.sympy_commutative">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.usympy.</span></span><span class="sig-name descname"><span class="pre">sympy_commutative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/usympy.html#sympy_commutative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.usympy.sympy_commutative" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.unify.usympy.unify">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.usympy.</span></span><span class="sig-name descname"><span class="pre">unify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/usympy.html#unify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.usympy.unify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Structural unification of two expressions/patterns</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.usympy</span> <span class="kn">import</span> <span class="n">unify</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">cos</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..abc</span> <span class="kn">import</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">unify</span><span class="p">(</span><span class="n">Basic</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">Basic</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span>
+<span class="go">{x: 2}</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pattern</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">p</span> <span class="o">+</span> <span class="n">q</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">unify</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="p">{},</span> <span class="n">variables</span><span class="o">=</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)))</span>
+<span class="go">{p: x, q: y + z}</span>
+</pre></div>
+</div>
+<p>Unification supports commutative and associative matching</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="n">z</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pattern</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="n">q</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">unify</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="p">{},</span> <span class="n">variables</span><span class="o">=</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">))))</span>
+<span class="go">12</span>
+</pre></div>
+</div>
+<p>Symbols not indicated to be variables are treated as literal,
+else they are wild-like and match anything in a sub-expression.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pattern</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">unify</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="p">{},</span> <span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]))</span>
+<span class="go">{x: y, y: x*z}</span>
+</pre></div>
+</div>
+<p>The x and y of the pattern above were in a Mul and matched factors
+in the Mul of expr. Here, a single symbol matches an entire term:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pattern</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">next</span><span class="p">(</span><span class="n">unify</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="p">{},</span> <span class="n">variables</span><span class="o">=</span><span class="p">[</span><span class="n">p</span><span class="p">]))</span>
+<span class="go">{p: x*y}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.unify">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.unify" title="Permalink to this headline">¶</a></h2>
+<p>Unification in SymPy</p>
+<p>See sympy.unify.core docstring for algorithmic details</p>
+<p>See <a class="reference external" href="http://matthewrocklin.com/blog/work/2012/11/01/Unification/">http://matthewrocklin.com/blog/work/2012/11/01/Unification/</a> for discussion</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">modelparameters.sympy.unify package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.unify.core">modelparameters.sympy.unify.core module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.unify.rewrite">modelparameters.sympy.unify.rewrite module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.unify.usympy">modelparameters.sympy.unify.usympy module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.unify">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.tensor.array.html"
+                        title="previous chapter">modelparameters.sympy.tensor.array package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.utilities.html"
+                        title="next chapter">modelparameters.sympy.utilities package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modelparameters.sympy.unify.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.utilities.html" title="modelparameters.sympy.utilities package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.tensor.array.html" title="modelparameters.sympy.tensor.array package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" >modelparameters.sympy package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.unify package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

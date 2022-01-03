@@ -1,0 +1,655 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>modelparameters.sympy.parsing package &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="modelparameters.sympy.physics package" href="modelparameters.sympy.physics.html" />
+    <link rel="prev" title="modelparameters.sympy.ntheory package" href="modelparameters.sympy.ntheory.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.physics.html" title="modelparameters.sympy.physics package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.ntheory.html" title="modelparameters.sympy.ntheory package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" accesskey="U">modelparameters.sympy package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.parsing package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="modelparameters-sympy-parsing-package">
+<h1>modelparameters.sympy.parsing package<a class="headerlink" href="#modelparameters-sympy-parsing-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-modelparameters.sympy.parsing.ast_parser">
+<span id="modelparameters-sympy-parsing-ast-parser-module"></span><h2>modelparameters.sympy.parsing.ast_parser module<a class="headerlink" href="#module-modelparameters.sympy.parsing.ast_parser" title="Permalink to this headline">¶</a></h2>
+<p>This module implements the functionality to take any Python expression as a
+string and fix all numbers and other things before evaluating it,
+thus</p>
+<p>1/2</p>
+<p>returns</p>
+<p>Integer(1)/Integer(2)</p>
+<p>We use the Python ast module for that, which is in python2.6 and later. It is
+well documented at docs.python.org.</p>
+<p>Some tips to understand how this works: use dump() to get a nice
+representation of any node. Then write a string of what you want to get,
+e.g. “Integer(1)”, parse it, dump it and you’ll see that you need to do
+“Call(Name(‘Integer’, Load()), [node], [], None, None)”. You don’t need
+to bother with lineno and col_offset, just call fix_missing_locations()
+before returning the node.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.ast_parser.Transform">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.ast_parser.</span></span><span class="sig-name descname"><span class="pre">Transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">local_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/ast_parser.html#Transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.ast_parser.Transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/ast.html#ast.NodeTransformer" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ast.NodeTransformer</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.ast_parser.Transform.visit_Lambda">
+<span class="sig-name descname"><span class="pre">visit_Lambda</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/ast_parser.html#Transform.visit_Lambda"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.ast_parser.Transform.visit_Lambda" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.ast_parser.Transform.visit_Name">
+<span class="sig-name descname"><span class="pre">visit_Name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/ast_parser.html#Transform.visit_Name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.ast_parser.Transform.visit_Name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.ast_parser.Transform.visit_Num">
+<span class="sig-name descname"><span class="pre">visit_Num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/ast_parser.html#Transform.visit_Num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.ast_parser.Transform.visit_Num" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.ast_parser.parse_expr">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.ast_parser.</span></span><span class="sig-name descname"><span class="pre">parse_expr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/ast_parser.html#parse_expr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.ast_parser.parse_expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the string “s” to a SymPy expression, in local_dict.</p>
+<p>It converts all numbers to Integers before feeding it to Python and
+automatically creates Symbols.</p>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.parsing.mathematica">
+<span id="modelparameters-sympy-parsing-mathematica-module"></span><h2>modelparameters.sympy.parsing.mathematica module<a class="headerlink" href="#module-modelparameters.sympy.parsing.mathematica" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.mathematica.mathematica">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.mathematica.</span></span><span class="sig-name descname"><span class="pre">mathematica</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/mathematica.html#mathematica"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.mathematica.mathematica" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.mathematica.parse">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.mathematica.</span></span><span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/mathematica.html#parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.mathematica.parse" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.mathematica.translateFunction">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.mathematica.</span></span><span class="sig-name descname"><span class="pre">translateFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/mathematica.html#translateFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.mathematica.translateFunction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.mathematica.translateOperator">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.mathematica.</span></span><span class="sig-name descname"><span class="pre">translateOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/mathematica.html#translateOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.mathematica.translateOperator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.parsing.maxima">
+<span id="modelparameters-sympy-parsing-maxima-module"></span><h2>modelparameters.sympy.parsing.maxima module<a class="headerlink" href="#module-modelparameters.sympy.parsing.maxima" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.maxima.MaximaHelpers">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.maxima.</span></span><span class="sig-name descname"><span class="pre">MaximaHelpers</span></span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/maxima.html#MaximaHelpers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.maxima.MaximaHelpers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.maxima.MaximaHelpers.maxima_csc">
+<span class="sig-name descname"><span class="pre">maxima_csc</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/maxima.html#MaximaHelpers.maxima_csc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.maxima.MaximaHelpers.maxima_csc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.maxima.MaximaHelpers.maxima_expand">
+<span class="sig-name descname"><span class="pre">maxima_expand</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/maxima.html#MaximaHelpers.maxima_expand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.maxima.MaximaHelpers.maxima_expand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.maxima.MaximaHelpers.maxima_float">
+<span class="sig-name descname"><span class="pre">maxima_float</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/maxima.html#MaximaHelpers.maxima_float"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.maxima.MaximaHelpers.maxima_float" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.maxima.MaximaHelpers.maxima_product">
+<span class="sig-name descname"><span class="pre">maxima_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/maxima.html#MaximaHelpers.maxima_product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.maxima.MaximaHelpers.maxima_product" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.maxima.MaximaHelpers.maxima_sec">
+<span class="sig-name descname"><span class="pre">maxima_sec</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/maxima.html#MaximaHelpers.maxima_sec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.maxima.MaximaHelpers.maxima_sec" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.maxima.MaximaHelpers.maxima_sum">
+<span class="sig-name descname"><span class="pre">maxima_sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/maxima.html#MaximaHelpers.maxima_sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.maxima.MaximaHelpers.maxima_sum" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.maxima.MaximaHelpers.maxima_trigexpand">
+<span class="sig-name descname"><span class="pre">maxima_trigexpand</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/maxima.html#MaximaHelpers.maxima_trigexpand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.maxima.MaximaHelpers.maxima_trigexpand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.maxima.parse_maxima">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.maxima.</span></span><span class="sig-name descname"><span class="pre">parse_maxima</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">globals</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/maxima.html#parse_maxima"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.maxima.parse_maxima" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.parsing.sympy_parser">
+<span id="modelparameters-sympy-parsing-sympy-parser-module"></span><h2>modelparameters.sympy.parsing.sympy_parser module<a class="headerlink" href="#module-modelparameters.sympy.parsing.sympy_parser" title="Permalink to this headline">¶</a></h2>
+<p>Transform a string with Python-like source code into SymPy expression.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.AppliedFunction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">AppliedFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exponent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#AppliedFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.AppliedFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>A group of tokens representing a function and its arguments.</p>
+<p><cite>exponent</cite> is for handling the shorthand sin^2, ln^2, etc.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.AppliedFunction.expand">
+<span class="sig-name descname"><span class="pre">expand</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#AppliedFunction.expand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.AppliedFunction.expand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of tokens representing the function</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.EvaluateFalseTransformer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">EvaluateFalseTransformer</span></span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#EvaluateFalseTransformer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.EvaluateFalseTransformer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/ast.html#ast.NodeTransformer" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ast.NodeTransformer</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.EvaluateFalseTransformer.flatten">
+<span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#EvaluateFalseTransformer.flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.EvaluateFalseTransformer.flatten" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.EvaluateFalseTransformer.operators">
+<span class="sig-name descname"><span class="pre">operators</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{&lt;class</span> <span class="pre">'_ast.Add'&gt;:</span> <span class="pre">'Add',</span> <span class="pre">&lt;class</span> <span class="pre">'_ast.Mult'&gt;:</span> <span class="pre">'Mul',</span> <span class="pre">&lt;class</span> <span class="pre">'_ast.Pow'&gt;:</span> <span class="pre">'Pow',</span> <span class="pre">&lt;class</span> <span class="pre">'_ast.Sub'&gt;:</span> <span class="pre">'Add',</span> <span class="pre">&lt;class</span> <span class="pre">'_ast.Div'&gt;:</span> <span class="pre">'Mul',</span> <span class="pre">&lt;class</span> <span class="pre">'_ast.BitOr'&gt;:</span> <span class="pre">'Or',</span> <span class="pre">&lt;class</span> <span class="pre">'_ast.BitAnd'&gt;:</span> <span class="pre">'And',</span> <span class="pre">&lt;class</span> <span class="pre">'_ast.BitXor'&gt;:</span> <span class="pre">'Not'}</span></em><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.EvaluateFalseTransformer.operators" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.EvaluateFalseTransformer.visit_BinOp">
+<span class="sig-name descname"><span class="pre">visit_BinOp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#EvaluateFalseTransformer.visit_BinOp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.EvaluateFalseTransformer.visit_BinOp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.ParenthesisGroup">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">ParenthesisGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#ParenthesisGroup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.ParenthesisGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
+<p>List of tokens representing an expression in parentheses.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.auto_number">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">auto_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#auto_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.auto_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts numeric literals to use SymPy equivalents.</p>
+<p>Complex numbers use <code class="docutils literal notranslate"><span class="pre">I</span></code>; integer literals use <code class="docutils literal notranslate"><span class="pre">Integer</span></code>, float
+literals use <code class="docutils literal notranslate"><span class="pre">Float</span></code>, and repeating decimals use <code class="docutils literal notranslate"><span class="pre">Rational</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.auto_symbol">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">auto_symbol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#auto_symbol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.auto_symbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inserts calls to <code class="docutils literal notranslate"><span class="pre">Symbol</span></code> for undefined variables.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.convert_equals_signs">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">convert_equals_signs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#convert_equals_signs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.convert_equals_signs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms all the equals signs <code class="docutils literal notranslate"><span class="pre">=</span></code> to instances of Eq.</p>
+<p>Parses the equals signs in the expression and replaces them with
+appropriate Eq instances.Also works with nested equals signs.</p>
+<p>Does not yet play well with function arguments.
+For example, the expression <cite>(x=y)</cite> is ambiguous and can be interpreted
+as x being an argument to a function and <cite>convert_equals_signs</cite> won’t
+work for this.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>convert_equality_operators</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.sympy_parser</span> <span class="kn">import</span> <span class="p">(</span><span class="n">parse_expr</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">standard_transformations</span><span class="p">,</span> <span class="n">convert_equals_signs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s2">&quot;1*2=x&quot;</span><span class="p">,</span> <span class="n">transformations</span><span class="o">=</span><span class="p">(</span>
+<span class="gp">... </span><span class="n">standard_transformations</span> <span class="o">+</span> <span class="p">(</span><span class="n">convert_equals_signs</span><span class="p">,)))</span>
+<span class="go">Eq(2, x)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s2">&quot;(1*2=x)=False&quot;</span><span class="p">,</span> <span class="n">transformations</span><span class="o">=</span><span class="p">(</span>
+<span class="gp">... </span><span class="n">standard_transformations</span> <span class="o">+</span> <span class="p">(</span><span class="n">convert_equals_signs</span><span class="p">,)))</span>
+<span class="go">Eq(Eq(2, x), False)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.convert_xor">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">convert_xor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#convert_xor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.convert_xor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Treats XOR, <code class="docutils literal notranslate"><span class="pre">^</span></code>, as exponentiation, <code class="docutils literal notranslate"><span class="pre">**</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.eval_expr">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">eval_expr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#eval_expr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.eval_expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate Python code generated by <code class="docutils literal notranslate"><span class="pre">stringify_expr</span></code>.</p>
+<p>Generally, <code class="docutils literal notranslate"><span class="pre">parse_expr</span></code> should be used.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.evaluateFalse">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">evaluateFalse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#evaluateFalse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.evaluateFalse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replaces operators with the SymPy equivalent and sets evaluate=False.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.factorial_notation">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">factorial_notation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#factorial_notation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.factorial_notation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows standard notation for factorial.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.function_exponentiation">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">function_exponentiation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#function_exponentiation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.function_exponentiation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows functions to be exponentiated, e.g. <code class="docutils literal notranslate"><span class="pre">cos**2(x)</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.sympy_parser</span> <span class="kn">import</span> <span class="p">(</span><span class="n">parse_expr</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">standard_transformations</span><span class="p">,</span> <span class="n">function_exponentiation</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformations</span> <span class="o">=</span> <span class="n">standard_transformations</span> <span class="o">+</span> <span class="p">(</span><span class="n">function_exponentiation</span><span class="p">,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s1">&#39;sin**4(x)&#39;</span><span class="p">,</span> <span class="n">transformations</span><span class="o">=</span><span class="n">transformations</span><span class="p">)</span>
+<span class="go">sin(x)**4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.implicit_application">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">implicit_application</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#implicit_application"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.implicit_application" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes parentheses optional in some cases for function calls.</p>
+<p>Use this after <a class="reference internal" href="#modelparameters.sympy.parsing.sympy_parser.implicit_multiplication" title="modelparameters.sympy.parsing.sympy_parser.implicit_multiplication"><code class="xref py py-func docutils literal notranslate"><span class="pre">implicit_multiplication()</span></code></a>, otherwise expressions
+like <code class="docutils literal notranslate"><span class="pre">sin</span> <span class="pre">2x</span></code> will be parsed as <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">sin(2)</span></code> rather than
+<code class="docutils literal notranslate"><span class="pre">sin(2*x)</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.sympy_parser</span> <span class="kn">import</span> <span class="p">(</span><span class="n">parse_expr</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">standard_transformations</span><span class="p">,</span> <span class="n">implicit_application</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformations</span> <span class="o">=</span> <span class="n">standard_transformations</span> <span class="o">+</span> <span class="p">(</span><span class="n">implicit_application</span><span class="p">,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s1">&#39;cot z + csc z&#39;</span><span class="p">,</span> <span class="n">transformations</span><span class="o">=</span><span class="n">transformations</span><span class="p">)</span>
+<span class="go">cot(z) + csc(z)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.implicit_multiplication">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">implicit_multiplication</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#implicit_multiplication"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.implicit_multiplication" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes the multiplication operator optional in most cases.</p>
+<p>Use this before <a class="reference internal" href="#modelparameters.sympy.parsing.sympy_parser.implicit_application" title="modelparameters.sympy.parsing.sympy_parser.implicit_application"><code class="xref py py-func docutils literal notranslate"><span class="pre">implicit_application()</span></code></a>, otherwise expressions like
+<code class="docutils literal notranslate"><span class="pre">sin</span> <span class="pre">2x</span></code> will be parsed as <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">*</span> <span class="pre">sin(2)</span></code> rather than <code class="docutils literal notranslate"><span class="pre">sin(2*x)</span></code>.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.sympy_parser</span> <span class="kn">import</span> <span class="p">(</span><span class="n">parse_expr</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">standard_transformations</span><span class="p">,</span> <span class="n">implicit_multiplication</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformations</span> <span class="o">=</span> <span class="n">standard_transformations</span> <span class="o">+</span> <span class="p">(</span><span class="n">implicit_multiplication</span><span class="p">,)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s1">&#39;3 x y&#39;</span><span class="p">,</span> <span class="n">transformations</span><span class="o">=</span><span class="n">transformations</span><span class="p">)</span>
+<span class="go">3*x*y</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.implicit_multiplication_application">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">implicit_multiplication_application</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#implicit_multiplication_application"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.implicit_multiplication_application" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows a slightly relaxed syntax.</p>
+<ul class="simple">
+<li><p>Parentheses for single-argument method calls are optional.</p></li>
+<li><p>Multiplication is implicit.</p></li>
+<li><p>Symbol names can be split (i.e. spaces are not needed between
+symbols).</p></li>
+<li><p>Functions can be exponentiated.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.sympy_parser</span> <span class="kn">import</span> <span class="p">(</span><span class="n">parse_expr</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">standard_transformations</span><span class="p">,</span> <span class="n">implicit_multiplication_application</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s2">&quot;10sin**2 x**2 + 3xyz + tan theta&quot;</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">transformations</span><span class="o">=</span><span class="p">(</span><span class="n">standard_transformations</span> <span class="o">+</span>
+<span class="gp">... </span><span class="p">(</span><span class="n">implicit_multiplication_application</span><span class="p">,)))</span>
+<span class="go">3*x*y*z + 10*sin(x**2)**2 + tan(theta)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.iskeyword">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">iskeyword</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.iskeyword" title="Permalink to this definition">¶</a></dt>
+<dd><p>x.__contains__(y) &lt;==&gt; y in x.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.lambda_notation">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">lambda_notation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#lambda_notation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.lambda_notation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Substitutes “lambda” with its Sympy equivalent Lambda().
+However, the conversion doesn’t take place if only “lambda”
+is passed because that is a syntax error.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.parse_expr">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">parse_expr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dict=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformations=(&lt;function</span> <span class="pre">lambda_notation&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;function</span> <span class="pre">auto_symbol&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;function</span> <span class="pre">auto_number&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">&lt;function</span> <span class="pre">factorial_notation&gt;)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_dict=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluate=True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#parse_expr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.parse_expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the string <code class="docutils literal notranslate"><span class="pre">s</span></code> to a SymPy expression, in <code class="docutils literal notranslate"><span class="pre">local_dict</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>s</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The string to parse.</p></li>
+<li><p><strong>local_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary of local variables to use when parsing.</p></li>
+<li><p><strong>global_dict</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary of global variables. By default, this is initialized
+with <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">..</span> <span class="pre">import</span> <span class="pre">*</span></code>; provide this parameter to override
+this behavior (for instance, to parse <code class="docutils literal notranslate"><span class="pre">&quot;Q</span> <span class="pre">&amp;</span> <span class="pre">S&quot;</span></code>).</p></li>
+<li><p><strong>transformations</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a><em>, </em><em>optional</em>) – A tuple of transformation functions used to modify the tokens of the
+parsed expression before evaluation. The default transformations
+convert numeric literals into their SymPy equivalents, convert
+undefined variables into SymPy symbols, and allow the use of standard
+mathematical factorial notation (e.g. <code class="docutils literal notranslate"><span class="pre">x!</span></code>).</p></li>
+<li><p><strong>evaluate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – When False, the order of the arguments will remain as they were in the
+string and automatic simplification that would normally occur is
+suppressed. (see examples)</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.sympy_parser</span> <span class="kn">import</span> <span class="n">parse_expr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s2">&quot;1/2&quot;</span><span class="p">)</span>
+<span class="go">1/2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">_</span><span class="p">)</span>
+<span class="go">&lt;class &#39;sympy.core.numbers.Half&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.sympy_parser</span> <span class="kn">import</span> <span class="n">standard_transformations</span><span class="p">,</span>\
+<span class="gp">... </span><span class="n">implicit_multiplication_application</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformations</span> <span class="o">=</span> <span class="p">(</span><span class="n">standard_transformations</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="n">implicit_multiplication_application</span><span class="p">,))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s2">&quot;2x&quot;</span><span class="p">,</span> <span class="n">transformations</span><span class="o">=</span><span class="n">transformations</span><span class="p">)</span>
+<span class="go">2*x</span>
+</pre></div>
+</div>
+<p>When evaluate=False, some automatic simplifications will not occur:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s2">&quot;2**3&quot;</span><span class="p">),</span> <span class="n">parse_expr</span><span class="p">(</span><span class="s2">&quot;2**3&quot;</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">(8, 2**3)</span>
+</pre></div>
+</div>
+<p>In addition the order of the arguments will not be made canonical.
+This feature allows one to tell exactly how the expression was entered:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">parse_expr</span><span class="p">(</span><span class="s1">&#39;1 + x&#39;</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">parse_expr</span><span class="p">(</span><span class="s1">&#39;x + 1&#39;</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">args</span>
+<span class="go">(1, x)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span><span class="o">.</span><span class="n">args</span>
+<span class="go">(x, 1)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#modelparameters.sympy.parsing.sympy_parser.stringify_expr" title="modelparameters.sympy.parsing.sympy_parser.stringify_expr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stringify_expr</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.parsing.sympy_parser.eval_expr" title="modelparameters.sympy.parsing.sympy_parser.eval_expr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval_expr</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.parsing.sympy_parser.standard_transformations" title="modelparameters.sympy.parsing.sympy_parser.standard_transformations"><code class="xref py py-obj docutils literal notranslate"><span class="pre">standard_transformations</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.parsing.sympy_parser.implicit_multiplication_application" title="modelparameters.sympy.parsing.sympy_parser.implicit_multiplication_application"><code class="xref py py-obj docutils literal notranslate"><span class="pre">implicit_multiplication_application</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.rationalize">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">rationalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#rationalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.rationalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts floats into <code class="docutils literal notranslate"><span class="pre">Rational</span></code>. Run AFTER <code class="docutils literal notranslate"><span class="pre">auto_number</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.split_symbols">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">split_symbols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.split_symbols" title="Permalink to this definition">¶</a></dt>
+<dd><p>Splits symbol names for implicit multiplication.</p>
+<p>Intended to let expressions like <code class="docutils literal notranslate"><span class="pre">xyz</span></code> be parsed as <code class="docutils literal notranslate"><span class="pre">x*y*z</span></code>. Does not
+split Greek character names, so <code class="docutils literal notranslate"><span class="pre">theta</span></code> will <em>not</em> become
+<code class="docutils literal notranslate"><span class="pre">t*h*e*t*a</span></code>. Generally this should be used with
+<code class="docutils literal notranslate"><span class="pre">implicit_multiplication</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.split_symbols_custom">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">split_symbols_custom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predicate</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#split_symbols_custom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.split_symbols_custom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a transformation that splits symbol names.</p>
+<p><code class="docutils literal notranslate"><span class="pre">predicate</span></code> should return True if the symbol name is to be split.</p>
+<p>For instance, to retain the default behavior but avoid splitting certain
+symbol names, a predicate like this would work:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.sympy_parser</span> <span class="kn">import</span> <span class="p">(</span><span class="n">parse_expr</span><span class="p">,</span> <span class="n">_token_splittable</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">standard_transformations</span><span class="p">,</span> <span class="n">implicit_multiplication</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">split_symbols_custom</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">can_split</span><span class="p">(</span><span class="n">symbol</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">if</span> <span class="n">symbol</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;list&#39;</span><span class="p">,</span> <span class="s1">&#39;of&#39;</span><span class="p">,</span> <span class="s1">&#39;unsplittable&#39;</span><span class="p">,</span> <span class="s1">&#39;names&#39;</span><span class="p">):</span>
+<span class="gp">... </span>            <span class="k">return</span> <span class="n">_token_splittable</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="kc">False</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">transformation</span> <span class="o">=</span> <span class="n">split_symbols_custom</span><span class="p">(</span><span class="n">can_split</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">parse_expr</span><span class="p">(</span><span class="s1">&#39;unsplittable&#39;</span><span class="p">,</span> <span class="n">transformations</span><span class="o">=</span><span class="n">standard_transformations</span> <span class="o">+</span>
+<span class="gp">... </span><span class="p">(</span><span class="n">transformation</span><span class="p">,</span> <span class="n">implicit_multiplication</span><span class="p">))</span>
+<span class="go">unsplittable</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.standard_transformations">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">standard_transformations</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">(&lt;function</span> <span class="pre">lambda_notation&gt;,</span> <span class="pre">&lt;function</span> <span class="pre">auto_symbol&gt;,</span> <span class="pre">&lt;function</span> <span class="pre">auto_number&gt;,</span> <span class="pre">&lt;function</span> <span class="pre">factorial_notation&gt;)</span></em><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.standard_transformations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Standard transformations for <a class="reference internal" href="#modelparameters.sympy.parsing.sympy_parser.parse_expr" title="modelparameters.sympy.parsing.sympy_parser.parse_expr"><code class="xref py py-func docutils literal notranslate"><span class="pre">parse_expr()</span></code></a>.
+Inserts calls to <code class="xref py py-class docutils literal notranslate"><span class="pre">Symbol</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Integer</span></code>, and other SymPy
+datatypes and allows the use of standard factorial notation (e.g. <code class="docutils literal notranslate"><span class="pre">x!</span></code>).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_parser.stringify_expr">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_parser.</span></span><span class="sig-name descname"><span class="pre">stringify_expr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transformations</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_parser.html#stringify_expr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_parser.stringify_expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the string <code class="docutils literal notranslate"><span class="pre">s</span></code> to Python code, in <code class="docutils literal notranslate"><span class="pre">local_dict</span></code></p>
+<p>Generally, <code class="docutils literal notranslate"><span class="pre">parse_expr</span></code> should be used.</p>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.parsing.sympy_tokenize">
+<span id="modelparameters-sympy-parsing-sympy-tokenize-module"></span><h2>modelparameters.sympy.parsing.sympy_tokenize module<a class="headerlink" href="#module-modelparameters.sympy.parsing.sympy_tokenize" title="Permalink to this headline">¶</a></h2>
+<p>Tokenization help for Python programs.</p>
+<p>generate_tokens(readline) is a generator that breaks a stream of
+text into Python tokens.  It accepts a readline-like method which is called
+repeatedly to get the next line of input (or “” for EOF).  It generates
+5-tuples with these members:</p>
+<blockquote>
+<div><p>the token type (see token.py)
+the token (a string)
+the starting (row, column) indices of the token (a 2-tuple of ints)
+the ending (row, column) indices of the token (a 2-tuple of ints)
+the original line (string)</p>
+</div></blockquote>
+<p>It is designed to match the working of the Python tokenizer exactly, except
+that it produces COMMENT tokens for comments and gives type OP for all
+operators</p>
+<dl class="simple">
+<dt>Older entry points</dt><dd><p>tokenize_loop(readline, tokeneater)
+tokenize(readline, tokeneater=printtoken)</p>
+</dd>
+</dl>
+<p>are the same, except instead of generating tokens, tokeneater is a callback
+function to which the 5 fields described above are passed as 5 arguments,
+each time a new token is found.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_tokenize.ISEOF">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_tokenize.</span></span><span class="sig-name descname"><span class="pre">ISEOF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/token.html#ISEOF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_tokenize.ISEOF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_tokenize.ISNONTERMINAL">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_tokenize.</span></span><span class="sig-name descname"><span class="pre">ISNONTERMINAL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/token.html#ISNONTERMINAL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_tokenize.ISNONTERMINAL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_tokenize.ISTERMINAL">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_tokenize.</span></span><span class="sig-name descname"><span class="pre">ISTERMINAL</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/token.html#ISTERMINAL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_tokenize.ISTERMINAL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_tokenize.generate_tokens">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_tokenize.</span></span><span class="sig-name descname"><span class="pre">generate_tokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">readline</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_tokenize.html#generate_tokens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_tokenize.generate_tokens" title="Permalink to this definition">¶</a></dt>
+<dd><p>The generate_tokens() generator requires one argment, readline, which
+must be a callable object which provides the same interface as the
+readline() method of built-in file objects. Each call to the function
+should return one line of input as a string.  Alternately, readline
+can be a callable function terminating with StopIteration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">readline</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">myfile</span><span class="p">)</span><span class="o">.</span><span class="n">next</span>    <span class="c1"># Example of alternate readline</span>
+</pre></div>
+</div>
+<p>The generator produces 5-tuples with these members: the token type; the
+token string; a 2-tuple (srow, scol) of ints specifying the row and
+column where the token begins in the source; a 2-tuple (erow, ecol) of
+ints specifying the row and column where the token ends in the source;
+and the line on which the token was found. The line passed is the
+logical line; continuation lines are included.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_tokenize.tokenize">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_tokenize.</span></span><span class="sig-name descname"><span class="pre">tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">readline</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokeneater=&lt;function</span> <span class="pre">printtoken&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_tokenize.html#tokenize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_tokenize.tokenize" title="Permalink to this definition">¶</a></dt>
+<dd><p>The tokenize() function accepts two parameters: one representing the
+input stream, and one providing an output mechanism for tokenize().</p>
+<p>The first parameter, readline, must be a callable object which provides
+the same interface as the readline() method of built-in file objects.
+Each call to the function should return one line of input as a string.</p>
+<p>The second parameter, tokeneater, must also be a callable object. It is
+called once for each token, with five arguments, corresponding to the
+tuples generated by generate_tokens().</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.parsing.sympy_tokenize.untokenize">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.parsing.sympy_tokenize.</span></span><span class="sig-name descname"><span class="pre">untokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/parsing/sympy_tokenize.html#untokenize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.parsing.sympy_tokenize.untokenize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform tokens back into Python source code.</p>
+<p>Each element returned by the iterable must be a token sequence
+with at least two elements, a token number and token value.  If
+only two tokens are passed, the resulting output is poor.</p>
+<dl class="simple">
+<dt>Round-trip invariant for full input:</dt><dd><p>Untokenized source will match input source exactly</p>
+</dd>
+</dl>
+<p>Round-trip invariant for limited intput:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Output text will tokenize the back to the input</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="p">[</span><span class="n">tok</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">generate_tokens</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">)]</span>
+<span class="n">newcode</span> <span class="o">=</span> <span class="n">untokenize</span><span class="p">(</span><span class="n">t1</span><span class="p">)</span>
+<span class="n">readline</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">newcode</span><span class="o">.</span><span class="n">splitlines</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">next</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="p">[</span><span class="n">tok</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">tok</span> <span class="ow">in</span> <span class="n">generate_tokens</span><span class="p">(</span><span class="n">readline</span><span class="p">)]</span>
+<span class="k">if</span> <span class="n">t1</span> <span class="o">!=</span> <span class="n">t2</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;t1 should be equal to t2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.parsing">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.parsing" title="Permalink to this headline">¶</a></h2>
+<p>Used for translating a string into a SymPy expression.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">modelparameters.sympy.parsing package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.parsing.ast_parser">modelparameters.sympy.parsing.ast_parser module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.parsing.mathematica">modelparameters.sympy.parsing.mathematica module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.parsing.maxima">modelparameters.sympy.parsing.maxima module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.parsing.sympy_parser">modelparameters.sympy.parsing.sympy_parser module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.parsing.sympy_tokenize">modelparameters.sympy.parsing.sympy_tokenize module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.parsing">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.ntheory.html"
+                        title="previous chapter">modelparameters.sympy.ntheory package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.physics.html"
+                        title="next chapter">modelparameters.sympy.physics package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modelparameters.sympy.parsing.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.physics.html" title="modelparameters.sympy.physics package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.ntheory.html" title="modelparameters.sympy.ntheory package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" >modelparameters.sympy package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.parsing package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

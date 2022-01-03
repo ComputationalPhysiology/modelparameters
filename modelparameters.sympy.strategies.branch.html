@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>modelparameters.sympy.strategies.branch package &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="modelparameters.sympy.tensor package" href="modelparameters.sympy.tensor.html" />
+    <link rel="prev" title="modelparameters.sympy.strategies package" href="modelparameters.sympy.strategies.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.tensor.html" title="modelparameters.sympy.tensor package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.strategies.html" title="modelparameters.sympy.strategies package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" >modelparameters.sympy package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="modelparameters.sympy.strategies.html" accesskey="U">modelparameters.sympy.strategies package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.strategies.branch package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="modelparameters-sympy-strategies-branch-package">
+<h1>modelparameters.sympy.strategies.branch package<a class="headerlink" href="#modelparameters-sympy-strategies-branch-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-modelparameters.sympy.strategies.branch.core">
+<span id="modelparameters-sympy-strategies-branch-core-module"></span><h2>modelparameters.sympy.strategies.branch.core module<a class="headerlink" href="#module-modelparameters.sympy.strategies.branch.core" title="Permalink to this headline">¶</a></h2>
+<p>Generic SymPy-Independent Strategies</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.branch.core.chain">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.branch.core.</span></span><span class="sig-name descname"><span class="pre">chain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">brules</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/branch/core.html#chain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.branch.core.chain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compose a sequence of brules so that they apply to the expr sequentially</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.branch.core.condition">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.branch.core.</span></span><span class="sig-name descname"><span class="pre">condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cond</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brule</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/branch/core.html#condition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.branch.core.condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Only apply branching rule if condition is true</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.branch.core.debug">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.branch.core.</span></span><span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">brule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/branch/core.html#debug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.branch.core.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the input and output expressions at each rule application</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.branch.core.do_one">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.branch.core.</span></span><span class="sig-name descname"><span class="pre">do_one</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">brules</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/branch/core.html#do_one"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.branch.core.do_one" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute one of the branching rules</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.branch.core.exhaust">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.branch.core.</span></span><span class="sig-name descname"><span class="pre">exhaust</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">brule</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/branch/core.html#exhaust"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.branch.core.exhaust" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a branching rule repeatedly until it has no effect</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.branch.core.identity">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.branch.core.</span></span><span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/branch/core.html#identity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.branch.core.identity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.branch.core.multiplex">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.branch.core.</span></span><span class="sig-name descname"><span class="pre">multiplex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">brules</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/branch/core.html#multiplex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.branch.core.multiplex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiplex many branching rules into one</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.branch.core.notempty">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.branch.core.</span></span><span class="sig-name descname"><span class="pre">notempty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">brule</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/branch/core.html#notempty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.branch.core.notempty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.branch.core.onaction">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.branch.core.</span></span><span class="sig-name descname"><span class="pre">onaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">brule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/branch/core.html#onaction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.branch.core.onaction" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.branch.core.sfilter">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.branch.core.</span></span><span class="sig-name descname"><span class="pre">sfilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brule</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/branch/core.html#sfilter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.branch.core.sfilter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Yield only those results which satisfy the predicate</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.branch.core.yieldify">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.branch.core.</span></span><span class="sig-name descname"><span class="pre">yieldify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/branch/core.html#yieldify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.branch.core.yieldify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn a rule into a branching rule</p>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.strategies.branch.tools">
+<span id="modelparameters-sympy-strategies-branch-tools-module"></span><h2>modelparameters.sympy.strategies.branch.tools module<a class="headerlink" href="#module-modelparameters.sympy.strategies.branch.tools" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.branch.tools.canon">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.branch.tools.</span></span><span class="sig-name descname"><span class="pre">canon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">rules</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/branch/tools.html#canon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.branch.tools.canon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Strategy for canonicalization</p>
+<p>Apply each branching rule in a top-down fashion through the tree.
+Multiplex through all branching rule traversals
+Keep doing this until there is no change.</p>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.strategies.branch.traverse">
+<span id="modelparameters-sympy-strategies-branch-traverse-module"></span><h2>modelparameters.sympy.strategies.branch.traverse module<a class="headerlink" href="#module-modelparameters.sympy.strategies.branch.traverse" title="Permalink to this headline">¶</a></h2>
+<p>Branching Strategies to Traverse a Tree</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.branch.traverse.sall">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.branch.traverse.</span></span><span class="sig-name descname"><span class="pre">sall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">brule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fns={'children':</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'leaf':</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'new':</span> <span class="pre">&lt;function</span> <span class="pre">Basic.__new__&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'op':</span> <span class="pre">&lt;class</span> <span class="pre">'type'&gt;}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/branch/traverse.html#sall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.branch.traverse.sall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Strategic all - apply rule to args</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.branch.traverse.top_down">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.branch.traverse.</span></span><span class="sig-name descname"><span class="pre">top_down</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">brule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fns={'children':</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'leaf':</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'new':</span> <span class="pre">&lt;function</span> <span class="pre">Basic.__new__&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'op':</span> <span class="pre">&lt;class</span> <span class="pre">'type'&gt;}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/branch/traverse.html#top_down"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.branch.traverse.top_down" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a rule down a tree running it on the top nodes first</p>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.strategies.branch">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.strategies.branch" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">modelparameters.sympy.strategies.branch package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.strategies.branch.core">modelparameters.sympy.strategies.branch.core module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.strategies.branch.tools">modelparameters.sympy.strategies.branch.tools module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.strategies.branch.traverse">modelparameters.sympy.strategies.branch.traverse module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.strategies.branch">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.strategies.html"
+                        title="previous chapter">modelparameters.sympy.strategies package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.tensor.html"
+                        title="next chapter">modelparameters.sympy.tensor package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modelparameters.sympy.strategies.branch.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.tensor.html" title="modelparameters.sympy.tensor package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.strategies.html" title="modelparameters.sympy.strategies package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" >modelparameters.sympy package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="modelparameters.sympy.strategies.html" >modelparameters.sympy.strategies package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.strategies.branch package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

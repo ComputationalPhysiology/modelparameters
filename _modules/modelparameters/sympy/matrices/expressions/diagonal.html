@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.matrices.expressions.diagonal &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.matrices.expressions.diagonal</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.matrices.expressions.diagonal</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..expressions</span> <span class="kn">import</span> <span class="n">MatrixExpr</span>
+<span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="n">S</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Ge</span>
+<span class="kn">from</span> <span class="nn">...functions.special.tensor_functions</span> <span class="kn">import</span> <span class="n">KroneckerDelta</span>
+
+
+<div class="viewcode-block" id="DiagonalMatrix"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.diagonal.DiagonalMatrix">[docs]</a><span class="k">class</span> <span class="nc">DiagonalMatrix</span><span class="p">(</span><span class="n">MatrixExpr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;DiagonalMatrix(M) will create a matrix expression that</span>
+<span class="sd">    behaves as though all off-diagonal elements,</span>
+<span class="sd">    `M[i, j]` where `i != j`, are zero.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from ... import MatrixSymbol, DiagonalMatrix, Symbol</span>
+<span class="sd">    &gt;&gt;&gt; n = Symbol(&#39;n&#39;, integer=True)</span>
+<span class="sd">    &gt;&gt;&gt; m = Symbol(&#39;m&#39;, integer=True)</span>
+<span class="sd">    &gt;&gt;&gt; D = DiagonalMatrix(MatrixSymbol(&#39;x&#39;, 2, 3))</span>
+<span class="sd">    &gt;&gt;&gt; D[1, 2]</span>
+<span class="sd">    0</span>
+<span class="sd">    &gt;&gt;&gt; D[1, 1]</span>
+<span class="sd">    x[1, 1]</span>
+
+<span class="sd">    The length of the diagonal -- the lesser of the two dimensions of `M` --</span>
+<span class="sd">    is accessed through the `diagonal_length` property:</span>
+
+<span class="sd">    &gt;&gt;&gt; D.diagonal_length</span>
+<span class="sd">    2</span>
+<span class="sd">    &gt;&gt;&gt; DiagonalMatrix(MatrixSymbol(&#39;x&#39;, n + 1, n)).diagonal_length</span>
+<span class="sd">    n</span>
+
+<span class="sd">    When one of the dimensions is symbolic the other will be treated as</span>
+<span class="sd">    though it is smaller:</span>
+
+<span class="sd">    &gt;&gt;&gt; tall = DiagonalMatrix(MatrixSymbol(&#39;x&#39;, n, 3))</span>
+<span class="sd">    &gt;&gt;&gt; tall.diagonal_length</span>
+<span class="sd">    3</span>
+<span class="sd">    &gt;&gt;&gt; tall[10, 1]</span>
+<span class="sd">    0</span>
+
+<span class="sd">    When the size of the diagonal is not known, a value of None will</span>
+<span class="sd">    be returned:</span>
+
+<span class="sd">    &gt;&gt;&gt; DiagonalMatrix(MatrixSymbol(&#39;x&#39;, n, m)).diagonal_length is None</span>
+<span class="sd">    True</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">arg</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">shape</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">diagonal_length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">is_Integer</span> <span class="ow">and</span> <span class="n">c</span><span class="o">.</span><span class="n">is_Integer</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">r</span><span class="o">.</span><span class="n">is_Integer</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">c</span><span class="o">.</span><span class="n">is_Integer</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">r</span>
+        <span class="k">elif</span> <span class="n">c</span><span class="o">.</span><span class="n">is_Integer</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">r</span><span class="o">.</span><span class="n">is_Integer</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">c</span>
+        <span class="k">elif</span> <span class="n">r</span> <span class="o">==</span> <span class="n">c</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">r</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">m</span>
+
+    <span class="k">def</span> <span class="nf">_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal_length</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Ge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal_length</span><span class="p">)</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+            <span class="k">elif</span> <span class="n">Ge</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">diagonal_length</span><span class="p">)</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+        <span class="n">eq</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">eq</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">true</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">eq</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">false</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">KroneckerDelta</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DiagonalOf"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.diagonal.DiagonalOf">[docs]</a><span class="k">class</span> <span class="nc">DiagonalOf</span><span class="p">(</span><span class="n">MatrixExpr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;DiagonalOf(M) will create a matrix expression that</span>
+<span class="sd">    is equivalent to the diagonal of `M`, represented as</span>
+<span class="sd">    a single column matrix.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from ... import MatrixSymbol, DiagonalOf, Symbol</span>
+<span class="sd">    &gt;&gt;&gt; n = Symbol(&#39;n&#39;, integer=True)</span>
+<span class="sd">    &gt;&gt;&gt; m = Symbol(&#39;m&#39;, integer=True)</span>
+<span class="sd">    &gt;&gt;&gt; x = MatrixSymbol(&#39;x&#39;, 2, 3)</span>
+<span class="sd">    &gt;&gt;&gt; diag = DiagonalOf(x)</span>
+<span class="sd">    &gt;&gt;&gt; diag.shape</span>
+<span class="sd">    (2, 1)</span>
+
+<span class="sd">    The diagonal can be addressed like a matrix or vector and will</span>
+<span class="sd">    return the corresponding element of the original matrix:</span>
+
+<span class="sd">    &gt;&gt;&gt; diag[1, 0] == diag[1] == x[1, 1]</span>
+<span class="sd">    True</span>
+
+<span class="sd">    The length of the diagonal -- the lesser of the two dimensions of `M` --</span>
+<span class="sd">    is accessed through the `diagonal_length` property:</span>
+
+<span class="sd">    &gt;&gt;&gt; diag.diagonal_length</span>
+<span class="sd">    2</span>
+<span class="sd">    &gt;&gt;&gt; DiagonalOf(MatrixSymbol(&#39;x&#39;, n + 1, n)).diagonal_length</span>
+<span class="sd">    n</span>
+
+<span class="sd">    When only one of the dimensions is symbolic the other will be</span>
+<span class="sd">    treated as though it is smaller:</span>
+
+<span class="sd">    &gt;&gt;&gt; dtall = DiagonalOf(MatrixSymbol(&#39;x&#39;, n, 3))</span>
+<span class="sd">    &gt;&gt;&gt; dtall.diagonal_length</span>
+<span class="sd">    3</span>
+
+<span class="sd">    When the size of the diagonal is not known, a value of None will</span>
+<span class="sd">    be returned:</span>
+
+<span class="sd">    &gt;&gt;&gt; DiagonalOf(MatrixSymbol(&#39;x&#39;, n, m)).diagonal_length is None</span>
+<span class="sd">    True</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">arg</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">is_Integer</span> <span class="ow">and</span> <span class="n">c</span><span class="o">.</span><span class="n">is_Integer</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">r</span><span class="o">.</span><span class="n">is_Integer</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">c</span><span class="o">.</span><span class="n">is_Integer</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">r</span>
+        <span class="k">elif</span> <span class="n">c</span><span class="o">.</span><span class="n">is_Integer</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">r</span><span class="o">.</span><span class="n">is_Integer</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">c</span>
+        <span class="k">elif</span> <span class="n">r</span> <span class="o">==</span> <span class="n">c</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">r</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="n">m</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">m</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">diagonal_length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.matrices.expressions.diagonal</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

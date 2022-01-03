@@ -1,0 +1,463 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.assumptions.sathandlers &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.assumptions.sathandlers</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.assumptions.sathandlers</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">MutableMapping</span><span class="p">,</span> <span class="n">defaultdict</span>
+
+<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">Number</span><span class="p">,</span> <span class="n">NumberSymbol</span><span class="p">,)</span>
+<span class="kn">from</span> <span class="nn">..core.numbers</span> <span class="kn">import</span> <span class="n">ImaginaryUnit</span>
+<span class="kn">from</span> <span class="nn">..core.sympify</span> <span class="kn">import</span> <span class="n">_sympify</span>
+<span class="kn">from</span> <span class="nn">..core.rules</span> <span class="kn">import</span> <span class="n">Transform</span>
+<span class="kn">from</span> <span class="nn">..core.logic</span> <span class="kn">import</span> <span class="n">fuzzy_or</span><span class="p">,</span> <span class="n">fuzzy_and</span>
+<span class="kn">from</span> <span class="nn">..matrices.expressions</span> <span class="kn">import</span> <span class="n">MatMul</span>
+
+<span class="kn">from</span> <span class="nn">..functions.elementary.complexes</span> <span class="kn">import</span> <span class="n">Abs</span>
+
+<span class="kn">from</span> <span class="nn">.ask</span> <span class="kn">import</span> <span class="n">Q</span>
+<span class="kn">from</span> <span class="nn">.assume</span> <span class="kn">import</span> <span class="n">Predicate</span><span class="p">,</span> <span class="n">AppliedPredicate</span>
+<span class="kn">from</span> <span class="nn">..logic.boolalg</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Equivalent</span><span class="p">,</span> <span class="n">Implies</span><span class="p">,</span> <span class="n">And</span><span class="p">,</span> <span class="n">Or</span><span class="p">,</span>
+    <span class="n">BooleanFunction</span><span class="p">,</span> <span class="n">Not</span><span class="p">)</span>
+
+<span class="c1"># APIs here may be subject to change</span>
+
+<span class="c1"># XXX: Better name?</span>
+<div class="viewcode-block" id="UnevaluatedOnFree"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.UnevaluatedOnFree">[docs]</a><span class="k">class</span> <span class="nc">UnevaluatedOnFree</span><span class="p">(</span><span class="n">BooleanFunction</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a Boolean function that remains unevaluated on free predicates</span>
+
+<span class="sd">    This is intended to be a superclass of other classes, which define the</span>
+<span class="sd">    behavior on singly applied predicates.</span>
+
+<span class="sd">    A free predicate is a predicate that is not applied, or a combination</span>
+<span class="sd">    thereof. For example, Q.zero or Or(Q.positive, Q.negative).</span>
+
+<span class="sd">    A singly applied predicate is a free predicate applied everywhere to a</span>
+<span class="sd">    single expression. For instance, Q.zero(x) and Or(Q.positive(x*y),</span>
+<span class="sd">    Q.negative(x*y)) are singly applied, but Or(Q.positive(x), Q.negative(y))</span>
+<span class="sd">    and Or(Q.positive, Q.negative(y)) are not.</span>
+
+<span class="sd">    The boolean literals True and False are considered to be both free and</span>
+<span class="sd">    singly applied.</span>
+
+<span class="sd">    This class raises ValueError unless the input is a free predicate or a</span>
+<span class="sd">    singly applied predicate.</span>
+
+<span class="sd">    On a free predicate, this class remains unevaluated. On a singly applied</span>
+<span class="sd">    predicate, the method apply() is called and returned, or the original</span>
+<span class="sd">    expression returned if apply() returns None. When apply() is called,</span>
+<span class="sd">    self.expr is set to the unique expression that the predicates are applied</span>
+<span class="sd">    at. self.pred is set to the free form of the predicate.</span>
+
+<span class="sd">    The typical usage is to create this class with free predicates and</span>
+<span class="sd">    evaluate it using .rcall().</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+        <span class="c1"># Mostly type checking here</span>
+        <span class="n">arg</span> <span class="o">=</span> <span class="n">_sympify</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+        <span class="n">predicates</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">Predicate</span><span class="p">)</span>
+        <span class="n">applied_predicates</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">AppliedPredicate</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">predicates</span> <span class="ow">and</span> <span class="n">applied_predicates</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;arg must be either completely free or singly applied&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">applied_predicates</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">BooleanFunction</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">pred</span> <span class="o">=</span> <span class="n">arg</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">expr</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="n">obj</span>
+        <span class="n">predicate_args</span> <span class="o">=</span> <span class="p">{</span><span class="n">pred</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">applied_predicates</span><span class="p">}</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">predicate_args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The AppliedPredicates in arg must be applied to a single expression.&quot;</span><span class="p">)</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">BooleanFunction</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">expr</span> <span class="o">=</span> <span class="n">predicate_args</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">pred</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">xreplace</span><span class="p">(</span><span class="n">Transform</span><span class="p">(</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">func</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">AppliedPredicate</span><span class="p">)))</span>
+        <span class="n">applied</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">apply</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">applied</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">obj</span>
+        <span class="k">return</span> <span class="n">applied</span>
+
+<div class="viewcode-block" id="UnevaluatedOnFree.apply"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.UnevaluatedOnFree.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span></div></div>
+
+
+<div class="viewcode-block" id="AllArgs"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.AllArgs">[docs]</a><span class="k">class</span> <span class="nc">AllArgs</span><span class="p">(</span><span class="n">UnevaluatedOnFree</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class representing vectorizing a predicate over all the .args of an</span>
+<span class="sd">    expression</span>
+
+<span class="sd">    See the docstring of UnevaluatedOnFree for more information on this</span>
+<span class="sd">    class.</span>
+
+<span class="sd">    The typical usage is to evaluate predicates with expressions using .rcall().</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    =======</span>
+
+<span class="sd">    &gt;&gt;&gt; from .sathandlers import AllArgs</span>
+<span class="sd">    &gt;&gt;&gt; from .. import symbols, Q</span>
+<span class="sd">    &gt;&gt;&gt; x, y = symbols(&#39;x y&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; a = AllArgs(Q.positive | Q.negative)</span>
+<span class="sd">    &gt;&gt;&gt; a</span>
+<span class="sd">    AllArgs(Q.negative | Q.positive)</span>
+<span class="sd">    &gt;&gt;&gt; a.rcall(x*y)</span>
+<span class="sd">    (Q.negative(x) | Q.positive(x)) &amp; (Q.negative(y) | Q.positive(y))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AllArgs.apply"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.AllArgs.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">And</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pred</span><span class="o">.</span><span class="n">rcall</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">])</span></div></div>
+
+
+<div class="viewcode-block" id="AnyArgs"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.AnyArgs">[docs]</a><span class="k">class</span> <span class="nc">AnyArgs</span><span class="p">(</span><span class="n">UnevaluatedOnFree</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class representing vectorizing a predicate over any of the .args of an</span>
+<span class="sd">    expression.</span>
+
+<span class="sd">    See the docstring of UnevaluatedOnFree for more information on this</span>
+<span class="sd">    class.</span>
+
+<span class="sd">    The typical usage is to evaluate predicates with expressions using .rcall().</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    =======</span>
+
+<span class="sd">    &gt;&gt;&gt; from .sathandlers import AnyArgs</span>
+<span class="sd">    &gt;&gt;&gt; from .. import symbols, Q</span>
+<span class="sd">    &gt;&gt;&gt; x, y = symbols(&#39;x y&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; a = AnyArgs(Q.positive &amp; Q.negative)</span>
+<span class="sd">    &gt;&gt;&gt; a</span>
+<span class="sd">    AnyArgs(Q.negative &amp; Q.positive)</span>
+<span class="sd">    &gt;&gt;&gt; a.rcall(x*y)</span>
+<span class="sd">    (Q.negative(x) &amp; Q.positive(x)) | (Q.negative(y) &amp; Q.positive(y))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AnyArgs.apply"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.AnyArgs.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Or</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pred</span><span class="o">.</span><span class="n">rcall</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">])</span></div></div>
+
+
+<div class="viewcode-block" id="ExactlyOneArg"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.ExactlyOneArg">[docs]</a><span class="k">class</span> <span class="nc">ExactlyOneArg</span><span class="p">(</span><span class="n">UnevaluatedOnFree</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class representing a predicate holding on exactly one of the .args of an</span>
+<span class="sd">    expression.</span>
+
+<span class="sd">    See the docstring of UnevaluatedOnFree for more information on this</span>
+<span class="sd">    class.</span>
+
+<span class="sd">    The typical usage is to evaluate predicate with expressions using</span>
+<span class="sd">    .rcall().</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    =======</span>
+
+<span class="sd">    &gt;&gt;&gt; from .sathandlers import ExactlyOneArg</span>
+<span class="sd">    &gt;&gt;&gt; from .. import symbols, Q</span>
+<span class="sd">    &gt;&gt;&gt; x, y = symbols(&#39;x y&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; a = ExactlyOneArg(Q.positive)</span>
+<span class="sd">    &gt;&gt;&gt; a</span>
+<span class="sd">    ExactlyOneArg(Q.positive)</span>
+<span class="sd">    &gt;&gt;&gt; a.rcall(x*y)</span>
+<span class="sd">    (Q.positive(x) &amp; ~Q.positive(y)) | (Q.positive(y) &amp; ~Q.positive(x))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ExactlyOneArg.apply"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.ExactlyOneArg.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">expr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expr</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pred</span>
+        <span class="n">pred_args</span> <span class="o">=</span> <span class="p">[</span><span class="n">pred</span><span class="o">.</span><span class="n">rcall</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">]</span>
+        <span class="c1"># Technically this is xor, but if one term in the disjunction is true,</span>
+        <span class="c1"># it is not possible for the remainder to be true, so regular or is</span>
+        <span class="c1"># fine in this case.</span>
+        <span class="k">return</span> <span class="n">Or</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">And</span><span class="p">(</span><span class="n">pred_args</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="n">Not</span><span class="p">,</span> <span class="n">pred_args</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span>
+            <span class="n">pred_args</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">:]))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pred_args</span><span class="p">))])</span></div></div>
+        <span class="c1"># Note: this is the equivalent cnf form. The above is more efficient</span>
+        <span class="c1"># as the first argument of an implication, since p &gt;&gt; q is the same as</span>
+        <span class="c1"># q | ~p, so the the ~ will convert the Or to and, and one just needs</span>
+        <span class="c1"># to distribute the q across it to get to cnf.</span>
+
+        <span class="c1"># return And(*[Or(*map(Not, c)) for c in combinations(pred_args, 2)]) &amp; Or(*pred_args)</span>
+
+
+<span class="k">def</span> <span class="nf">_old_assump_replacer</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+    <span class="c1"># Things to be careful of:</span>
+    <span class="c1"># - real means real or infinite in the old assumptions.</span>
+    <span class="c1"># - nonzero does not imply real in the old assumptions.</span>
+    <span class="c1"># - finite means finite and not zero in the old assumptions.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">AppliedPredicate</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="n">e</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ret</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">fuzzy_and</span><span class="p">([</span><span class="n">e</span><span class="o">.</span><span class="n">is_finite</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">is_positive</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">Q</span><span class="o">.</span><span class="n">zero</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">is_zero</span>
+    <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">Q</span><span class="o">.</span><span class="n">negative</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">fuzzy_and</span><span class="p">([</span><span class="n">e</span><span class="o">.</span><span class="n">is_finite</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">is_negative</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">Q</span><span class="o">.</span><span class="n">nonpositive</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">fuzzy_and</span><span class="p">([</span><span class="n">e</span><span class="o">.</span><span class="n">is_finite</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">is_nonpositive</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">Q</span><span class="o">.</span><span class="n">nonzero</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">fuzzy_and</span><span class="p">([</span><span class="n">e</span><span class="o">.</span><span class="n">is_nonzero</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">is_finite</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">Q</span><span class="o">.</span><span class="n">nonnegative</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">fuzzy_and</span><span class="p">([</span><span class="n">fuzzy_or</span><span class="p">([</span><span class="n">e</span><span class="o">.</span><span class="n">is_zero</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">is_finite</span><span class="p">]),</span>
+        <span class="n">e</span><span class="o">.</span><span class="n">is_nonnegative</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">Q</span><span class="o">.</span><span class="n">rational</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">is_rational</span>
+    <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">Q</span><span class="o">.</span><span class="n">irrational</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">is_irrational</span>
+
+    <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">Q</span><span class="o">.</span><span class="n">even</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">is_even</span>
+    <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">Q</span><span class="o">.</span><span class="n">odd</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">is_odd</span>
+    <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">Q</span><span class="o">.</span><span class="n">integer</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">is_integer</span>
+    <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">Q</span><span class="o">.</span><span class="n">imaginary</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">is_imaginary</span>
+    <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">Q</span><span class="o">.</span><span class="n">commutative</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">is_commutative</span>
+
+    <span class="k">if</span> <span class="n">ret</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">obj</span>
+    <span class="k">return</span> <span class="n">ret</span>
+
+
+<div class="viewcode-block" id="evaluate_old_assump"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.evaluate_old_assump">[docs]</a><span class="k">def</span> <span class="nf">evaluate_old_assump</span><span class="p">(</span><span class="n">pred</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Replace assumptions of expressions replaced with their values in the old</span>
+<span class="sd">    assumptions (like Q.negative(-1) =&gt; True). Useful because some direct</span>
+<span class="sd">    computations for numeric objects is defined most conveniently in the old</span>
+<span class="sd">    assumptions.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">pred</span><span class="o">.</span><span class="n">xreplace</span><span class="p">(</span><span class="n">Transform</span><span class="p">(</span><span class="n">_old_assump_replacer</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="CheckOldAssump"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.CheckOldAssump">[docs]</a><span class="k">class</span> <span class="nc">CheckOldAssump</span><span class="p">(</span><span class="n">UnevaluatedOnFree</span><span class="p">):</span>
+<div class="viewcode-block" id="CheckOldAssump.apply"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.CheckOldAssump.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Equivalent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">evaluate_old_assump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span></div></div>
+
+
+<div class="viewcode-block" id="CheckIsPrime"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.CheckIsPrime">[docs]</a><span class="k">class</span> <span class="nc">CheckIsPrime</span><span class="p">(</span><span class="n">UnevaluatedOnFree</span><span class="p">):</span>
+<div class="viewcode-block" id="CheckIsPrime.apply"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.CheckIsPrime.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">isprime</span>
+        <span class="k">return</span> <span class="n">Equivalent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">isprime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">expr</span><span class="p">))</span></div></div>
+
+
+<div class="viewcode-block" id="CustomLambda"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.CustomLambda">[docs]</a><span class="k">class</span> <span class="nc">CustomLambda</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Interface to lambda with rcall</span>
+
+<span class="sd">    Workaround until we get a better way to represent certain facts.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lamda</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lamda</span> <span class="o">=</span> <span class="n">lamda</span>
+
+<div class="viewcode-block" id="CustomLambda.rcall"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.CustomLambda.rcall">[docs]</a>    <span class="k">def</span> <span class="nf">rcall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lamda</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="ClassFactRegistry"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.ClassFactRegistry">[docs]</a><span class="k">class</span> <span class="nc">ClassFactRegistry</span><span class="p">(</span><span class="n">MutableMapping</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Register handlers against classes</span>
+
+<span class="sd">    ``registry[C] = handler`` registers ``handler`` for class</span>
+<span class="sd">    ``C``. ``registry[C]`` returns a set of handlers for class ``C``, or any</span>
+<span class="sd">    of its superclasses.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">d</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">frozenset</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">ClassFactRegistry</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+                <span class="n">ret</span> <span class="o">|=</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">ret</span>
+
+    <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">d</span><span class="p">)</span></div>
+
+
+<span class="n">fact_registry</span> <span class="o">=</span> <span class="n">ClassFactRegistry</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="register_fact"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.sathandlers.register_fact">[docs]</a><span class="k">def</span> <span class="nf">register_fact</span><span class="p">(</span><span class="n">klass</span><span class="p">,</span> <span class="n">fact</span><span class="p">,</span> <span class="n">registry</span><span class="o">=</span><span class="n">fact_registry</span><span class="p">):</span>
+    <span class="n">registry</span><span class="p">[</span><span class="n">klass</span><span class="p">]</span> <span class="o">|=</span> <span class="p">{</span><span class="n">fact</span><span class="p">}</span></div>
+
+
+<span class="k">for</span> <span class="n">klass</span><span class="p">,</span> <span class="n">fact</span> <span class="ow">in</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">Mul</span><span class="p">,</span> <span class="n">Equivalent</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">zero</span><span class="p">,</span> <span class="n">AnyArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">zero</span><span class="p">))),</span>
+    <span class="p">(</span><span class="n">MatMul</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">square</span><span class="p">),</span> <span class="n">Equivalent</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">invertible</span><span class="p">,</span> <span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">invertible</span><span class="p">)))),</span>
+    <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">negative</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">negative</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Mul</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Mul</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">commutative</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">commutative</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Mul</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">commutative</span><span class="p">)),</span>
+
+    <span class="p">(</span><span class="n">Pow</span><span class="p">,</span> <span class="n">CustomLambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">power</span><span class="p">:</span> <span class="n">Implies</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">power</span><span class="o">.</span><span class="n">base</span><span class="p">)</span> <span class="o">&amp;</span>
+    <span class="n">Q</span><span class="o">.</span><span class="n">even</span><span class="p">(</span><span class="n">power</span><span class="o">.</span><span class="n">exp</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Q</span><span class="o">.</span><span class="n">nonnegative</span><span class="p">(</span><span class="n">power</span><span class="o">.</span><span class="n">exp</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">nonnegative</span><span class="p">(</span><span class="n">power</span><span class="p">)))),</span>
+    <span class="p">(</span><span class="n">Pow</span><span class="p">,</span> <span class="n">CustomLambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">power</span><span class="p">:</span> <span class="n">Implies</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonnegative</span><span class="p">(</span><span class="n">power</span><span class="o">.</span><span class="n">base</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Q</span><span class="o">.</span><span class="n">odd</span><span class="p">(</span><span class="n">power</span><span class="o">.</span><span class="n">exp</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Q</span><span class="o">.</span><span class="n">nonnegative</span><span class="p">(</span><span class="n">power</span><span class="o">.</span><span class="n">exp</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">nonnegative</span><span class="p">(</span><span class="n">power</span><span class="p">)))),</span>
+    <span class="p">(</span><span class="n">Pow</span><span class="p">,</span> <span class="n">CustomLambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">power</span><span class="p">:</span> <span class="n">Implies</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonpositive</span><span class="p">(</span><span class="n">power</span><span class="o">.</span><span class="n">base</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Q</span><span class="o">.</span><span class="n">odd</span><span class="p">(</span><span class="n">power</span><span class="o">.</span><span class="n">exp</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Q</span><span class="o">.</span><span class="n">nonnegative</span><span class="p">(</span><span class="n">power</span><span class="o">.</span><span class="n">exp</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">nonpositive</span><span class="p">(</span><span class="n">power</span><span class="p">)))),</span>
+
+    <span class="c1"># This one can still be made easier to read. I think we need basic pattern</span>
+    <span class="c1"># matching, so that we can just write Equivalent(Q.zero(x**y), Q.zero(x) &amp; Q.positive(y))</span>
+    <span class="p">(</span><span class="n">Pow</span><span class="p">,</span> <span class="n">CustomLambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">power</span><span class="p">:</span> <span class="n">Equivalent</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="n">power</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="n">power</span><span class="o">.</span><span class="n">base</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">(</span><span class="n">power</span><span class="o">.</span><span class="n">exp</span><span class="p">)))),</span>
+    <span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">CheckIsPrime</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">prime</span><span class="p">)),</span>
+    <span class="c1"># Implicitly assumes Mul has more than one arg</span>
+    <span class="c1"># Would be AllArgs(Q.prime | Q.composite) except 1 is composite</span>
+    <span class="p">(</span><span class="n">Mul</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">prime</span><span class="p">),</span> <span class="o">~</span><span class="n">Q</span><span class="o">.</span><span class="n">prime</span><span class="p">)),</span>
+    <span class="c1"># More advanced prime assumptions will require inequalities, as 1 provides</span>
+    <span class="c1"># a corner case.</span>
+    <span class="p">(</span><span class="n">Mul</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">imaginary</span> <span class="o">|</span> <span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">),</span> <span class="n">Implies</span><span class="p">(</span><span class="n">ExactlyOneArg</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">imaginary</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">imaginary</span><span class="p">))),</span>
+    <span class="p">(</span><span class="n">Mul</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">)),</span>
+    <span class="c1"># General Case: Odd number of imaginary args implies mul is imaginary(To be implemented)</span>
+    <span class="p">(</span><span class="n">Mul</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">),</span> <span class="n">Implies</span><span class="p">(</span><span class="n">ExactlyOneArg</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">irrational</span><span class="p">),</span>
+        <span class="n">Q</span><span class="o">.</span><span class="n">irrational</span><span class="p">))),</span>
+    <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">),</span> <span class="n">Implies</span><span class="p">(</span><span class="n">ExactlyOneArg</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">irrational</span><span class="p">),</span>
+        <span class="n">Q</span><span class="o">.</span><span class="n">irrational</span><span class="p">))),</span>
+    <span class="p">(</span><span class="n">Mul</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">rational</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">rational</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">rational</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">rational</span><span class="p">)),</span>
+
+    <span class="p">(</span><span class="n">Abs</span><span class="p">,</span> <span class="n">Q</span><span class="o">.</span><span class="n">nonnegative</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">Abs</span><span class="p">,</span> <span class="n">Equivalent</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="o">~</span><span class="n">Q</span><span class="o">.</span><span class="n">zero</span><span class="p">),</span> <span class="o">~</span><span class="n">Q</span><span class="o">.</span><span class="n">zero</span><span class="p">)),</span>
+
+    <span class="c1"># Including the integer qualification means we don&#39;t need to add any facts</span>
+    <span class="c1"># for odd, since the assumptions already know that every integer is</span>
+    <span class="c1"># exactly one of even or odd.</span>
+    <span class="p">(</span><span class="n">Mul</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">integer</span><span class="p">),</span> <span class="n">Equivalent</span><span class="p">(</span><span class="n">AnyArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">even</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">even</span><span class="p">))),</span>
+
+    <span class="p">(</span><span class="n">Abs</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">even</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">even</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Abs</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">odd</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">odd</span><span class="p">)),</span>
+
+    <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">integer</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">integer</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">ExactlyOneArg</span><span class="p">(</span><span class="o">~</span><span class="n">Q</span><span class="o">.</span><span class="n">integer</span><span class="p">),</span> <span class="o">~</span><span class="n">Q</span><span class="o">.</span><span class="n">integer</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Mul</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">integer</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">integer</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Mul</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">ExactlyOneArg</span><span class="p">(</span><span class="o">~</span><span class="n">Q</span><span class="o">.</span><span class="n">rational</span><span class="p">),</span> <span class="o">~</span><span class="n">Q</span><span class="o">.</span><span class="n">integer</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Abs</span><span class="p">,</span> <span class="n">Implies</span><span class="p">(</span><span class="n">AllArgs</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">integer</span><span class="p">),</span> <span class="n">Q</span><span class="o">.</span><span class="n">integer</span><span class="p">)),</span>
+
+    <span class="p">(</span><span class="n">Number</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">negative</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Number</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">zero</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Number</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Number</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonnegative</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Number</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonzero</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Number</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonpositive</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Number</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">rational</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Number</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">irrational</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Number</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">even</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Number</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">odd</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Number</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">integer</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">Number</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">imaginary</span><span class="p">)),</span>
+    <span class="c1"># For some reason NumberSymbol does not subclass Number</span>
+    <span class="p">(</span><span class="n">NumberSymbol</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">negative</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">NumberSymbol</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">zero</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">NumberSymbol</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">NumberSymbol</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonnegative</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">NumberSymbol</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonzero</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">NumberSymbol</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonpositive</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">NumberSymbol</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">rational</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">NumberSymbol</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">irrational</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">NumberSymbol</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">imaginary</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">ImaginaryUnit</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">negative</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">ImaginaryUnit</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">zero</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">ImaginaryUnit</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">ImaginaryUnit</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonnegative</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">ImaginaryUnit</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonzero</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">ImaginaryUnit</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonpositive</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">ImaginaryUnit</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">rational</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">ImaginaryUnit</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">irrational</span><span class="p">)),</span>
+    <span class="p">(</span><span class="n">ImaginaryUnit</span><span class="p">,</span> <span class="n">CheckOldAssump</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">imaginary</span><span class="p">))</span>
+    <span class="p">]:</span>
+
+    <span class="n">register_fact</span><span class="p">(</span><span class="n">klass</span><span class="p">,</span> <span class="n">fact</span><span class="p">)</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.assumptions.sathandlers</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

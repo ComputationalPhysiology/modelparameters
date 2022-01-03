@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.holonomic.linearsolver &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.holonomic.linearsolver</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.holonomic.linearsolver</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; Linear Solver for Holonomic Functions&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..matrices.dense</span> <span class="kn">import</span> <span class="n">MutableDenseMatrix</span>
+<span class="kn">from</span> <span class="nn">..utilities.iterables</span> <span class="kn">import</span> <span class="n">flatten</span><span class="p">,</span> <span class="n">numbered_symbols</span>
+<span class="kn">from</span> <span class="nn">..core.symbol</span> <span class="kn">import</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">symbols</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">S</span>
+
+
+<div class="viewcode-block" id="NewMatrix"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.linearsolver.NewMatrix">[docs]</a><span class="k">class</span> <span class="nc">NewMatrix</span><span class="p">(</span><span class="n">MutableDenseMatrix</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Supports elements which can&#39;t be Sympified.</span>
+<span class="sd">    See docstrings in sympy/matrices/matrices.py</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_sympify</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">a</span>
+
+<div class="viewcode-block" id="NewMatrix.row_join"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.linearsolver.NewMatrix.row_join">[docs]</a>    <span class="k">def</span> <span class="nf">row_join</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">..matrices</span> <span class="kn">import</span> <span class="n">MutableMatrix</span>
+        <span class="c1"># Allows you to build a matrix even if it is null matrix</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">rhs</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">!=</span> <span class="n">rhs</span><span class="o">.</span><span class="n">rows</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ShapeError</span><span class="p">(</span>
+                <span class="s2">&quot;`self` and `rhs` must have the same number of rows.&quot;</span><span class="p">)</span>
+        <span class="n">newmat</span> <span class="o">=</span> <span class="n">NewMatrix</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">+</span> <span class="n">rhs</span><span class="o">.</span><span class="n">cols</span><span class="p">)</span>
+        <span class="n">newmat</span><span class="p">[:,</span> <span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="n">newmat</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">:]</span> <span class="o">=</span> <span class="n">rhs</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">newmat</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NewMatrix.col_join"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.linearsolver.NewMatrix.col_join">[docs]</a>    <span class="k">def</span> <span class="nf">col_join</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bott</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">..matrices</span> <span class="kn">import</span> <span class="n">MutableMatrix</span>
+        <span class="c1"># Allows you to build a matrix even if it is null matrix</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">bott</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">!=</span> <span class="n">bott</span><span class="o">.</span><span class="n">cols</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ShapeError</span><span class="p">(</span>
+                <span class="s2">&quot;`self` and `bott` must have the same number of columns.&quot;</span><span class="p">)</span>
+        <span class="n">newmat</span> <span class="o">=</span> <span class="n">NewMatrix</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">+</span> <span class="n">bott</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">)</span>
+        <span class="n">newmat</span><span class="p">[:</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="n">newmat</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">bott</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">newmat</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NewMatrix.gauss_jordan_solve"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.linearsolver.NewMatrix.gauss_jordan_solve">[docs]</a>    <span class="k">def</span> <span class="nf">gauss_jordan_solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">freevar</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">..matrices</span> <span class="kn">import</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">zeros</span>
+
+        <span class="n">aug</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">b</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+        <span class="n">row</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">aug</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="c1"># solve by reduced row echelon form</span>
+        <span class="n">A</span><span class="p">,</span> <span class="n">pivots</span> <span class="o">=</span> <span class="n">aug</span><span class="o">.</span><span class="n">rref</span><span class="p">()</span>
+        <span class="n">A</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">A</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">A</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">pivots</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="n">col</span><span class="p">,</span> <span class="n">pivots</span><span class="p">))</span>
+        <span class="n">rank</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pivots</span><span class="p">)</span>
+
+        <span class="c1"># Bring to block form</span>
+        <span class="n">permutation</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">col</span><span class="p">))</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">permutation</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pivots</span><span class="p">):</span>
+            <span class="n">A</span><span class="o">.</span><span class="n">col_swap</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+        <span class="n">A</span><span class="p">,</span> <span class="n">permutation</span> <span class="o">=</span> <span class="n">A</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">A</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+
+        <span class="c1"># check for existence of solutions</span>
+        <span class="c1"># rank of aug Matrix should be equal to rank of coefficient matrix</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">v</span><span class="p">[</span><span class="n">rank</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Linear system has no solution&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Get index of free symbols (free parameters)</span>
+        <span class="n">free_var_index</span> <span class="o">=</span> <span class="n">permutation</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">pivots</span><span class="p">):]</span>  <span class="c1"># non-pivots columns are free variables</span>
+
+        <span class="c1"># Free parameters</span>
+        <span class="n">tau</span> <span class="o">=</span> <span class="n">NewMatrix</span><span class="p">([</span><span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">col</span> <span class="o">-</span> <span class="n">rank</span><span class="p">)])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">col</span> <span class="o">-</span> <span class="n">rank</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Full parametric solution</span>
+        <span class="n">V</span> <span class="o">=</span> <span class="n">A</span><span class="p">[:</span><span class="n">rank</span><span class="p">,</span> <span class="n">rank</span><span class="p">:]</span>
+        <span class="n">vt</span> <span class="o">=</span> <span class="n">v</span><span class="p">[:</span><span class="n">rank</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">free_sol</span> <span class="o">=</span> <span class="n">tau</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">vt</span> <span class="o">-</span> <span class="n">V</span><span class="o">*</span><span class="n">tau</span><span class="p">,</span> <span class="n">tau</span><span class="p">)</span>
+
+        <span class="c1"># Undo permutation</span>
+        <span class="n">sol</span> <span class="o">=</span> <span class="n">NewMatrix</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">free_sol</span><span class="p">):</span>
+            <span class="n">sol</span><span class="p">[</span><span class="n">permutation</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+        <span class="k">if</span> <span class="n">freevar</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">sol</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">free_var_index</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">sol</span><span class="p">,</span> <span class="n">tau</span></div></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.holonomic.linearsolver</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

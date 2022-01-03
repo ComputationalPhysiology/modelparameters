@@ -1,0 +1,279 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.polys.domains.quotientring &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.polys.domains.quotientring</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.polys.domains.quotientring</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Implementation of :class:`QuotientRing` class.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">.ring</span> <span class="kn">import</span> <span class="n">Ring</span>
+<span class="kn">from</span> <span class="nn">..polyerrors</span> <span class="kn">import</span> <span class="n">NotReversible</span><span class="p">,</span> <span class="n">CoercionFailed</span>
+<span class="kn">from</span> <span class="nn">..agca.modules</span> <span class="kn">import</span> <span class="n">FreeModuleQuotientRing</span>
+
+<span class="kn">from</span> <span class="nn">...utilities</span> <span class="kn">import</span> <span class="n">public</span>
+
+<span class="c1"># TODO</span>
+<span class="c1"># - successive quotients (when quotient ideals are implemented)</span>
+<span class="c1"># - poly rings over quotients?</span>
+<span class="c1"># - division by non-units in integral domains?</span>
+
+<div class="viewcode-block" id="QuotientRingElement"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.quotientring.QuotientRingElement">[docs]</a><span class="nd">@public</span>
+<span class="k">class</span> <span class="nc">QuotientRingElement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class representing elements of (commutative) quotient rings.</span>
+
+<span class="sd">    Attributes:</span>
+
+<span class="sd">    - ring - containing ring</span>
+<span class="sd">    - data - element of ring.ring (i.e. base ring) representing self</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ring</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ring</span> <span class="o">=</span> <span class="n">ring</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">sstr</span>
+        <span class="k">return</span> <span class="n">sstr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; + &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">base_ideal</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">om</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span> <span class="ow">or</span> <span class="n">om</span><span class="o">.</span><span class="n">ring</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">om</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">om</span><span class="p">)</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">NotImplementedError</span><span class="p">,</span> <span class="n">CoercionFailed</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">+</span> <span class="n">om</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="fm">__radd__</span> <span class="o">=</span> <span class="fm">__add__</span>
+
+    <span class="k">def</span> <span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">om</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__add__</span><span class="p">(</span><span class="o">-</span><span class="n">om</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__rsub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">om</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__add__</span><span class="p">(</span><span class="n">om</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">o</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">NotImplementedError</span><span class="p">,</span> <span class="n">CoercionFailed</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">*</span><span class="n">o</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="fm">__rmul__</span> <span class="o">=</span> <span class="fm">__mul__</span>
+
+    <span class="k">def</span> <span class="nf">__rdiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">revert</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">*</span><span class="n">o</span>
+
+    <span class="fm">__rtruediv__</span> <span class="o">=</span> <span class="n">__rdiv__</span>
+
+    <span class="k">def</span> <span class="nf">__div__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">o</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">o</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">NotImplementedError</span><span class="p">,</span> <span class="n">CoercionFailed</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">revert</span><span class="p">(</span><span class="n">o</span><span class="p">)</span><span class="o">*</span><span class="bp">self</span>
+
+    <span class="fm">__truediv__</span> <span class="o">=</span> <span class="n">__div__</span>
+
+    <span class="k">def</span> <span class="fm">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">oth</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">**</span><span class="n">oth</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">om</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">om</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span> <span class="ow">or</span> <span class="n">om</span><span class="o">.</span><span class="n">ring</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">is_zero</span><span class="p">(</span><span class="bp">self</span> <span class="o">-</span> <span class="n">om</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">om</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">om</span><span class="p">)</span></div>
+
+
+<span class="k">class</span> <span class="nc">QuotientRing</span><span class="p">(</span><span class="n">Ring</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class representing (commutative) quotient rings.</span>
+
+<span class="sd">    You should not usually instantiate this by hand, instead use the constructor</span>
+<span class="sd">    from the base ring in the construction.</span>
+
+<span class="sd">    &gt;&gt;&gt; from ...abc import x</span>
+<span class="sd">    &gt;&gt;&gt; from ... import QQ</span>
+<span class="sd">    &gt;&gt;&gt; I = QQ.old_poly_ring(x).ideal(x**3 + 1)</span>
+<span class="sd">    &gt;&gt;&gt; QQ.old_poly_ring(x).quotient_ring(I)</span>
+<span class="sd">    QQ[x]/&lt;x**3 + 1&gt;</span>
+
+<span class="sd">    Shorter versions are possible:</span>
+
+<span class="sd">    &gt;&gt;&gt; QQ.old_poly_ring(x)/I</span>
+<span class="sd">    QQ[x]/&lt;x**3 + 1&gt;</span>
+
+<span class="sd">    &gt;&gt;&gt; QQ.old_poly_ring(x)/[x**3 + 1]</span>
+<span class="sd">    QQ[x]/&lt;x**3 + 1&gt;</span>
+
+<span class="sd">    Attributes:</span>
+
+<span class="sd">    - ring - the base ring</span>
+<span class="sd">    - base_ideal - the ideal used to form the quotient</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">has_assoc_Ring</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">has_assoc_Field</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">QuotientRingElement</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ring</span><span class="p">,</span> <span class="n">ideal</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ideal</span><span class="o">.</span><span class="n">ring</span> <span class="o">==</span> <span class="n">ring</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Ideal must belong to </span><span class="si">%s</span><span class="s1">, got </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ring</span><span class="p">,</span> <span class="n">ideal</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ring</span> <span class="o">=</span> <span class="n">ring</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base_ideal</span> <span class="o">=</span> <span class="n">ideal</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zero</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">zero</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">one</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">one</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">base_ideal</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_ideal</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Construct an element of `self` domain from `a`. &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="c1"># TODO optionally disable reduction?</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_ideal</span><span class="o">.</span><span class="n">reduce_element</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns `True` if two domains are equivalent. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">QuotientRing</span><span class="p">)</span> <span class="ow">and</span> \
+            <span class="bp">self</span><span class="o">.</span><span class="n">ring</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">ring</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_ideal</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">base_ideal</span>
+
+    <span class="k">def</span> <span class="nf">from_ZZ_python</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert a Python `int` object to `dtype`. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">K1</span><span class="p">(</span><span class="n">K1</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">))</span>
+
+    <span class="n">from_QQ_python</span> <span class="o">=</span> <span class="n">from_ZZ_python</span>
+    <span class="n">from_ZZ_gmpy</span> <span class="o">=</span> <span class="n">from_ZZ_python</span>
+    <span class="n">from_QQ_gmpy</span> <span class="o">=</span> <span class="n">from_ZZ_python</span>
+    <span class="n">from_RealField</span> <span class="o">=</span> <span class="n">from_ZZ_python</span>
+    <span class="n">from_GlobalPolynomialRing</span> <span class="o">=</span> <span class="n">from_ZZ_python</span>
+    <span class="n">from_FractionField</span> <span class="o">=</span> <span class="n">from_ZZ_python</span>
+
+    <span class="k">def</span> <span class="nf">from_sympy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">from_sympy</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">to_sympy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">to_sympy</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">from_QuotientRing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">K0</span> <span class="o">==</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">a</span>
+
+    <span class="k">def</span> <span class="nf">poly_ring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a polynomial ring, i.e. `K[X]`. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;nested domains not allowed&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">frac_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a fraction field, i.e. `K(X)`. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;nested domains not allowed&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">revert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute a**(-1), if possible.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">I</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">ideal</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_ideal</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">(</span><span class="n">I</span><span class="o">.</span><span class="n">in_terms_of_generators</span><span class="p">(</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>  <span class="c1"># 1 not in I</span>
+            <span class="k">raise</span> <span class="n">NotReversible</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> not a unit in </span><span class="si">%r</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">is_zero</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_ideal</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">free_module</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rank</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate a free module of rank ``rank`` over ``self``.</span>
+
+<span class="sd">        &gt;&gt;&gt; from ...abc import x</span>
+<span class="sd">        &gt;&gt;&gt; from ... import QQ</span>
+<span class="sd">        &gt;&gt;&gt; (QQ.old_poly_ring(x)/[x**2 + 1]).free_module(2)</span>
+<span class="sd">        (QQ[x]/&lt;x**2 + 1&gt;)**2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">FreeModuleQuotientRing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rank</span><span class="p">)</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.polys.domains.quotientring</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

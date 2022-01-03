@@ -1,0 +1,249 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.polys.domains.mpelements &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.polys.domains.mpelements</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.polys.domains.mpelements</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Real and complex elements. &quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">.domainelement</span> <span class="kn">import</span> <span class="n">DomainElement</span>
+
+<span class="kn">from</span> <span class="nn">mpmath.ctx_mp_python</span> <span class="kn">import</span> <span class="n">PythonMPContext</span><span class="p">,</span> <span class="n">_mpf</span><span class="p">,</span> <span class="n">_mpc</span><span class="p">,</span> <span class="n">_constant</span>
+<span class="kn">from</span> <span class="nn">mpmath.libmp</span> <span class="kn">import</span> <span class="p">(</span><span class="n">MPZ_ONE</span><span class="p">,</span> <span class="n">fzero</span><span class="p">,</span> <span class="n">fone</span><span class="p">,</span> <span class="n">finf</span><span class="p">,</span> <span class="n">fninf</span><span class="p">,</span> <span class="n">fnan</span><span class="p">,</span>
+    <span class="n">round_nearest</span><span class="p">,</span> <span class="n">mpf_mul</span><span class="p">,</span> <span class="n">mpf_abs</span><span class="p">,</span> <span class="n">mpf_lt</span><span class="p">,</span> <span class="n">mpc_abs</span><span class="p">,</span> <span class="n">repr_dps</span><span class="p">,</span> <span class="n">int_types</span><span class="p">,</span>
+    <span class="n">from_int</span><span class="p">,</span> <span class="n">from_float</span><span class="p">,</span> <span class="n">from_str</span><span class="p">,</span> <span class="n">to_rational</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">mpmath.rational</span> <span class="kn">import</span> <span class="n">mpq</span>
+
+<span class="kn">from</span> <span class="nn">...utilities</span> <span class="kn">import</span> <span class="n">public</span>
+
+<div class="viewcode-block" id="RealElement"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.mpelements.RealElement">[docs]</a><span class="nd">@public</span>
+<span class="k">class</span> <span class="nc">RealElement</span><span class="p">(</span><span class="n">_mpf</span><span class="p">,</span> <span class="n">DomainElement</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An element of a real domain. &quot;&quot;&quot;</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;__mpf__&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_set_mpf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__mpf__</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="n">_mpf_</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mpf__</span><span class="p">,</span> <span class="n">_set_mpf</span><span class="p">)</span>
+
+<div class="viewcode-block" id="RealElement.parent"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.mpelements.RealElement.parent">[docs]</a>    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">_parent</span></div></div>
+
+<div class="viewcode-block" id="ComplexElement"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.mpelements.ComplexElement">[docs]</a><span class="nd">@public</span>
+<span class="k">class</span> <span class="nc">ComplexElement</span><span class="p">(</span><span class="n">_mpc</span><span class="p">,</span> <span class="n">DomainElement</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An element of a complex domain. &quot;&quot;&quot;</span>
+
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;__mpc__&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_set_mpc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__mpc__</span> <span class="o">=</span> <span class="n">val</span>
+
+    <span class="n">_mpc_</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mpc__</span><span class="p">,</span> <span class="n">_set_mpc</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ComplexElement.parent"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.mpelements.ComplexElement.parent">[docs]</a>    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">_parent</span></div></div>
+
+<span class="n">new</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span>
+
+<div class="viewcode-block" id="MPContext"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.mpelements.MPContext">[docs]</a><span class="nd">@public</span>
+<span class="k">class</span> <span class="nc">MPContext</span><span class="p">(</span><span class="n">PythonMPContext</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">prec</span><span class="o">=</span><span class="mi">53</span><span class="p">,</span> <span class="n">dps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">_prec_rounding</span> <span class="o">=</span> <span class="p">[</span><span class="n">prec</span><span class="p">,</span> <span class="n">round_nearest</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">dps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">_set_prec</span><span class="p">(</span><span class="n">prec</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">_set_dps</span><span class="p">(</span><span class="n">dps</span><span class="p">)</span>
+
+        <span class="n">ctx</span><span class="o">.</span><span class="n">mpf</span> <span class="o">=</span> <span class="n">RealElement</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">mpc</span> <span class="o">=</span> <span class="n">ComplexElement</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">mpf</span><span class="o">.</span><span class="n">_ctxdata</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctx</span><span class="o">.</span><span class="n">mpf</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">_prec_rounding</span><span class="p">]</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">mpc</span><span class="o">.</span><span class="n">_ctxdata</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctx</span><span class="o">.</span><span class="n">mpc</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">_prec_rounding</span><span class="p">]</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">mpf</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">ctx</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">mpc</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">ctx</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">constant</span> <span class="o">=</span> <span class="n">_constant</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">constant</span><span class="o">.</span><span class="n">_ctxdata</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctx</span><span class="o">.</span><span class="n">mpf</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">_prec_rounding</span><span class="p">]</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">constant</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">ctx</span>
+
+        <span class="n">ctx</span><span class="o">.</span><span class="n">types</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctx</span><span class="o">.</span><span class="n">mpf</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">mpc</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">constant</span><span class="p">]</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">trap_complex</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">pretty</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">if</span> <span class="n">tol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">tol</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">_make_tol</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">tol</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">tol</span> <span class="o">=</span> <span class="n">fzero</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">tol</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">_convert_tol</span><span class="p">(</span><span class="n">tol</span><span class="p">)</span>
+
+        <span class="n">ctx</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">make_mpf</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">tol</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tolerance</span><span class="p">:</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">max_denom</span> <span class="o">=</span> <span class="mi">1000000</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">max_denom</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">ctx</span><span class="o">.</span><span class="n">tolerance</span><span class="p">)</span>
+
+        <span class="n">ctx</span><span class="o">.</span><span class="n">zero</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">make_mpf</span><span class="p">(</span><span class="n">fzero</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">one</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">make_mpf</span><span class="p">(</span><span class="n">fone</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">j</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">make_mpc</span><span class="p">((</span><span class="n">fzero</span><span class="p">,</span> <span class="n">fone</span><span class="p">))</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">inf</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">make_mpf</span><span class="p">(</span><span class="n">finf</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">ninf</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">make_mpf</span><span class="p">(</span><span class="n">fninf</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">nan</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">make_mpf</span><span class="p">(</span><span class="n">fnan</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_make_tol</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+        <span class="n">hundred</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="n">eps</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">MPZ_ONE</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">ctx</span><span class="o">.</span><span class="n">prec</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mpf_mul</span><span class="p">(</span><span class="n">hundred</span><span class="p">,</span> <span class="n">eps</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MPContext.make_tol"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.mpelements.MPContext.make_tol">[docs]</a>    <span class="k">def</span> <span class="nf">make_tol</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ctx</span><span class="o">.</span><span class="n">make_mpf</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">_make_tol</span><span class="p">())</span></div>
+
+    <span class="k">def</span> <span class="nf">_convert_tol</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">tol</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tol</span><span class="p">,</span> <span class="n">int_types</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">from_int</span><span class="p">(</span><span class="n">tol</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tol</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">from_float</span><span class="p">(</span><span class="n">tol</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">tol</span><span class="p">,</span> <span class="s2">&quot;_mpf_&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">tol</span><span class="o">.</span><span class="n">_mpf_</span>
+        <span class="n">prec</span><span class="p">,</span> <span class="n">rounding</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">_prec_rounding</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tol</span><span class="p">,</span> <span class="n">basestring</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">from_str</span><span class="p">(</span><span class="n">tol</span><span class="p">,</span> <span class="n">prec</span><span class="p">,</span> <span class="n">rounding</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;expected a real number, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">tol</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_convert_fallback</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">strings</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;cannot create mpf from &quot;</span> <span class="o">+</span> <span class="nb">repr</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_repr_digits</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">repr_dps</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">_prec</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">_str_digits</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ctx</span><span class="o">.</span><span class="n">_dps</span>
+
+<div class="viewcode-block" id="MPContext.to_rational"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.mpelements.MPContext.to_rational">[docs]</a>    <span class="k">def</span> <span class="nf">to_rational</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">to_rational</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">_mpf_</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">limit</span> <span class="ow">or</span> <span class="n">q</span> <span class="o">&lt;=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">max_denom</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span>
+
+        <span class="n">p0</span><span class="p">,</span> <span class="n">q0</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">q1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">n</span><span class="o">//</span><span class="n">d</span>
+            <span class="n">q2</span> <span class="o">=</span> <span class="n">q0</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">q1</span>
+            <span class="k">if</span> <span class="n">q2</span> <span class="o">&gt;</span> <span class="n">ctx</span><span class="o">.</span><span class="n">max_denom</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">p0</span><span class="p">,</span> <span class="n">q0</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">q1</span> <span class="o">=</span> <span class="n">p1</span><span class="p">,</span> <span class="n">q1</span><span class="p">,</span> <span class="n">p0</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="n">p1</span><span class="p">,</span> <span class="n">q2</span>
+            <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">a</span><span class="o">*</span><span class="n">d</span>
+
+        <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">max_denom</span> <span class="o">-</span> <span class="n">q0</span><span class="p">)</span><span class="o">//</span><span class="n">q1</span>
+
+        <span class="n">number</span> <span class="o">=</span> <span class="n">mpq</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+        <span class="n">bound1</span> <span class="o">=</span> <span class="n">mpq</span><span class="p">(</span><span class="n">p0</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="n">p1</span><span class="p">,</span> <span class="n">q0</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="n">q1</span><span class="p">)</span>
+        <span class="n">bound2</span> <span class="o">=</span> <span class="n">mpq</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">q1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">bound2</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">bound1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span>
+        <span class="k">elif</span> <span class="nb">abs</span><span class="p">(</span><span class="n">bound2</span> <span class="o">-</span> <span class="n">number</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">bound1</span> <span class="o">-</span> <span class="n">number</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">bound2</span><span class="o">.</span><span class="n">_mpq_</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">bound1</span><span class="o">.</span><span class="n">_mpq_</span></div>
+
+<div class="viewcode-block" id="MPContext.almosteq"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.mpelements.MPContext.almosteq">[docs]</a>    <span class="k">def</span> <span class="nf">almosteq</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">rel_eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">abs_eps</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">abs_eps</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">rel_eps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rel_eps</span> <span class="o">=</span> <span class="n">abs_eps</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">tolerance</span> <span class="ow">or</span> <span class="n">ctx</span><span class="o">.</span><span class="n">make_tol</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">abs_eps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">abs_eps</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">rel_eps</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">rel_eps</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">rel_eps</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">abs_eps</span><span class="p">)</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="n">t</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">diff</span> <span class="o">&lt;=</span> <span class="n">abs_eps</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="n">abss</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">abst</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">abss</span> <span class="o">&lt;</span> <span class="n">abst</span><span class="p">:</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="n">diff</span><span class="o">/</span><span class="n">abst</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">err</span> <span class="o">=</span> <span class="n">diff</span><span class="o">/</span><span class="n">abss</span>
+        <span class="k">return</span> <span class="n">err</span> <span class="o">&lt;=</span> <span class="n">rel_eps</span></div></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.polys.domains.mpelements</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

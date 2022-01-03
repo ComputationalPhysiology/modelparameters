@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>modelparameters.sympy.plotting.intervalmath package &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="modelparameters.sympy.plotting.pygletplot package" href="modelparameters.sympy.plotting.pygletplot.html" />
+    <link rel="prev" title="modelparameters.sympy.plotting package" href="modelparameters.sympy.plotting.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.plotting.pygletplot.html" title="modelparameters.sympy.plotting.pygletplot package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.plotting.html" title="modelparameters.sympy.plotting package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" >modelparameters.sympy package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="modelparameters.sympy.plotting.html" accesskey="U">modelparameters.sympy.plotting package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.plotting.intervalmath package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="modelparameters-sympy-plotting-intervalmath-package">
+<h1>modelparameters.sympy.plotting.intervalmath package<a class="headerlink" href="#modelparameters-sympy-plotting-intervalmath-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-modelparameters.sympy.plotting.intervalmath.interval_arithmetic">
+<span id="modelparameters-sympy-plotting-intervalmath-interval-arithmetic-module"></span><h2>modelparameters.sympy.plotting.intervalmath.interval_arithmetic module<a class="headerlink" href="#module-modelparameters.sympy.plotting.intervalmath.interval_arithmetic" title="Permalink to this headline">¶</a></h2>
+<p>Interval Arithmetic for plotting.
+This module does not implement interval arithmetic accurately and
+hence cannot be used for purposes other than plotting. If you want
+to use interval arithmetic, use mpmath’s interval arithmetic.</p>
+<p>The module implements interval arithmetic using numpy and
+python floating points. The rounding up and down is not handled
+and hence this is not an accurate implementation of interval
+arithmetic.</p>
+<p>The module uses numpy for speed which cannot be achieved with mpmath.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.interval_arithmetic.interval">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.interval_arithmetic.</span></span><span class="sig-name descname"><span class="pre">interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/interval_arithmetic.html#interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.interval_arithmetic.interval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Represents an interval containing floating points as start and
+end of the interval
+The is_valid variable tracks whether the interval obtained as the
+result of the function is in the domain and is continuous.
+- True: Represents the interval result of a function is continuous and</p>
+<blockquote>
+<div><p>in the domain of the function.</p>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>False: The interval argument of the function was not in the domain of</dt><dd><p>the function, hence the is_valid of the result interval is False</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>None: The function was not continuous over the interval or</dt><dd><p>the function’s argument interval is partly in the domain of the
+function</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>The comparison of two intervals returns a tuple of two 3-valued logic
+values.</p>
+<p>The first value determines the comparison as follows:
+- True: If the comparison is True throughout the intervals.
+- False: If the comparison is False throughout the intervals.
+- None: If the comparison is True for some part of the intervals.</p>
+<p>The second value is determined as follows:
+- True: If both the intervals in comparison are valid.
+- False: If at least one of the intervals is False, else
+- None</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.interval_arithmetic.interval.mid">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mid</span></span><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.interval_arithmetic.interval.mid" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.interval_arithmetic.interval.width">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">width</span></span><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.interval_arithmetic.interval.width" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.plotting.intervalmath.lib_interval">
+<span id="modelparameters-sympy-plotting-intervalmath-lib-interval-module"></span><h2>modelparameters.sympy.plotting.intervalmath.lib_interval module<a class="headerlink" href="#module-modelparameters.sympy.plotting.intervalmath.lib_interval" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.Abs">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">Abs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#Abs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.Abs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.And">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">And</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#And"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.And" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the three valued <code class="docutils literal notranslate"><span class="pre">And</span></code> behaviour for a 2-tuple of
+three valued logic values</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.Or">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">Or</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#Or"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.Or" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defines the three valued <code class="docutils literal notranslate"><span class="pre">Or</span></code> behaviour for a 2-tuple of
+three valued logic values</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.acos">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">acos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#acos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.acos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the inverse cos of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.acosh">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">acosh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#acosh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.acosh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the inverse hyperbolic cosine of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.asin">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">asin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#asin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.asin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the inverse sine of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.asinh">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">asinh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#asinh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.asinh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the inverse hyperbolic sine of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.atan">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">atan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#atan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.atan" title="Permalink to this definition">¶</a></dt>
+<dd><p>evaluates the tan inverse of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.atanh">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">atanh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#atanh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.atanh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the inverse hyperbolic tangent of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.ceil">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">ceil</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#ceil"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.ceil" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the ceiling of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.cos">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">cos</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#cos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.cos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the cos of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.cosh">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">cosh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#cosh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.cosh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the hyperbolic cos of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.exp">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">exp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#exp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.exp" title="Permalink to this definition">¶</a></dt>
+<dd><p>evaluates the exponential of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.floor">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">floor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#floor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.floor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the floor of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.imax">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">imax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#imax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.imax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the maximum of a list of intervals</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.imin">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">imin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#imin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.imin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the minimum of a list of intervals</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.log">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>evaluates the natural logarithm of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.log10">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">log10</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#log10"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.log10" title="Permalink to this definition">¶</a></dt>
+<dd><p>evaluates the logarithm to the base 10 of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.sin">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">sin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#sin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.sin" title="Permalink to this definition">¶</a></dt>
+<dd><p>evaluates the sine of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.sinh">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">sinh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#sinh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.sinh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the hyperbolic sine of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.sqrt">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">sqrt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#sqrt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.sqrt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the square root of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.tan">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">tan</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#tan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.tan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the tan of an interval</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.intervalmath.lib_interval.tanh">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.intervalmath.lib_interval.</span></span><span class="sig-name descname"><span class="pre">tanh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/intervalmath/lib_interval.html#tanh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.intervalmath.lib_interval.tanh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluates the hyperbolic tan of an interval</p>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.plotting.intervalmath">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.plotting.intervalmath" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">modelparameters.sympy.plotting.intervalmath package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.plotting.intervalmath.interval_arithmetic">modelparameters.sympy.plotting.intervalmath.interval_arithmetic module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.plotting.intervalmath.lib_interval">modelparameters.sympy.plotting.intervalmath.lib_interval module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.plotting.intervalmath">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.plotting.html"
+                        title="previous chapter">modelparameters.sympy.plotting package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.plotting.pygletplot.html"
+                        title="next chapter">modelparameters.sympy.plotting.pygletplot package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modelparameters.sympy.plotting.intervalmath.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.plotting.pygletplot.html" title="modelparameters.sympy.plotting.pygletplot package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.plotting.html" title="modelparameters.sympy.plotting package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" >modelparameters.sympy package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="modelparameters.sympy.plotting.html" >modelparameters.sympy.plotting package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.plotting.intervalmath package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

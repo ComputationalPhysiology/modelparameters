@@ -1,0 +1,534 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.plotting.intervalmath.lib_interval &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.plotting.intervalmath.lib_interval</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.plotting.intervalmath.lib_interval</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..intervalmath</span> <span class="kn">import</span> <span class="n">interval</span>
+<span class="kn">from</span> <span class="nn">...external</span> <span class="kn">import</span> <span class="n">import_module</span>
+<span class="kn">from</span> <span class="nn">...core.compatibility</span> <span class="kn">import</span> <span class="n">reduce</span>
+<span class="sd">&quot;&quot;&quot; The module contains implemented functions for interval arithmetic.&quot;&quot;&quot;</span>
+
+
+
+<div class="viewcode-block" id="Abs"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.Abs">[docs]</a><span class="k">def</span> <span class="nf">Abs</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">end</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">)),</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">),</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<span class="c1">#Monotonic</span>
+
+
+<div class="viewcode-block" id="exp"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.exp">[docs]</a><span class="k">def</span> <span class="nf">exp</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;evaluates the exponential of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">),</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<span class="c1">#Monotonic</span>
+<div class="viewcode-block" id="log"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.log">[docs]</a><span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;evaluates the natural logarithm of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">x</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<span class="c1">#Monotonic</span>
+<div class="viewcode-block" id="log10"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.log10">[docs]</a><span class="k">def</span> <span class="nf">log10</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;evaluates the logarithm to the base 10 of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">x</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<span class="c1">#Monotonic</span>
+<div class="viewcode-block" id="atan"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.atan">[docs]</a><span class="k">def</span> <span class="nf">atan</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;evaluates the tan inverse of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<span class="c1">#periodic</span>
+<div class="viewcode-block" id="sin"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.sin">[docs]</a><span class="k">def</span> <span class="nf">sin</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;evaluates the sine of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+        <span class="n">na</span><span class="p">,</span> <span class="n">__</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
+        <span class="n">nb</span><span class="p">,</span> <span class="n">__</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">))</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">nb</span> <span class="o">-</span> <span class="n">na</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">na</span> <span class="o">==</span> <span class="n">nb</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">na</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span> <span class="o">!=</span> <span class="p">(</span><span class="n">nb</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="c1">#sin has max</span>
+                <span class="n">end</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">na</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span> <span class="o">!=</span> <span class="p">(</span><span class="n">nb</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="c1">#sin has min</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<span class="c1">#periodic</span>
+<div class="viewcode-block" id="cos"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.cos">[docs]</a><span class="k">def</span> <span class="nf">cos</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Evaluates the cos of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+        <span class="n">na</span><span class="p">,</span> <span class="n">__</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
+        <span class="n">nb</span><span class="p">,</span> <span class="n">__</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">))</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">nb</span> <span class="o">-</span> <span class="n">na</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="c1">#differ more than 2*pi</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">na</span> <span class="o">==</span> <span class="n">nb</span><span class="p">:</span>
+            <span class="c1">#in the same quadarant</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">na</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span> <span class="o">!=</span> <span class="p">(</span><span class="n">nb</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="c1">#cos has max</span>
+                <span class="n">end</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">na</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span> <span class="o">!=</span> <span class="p">(</span><span class="n">nb</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="o">//</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="c1">#cos has min</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<div class="viewcode-block" id="tan"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.tan">[docs]</a><span class="k">def</span> <span class="nf">tan</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Evaluates the tan of an interval&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+
+<span class="c1">#Monotonic</span>
+<div class="viewcode-block" id="sqrt"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.sqrt">[docs]</a><span class="k">def</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Evaluates the square root of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="c1">#Outside the domain</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1">#Partially outside the domain</span>
+        <span class="k">elif</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">),</span>
+                    <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<div class="viewcode-block" id="imin"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.imin">[docs]</a><span class="k">def</span> <span class="nf">imin</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Evaluates the minimum of a list of intervals&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">interval</span><span class="p">))</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ne">NotImplementedError</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">new_args</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>
+                    <span class="ow">or</span> <span class="n">a</span><span class="o">.</span><span class="n">is_valid</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">is_valid</span> <span class="ow">is</span> <span class="kc">False</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">start_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="k">else</span> <span class="n">a</span><span class="o">.</span><span class="n">start</span>
+                       <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">new_args</span><span class="p">]</span>
+
+        <span class="n">end_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="k">else</span> <span class="n">a</span><span class="o">.</span><span class="n">end</span>
+                     <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">new_args</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">start_array</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">end_array</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="imax"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.imax">[docs]</a><span class="k">def</span> <span class="nf">imax</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Evaluates the maximum of a list of intervals&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">interval</span><span class="p">))</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ne">NotImplementedError</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">new_args</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span>
+                    <span class="ow">or</span> <span class="n">a</span><span class="o">.</span><span class="n">is_valid</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">is_valid</span> <span class="ow">is</span> <span class="kc">False</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">start_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="k">else</span> <span class="n">a</span><span class="o">.</span><span class="n">start</span>
+                       <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">new_args</span><span class="p">]</span>
+
+        <span class="n">end_array</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">))</span> <span class="k">else</span> <span class="n">a</span><span class="o">.</span><span class="n">end</span>
+                     <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">new_args</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">start_array</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">end_array</span><span class="p">))</span></div>
+
+
+<span class="c1">#Monotonic</span>
+<div class="viewcode-block" id="sinh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.sinh">[docs]</a><span class="k">def</span> <span class="nf">sinh</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Evaluates the hyperbolic sine of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">),</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<div class="viewcode-block" id="cosh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.cosh">[docs]</a><span class="k">def</span> <span class="nf">cosh</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Evaluates the hyperbolic cos of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="c1">#both signs</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">end</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1">#Monotonic</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<span class="c1">#Monotonic</span>
+<div class="viewcode-block" id="tanh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.tanh">[docs]</a><span class="k">def</span> <span class="nf">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Evaluates the hyperbolic tan of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">),</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+<div class="viewcode-block" id="asin"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.asin">[docs]</a><span class="k">def</span> <span class="nf">asin</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Evaluates the inverse sine of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="c1">#Outside the domain</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="c1">#Outside the domain</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">is_valid</span> <span class="ow">is</span> <span class="kc">False</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1">#Partially outside the domain</span>
+        <span class="k">elif</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">end</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="acos"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.acos">[docs]</a><span class="k">def</span> <span class="nf">acos</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Evaluates the inverse cos of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="c1">#Outside the domain</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="c1">#Outside the domain</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">is_valid</span> <span class="ow">is</span> <span class="kc">False</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1">#Partially outside the domain</span>
+        <span class="k">elif</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">end</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ceil"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.ceil">[docs]</a><span class="k">def</span> <span class="nf">ceil</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Evaluates the ceiling of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">is_valid</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+            <span class="c1">#Continuous over the interval</span>
+            <span class="k">if</span> <span class="n">start</span> <span class="o">==</span> <span class="n">end</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1">#Not continuous over the interval</span>
+                <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="ne">NotImplementedError</span></div>
+
+
+<div class="viewcode-block" id="floor"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.floor">[docs]</a><span class="k">def</span> <span class="nf">floor</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Evaluates the floor of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">is_valid</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+            <span class="c1">#continuous over the argument</span>
+            <span class="k">if</span> <span class="n">start</span> <span class="o">==</span> <span class="n">end</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1">#not continuous over the interval</span>
+                <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="ne">NotImplementedError</span></div>
+
+
+<div class="viewcode-block" id="acosh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.acosh">[docs]</a><span class="k">def</span> <span class="nf">acosh</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Evaluates the inverse hyperbolic cosine of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="c1">#Outside the domain</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arccosh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="c1">#Outside the domain</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1">#Partly outside the domain</span>
+        <span class="k">elif</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccosh</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccosh</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="ne">NotImplementedError</span></div>
+
+
+<span class="c1">#Monotonic</span>
+<div class="viewcode-block" id="asinh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.asinh">[docs]</a><span class="k">def</span> <span class="nf">asinh</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Evaluates the inverse hyperbolic sine of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arcsinh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsinh</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsinh</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="ne">NotImplementedError</span></div>
+
+
+<div class="viewcode-block" id="atanh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.atanh">[docs]</a><span class="k">def</span> <span class="nf">atanh</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Evaluates the inverse hyperbolic tangent of an interval&quot;&quot;&quot;</span>
+    <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="c1">#Outside the domain</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctanh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="c1">#outside the domain</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">is_valid</span> <span class="ow">is</span> <span class="kc">False</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="c1">#partly outside the domain</span>
+        <span class="k">elif</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">x</span><span class="o">.</span><span class="n">end</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctanh</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctanh</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">is_valid</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">is_valid</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="ne">NotImplementedError</span></div>
+
+
+<span class="c1">#Three valued logic for interval plotting.</span>
+
+<div class="viewcode-block" id="And"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.And">[docs]</a><span class="k">def</span> <span class="nf">And</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Defines the three valued ``And`` behaviour for a 2-tuple of</span>
+<span class="sd">     three valued logic values&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">reduce_and</span><span class="p">(</span><span class="n">cmp_intervala</span><span class="p">,</span> <span class="n">cmp_intervalb</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cmp_intervala</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span> <span class="ow">or</span> <span class="n">cmp_intervalb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="n">first</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">elif</span> <span class="n">cmp_intervala</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">cmp_intervalb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">first</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">first</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">cmp_intervala</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span> <span class="ow">or</span> <span class="n">cmp_intervalb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="n">second</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">elif</span> <span class="n">cmp_intervala</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">cmp_intervalb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">second</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">second</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">reduce_and</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Or"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.Or">[docs]</a><span class="k">def</span> <span class="nf">Or</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Defines the three valued ``Or`` behaviour for a 2-tuple of</span>
+<span class="sd">     three valued logic values&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">reduce_or</span><span class="p">(</span><span class="n">cmp_intervala</span><span class="p">,</span> <span class="n">cmp_intervalb</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cmp_intervala</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">or</span> <span class="n">cmp_intervalb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">first</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="n">cmp_intervala</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">cmp_intervalb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">first</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">first</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="k">if</span> <span class="n">cmp_intervala</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">or</span> <span class="n">cmp_intervalb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">second</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="n">cmp_intervala</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">cmp_intervalb</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">second</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">second</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">reduce_or</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.plotting.intervalmath.lib_interval</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

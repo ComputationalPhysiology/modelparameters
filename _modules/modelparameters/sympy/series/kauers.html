@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.series.kauers &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.series.kauers</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.series.kauers</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+
+<div class="viewcode-block" id="finite_diff"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.kauers.finite_diff">[docs]</a><span class="k">def</span> <span class="nf">finite_diff</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">increment</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Takes as input a polynomial expression and the variable used to construct</span>
+<span class="sd">    it and returns the difference between function&#39;s value when the input is</span>
+<span class="sd">    incremented to 1 and the original function value. If you want an increment</span>
+<span class="sd">    other than one supply it as a third argument.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from ..abc import x, y, z, k, n</span>
+<span class="sd">    &gt;&gt;&gt; from .kauers import finite_diff</span>
+<span class="sd">    &gt;&gt;&gt; from  sympy import Sum</span>
+<span class="sd">    &gt;&gt;&gt; finite_diff(x**2, x)</span>
+<span class="sd">    2*x + 1</span>
+<span class="sd">    &gt;&gt;&gt; finite_diff(y**3 + 2*y**2 + 3*y + 4, y)</span>
+<span class="sd">    3*y**2 + 7*y + 6</span>
+<span class="sd">    &gt;&gt;&gt; finite_diff(x**2 + 3*x + 8, x, 2)</span>
+<span class="sd">    4*x + 10</span>
+<span class="sd">    &gt;&gt;&gt; finite_diff(z**3 + 8*z, z, 3)</span>
+<span class="sd">    9*z**2 + 27*z + 51</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">expression</span> <span class="o">=</span> <span class="n">expression</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
+    <span class="n">expression2</span> <span class="o">=</span> <span class="n">expression</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="n">variable</span> <span class="o">+</span> <span class="n">increment</span><span class="p">)</span>
+    <span class="n">expression2</span> <span class="o">=</span> <span class="n">expression2</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">expression2</span> <span class="o">-</span> <span class="n">expression</span></div>
+
+<div class="viewcode-block" id="finite_diff_kauers"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.kauers.finite_diff_kauers">[docs]</a><span class="k">def</span> <span class="nf">finite_diff_kauers</span><span class="p">(</span><span class="nb">sum</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Takes as input a Sum instance and returns the difference between the sum</span>
+<span class="sd">    with the upper index incremented by 1 and the original sum. For example,</span>
+<span class="sd">    if S(n) is a sum, then finite_diff_kauers will return S(n + 1) - S(n).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .kauers import finite_diff_kauers</span>
+<span class="sd">    &gt;&gt;&gt; from .. import Sum</span>
+<span class="sd">    &gt;&gt;&gt; from ..abc import x, y, m, n, k</span>
+<span class="sd">    &gt;&gt;&gt; finite_diff_kauers(Sum(k, (k, 1, n)))</span>
+<span class="sd">    n + 1</span>
+<span class="sd">    &gt;&gt;&gt; finite_diff_kauers(Sum(1/k, (k, 1, n)))</span>
+<span class="sd">    1/(n + 1)</span>
+<span class="sd">    &gt;&gt;&gt; finite_diff_kauers(Sum((x*y**2), (x, 1, n), (y, 1, m)))</span>
+<span class="sd">    (m + 1)**2*(n + 1)</span>
+<span class="sd">    &gt;&gt;&gt; finite_diff_kauers(Sum((x*y), (x, 1, m), (y, 1, n)))</span>
+<span class="sd">    (m + 1)*(n + 1)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">function</span> <span class="o">=</span> <span class="nb">sum</span><span class="o">.</span><span class="n">function</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">sum</span><span class="o">.</span><span class="n">limits</span><span class="p">:</span>
+        <span class="n">function</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">l</span><span class="p">[</span><span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">function</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.series.kauers</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

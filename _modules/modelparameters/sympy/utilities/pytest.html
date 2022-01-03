@@ -1,0 +1,244 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.utilities.pytest &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.utilities.pytest</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.utilities.pytest</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;py.test hacks to support XFAIL/XPASS&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="n">get_function_name</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">py</span>
+    <span class="kn">from</span> <span class="nn">py.test</span> <span class="kn">import</span> <span class="n">skip</span><span class="p">,</span> <span class="n">raises</span>
+    <span class="n">USE_PYTEST</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="p">,</span> <span class="s1">&#39;_running_pytest&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="n">USE_PYTEST</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">ON_TRAVIS</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;TRAVIS_BUILD_NUMBER&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">USE_PYTEST</span><span class="p">:</span>
+<div class="viewcode-block" id="raises"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.pytest.raises">[docs]</a>    <span class="k">def</span> <span class="nf">raises</span><span class="p">(</span><span class="n">expectedException</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tests that ``code`` raises the exception ``expectedException``.</span>
+
+<span class="sd">        ``code`` may be a callable, such as a lambda expression or function</span>
+<span class="sd">        name.</span>
+
+<span class="sd">        If ``code`` is not given or None, ``raises`` will return a context</span>
+<span class="sd">        manager for use in ``with`` statements; the code to execute then</span>
+<span class="sd">        comes from the scope of the ``with``.</span>
+
+<span class="sd">        ``raises()`` does nothing if the callable raises the expected exception,</span>
+<span class="sd">        otherwise it raises an AssertionError.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .pytest import raises</span>
+
+<span class="sd">        &gt;&gt;&gt; raises(ZeroDivisionError, lambda: 1/0)</span>
+<span class="sd">        &gt;&gt;&gt; raises(ZeroDivisionError, lambda: 1/2)</span>
+<span class="sd">        Traceback (most recent call last):</span>
+<span class="sd">        ...</span>
+<span class="sd">        AssertionError: DID NOT RAISE</span>
+
+<span class="sd">        &gt;&gt;&gt; with raises(ZeroDivisionError):</span>
+<span class="sd">        ...     n = 1/0</span>
+<span class="sd">        &gt;&gt;&gt; with raises(ZeroDivisionError):</span>
+<span class="sd">        ...     n = 1/2</span>
+<span class="sd">        Traceback (most recent call last):</span>
+<span class="sd">        ...</span>
+<span class="sd">        AssertionError: DID NOT RAISE</span>
+
+<span class="sd">        Note that you cannot test multiple statements via</span>
+<span class="sd">        ``with raises``:</span>
+
+<span class="sd">        &gt;&gt;&gt; with raises(ZeroDivisionError):</span>
+<span class="sd">        ...     n = 1/0    # will execute and raise, aborting the ``with``</span>
+<span class="sd">        ...     n = 9999/0 # never executed</span>
+
+<span class="sd">        This is just what ``with`` is supposed to do: abort the</span>
+<span class="sd">        contained statement sequence at the first exception and let</span>
+<span class="sd">        the context manager deal with the exception.</span>
+
+<span class="sd">        To test multiple statements, you&#39;ll need a separate ``with``</span>
+<span class="sd">        for each:</span>
+
+<span class="sd">        &gt;&gt;&gt; with raises(ZeroDivisionError):</span>
+<span class="sd">        ...     n = 1/0    # will execute and raise</span>
+<span class="sd">        &gt;&gt;&gt; with raises(ZeroDivisionError):</span>
+<span class="sd">        ...     n = 9999/0 # will also execute and raise</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">RaisesContext</span><span class="p">(</span><span class="n">expectedException</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">callable</span><span class="p">(</span><span class="n">code</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">code</span><span class="p">()</span>
+            <span class="k">except</span> <span class="n">expectedException</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;DID NOT RAISE&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">raises(xxx, &quot;code&quot;)</span><span class="se">\&#39;</span><span class="s1"> has been phased out; &#39;</span>
+                <span class="s1">&#39;change </span><span class="se">\&#39;</span><span class="s1">raises(xxx, &quot;expression&quot;)</span><span class="se">\&#39;</span><span class="s1"> &#39;</span>
+                <span class="s1">&#39;to </span><span class="se">\&#39;</span><span class="s1">raises(xxx, lambda: expression)</span><span class="se">\&#39;</span><span class="s1">, &#39;</span>
+                <span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">raises(xxx, &quot;statement&quot;)</span><span class="se">\&#39;</span><span class="s1"> &#39;</span>
+                <span class="s1">&#39;to </span><span class="se">\&#39;</span><span class="s1">with raises(xxx): statement</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s1">&#39;raises() expects a callable for the 2nd argument.&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RaisesContext"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.pytest.RaisesContext">[docs]</a>    <span class="k">class</span> <span class="nc">RaisesContext</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expectedException</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">expectedException</span> <span class="o">=</span> <span class="n">expectedException</span>
+
+        <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">exc_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;DID NOT RAISE&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">exc_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">expectedException</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="XFail"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.pytest.XFail">[docs]</a>    <span class="k">class</span> <span class="nc">XFail</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="XPass"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.pytest.XPass">[docs]</a>    <span class="k">class</span> <span class="nc">XPass</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="Skipped"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.pytest.Skipped">[docs]</a>    <span class="k">class</span> <span class="nc">Skipped</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="XFAIL"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.pytest.XFAIL">[docs]</a>    <span class="k">def</span> <span class="nf">XFAIL</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">func</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">message</span> <span class="o">!=</span> <span class="s2">&quot;Timeout&quot;</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">XFail</span><span class="p">(</span><span class="n">get_function_name</span><span class="p">(</span><span class="n">func</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">Skipped</span><span class="p">(</span><span class="s2">&quot;Timeout&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">XPass</span><span class="p">(</span><span class="n">get_function_name</span><span class="p">(</span><span class="n">func</span><span class="p">))</span>
+
+        <span class="n">wrapper</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">update_wrapper</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">wrapper</span></div>
+
+<div class="viewcode-block" id="skip"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.pytest.skip">[docs]</a>    <span class="k">def</span> <span class="nf">skip</span><span class="p">(</span><span class="nb">str</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">Skipped</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">SKIP</span><span class="p">(</span><span class="n">reason</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Similar to :func:`skip`, but this is a decorator. &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+            <span class="k">def</span> <span class="nf">func_wrapper</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="n">Skipped</span><span class="p">(</span><span class="n">reason</span><span class="p">)</span>
+
+            <span class="n">func_wrapper</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">update_wrapper</span><span class="p">(</span><span class="n">func_wrapper</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">func_wrapper</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+<div class="viewcode-block" id="slow"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.pytest.slow">[docs]</a>    <span class="k">def</span> <span class="nf">slow</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="n">func</span><span class="o">.</span><span class="n">_slow</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="k">def</span> <span class="nf">func_wrapper</span><span class="p">():</span>
+            <span class="n">func</span><span class="p">()</span>
+
+        <span class="n">func_wrapper</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">update_wrapper</span><span class="p">(</span><span class="n">func_wrapper</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span>
+        <span class="n">func_wrapper</span><span class="o">.</span><span class="n">__wrapped__</span> <span class="o">=</span> <span class="n">func</span>
+        <span class="k">return</span> <span class="n">func_wrapper</span></div>
+
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">XFAIL</span> <span class="o">=</span> <span class="n">py</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">xfail</span>
+    <span class="n">slow</span> <span class="o">=</span> <span class="n">py</span><span class="o">.</span><span class="n">test</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">slow</span>
+
+<div class="viewcode-block" id="SKIP"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.pytest.SKIP">[docs]</a>    <span class="k">def</span> <span class="nf">SKIP</span><span class="p">(</span><span class="n">reason</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">skipping</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+            <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+            <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="n">skip</span><span class="p">(</span><span class="n">reason</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">inner</span>
+
+        <span class="k">return</span> <span class="n">skipping</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.utilities.pytest</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

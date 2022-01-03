@@ -56,9 +56,9 @@
 <span class="c1"># System imports</span>
 <span class="kn">import</span> <span class="nn">re</span>
 
-<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sp</span>
-<span class="kn">from</span> <span class="nn">sympy.core</span> <span class="kn">import</span> <span class="n">relational</span> <span class="k">as</span> <span class="n">_relational</span>
-<span class="kn">from</span> <span class="nn">sympy.core.function</span> <span class="kn">import</span> <span class="n">AppliedUndef</span> <span class="k">as</span> <span class="n">_AppliedUndef</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">sympy</span> <span class="k">as</span> <span class="n">sp</span>
+<span class="kn">from</span> <span class="nn">.sympy.core</span> <span class="kn">import</span> <span class="n">relational</span> <span class="k">as</span> <span class="n">_relational</span>
+<span class="kn">from</span> <span class="nn">.sympy.core.function</span> <span class="kn">import</span> <span class="n">AppliedUndef</span> <span class="k">as</span> <span class="n">_AppliedUndef</span>
 
 <span class="kn">from</span> <span class="nn">.logger</span> <span class="kn">import</span> <span class="n">error</span>
 <span class="kn">from</span> <span class="nn">.logger</span> <span class="kn">import</span> <span class="n">type_error</span>
@@ -91,8 +91,8 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">cond</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">sympify</span><span class="p">(</span><span class="n">cond</span><span class="p">)</span>
 
-    <span class="kn">from</span> <span class="nn">sympy.core.relational</span> <span class="kn">import</span> <span class="n">Relational</span>
-    <span class="kn">from</span> <span class="nn">sympy.logic.boolalg</span> <span class="kn">import</span> <span class="n">Boolean</span>
+    <span class="kn">from</span> <span class="nn">.sympy.core.relational</span> <span class="kn">import</span> <span class="n">Relational</span>
+    <span class="kn">from</span> <span class="nn">.sympy.logic.boolalg</span> <span class="kn">import</span> <span class="n">Boolean</span>
 
     <span class="c1"># If the conditional is a bool it is already evaluated</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
@@ -202,7 +202,7 @@
 <span class="sd">    Take a symbol or expression of symbols and returns the corresponding</span>
 <span class="sd">    Parameters</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">sympy.core.function</span> <span class="kn">import</span> <span class="n">AppliedUndef</span>
+    <span class="kn">from</span> <span class="nn">.sympy.core.function</span> <span class="kn">import</span> <span class="n">AppliedUndef</span>
     <span class="kn">from</span> <span class="nn">.codegeneration</span> <span class="kn">import</span> <span class="n">sympycode</span>
 
     <span class="k">if</span> <span class="n">sp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -246,7 +246,7 @@
 <span class="sd">    include_derivatives : bool</span>
 <span class="sd">        If True derivatives will be returned instead of its variables</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">sympy.core.function</span> <span class="kn">import</span> <span class="n">AppliedUndef</span>
+    <span class="kn">from</span> <span class="nn">.sympy.core.function</span> <span class="kn">import</span> <span class="n">AppliedUndef</span>
 
     <span class="n">symbols</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
@@ -419,7 +419,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
     </div>
   </body>
 </html>

@@ -1,0 +1,493 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.tensor.array.ndim_array &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.tensor.array.ndim_array</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.tensor.array.ndim_array</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">Basic</span>
+
+
+<div class="viewcode-block" id="NDimArray"><a class="viewcode-back" href="../../../../../modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray">[docs]</a><span class="k">class</span> <span class="nc">NDimArray</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    Create an N-dim array of zeros:</span>
+
+<span class="sd">    &gt;&gt;&gt; from ... import MutableDenseNDimArray</span>
+<span class="sd">    &gt;&gt;&gt; a = MutableDenseNDimArray.zeros(2, 3, 4)</span>
+<span class="sd">    &gt;&gt;&gt; a</span>
+<span class="sd">    [[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]], [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]]</span>
+
+<span class="sd">    Create an N-dim array from a list;</span>
+
+<span class="sd">    &gt;&gt;&gt; a = MutableDenseNDimArray([[2, 3], [4, 5]])</span>
+<span class="sd">    &gt;&gt;&gt; a</span>
+<span class="sd">    [[2, 3], [4, 5]]</span>
+
+<span class="sd">    &gt;&gt;&gt; b = MutableDenseNDimArray([[[1, 2], [3, 4], [5, 6]], [[7, 8], [9, 10], [11, 12]]])</span>
+<span class="sd">    &gt;&gt;&gt; b</span>
+<span class="sd">    [[[1, 2], [3, 4], [5, 6]], [[7, 8], [9, 10], [11, 12]]]</span>
+
+<span class="sd">    Create an N-dim array from a flat list with dimension shape:</span>
+
+<span class="sd">    &gt;&gt;&gt; a = MutableDenseNDimArray([1, 2, 3, 4, 5, 6], (2, 3))</span>
+<span class="sd">    &gt;&gt;&gt; a</span>
+<span class="sd">    [[1, 2, 3], [4, 5, 6]]</span>
+
+<span class="sd">    Create an N-dim array from a matrix:</span>
+
+<span class="sd">    &gt;&gt;&gt; from ... import Matrix</span>
+<span class="sd">    &gt;&gt;&gt; a = Matrix([[1,2],[3,4]])</span>
+<span class="sd">    &gt;&gt;&gt; a</span>
+<span class="sd">    Matrix([</span>
+<span class="sd">    [1, 2],</span>
+<span class="sd">    [3, 4]])</span>
+<span class="sd">    &gt;&gt;&gt; b = MutableDenseNDimArray(a)</span>
+<span class="sd">    &gt;&gt;&gt; b</span>
+<span class="sd">    [[1, 2], [3, 4]]</span>
+
+<span class="sd">    Arithmetic operations on N-dim arrays</span>
+
+<span class="sd">    &gt;&gt;&gt; a = MutableDenseNDimArray([1, 1, 1, 1], (2, 2))</span>
+<span class="sd">    &gt;&gt;&gt; b = MutableDenseNDimArray([4, 4, 4, 4], (2, 2))</span>
+<span class="sd">    &gt;&gt;&gt; c = a + b</span>
+<span class="sd">    &gt;&gt;&gt; c</span>
+<span class="sd">    [[5, 5], [5, 5]]</span>
+<span class="sd">    &gt;&gt;&gt; a - b</span>
+<span class="sd">    [[-3, -3], [-3, -3]]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">..array</span> <span class="kn">import</span> <span class="n">ImmutableDenseNDimArray</span>
+        <span class="k">return</span> <span class="n">ImmutableDenseNDimArray</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_parse_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Integer</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">index</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loop_size</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;index out of range&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">index</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rank</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Wrong number of array axes&#39;</span><span class="p">)</span>
+
+        <span class="n">real_index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># check if input index can exist in current indexing</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rank</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Index &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; out of border&#39;</span><span class="p">)</span>
+            <span class="n">real_index</span> <span class="o">=</span> <span class="n">real_index</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">real_index</span>
+
+    <span class="k">def</span> <span class="nf">_get_tuple_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">integer_index</span><span class="p">):</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sh</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)):</span>
+            <span class="n">index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">integer_index</span> <span class="o">%</span> <span class="n">sh</span><span class="p">)</span>
+            <span class="n">integer_index</span> <span class="o">//=</span> <span class="n">sh</span>
+        <span class="n">index</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_check_symbolic_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="c1"># Check if any index is symbolic:</span>
+        <span class="n">tuple_index</span> <span class="o">=</span> <span class="p">(</span><span class="n">index</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="k">else</span> <span class="p">(</span><span class="n">index</span><span class="p">,))</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">([(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">Expr</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">i</span><span class="o">.</span><span class="n">is_number</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tuple_index</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">nth_dim</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tuple_index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">((</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="ow">or</span> <span class="p">((</span><span class="n">i</span> <span class="o">&gt;=</span> <span class="n">nth_dim</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;index out of range&quot;</span><span class="p">)</span>
+            <span class="kn">from</span> <span class="nn">...tensor</span> <span class="kn">import</span> <span class="n">Indexed</span>
+            <span class="k">return</span> <span class="n">Indexed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">tuple_index</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">_setter_iterable_check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">...matrices.matrices</span> <span class="kn">import</span> <span class="n">MatrixBase</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">,</span> <span class="n">MatrixBase</span><span class="p">,</span> <span class="n">NDimArray</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_scan_iterable_shape</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">iterable</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">pointer</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pointer</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
+                <span class="k">return</span> <span class="p">[</span><span class="n">pointer</span><span class="p">],</span> <span class="p">()</span>
+
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">elems</span><span class="p">,</span> <span class="n">shapes</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pointer</span><span class="p">])</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">shapes</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;could not determine shape unambiguously&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">elems</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">shapes</span><span class="p">),)</span><span class="o">+</span><span class="n">shapes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_handle_ndarray_creation_inputs</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">iterable</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">...matrices.matrices</span> <span class="kn">import</span> <span class="n">MatrixBase</span>
+
+        <span class="k">if</span> <span class="n">shape</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">iterable</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">shape</span> <span class="o">=</span> <span class="p">()</span>
+            <span class="n">iterable</span> <span class="o">=</span> <span class="p">()</span>
+        <span class="c1"># Construction from another `NDimArray`:</span>
+        <span class="k">elif</span> <span class="n">shape</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">NDimArray</span><span class="p">):</span>
+            <span class="n">shape</span> <span class="o">=</span> <span class="n">iterable</span><span class="o">.</span><span class="n">shape</span>
+            <span class="n">iterable</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+        <span class="c1"># Construct N-dim array from an iterable (numpy arrays included):</span>
+        <span class="k">elif</span> <span class="n">shape</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
+            <span class="n">iterable</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_scan_iterable_shape</span><span class="p">(</span><span class="n">iterable</span><span class="p">)</span>
+
+        <span class="c1"># Construct N-dim array from a Matrix:</span>
+        <span class="k">elif</span> <span class="n">shape</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">MatrixBase</span><span class="p">):</span>
+            <span class="n">shape</span> <span class="o">=</span> <span class="n">iterable</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="c1"># Construct N-dim array from another N-dim array:</span>
+        <span class="k">elif</span> <span class="n">shape</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">NDimArray</span><span class="p">):</span>
+            <span class="n">shape</span> <span class="o">=</span> <span class="n">iterable</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="c1"># Construct NDimArray(iterable, shape)</span>
+        <span class="k">elif</span> <span class="n">shape</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">shape</span> <span class="o">=</span> <span class="p">()</span>
+            <span class="n">iterable</span> <span class="o">=</span> <span class="p">(</span><span class="n">iterable</span><span class="p">,)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Integer</span><span class="p">)):</span>
+            <span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">shape</span><span class="p">,)</span>
+
+        <span class="k">if</span> <span class="nb">any</span><span class="p">([</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">Integer</span><span class="p">))</span> <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">shape</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Shape should contain integers only.&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">shape</span><span class="p">),</span> <span class="n">iterable</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Overload common function len(). Returns number of elements in array.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from ... import MutableDenseNDimArray</span>
+<span class="sd">        &gt;&gt;&gt; a = MutableDenseNDimArray.zeros(3, 3)</span>
+<span class="sd">        &gt;&gt;&gt; a</span>
+<span class="sd">        [[0, 0, 0], [0, 0, 0], [0, 0, 0]]</span>
+<span class="sd">        &gt;&gt;&gt; len(a)</span>
+<span class="sd">        9</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loop_size</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns array shape (dimension).</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from ... import MutableDenseNDimArray</span>
+<span class="sd">        &gt;&gt;&gt; a = MutableDenseNDimArray.zeros(3, 3)</span>
+<span class="sd">        &gt;&gt;&gt; a.shape</span>
+<span class="sd">        (3, 3)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shape</span>
+
+<div class="viewcode-block" id="NDimArray.rank"><a class="viewcode-back" href="../../../../../modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.rank">[docs]</a>    <span class="k">def</span> <span class="nf">rank</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns rank of array.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from ... import MutableDenseNDimArray</span>
+<span class="sd">        &gt;&gt;&gt; a = MutableDenseNDimArray.zeros(3,4,5,6,3)</span>
+<span class="sd">        &gt;&gt;&gt; a.rank()</span>
+<span class="sd">        5</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rank</span></div>
+
+<div class="viewcode-block" id="NDimArray.diff"><a class="viewcode-back" href="../../../../../modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.diff">[docs]</a>    <span class="k">def</span> <span class="nf">diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate the derivative of each element in the array.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from ... import ImmutableDenseNDimArray</span>
+<span class="sd">        &gt;&gt;&gt; from ...abc import x, y</span>
+<span class="sd">        &gt;&gt;&gt; M = ImmutableDenseNDimArray([[x, y], [1, x*y]])</span>
+<span class="sd">        &gt;&gt;&gt; M.diff(x)</span>
+<span class="sd">        [[1, 0], [0, y]]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">),</span> <span class="bp">self</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="NDimArray.applyfunc"><a class="viewcode-back" href="../../../../../modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.applyfunc">[docs]</a>    <span class="k">def</span> <span class="nf">applyfunc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply a function to each element of the N-dim array.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from ... import ImmutableDenseNDimArray</span>
+<span class="sd">        &gt;&gt;&gt; m = ImmutableDenseNDimArray([i*2+j for i in range(2) for j in range(2)], (2, 2))</span>
+<span class="sd">        &gt;&gt;&gt; m</span>
+<span class="sd">        [[0, 1], [2, 3]]</span>
+<span class="sd">        &gt;&gt;&gt; m.applyfunc(lambda i: 2*i)</span>
+<span class="sd">        [[0, 2], [4, 6]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="nb">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns string, allows to use standard functions print() and str().</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from ... import MutableDenseNDimArray</span>
+<span class="sd">        &gt;&gt;&gt; a = MutableDenseNDimArray.zeros(2, 2)</span>
+<span class="sd">        &gt;&gt;&gt; a</span>
+<span class="sd">        [[0, 0], [0, 0]]</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">sh</span><span class="p">,</span> <span class="n">shape_left</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape_left</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">&quot;[&quot;</span><span class="o">+</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">e</span><span class="p">])</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)])</span><span class="o">+</span><span class="s2">&quot;]&quot;</span>
+
+            <span class="n">sh</span> <span class="o">//=</span> <span class="n">shape_left</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">return</span> <span class="s2">&quot;[&quot;</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">sh</span><span class="p">,</span> <span class="n">shape_left</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">i</span><span class="o">+</span><span class="n">e</span><span class="o">*</span><span class="n">sh</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="p">(</span><span class="n">e</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">sh</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape_left</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span> <span class="c1"># + &quot;\n&quot;*len(shape_left)</span>
+
+        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loop_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loop_size</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="NDimArray.tolist"><a class="viewcode-back" href="../../../../../modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.tolist">[docs]</a>    <span class="k">def</span> <span class="nf">tolist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Conveting MutableDenseNDimArray to one-dim list</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from ... import MutableDenseNDimArray</span>
+<span class="sd">        &gt;&gt;&gt; a = MutableDenseNDimArray([1, 2, 3, 4], (2, 2))</span>
+<span class="sd">        &gt;&gt;&gt; a</span>
+<span class="sd">        [[1, 2], [3, 4]]</span>
+<span class="sd">        &gt;&gt;&gt; b = a.tolist()</span>
+<span class="sd">        &gt;&gt;&gt; b</span>
+<span class="sd">        [[1, 2], [3, 4]]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">sh</span><span class="p">,</span> <span class="n">shape_left</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">shape_left</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="p">[</span><span class="n">e</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)]</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">sh</span> <span class="o">//=</span> <span class="n">shape_left</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">shape_left</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">sh</span><span class="p">,</span> <span class="n">shape_left</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">i</span><span class="o">+</span><span class="n">e</span><span class="o">*</span><span class="n">sh</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="p">(</span><span class="n">e</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">sh</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">result</span>
+
+        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_loop_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_loop_size</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">NDimArray</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">other</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;array shape mismatch&quot;</span><span class="p">)</span>
+        <span class="n">result_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)]</span>
+
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">result_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">NDimArray</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">other</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;array shape mismatch&quot;</span><span class="p">)</span>
+        <span class="n">result_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="n">j</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)]</span>
+
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">result_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">...matrices.matrices</span> <span class="kn">import</span> <span class="n">MatrixBase</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">,</span><span class="n">NDimArray</span><span class="p">,</span> <span class="n">MatrixBase</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;scalar expected, use tensorproduct(...) for tensorial product&quot;</span><span class="p">)</span>
+        <span class="n">other</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="n">result_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">other</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">result_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__rmul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">...matrices.matrices</span> <span class="kn">import</span> <span class="n">MatrixBase</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">,</span><span class="n">NDimArray</span><span class="p">,</span> <span class="n">MatrixBase</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;scalar expected, use tensorproduct(...) for tensorial product&quot;</span><span class="p">)</span>
+        <span class="n">other</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="n">result_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">other</span><span class="o">*</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">result_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__div__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">...matrices.matrices</span> <span class="kn">import</span> <span class="n">MatrixBase</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="n">collections</span><span class="o">.</span><span class="n">Iterable</span><span class="p">,</span><span class="n">NDimArray</span><span class="p">,</span> <span class="n">MatrixBase</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;scalar expected&quot;</span><span class="p">)</span>
+        <span class="n">other</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="n">result_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">/</span><span class="n">other</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">result_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__rdiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;unsupported operation on NDimArray&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">result_list</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">result_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        NDimArray instances can be compared to each other.</span>
+<span class="sd">        Instances equal if they have same shape and data.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from ... import MutableDenseNDimArray</span>
+<span class="sd">        &gt;&gt;&gt; a = MutableDenseNDimArray.zeros(2, 3)</span>
+<span class="sd">        &gt;&gt;&gt; b = MutableDenseNDimArray.zeros(2, 3)</span>
+<span class="sd">        &gt;&gt;&gt; a == b</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; c = a.reshape(3, 2)</span>
+<span class="sd">        &gt;&gt;&gt; c == b</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; a[0,0] = 1</span>
+<span class="sd">        &gt;&gt;&gt; b[0,0] = 2</span>
+<span class="sd">        &gt;&gt;&gt; a == b</span>
+<span class="sd">        False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">NDimArray</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">(</span><span class="n">other</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="fm">__truediv__</span> <span class="o">=</span> <span class="n">__div__</span>
+    <span class="fm">__rtruediv__</span> <span class="o">=</span> <span class="n">__rdiv__</span>
+
+    <span class="k">def</span> <span class="nf">_eval_diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;evaluate&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Derivative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_eval_transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;array rank not 2&quot;</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">.arrayop</span> <span class="kn">import</span> <span class="n">permutedims</span>
+        <span class="k">return</span> <span class="n">permutedims</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+
+<div class="viewcode-block" id="NDimArray.transpose"><a class="viewcode-back" href="../../../../../modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.transpose">[docs]</a>    <span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_transpose</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">_eval_conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">([</span><span class="n">i</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<div class="viewcode-block" id="NDimArray.conjugate"><a class="viewcode-back" href="../../../../../modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.conjugate">[docs]</a>    <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_conjugate</span><span class="p">()</span></div>
+
+    <span class="k">def</span> <span class="nf">_eval_adjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">conjugate</span><span class="p">()</span>
+
+<div class="viewcode-block" id="NDimArray.adjoint"><a class="viewcode-back" href="../../../../../modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.adjoint">[docs]</a>    <span class="k">def</span> <span class="nf">adjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_adjoint</span><span class="p">()</span></div></div>
+
+
+<div class="viewcode-block" id="ImmutableNDimArray"><a class="viewcode-back" href="../../../../../modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.ImmutableNDimArray">[docs]</a><span class="k">class</span> <span class="nc">ImmutableNDimArray</span><span class="p">(</span><span class="n">NDimArray</span><span class="p">,</span> <span class="n">Basic</span><span class="p">):</span>
+    <span class="n">_op_priority</span> <span class="o">=</span> <span class="mf">11.0</span>
+
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Basic</span><span class="o">.</span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+
+<span class="kn">from</span> <span class="nn">...core.numbers</span> <span class="kn">import</span> <span class="n">Integer</span>
+<span class="kn">from</span> <span class="nn">...core.sympify</span> <span class="kn">import</span> <span class="n">sympify</span>
+<span class="kn">from</span> <span class="nn">...core.function</span> <span class="kn">import</span> <span class="n">Derivative</span>
+<span class="kn">from</span> <span class="nn">...core.expr</span> <span class="kn">import</span> <span class="n">Expr</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.tensor.array.ndim_array</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

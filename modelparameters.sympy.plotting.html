@@ -1,0 +1,1432 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>modelparameters.sympy.plotting package &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="modelparameters.sympy.plotting.intervalmath package" href="modelparameters.sympy.plotting.intervalmath.html" />
+    <link rel="prev" title="modelparameters.sympy.physics.vector package" href="modelparameters.sympy.physics.vector.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.plotting.intervalmath.html" title="modelparameters.sympy.plotting.intervalmath package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.physics.vector.html" title="modelparameters.sympy.physics.vector package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" accesskey="U">modelparameters.sympy package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.plotting package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="modelparameters-sympy-plotting-package">
+<h1>modelparameters.sympy.plotting package<a class="headerlink" href="#modelparameters-sympy-plotting-package" title="Permalink to this headline">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.plotting.intervalmath.html">modelparameters.sympy.plotting.intervalmath package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.intervalmath.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.intervalmath.html#module-modelparameters.sympy.plotting.intervalmath.interval_arithmetic">modelparameters.sympy.plotting.intervalmath.interval_arithmetic module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.intervalmath.html#module-modelparameters.sympy.plotting.intervalmath.lib_interval">modelparameters.sympy.plotting.intervalmath.lib_interval module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.intervalmath.html#module-modelparameters.sympy.plotting.intervalmath">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html">modelparameters.sympy.plotting.pygletplot package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-color-scheme-module">modelparameters.sympy.plotting.pygletplot.color_scheme module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-managed-window-module">modelparameters.sympy.plotting.pygletplot.managed_window module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-module">modelparameters.sympy.plotting.pygletplot.plot module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-axes-module">modelparameters.sympy.plotting.pygletplot.plot_axes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-camera-module">modelparameters.sympy.plotting.pygletplot.plot_camera module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-controller-module">modelparameters.sympy.plotting.pygletplot.plot_controller module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-curve-module">modelparameters.sympy.plotting.pygletplot.plot_curve module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#module-modelparameters.sympy.plotting.pygletplot.plot_interval">modelparameters.sympy.plotting.pygletplot.plot_interval module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-mode-module">modelparameters.sympy.plotting.pygletplot.plot_mode module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-mode-base-module">modelparameters.sympy.plotting.pygletplot.plot_mode_base module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-modes-module">modelparameters.sympy.plotting.pygletplot.plot_modes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#module-modelparameters.sympy.plotting.pygletplot.plot_object">modelparameters.sympy.plotting.pygletplot.plot_object module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-rotation-module">modelparameters.sympy.plotting.pygletplot.plot_rotation module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-surface-module">modelparameters.sympy.plotting.pygletplot.plot_surface module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-plot-window-module">modelparameters.sympy.plotting.pygletplot.plot_window module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#modelparameters-sympy-plotting-pygletplot-util-module">modelparameters.sympy.plotting.pygletplot.util module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.plotting.pygletplot.html#module-modelparameters.sympy.plotting.pygletplot">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-modelparameters.sympy.plotting.experimental_lambdify">
+<span id="modelparameters-sympy-plotting-experimental-lambdify-module"></span><h2>modelparameters.sympy.plotting.experimental_lambdify module<a class="headerlink" href="#module-modelparameters.sympy.plotting.experimental_lambdify" title="Permalink to this headline">¶</a></h2>
+<p>rewrite of lambdify - This stuff is not stable at all.</p>
+<p>It is for internal use in the new plotting module.
+It may (will! see the Q’n’A in the source) be rewritten.</p>
+<p>It’s completely self contained. Especially it does not use lambdarepr.</p>
+<p>It does not aim to replace the current lambdify. Most importantly it will never
+ever support anything else than sympy expressions (no Matrices, dictionaries
+and so on).</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.experimental_lambdify.</span></span><span class="sig-name descname"><span class="pre">Lambdifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_lambda</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_evalf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float_wrap_evalf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">complex_wrap_evalf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_np</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_python_math</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_python_cmath</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/experimental_lambdify.html#Lambdifier"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.builtin_functions_different">
+<span class="sig-name descname"><span class="pre">builtin_functions_different</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'Abs':</span> <span class="pre">'abs',</span> <span class="pre">'Max':</span> <span class="pre">'max',</span> <span class="pre">'Min':</span> <span class="pre">'min'}</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.builtin_functions_different" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.builtin_not_functions">
+<span class="sig-name descname"><span class="pre">builtin_not_functions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'I':</span> <span class="pre">'1j'}</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.builtin_not_functions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.cmath_functions_different">
+<span class="sig-name descname"><span class="pre">cmath_functions_different</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'arg':</span> <span class="pre">'phase',</span> <span class="pre">'ln':</span> <span class="pre">'log'}</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.cmath_functions_different" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.cmath_functions_same">
+<span class="sig-name descname"><span class="pre">cmath_functions_same</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['sin',</span> <span class="pre">'cos',</span> <span class="pre">'tan',</span> <span class="pre">'asin',</span> <span class="pre">'acos',</span> <span class="pre">'atan',</span> <span class="pre">'sinh',</span> <span class="pre">'cosh',</span> <span class="pre">'tanh',</span> <span class="pre">'asinh',</span> <span class="pre">'acosh',</span> <span class="pre">'atanh',</span> <span class="pre">'exp',</span> <span class="pre">'log',</span> <span class="pre">'sqrt']</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.cmath_functions_same" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.cmath_not_functions">
+<span class="sig-name descname"><span class="pre">cmath_not_functions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'E':</span> <span class="pre">'cmath.e',</span> <span class="pre">'pi':</span> <span class="pre">'cmath.pi'}</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.cmath_not_functions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.get_dict_fun">
+<span class="sig-name descname"><span class="pre">get_dict_fun</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/experimental_lambdify.html#Lambdifier.get_dict_fun"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.get_dict_fun" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.get_dict_str">
+<span class="sig-name descname"><span class="pre">get_dict_str</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/experimental_lambdify.html#Lambdifier.get_dict_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.get_dict_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.interval_functions_different">
+<span class="sig-name descname"><span class="pre">interval_functions_different</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'Max':</span> <span class="pre">'imax',</span> <span class="pre">'Min':</span> <span class="pre">'imin',</span> <span class="pre">'ceiling':</span> <span class="pre">'ceil'}</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.interval_functions_different" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.interval_functions_same">
+<span class="sig-name descname"><span class="pre">interval_functions_same</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['sin',</span> <span class="pre">'cos',</span> <span class="pre">'exp',</span> <span class="pre">'tan',</span> <span class="pre">'atan',</span> <span class="pre">'log',</span> <span class="pre">'sqrt',</span> <span class="pre">'cosh',</span> <span class="pre">'sinh',</span> <span class="pre">'tanh',</span> <span class="pre">'floor',</span> <span class="pre">'acos',</span> <span class="pre">'asin',</span> <span class="pre">'acosh',</span> <span class="pre">'asinh',</span> <span class="pre">'atanh',</span> <span class="pre">'Abs',</span> <span class="pre">'And',</span> <span class="pre">'Or']</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.interval_functions_same" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.interval_not_functions">
+<span class="sig-name descname"><span class="pre">interval_not_functions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'E':</span> <span class="pre">'math.e',</span> <span class="pre">'pi':</span> <span class="pre">'math.pi'}</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.interval_not_functions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.math_functions_different">
+<span class="sig-name descname"><span class="pre">math_functions_different</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'ceiling':</span> <span class="pre">'ceil',</span> <span class="pre">'ln':</span> <span class="pre">'log',</span> <span class="pre">'loggamma':</span> <span class="pre">'lgamma'}</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.math_functions_different" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.math_functions_same">
+<span class="sig-name descname"><span class="pre">math_functions_same</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['sin',</span> <span class="pre">'cos',</span> <span class="pre">'tan',</span> <span class="pre">'asin',</span> <span class="pre">'acos',</span> <span class="pre">'atan',</span> <span class="pre">'atan2',</span> <span class="pre">'sinh',</span> <span class="pre">'cosh',</span> <span class="pre">'tanh',</span> <span class="pre">'asinh',</span> <span class="pre">'acosh',</span> <span class="pre">'atanh',</span> <span class="pre">'exp',</span> <span class="pre">'log',</span> <span class="pre">'erf',</span> <span class="pre">'sqrt',</span> <span class="pre">'floor',</span> <span class="pre">'factorial',</span> <span class="pre">'gamma']</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.math_functions_same" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.math_not_functions">
+<span class="sig-name descname"><span class="pre">math_not_functions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'E':</span> <span class="pre">'math.e',</span> <span class="pre">'pi':</span> <span class="pre">'math.pi'}</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.math_not_functions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.numpy_functions_different">
+<span class="sig-name descname"><span class="pre">numpy_functions_different</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'Abs':</span> <span class="pre">'abs',</span> <span class="pre">'Max':</span> <span class="pre">'amax',</span> <span class="pre">'Min':</span> <span class="pre">'amin',</span> <span class="pre">'acos':</span> <span class="pre">'arccos',</span> <span class="pre">'acosh':</span> <span class="pre">'arccosh',</span> <span class="pre">'arg':</span> <span class="pre">'angle',</span> <span class="pre">'asin':</span> <span class="pre">'arcsin',</span> <span class="pre">'asinh':</span> <span class="pre">'arcsinh',</span> <span class="pre">'atan':</span> <span class="pre">'arctan',</span> <span class="pre">'atan2':</span> <span class="pre">'arctan2',</span> <span class="pre">'atanh':</span> <span class="pre">'arctanh',</span> <span class="pre">'ceiling':</span> <span class="pre">'ceil',</span> <span class="pre">'im':</span> <span class="pre">'imag',</span> <span class="pre">'ln':</span> <span class="pre">'log',</span> <span class="pre">'re':</span> <span class="pre">'real'}</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.numpy_functions_different" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.numpy_functions_same">
+<span class="sig-name descname"><span class="pre">numpy_functions_same</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['sin',</span> <span class="pre">'cos',</span> <span class="pre">'tan',</span> <span class="pre">'sinh',</span> <span class="pre">'cosh',</span> <span class="pre">'tanh',</span> <span class="pre">'exp',</span> <span class="pre">'log',</span> <span class="pre">'sqrt',</span> <span class="pre">'floor',</span> <span class="pre">'conjugate']</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.numpy_functions_same" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.numpy_not_functions">
+<span class="sig-name descname"><span class="pre">numpy_not_functions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'E':</span> <span class="pre">'np.e',</span> <span class="pre">'oo':</span> <span class="pre">'np.inf',</span> <span class="pre">'pi':</span> <span class="pre">'np.pi'}</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.numpy_not_functions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.str2tree">
+<span class="sig-name descname"><span class="pre">str2tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exprstr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/experimental_lambdify.html#Lambdifier.str2tree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.str2tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts an expression string to a tree.</p>
+<p>Functions are represented by (‘func_name(’, tree_of_arguments).
+Other expressions are (head_string, mid_tree, tail_str).
+Expressions that do not contain functions are directly returned.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..abc</span> <span class="kn">import</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Integral</span><span class="p">,</span> <span class="n">sin</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.experimental_lambdify</span> <span class="kn">import</span> <span class="n">Lambdifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">str2tree</span> <span class="o">=</span> <span class="n">Lambdifier</span><span class="p">([</span><span class="n">x</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">str2tree</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">str2tree</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Integral</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="p">))))</span>
+<span class="go">(&#39;&#39;, (&#39;Integral(&#39;, &#39;x, (x, 1, y)&#39;), &#39;)&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">str2tree</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">))</span>
+<span class="go">&#39;x + y&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">str2tree</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="go">(&#39;x + y*&#39;, (&#39;sin(&#39;, &#39;z&#39;), &#39;) + 1&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">str2tree</span><span class="p">(</span><span class="s1">&#39;sin(y*(y + 1.1) + (sin(y)))&#39;</span><span class="p">)</span>
+<span class="go">(&#39;&#39;, (&#39;sin(&#39;, (&#39;y*(y + 1.1) + (&#39;, (&#39;sin(&#39;, &#39;y&#39;), &#39;))&#39;)), &#39;)&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.sympy_atoms_namespace">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sympy_atoms_namespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/experimental_lambdify.html#Lambdifier.sympy_atoms_namespace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.sympy_atoms_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>For no real reason this function is separated from
+sympy_expression_namespace. It can be moved to it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.sympy_expression_namespace">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">sympy_expression_namespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/experimental_lambdify.html#Lambdifier.sympy_expression_namespace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.sympy_expression_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Traverses the (func, args) tree of an expression and creates a sympy
+namespace. All other modules are imported only as a module name. That way
+the namespace is not poluted and rests quite small. It probably causes much
+more variable lookups and so it takes more time, but there are no tests on
+that for the moment.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.translate_func">
+<span class="sig-name descname"><span class="pre">translate_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argtree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/experimental_lambdify.html#Lambdifier.translate_func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.translate_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate function names and the tree of arguments.</p>
+<p>If the function name is not in the dictionaries of dict_tuple_fun then the
+function is surrounded by a float((…).evalf()).</p>
+<p>The use of float is necessary as np.&lt;function&gt;(sympy.Float(..)) raises an
+error.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.translate_str">
+<span class="sig-name descname"><span class="pre">translate_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">estr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/experimental_lambdify.html#Lambdifier.translate_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.translate_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translate substrings of estr using in order the dictionaries in
+dict_tuple_str.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.tree2str">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">tree2str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/experimental_lambdify.html#Lambdifier.tree2str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.tree2str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a tree to string without translations.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..abc</span> <span class="kn">import</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Integral</span><span class="p">,</span> <span class="n">sin</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.experimental_lambdify</span> <span class="kn">import</span> <span class="n">Lambdifier</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">str2tree</span> <span class="o">=</span> <span class="n">Lambdifier</span><span class="p">([</span><span class="n">x</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">str2tree</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree2str</span> <span class="o">=</span> <span class="n">Lambdifier</span><span class="p">([</span><span class="n">x</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">tree2str</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree2str</span><span class="p">(</span><span class="n">str2tree</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="n">z</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span>
+<span class="go">&#39;x + y*sin(z) + 1&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.tree2str_translate">
+<span class="sig-name descname"><span class="pre">tree2str_translate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/experimental_lambdify.html#Lambdifier.tree2str_translate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.tree2str_translate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a tree to string with translations.</p>
+<p>Function names are translated by translate_func.
+Other strings are translated by translate_str.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.experimental_lambdify">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.experimental_lambdify.</span></span><span class="sig-name descname"><span class="pre">experimental_lambdify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/experimental_lambdify.html#experimental_lambdify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.experimental_lambdify" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.lambdify">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.experimental_lambdify.</span></span><span class="sig-name descname"><span class="pre">lambdify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/experimental_lambdify.html#lambdify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.lambdify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Returns the lambdified function.</p>
+<p>This function uses experimental_lambdify to create a lambdified
+expression. It uses cmath to lambdify the expression. If the function
+is not implemented in python cmath, python cmath calls evalf on those
+functions.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.experimental_lambdify.vectorized_lambdify">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.experimental_lambdify.</span></span><span class="sig-name descname"><span class="pre">vectorized_lambdify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/experimental_lambdify.html#vectorized_lambdify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.experimental_lambdify.vectorized_lambdify" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Return a sufficiently smart, vectorized and lambdified function.</p>
+<p>Returns only reals.</p>
+<p>This function uses experimental_lambdify to created a lambdified
+expression ready to be used with numpy. Many of the functions in sympy
+are not implemented in numpy so in some cases we resort to python cmath or
+even to evalf.</p>
+<dl>
+<dt>The following translations are tried:</dt><dd><p>only numpy complex
+- on errors raised by sympy trying to work with ndarray:</p>
+<blockquote>
+<div><p>only python cmath and then vectorize complex128</p>
+</div></blockquote>
+</dd>
+</dl>
+<p>When using python cmath there is no need for evalf or float/complex
+because python cmath calls those.</p>
+<p>This function never tries to mix numpy directly with evalf because numpy
+does not understand sympy Float. If this is needed one can use the
+float_wrap_evalf/complex_wrap_evalf options of experimental_lambdify or
+better one can be explicit about the dtypes that numpy works with.
+Check numpy bug <a class="reference external" href="http://projects.scipy.org/numpy/ticket/1013">http://projects.scipy.org/numpy/ticket/1013</a> to know what
+types of errors to expect.</p>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.plotting.plot">
+<span id="modelparameters-sympy-plotting-plot-module"></span><h2>modelparameters.sympy.plotting.plot module<a class="headerlink" href="#module-modelparameters.sympy.plotting.plot" title="Permalink to this headline">¶</a></h2>
+<p>Plotting module for Sympy.</p>
+<p>A plot is represented by the <code class="docutils literal notranslate"><span class="pre">Plot</span></code> class that contains a reference to the
+backend and a list of the data series to be plotted. The data series are
+instances of classes meant to simplify getting points and meshes from sympy
+expressions. <code class="docutils literal notranslate"><span class="pre">plot_backends</span></code> is a dictionary with all the backends.</p>
+<p>This module gives only the essential. For all the fancy stuff use directly
+the backend. You can get the backend wrapper for every plot from the
+<code class="docutils literal notranslate"><span class="pre">_backend</span></code> attribute. Moreover the data series classes have various useful
+methods like <code class="docutils literal notranslate"><span class="pre">get_points</span></code>, <code class="docutils literal notranslate"><span class="pre">get_segments</span></code>, <code class="docutils literal notranslate"><span class="pre">get_meshes</span></code>, etc, that may
+be useful if you wish to use another plotting library.</p>
+<p>Especially if you need publication ready graphs and this module is not enough
+for you - just get the <code class="docutils literal notranslate"><span class="pre">_backend</span></code> attribute and add whatever you want
+directly to it. In the case of matplotlib (the common way to graph data in
+python) just copy <code class="docutils literal notranslate"><span class="pre">_backend.fig</span></code> which is the figure and <code class="docutils literal notranslate"><span class="pre">_backend.ax</span></code>
+which is the axis and work on them as you would on any other matplotlib object.</p>
+<p>Simplicity of code takes much greater importance than performance. Don’t use it
+if you care at all about performance. A new backend instance is initialized
+every time you call <code class="docutils literal notranslate"><span class="pre">show()</span></code> and the old one is left to the garbage collector.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.BaseBackend">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">BaseBackend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#BaseBackend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.BaseBackend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.BaseSeries">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">BaseSeries</span></span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#BaseSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.BaseSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Base class for the data objects containing stuff to be plotted.</p>
+<p>The backend should check if it supports the data series that it’s given.
+(eg TextBackend supports only LineOver1DRange).
+It’s the backend responsibility to know how to use the class of
+data series that it’s given.</p>
+<p>Some data series classes are grouped (using a class attribute like is_2Dline)
+according to the api they present (based only on convention). The backend is
+not obliged to use that api (eg. The LineOver1DRange belongs to the
+is_2Dline group and presents the get_points method, but the
+TextBackend does not use the get_points method).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.BaseSeries.is_2Dline">
+<span class="sig-name descname"><span class="pre">is_2Dline</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.plot.BaseSeries.is_2Dline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.BaseSeries.is_3D">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_3D</span></span><a class="headerlink" href="#modelparameters.sympy.plotting.plot.BaseSeries.is_3D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.BaseSeries.is_3Dline">
+<span class="sig-name descname"><span class="pre">is_3Dline</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.plot.BaseSeries.is_3Dline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.BaseSeries.is_3Dsurface">
+<span class="sig-name descname"><span class="pre">is_3Dsurface</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.plot.BaseSeries.is_3Dsurface" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.BaseSeries.is_contour">
+<span class="sig-name descname"><span class="pre">is_contour</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.plot.BaseSeries.is_contour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.BaseSeries.is_implicit">
+<span class="sig-name descname"><span class="pre">is_implicit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.plot.BaseSeries.is_implicit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.BaseSeries.is_line">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">is_line</span></span><a class="headerlink" href="#modelparameters.sympy.plotting.plot.BaseSeries.is_line" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.BaseSeries.is_parametric">
+<span class="sig-name descname"><span class="pre">is_parametric</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.plot.BaseSeries.is_parametric" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.ContourSeries">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">ContourSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_start_end_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_start_end_y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#ContourSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.ContourSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.plotting.plot.BaseSeries" title="modelparameters.sympy.plotting.plot.BaseSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.plotting.plot.BaseSeries</span></code></a></p>
+<p>Representation for a contour plot.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.ContourSeries.get_meshes">
+<span class="sig-name descname"><span class="pre">get_meshes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#ContourSeries.get_meshes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.ContourSeries.get_meshes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.ContourSeries.is_contour">
+<span class="sig-name descname"><span class="pre">is_contour</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.plot.ContourSeries.is_contour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.DefaultBackend">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">DefaultBackend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#DefaultBackend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.DefaultBackend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.plotting.plot.BaseBackend" title="modelparameters.sympy.plotting.plot.BaseBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.plotting.plot.BaseBackend</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Line2DBaseSeries">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">Line2DBaseSeries</span></span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#Line2DBaseSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Line2DBaseSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.plotting.plot.BaseSeries" title="modelparameters.sympy.plotting.plot.BaseSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.plotting.plot.BaseSeries</span></code></a></p>
+<p>A base class for 2D lines.</p>
+<ul class="simple">
+<li><p>adding the label, steps and only_integers options</p></li>
+<li><p>making is_2Dline true</p></li>
+<li><p>defining get_segments and get_color_array</p></li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Line2DBaseSeries.get_color_array">
+<span class="sig-name descname"><span class="pre">get_color_array</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#Line2DBaseSeries.get_color_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Line2DBaseSeries.get_color_array" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Line2DBaseSeries.get_segments">
+<span class="sig-name descname"><span class="pre">get_segments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#Line2DBaseSeries.get_segments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Line2DBaseSeries.get_segments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Line2DBaseSeries.is_2Dline">
+<span class="sig-name descname"><span class="pre">is_2Dline</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Line2DBaseSeries.is_2Dline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Line3DBaseSeries">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">Line3DBaseSeries</span></span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#Line3DBaseSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Line3DBaseSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.plotting.plot.Line2DBaseSeries" title="modelparameters.sympy.plotting.plot.Line2DBaseSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.plotting.plot.Line2DBaseSeries</span></code></a></p>
+<p>A base class for 3D lines.</p>
+<p>Most of the stuff is derived from Line2DBaseSeries.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Line3DBaseSeries.is_2Dline">
+<span class="sig-name descname"><span class="pre">is_2Dline</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Line3DBaseSeries.is_2Dline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Line3DBaseSeries.is_3Dline">
+<span class="sig-name descname"><span class="pre">is_3Dline</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Line3DBaseSeries.is_3Dline" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.LineOver1DRangeSeries">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">LineOver1DRangeSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_start_end</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#LineOver1DRangeSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.LineOver1DRangeSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.plotting.plot.Line2DBaseSeries" title="modelparameters.sympy.plotting.plot.Line2DBaseSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.plotting.plot.Line2DBaseSeries</span></code></a></p>
+<p>Representation for a line consisting of a SymPy expression over a range.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.LineOver1DRangeSeries.get_points">
+<span class="sig-name descname"><span class="pre">get_points</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#LineOver1DRangeSeries.get_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.LineOver1DRangeSeries.get_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.LineOver1DRangeSeries.get_segments">
+<span class="sig-name descname"><span class="pre">get_segments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#LineOver1DRangeSeries.get_segments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.LineOver1DRangeSeries.get_segments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adaptively gets segments for plotting.</p>
+<p>The adaptive sampling is done by recursively checking if three
+points are almost collinear. If they are not collinear, then more
+points are added between those points.</p>
+<p class="rubric">References</p>
+<dl class="simple">
+<dt>[1] Adaptive polygonal approximation of parametric curves,</dt><dd><p>Luiz Henrique de Figueiredo.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.List2DSeries">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">List2DSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#List2DSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.List2DSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.plotting.plot.Line2DBaseSeries" title="modelparameters.sympy.plotting.plot.Line2DBaseSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.plotting.plot.Line2DBaseSeries</span></code></a></p>
+<p>Representation for a line consisting of list of points.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.List2DSeries.get_points">
+<span class="sig-name descname"><span class="pre">get_points</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#List2DSeries.get_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.List2DSeries.get_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.MatplotlibBackend">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">MatplotlibBackend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#MatplotlibBackend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.MatplotlibBackend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.plotting.plot.BaseBackend" title="modelparameters.sympy.plotting.plot.BaseBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.plotting.plot.BaseBackend</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.MatplotlibBackend.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#MatplotlibBackend.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.MatplotlibBackend.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.MatplotlibBackend.process_series">
+<span class="sig-name descname"><span class="pre">process_series</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#MatplotlibBackend.process_series"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.MatplotlibBackend.process_series" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.MatplotlibBackend.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#MatplotlibBackend.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.MatplotlibBackend.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.MatplotlibBackend.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#MatplotlibBackend.show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.MatplotlibBackend.show" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Parametric2DLineSeries">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">Parametric2DLineSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expr_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_start_end</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#Parametric2DLineSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Parametric2DLineSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.plotting.plot.Line2DBaseSeries" title="modelparameters.sympy.plotting.plot.Line2DBaseSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.plotting.plot.Line2DBaseSeries</span></code></a></p>
+<p>Representation for a line consisting of two parametric sympy expressions
+over a range.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Parametric2DLineSeries.get_parameter_points">
+<span class="sig-name descname"><span class="pre">get_parameter_points</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#Parametric2DLineSeries.get_parameter_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Parametric2DLineSeries.get_parameter_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Parametric2DLineSeries.get_points">
+<span class="sig-name descname"><span class="pre">get_points</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#Parametric2DLineSeries.get_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Parametric2DLineSeries.get_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Parametric2DLineSeries.get_segments">
+<span class="sig-name descname"><span class="pre">get_segments</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#Parametric2DLineSeries.get_segments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Parametric2DLineSeries.get_segments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adaptively gets segments for plotting.</p>
+<p>The adaptive sampling is done by recursively checking if three
+points are almost collinear. If they are not collinear, then more
+points are added between those points.</p>
+<p class="rubric">References</p>
+<dl class="simple">
+<dt>[1] Adaptive polygonal approximation of parametric curves,</dt><dd><p>Luiz Henrique de Figueiredo.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Parametric2DLineSeries.is_parametric">
+<span class="sig-name descname"><span class="pre">is_parametric</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Parametric2DLineSeries.is_parametric" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Parametric3DLineSeries">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">Parametric3DLineSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expr_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expr_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_start_end</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#Parametric3DLineSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Parametric3DLineSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.plotting.plot.Line3DBaseSeries" title="modelparameters.sympy.plotting.plot.Line3DBaseSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.plotting.plot.Line3DBaseSeries</span></code></a></p>
+<p>Representation for a 3D line consisting of two parametric sympy
+expressions and a range.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Parametric3DLineSeries.get_parameter_points">
+<span class="sig-name descname"><span class="pre">get_parameter_points</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#Parametric3DLineSeries.get_parameter_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Parametric3DLineSeries.get_parameter_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Parametric3DLineSeries.get_points">
+<span class="sig-name descname"><span class="pre">get_points</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#Parametric3DLineSeries.get_points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Parametric3DLineSeries.get_points" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.ParametricSurfaceSeries">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">ParametricSurfaceSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expr_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expr_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_start_end_u</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_start_end_v</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#ParametricSurfaceSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.ParametricSurfaceSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.plotting.plot.SurfaceBaseSeries" title="modelparameters.sympy.plotting.plot.SurfaceBaseSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.plotting.plot.SurfaceBaseSeries</span></code></a></p>
+<p>Representation for a 3D surface consisting of three parametric sympy
+expressions and a range.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.ParametricSurfaceSeries.get_meshes">
+<span class="sig-name descname"><span class="pre">get_meshes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#ParametricSurfaceSeries.get_meshes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.ParametricSurfaceSeries.get_meshes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.ParametricSurfaceSeries.get_parameter_meshes">
+<span class="sig-name descname"><span class="pre">get_parameter_meshes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#ParametricSurfaceSeries.get_parameter_meshes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.ParametricSurfaceSeries.get_parameter_meshes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.ParametricSurfaceSeries.is_parametric">
+<span class="sig-name descname"><span class="pre">is_parametric</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.plot.ParametricSurfaceSeries.is_parametric" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Plot">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">Plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#Plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>The central class of the plotting module.</p>
+<p>For interactive work the function <code class="docutils literal notranslate"><span class="pre">plot</span></code> is better suited.</p>
+<p>This class permits the plotting of sympy expressions using numerous
+backends (matplotlib, textplot, the old pyglet module for sympy, Google
+charts api, etc).</p>
+<p>The figure can contain an arbitrary number of plots of sympy expressions,
+lists of coordinates of points, etc. Plot has a private attribute _series that
+contains all data series to be plotted (expressions for lines or surfaces,
+lists of points, etc (all subclasses of BaseSeries)). Those data series are
+instances of classes not imported by <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">..</span> <span class="pre">import</span> <span class="pre">*</span></code>.</p>
+<p>The customization of the figure is on two levels. Global options that
+concern the figure as a whole (eg title, xlabel, scale, etc) and
+per-data series options (eg name) and aesthetics (eg. color, point shape,
+line type, etc.).</p>
+<p>The difference between options and aesthetics is that an aesthetic can be
+a function of the coordinates (or parameters in a parametric plot). The
+supported values for an aesthetic are:
+- None (the backend uses default values)
+- a constant
+- a function of one variable (the first coordinate or parameter)
+- a function of two variables (the first and second coordinate or
+parameters)
+- a function of three variables (only in nonparametric 3D plots)
+Their implementation depends on the backend so they may not work in some
+backends.</p>
+<p>If the plot is parametric and the arity of the aesthetic function permits
+it the aesthetic is calculated over parameters and not over coordinates.
+If the arity does not permit calculation over parameters the calculation is
+done over coordinates.</p>
+<p>Only cartesian coordinates are supported for the moment, but you can use
+the parametric plots to plot in polar, spherical and cylindrical
+coordinates.</p>
+<p>The arguments for the constructor Plot must be subclasses of BaseSeries.</p>
+<p>Any global option can be specified as a keyword argument.</p>
+<p>The global options for a figure are:</p>
+<ul class="simple">
+<li><p>title : str</p></li>
+<li><p>xlabel : str</p></li>
+<li><p>ylabel : str</p></li>
+<li><p>legend : bool</p></li>
+<li><p>xscale : {‘linear’, ‘log’}</p></li>
+<li><p>yscale : {‘linear’, ‘log’}</p></li>
+<li><p>axis : bool</p></li>
+<li><p>axis_center : tuple of two floats or {‘center’, ‘auto’}</p></li>
+<li><p>xlim : tuple of two floats</p></li>
+<li><p>ylim : tuple of two floats</p></li>
+<li><p>aspect_ratio : tuple of two floats or {‘auto’}</p></li>
+<li><p>autoscale : bool</p></li>
+<li><p>margin : float in [0, 1]</p></li>
+</ul>
+<p>The per data series options and aesthetics are:
+There are none in the base series. See below for options for subclasses.</p>
+<p>Some data series support additional aesthetics or options:</p>
+<p>ListSeries, LineOver1DRangeSeries, Parametric2DLineSeries,
+Parametric3DLineSeries support the following:</p>
+<p>Aesthetics:</p>
+<ul class="simple">
+<li><p>line_color : function which returns a float.</p></li>
+</ul>
+<p>options:</p>
+<ul class="simple">
+<li><p>label : str</p></li>
+<li><p>steps : bool</p></li>
+<li><p>integers_only : bool</p></li>
+</ul>
+<p>SurfaceOver2DRangeSeries, ParametricSurfaceSeries support the following:</p>
+<p>aesthetics:</p>
+<ul class="simple">
+<li><p>surface_color : function which returns a float.</p></li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Plot.append">
+<span class="sig-name descname"><span class="pre">append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#Plot.append"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Plot.append" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds an element from a plot’s series to an existing plot.</p>
+<p class="rubric">Examples</p>
+<p>Consider two <code class="docutils literal notranslate"><span class="pre">Plot</span></code> objects, <code class="docutils literal notranslate"><span class="pre">p1</span></code> and <code class="docutils literal notranslate"><span class="pre">p2</span></code>. To add the
+second plot’s first series object to the first, use the
+<code class="docutils literal notranslate"><span class="pre">append</span></code> method, like so:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">symbols</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..plotting</span> <span class="kn">import</span> <span class="n">plot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span>
+<span class="go">Plot object containing:</span>
+<span class="go">[0]: cartesian line: x**2 for x over (-10.0, 10.0)</span>
+<span class="go">[1]: cartesian line: x for x over (-10.0, 10.0)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#modelparameters.sympy.plotting.plot.Plot.extend" title="modelparameters.sympy.plotting.plot.Plot.extend"><code class="xref py py-obj docutils literal notranslate"><span class="pre">extend</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Plot.extend">
+<span class="sig-name descname"><span class="pre">extend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#Plot.extend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Plot.extend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds all series from another plot.</p>
+<p class="rubric">Examples</p>
+<p>Consider two <code class="docutils literal notranslate"><span class="pre">Plot</span></code> objects, <code class="docutils literal notranslate"><span class="pre">p1</span></code> and <code class="docutils literal notranslate"><span class="pre">p2</span></code>. To add the
+second plot to the first, use the <code class="docutils literal notranslate"><span class="pre">extend</span></code> method, like so:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">symbols</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..plotting</span> <span class="kn">import</span> <span class="n">plot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span>
+<span class="go">Plot object containing:</span>
+<span class="go">[0]: cartesian line: x**2 for x over (-10.0, 10.0)</span>
+<span class="go">[1]: cartesian line: x for x over (-10.0, 10.0)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Plot.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#Plot.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Plot.save" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.Plot.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#Plot.show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.Plot.show" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.SurfaceBaseSeries">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">SurfaceBaseSeries</span></span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#SurfaceBaseSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.SurfaceBaseSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.plotting.plot.BaseSeries" title="modelparameters.sympy.plotting.plot.BaseSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.plotting.plot.BaseSeries</span></code></a></p>
+<p>A base class for 3D surfaces.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.SurfaceBaseSeries.get_color_array">
+<span class="sig-name descname"><span class="pre">get_color_array</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#SurfaceBaseSeries.get_color_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.SurfaceBaseSeries.get_color_array" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.SurfaceBaseSeries.is_3Dsurface">
+<span class="sig-name descname"><span class="pre">is_3Dsurface</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.plot.SurfaceBaseSeries.is_3Dsurface" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.SurfaceOver2DRangeSeries">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">SurfaceOver2DRangeSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_start_end_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_start_end_y</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#SurfaceOver2DRangeSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.SurfaceOver2DRangeSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.plotting.plot.SurfaceBaseSeries" title="modelparameters.sympy.plotting.plot.SurfaceBaseSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.plotting.plot.SurfaceBaseSeries</span></code></a></p>
+<p>Representation for a 3D surface consisting of a sympy expression and 2D
+range.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.SurfaceOver2DRangeSeries.get_meshes">
+<span class="sig-name descname"><span class="pre">get_meshes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#SurfaceOver2DRangeSeries.get_meshes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.SurfaceOver2DRangeSeries.get_meshes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.TextBackend">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">TextBackend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#TextBackend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.TextBackend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.plotting.plot.BaseBackend" title="modelparameters.sympy.plotting.plot.BaseBackend"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.plotting.plot.BaseBackend</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.TextBackend.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#TextBackend.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.TextBackend.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.TextBackend.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#TextBackend.show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.TextBackend.show" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.centers_of_faces">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">centers_of_faces</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#centers_of_faces"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.centers_of_faces" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.centers_of_segments">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">centers_of_segments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#centers_of_segments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.centers_of_segments" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.check_arguments">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">check_arguments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expr_len</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_of_free_symbols</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#check_arguments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.check_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks the arguments and converts into tuples of the
+form (exprs, ranges)</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">plot</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">symbols</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.plot</span> <span class="kn">import</span> <span class="n">check_arguments</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_arguments</span><span class="p">([</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)],</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">    [(cos(x), sin(x), (x, -10, 10))]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">check_arguments</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">    [(x, (x, -10, 10)), (x**2, (x, -10, 10))]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.flat">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">flat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.001</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#flat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.flat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks whether three points are almost collinear</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.plot">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a function of a single variable and returns an instance of
+the <code class="docutils literal notranslate"><span class="pre">Plot</span></code> class (also, see the description of the
+<code class="docutils literal notranslate"><span class="pre">show</span></code> keyword argument below).</p>
+<p>The plotting uses an adaptive algorithm which samples recursively to
+accurately plot the plot. The adaptive algorithm uses a random point near
+the midpoint of two points that has to be further sampled. Hence the same
+plots can appear slightly different.</p>
+<p>Single Plot</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot(expr,</span> <span class="pre">range,</span> <span class="pre">**kwargs)</span></code></p>
+<p>If the range is not specified, then a default range of (-10, 10) is used.</p>
+<p>Multiple plots with same range.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot(expr1,</span> <span class="pre">expr2,</span> <span class="pre">...,</span> <span class="pre">range,</span> <span class="pre">**kwargs)</span></code></p>
+<p>If the range is not specified, then a default range of (-10, 10) is used.</p>
+<p>Multiple plots with different ranges.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot((expr1,</span> <span class="pre">range),</span> <span class="pre">(expr2,</span> <span class="pre">range),</span> <span class="pre">...,</span> <span class="pre">**kwargs)</span></code></p>
+<p>Range has to be specified for every expression.</p>
+<p>Default range may change in the future if a more advanced default range
+detection algorithm is implemented.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr</strong> (<em>Expression representing the function of single variable</em>) – </p></li>
+<li><p><strong>range</strong> (<em>(</em><em>x</em><em>, </em><em>0</em><em>, </em><em>5</em><em>)</em><em>, </em><em>A 3-tuple denoting the range of the free variable.</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>function</strong> (<em>Arguments for plot</em>) – </p></li>
+<li><p><strong>show</strong> (Boolean. The default value is set to <code class="docutils literal notranslate"><span class="pre">True</span></code>. Set show to) – </p></li>
+<li><p><strong>returned</strong> (<em>False and the function will not display the plot. The</em>) – </p></li>
+<li><p><strong>display</strong> (<em>instance of the Plot class can then be used to save or</em>) – </p></li>
+<li><p><strong>methods</strong> (<em>the plot by calling the save</em><em>(</em><em>) </em><em>and show</em><em>(</em><em>)</em>) – </p></li>
+<li><p><strong>respectively.</strong> – </p></li>
+<li><p><strong>class</strong> (<em>Arguments for Plot</em>) – </p></li>
+<li><p><strong>adaptive</strong> (<em>Boolean. The default value is set to True. Set adaptive to False and</em>) – </p></li>
+<li><p><strong>required.</strong> (<em>specify nb_of_points if uniform sampling is</em>) – </p></li>
+<li><p><strong>depth</strong> (int Recursion depth of the adaptive algorithm. A depth of value <code class="docutils literal notranslate"><span class="pre">n</span></code>) – </p></li>
+<li><p><strong>points.</strong> (<em>is uniformly sampled at nb_of_points number of</em>) – </p></li>
+<li><p><strong>nb_of_points</strong> (int. Used when the <code class="docutils literal notranslate"><span class="pre">adaptive</span></code> is set to False. The function) – </p></li>
+<li><p><strong>points.</strong> – </p></li>
+<li><p><strong>options</strong> (<em>Aesthetics</em>) – </p></li>
+<li><p><strong>line_color</strong> (<em>float. Specifies the color for the plot.</em>) – </p></li>
+<li><p><strong>plots.</strong> (<em>See Plot to see how to set color for the</em>) – </p></li>
+<li><p><strong>to</strong> (<em>If there are multiple plots</em><em>, </em><em>then the same series series are applied</em>) – </p></li>
+<li><p><strong>index</strong> (<em>all the plots. If you want to set these options separately</em><em>, </em><em>you can</em>) – </p></li>
+<li><p><strong>it.</strong> (<em>the Plot object returned and set</em>) – </p></li>
+<li><p><strong>class</strong> – </p></li>
+<li><p><strong>title</strong> (<em>str. Title of the plot. It is set to the latex representation of</em>) – </p></li>
+<li><p><strong>expression.</strong> (<em>the expression</em><em>, </em><em>if the plot has only one</em>) – </p></li>
+<li><p><strong>xlabel</strong> (<em>str. Label for the x-axis.</em>) – </p></li>
+<li><p><strong>ylabel</strong> (<em>str. Label for the y-axis.</em>) – </p></li>
+<li><p><strong>xscale</strong> (<em>{'linear'</em><em>, </em><em>'log'} Sets the scaling of the x-axis.</em>) – </p></li>
+<li><p><strong>yscale</strong> (<em>{'linear'</em><em>, </em><em>'log'} Sets the scaling if the y-axis.</em>) – </p></li>
+<li><p><strong>axis_center</strong> (<em>tuple of two floats denoting the coordinates of the center or</em>) – </p></li>
+<li><p><strong>'auto'}</strong> (<em>{'center'</em><em>,</em>) – </p></li>
+<li><p><strong>xlim</strong> (<em>tuple of two floats</em><em>, </em><em>denoting the x-axis limits.</em>) – </p></li>
+<li><p><strong>ylim</strong> (<em>tuple of two floats</em><em>, </em><em>denoting the y-axis limits.</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">symbols</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..plotting</span> <span class="kn">import</span> <span class="n">plot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Single Plot</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="go">Plot object containing:</span>
+<span class="go">[0]: cartesian line: x**2 for x over (-5.0, 5.0)</span>
+</pre></div>
+</div>
+<p>Multiple plots with single range.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="go">Plot object containing:</span>
+<span class="go">[0]: cartesian line: x for x over (-5.0, 5.0)</span>
+<span class="go">[1]: cartesian line: x**2 for x over (-5.0, 5.0)</span>
+<span class="go">[2]: cartesian line: x**3 for x over (-5.0, 5.0)</span>
+</pre></div>
+</div>
+<p>Multiple plots with different ranges.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span><span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">)),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)))</span>
+<span class="go">Plot object containing:</span>
+<span class="go">[0]: cartesian line: x**2 for x over (-6.0, 6.0)</span>
+<span class="go">[1]: cartesian line: x for x over (-5.0, 5.0)</span>
+</pre></div>
+</div>
+<p>No adaptive sampling.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">adaptive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nb_of_points</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<span class="go">Plot object containing:</span>
+<span class="go">[0]: cartesian line: x**2 for x over (-10.0, 10.0)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#modelparameters.sympy.plotting.plot.Plot" title="modelparameters.sympy.plotting.plot.Plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plot</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">LineOver1DRangeSeries.</span></code></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.plot3d">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">plot3d</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#plot3d"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.plot3d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a 3D surface plot.</p>
+<p>Single plot</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot3d(expr,</span> <span class="pre">range_x,</span> <span class="pre">range_y,</span> <span class="pre">**kwargs)</span></code></p>
+<p>If the ranges are not specified, then a default range of (-10, 10) is used.</p>
+<p>Multiple plot with the same range.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot3d(expr1,</span> <span class="pre">expr2,</span> <span class="pre">range_x,</span> <span class="pre">range_y,</span> <span class="pre">**kwargs)</span></code></p>
+<p>If the ranges are not specified, then a default range of (-10, 10) is used.</p>
+<p>Multiple plots with different ranges.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot3d((expr1,</span> <span class="pre">range_x,</span> <span class="pre">range_y),</span> <span class="pre">(expr2,</span> <span class="pre">range_x,</span> <span class="pre">range_y),</span> <span class="pre">...,</span> <span class="pre">**kwargs)</span></code></p>
+<p>Ranges have to be specified for every expression.</p>
+<p>Default range may change in the future if a more advanced default range
+detection algorithm is implemented.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr</strong> (<em>Expression representing the function along x.</em>) – </p></li>
+<li><p><strong>range_x</strong> (<em>(</em><em>x</em><em>, </em><em>0</em><em>, </em><em>5</em><em>)</em><em>, </em><em>A 3-tuple denoting the range of the x</em>) – </p></li>
+<li><p><strong>variable.</strong> – </p></li>
+<li><p><strong>range_y</strong> (<em>(</em><em>y</em><em>, </em><em>0</em><em>, </em><em>5</em><em>)</em><em>, </em><em>A 3-tuple denoting the range of the y</em>) – variable.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>class</strong> (<em>Arguments for Plot</em>) – </p></li>
+<li><p><strong>nb_of_points_x</strong> (<em>int. The x range is sampled uniformly at</em>) – </p></li>
+<li><p><strong>points.</strong> (<em>nb_of_points_y of</em>) – </p></li>
+<li><p><strong>nb_of_points_y</strong> (<em>int. The y range is sampled uniformly at</em>) – </p></li>
+<li><p><strong>points.</strong> – </p></li>
+<li><p><strong>Aesthetics</strong> – </p></li>
+<li><p><strong>surface_color</strong> (<em>Function which returns a float. Specifies the color for</em>) – </p></li>
+<li><p><strong>details.</strong> (<em>the surface of the plot. See sympy.plotting.Plot for more</em>) – </p></li>
+<li><p><strong>to</strong> (<em>If there are multiple plots</em><em>, </em><em>then the same series arguments are applied</em>) – </p></li>
+<li><p><strong>index</strong> (<em>all the plots. If you want to set these options separately</em><em>, </em><em>you can</em>) – </p></li>
+<li><p><strong>it.</strong> (<em>the returned Plot object and set</em>) – </p></li>
+<li><p><strong>class</strong> – </p></li>
+<li><p><strong>title</strong> (<em>str. Title of the plot.</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">symbols</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..plotting</span> <span class="kn">import</span> <span class="n">plot3d</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Single plot</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plot3d</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="go">Plot object containing:</span>
+<span class="go">[0]: cartesian surface: x*y for x over (-5.0, 5.0) and y over (-5.0, 5.0)</span>
+</pre></div>
+</div>
+<p>Multiple plots with same range</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plot3d</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="go">Plot object containing:</span>
+<span class="go">[0]: cartesian surface: x*y for x over (-5.0, 5.0) and y over (-5.0, 5.0)</span>
+<span class="go">[1]: cartesian surface: -x*y for x over (-5.0, 5.0) and y over (-5.0, 5.0)</span>
+</pre></div>
+</div>
+<p>Multiple plots with different ranges.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plot3d</span><span class="p">((</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+<span class="go">Plot object containing:</span>
+<span class="go">[0]: cartesian surface: x**2 + y**2 for x over (-5.0, 5.0) and y over (-5.0, 5.0)</span>
+<span class="go">[1]: cartesian surface: x*y for x over (-3.0, 3.0) and y over (-3.0, 3.0)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#modelparameters.sympy.plotting.plot.Plot" title="modelparameters.sympy.plotting.plot.Plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plot</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.plotting.plot.SurfaceOver2DRangeSeries" title="modelparameters.sympy.plotting.plot.SurfaceOver2DRangeSeries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SurfaceOver2DRangeSeries</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.plot3d_parametric_line">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">plot3d_parametric_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#plot3d_parametric_line"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.plot3d_parametric_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a 3D parametric line plot.</p>
+<p>Single plot:</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot3d_parametric_line(expr_x,</span> <span class="pre">expr_y,</span> <span class="pre">expr_z,</span> <span class="pre">range,</span> <span class="pre">**kwargs)</span></code></p>
+<p>If the range is not specified, then a default range of (-10, 10) is used.</p>
+<p>Multiple plots.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot3d_parametric_line((expr_x,</span> <span class="pre">expr_y,</span> <span class="pre">expr_z,</span> <span class="pre">range),</span> <span class="pre">...,</span> <span class="pre">**kwargs)</span></code></p>
+<p>Ranges have to be specified for every expression.</p>
+<p>Default range may change in the future if a more advanced default range
+detection algorithm is implemented.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr_x</strong> (<em>Expression representing the function along x.</em>) – </p></li>
+<li><p><strong>expr_y</strong> (<em>Expression representing the function along y.</em>) – </p></li>
+<li><p><strong>expr_z</strong> (<em>Expression representing the function along z.</em>) – </p></li>
+<li><p><strong>range</strong> (<code class="docutils literal notranslate"><span class="pre">(u,</span> <span class="pre">0,</span> <span class="pre">5)</span></code>, A 3-tuple denoting the range of the parameter) – </p></li>
+<li><p><strong>variable.</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>class.</strong> (<em>Arguments for Plot</em>) – </p></li>
+<li><p><strong>nb_of_points</strong> (The range is uniformly sampled at <code class="docutils literal notranslate"><span class="pre">nb_of_points</span></code>) – </p></li>
+<li><p><strong>points.</strong> (<em>number of</em>) – </p></li>
+<li><p><strong>Aesthetics</strong> – </p></li>
+<li><p><strong>line_color</strong> (<em>function which returns a float. Specifies the color for the</em>) – </p></li>
+<li><p><strong>details.</strong> (<em>plot. See sympy.plotting.Plot for more</em>) – </p></li>
+<li><p><strong>to</strong> (<em>If there are multiple plots</em><em>, </em><em>then the same series arguments are applied</em>) – </p></li>
+<li><p><strong>index</strong> (<em>all the plots. If you want to set these options separately</em><em>, </em><em>you can</em>) – </p></li>
+<li><p><strong>it.</strong> (<em>the returned Plot object and set</em>) – </p></li>
+<li><p><strong>class.</strong> – </p></li>
+<li><p><strong>title</strong> (<em>str. Title of the plot.</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..plotting</span> <span class="kn">import</span> <span class="n">plot3d_parametric_line</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Single plot.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plot3d_parametric_line</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">u</span><span class="p">,</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="go">Plot object containing:</span>
+<span class="go">[0]: 3D parametric cartesian line: (cos(u), sin(u), u) for u over (-5.0, 5.0)</span>
+</pre></div>
+</div>
+<p>Multiple plots.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plot3d_parametric_line</span><span class="p">((</span><span class="n">cos</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">u</span><span class="p">,</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="n">sin</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">u</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)))</span>
+<span class="go">Plot object containing:</span>
+<span class="go">[0]: 3D parametric cartesian line: (cos(u), sin(u), u) for u over (-5.0, 5.0)</span>
+<span class="go">[1]: 3D parametric cartesian line: (sin(u), u**2, u) for u over (-5.0, 5.0)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#modelparameters.sympy.plotting.plot.Plot" title="modelparameters.sympy.plotting.plot.Plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plot</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.plotting.plot.Parametric3DLineSeries" title="modelparameters.sympy.plotting.plot.Parametric3DLineSeries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Parametric3DLineSeries</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.plot3d_parametric_surface">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">plot3d_parametric_surface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#plot3d_parametric_surface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.plot3d_parametric_surface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a 3D parametric surface plot.</p>
+<p>Single plot.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot3d_parametric_surface(expr_x,</span> <span class="pre">expr_y,</span> <span class="pre">expr_z,</span> <span class="pre">range_u,</span> <span class="pre">range_v,</span> <span class="pre">**kwargs)</span></code></p>
+<p>If the ranges is not specified, then a default range of (-10, 10) is used.</p>
+<p>Multiple plots.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot3d_parametric_surface((expr_x,</span> <span class="pre">expr_y,</span> <span class="pre">expr_z,</span> <span class="pre">range_u,</span> <span class="pre">range_v),</span> <span class="pre">...,</span> <span class="pre">**kwargs)</span></code></p>
+<p>Ranges have to be specified for every expression.</p>
+<p>Default range may change in the future if a more advanced default range
+detection algorithm is implemented.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr_x</strong> (Expression representing the function along <code class="docutils literal notranslate"><span class="pre">x</span></code>.) – </p></li>
+<li><p><strong>expr_y</strong> (Expression representing the function along <code class="docutils literal notranslate"><span class="pre">y</span></code>.) – </p></li>
+<li><p><strong>expr_z</strong> (Expression representing the function along <code class="docutils literal notranslate"><span class="pre">z</span></code>.) – </p></li>
+<li><p><strong>range_u</strong> (<code class="docutils literal notranslate"><span class="pre">(u,</span> <span class="pre">0,</span> <span class="pre">5)</span></code>,  A 3-tuple denoting the range of the <code class="docutils literal notranslate"><span class="pre">u</span></code>) – </p></li>
+<li><p><strong>variable.</strong> – </p></li>
+<li><p><strong>range_v</strong> (<code class="docutils literal notranslate"><span class="pre">(v,</span> <span class="pre">0,</span> <span class="pre">5)</span></code>,  A 3-tuple denoting the range of the v) – </p></li>
+<li><p><strong>variable.</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>class</strong> (<em>Arguments for ParametricSurfaceSeries</em>) – </p></li>
+<li><p><strong>nb_of_points_u</strong> (int. The <code class="docutils literal notranslate"><span class="pre">u</span></code> range is sampled uniformly at) – </p></li>
+<li><p><strong>points</strong> (<em>nb_of_points_y of</em>) – </p></li>
+<li><p><strong>nb_of_points_y</strong> (int. The <code class="docutils literal notranslate"><span class="pre">v</span></code> range is sampled uniformly at) – </p></li>
+<li><p><strong>points</strong> – </p></li>
+<li><p><strong>Aesthetics</strong> – </p></li>
+<li><p><strong>surface_color</strong> (<em>Function which returns a float. Specifies the color for</em>) – </p></li>
+<li><p><strong>details.</strong> (<em>the surface of the plot. See sympy.plotting.Plot for more</em>) – </p></li>
+<li><p><strong>for</strong> (<em>If there are multiple plots</em><em>, </em><em>then the same series arguments are applied</em>) – </p></li>
+<li><p><strong>index</strong> (<em>all the plots. If you want to set these options separately</em><em>, </em><em>you can</em>) – </p></li>
+<li><p><strong>it.</strong> (<em>the returned Plot object and set</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<p>Arguments for <code class="docutils literal notranslate"><span class="pre">Plot</span></code> class:</p>
+<p><code class="docutils literal notranslate"><span class="pre">title</span></code> : str. Title of the plot.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..plotting</span> <span class="kn">import</span> <span class="n">plot3d_parametric_surface</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;u v&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Single plot.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plot3d_parametric_surface</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">u</span> <span class="o">+</span> <span class="n">v</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">v</span><span class="p">),</span> <span class="n">u</span> <span class="o">-</span> <span class="n">v</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="go">Plot object containing:</span>
+<span class="go">[0]: parametric cartesian surface: (cos(u + v), sin(u - v), u - v) for u over (-5.0, 5.0) and v over (-5.0, 5.0)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#modelparameters.sympy.plotting.plot.Plot" title="modelparameters.sympy.plotting.plot.Plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plot</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.plotting.plot.ParametricSurfaceSeries" title="modelparameters.sympy.plotting.plot.ParametricSurfaceSeries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ParametricSurfaceSeries</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.plot_parametric">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">plot_parametric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#plot_parametric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.plot_parametric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots a 2D parametric plot.</p>
+<p>The plotting uses an adaptive algorithm which samples recursively to
+accurately plot the plot. The adaptive algorithm uses a random point near
+the midpoint of two points that has to be further sampled. Hence the same
+plots can appear slightly different.</p>
+<p>Single plot.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot_parametric(expr_x,</span> <span class="pre">expr_y,</span> <span class="pre">range,</span> <span class="pre">**kwargs)</span></code></p>
+<p>If the range is not specified, then a default range of (-10, 10) is used.</p>
+<p>Multiple plots with same range.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot_parametric((expr1_x,</span> <span class="pre">expr1_y),</span> <span class="pre">(expr2_x,</span> <span class="pre">expr2_y),</span> <span class="pre">range,</span> <span class="pre">**kwargs)</span></code></p>
+<p>If the range is not specified, then a default range of (-10, 10) is used.</p>
+<p>Multiple plots with different ranges.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot_parametric((expr_x,</span> <span class="pre">expr_y,</span> <span class="pre">range),</span> <span class="pre">...,</span> <span class="pre">**kwargs)</span></code></p>
+<p>Range has to be specified for every expression.</p>
+<p>Default range may change in the future if a more advanced default range
+detection algorithm is implemented.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr_x</strong> (<em>Expression representing the function along x.</em>) – </p></li>
+<li><p><strong>expr_y</strong> (<em>Expression representing the function along y.</em>) – </p></li>
+<li><p><strong>range</strong> (<em>(</em><em>u</em><em>, </em><em>0</em><em>, </em><em>5</em><em>)</em><em>, </em><em>A 3-tuple denoting the range of the parameter</em>) – </p></li>
+<li><p><strong>variable.</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>class</strong> (<em>Arguments for Plot</em>) – </p></li>
+<li><p><strong>adaptive</strong> (<em>Boolean. The default value is set to True. Set adaptive to</em>) – </p></li>
+<li><p><strong>required.</strong> (<em>False and specify nb_of_points if uniform sampling is</em>) – </p></li>
+<li><p><strong>depth</strong> (<em>int Recursion depth of the adaptive algorithm. A depth of</em>) – </p></li>
+<li><p><strong>points.</strong> (<em>function is uniformly sampled at nb_of_points number of</em>) – </p></li>
+<li><p><strong>nb_of_points</strong> (int. Used when the <code class="docutils literal notranslate"><span class="pre">adaptive</span></code> is set to False. The) – </p></li>
+<li><p><strong>points.</strong> – </p></li>
+<li><p><strong>Aesthetics</strong> – </p></li>
+<li><p><strong>----------</strong> – </p></li>
+<li><p><strong>line_color</strong> (<em>function which returns a float. Specifies the color for the</em>) – </p></li>
+<li><p><strong>details.</strong> (<em>plot. See sympy.plotting.Plot for more</em>) – </p></li>
+<li><p><strong>to</strong> (<em>If there are multiple plots</em><em>, </em><em>then the same Series arguments are applied</em>) – </p></li>
+<li><p><strong>index</strong> (<em>all the plots. If you want to set these options separately</em><em>, </em><em>you can</em>) – </p></li>
+<li><p><strong>it.</strong> (<em>the returned Plot object and set</em>) – </p></li>
+<li><p><strong>class</strong> – </p></li>
+<li><p><strong>xlabel</strong> (<em>str. Label for the x-axis.</em>) – </p></li>
+<li><p><strong>ylabel</strong> (<em>str. Label for the y-axis.</em>) – </p></li>
+<li><p><strong>xscale</strong> (<em>{'linear'</em><em>, </em><em>'log'} Sets the scaling of the x-axis.</em>) – </p></li>
+<li><p><strong>yscale</strong> (<em>{'linear'</em><em>, </em><em>'log'} Sets the scaling if the y-axis.</em>) – </p></li>
+<li><p><strong>axis_center</strong> (<em>tuple of two floats denoting the coordinates of the center</em>) – </p></li>
+<li><p><strong>'auto'}</strong> (<em>or {'center'</em><em>,</em>) – </p></li>
+<li><p><strong>xlim</strong> (<em>tuple of two floats</em><em>, </em><em>denoting the x-axis limits.</em>) – </p></li>
+<li><p><strong>ylim</strong> (<em>tuple of two floats</em><em>, </em><em>denoting the y-axis limits.</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..plotting</span> <span class="kn">import</span> <span class="n">plot_parametric</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">u</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Single Parametric plot</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plot_parametric</span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="go">Plot object containing:</span>
+<span class="go">[0]: parametric cartesian line: (cos(u), sin(u)) for u over (-5.0, 5.0)</span>
+</pre></div>
+</div>
+<p>Multiple parametric plot with single range.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plot_parametric</span><span class="p">((</span><span class="n">cos</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">u</span><span class="p">)),</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">cos</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+<span class="go">Plot object containing:</span>
+<span class="go">[0]: parametric cartesian line: (cos(u), sin(u)) for u over (-10.0, 10.0)</span>
+<span class="go">[1]: parametric cartesian line: (u, cos(u)) for u over (-10.0, 10.0)</span>
+</pre></div>
+</div>
+<p>Multiple parametric plots.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">plot_parametric</span><span class="p">((</span><span class="n">cos</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)),</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="n">u</span><span class="p">,</span> <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)))</span>
+<span class="go">Plot object containing:</span>
+<span class="go">[0]: parametric cartesian line: (cos(u), sin(u)) for u over (-5.0, 5.0)</span>
+<span class="go">[1]: parametric cartesian line: (cos(u), u) for u over (-5.0, 5.0)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#modelparameters.sympy.plotting.plot.Plot" title="modelparameters.sympy.plotting.plot.Plot"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Plot</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.plotting.plot.Parametric2DLineSeries" title="modelparameters.sympy.plotting.plot.Parametric2DLineSeries"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Parametric2DLineSeries</span></code></a></p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot.unset_show">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot.</span></span><span class="sig-name descname"><span class="pre">unset_show</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot.html#unset_show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot.unset_show" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.plotting.plot_implicit">
+<span id="modelparameters-sympy-plotting-plot-implicit-module"></span><h2>modelparameters.sympy.plotting.plot_implicit module<a class="headerlink" href="#module-modelparameters.sympy.plotting.plot_implicit" title="Permalink to this headline">¶</a></h2>
+<p>Implicit plotting module for SymPy</p>
+<p>The module implements a data series called ImplicitSeries which is used by
+<code class="docutils literal notranslate"><span class="pre">Plot</span></code> class to plot implicit plots for different backends. The module,
+by default, implements plotting using interval arithmetic. It switches to a
+fall back algorithm if the expression cannot be plotted using interval arithmetic.
+It is also possible to specify to use the fall back algorithm for all plots.</p>
+<p>Boolean combinations of expressions cannot be plotted by the fall back
+algorithm.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sympy.plotting.plot</span></code></p>
+</div>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p>Jeffrey Allen Tupper. Reliable Two-Dimensional Graphing Methods for</p></li>
+</ul>
+<p>Mathematical Formulae with Two Free Variables.</p>
+<ul class="simple">
+<li><p>Jeffrey Allen Tupper. Graphing Equations with Generalized Interval</p></li>
+</ul>
+<p>Arithmetic. Master’s thesis. University of Toronto, 1996</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot_implicit.ImplicitSeries">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot_implicit.</span></span><span class="sig-name descname"><span class="pre">ImplicitSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_start_end_x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_start_end_y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">has_equality</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_interval_math</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_of_points</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">line_color</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot_implicit.html#ImplicitSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot_implicit.ImplicitSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.plotting.plot.BaseSeries" title="modelparameters.sympy.plotting.plot.BaseSeries"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.plotting.plot.BaseSeries</span></code></a></p>
+<p>Representation for Implicit plot</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot_implicit.ImplicitSeries.get_raster">
+<span class="sig-name descname"><span class="pre">get_raster</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot_implicit.html#ImplicitSeries.get_raster"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot_implicit.ImplicitSeries.get_raster" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot_implicit.ImplicitSeries.is_implicit">
+<span class="sig-name descname"><span class="pre">is_implicit</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.plot_implicit.ImplicitSeries.is_implicit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.plot_implicit.plot_implicit">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.plot_implicit.</span></span><span class="sig-name descname"><span class="pre">plot_implicit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_var</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/plot_implicit.html#plot_implicit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.plot_implicit.plot_implicit" title="Permalink to this definition">¶</a></dt>
+<dd><p>A plot function to plot implicit equations / inequalities.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>expr</strong> (<em>-</em>) – </p></li>
+<li><p><strong>(</strong><strong>optional</strong><strong>)</strong> (<em>- y_var</em>) – and range as <code class="docutils literal notranslate"><span class="pre">(symbol,</span> <span class="pre">xmin,</span> <span class="pre">xmax)</span></code></p></li>
+<li><p><strong>(</strong><strong>optional</strong><strong>)</strong> – and range as <code class="docutils literal notranslate"><span class="pre">(symbol,</span> <span class="pre">ymin,</span> <span class="pre">ymax)</span></code></p></li>
+<li><p><strong>the</strong> (<em>If neither x_var nor y_var are given then the free symbols in</em>) – </p></li>
+<li><p><strong>sorted.</strong> (<em>expression will be assigned in the order they are</em>) – </p></li>
+<li><p><strong>used</strong> (<em>The following keyword arguments can also be</em>) – </p></li>
+<li><p><strong>be</strong> (<em>- adaptive. Boolean. The default value is set to True. It has to</em>) – set to False if you want to use a mesh grid.</p></li>
+<li><p><strong>grid.</strong> (<em>- depth integer. The depth of recursion for adaptive mesh</em>) – Default value is 0. Takes value in the range (0, 4).</p></li>
+<li><p><strong>not</strong> (<em>- points integer. The number of points if adaptive mesh grid is</em>) – used. Default value is 200.</p></li>
+<li><p><strong>plot.</strong> (<em>- title string .The title for the</em>) – </p></li>
+<li><p><strong>x-axis</strong> (<em>- xlabel string. The label for the</em>) – </p></li>
+<li><p><strong>y-axis</strong> (<em>- ylabel string. The label for the</em>) – </p></li>
+<li><p><strong>options</strong> (<em>Aesthetics</em>) – </p></li>
+<li><p><strong>line_color</strong> (<em>-</em>) – See <code class="docutils literal notranslate"><span class="pre">Plot</span></code> to see how to set color for the plots.</p></li>
+<li><p><strong>plot_implicit</strong> – </p></li>
+<li><p><strong>default</strong> (<em>by</em>) – </p></li>
+<li><p><strong>If</strong> (<em>uses interval arithmetic to plot functions.</em>) – </p></li>
+<li><p><strong>arithmetic</strong> (<a class="reference internal" href="modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.interval_arithmetic.interval" title="modelparameters.sympy.plotting.intervalmath.interval_arithmetic.interval"><em>interval</em></a>) – </p></li>
+<li><p><strong>to</strong> (<em>it defaults</em>) – </p></li>
+<li><p><strong>By</strong> (<em>a generating a contour using a mesh grid of fixed number of points.</em>) – </p></li>
+<li><p><strong>False</strong> (<em>setting adaptive to</em>) – </p></li>
+<li><p><strong>mesh</strong> (<em>you can force plot_implicit to use the</em>) – </p></li>
+<li><p><strong>using</strong> (<em>grid. The mesh grid method can be effective when adaptive plotting</em>) – </p></li>
+<li><p><strong>arithmetic</strong> – </p></li>
+<li><p><strong>width.</strong> (<em>fails to plot with small line</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>Plot expressions:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">plot_implicit</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">And</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Without any ranges for the symbols in the expression</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p1</span> <span class="o">=</span> <span class="n">plot_implicit</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>With the range for the symbols</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p2</span> <span class="o">=</span> <span class="n">plot_implicit</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>With depth of recursion as argument.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p3</span> <span class="o">=</span> <span class="n">plot_implicit</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">depth</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Using mesh grid and not using adaptive meshing.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p4</span> <span class="o">=</span> <span class="n">plot_implicit</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">adaptive</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Using mesh grid with number of points as input.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p5</span> <span class="o">=</span> <span class="n">plot_implicit</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="n">adaptive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Plotting regions.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p6</span> <span class="o">=</span> <span class="n">plot_implicit</span><span class="p">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Plotting Using boolean conjunctions.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p7</span> <span class="o">=</span> <span class="n">plot_implicit</span><span class="p">(</span><span class="n">And</span><span class="p">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="o">-</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>When plotting an expression with a single variable (y - 1, for example),
+specify the x or the y variable explicitly:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p8</span> <span class="o">=</span> <span class="n">plot_implicit</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">y_var</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p9</span> <span class="o">=</span> <span class="n">plot_implicit</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">x_var</span><span class="o">=</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.plotting.textplot">
+<span id="modelparameters-sympy-plotting-textplot-module"></span><h2>modelparameters.sympy.plotting.textplot module<a class="headerlink" href="#module-modelparameters.sympy.plotting.textplot" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.textplot.textplot">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.textplot.</span></span><span class="sig-name descname"><span class="pre">textplot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">55</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">H</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">18</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/textplot.html#textplot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.textplot.textplot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a crude ASCII art plot of the SymPy expression ‘expr’ (which
+should contain a single symbol, e.g. x or something else) over the
+interval [a, b].</p>
+<p class="rubric">Examples</p>
+<p>textplot(sin(t)*t, 0, 15)</p>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.plotting">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.plotting" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">modelparameters.sympy.plotting package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.plotting.experimental_lambdify">modelparameters.sympy.plotting.experimental_lambdify module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.plotting.plot">modelparameters.sympy.plotting.plot module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.plotting.plot_implicit">modelparameters.sympy.plotting.plot_implicit module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.plotting.textplot">modelparameters.sympy.plotting.textplot module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.plotting">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.physics.vector.html"
+                        title="previous chapter">modelparameters.sympy.physics.vector package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.plotting.intervalmath.html"
+                        title="next chapter">modelparameters.sympy.plotting.intervalmath package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modelparameters.sympy.plotting.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.plotting.intervalmath.html" title="modelparameters.sympy.plotting.intervalmath package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.physics.vector.html" title="modelparameters.sympy.physics.vector package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" >modelparameters.sympy package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.plotting package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

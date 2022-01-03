@@ -1,0 +1,555 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.printing.llvmjitcode &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.printing.llvmjitcode</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.printing.llvmjitcode</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Use llvmlite to create executable functions from Sympy expressions</span>
+
+<span class="sd">This module requires llvmlite (https://github.com/numba/llvmlite).</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">ctypes</span>
+
+<span class="kn">from</span> <span class="nn">..external</span> <span class="kn">import</span> <span class="n">import_module</span>
+<span class="kn">from</span> <span class="nn">.printer</span> <span class="kn">import</span> <span class="n">Printer</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">S</span><span class="p">,</span> <span class="n">IndexedBase</span>
+<span class="kn">from</span> <span class="nn">..utilities.decorator</span> <span class="kn">import</span> <span class="n">doctest_depends_on</span>
+
+<span class="n">llvmlite</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;llvmlite&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">llvmlite</span><span class="p">:</span>
+    <span class="n">ll</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;llvmlite.ir&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">ir</span>
+    <span class="n">llvm</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;llvmlite.binding&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">binding</span>
+    <span class="n">llvm</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+    <span class="n">llvm</span><span class="o">.</span><span class="n">initialize_native_target</span><span class="p">()</span>
+    <span class="n">llvm</span><span class="o">.</span><span class="n">initialize_native_asmprinter</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="LLVMJitPrinter"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.llvmjitcode.LLVMJitPrinter">[docs]</a><span class="k">class</span> <span class="nc">LLVMJitPrinter</span><span class="p">(</span><span class="n">Printer</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Convert expressions to LLVM IR&#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">builder</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">func_arg_map</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;func_arg_map&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">llvmlite</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;llvmlite is required for LLVMJITPrinter&quot;</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LLVMJitPrinter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">DoubleType</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module</span> <span class="o">=</span> <span class="n">module</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">builder</span> <span class="o">=</span> <span class="n">builder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fn</span> <span class="o">=</span> <span class="n">fn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ext_fn</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># keep track of wrappers to external functions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tmp_var</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="nf">_add_tmp_var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tmp_var</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">_print_Number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ll</span><span class="o">.</span><span class="n">Constant</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_print_Integer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ll</span><span class="o">.</span><span class="n">Constant</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">p</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_print_Symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tmp_var</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">val</span><span class="p">:</span>
+            <span class="c1"># look up parameter with name s</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_arg_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">val</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s2">&quot;Symbol not found: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">s</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">val</span>
+
+    <span class="k">def</span> <span class="nf">_print_Pow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="n">base0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">exp</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">fdiv</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">Constant</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">base0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">exp</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">Half</span><span class="p">:</span>
+            <span class="n">fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ext_fn</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;sqrt&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">fn</span><span class="p">:</span>
+                <span class="n">fn_type</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">FunctionType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span><span class="p">])</span>
+                <span class="n">fn</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">module</span><span class="p">,</span> <span class="n">fn_type</span><span class="p">,</span> <span class="s2">&quot;sqrt&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ext_fn</span><span class="p">[</span><span class="s2">&quot;sqrt&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fn</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="p">[</span><span class="n">base0</span><span class="p">],</span> <span class="s2">&quot;sqrt&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">exp</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">fmul</span><span class="p">(</span><span class="n">base0</span><span class="p">,</span> <span class="n">base0</span><span class="p">)</span>
+
+        <span class="n">exp0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">exp</span><span class="p">)</span>
+        <span class="n">fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ext_fn</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;pow&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fn</span><span class="p">:</span>
+            <span class="n">fn_type</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">FunctionType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span><span class="p">])</span>
+            <span class="n">fn</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">module</span><span class="p">,</span> <span class="n">fn_type</span><span class="p">,</span> <span class="s2">&quot;pow&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ext_fn</span><span class="p">[</span><span class="s2">&quot;pow&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fn</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="p">[</span><span class="n">base0</span><span class="p">,</span> <span class="n">exp0</span><span class="p">],</span> <span class="s2">&quot;pow&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_print_Mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">]</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">fmul</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">e</span>
+
+    <span class="k">def</span> <span class="nf">_print_Add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">]</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">fadd</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">e</span>
+
+    <span class="c1"># TODO - assumes all called functions take one double precision argument.</span>
+    <span class="c1">#        Should have a list of math library functions to validate this.</span>
+    <span class="k">def</span> <span class="nf">_print_Function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="n">e0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ext_fn</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fn</span><span class="p">:</span>
+            <span class="n">fn_type</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">FunctionType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span><span class="p">])</span>
+            <span class="n">fn</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">module</span><span class="p">,</span> <span class="n">fn_type</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ext_fn</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">fn</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="p">[</span><span class="n">e0</span><span class="p">],</span> <span class="n">name</span><span class="p">)</span>
+
+<div class="viewcode-block" id="LLVMJitPrinter.emptyPrinter"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.llvmjitcode.LLVMJitPrinter.emptyPrinter">[docs]</a>    <span class="k">def</span> <span class="nf">emptyPrinter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Unsupported type for LLVM JIT conversion: </span><span class="si">%s</span><span class="s2">&quot;</span>
+                        <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">expr</span><span class="p">))</span></div></div>
+
+
+<span class="c1"># Used when parameters are passed by array.  Often used in callbacks to</span>
+<span class="c1"># handle a variable number of parameters.</span>
+<div class="viewcode-block" id="LLVMJitCallbackPrinter"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.llvmjitcode.LLVMJitCallbackPrinter">[docs]</a><span class="k">class</span> <span class="nc">LLVMJitCallbackPrinter</span><span class="p">(</span><span class="n">LLVMJitPrinter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LLVMJitCallbackPrinter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_print_Indexed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="n">array</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_arg_map</span><span class="p">[</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">]</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">evalf</span><span class="p">())</span>
+        <span class="n">array_ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">gep</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="p">[</span><span class="n">ll</span><span class="o">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">IntType</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span> <span class="n">offset</span><span class="p">)])</span>
+        <span class="n">fp_array_ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">bitcast</span><span class="p">(</span><span class="n">array_ptr</span><span class="p">,</span> <span class="n">ll</span><span class="o">.</span><span class="n">PointerType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span><span class="p">))</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp_array_ptr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">_print_Symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tmp_var</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">val</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">val</span>
+
+        <span class="n">array</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func_arg_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">array</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s2">&quot;Symbol not found: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">s</span><span class="p">)</span>
+        <span class="n">array_ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">gep</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="p">[</span><span class="n">ll</span><span class="o">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">IntType</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span> <span class="n">idx</span><span class="p">)])</span>
+        <span class="n">fp_array_ptr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">bitcast</span><span class="p">(</span><span class="n">array_ptr</span><span class="p">,</span>
+                                            <span class="n">ll</span><span class="o">.</span><span class="n">PointerType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span><span class="p">))</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp_array_ptr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span></div>
+
+
+<span class="c1"># ensure lifetime of the execution engine persists (else call to compiled</span>
+<span class="c1">#   function will seg fault)</span>
+<span class="n">exe_engines</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># ensure names for generated functions are unique</span>
+<span class="n">link_names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<span class="n">current_link_suffix</span> <span class="o">=</span> <span class="mi">0</span>
+
+
+<div class="viewcode-block" id="LLVMJitCode"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.llvmjitcode.LLVMJitCode">[docs]</a><span class="k">class</span> <span class="nc">LLVMJitCode</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signature</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">signature</span> <span class="o">=</span> <span class="n">signature</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">DoubleType</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">module</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">Module</span><span class="p">(</span><span class="s1">&#39;mod1&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fn</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">llvm_arg_types</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">llvm_ret_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param_dict</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># map symbol name to LLVM function argument</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">link_name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="nf">_from_ctype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctype</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ctype</span> <span class="o">==</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ll</span><span class="o">.</span><span class="n">IntType</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ctype</span> <span class="o">==</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span>
+        <span class="k">if</span> <span class="n">ctype</span> <span class="o">==</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ll</span><span class="o">.</span><span class="n">PointerType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ctype</span> <span class="o">==</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ll</span><span class="o">.</span><span class="n">PointerType</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">IntType</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">ctype</span> <span class="o">==</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">py_object</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ll</span><span class="o">.</span><span class="n">PointerType</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">IntType</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unhandled ctype = </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">ctype</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_create_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create types for function arguments&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">llvm_ret_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_from_ctype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">signature</span><span class="o">.</span><span class="n">ret_type</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">llvm_arg_types</span> <span class="o">=</span> \
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_from_ctype</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">signature</span><span class="o">.</span><span class="n">arg_ctypes</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_create_function_base</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create function with name and type signature&quot;&quot;&quot;</span>
+        <span class="k">global</span> <span class="n">link_names</span><span class="p">,</span> <span class="n">current_link_suffix</span>
+        <span class="n">default_link_name</span> <span class="o">=</span> <span class="s1">&#39;jit_func&#39;</span>
+        <span class="n">current_link_suffix</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">link_name</span> <span class="o">=</span> <span class="n">default_link_name</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">current_link_suffix</span><span class="p">)</span>
+        <span class="n">link_names</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">link_name</span><span class="p">)</span>
+
+        <span class="n">fn_type</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">FunctionType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">llvm_ret_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">llvm_arg_types</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fn</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">module</span><span class="p">,</span> <span class="n">fn_type</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">link_name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_param_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Mapping of symbolic values to function arguments&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">func_args</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">param_dict</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">_create_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create function body and return LLVM IR&quot;&quot;&quot;</span>
+        <span class="n">bb_entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="o">.</span><span class="n">append_basic_block</span><span class="p">(</span><span class="s1">&#39;entry&#39;</span><span class="p">)</span>
+        <span class="n">builder</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">IRBuilder</span><span class="p">(</span><span class="n">bb_entry</span><span class="p">)</span>
+
+        <span class="n">lj</span> <span class="o">=</span> <span class="n">LLVMJitPrinter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">module</span><span class="p">,</span> <span class="n">builder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="p">,</span>
+                            <span class="n">func_arg_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">param_dict</span><span class="p">)</span>
+
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_expr</span><span class="p">(</span><span class="n">lj</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+        <span class="n">lj</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">ret</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wrap_return</span><span class="p">(</span><span class="n">lj</span><span class="p">,</span> <span class="n">ret</span><span class="p">))</span>
+
+        <span class="n">strmod</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">module</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">strmod</span>
+
+    <span class="k">def</span> <span class="nf">_wrap_return</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lj</span><span class="p">,</span> <span class="n">vals</span><span class="p">):</span>
+        <span class="c1"># Return a single double if there is one return value,</span>
+        <span class="c1">#  else return a tuple of doubles.</span>
+
+        <span class="c1"># Don&#39;t wrap return value in this case</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">signature</span><span class="o">.</span><span class="n">ret_type</span> <span class="o">==</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">vals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Use this instead of a real PyObject*</span>
+        <span class="n">void_ptr</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">PointerType</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">IntType</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span>
+
+        <span class="c1"># Create a wrapped double: PyObject* PyFloat_FromDouble(double v)</span>
+        <span class="n">wrap_type</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">FunctionType</span><span class="p">(</span><span class="n">void_ptr</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span><span class="p">])</span>
+        <span class="n">wrap_fn</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="n">lj</span><span class="o">.</span><span class="n">module</span><span class="p">,</span> <span class="n">wrap_type</span><span class="p">,</span> <span class="s2">&quot;PyFloat_FromDouble&quot;</span><span class="p">)</span>
+
+        <span class="n">wrapped_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">lj</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">wrap_fn</span><span class="p">,</span> <span class="p">[</span><span class="n">v</span><span class="p">])</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vals</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">final_val</span> <span class="o">=</span> <span class="n">wrapped_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Create a tuple: PyObject* PyTuple_Pack(Py_ssize_t n, ...)</span>
+
+            <span class="c1"># This should be Py_ssize_t</span>
+            <span class="n">tuple_arg_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">ll</span><span class="o">.</span><span class="n">IntType</span><span class="p">(</span><span class="mi">32</span><span class="p">)]</span>
+
+            <span class="n">tuple_arg_types</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">void_ptr</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">vals</span><span class="p">))</span>
+            <span class="n">tuple_type</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">FunctionType</span><span class="p">(</span><span class="n">void_ptr</span><span class="p">,</span> <span class="n">tuple_arg_types</span><span class="p">)</span>
+            <span class="n">tuple_fn</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="n">lj</span><span class="o">.</span><span class="n">module</span><span class="p">,</span> <span class="n">tuple_type</span><span class="p">,</span> <span class="s2">&quot;PyTuple_Pack&quot;</span><span class="p">)</span>
+
+            <span class="n">tuple_args</span> <span class="o">=</span> <span class="p">[</span><span class="n">ll</span><span class="o">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">IntType</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">wrapped_vals</span><span class="p">))]</span>
+            <span class="n">tuple_args</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">wrapped_vals</span><span class="p">)</span>
+
+            <span class="n">final_val</span> <span class="o">=</span> <span class="n">lj</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">tuple_fn</span><span class="p">,</span> <span class="n">tuple_args</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">final_val</span>
+
+    <span class="k">def</span> <span class="nf">_convert_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lj</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Match CSE return data structure.</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">tmp_exprs</span> <span class="o">=</span> <span class="n">expr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">final_exprs</span> <span class="o">=</span> <span class="n">expr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">final_exprs</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">signature</span><span class="o">.</span><span class="n">ret_type</span> <span class="o">==</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Return of multiple expressions not supported for this callback&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">tmp_exprs</span><span class="p">:</span>
+                    <span class="n">val</span> <span class="o">=</span> <span class="n">lj</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                    <span class="n">lj</span><span class="o">.</span><span class="n">_add_tmp_var</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="n">final_exprs</span> <span class="o">=</span> <span class="p">[</span><span class="n">expr</span><span class="p">]</span>
+
+        <span class="n">vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">lj</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">final_exprs</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">vals</span>
+
+    <span class="k">def</span> <span class="nf">_compile_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strmod</span><span class="p">):</span>
+        <span class="k">global</span> <span class="n">exe_engines</span>
+        <span class="n">llmod</span> <span class="o">=</span> <span class="n">llvm</span><span class="o">.</span><span class="n">parse_assembly</span><span class="p">(</span><span class="n">strmod</span><span class="p">)</span>
+
+        <span class="n">pmb</span> <span class="o">=</span> <span class="n">llvm</span><span class="o">.</span><span class="n">create_pass_manager_builder</span><span class="p">()</span>
+        <span class="n">pmb</span><span class="o">.</span><span class="n">opt_level</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">pass_manager</span> <span class="o">=</span> <span class="n">llvm</span><span class="o">.</span><span class="n">create_module_pass_manager</span><span class="p">()</span>
+        <span class="n">pmb</span><span class="o">.</span><span class="n">populate</span><span class="p">(</span><span class="n">pass_manager</span><span class="p">)</span>
+
+        <span class="n">pass_manager</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">llmod</span><span class="p">)</span>
+
+        <span class="n">target_machine</span> <span class="o">=</span> \
+            <span class="n">llvm</span><span class="o">.</span><span class="n">Target</span><span class="o">.</span><span class="n">from_default_triple</span><span class="p">()</span><span class="o">.</span><span class="n">create_target_machine</span><span class="p">()</span>
+        <span class="n">exe_eng</span> <span class="o">=</span> <span class="n">llvm</span><span class="o">.</span><span class="n">create_mcjit_compiler</span><span class="p">(</span><span class="n">llmod</span><span class="p">,</span> <span class="n">target_machine</span><span class="p">)</span>
+        <span class="n">exe_eng</span><span class="o">.</span><span class="n">finalize_object</span><span class="p">()</span>
+        <span class="n">exe_engines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">exe_eng</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Assembly&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">target_machine</span><span class="o">.</span><span class="n">emit_assembly</span><span class="p">(</span><span class="n">llmod</span><span class="p">))</span>
+
+        <span class="n">fptr</span> <span class="o">=</span> <span class="n">exe_eng</span><span class="o">.</span><span class="n">get_pointer_to_function</span><span class="p">(</span>
+            <span class="n">llmod</span><span class="o">.</span><span class="n">get_function</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">link_name</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">fptr</span></div>
+
+
+<div class="viewcode-block" id="LLVMJitCodeCallback"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.llvmjitcode.LLVMJitCodeCallback">[docs]</a><span class="k">class</span> <span class="nc">LLVMJitCodeCallback</span><span class="p">(</span><span class="n">LLVMJitCode</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">signature</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">LLVMJitCodeCallback</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_param_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_args</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">func_args</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">IndexedBase</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">param_dict</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">param_dict</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">signature</span><span class="o">.</span><span class="n">input_arg</span><span class="p">],</span>
+                                      <span class="n">i</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create function body and return LLVM IR&quot;&quot;&quot;</span>
+        <span class="n">bb_entry</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="o">.</span><span class="n">append_basic_block</span><span class="p">(</span><span class="s1">&#39;entry&#39;</span><span class="p">)</span>
+        <span class="n">builder</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">IRBuilder</span><span class="p">(</span><span class="n">bb_entry</span><span class="p">)</span>
+
+        <span class="n">lj</span> <span class="o">=</span> <span class="n">LLVMJitCallbackPrinter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">module</span><span class="p">,</span> <span class="n">builder</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="p">,</span>
+                                    <span class="n">func_arg_map</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">param_dict</span><span class="p">)</span>
+
+        <span class="n">ret</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_expr</span><span class="p">(</span><span class="n">lj</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">signature</span><span class="o">.</span><span class="n">ret_arg</span><span class="p">:</span>
+            <span class="n">output_fp_ptr</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">bitcast</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fn</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">signature</span><span class="o">.</span><span class="n">ret_arg</span><span class="p">],</span>
+                                            <span class="n">ll</span><span class="o">.</span><span class="n">PointerType</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fp_type</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ret</span><span class="p">):</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="n">ll</span><span class="o">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">IntType</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span> <span class="n">i</span><span class="p">)</span>
+                <span class="n">output_array_ptr</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">gep</span><span class="p">(</span><span class="n">output_fp_ptr</span><span class="p">,</span> <span class="p">[</span><span class="n">index</span><span class="p">])</span>
+                <span class="n">builder</span><span class="o">.</span><span class="n">store</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="n">output_array_ptr</span><span class="p">)</span>
+            <span class="n">builder</span><span class="o">.</span><span class="n">ret</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">Constant</span><span class="p">(</span><span class="n">ll</span><span class="o">.</span><span class="n">IntType</span><span class="p">(</span><span class="mi">32</span><span class="p">),</span> <span class="mi">0</span><span class="p">))</span>  <span class="c1"># return success</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lj</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">ret</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wrap_return</span><span class="p">(</span><span class="n">lj</span><span class="p">,</span> <span class="n">ret</span><span class="p">))</span>
+
+        <span class="n">strmod</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">module</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">strmod</span></div>
+
+
+<div class="viewcode-block" id="CodeSignature"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.llvmjitcode.CodeSignature">[docs]</a><span class="k">class</span> <span class="nc">CodeSignature</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ret_type</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ret_type</span> <span class="o">=</span> <span class="n">ret_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">arg_ctypes</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Input argument array element index</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_arg</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># For the case output value is referenced through a parameter rather</span>
+        <span class="c1"># than the return value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ret_arg</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<span class="k">def</span> <span class="nf">_llvm_jit_code</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">signature</span><span class="p">,</span> <span class="n">callback_type</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a native code function from a Sympy expression&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">callback_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">jit</span> <span class="o">=</span> <span class="n">LLVMJitCode</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">jit</span> <span class="o">=</span> <span class="n">LLVMJitCodeCallback</span><span class="p">(</span><span class="n">signature</span><span class="p">)</span>
+
+    <span class="n">jit</span><span class="o">.</span><span class="n">_create_args</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">jit</span><span class="o">.</span><span class="n">_create_function_base</span><span class="p">()</span>
+    <span class="n">jit</span><span class="o">.</span><span class="n">_create_param_dict</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">strmod</span> <span class="o">=</span> <span class="n">jit</span><span class="o">.</span><span class="n">_create_function</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+    <span class="k">if</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LLVM IR&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">strmod</span><span class="p">)</span>
+    <span class="n">fptr</span> <span class="o">=</span> <span class="n">jit</span><span class="o">.</span><span class="n">_compile_function</span><span class="p">(</span><span class="n">strmod</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fptr</span>
+
+
+<div class="viewcode-block" id="llvm_callable"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.llvmjitcode.llvm_callable">[docs]</a><span class="nd">@doctest_depends_on</span><span class="p">(</span><span class="n">modules</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;llvmlite&#39;</span><span class="p">,</span> <span class="s1">&#39;scipy&#39;</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">llvm_callable</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">callback_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Compile function from a Sympy expression</span>
+
+<span class="sd">    Expressions are evaluated using double precision arithmetic.</span>
+<span class="sd">    Some single argument math functions (exp, sin, cos, etc.) are supported</span>
+<span class="sd">    in expressions.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ==========</span>
+<span class="sd">    args : List of Symbol</span>
+<span class="sd">        Arguments to the generated function.  Usually the free symbols in</span>
+<span class="sd">        the expression.  Currently each one is assumed to convert to</span>
+<span class="sd">        a double precision scalar.</span>
+<span class="sd">    expr : Expr, or (Replacements, Expr) as returned from &#39;cse&#39;</span>
+<span class="sd">        Expression to compile.</span>
+<span class="sd">    callback_type : string</span>
+<span class="sd">        Create function with signature appropriate to use as a callback.</span>
+<span class="sd">        Currently supported:</span>
+<span class="sd">           &#39;scipy.integrate&#39;</span>
+<span class="sd">           &#39;scipy.integrate.test&#39;</span>
+<span class="sd">           &#39;cubature&#39;</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    =======</span>
+<span class="sd">    Compiled function that can evaluate the expression.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+<span class="sd">    &gt;&gt;&gt; from ... import sympy.printing.llvmjitcode as jit</span>
+<span class="sd">    &gt;&gt;&gt; from ..abc import a</span>
+<span class="sd">    &gt;&gt;&gt; e = a*a + a + 1</span>
+<span class="sd">    &gt;&gt;&gt; e1 = jit.llvm_callable([a], e)</span>
+<span class="sd">    &gt;&gt;&gt; e.subs(a, 1.1)   # Evaluate via substitution</span>
+<span class="sd">    3.31000000000000</span>
+<span class="sd">    &gt;&gt;&gt; e1(1.1)  # Evaluate using JIT-compiled code</span>
+<span class="sd">    3.3100000000000005</span>
+
+
+<span class="sd">    Callbacks for integration functions can be JIT compiled.</span>
+<span class="sd">    &gt;&gt;&gt; from ... import sympy.printing.llvmjitcode as jit</span>
+<span class="sd">    &gt;&gt;&gt; from ..abc import a</span>
+<span class="sd">    &gt;&gt;&gt; from .. import integrate</span>
+<span class="sd">    &gt;&gt;&gt; from scipy.integrate import quad</span>
+<span class="sd">    &gt;&gt;&gt; e = a*a</span>
+<span class="sd">    &gt;&gt;&gt; e1 = jit.llvm_callable([a], e, callback_type=&#39;scipy.integrate&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; integrate(e, (a, 0.0, 2.0))</span>
+<span class="sd">    2.66666666666667</span>
+<span class="sd">    &gt;&gt;&gt; quad(e1, 0.0, 2.0)[0]</span>
+<span class="sd">    2.66666666666667</span>
+
+<span class="sd">    The &#39;cubature&#39; callback is for the Python wrapper around the</span>
+<span class="sd">    cubature package ( https://github.com/saullocastro/cubature )</span>
+<span class="sd">    and ( http://ab-initio.mit.edu/wiki/index.php/Cubature )</span>
+
+<span class="sd">    There are two signatures for the SciPy integration callbacks.</span>
+<span class="sd">    The first (&#39;scipy.integrate&#39;) is the function to be passed to the</span>
+<span class="sd">    integration routine, and will pass the signature checks.</span>
+<span class="sd">    The second (&#39;scipy.integrate.test&#39;) is only useful for directly calling</span>
+<span class="sd">    the function using ctypes variables. It will not pass the signature checks</span>
+<span class="sd">    for scipy.integrate.</span>
+
+<span class="sd">    The return value from the cse module can also be compiled.  This</span>
+<span class="sd">    can improve the performance of the compiled function.  If multiple</span>
+<span class="sd">    expressions are given to cse, the compiled function returns a tuple.</span>
+<span class="sd">    The &#39;cubature&#39; callback handles multiple expressions (set `fdim`</span>
+<span class="sd">    to match in the integration call.)</span>
+<span class="sd">    &gt;&gt;&gt; from ... import sympy.printing.llvmjitcode as jit</span>
+<span class="sd">    &gt;&gt;&gt; from .. import cse, exp</span>
+<span class="sd">    &gt;&gt;&gt; from ..abc import x,y</span>
+<span class="sd">    &gt;&gt;&gt; e1 = x*x + y*y</span>
+<span class="sd">    &gt;&gt;&gt; e2 = 4*(x*x + y*y) + 8.0</span>
+<span class="sd">    &gt;&gt;&gt; after_cse = cse([e1,e2])</span>
+<span class="sd">    &gt;&gt;&gt; after_cse</span>
+<span class="sd">    ([(x0, x**2), (x1, y**2)], [x0 + x1, 4*x0 + 4*x1 + 8.0])</span>
+<span class="sd">    &gt;&gt;&gt; j1 = jit.llvm_callable([x,y], after_cse)</span>
+<span class="sd">    &gt;&gt;&gt; j1(1.0, 2.0)</span>
+<span class="sd">    (5.0, 28.0)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">llvmlite</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;llvmlite is required for llvmjitcode&quot;</span><span class="p">)</span>
+
+    <span class="n">signature</span> <span class="o">=</span> <span class="n">CodeSignature</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">py_object</span><span class="p">)</span>
+
+    <span class="n">arg_ctypes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">callback_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="n">arg_ctype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span>
+            <span class="n">arg_ctypes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg_ctype</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">callback_type</span> <span class="o">==</span> <span class="s1">&#39;scipy.integrate&#39;</span> <span class="ow">or</span> <span class="n">callback_type</span> <span class="o">==</span> <span class="s1">&#39;scipy.integrate.test&#39;</span><span class="p">:</span>
+        <span class="n">signature</span><span class="o">.</span><span class="n">ret_type</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span>
+        <span class="n">arg_ctypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">)]</span>
+        <span class="n">arg_ctypes_formal</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">]</span>
+        <span class="n">signature</span><span class="o">.</span><span class="n">input_arg</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">callback_type</span> <span class="o">==</span> <span class="s1">&#39;cubature&#39;</span><span class="p">:</span>
+        <span class="n">arg_ctypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>
+                      <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">),</span>
+                      <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">,</span>
+                      <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">,</span>
+                      <span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_double</span><span class="p">)</span>
+                      <span class="p">]</span>
+        <span class="n">signature</span><span class="o">.</span><span class="n">ret_type</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span>
+        <span class="n">signature</span><span class="o">.</span><span class="n">input_arg</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">signature</span><span class="o">.</span><span class="n">ret_arg</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown callback type: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">callback_type</span><span class="p">)</span>
+
+    <span class="n">signature</span><span class="o">.</span><span class="n">arg_ctypes</span> <span class="o">=</span> <span class="n">arg_ctypes</span>
+
+    <span class="n">fptr</span> <span class="o">=</span> <span class="n">_llvm_jit_code</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">signature</span><span class="p">,</span> <span class="n">callback_type</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">callback_type</span> <span class="ow">and</span> <span class="n">callback_type</span> <span class="o">==</span> <span class="s1">&#39;scipy.integrate&#39;</span><span class="p">:</span>
+        <span class="n">arg_ctypes</span> <span class="o">=</span> <span class="n">arg_ctypes_formal</span>
+
+    <span class="n">cfunc</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CFUNCTYPE</span><span class="p">(</span><span class="n">signature</span><span class="o">.</span><span class="n">ret_type</span><span class="p">,</span> <span class="o">*</span><span class="n">arg_ctypes</span><span class="p">)(</span><span class="n">fptr</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cfunc</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.printing.llvmjitcode</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

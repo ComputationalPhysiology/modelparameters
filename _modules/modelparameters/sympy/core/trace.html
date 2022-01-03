@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.core.trace &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.core.trace</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.core.trace</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span> <span class="n">sympify</span><span class="p">,</span> <span class="n">Matrix</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">.compatibility</span> <span class="kn">import</span> <span class="nb">range</span>
+<span class="kn">from</span> <span class="nn">..utilities</span> <span class="kn">import</span> <span class="n">default_sort_key</span>
+
+
+<span class="k">def</span> <span class="nf">_is_scalar</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Helper method used in Tr&quot;&quot;&quot;</span>
+
+    <span class="c1"># sympify to set proper attributes</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">Expr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">is_Integer</span> <span class="ow">or</span> <span class="n">e</span><span class="o">.</span><span class="n">is_Float</span> <span class="ow">or</span>
+            <span class="n">e</span><span class="o">.</span><span class="n">is_Rational</span> <span class="ow">or</span> <span class="n">e</span><span class="o">.</span><span class="n">is_Number</span> <span class="ow">or</span>
+            <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">is_Symbol</span> <span class="ow">and</span> <span class="n">e</span><span class="o">.</span><span class="n">is_commutative</span><span class="p">)</span>
+                <span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">def</span> <span class="nf">_cycle_permute</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Cyclic permutations based on canonical ordering</span>
+
+<span class="sd">    This method does the sort based ascii values while</span>
+<span class="sd">    a better approach would be to used lexicographic sort.</span>
+<span class="sd">    TODO: Handle condition such as symbols have subscripts/superscripts</span>
+<span class="sd">    in case of lexicographic sort</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">l</span>
+
+    <span class="n">min_item</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">default_sort_key</span><span class="p">)</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">min_item</span><span class="p">]</span>
+
+    <span class="n">le</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="n">le</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>  <span class="c1"># duplicate and extend string for easy processing</span>
+
+    <span class="c1"># adding the first min_item index back for easier looping</span>
+    <span class="n">indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">+</span> <span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># create sublist of items with first item as min_item and last_item</span>
+    <span class="c1"># in each of the sublist is item just before the next occurence of</span>
+    <span class="c1"># minitem in the cycle formed.</span>
+    <span class="n">sublist</span> <span class="o">=</span> <span class="p">[[</span><span class="n">le</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span>
+               <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)]</span>
+
+    <span class="c1"># we do comparison of strings by comparing elements</span>
+    <span class="c1"># in each sublist</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">sublist</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">sublist</span><span class="p">))</span>
+    <span class="n">ordered_l</span> <span class="o">=</span> <span class="n">le</span><span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="n">idx</span><span class="p">]:</span><span class="n">indices</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)]</span>
+
+    <span class="k">return</span> <span class="n">ordered_l</span>
+
+
+<span class="k">def</span> <span class="nf">_rearrange_args</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; this just moves the last arg to first position</span>
+<span class="sd">     to enable expansion of args</span>
+<span class="sd">     A,B,A ==&gt; A**2,B</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">l</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:])</span>
+    <span class="n">x</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">args</span>
+
+
+<div class="viewcode-block" id="Tr"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.trace.Tr">[docs]</a><span class="k">class</span> <span class="nc">Tr</span><span class="p">(</span><span class="n">Expr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Generic Trace operation than can trace over:</span>
+
+<span class="sd">    a) sympy matrix</span>
+<span class="sd">    b) operators</span>
+<span class="sd">    c) outer products</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ==========</span>
+<span class="sd">    o : operator, matrix, expr</span>
+<span class="sd">    i : tuple/list indices (optional)</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    # TODO: Need to handle printing</span>
+
+<span class="sd">    a) Trace(A+B) = Tr(A) + Tr(B)</span>
+<span class="sd">    b) Trace(scalar*Operator) = scalar*Trace(Operator)</span>
+
+<span class="sd">    &gt;&gt;&gt; from .trace import Tr</span>
+<span class="sd">    &gt;&gt;&gt; from .. import symbols, Matrix</span>
+<span class="sd">    &gt;&gt;&gt; a, b = symbols(&#39;a b&#39;, commutative=True)</span>
+<span class="sd">    &gt;&gt;&gt; A, B = symbols(&#39;A B&#39;, commutative=False)</span>
+<span class="sd">    &gt;&gt;&gt; Tr(a*A,[2])</span>
+<span class="sd">    a*Tr(A)</span>
+<span class="sd">    &gt;&gt;&gt; m = Matrix([[1,2],[1,1]])</span>
+<span class="sd">    &gt;&gt;&gt; Tr(m)</span>
+<span class="sd">    2</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Construct a Trace object.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ==========</span>
+<span class="sd">        args = sympy expression</span>
+<span class="sd">        indices = tuple/list if indices, optional</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># expect no indices,int or a tuple/list/Tuple</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+                <span class="n">indices</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">indices</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+            <span class="n">expr</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">()</span>
+            <span class="n">expr</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Arguments to Tr should be of form &quot;</span>
+                             <span class="s2">&quot;(expr[, [indices]])&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Matrix</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="s1">&#39;trace&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">callable</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">trace</span><span class="p">):</span>
+            <span class="c1">#for any objects that have trace() defined e.g numpy</span>
+            <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">trace</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Add</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Add</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">Tr</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Mul</span><span class="p">):</span>
+            <span class="n">c_part</span><span class="p">,</span> <span class="n">nc_part</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">args_cnc</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">nc_part</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="n">c_part</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">obj</span> <span class="o">=</span> <span class="n">Expr</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="n">nc_part</span><span class="p">),</span> <span class="n">indices</span> <span class="p">)</span>
+                <span class="c1">#this check is needed to prevent cached instances</span>
+                <span class="c1">#being returned even if len(c_part)==0</span>
+                <span class="k">return</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="n">c_part</span><span class="p">)</span><span class="o">*</span><span class="n">obj</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">c_part</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">obj</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Pow</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">_is_scalar</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">and</span>
+                    <span class="n">_is_scalar</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])):</span>
+                <span class="k">return</span> <span class="n">expr</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">Expr</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">_is_scalar</span><span class="p">(</span><span class="n">expr</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="n">expr</span>
+
+            <span class="k">return</span> <span class="n">Expr</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Tr.doit"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.trace.Tr.doit">[docs]</a>    <span class="k">def</span> <span class="nf">doit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Perform the trace operation.</span>
+
+<span class="sd">        #TODO: Current version ignores the indices set for partial trace.</span>
+
+<span class="sd">        &gt;&gt;&gt; from .trace import Tr</span>
+<span class="sd">        &gt;&gt;&gt; from ..physics.quantum.operator import OuterProduct</span>
+<span class="sd">        &gt;&gt;&gt; from ..physics.quantum.spin import JzKet, JzBra</span>
+<span class="sd">        &gt;&gt;&gt; t = Tr(OuterProduct(JzKet(1,1), JzBra(1,1)))</span>
+<span class="sd">        &gt;&gt;&gt; t.doit()</span>
+<span class="sd">        1</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;_eval_trace&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_eval_trace</span><span class="p">(</span><span class="n">indices</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># TODO : improve this implementation</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="c1">#TODO: Review if the permute method is needed</span>
+    <span class="c1"># and if it needs to return a new instance</span>
+<div class="viewcode-block" id="Tr.permute"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.trace.Tr.permute">[docs]</a>    <span class="k">def</span> <span class="nf">permute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; Permute the arguments cyclically.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ==========</span>
+<span class="sd">        pos : integer, if positive, shift-right, else shift-left</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .trace import Tr</span>
+<span class="sd">        &gt;&gt;&gt; from .. import symbols</span>
+<span class="sd">        &gt;&gt;&gt; A, B, C, D = symbols(&#39;A B C D&#39;, commutative=False)</span>
+<span class="sd">        &gt;&gt;&gt; t = Tr(A*B*C*D)</span>
+<span class="sd">        &gt;&gt;&gt; t.permute(2)</span>
+<span class="sd">        Tr(C*D*A*B)</span>
+<span class="sd">        &gt;&gt;&gt; t.permute(-2)</span>
+<span class="sd">        Tr(C*D*A*B)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">pos</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">pos</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">args</span><span class="p">))</span>
+
+        <span class="n">args</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="o">-</span><span class="n">pos</span><span class="p">:]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="n">pos</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">Tr</span><span class="p">(</span><span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">args</span><span class="p">)))</span></div>
+
+    <span class="k">def</span> <span class="nf">_hashable_content</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Mul</span><span class="p">):</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="n">_cycle_permute</span><span class="p">(</span><span class="n">_rearrange_args</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">args</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.core.trace</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

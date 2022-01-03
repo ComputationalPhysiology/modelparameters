@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.polys.heuristicgcd &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.polys.heuristicgcd</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.polys.heuristicgcd</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Heuristic polynomial GCD algorithm (HEUGCD). &quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="nb">range</span>
+<span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="kn">import</span> <span class="n">HeuristicGCDFailed</span>
+
+<span class="n">HEU_GCD_MAX</span> <span class="o">=</span> <span class="mi">6</span>
+
+<div class="viewcode-block" id="heugcd"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.heuristicgcd.heugcd">[docs]</a><span class="k">def</span> <span class="nf">heugcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Heuristic polynomial GCD in ``Z[X]``.</span>
+
+<span class="sd">    Given univariate polynomials ``f`` and ``g`` in ``Z[X]``, returns</span>
+<span class="sd">    their GCD and cofactors, i.e. polynomials ``h``, ``cff`` and ``cfg``</span>
+<span class="sd">    such that::</span>
+
+<span class="sd">          h = gcd(f, g), cff = quo(f, h) and cfg = quo(g, h)</span>
+
+<span class="sd">    The algorithm is purely heuristic which means it may fail to compute</span>
+<span class="sd">    the GCD. This will be signaled by raising an exception. In this case</span>
+<span class="sd">    you will need to switch to another GCD method.</span>
+
+<span class="sd">    The algorithm computes the polynomial GCD by evaluating polynomials</span>
+<span class="sd">    ``f`` and ``g`` at certain points and computing (fast) integer GCD</span>
+<span class="sd">    of those evaluations. The polynomial GCD is recovered from the integer</span>
+<span class="sd">    image by interpolation. The evaluation proces reduces f and g variable</span>
+<span class="sd">    by variable into a large integer. The final step is to verify if the</span>
+<span class="sd">    interpolated polynomial is the correct GCD. This gives cofactors of</span>
+<span class="sd">    the input polynomials as a side effect.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .heuristicgcd import heugcd</span>
+<span class="sd">    &gt;&gt;&gt; from ..polys import ring, ZZ</span>
+
+<span class="sd">    &gt;&gt;&gt; R, x,y, = ring(&quot;x,y&quot;, ZZ)</span>
+
+<span class="sd">    &gt;&gt;&gt; f = x**2 + 2*x*y + y**2</span>
+<span class="sd">    &gt;&gt;&gt; g = x**2 + x*y</span>
+
+<span class="sd">    &gt;&gt;&gt; h, cff, cfg = heugcd(f, g)</span>
+<span class="sd">    &gt;&gt;&gt; h, cff, cfg</span>
+<span class="sd">    (x + y, x + y, x)</span>
+
+<span class="sd">    &gt;&gt;&gt; cff*h == f</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; cfg*h == g</span>
+<span class="sd">    True</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ==========</span>
+
+<span class="sd">    1. [Liao95]_</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">f</span><span class="o">.</span><span class="n">ring</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">ring</span> <span class="ow">and</span> <span class="n">f</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_ZZ</span>
+
+    <span class="n">ring</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">ring</span>
+    <span class="n">x0</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">gens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">domain</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span>
+
+    <span class="n">gcd</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">extract_ground</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+    <span class="n">f_norm</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">max_norm</span><span class="p">()</span>
+    <span class="n">g_norm</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">max_norm</span><span class="p">()</span>
+
+    <span class="n">B</span> <span class="o">=</span> <span class="n">domain</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nb">min</span><span class="p">(</span><span class="n">f_norm</span><span class="p">,</span> <span class="n">g_norm</span><span class="p">)</span> <span class="o">+</span> <span class="mi">29</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="mi">99</span><span class="o">*</span><span class="n">domain</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">B</span><span class="p">)),</span>
+            <span class="mi">2</span><span class="o">*</span><span class="nb">min</span><span class="p">(</span><span class="n">f_norm</span> <span class="o">//</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">LC</span><span class="p">),</span>
+                  <span class="n">g_norm</span> <span class="o">//</span> <span class="nb">abs</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">LC</span><span class="p">))</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">HEU_GCD_MAX</span><span class="p">):</span>
+        <span class="n">ff</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">gg</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">ff</span> <span class="ow">and</span> <span class="n">gg</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ring</span><span class="o">.</span><span class="n">ngens</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">h</span><span class="p">,</span> <span class="n">cff</span><span class="p">,</span> <span class="n">cfg</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">cofactors</span><span class="p">(</span><span class="n">ff</span><span class="p">,</span> <span class="n">gg</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">h</span><span class="p">,</span> <span class="n">cff</span><span class="p">,</span> <span class="n">cfg</span> <span class="o">=</span> <span class="n">heugcd</span><span class="p">(</span><span class="n">ff</span><span class="p">,</span> <span class="n">gg</span><span class="p">)</span>
+
+            <span class="n">h</span> <span class="o">=</span> <span class="n">_gcd_interpolate</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ring</span><span class="p">)</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">primitive</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+
+            <span class="n">cff_</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="p">:</span>
+                <span class="n">cfg_</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="p">:</span>
+                    <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">mul_ground</span><span class="p">(</span><span class="n">gcd</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">h</span><span class="p">,</span> <span class="n">cff_</span><span class="p">,</span> <span class="n">cfg_</span>
+
+            <span class="n">cff</span> <span class="o">=</span> <span class="n">_gcd_interpolate</span><span class="p">(</span><span class="n">cff</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ring</span><span class="p">)</span>
+
+            <span class="n">h</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">cff</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="p">:</span>
+                <span class="n">cfg_</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="p">:</span>
+                    <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">mul_ground</span><span class="p">(</span><span class="n">gcd</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">h</span><span class="p">,</span> <span class="n">cff</span><span class="p">,</span> <span class="n">cfg_</span>
+
+            <span class="n">cfg</span> <span class="o">=</span> <span class="n">_gcd_interpolate</span><span class="p">(</span><span class="n">cfg</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ring</span><span class="p">)</span>
+
+            <span class="n">h</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="p">:</span>
+                <span class="n">cff_</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="p">:</span>
+                    <span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">mul_ground</span><span class="p">(</span><span class="n">gcd</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">h</span><span class="p">,</span> <span class="n">cff_</span><span class="p">,</span> <span class="n">cfg</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="mi">73794</span><span class="o">*</span><span class="n">x</span> <span class="o">*</span> <span class="n">domain</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">domain</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">//</span> <span class="mi">27011</span>
+
+    <span class="k">raise</span> <span class="n">HeuristicGCDFailed</span><span class="p">(</span><span class="s1">&#39;no luck&#39;</span><span class="p">)</span></div>
+
+<span class="k">def</span> <span class="nf">_gcd_interpolate</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">ring</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Interpolate polynomial GCD from integer GCD. &quot;&quot;&quot;</span>
+    <span class="n">f</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">zero</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="c1"># TODO: don&#39;t expose poly repr implementation details</span>
+    <span class="k">if</span> <span class="n">ring</span><span class="o">.</span><span class="n">ngens</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">while</span> <span class="n">h</span><span class="p">:</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">h</span> <span class="o">%</span> <span class="n">x</span>
+            <span class="k">if</span> <span class="n">g</span> <span class="o">&gt;</span> <span class="n">x</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:</span> <span class="n">g</span> <span class="o">-=</span> <span class="n">x</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="n">g</span><span class="p">)</span> <span class="o">//</span> <span class="n">x</span>
+
+            <span class="c1"># f += X**i*g</span>
+            <span class="k">if</span> <span class="n">g</span><span class="p">:</span>
+                <span class="n">f</span><span class="p">[(</span><span class="n">i</span><span class="p">,)]</span> <span class="o">=</span> <span class="n">g</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">while</span> <span class="n">h</span><span class="p">:</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">trunc_ground</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">h</span> <span class="o">-</span> <span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">quo_ground</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+            <span class="c1"># f += X**i*g</span>
+            <span class="k">if</span> <span class="n">g</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">iterterms</span><span class="p">():</span>
+                    <span class="n">f</span><span class="p">[(</span><span class="n">i</span><span class="p">,)</span> <span class="o">+</span> <span class="n">monom</span><span class="p">]</span> <span class="o">=</span> <span class="n">coeff</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">LC</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">f</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span>  <span class="n">f</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.polys.heuristicgcd</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

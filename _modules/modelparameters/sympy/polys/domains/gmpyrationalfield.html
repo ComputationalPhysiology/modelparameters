@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.polys.domains.gmpyrationalfield &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.polys.domains.gmpyrationalfield</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.polys.domains.gmpyrationalfield</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Implementaton of :class:`GMPYRationalField` class. &quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">.rationalfield</span> <span class="kn">import</span> <span class="n">RationalField</span>
+<span class="kn">from</span> <span class="nn">.groundtypes</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">GMPYRational</span><span class="p">,</span> <span class="n">SymPyRational</span><span class="p">,</span>
+    <span class="n">gmpy_numer</span><span class="p">,</span> <span class="n">gmpy_denom</span><span class="p">,</span> <span class="n">gmpy_factorial</span><span class="p">,</span> <span class="n">gmpy_qdiv</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">..polyerrors</span> <span class="kn">import</span> <span class="n">CoercionFailed</span>
+<span class="kn">from</span> <span class="nn">...utilities</span> <span class="kn">import</span> <span class="n">public</span>
+
+<div class="viewcode-block" id="GMPYRationalField"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.GMPYRationalField">[docs]</a><span class="nd">@public</span>
+<span class="k">class</span> <span class="nc">GMPYRationalField</span><span class="p">(</span><span class="n">RationalField</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Rational field based on GMPY mpq class. &quot;&quot;&quot;</span>
+
+    <span class="n">dtype</span> <span class="o">=</span> <span class="n">GMPYRational</span>
+    <span class="n">zero</span> <span class="o">=</span> <span class="n">dtype</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">one</span> <span class="o">=</span> <span class="n">dtype</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">tp</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">one</span><span class="p">)</span>
+    <span class="n">alias</span> <span class="o">=</span> <span class="s1">&#39;QQ_gmpy&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="GMPYRationalField.get_ring"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.GMPYRationalField.get_ring">[docs]</a>    <span class="k">def</span> <span class="nf">get_ring</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns ring associated with ``self``. &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">..domains</span> <span class="kn">import</span> <span class="n">GMPYIntegerRing</span>
+        <span class="k">return</span> <span class="n">GMPYIntegerRing</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="GMPYRationalField.to_sympy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.GMPYRationalField.to_sympy">[docs]</a>    <span class="k">def</span> <span class="nf">to_sympy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert `a` to a SymPy object. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SymPyRational</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">gmpy_numer</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span>
+                             <span class="nb">int</span><span class="p">(</span><span class="n">gmpy_denom</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span></div>
+
+<div class="viewcode-block" id="GMPYRationalField.from_sympy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.GMPYRationalField.from_sympy">[docs]</a>    <span class="k">def</span> <span class="nf">from_sympy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert SymPy&#39;s Integer to `dtype`. &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">is_Rational</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">GMPYRational</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">p</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">q</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">a</span><span class="o">.</span><span class="n">is_Float</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">..domains</span> <span class="kn">import</span> <span class="n">RR</span>
+            <span class="k">return</span> <span class="n">GMPYRational</span><span class="p">(</span><span class="o">*</span><span class="n">RR</span><span class="o">.</span><span class="n">to_rational</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">CoercionFailed</span><span class="p">(</span><span class="s2">&quot;expected `Rational` object, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">a</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GMPYRationalField.from_ZZ_python"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.GMPYRationalField.from_ZZ_python">[docs]</a>    <span class="k">def</span> <span class="nf">from_ZZ_python</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert a Python `int` object to `dtype`. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">GMPYRational</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GMPYRationalField.from_QQ_python"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.GMPYRationalField.from_QQ_python">[docs]</a>    <span class="k">def</span> <span class="nf">from_QQ_python</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert a Python `Fraction` object to `dtype`. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">GMPYRational</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">numerator</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">denominator</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GMPYRationalField.from_ZZ_gmpy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.GMPYRationalField.from_ZZ_gmpy">[docs]</a>    <span class="k">def</span> <span class="nf">from_ZZ_gmpy</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert a GMPY `mpz` object to `dtype`. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">GMPYRational</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GMPYRationalField.from_QQ_gmpy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.GMPYRationalField.from_QQ_gmpy">[docs]</a>    <span class="k">def</span> <span class="nf">from_QQ_gmpy</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert a GMPY `mpq` object to `dtype`. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">a</span></div>
+
+<div class="viewcode-block" id="GMPYRationalField.from_RealField"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.GMPYRationalField.from_RealField">[docs]</a>    <span class="k">def</span> <span class="nf">from_RealField</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert a mpmath `mpf` object to `dtype`. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">GMPYRational</span><span class="p">(</span><span class="o">*</span><span class="n">K0</span><span class="o">.</span><span class="n">to_rational</span><span class="p">(</span><span class="n">a</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="GMPYRationalField.exquo"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.GMPYRationalField.exquo">[docs]</a>    <span class="k">def</span> <span class="nf">exquo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Exact quotient of `a` and `b`, implies `__div__`.  &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">GMPYRational</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">GMPYRational</span><span class="p">(</span><span class="n">b</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GMPYRationalField.quo"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.GMPYRationalField.quo">[docs]</a>    <span class="k">def</span> <span class="nf">quo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Quotient of `a` and `b`, implies `__div__`. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">GMPYRational</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">GMPYRational</span><span class="p">(</span><span class="n">b</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GMPYRationalField.rem"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.GMPYRationalField.rem">[docs]</a>    <span class="k">def</span> <span class="nf">rem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Remainder of `a` and `b`, implies nothing.  &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">zero</span></div>
+
+<div class="viewcode-block" id="GMPYRationalField.div"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.GMPYRationalField.div">[docs]</a>    <span class="k">def</span> <span class="nf">div</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Division of `a` and `b`, implies `__div__`. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">GMPYRational</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="n">GMPYRational</span><span class="p">(</span><span class="n">b</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">zero</span></div>
+
+<div class="viewcode-block" id="GMPYRationalField.numer"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.GMPYRationalField.numer">[docs]</a>    <span class="k">def</span> <span class="nf">numer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns numerator of `a`. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">numerator</span></div>
+
+<div class="viewcode-block" id="GMPYRationalField.denom"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.GMPYRationalField.denom">[docs]</a>    <span class="k">def</span> <span class="nf">denom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns denominator of `a`. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">denominator</span></div>
+
+<div class="viewcode-block" id="GMPYRationalField.factorial"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.GMPYRationalField.factorial">[docs]</a>    <span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns factorial of `a`. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">GMPYRational</span><span class="p">(</span><span class="n">gmpy_factorial</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span></div></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.polys.domains.gmpyrationalfield</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,513 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.concrete.expr_with_limits &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.concrete.expr_with_limits</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.concrete.expr_with_limits</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..core.add</span> <span class="kn">import</span> <span class="n">Add</span>
+<span class="kn">from</span> <span class="nn">..core.expr</span> <span class="kn">import</span> <span class="n">Expr</span>
+<span class="kn">from</span> <span class="nn">..core.mul</span> <span class="kn">import</span> <span class="n">Mul</span>
+<span class="kn">from</span> <span class="nn">..core.relational</span> <span class="kn">import</span> <span class="n">Equality</span>
+<span class="kn">from</span> <span class="nn">..sets.sets</span> <span class="kn">import</span> <span class="n">Interval</span>
+<span class="kn">from</span> <span class="nn">..core.singleton</span> <span class="kn">import</span> <span class="n">S</span>
+<span class="kn">from</span> <span class="nn">..core.symbol</span> <span class="kn">import</span> <span class="n">Symbol</span>
+<span class="kn">from</span> <span class="nn">..core.sympify</span> <span class="kn">import</span> <span class="n">sympify</span>
+<span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="n">is_sequence</span><span class="p">,</span> <span class="nb">range</span>
+<span class="kn">from</span> <span class="nn">..core.containers</span> <span class="kn">import</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">..functions.elementary.piecewise</span> <span class="kn">import</span> <span class="n">piecewise_fold</span>
+<span class="kn">from</span> <span class="nn">..utilities</span> <span class="kn">import</span> <span class="n">flatten</span>
+<span class="kn">from</span> <span class="nn">..utilities.iterables</span> <span class="kn">import</span> <span class="n">sift</span>
+<span class="kn">from</span> <span class="nn">..matrices</span> <span class="kn">import</span> <span class="n">Matrix</span>
+<span class="kn">from</span> <span class="nn">..tensor.indexed</span> <span class="kn">import</span> <span class="n">Idx</span>
+
+
+<span class="k">def</span> <span class="nf">_process_limits</span><span class="p">(</span><span class="o">*</span><span class="n">symbols</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Process the list of symbols and convert them to canonical limits,</span>
+<span class="sd">    storing them as Tuple(symbol, lower, upper). The orientation of</span>
+<span class="sd">    the function is also returned when the upper limit is missing</span>
+<span class="sd">    so (x, 1, None) becomes (x, None, 1) and the orientation is changed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">limits</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">orientation</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">V</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="s1">&#39;_diff_wrt&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">Idx</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">V</span><span class="o">.</span><span class="n">lower</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">V</span><span class="o">.</span><span class="n">upper</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">limits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Tuple</span><span class="p">(</span><span class="n">V</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">limits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Tuple</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">V</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">V</span><span class="o">.</span><span class="n">upper</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">limits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Tuple</span><span class="p">(</span><span class="n">V</span><span class="p">))</span>
+            <span class="k">continue</span>
+        <span class="k">elif</span> <span class="n">is_sequence</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">):</span>
+            <span class="n">V</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">flatten</span><span class="p">(</span><span class="n">V</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">Idx</span><span class="p">))</span> <span class="ow">or</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;_diff_wrt&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+                <span class="n">newsymbol</span> <span class="o">=</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Interval</span><span class="p">):</span>
+                    <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="p">[</span><span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">end</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">V</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">nlim</span> <span class="o">=</span> <span class="p">[</span><span class="n">V</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
+                    <span class="k">elif</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">V</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">orientation</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+                        <span class="n">nlim</span> <span class="o">=</span> <span class="p">[</span><span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+                    <span class="k">elif</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">V</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">nlim</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">nlim</span> <span class="o">=</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+                    <span class="n">limits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Tuple</span><span class="p">(</span><span class="n">newsymbol</span><span class="p">,</span> <span class="o">*</span><span class="n">nlim</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Idx</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">nlim</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">):</span>
+                            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Summation exceeds Idx lower range.&quot;</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">nlim</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">V</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">):</span>
+                            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Summation exceeds Idx upper range.&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+                    <span class="n">limits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Tuple</span><span class="p">(</span><span class="n">newsymbol</span><span class="p">))</span>
+                    <span class="k">continue</span>
+                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="n">limits</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Tuple</span><span class="p">(</span><span class="n">newsymbol</span><span class="p">,</span> <span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                    <span class="k">continue</span>
+
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid limits given: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">symbols</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">limits</span><span class="p">,</span> <span class="n">orientation</span>
+
+
+<div class="viewcode-block" id="ExprWithLimits"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits">[docs]</a><span class="k">class</span> <span class="nc">ExprWithLimits</span><span class="p">(</span><span class="n">Expr</span><span class="p">):</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;is_commutative&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">assumptions</span><span class="p">):</span>
+        <span class="c1"># Any embedded piecewise functions need to be brought out to the</span>
+        <span class="c1"># top level so that integration can go into piecewise mode at the</span>
+        <span class="c1"># earliest possible moment.</span>
+        <span class="n">function</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s1">&#39;func&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">function</span><span class="o">.</span><span class="n">func</span> <span class="ow">is</span> <span class="n">Equality</span><span class="p">:</span>
+            <span class="n">lhs</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">lhs</span>
+            <span class="n">rhs</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">rhs</span>
+            <span class="k">return</span> <span class="n">Equality</span><span class="p">(</span><span class="bp">cls</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">assumptions</span><span class="p">),</span> \
+                <span class="bp">cls</span><span class="p">(</span><span class="n">rhs</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">assumptions</span><span class="p">))</span>
+        <span class="n">function</span> <span class="o">=</span> <span class="n">piecewise_fold</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">function</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">NaN</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">NaN</span>
+
+        <span class="k">if</span> <span class="n">symbols</span><span class="p">:</span>
+            <span class="n">limits</span><span class="p">,</span> <span class="n">orientation</span> <span class="o">=</span> <span class="n">_process_limits</span><span class="p">(</span><span class="o">*</span><span class="n">symbols</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># symbol not provided -- we can still try to compute a general form</span>
+            <span class="n">free</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">free_symbols</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">free</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot;specify dummy variables for </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">function</span><span class="p">)</span>
+            <span class="n">limits</span><span class="p">,</span> <span class="n">orientation</span> <span class="o">=</span> <span class="p">[</span><span class="n">Tuple</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">free</span><span class="p">],</span> <span class="mi">1</span>
+
+        <span class="c1"># denest any nested calls</span>
+        <span class="k">while</span> <span class="bp">cls</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+            <span class="n">limits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">limits</span><span class="p">)</span> <span class="o">+</span> <span class="n">limits</span>
+            <span class="n">function</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">function</span>
+
+        <span class="c1"># Only limits with lower and upper bounds are supported; the indefinite form</span>
+        <span class="c1"># is not supported</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span> <span class="ow">or</span> <span class="kc">None</span> <span class="ow">in</span> <span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">limits</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;ExprWithLimits requires values for lower and upper bounds.&#39;</span><span class="p">)</span>
+
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">Expr</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="n">arglist</span> <span class="o">=</span> <span class="p">[</span><span class="n">function</span><span class="p">]</span>
+        <span class="n">arglist</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">limits</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">_args</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">arglist</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">is_commutative</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">is_commutative</span>  <span class="c1"># limits already checked</span>
+
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the function applied across limits.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .. import Integral</span>
+<span class="sd">        &gt;&gt;&gt; from ..abc import x</span>
+<span class="sd">        &gt;&gt;&gt; Integral(x**2, (x,)).function</span>
+<span class="sd">        x**2</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        limits, variables, free_symbols</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">limits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the limits of expression.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .. import Integral</span>
+<span class="sd">        &gt;&gt;&gt; from ..abc import x, i</span>
+<span class="sd">        &gt;&gt;&gt; Integral(x**i, (i, 1, 3)).limits</span>
+<span class="sd">        ((i, 1, 3),)</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        function, variables, free_symbols</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a list of the dummy variables</span>
+
+<span class="sd">        &gt;&gt;&gt; from .. import Sum</span>
+<span class="sd">        &gt;&gt;&gt; from ..abc import x, i</span>
+<span class="sd">        &gt;&gt;&gt; Sum(x**i, (i, 1, 3)).variables</span>
+<span class="sd">        [i]</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        function, limits, free_symbols</span>
+<span class="sd">        as_dummy : Rename dummy variables</span>
+<span class="sd">        transform : Perform mapping on the dummy variable</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">free_symbols</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This method returns the symbols in the object, excluding those</span>
+<span class="sd">        that take on a specific value (i.e. the dummy symbols).</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .. import Sum</span>
+<span class="sd">        &gt;&gt;&gt; from ..abc import x, y</span>
+<span class="sd">        &gt;&gt;&gt; Sum(x, (x, y, 1)).free_symbols</span>
+<span class="sd">        {y}</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># don&#39;t test for any special values -- nominal free symbols</span>
+        <span class="c1"># should be returned, e.g. don&#39;t return set() if the</span>
+        <span class="c1"># function is zero -- treat it like an unevaluated expression.</span>
+        <span class="n">function</span><span class="p">,</span> <span class="n">limits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">limits</span>
+        <span class="n">isyms</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">free_symbols</span>
+        <span class="k">for</span> <span class="n">xab</span> <span class="ow">in</span> <span class="n">limits</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">xab</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">isyms</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">xab</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">continue</span>
+            <span class="c1"># take out the target symbol</span>
+            <span class="k">if</span> <span class="n">xab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">isyms</span><span class="p">:</span>
+                <span class="n">isyms</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">xab</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="c1"># add in the new symbols</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xab</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                <span class="n">isyms</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">isyms</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return True if the Sum has no free symbols, else False.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">free_symbols</span>
+
+<div class="viewcode-block" id="ExprWithLimits.as_dummy"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits.as_dummy">[docs]</a>    <span class="k">def</span> <span class="nf">as_dummy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Replace instances of the given dummy variables with explicit dummy</span>
+<span class="sd">        counterparts to make clear what are dummy variables and what</span>
+<span class="sd">        are real-world symbols in an object.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .. import Integral</span>
+<span class="sd">        &gt;&gt;&gt; from ..abc import x, y</span>
+<span class="sd">        &gt;&gt;&gt; Integral(x, (x, x, y), (y, x, y)).as_dummy()</span>
+<span class="sd">        Integral(_x, (_x, x, _y), (_y, x, y))</span>
+
+<span class="sd">        If the object supperts the &quot;integral at&quot; limit ``(x,)`` it</span>
+<span class="sd">        is not treated as a dummy, but the explicit form, ``(x, x)``</span>
+<span class="sd">        of length 2 does treat the variable as a dummy.</span>
+
+<span class="sd">        &gt;&gt;&gt; Integral(x, x).as_dummy()</span>
+<span class="sd">        Integral(x, x)</span>
+<span class="sd">        &gt;&gt;&gt; Integral(x, (x, x)).as_dummy()</span>
+<span class="sd">        Integral(_x, (_x, x))</span>
+
+<span class="sd">        If there were no dummies in the original expression, then the</span>
+<span class="sd">        the symbols which cannot be changed by subs() are clearly seen as</span>
+<span class="sd">        those with an underscore prefix.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        variables : Lists the integration variables</span>
+<span class="sd">        transform : Perform mapping on the integration variable</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">reps</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span>
+        <span class="n">limits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">limits</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">xab</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">limits</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">xab</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">xab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">xab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">as_dummy</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">xab</span><span class="p">)):</span>
+                <span class="n">xab</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">xab</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">reps</span><span class="p">)</span>
+            <span class="n">reps</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">xab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">limits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">xab</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">reps</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">limits</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_eval_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="n">limits</span> <span class="o">=</span> <span class="p">[(</span><span class="n">i</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">x</span> <span class="k">else</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">]</span>
+        <span class="n">integrand</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">integrand</span><span class="p">,</span> <span class="o">*</span><span class="n">limits</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_eval_subs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Perform substitutions over non-dummy variables</span>
+<span class="sd">        of an expression with limits.  Also, can be used</span>
+<span class="sd">        to specify point-evaluation of an abstract antiderivative.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .. import Sum, oo</span>
+<span class="sd">        &gt;&gt;&gt; from ..abc import s, n</span>
+<span class="sd">        &gt;&gt;&gt; Sum(1/n**s, (n, 1, oo)).subs(s, 2)</span>
+<span class="sd">        Sum(n**(-2), (n, 1, oo))</span>
+
+<span class="sd">        &gt;&gt;&gt; from .. import Integral</span>
+<span class="sd">        &gt;&gt;&gt; from ..abc import x, a</span>
+<span class="sd">        &gt;&gt;&gt; Integral(a*x**2, x).subs(x, 4)</span>
+<span class="sd">        Integral(a*x**2, (x, 4))</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        variables : Lists the integration variables</span>
+<span class="sd">        transform : Perform mapping on the dummy variable for intgrals</span>
+<span class="sd">        change_index : Perform mapping on the sum and product dummy variables</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">..core.function</span> <span class="kn">import</span> <span class="n">AppliedUndef</span><span class="p">,</span> <span class="n">UndefinedFunction</span>
+        <span class="n">func</span><span class="p">,</span> <span class="n">limits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">)</span>
+
+        <span class="c1"># If one of the expressions we are replacing is used as a func index</span>
+        <span class="c1"># one of two things happens.</span>
+        <span class="c1">#   - the old variable first appears as a free variable</span>
+        <span class="c1">#     so we perform all free substitutions before it becomes</span>
+        <span class="c1">#     a func index.</span>
+        <span class="c1">#   - the old variable first appears as a func index, in</span>
+        <span class="c1">#     which case we ignore.  See change_index.</span>
+
+        <span class="c1"># Reorder limits to match standard mathematical practice for scoping</span>
+        <span class="n">limits</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">)</span> <span class="ow">or</span> \
+                <span class="n">old</span><span class="o">.</span><span class="n">free_symbols</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">):</span>
+            <span class="n">sub_into_func</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">xab</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">limits</span><span class="p">):</span>
+                <span class="k">if</span> <span class="mi">1</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">xab</span><span class="p">)</span> <span class="ow">and</span> <span class="n">old</span> <span class="o">==</span> <span class="n">xab</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="n">xab</span> <span class="o">=</span> <span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">old</span><span class="p">)</span>
+                <span class="n">limits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">(</span><span class="n">xab</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">_subs</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">xab</span><span class="p">[</span><span class="mi">1</span><span class="p">:]])</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">xab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">free_symbols</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">old</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">sub_into_func</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">break</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">AppliedUndef</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">UndefinedFunction</span><span class="p">):</span>
+                <span class="n">sy2</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">new</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">Symbol</span><span class="p">)))</span>
+                <span class="n">sy1</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">old</span><span class="o">.</span><span class="n">args</span><span class="p">))</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">sy2</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">sy1</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="s2">&quot;substitution can not create dummy dependencies&quot;</span><span class="p">)</span>
+                <span class="n">sub_into_func</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">sub_into_func</span><span class="p">:</span>
+                <span class="n">func</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># old is a Symbol and a dummy variable of some limit</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">xab</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">limits</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">xab</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="n">limits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">(</span><span class="n">xab</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span><span class="p">[</span><span class="n">l</span><span class="o">.</span><span class="n">_subs</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">xab</span><span class="p">[</span><span class="mi">1</span><span class="p">:]])</span>
+                    <span class="k">if</span> <span class="n">old</span> <span class="o">==</span> <span class="n">xab</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                        <span class="k">break</span>
+        <span class="c1"># simplify redundant limits (x, x)  to (x, )</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">xab</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">limits</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">xab</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span> <span class="ow">and</span> <span class="p">(</span><span class="n">xab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">xab</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
+                <span class="n">limits</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">Tuple</span><span class="p">(</span><span class="n">xab</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">)</span>
+
+        <span class="c1"># Reorder limits back to representation-form</span>
+        <span class="n">limits</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">limits</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="AddWithLimits"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.expr_with_limits.AddWithLimits">[docs]</a><span class="k">class</span> <span class="nc">AddWithLimits</span><span class="p">(</span><span class="n">ExprWithLimits</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents unevaluated oriented additions.</span>
+<span class="sd">        Parent class for Integral and Sum.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">assumptions</span><span class="p">):</span>
+        <span class="c1"># Any embedded piecewise functions need to be brought out to the</span>
+        <span class="c1"># top level so that integration can go into piecewise mode at the</span>
+        <span class="c1"># earliest possible moment.</span>
+        <span class="c1">#</span>
+        <span class="c1"># This constructor only differs from ExprWithLimits</span>
+        <span class="c1"># in the application of the orientation variable.  Perhaps merge?</span>
+        <span class="n">function</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="s1">&#39;func&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">function</span><span class="o">.</span><span class="n">func</span> <span class="ow">is</span> <span class="n">Equality</span><span class="p">:</span>
+            <span class="n">lhs</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">lhs</span>
+            <span class="n">rhs</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">rhs</span>
+            <span class="k">return</span> <span class="n">Equality</span><span class="p">(</span><span class="bp">cls</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">assumptions</span><span class="p">),</span> \
+                <span class="bp">cls</span><span class="p">(</span><span class="n">rhs</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">assumptions</span><span class="p">))</span>
+        <span class="n">function</span> <span class="o">=</span> <span class="n">piecewise_fold</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">function</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">NaN</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">NaN</span>
+
+        <span class="k">if</span> <span class="n">symbols</span><span class="p">:</span>
+            <span class="n">limits</span><span class="p">,</span> <span class="n">orientation</span> <span class="o">=</span> <span class="n">_process_limits</span><span class="p">(</span><span class="o">*</span><span class="n">symbols</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># symbol not provided -- we can still try to compute a general form</span>
+            <span class="n">free</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">free_symbols</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">free</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">&quot; specify dummy variables for </span><span class="si">%s</span><span class="s2">. If the integrand contains&quot;</span>
+                    <span class="s2">&quot; more than one free symbol, an integration variable should&quot;</span>
+                    <span class="s2">&quot; be supplied explicitly e.g., integrate(f(x, y), x)&quot;</span>
+                    <span class="o">%</span> <span class="n">function</span><span class="p">)</span>
+            <span class="n">limits</span><span class="p">,</span> <span class="n">orientation</span> <span class="o">=</span> <span class="p">[</span><span class="n">Tuple</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">free</span><span class="p">],</span> <span class="mi">1</span>
+
+        <span class="c1"># denest any nested calls</span>
+        <span class="k">while</span> <span class="bp">cls</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="n">function</span><span class="p">):</span>
+            <span class="n">limits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">limits</span><span class="p">)</span> <span class="o">+</span> <span class="n">limits</span>
+            <span class="n">function</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">function</span>
+
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">Expr</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">assumptions</span><span class="p">)</span>
+        <span class="n">arglist</span> <span class="o">=</span> <span class="p">[</span><span class="n">orientation</span><span class="o">*</span><span class="n">function</span><span class="p">]</span>
+        <span class="n">arglist</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">limits</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">_args</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">arglist</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">is_commutative</span> <span class="o">=</span> <span class="n">function</span><span class="o">.</span><span class="n">is_commutative</span>  <span class="c1"># limits already checked</span>
+
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="k">def</span> <span class="nf">_eval_adjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">is_real</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">)]):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">adjoint</span><span class="p">(),</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">_eval_conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">is_real</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">)]):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(),</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">_eval_transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">is_real</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">)]):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">_eval_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
+        <span class="k">if</span> <span class="mi">1</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">):</span>
+            <span class="n">summand</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">factor</span><span class="p">(</span><span class="o">**</span><span class="n">hints</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">summand</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="n">sift</span><span class="p">(</span><span class="n">summand</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">w</span><span class="o">.</span><span class="n">is_commutative</span> \
+                    <span class="ow">and</span> <span class="ow">not</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">w</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="n">out</span><span class="p">[</span><span class="kc">True</span><span class="p">])</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="n">out</span><span class="p">[</span><span class="kc">False</span><span class="p">]),</span> \
+                    <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">summand</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">factor</span><span class="p">()</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">summand</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span><span class="o">*</span><span class="n">summand</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">summand</span><span class="p">,</span> <span class="n">Mul</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">summand</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">factor</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">_eval_expand_basic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
+        <span class="n">summand</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="o">**</span><span class="n">hints</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">summand</span><span class="o">.</span><span class="n">is_Add</span> <span class="ow">and</span> <span class="n">summand</span><span class="o">.</span><span class="n">is_commutative</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Add</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">summand</span><span class="o">.</span><span class="n">args</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">summand</span><span class="o">.</span><span class="n">is_Matrix</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Matrix</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">summand</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="n">summand</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">summand</span><span class="o">.</span><span class="n">_mat</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">summand</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">summand</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.concrete.expr_with_limits</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

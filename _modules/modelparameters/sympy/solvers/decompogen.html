@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.solvers.decompogen &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.solvers.decompogen</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.solvers.decompogen</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">Function</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span> <span class="n">sympify</span>
+<span class="kn">from</span> <span class="nn">..polys</span> <span class="kn">import</span> <span class="n">Poly</span><span class="p">,</span> <span class="n">decompose</span>
+
+
+<div class="viewcode-block" id="decompogen"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.decompogen.decompogen">[docs]</a><span class="k">def</span> <span class="nf">decompogen</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes General functional decomposition of ``f``.</span>
+<span class="sd">    Given an expression ``f``, returns a list ``[f_1, f_2, ..., f_n]``,</span>
+<span class="sd">    where::</span>
+<span class="sd">              f = f_1 o f_2 o ... f_n = f_1(f_2(... f_n))</span>
+
+<span class="sd">    Note: This is a General decomposition function. It also decomposes</span>
+<span class="sd">    Polynomials. For only Polynomial decomposition see ``decompose`` in polys.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .decompogen import decompogen</span>
+<span class="sd">    &gt;&gt;&gt; from ..abc import x</span>
+<span class="sd">    &gt;&gt;&gt; from .. import sqrt, sin, cos</span>
+<span class="sd">    &gt;&gt;&gt; decompogen(sin(cos(x)), x)</span>
+<span class="sd">    [sin(x), cos(x)]</span>
+<span class="sd">    &gt;&gt;&gt; decompogen(sin(x)**2 + sin(x) + 1, x)</span>
+<span class="sd">    [x**2 + x + 1, sin(x)]</span>
+<span class="sd">    &gt;&gt;&gt; decompogen(sqrt(6*x**2 - 5), x)</span>
+<span class="sd">    [sqrt(x), 6*x**2 - 5]</span>
+<span class="sd">    &gt;&gt;&gt; decompogen(sin(sqrt(cos(x**2 + 1))), x)</span>
+<span class="sd">    [sin(x), sqrt(x), cos(x), x**2 + 1]</span>
+<span class="sd">    &gt;&gt;&gt; decompogen(x**4 + 2*x**3 - x - 1, x)</span>
+<span class="sd">    [x**2 - x - 1, x**2 + x]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># ===== Simple Functions ===== #</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">Function</span><span class="p">,</span> <span class="n">Pow</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">symbol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">f</span><span class="p">]</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">symbol</span><span class="p">)]</span> <span class="o">+</span> <span class="n">decompogen</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">symbol</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="c1"># ===== Convert to Polynomial ===== #</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">Poly</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="n">gens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">free_symbols</span> <span class="p">,</span> <span class="n">fp</span><span class="o">.</span><span class="n">gens</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">gens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">symbol</span><span class="p">:</span>
+        <span class="n">f1</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">gens</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">symbol</span><span class="p">)</span>
+        <span class="n">f2</span> <span class="o">=</span> <span class="n">gens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="p">[</span><span class="n">f1</span><span class="p">]</span> <span class="o">+</span> <span class="n">decompogen</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="n">symbol</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="c1"># ===== Polynomial decompose() ====== #</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">decompose</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">f</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="compogen"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.decompogen.compogen">[docs]</a><span class="k">def</span> <span class="nf">compogen</span><span class="p">(</span><span class="n">g_s</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the composition of functions.</span>
+<span class="sd">    Given a list of functions ``g_s``, returns their composition ``f``,</span>
+<span class="sd">    where:</span>
+<span class="sd">        f = g_1 o g_2 o .. o g_n</span>
+
+<span class="sd">    Note: This is a General composition function. It also composes Polynomials.</span>
+<span class="sd">    For only Polynomial composition see ``compose`` in polys.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .decompogen import compogen</span>
+<span class="sd">    &gt;&gt;&gt; from ..abc import x</span>
+<span class="sd">    &gt;&gt;&gt; from .. import sqrt, sin, cos</span>
+<span class="sd">    &gt;&gt;&gt; compogen([sin(x), cos(x)], x)</span>
+<span class="sd">    sin(cos(x))</span>
+<span class="sd">    &gt;&gt;&gt; compogen([x**2 + x + 1, sin(x)], x)</span>
+<span class="sd">    sin(x)**2 + sin(x) + 1</span>
+<span class="sd">    &gt;&gt;&gt; compogen([sqrt(x), 6*x**2 - 5], x)</span>
+<span class="sd">    sqrt(6*x**2 - 5)</span>
+<span class="sd">    &gt;&gt;&gt; compogen([sin(x), sqrt(x), cos(x), x**2 + 1], x)</span>
+<span class="sd">    sin(sqrt(cos(x**2 + 1)))</span>
+<span class="sd">    &gt;&gt;&gt; compogen([x**2 - x - 1, x**2 + x], x)</span>
+<span class="sd">    -x**2 - x + (x**2 + x)**2 - 1</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">g_s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">g_s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">foo</span> <span class="o">=</span> <span class="n">g_s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">g_s</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">g_s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">foo</span>
+
+    <span class="k">return</span> <span class="n">compogen</span><span class="p">([</span><span class="n">foo</span><span class="p">]</span> <span class="o">+</span> <span class="n">g_s</span><span class="p">[</span><span class="mi">2</span><span class="p">:],</span> <span class="n">symbol</span><span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.solvers.decompogen</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

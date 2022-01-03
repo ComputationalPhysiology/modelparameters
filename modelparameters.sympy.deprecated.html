@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>modelparameters.sympy.deprecated package &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="modelparameters.sympy.diffgeom package" href="modelparameters.sympy.diffgeom.html" />
+    <link rel="prev" title="modelparameters.sympy.crypto package" href="modelparameters.sympy.crypto.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.diffgeom.html" title="modelparameters.sympy.diffgeom package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.crypto.html" title="modelparameters.sympy.crypto package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" accesskey="U">modelparameters.sympy package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.deprecated package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="modelparameters-sympy-deprecated-package">
+<h1>modelparameters.sympy.deprecated package<a class="headerlink" href="#modelparameters-sympy-deprecated-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-modelparameters.sympy.deprecated.class_registry">
+<span id="modelparameters-sympy-deprecated-class-registry-module"></span><h2>modelparameters.sympy.deprecated.class_registry module<a class="headerlink" href="#module-modelparameters.sympy.deprecated.class_registry" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.deprecated.class_registry.ClassRegistry">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.deprecated.class_registry.</span></span><span class="sig-name descname"><span class="pre">ClassRegistry</span></span><a class="reference internal" href="_modules/modelparameters/sympy/deprecated/class_registry.html#ClassRegistry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.deprecated.class_registry.ClassRegistry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.core.Registry" title="modelparameters.sympy.core.core.Registry"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.core.Registry</span></code></a></p>
+<p>Namespace for SymPy classes</p>
+<p>This is needed to avoid problems with cyclic imports.
+To get a SymPy class, use <cite>C.&lt;class_name&gt;</cite> e.g. <cite>C.Rational</cite>, <cite>C.Add</cite>.</p>
+<p>For performance reasons, this is coupled with a set <cite>all_classes</cite> holding
+the classes, which should not be modified directly.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.deprecated.class_registry.ClassRegistry.BasicMeta">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BasicMeta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kws</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelparameters.sympy.deprecated.class_registry.ClassRegistry.BasicMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.deprecated">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.deprecated" title="Permalink to this headline">¶</a></h2>
+<p>This module contains deprecations that could not stay in their original
+module for some reason.</p>
+<p>Such reasons include:
+- Original module had to be removed.
+- Adding &#64;deprecated to a declaration caused an import cycle.</p>
+<p>Since no modules in SymPy ever depend on deprecated code, SymPy always imports
+this last, after all other modules have been imported.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">modelparameters.sympy.deprecated package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.deprecated.class_registry">modelparameters.sympy.deprecated.class_registry module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.deprecated">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.crypto.html"
+                        title="previous chapter">modelparameters.sympy.crypto package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.diffgeom.html"
+                        title="next chapter">modelparameters.sympy.diffgeom package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modelparameters.sympy.deprecated.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.diffgeom.html" title="modelparameters.sympy.diffgeom package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.crypto.html" title="modelparameters.sympy.crypto package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" >modelparameters.sympy package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.deprecated package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

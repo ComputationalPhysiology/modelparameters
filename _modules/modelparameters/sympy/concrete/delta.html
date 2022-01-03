@@ -1,0 +1,407 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.concrete.delta &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.concrete.delta</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.concrete.delta</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module implements sums and products containing the Kronecker Delta function.</span>
+
+<span class="sd">References</span>
+<span class="sd">==========</span>
+
+<span class="sd">- http://mathworld.wolfram.com/KroneckerDelta.html</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Dummy</span>
+<span class="kn">from</span> <span class="nn">..core.cache</span> <span class="kn">import</span> <span class="n">cacheit</span>
+<span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="n">default_sort_key</span><span class="p">,</span> <span class="nb">range</span>
+<span class="kn">from</span> <span class="nn">..functions</span> <span class="kn">import</span> <span class="n">KroneckerDelta</span><span class="p">,</span> <span class="n">Piecewise</span><span class="p">,</span> <span class="n">piecewise_fold</span>
+<span class="kn">from</span> <span class="nn">..sets</span> <span class="kn">import</span> <span class="n">Interval</span>
+
+
+<span class="nd">@cacheit</span>
+<span class="k">def</span> <span class="nf">_expand_delta</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Expand the first Add containing a simple KroneckerDelta.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">expr</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="n">Add</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="p">[</span><span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">delta</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">h</span><span class="o">.</span><span class="n">is_Add</span> <span class="ow">and</span> <span class="n">_has_simple_delta</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">func</span>
+            <span class="n">terms</span> <span class="o">=</span> <span class="p">[</span><span class="n">terms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">h</span><span class="o">.</span><span class="n">args</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">terms</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">*</span><span class="n">h</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">terms</span><span class="p">)</span>
+
+
+<span class="nd">@cacheit</span>
+<span class="k">def</span> <span class="nf">_extract_delta</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extract a simple KroneckerDelta from the expression.</span>
+
+<span class="sd">    Returns the tuple ``(delta, newexpr)`` where:</span>
+
+<span class="sd">      - ``delta`` is a simple KroneckerDelta expression if one was found,</span>
+<span class="sd">        or ``None`` if no simple KroneckerDelta expression was found.</span>
+
+<span class="sd">      - ``newexpr`` is a Mul containing the remaining terms; ``expr`` is</span>
+<span class="sd">        returned unchanged if no simple KroneckerDelta expression was found.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .. import KroneckerDelta</span>
+<span class="sd">    &gt;&gt;&gt; from .delta import _extract_delta</span>
+<span class="sd">    &gt;&gt;&gt; from ..abc import x, y, i, j, k</span>
+<span class="sd">    &gt;&gt;&gt; _extract_delta(4*x*y*KroneckerDelta(i, j), i)</span>
+<span class="sd">    (KroneckerDelta(i, j), 4*x*y)</span>
+<span class="sd">    &gt;&gt;&gt; _extract_delta(4*x*y*KroneckerDelta(i, j), k)</span>
+<span class="sd">    (None, 4*x*y*KroneckerDelta(i, j))</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    sympy.functions.special.tensor_functions.KroneckerDelta</span>
+<span class="sd">    deltaproduct</span>
+<span class="sd">    deltasummation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_has_simple_delta</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">KroneckerDelta</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">S</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Incorrect expr&quot;</span><span class="p">)</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">delta</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">_is_simple_delta</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">arg</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">expr</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">terms</span><span class="p">))</span>
+
+
+<span class="nd">@cacheit</span>
+<span class="k">def</span> <span class="nf">_has_simple_delta</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns True if ``expr`` is an expression that contains a KroneckerDelta</span>
+<span class="sd">    that is simple in the index ``index``, meaning that this KroneckerDelta</span>
+<span class="sd">    is nonzero for a single value of the index ``index``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">KroneckerDelta</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">_is_simple_delta</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Add</span> <span class="ow">or</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">_has_simple_delta</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="nd">@cacheit</span>
+<span class="k">def</span> <span class="nf">_is_simple_delta</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns True if ``delta`` is a KroneckerDelta and is nonzero for a single</span>
+<span class="sd">    value of the index ``index``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">KroneckerDelta</span><span class="p">)</span> <span class="ow">and</span> <span class="n">delta</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="p">(</span><span class="n">delta</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">delta</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">as_poly</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">p</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">p</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="nd">@cacheit</span>
+<span class="k">def</span> <span class="nf">_remove_multiple_delta</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Evaluate products of KroneckerDelta&#39;s.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">..solvers</span> <span class="kn">import</span> <span class="n">solve</span>
+    <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Add</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">_remove_multiple_delta</span><span class="p">,</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">expr</span>
+    <span class="n">eqs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">newargs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">KroneckerDelta</span><span class="p">):</span>
+            <span class="n">eqs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">arg</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">newargs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">eqs</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">expr</span>
+    <span class="n">solns</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">eqs</span><span class="p">,</span> <span class="nb">dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">solns</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">solns</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">solns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">newargs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">KroneckerDelta</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">solns</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">key</span><span class="p">]))</span>
+        <span class="n">expr2</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">newargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">expr</span> <span class="o">!=</span> <span class="n">expr2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_remove_multiple_delta</span><span class="p">(</span><span class="n">expr2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">expr</span>
+
+
+<span class="nd">@cacheit</span>
+<span class="k">def</span> <span class="nf">_simplify_delta</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Rewrite a KroneckerDelta&#39;s indices in its simplest form.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">..solvers</span> <span class="kn">import</span> <span class="n">solve</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">KroneckerDelta</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">slns</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">slns</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">slns</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">KroneckerDelta</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+                            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">slns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+        <span class="k">except</span> <span class="ne">NotImplementedError</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="k">return</span> <span class="n">expr</span>
+
+
+<div class="viewcode-block" id="deltaproduct"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.delta.deltaproduct">[docs]</a><span class="nd">@cacheit</span>
+<span class="k">def</span> <span class="nf">deltaproduct</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">limit</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handle products containing a KroneckerDelta.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    deltasummation</span>
+<span class="sd">    sympy.functions.special.tensor_functions.KroneckerDelta</span>
+<span class="sd">    sympy.concrete.products.product</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">.products</span> <span class="kn">import</span> <span class="n">product</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">limit</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">KroneckerDelta</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">product</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">is_Add</span><span class="p">:</span>
+        <span class="c1"># Identify the term in the Add that has a simple KroneckerDelta</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">terms</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">default_sort_key</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">delta</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">_has_simple_delta</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+                <span class="n">delta</span> <span class="o">=</span> <span class="n">arg</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">terms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+        <span class="n">newexpr</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">terms</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">(</span><span class="s2">&quot;kprime&quot;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">deltaproduct</span><span class="p">(</span><span class="n">newexpr</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span> <span class="o">+</span> <span class="nb">sum</span><span class="p">([</span>
+                <span class="n">deltaproduct</span><span class="p">(</span><span class="n">newexpr</span><span class="p">,</span> <span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ik</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span>
+                <span class="n">delta</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ik</span><span class="p">)</span> <span class="o">*</span>
+                <span class="n">deltaproduct</span><span class="p">(</span><span class="n">newexpr</span><span class="p">,</span> <span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ik</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">limit</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span> <span class="k">for</span> <span class="n">ik</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))]</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">deltaproduct</span><span class="p">(</span><span class="n">newexpr</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span> <span class="o">+</span> <span class="n">deltasummation</span><span class="p">(</span>
+                <span class="n">deltaproduct</span><span class="p">(</span><span class="n">newexpr</span><span class="p">,</span> <span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span>
+                <span class="n">delta</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span>
+                <span class="n">deltaproduct</span><span class="p">(</span><span class="n">newexpr</span><span class="p">,</span> <span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">limit</span><span class="p">[</span><span class="mi">2</span><span class="p">])),</span>
+                <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">limit</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span>
+                <span class="n">no_piecewise</span><span class="o">=</span><span class="n">_has_simple_delta</span><span class="p">(</span><span class="n">newexpr</span><span class="p">,</span> <span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">_remove_multiple_delta</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="n">delta</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_extract_delta</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">delta</span><span class="p">:</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">_expand_delta</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">f</span> <span class="o">!=</span> <span class="n">g</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">factor</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">factor</span><span class="p">(</span><span class="n">deltaproduct</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">limit</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">deltaproduct</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">product</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+
+    <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Eq</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">Eq</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_remove_multiple_delta</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">KroneckerDelta</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="o">+</span> \
+        <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="o">*</span><span class="n">_simplify_delta</span><span class="p">(</span><span class="n">KroneckerDelta</span><span class="p">(</span><span class="n">limit</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="deltasummation"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.delta.deltasummation">[docs]</a><span class="nd">@cacheit</span>
+<span class="k">def</span> <span class="nf">deltasummation</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">no_piecewise</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handle summations containing a KroneckerDelta.</span>
+
+<span class="sd">    The idea for summation is the following:</span>
+
+<span class="sd">    - If we are dealing with a KroneckerDelta expression, i.e. KroneckerDelta(g(x), j),</span>
+<span class="sd">      we try to simplify it.</span>
+
+<span class="sd">      If we could simplify it, then we sum the resulting expression.</span>
+<span class="sd">      We already know we can sum a simplified expression, because only</span>
+<span class="sd">      simple KroneckerDelta expressions are involved.</span>
+
+<span class="sd">      If we couldn&#39;t simplify it, there are two cases:</span>
+
+<span class="sd">      1) The expression is a simple expression: we return the summation,</span>
+<span class="sd">         taking care if we are dealing with a Derivative or with a proper</span>
+<span class="sd">         KroneckerDelta.</span>
+
+<span class="sd">      2) The expression is not simple (i.e. KroneckerDelta(cos(x))): we can do</span>
+<span class="sd">         nothing at all.</span>
+
+<span class="sd">    - If the expr is a multiplication expr having a KroneckerDelta term:</span>
+
+<span class="sd">      First we expand it.</span>
+
+<span class="sd">      If the expansion did work, then we try to sum the expansion.</span>
+
+<span class="sd">      If not, we try to extract a simple KroneckerDelta term, then we have two</span>
+<span class="sd">      cases:</span>
+
+<span class="sd">      1) We have a simple KroneckerDelta term, so we return the summation.</span>
+
+<span class="sd">      2) We didn&#39;t have a simple term, but we do have an expression with</span>
+<span class="sd">         simplified KroneckerDelta terms, so we sum this expression.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .. import oo, symbols</span>
+<span class="sd">    &gt;&gt;&gt; from ..abc import k</span>
+<span class="sd">    &gt;&gt;&gt; i, j = symbols(&#39;i, j&#39;, integer=True, finite=True)</span>
+<span class="sd">    &gt;&gt;&gt; from .delta import deltasummation</span>
+<span class="sd">    &gt;&gt;&gt; from .. import KroneckerDelta, Piecewise</span>
+<span class="sd">    &gt;&gt;&gt; deltasummation(KroneckerDelta(i, k), (k, -oo, oo))</span>
+<span class="sd">    1</span>
+<span class="sd">    &gt;&gt;&gt; deltasummation(KroneckerDelta(i, k), (k, 0, oo))</span>
+<span class="sd">    Piecewise((1, 0 &lt;= i), (0, True))</span>
+<span class="sd">    &gt;&gt;&gt; deltasummation(KroneckerDelta(i, k), (k, 1, 3))</span>
+<span class="sd">    Piecewise((1, (1 &lt;= i) &amp; (i &lt;= 3)), (0, True))</span>
+<span class="sd">    &gt;&gt;&gt; deltasummation(k*KroneckerDelta(i, j)*KroneckerDelta(j, k), (k, -oo, oo))</span>
+<span class="sd">    j*KroneckerDelta(i, j)</span>
+<span class="sd">    &gt;&gt;&gt; deltasummation(j*KroneckerDelta(i, j), (j, -oo, oo))</span>
+<span class="sd">    i</span>
+<span class="sd">    &gt;&gt;&gt; deltasummation(i*KroneckerDelta(i, j), (i, -oo, oo))</span>
+<span class="sd">    j</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    deltaproduct</span>
+<span class="sd">    sympy.functions.special.tensor_functions.KroneckerDelta</span>
+<span class="sd">    sympy.concrete.sums.summation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">.summations</span> <span class="kn">import</span> <span class="n">summation</span>
+    <span class="kn">from</span> <span class="nn">..solvers</span> <span class="kn">import</span> <span class="n">solve</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">limit</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">KroneckerDelta</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">summation</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">limit</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">g</span> <span class="o">=</span> <span class="n">_expand_delta</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">is_Add</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">piecewise_fold</span><span class="p">(</span>
+            <span class="n">g</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">deltasummation</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">no_piecewise</span><span class="p">)</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">args</span><span class="p">]))</span>
+
+    <span class="c1"># try to extract a simple KroneckerDelta term</span>
+    <span class="n">delta</span><span class="p">,</span> <span class="n">expr</span> <span class="o">=</span> <span class="n">_extract_delta</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">delta</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">summation</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+
+    <span class="n">solns</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">delta</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">delta</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">solns</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
+    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">solns</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Sum</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">solns</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">no_piecewise</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Piecewise</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">value</span><span class="p">),</span> <span class="n">Interval</span><span class="p">(</span><span class="o">*</span><span class="n">limit</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">as_relational</span><span class="p">(</span><span class="n">value</span><span class="p">)),</span>
+        <span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.concrete.delta</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

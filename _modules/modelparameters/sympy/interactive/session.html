@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.interactive.session &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.interactive.session</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.interactive.session</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Tools for setting up interactive sessions. &quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">distutils.version</span> <span class="kn">import</span> <span class="n">LooseVersion</span> <span class="k">as</span> <span class="n">V</span>
+
+<span class="kn">from</span> <span class="nn">..external</span> <span class="kn">import</span> <span class="n">import_module</span>
+<span class="kn">from</span> <span class="nn">.printing</span> <span class="kn">import</span> <span class="n">init_printing</span>
+
+<span class="n">preexec_source</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">from __future__ import division</span>
+<span class="s2">from .. import *</span>
+<span class="s2">x, y, z, t = symbols(&#39;x y z t&#39;)</span>
+<span class="s2">k, m, n = symbols(&#39;k m n&#39;, integer=True)</span>
+<span class="s2">f, g, h = symbols(&#39;f g h&#39;, cls=Function)</span>
+<span class="s2">init_printing()</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">verbose_message</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">These commands were executed:</span>
+<span class="si">%(source)s</span><span class="s2"></span>
+<span class="s2">Documentation can be found at http://docs.sympy.org/</span><span class="si">%(version)s</span><span class="s2"></span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">no_ipython</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">Couldn&#39;t locate IPython. Having IPython installed is greatly recommended.</span>
+<span class="s2">See http://ipython.scipy.org for more details. If you use Debian/Ubuntu,</span>
+<span class="s2">just install the &#39;ipython&#39; package and start isympy again.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<span class="k">def</span> <span class="nf">_make_message</span><span class="p">(</span><span class="n">ipython</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a banner for an interactive session. &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">__version__</span> <span class="k">as</span> <span class="n">sympy_version</span>
+    <span class="kn">from</span> <span class="nn">..polys.domains</span> <span class="kn">import</span> <span class="n">GROUND_TYPES</span>
+    <span class="kn">from</span> <span class="nn">..utilities.misc</span> <span class="kn">import</span> <span class="n">ARCH</span>
+    <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">SYMPY_DEBUG</span>
+
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+
+    <span class="k">if</span> <span class="n">quiet</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="n">python_version</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="s2">.</span><span class="si">%d</span><span class="s2">.</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">ipython</span><span class="p">:</span>
+        <span class="n">shell_name</span> <span class="o">=</span> <span class="s2">&quot;IPython&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">shell_name</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span>
+
+    <span class="n">info</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ground types: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">GROUND_TYPES</span><span class="p">]</span>
+
+    <span class="n">cache</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;SYMPY_USE_CACHE&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">cache</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">cache</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;no&#39;</span><span class="p">:</span>
+        <span class="n">info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;cache: off&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">SYMPY_DEBUG</span><span class="p">:</span>
+        <span class="n">info</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;debugging: on&#39;</span><span class="p">)</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="n">shell_name</span><span class="p">,</span> <span class="n">sympy_version</span><span class="p">,</span> <span class="n">python_version</span><span class="p">,</span> <span class="n">ARCH</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">info</span><span class="p">)</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> console for SymPy </span><span class="si">%s</span><span class="s2"> (Python </span><span class="si">%s</span><span class="s2">-</span><span class="si">%s</span><span class="s2">) (</span><span class="si">%s</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">args</span>
+
+    <span class="k">if</span> <span class="n">source</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">preexec_source</span>
+
+    <span class="n">_source</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">source</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">line</span><span class="p">:</span>
+            <span class="n">_source</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_source</span> <span class="o">+=</span> <span class="s1">&#39;&gt;&gt;&gt; &#39;</span> <span class="o">+</span> <span class="n">line</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+
+    <span class="n">doc_version</span> <span class="o">=</span> <span class="n">sympy_version</span>
+    <span class="k">if</span> <span class="s1">&#39;dev&#39;</span> <span class="ow">in</span> <span class="n">doc_version</span><span class="p">:</span>
+        <span class="n">doc_version</span> <span class="o">=</span> <span class="s2">&quot;dev&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">doc_version</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">/&quot;</span> <span class="o">%</span> <span class="n">doc_version</span>
+
+    <span class="n">message</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">verbose_message</span> <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;source&#39;</span><span class="p">:</span> <span class="n">_source</span><span class="p">,</span>
+                                         <span class="s1">&#39;version&#39;</span><span class="p">:</span> <span class="n">doc_version</span><span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">message</span>
+
+
+<div class="viewcode-block" id="int_to_Integer"><a class="viewcode-back" href="../../../../modelparameters.sympy.interactive.html#modelparameters.sympy.interactive.session.int_to_Integer">[docs]</a><span class="k">def</span> <span class="nf">int_to_Integer</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrap integer literals with Integer.</span>
+
+<span class="sd">    This is based on the decistmt example from</span>
+<span class="sd">    http://docs.python.org/library/tokenize.html.</span>
+
+<span class="sd">    Only integer literals are converted.  Float literals are left alone.</span>
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from __future__ import division</span>
+<span class="sd">    &gt;&gt;&gt; from .session import int_to_Integer</span>
+<span class="sd">    &gt;&gt;&gt; from .. import Integer</span>
+<span class="sd">    &gt;&gt;&gt; s = &#39;1.2 + 1/2 - 0x12 + a1&#39;</span>
+<span class="sd">    &gt;&gt;&gt; int_to_Integer(s)</span>
+<span class="sd">    &#39;1.2 +Integer (1 )/Integer (2 )-Integer (0x12 )+a1 &#39;</span>
+<span class="sd">    &gt;&gt;&gt; s = &#39;print (1/2)&#39;</span>
+<span class="sd">    &gt;&gt;&gt; int_to_Integer(s)</span>
+<span class="sd">    &#39;print (Integer (1 )/Integer (2 ))&#39;</span>
+<span class="sd">    &gt;&gt;&gt; exec(s)</span>
+<span class="sd">    0.5</span>
+<span class="sd">    &gt;&gt;&gt; exec(int_to_Integer(s))</span>
+<span class="sd">    1/2</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">tokenize</span> <span class="kn">import</span> <span class="n">generate_tokens</span><span class="p">,</span> <span class="n">untokenize</span><span class="p">,</span> <span class="n">NUMBER</span><span class="p">,</span> <span class="n">NAME</span><span class="p">,</span> <span class="n">OP</span>
+    <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="n">StringIO</span>
+
+    <span class="k">def</span> <span class="nf">_is_int</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns true if string value num (with token NUMBER) represents an integer.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># XXX: Is there something in the standard library that will do this?</span>
+        <span class="k">if</span> <span class="s1">&#39;.&#39;</span> <span class="ow">in</span> <span class="n">num</span> <span class="ow">or</span> <span class="s1">&#39;j&#39;</span> <span class="ow">in</span> <span class="n">num</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> <span class="s1">&#39;e&#39;</span> <span class="ow">in</span> <span class="n">num</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">generate_tokens</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">readline</span><span class="p">)</span>   <span class="c1"># tokenize the string</span>
+    <span class="k">for</span> <span class="n">toknum</span><span class="p">,</span> <span class="n">tokval</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">g</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">toknum</span> <span class="o">==</span> <span class="n">NUMBER</span> <span class="ow">and</span> <span class="n">_is_int</span><span class="p">(</span><span class="n">tokval</span><span class="p">):</span>  <span class="c1"># replace NUMBER tokens</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span>
+                <span class="p">(</span><span class="n">NAME</span><span class="p">,</span> <span class="s1">&#39;Integer&#39;</span><span class="p">),</span>
+                <span class="p">(</span><span class="n">OP</span><span class="p">,</span> <span class="s1">&#39;(&#39;</span><span class="p">),</span>
+                <span class="p">(</span><span class="n">NUMBER</span><span class="p">,</span> <span class="n">tokval</span><span class="p">),</span>
+                <span class="p">(</span><span class="n">OP</span><span class="p">,</span> <span class="s1">&#39;)&#39;</span><span class="p">)</span>
+            <span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">toknum</span><span class="p">,</span> <span class="n">tokval</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">untokenize</span><span class="p">(</span><span class="n">result</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="enable_automatic_int_sympification"><a class="viewcode-back" href="../../../../modelparameters.sympy.interactive.html#modelparameters.sympy.interactive.session.enable_automatic_int_sympification">[docs]</a><span class="k">def</span> <span class="nf">enable_automatic_int_sympification</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Allow IPython to automatically convert integer literals to Integer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">hasshell</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s1">&#39;shell&#39;</span><span class="p">)</span>
+
+    <span class="kn">import</span> <span class="nn">ast</span>
+    <span class="k">if</span> <span class="n">hasshell</span><span class="p">:</span>
+        <span class="n">old_run_cell</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">run_cell</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">old_run_cell</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">run_cell</span>
+
+    <span class="k">def</span> <span class="nf">my_run_cell</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Check the cell for syntax errors.  This way, the syntax error</span>
+            <span class="c1"># will show the original input, not the transformed input.  The</span>
+            <span class="c1"># downside here is that IPython magic like %timeit will not work</span>
+            <span class="c1"># with transformed input (but on the other hand, IPython magic</span>
+            <span class="c1"># that doesn&#39;t expect transformed input will continue to work).</span>
+            <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">SyntaxError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cell</span> <span class="o">=</span> <span class="n">int_to_Integer</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+        <span class="n">old_run_cell</span><span class="p">(</span><span class="n">cell</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">hasshell</span><span class="p">:</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">run_cell</span> <span class="o">=</span> <span class="n">my_run_cell</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">run_cell</span> <span class="o">=</span> <span class="n">my_run_cell</span></div>
+
+
+<div class="viewcode-block" id="enable_automatic_symbols"><a class="viewcode-back" href="../../../../modelparameters.sympy.interactive.html#modelparameters.sympy.interactive.session.enable_automatic_symbols">[docs]</a><span class="k">def</span> <span class="nf">enable_automatic_symbols</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Allow IPython to automatially create symbols (``isympy -a``). &quot;&quot;&quot;</span>
+    <span class="c1"># XXX: This should perhaps use tokenize, like int_to_Integer() above.</span>
+    <span class="c1"># This would avoid re-executing the code, which can lead to subtle</span>
+    <span class="c1"># issues.  For example:</span>
+    <span class="c1">#</span>
+    <span class="c1"># In [1]: a = 1</span>
+    <span class="c1">#</span>
+    <span class="c1"># In [2]: for i in range(10):</span>
+    <span class="c1">#    ...:     a += 1</span>
+    <span class="c1">#    ...:</span>
+    <span class="c1">#</span>
+    <span class="c1"># In [3]: a</span>
+    <span class="c1"># Out[3]: 11</span>
+    <span class="c1">#</span>
+    <span class="c1"># In [4]: a = 1</span>
+    <span class="c1">#</span>
+    <span class="c1"># In [5]: for i in range(10):</span>
+    <span class="c1">#    ...:     a += 1</span>
+    <span class="c1">#    ...:     print b</span>
+    <span class="c1">#    ...:</span>
+    <span class="c1"># b</span>
+    <span class="c1"># b</span>
+    <span class="c1"># b</span>
+    <span class="c1"># b</span>
+    <span class="c1"># b</span>
+    <span class="c1"># b</span>
+    <span class="c1"># b</span>
+    <span class="c1"># b</span>
+    <span class="c1"># b</span>
+    <span class="c1"># b</span>
+    <span class="c1">#</span>
+    <span class="c1"># In [6]: a</span>
+    <span class="c1"># Out[6]: 12</span>
+    <span class="c1">#</span>
+    <span class="c1"># Note how the for loop is executed again because `b` was not defined, but `a`</span>
+    <span class="c1"># was already incremented once, so the result is that it is incremented</span>
+    <span class="c1"># multiple times.</span>
+
+    <span class="kn">import</span> <span class="nn">re</span>
+    <span class="n">re_nameerror</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+        <span class="s2">&quot;name &#39;(?P&lt;symbol&gt;[A-Za-z_][A-Za-z0-9_]*)&#39; is not defined&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_handler</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">etype</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">tb</span><span class="p">,</span> <span class="n">tb_offset</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Handle :exc:`NameError` exception and allow injection of missing symbols. &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">etype</span> <span class="ow">is</span> <span class="ne">NameError</span> <span class="ow">and</span> <span class="n">tb</span><span class="o">.</span><span class="n">tb_next</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">tb</span><span class="o">.</span><span class="n">tb_next</span><span class="o">.</span><span class="n">tb_next</span><span class="p">:</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">re_nameerror</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">match</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># XXX: Make sure Symbol is in scope. Otherwise you&#39;ll get infinite recursion.</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">run_cell</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%(symbol)s</span><span class="s2"> = Symbol(&#39;</span><span class="si">%(symbol)s</span><span class="s2">&#39;)&quot;</span> <span class="o">%</span>
+                    <span class="p">{</span><span class="s1">&#39;symbol&#39;</span><span class="p">:</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;symbol&quot;</span><span class="p">)},</span> <span class="n">store_history</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">user_ns</span><span class="p">[</span><span class="s1">&#39;In&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">except</span> <span class="p">(</span><span class="ne">KeyError</span><span class="p">,</span> <span class="ne">IndexError</span><span class="p">):</span>
+                    <span class="k">pass</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">run_cell</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">store_history</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+                <span class="k">finally</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">run_cell</span><span class="p">(</span><span class="s2">&quot;del </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s2">&quot;symbol&quot;</span><span class="p">),</span>
+                                  <span class="n">store_history</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="n">stb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">InteractiveTB</span><span class="o">.</span><span class="n">structured_traceback</span><span class="p">(</span>
+            <span class="n">etype</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">tb</span><span class="p">,</span> <span class="n">tb_offset</span><span class="o">=</span><span class="n">tb_offset</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_showtraceback</span><span class="p">(</span><span class="n">etype</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">stb</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s1">&#39;shell&#39;</span><span class="p">):</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">shell</span><span class="o">.</span><span class="n">set_custom_exc</span><span class="p">((</span><span class="ne">NameError</span><span class="p">,),</span> <span class="n">_handler</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># This was restructured in IPython 0.13</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">set_custom_exc</span><span class="p">((</span><span class="ne">NameError</span><span class="p">,),</span> <span class="n">_handler</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="init_ipython_session"><a class="viewcode-back" href="../../../../modelparameters.sympy.interactive.html#modelparameters.sympy.interactive.session.init_ipython_session">[docs]</a><span class="k">def</span> <span class="nf">init_ipython_session</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="p">[],</span> <span class="n">auto_symbols</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">auto_int_to_Integer</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct new IPython session. &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">IPython</span>
+
+    <span class="k">if</span> <span class="n">V</span><span class="p">(</span><span class="n">IPython</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="s1">&#39;0.11&#39;</span><span class="p">:</span>
+        <span class="c1"># use an app to parse the command line, and init config</span>
+        <span class="c1"># IPython 1.0 deprecates the frontend module, so we import directly</span>
+        <span class="c1"># from the terminal module to prevent a deprecation message from being</span>
+        <span class="c1"># shown.</span>
+        <span class="k">if</span> <span class="n">V</span><span class="p">(</span><span class="n">IPython</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="s1">&#39;1.0&#39;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">IPython.terminal</span> <span class="kn">import</span> <span class="n">ipapp</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">IPython.frontend.terminal</span> <span class="kn">import</span> <span class="n">ipapp</span>
+        <span class="n">app</span> <span class="o">=</span> <span class="n">ipapp</span><span class="o">.</span><span class="n">TerminalIPythonApp</span><span class="p">()</span>
+
+        <span class="c1"># don&#39;t draw IPython banner during initialization:</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">display_banner</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">auto_symbols</span><span class="p">:</span>
+            <span class="n">readline</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s2">&quot;readline&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">readline</span><span class="p">:</span>
+                <span class="n">enable_automatic_symbols</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">auto_int_to_Integer</span><span class="p">:</span>
+            <span class="n">enable_automatic_int_sympification</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">app</span><span class="o">.</span><span class="n">shell</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">IPython.Shell</span> <span class="kn">import</span> <span class="n">make_IPython</span>
+        <span class="k">return</span> <span class="n">make_IPython</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="init_python_session"><a class="viewcode-back" href="../../../../modelparameters.sympy.interactive.html#modelparameters.sympy.interactive.session.init_python_session">[docs]</a><span class="k">def</span> <span class="nf">init_python_session</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Construct new Python session. &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">code</span> <span class="kn">import</span> <span class="n">InteractiveConsole</span>
+
+    <span class="k">class</span> <span class="nc">SymPyConsole</span><span class="p">(</span><span class="n">InteractiveConsole</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;An interactive console with readline support. &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="n">InteractiveConsole</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">import</span> <span class="nn">readline</span>
+            <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="kn">import</span> <span class="nn">os</span>
+                <span class="kn">import</span> <span class="nn">atexit</span>
+
+                <span class="n">readline</span><span class="o">.</span><span class="n">parse_and_bind</span><span class="p">(</span><span class="s1">&#39;tab: complete&#39;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">readline</span><span class="p">,</span> <span class="s1">&#39;read_history_file&#39;</span><span class="p">):</span>
+                    <span class="n">history</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/.sympy-history&#39;</span><span class="p">)</span>
+
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">readline</span><span class="o">.</span><span class="n">read_history_file</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">IOError</span><span class="p">:</span>
+                        <span class="k">pass</span>
+
+                    <span class="n">atexit</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">readline</span><span class="o">.</span><span class="n">write_history_file</span><span class="p">,</span> <span class="n">history</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">SymPyConsole</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="init_session"><a class="viewcode-back" href="../../../../modelparameters.sympy.interactive.html#modelparameters.sympy.interactive.session.init_session">[docs]</a><span class="k">def</span> <span class="nf">init_session</span><span class="p">(</span><span class="n">ipython</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">use_unicode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_latex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">quiet</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">auto_symbols</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">auto_int_to_Integer</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">str_printer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pretty_printer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">latex_printer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">argv</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initialize an embedded IPython or Python session. The IPython session is</span>
+<span class="sd">    initiated with the --pylab option, without the numpy imports, so that</span>
+<span class="sd">    matplotlib plotting can be interactive.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ==========</span>
+
+<span class="sd">    pretty_print: boolean</span>
+<span class="sd">        If True, use pretty_print to stringify;</span>
+<span class="sd">        if False, use sstrrepr to stringify.</span>
+<span class="sd">    order: string or None</span>
+<span class="sd">        There are a few different settings for this parameter:</span>
+<span class="sd">        lex (default), which is lexographic order;</span>
+<span class="sd">        grlex, which is graded lexographic order;</span>
+<span class="sd">        grevlex, which is reversed graded lexographic order;</span>
+<span class="sd">        old, which is used for compatibility reasons and for long expressions;</span>
+<span class="sd">        None, which sets it to lex.</span>
+<span class="sd">    use_unicode: boolean or None</span>
+<span class="sd">        If True, use unicode characters;</span>
+<span class="sd">        if False, do not use unicode characters.</span>
+<span class="sd">    use_latex: boolean or None</span>
+<span class="sd">        If True, use latex rendering if IPython GUI&#39;s;</span>
+<span class="sd">        if False, do not use latex rendering.</span>
+<span class="sd">    quiet: boolean</span>
+<span class="sd">        If True, init_session will not print messages regarding its status;</span>
+<span class="sd">        if False, init_session will print messages regarding its status.</span>
+<span class="sd">    auto_symbols: boolean</span>
+<span class="sd">        If True, IPython will automatically create symbols for you.</span>
+<span class="sd">        If False, it will not.</span>
+<span class="sd">        The default is False.</span>
+<span class="sd">    auto_int_to_Integer: boolean</span>
+<span class="sd">        If True, IPython will automatically wrap int literals with Integer, so</span>
+<span class="sd">        that things like 1/2 give Rational(1, 2).</span>
+<span class="sd">        If False, it will not.</span>
+<span class="sd">        The default is False.</span>
+<span class="sd">    ipython: boolean or None</span>
+<span class="sd">        If True, printing will initialize for an IPython console;</span>
+<span class="sd">        if False, printing will initialize for a normal console;</span>
+<span class="sd">        The default is None, which automatically determines whether we are in</span>
+<span class="sd">        an ipython instance or not.</span>
+<span class="sd">    str_printer: function, optional, default=None</span>
+<span class="sd">        A custom string printer function. This should mimic</span>
+<span class="sd">        sympy.printing.sstrrepr().</span>
+<span class="sd">    pretty_printer: function, optional, default=None</span>
+<span class="sd">        A custom pretty printer. This should mimic sympy.printing.pretty().</span>
+<span class="sd">    latex_printer: function, optional, default=None</span>
+<span class="sd">        A custom LaTeX printer. This should mimic sympy.printing.latex()</span>
+<span class="sd">        This should mimic sympy.printing.latex().</span>
+<span class="sd">    argv: list of arguments for IPython</span>
+<span class="sd">        See sympy.bin.isympy for options that can be used to initialize IPython.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    sympy.interactive.printing.init_printing: for examples and the rest of the parameters.</span>
+
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .. import init_session, Symbol, sin, sqrt</span>
+<span class="sd">    &gt;&gt;&gt; sin(x) #doctest: +SKIP</span>
+<span class="sd">    NameError: name &#39;x&#39; is not defined</span>
+<span class="sd">    &gt;&gt;&gt; init_session() #doctest: +SKIP</span>
+<span class="sd">    &gt;&gt;&gt; sin(x) #doctest: +SKIP</span>
+<span class="sd">    sin(x)</span>
+<span class="sd">    &gt;&gt;&gt; sqrt(5) #doctest: +SKIP</span>
+<span class="sd">      ___</span>
+<span class="sd">    \\/ 5</span>
+<span class="sd">    &gt;&gt;&gt; init_session(pretty_print=False) #doctest: +SKIP</span>
+<span class="sd">    &gt;&gt;&gt; sqrt(5) #doctest: +SKIP</span>
+<span class="sd">    sqrt(5)</span>
+<span class="sd">    &gt;&gt;&gt; y + x + y**2 + x**2 #doctest: +SKIP</span>
+<span class="sd">    x**2 + x + y**2 + y</span>
+<span class="sd">    &gt;&gt;&gt; init_session(order=&#39;grlex&#39;) #doctest: +SKIP</span>
+<span class="sd">    &gt;&gt;&gt; y + x + y**2 + x**2 #doctest: +SKIP</span>
+<span class="sd">    x**2 + y**2 + x + y</span>
+<span class="sd">    &gt;&gt;&gt; init_session(order=&#39;grevlex&#39;) #doctest: +SKIP</span>
+<span class="sd">    &gt;&gt;&gt; y * x**2 + x * y**2 #doctest: +SKIP</span>
+<span class="sd">    x**2*y + x*y**2</span>
+<span class="sd">    &gt;&gt;&gt; init_session(order=&#39;old&#39;) #doctest: +SKIP</span>
+<span class="sd">    &gt;&gt;&gt; x**2 + y**2 + x + y #doctest: +SKIP</span>
+<span class="sd">    x + y + x**2 + y**2</span>
+<span class="sd">    &gt;&gt;&gt; theta = Symbol(&#39;theta&#39;) #doctest: +SKIP</span>
+<span class="sd">    &gt;&gt;&gt; theta #doctest: +SKIP</span>
+<span class="sd">    theta</span>
+<span class="sd">    &gt;&gt;&gt; init_session(use_unicode=True) #doctest: +SKIP</span>
+<span class="sd">    &gt;&gt;&gt; theta # doctest: +SKIP</span>
+<span class="sd">    \u03b8</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+
+    <span class="n">in_ipython</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="n">ipython</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">IPython</span>
+        <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ipython</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;IPython is not available on this system&quot;</span><span class="p">)</span>
+            <span class="n">ip</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">IPython</span> <span class="kn">import</span> <span class="n">get_ipython</span>
+                <span class="n">ip</span> <span class="o">=</span> <span class="n">get_ipython</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                <span class="n">ip</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">in_ipython</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ipython</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ipython</span> <span class="o">=</span> <span class="n">in_ipython</span>
+
+    <span class="k">if</span> <span class="n">ipython</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">ip</span> <span class="o">=</span> <span class="n">init_python_session</span><span class="p">()</span>
+        <span class="n">mainloop</span> <span class="o">=</span> <span class="n">ip</span><span class="o">.</span><span class="n">interact</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ip</span> <span class="o">=</span> <span class="n">init_ipython_session</span><span class="p">(</span><span class="n">argv</span><span class="o">=</span><span class="n">argv</span><span class="p">,</span> <span class="n">auto_symbols</span><span class="o">=</span><span class="n">auto_symbols</span><span class="p">,</span>
+            <span class="n">auto_int_to_Integer</span><span class="o">=</span><span class="n">auto_int_to_Integer</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">V</span><span class="p">(</span><span class="n">IPython</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="s1">&#39;0.11&#39;</span><span class="p">:</span>
+            <span class="c1"># runsource is gone, use run_cell instead, which doesn&#39;t</span>
+            <span class="c1"># take a symbol arg.  The second arg is `store_history`,</span>
+            <span class="c1"># and False means don&#39;t add the line to IPython&#39;s history.</span>
+            <span class="n">ip</span><span class="o">.</span><span class="n">runsource</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">src</span><span class="p">,</span> <span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;exec&#39;</span><span class="p">:</span> <span class="n">ip</span><span class="o">.</span><span class="n">run_cell</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+            <span class="c1">#Enable interactive plotting using pylab.</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ip</span><span class="o">.</span><span class="n">enable_pylab</span><span class="p">(</span><span class="n">import_all</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="c1"># Causes an import error if matplotlib is not installed.</span>
+                <span class="c1"># Causes other errors (depending on the backend) if there</span>
+                <span class="c1"># is no display, or if there is some problem in the</span>
+                <span class="c1"># backend, so we have a bare &quot;except Exception&quot; here</span>
+                <span class="k">pass</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">in_ipython</span><span class="p">:</span>
+            <span class="n">mainloop</span> <span class="o">=</span> <span class="n">ip</span><span class="o">.</span><span class="n">mainloop</span>
+
+    <span class="n">readline</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s2">&quot;readline&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">auto_symbols</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">ipython</span> <span class="ow">or</span> <span class="n">V</span><span class="p">(</span><span class="n">IPython</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span> <span class="o">&lt;</span> <span class="s1">&#39;0.11&#39;</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">readline</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;automatic construction of symbols is possible only in IPython 0.11 or above with readline support&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">auto_int_to_Integer</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">ipython</span> <span class="ow">or</span> <span class="n">V</span><span class="p">(</span><span class="n">IPython</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span> <span class="o">&lt;</span> <span class="s1">&#39;0.11&#39;</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;automatic int to Integer transformation is possible only in IPython 0.11 or above&quot;</span><span class="p">)</span>
+
+    <span class="n">_preexec_source</span> <span class="o">=</span> <span class="n">preexec_source</span>
+
+    <span class="n">ip</span><span class="o">.</span><span class="n">runsource</span><span class="p">(</span><span class="n">_preexec_source</span><span class="p">,</span> <span class="n">symbol</span><span class="o">=</span><span class="s1">&#39;exec&#39;</span><span class="p">)</span>
+    <span class="n">init_printing</span><span class="p">(</span><span class="n">pretty_print</span><span class="o">=</span><span class="n">pretty_print</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+                  <span class="n">use_unicode</span><span class="o">=</span><span class="n">use_unicode</span><span class="p">,</span> <span class="n">use_latex</span><span class="o">=</span><span class="n">use_latex</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="n">ip</span><span class="p">,</span>
+                  <span class="n">str_printer</span><span class="o">=</span><span class="n">str_printer</span><span class="p">,</span> <span class="n">pretty_printer</span><span class="o">=</span><span class="n">pretty_printer</span><span class="p">,</span>
+                  <span class="n">latex_printer</span><span class="o">=</span><span class="n">latex_printer</span><span class="p">)</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="n">_make_message</span><span class="p">(</span><span class="n">ipython</span><span class="p">,</span> <span class="n">quiet</span><span class="p">,</span> <span class="n">_preexec_source</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">in_ipython</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="n">mainloop</span><span class="p">()</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s1">&#39;Exiting ...&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+        <span class="kn">import</span> <span class="nn">atexit</span>
+        <span class="n">atexit</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exiting ...</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">))</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.interactive.session</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

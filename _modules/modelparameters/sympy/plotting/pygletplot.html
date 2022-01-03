@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.plotting.pygletplot &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.plotting.pygletplot</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.plotting.pygletplot</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Plotting module that can plot 2D and 3D functions</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">...utilities.decorator</span> <span class="kn">import</span> <span class="n">doctest_depends_on</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="nd">@doctest_depends_on</span><span class="p">(</span><span class="n">modules</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;pyglet&#39;</span><span class="p">,))</span>
+    <span class="k">def</span> <span class="nf">PygletPlot</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Plot Examples</span>
+<span class="sd">        =============</span>
+
+<span class="sd">        See examples/advanced/pyglet_plotting.py for many more examples.</span>
+
+
+<span class="sd">        &gt;&gt;&gt; from ..pygletplot import PygletPlot as Plot</span>
+<span class="sd">        &gt;&gt;&gt; from ... import symbols</span>
+<span class="sd">        &gt;&gt;&gt; from ...abc import x, y, z</span>
+
+<span class="sd">        &gt;&gt;&gt; Plot(x*y**3-y*x**3)</span>
+<span class="sd">        [0]: -x**3*y + x*y**3, &#39;mode=cartesian&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; p = Plot()</span>
+<span class="sd">        &gt;&gt;&gt; p[1] = x*y</span>
+<span class="sd">        &gt;&gt;&gt; p[1].color = z, (0.4,0.4,0.9), (0.9,0.4,0.4)</span>
+
+<span class="sd">        &gt;&gt;&gt; p = Plot()</span>
+<span class="sd">        &gt;&gt;&gt; p[1] =  x**2+y**2</span>
+<span class="sd">        &gt;&gt;&gt; p[2] = -x**2-y**2</span>
+
+
+<span class="sd">        Variable Intervals</span>
+<span class="sd">        ==================</span>
+
+<span class="sd">        The basic format is [var, min, max, steps], but the</span>
+<span class="sd">        syntax is flexible and arguments left out are taken</span>
+<span class="sd">        from the defaults for the current coordinate mode:</span>
+
+<span class="sd">        &gt;&gt;&gt; Plot(x**2) # implies [x,-5,5,100]</span>
+<span class="sd">        [0]: x**2, &#39;mode=cartesian&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; Plot(x**2, [], []) # [x,-1,1,40], [y,-1,1,40]</span>
+<span class="sd">        [0]: x**2, &#39;mode=cartesian&#39;</span>
+<span class="sd">        &gt;&gt;&gt; Plot(x**2-y**2, [100], [100]) # [x,-1,1,100], [y,-1,1,100]</span>
+<span class="sd">        [0]: x**2 - y**2, &#39;mode=cartesian&#39;</span>
+<span class="sd">        &gt;&gt;&gt; Plot(x**2, [x,-13,13,100])</span>
+<span class="sd">        [0]: x**2, &#39;mode=cartesian&#39;</span>
+<span class="sd">        &gt;&gt;&gt; Plot(x**2, [-13,13]) # [x,-13,13,100]</span>
+<span class="sd">        [0]: x**2, &#39;mode=cartesian&#39;</span>
+<span class="sd">        &gt;&gt;&gt; Plot(x**2, [x,-13,13]) # [x,-13,13,100]</span>
+<span class="sd">        [0]: x**2, &#39;mode=cartesian&#39;</span>
+<span class="sd">        &gt;&gt;&gt; Plot(1*x, [], [x], mode=&#39;cylindrical&#39;)</span>
+<span class="sd">        ... # [unbound_theta,0,2*Pi,40], [x,-1,1,20]</span>
+<span class="sd">        [0]: x, &#39;mode=cartesian&#39;</span>
+
+
+<span class="sd">        Coordinate Modes</span>
+<span class="sd">        ================</span>
+
+<span class="sd">        Plot supports several curvilinear coordinate modes, and</span>
+<span class="sd">        they independent for each plotted function. You can specify</span>
+<span class="sd">        a coordinate mode explicitly with the &#39;mode&#39; named argument,</span>
+<span class="sd">        but it can be automatically determined for Cartesian or</span>
+<span class="sd">        parametric plots, and therefore must only be specified for</span>
+<span class="sd">        polar, cylindrical, and spherical modes.</span>
+
+<span class="sd">        Specifically, Plot(function arguments) and Plot[n] =</span>
+<span class="sd">        (function arguments) will interpret your arguments as a</span>
+<span class="sd">        Cartesian plot if you provide one function and a parametric</span>
+<span class="sd">        plot if you provide two or three functions. Similarly, the</span>
+<span class="sd">        arguments will be interpreted as a curve if one variable is</span>
+<span class="sd">        used, and a surface if two are used.</span>
+
+<span class="sd">        Supported mode names by number of variables:</span>
+
+<span class="sd">        1: parametric, cartesian, polar</span>
+<span class="sd">        2: parametric, cartesian, cylindrical = polar, spherical</span>
+
+<span class="sd">        &gt;&gt;&gt; Plot(1, mode=&#39;spherical&#39;) # doctest: +SKIP</span>
+
+
+<span class="sd">        Calculator-like Interface</span>
+<span class="sd">        =========================</span>
+
+<span class="sd">        &gt;&gt;&gt; p = Plot(visible=False)</span>
+<span class="sd">        &gt;&gt;&gt; f = x**2</span>
+<span class="sd">        &gt;&gt;&gt; p[1] = f</span>
+<span class="sd">        &gt;&gt;&gt; p[2] = f.diff(x)</span>
+<span class="sd">        &gt;&gt;&gt; p[3] = f.diff(x).diff(x) # doctest: +SKIP</span>
+<span class="sd">        &gt;&gt;&gt; p # doctest: +SKIP</span>
+<span class="sd">        [1]: x**2, &#39;mode=cartesian&#39;</span>
+<span class="sd">        [2]: 2*x, &#39;mode=cartesian&#39;</span>
+<span class="sd">        [3]: 2, &#39;mode=cartesian&#39;</span>
+<span class="sd">        &gt;&gt;&gt; p.show()</span>
+<span class="sd">        &gt;&gt;&gt; p.clear()</span>
+<span class="sd">        &gt;&gt;&gt; p</span>
+<span class="sd">        &lt;blank plot&gt;</span>
+<span class="sd">        &gt;&gt;&gt; p[1] =  x**2+y**2</span>
+<span class="sd">        &gt;&gt;&gt; p[1].style = &#39;solid&#39;</span>
+<span class="sd">        &gt;&gt;&gt; p[2] = -x**2-y**2</span>
+<span class="sd">        &gt;&gt;&gt; p[2].style = &#39;wireframe&#39;</span>
+<span class="sd">        &gt;&gt;&gt; p[1].color = z, (0.4,0.4,0.9), (0.9,0.4,0.4)</span>
+<span class="sd">        &gt;&gt;&gt; p[1].style = &#39;both&#39;</span>
+<span class="sd">        &gt;&gt;&gt; p[2].style = &#39;both&#39;</span>
+<span class="sd">        &gt;&gt;&gt; p.close()</span>
+
+
+<span class="sd">        Plot Window Keyboard Controls</span>
+<span class="sd">        =============================</span>
+
+<span class="sd">        Screen Rotation:</span>
+<span class="sd">            X,Y axis      Arrow Keys, A,S,D,W, Numpad 4,6,8,2</span>
+<span class="sd">            Z axis        Q,E, Numpad 7,9</span>
+
+<span class="sd">        Model Rotation:</span>
+<span class="sd">            Z axis        Z,C, Numpad 1,3</span>
+
+<span class="sd">        Zoom:             R,F, PgUp,PgDn, Numpad +,-</span>
+
+<span class="sd">        Reset Camera:     X, Numpad 5</span>
+
+<span class="sd">        Camera Presets:</span>
+<span class="sd">            XY            F1</span>
+<span class="sd">            XZ            F2</span>
+<span class="sd">            YZ            F3</span>
+<span class="sd">            Perspective   F4</span>
+
+<span class="sd">        Sensitivity Modifier: SHIFT</span>
+
+<span class="sd">        Axes Toggle:</span>
+<span class="sd">            Visible       F5</span>
+<span class="sd">            Colors        F6</span>
+
+<span class="sd">        Close Window:     ESCAPE</span>
+
+<span class="sd">        =============================</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="kn">import</span> <span class="nn">plot</span>
+        <span class="k">return</span> <span class="n">plot</span><span class="o">.</span><span class="n">PygletPlot</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<div class="viewcode-block" id="PygletPlot"><a class="viewcode-back" href="../../../../modelparameters.sympy.plotting.pygletplot.html#modelparameters.sympy.plotting.pygletplot.PygletPlot">[docs]</a>    <span class="k">def</span> <span class="nf">PygletPlot</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">e</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.plotting.pygletplot</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

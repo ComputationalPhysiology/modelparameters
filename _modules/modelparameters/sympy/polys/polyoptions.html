@@ -1,0 +1,885 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.polys.polyoptions &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.polys.polyoptions</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.polys.polyoptions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Options manager for :class:`Poly` and public API functions. &quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Options&quot;</span><span class="p">]</span>
+
+<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">S</span><span class="p">,</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">sympify</span>
+<span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="n">string_types</span><span class="p">,</span> <span class="n">with_metaclass</span>
+<span class="kn">from</span> <span class="nn">..utilities</span> <span class="kn">import</span> <span class="n">numbered_symbols</span><span class="p">,</span> <span class="n">topological_sort</span><span class="p">,</span> <span class="n">public</span>
+<span class="kn">from</span> <span class="nn">..utilities.iterables</span> <span class="kn">import</span> <span class="n">has_dups</span>
+<span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="kn">import</span> <span class="n">GeneratorsError</span><span class="p">,</span> <span class="n">OptionError</span><span class="p">,</span> <span class="n">FlagError</span>
+
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">polys</span>
+
+<span class="kn">import</span> <span class="nn">re</span>
+
+
+<span class="k">class</span> <span class="nc">Option</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base class for all kinds of options.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">is_Flag</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">after</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">before</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">option</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">postprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">Flag</span><span class="p">(</span><span class="n">Option</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base class for all kinds of flags.&quot;&quot;&quot;</span>
+
+    <span class="n">is_Flag</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+<span class="k">class</span> <span class="nc">BooleanOption</span><span class="p">(</span><span class="n">Option</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An option that must have a boolean value or equivalent assigned.&quot;&quot;&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span>
+                <span class="s2">&quot;&#39;</span><span class="si">%s</span><span class="s2">&#39; must have a boolean value assigned, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">option</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+            <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">OptionType</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Base type for all options that does registers options.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nd">@property</span>
+        <span class="k">def</span> <span class="nf">getter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">option</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">default</span><span class="p">()</span>
+
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">Options</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">option</span><span class="p">,</span> <span class="n">getter</span><span class="p">)</span>
+        <span class="n">Options</span><span class="o">.</span><span class="n">__options__</span><span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">option</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span>
+
+
+<div class="viewcode-block" id="Options"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.polyoptions.Options">[docs]</a><span class="nd">@public</span>
+<span class="k">class</span> <span class="nc">Options</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Options manager for polynomial manipulation module.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .polyoptions import Options</span>
+<span class="sd">    &gt;&gt;&gt; from .polyoptions import build_options</span>
+
+<span class="sd">    &gt;&gt;&gt; from ..abc import x, y, z</span>
+
+<span class="sd">    &gt;&gt;&gt; Options((x, y, z), {&#39;domain&#39;: &#39;ZZ&#39;})</span>
+<span class="sd">    {&#39;auto&#39;: False, &#39;domain&#39;: ZZ, &#39;gens&#39;: (x, y, z)}</span>
+
+<span class="sd">    &gt;&gt;&gt; build_options((x, y, z), {&#39;domain&#39;: &#39;ZZ&#39;})</span>
+<span class="sd">    {&#39;auto&#39;: False, &#39;domain&#39;: ZZ, &#39;gens&#39;: (x, y, z)}</span>
+
+<span class="sd">    **Options**</span>
+
+<span class="sd">    * Expand --- boolean option</span>
+<span class="sd">    * Gens --- option</span>
+<span class="sd">    * Wrt --- option</span>
+<span class="sd">    * Sort --- option</span>
+<span class="sd">    * Order --- option</span>
+<span class="sd">    * Field --- boolean option</span>
+<span class="sd">    * Greedy --- boolean option</span>
+<span class="sd">    * Domain --- option</span>
+<span class="sd">    * Split --- boolean option</span>
+<span class="sd">    * Gaussian --- boolean option</span>
+<span class="sd">    * Extension --- option</span>
+<span class="sd">    * Modulus --- option</span>
+<span class="sd">    * Symmetric --- boolean option</span>
+<span class="sd">    * Strict --- boolean option</span>
+
+<span class="sd">    **Flags**</span>
+
+<span class="sd">    * Auto --- boolean flag</span>
+<span class="sd">    * Frac --- boolean flag</span>
+<span class="sd">    * Formal --- boolean flag</span>
+<span class="sd">    * Polys --- boolean flag</span>
+<span class="sd">    * Include --- boolean flag</span>
+<span class="sd">    * All --- boolean flag</span>
+<span class="sd">    * Gen --- flag</span>
+<span class="sd">    * Series --- boolean flag</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">__order__</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__options__</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gens</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="nb">dict</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">gens</span> <span class="ow">and</span> <span class="n">args</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;gens&quot;</span><span class="p">,</span> <span class="p">()):</span>
+            <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span><span class="s2">&quot;both &#39;*gens&#39; and keyword argument &#39;gens&#39; supplied&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">gens</span><span class="p">:</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+            <span class="n">args</span><span class="p">[</span><span class="s2">&quot;gens&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gens</span>
+
+        <span class="n">defaults</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;defaults&quot;</span><span class="p">,</span> <span class="p">{})</span>
+
+        <span class="k">def</span> <span class="nf">preprocess_options</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">option</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="bp">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__options__</span><span class="p">[</span><span class="n">option</span><span class="p">]</span>
+                <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="si">%s</span><span class="s2">&#39; is not a valid option&quot;</span> <span class="o">%</span> <span class="n">option</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">Flag</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">flags</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">option</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">flags</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">strict</span><span class="p">:</span>
+                            <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span>
+                                <span class="s2">&quot;&#39;</span><span class="si">%s</span><span class="s2">&#39; flag is not allowed in this context&quot;</span> <span class="o">%</span> <span class="n">option</span>
+                            <span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="p">[</span><span class="n">option</span><span class="p">]</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">preprocess</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="n">preprocess_options</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">dict</span><span class="p">(</span><span class="n">defaults</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">:</span>
+                <span class="k">del</span> <span class="n">defaults</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="bp">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__options__</span><span class="p">[</span><span class="n">option</span><span class="p">]</span>
+
+                    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">excludes</span><span class="p">:</span>
+                        <span class="k">del</span> <span class="n">defaults</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+                        <span class="k">break</span>
+
+        <span class="n">preprocess_options</span><span class="p">(</span><span class="n">defaults</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="bp">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__options__</span><span class="p">[</span><span class="n">option</span><span class="p">]</span>
+
+            <span class="k">for</span> <span class="n">require_option</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">requires</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">require_option</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span>
+                        <span class="s2">&quot;&#39;</span><span class="si">%s</span><span class="s2">&#39; option is only allowed together with &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span>
+                        <span class="o">%</span> <span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="n">require_option</span><span class="p">)</span>
+                    <span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">exclude_option</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">excludes</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">exclude_option</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span>
+                        <span class="s2">&quot;&#39;</span><span class="si">%s</span><span class="s2">&#39; option is not allowed together with &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span>
+                        <span class="o">%</span> <span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="n">exclude_option</span><span class="p">)</span>
+                    <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">option</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__order__</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__options__</span><span class="p">[</span><span class="n">option</span><span class="p">]</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_init_dependencies_order</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Resolve the order of options&#39; processing.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__order__</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">vertices</span><span class="p">,</span> <span class="n">edges</span> <span class="o">=</span> <span class="p">[],</span> <span class="nb">set</span><span class="p">([])</span>
+
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">option</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__options__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">vertices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+                <span class="k">for</span> <span class="n">_name</span> <span class="ow">in</span> <span class="n">option</span><span class="o">.</span><span class="n">after</span><span class="p">:</span>
+                    <span class="n">edges</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">_name</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+
+                <span class="k">for</span> <span class="n">_name</span> <span class="ow">in</span> <span class="n">option</span><span class="o">.</span><span class="n">before</span><span class="p">:</span>
+                    <span class="n">edges</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">name</span><span class="p">,</span> <span class="n">_name</span><span class="p">))</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">cls</span><span class="o">.</span><span class="n">__order__</span> <span class="o">=</span> <span class="n">topological_sort</span><span class="p">((</span><span class="n">vertices</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">edges</span><span class="p">)))</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;cycle detected in polys options framework&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Options.clone"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.polyoptions.Options.clone">[docs]</a>    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">updates</span><span class="o">=</span><span class="p">{}):</span>
+        <span class="sd">&quot;&quot;&quot;Clone ``self`` and update specified options.&quot;&quot;&quot;</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">option</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">obj</span><span class="p">[</span><span class="n">option</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">for</span> <span class="n">option</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">updates</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">obj</span><span class="p">[</span><span class="n">option</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">return</span> <span class="n">obj</span></div>
+
+    <span class="k">def</span> <span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">attr</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__options__</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">[</span><span class="n">attr</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">Options</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">option</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">option</span> <span class="o">!=</span> <span class="s2">&quot;gens&quot;</span><span class="p">:</span>
+                <span class="bp">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__options__</span><span class="p">[</span><span class="n">option</span><span class="p">]</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">Flag</span><span class="p">):</span>
+                    <span class="n">args</span><span class="p">[</span><span class="n">option</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="k">return</span> <span class="n">args</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">options</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">option</span><span class="p">,</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__options__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">Flag</span><span class="p">):</span>
+                <span class="n">options</span><span class="p">[</span><span class="n">option</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">options</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">flags</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">flags</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">option</span><span class="p">,</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__options__</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">Flag</span><span class="p">):</span>
+                <span class="n">flags</span><span class="p">[</span><span class="n">option</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">flags</span></div>
+
+
+<span class="k">class</span> <span class="nc">Expand</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">BooleanOption</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``expand`` option to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;expand&quot;</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="k">class</span> <span class="nc">Gens</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">Option</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``gens`` option to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;gens&quot;</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">()</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">gens</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="n">Basic</span><span class="p">):</span>
+            <span class="n">gens</span> <span class="o">=</span> <span class="p">(</span><span class="n">gens</span><span class="p">,)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">gens</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;__iter__&quot;</span><span class="p">):</span>
+            <span class="n">gens</span> <span class="o">=</span> <span class="n">gens</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">gens</span> <span class="o">==</span> <span class="p">(</span><span class="kc">None</span><span class="p">,):</span>
+            <span class="n">gens</span> <span class="o">=</span> <span class="p">()</span>
+        <span class="k">elif</span> <span class="n">has_dups</span><span class="p">(</span><span class="n">gens</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">GeneratorsError</span><span class="p">(</span><span class="s2">&quot;duplicated generators: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">gens</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">any</span><span class="p">(</span><span class="n">gen</span><span class="o">.</span><span class="n">is_commutative</span> <span class="ow">is</span> <span class="kc">False</span> <span class="k">for</span> <span class="n">gen</span> <span class="ow">in</span> <span class="n">gens</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">GeneratorsError</span><span class="p">(</span><span class="s2">&quot;non-commutative generators: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">gens</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Wrt</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">Option</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``wrt`` option to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;wrt&quot;</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">_re_split</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\s*,\s*|\s+&quot;</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">wrt</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">wrt</span><span class="p">,</span> <span class="n">Basic</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">wrt</span><span class="p">)]</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">wrt</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">wrt</span> <span class="o">=</span> <span class="n">wrt</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">wrt</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span><span class="s2">&quot;Bad input: missing parameter.&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">wrt</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">[]</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">gen</span> <span class="k">for</span> <span class="n">gen</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_re_split</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">wrt</span><span class="p">)]</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">wrt</span><span class="p">,</span> <span class="s2">&quot;__getitem__&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">wrt</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span><span class="s2">&quot;invalid argument for &#39;wrt&#39; option&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Sort</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">Option</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``sort`` option to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;sort&quot;</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">sort</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sort</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">gen</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">gen</span> <span class="ow">in</span> <span class="n">sort</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;&gt;&quot;</span><span class="p">)]</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sort</span><span class="p">,</span> <span class="s2">&quot;__getitem__&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">sort</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span><span class="s2">&quot;invalid argument for &#39;sort&#39; option&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Order</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">Option</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``order`` option to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;order&quot;</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">polys</span><span class="o">.</span><span class="n">orderings</span><span class="o">.</span><span class="n">lex</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">polys</span><span class="o">.</span><span class="n">orderings</span><span class="o">.</span><span class="n">monomial_key</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Field</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">BooleanOption</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``field`` option to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;field&quot;</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">,</span> <span class="s2">&quot;split&quot;</span><span class="p">,</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">Greedy</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">BooleanOption</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``greedy`` option to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;greedy&quot;</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">,</span> <span class="s2">&quot;split&quot;</span><span class="p">,</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="s2">&quot;extension&quot;</span><span class="p">,</span> <span class="s2">&quot;modulus&quot;</span><span class="p">,</span> <span class="s2">&quot;symmetric&quot;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">Composite</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">BooleanOption</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``composite`` option to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;composite&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">,</span> <span class="s2">&quot;split&quot;</span><span class="p">,</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="s2">&quot;extension&quot;</span><span class="p">,</span> <span class="s2">&quot;modulus&quot;</span><span class="p">,</span> <span class="s2">&quot;symmetric&quot;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">Domain</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">Option</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``domain`` option to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;domain&quot;</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;field&quot;</span><span class="p">,</span> <span class="s2">&quot;greedy&quot;</span><span class="p">,</span> <span class="s2">&quot;split&quot;</span><span class="p">,</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="s2">&quot;extension&quot;</span><span class="p">]</span>
+
+    <span class="n">after</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;gens&quot;</span><span class="p">]</span>
+
+    <span class="n">_re_realfield</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(R|RR)(_(\d+))?$&quot;</span><span class="p">)</span>
+    <span class="n">_re_complexfield</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(C|CC)(_(\d+))?$&quot;</span><span class="p">)</span>
+    <span class="n">_re_finitefield</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(FF|GF)\((\d+)\)$&quot;</span><span class="p">)</span>
+    <span class="n">_re_polynomial</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(Z|ZZ|Q|QQ)\[(.+)\]$&quot;</span><span class="p">)</span>
+    <span class="n">_re_fraction</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(Z|ZZ|Q|QQ)\((.+)\)$&quot;</span><span class="p">)</span>
+    <span class="n">_re_algebraic</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^(Q|QQ)\&lt;(.+)\&gt;$&quot;</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">Domain</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">domain</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="s2">&quot;to_domain&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">domain</span><span class="o">.</span><span class="n">to_domain</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">domain</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">domain</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="s2">&quot;ZZ&quot;</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">ZZ</span>
+
+            <span class="k">if</span> <span class="n">domain</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;QQ&quot;</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">QQ</span>
+
+            <span class="k">if</span> <span class="n">domain</span> <span class="o">==</span> <span class="s2">&quot;EX&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">EX</span>
+
+            <span class="n">r</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_re_realfield</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">prec</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="n">prec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">RR</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">RealField</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">prec</span><span class="p">))</span>
+
+            <span class="n">r</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_re_complexfield</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">prec</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="n">prec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">CC</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">ComplexField</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">prec</span><span class="p">))</span>
+
+            <span class="n">r</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_re_finitefield</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">FF</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">groups</span><span class="p">()[</span><span class="mi">1</span><span class="p">]))</span>
+
+            <span class="n">r</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_re_polynomial</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">ground</span><span class="p">,</span> <span class="n">gens</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+
+                <span class="n">gens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">sympify</span><span class="p">,</span> <span class="n">gens</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)))</span>
+
+                <span class="k">if</span> <span class="n">ground</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="s2">&quot;ZZ&quot;</span><span class="p">]:</span>
+                    <span class="k">return</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">ZZ</span><span class="o">.</span><span class="n">poly_ring</span><span class="p">(</span><span class="o">*</span><span class="n">gens</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">QQ</span><span class="o">.</span><span class="n">poly_ring</span><span class="p">(</span><span class="o">*</span><span class="n">gens</span><span class="p">)</span>
+
+            <span class="n">r</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_re_fraction</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">ground</span><span class="p">,</span> <span class="n">gens</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+
+                <span class="n">gens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">sympify</span><span class="p">,</span> <span class="n">gens</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)))</span>
+
+                <span class="k">if</span> <span class="n">ground</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="s2">&quot;ZZ&quot;</span><span class="p">]:</span>
+                    <span class="k">return</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">ZZ</span><span class="o">.</span><span class="n">frac_field</span><span class="p">(</span><span class="o">*</span><span class="n">gens</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">QQ</span><span class="o">.</span><span class="n">frac_field</span><span class="p">(</span><span class="o">*</span><span class="n">gens</span><span class="p">)</span>
+
+            <span class="n">r</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_re_algebraic</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">domain</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">gens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">sympify</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">groups</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)))</span>
+                <span class="k">return</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">QQ</span><span class="o">.</span><span class="n">algebraic_field</span><span class="p">(</span><span class="o">*</span><span class="n">gens</span><span class="p">)</span>
+
+        <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span><span class="s2">&quot;expected a valid domain specification, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">domain</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">postprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="s2">&quot;gens&quot;</span> <span class="ow">in</span> <span class="n">options</span>
+            <span class="ow">and</span> <span class="s2">&quot;domain&quot;</span> <span class="ow">in</span> <span class="n">options</span>
+            <span class="ow">and</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">is_Composite</span>
+            <span class="ow">and</span> <span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">symbols</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;gens&quot;</span><span class="p">]))</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="n">GeneratorsError</span><span class="p">(</span><span class="s2">&quot;ground domain and generators interfere together&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span>
+            <span class="p">(</span><span class="s2">&quot;gens&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;gens&quot;</span><span class="p">])</span>
+            <span class="ow">and</span> <span class="s2">&quot;domain&quot;</span> <span class="ow">in</span> <span class="n">options</span>
+            <span class="ow">and</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">EX</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="n">GeneratorsError</span><span class="p">(</span>
+                <span class="s2">&quot;you have to provide generators because EX domain was requested&quot;</span>
+            <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Split</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">BooleanOption</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``split`` option to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;split&quot;</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;field&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;greedy&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;domain&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;gaussian&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;extension&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;modulus&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;symmetric&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">postprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">&quot;split&quot;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;&#39;split&#39; option is not implemented yet&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Gaussian</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">BooleanOption</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``gaussian`` option to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;gaussian&quot;</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">&quot;field&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;greedy&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;domain&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;split&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;extension&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;modulus&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;symmetric&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">postprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">&quot;gaussian&quot;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">and</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;gaussian&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">S</span><span class="o">.</span><span class="n">ImaginaryUnit</span><span class="p">])</span>
+            <span class="n">Extension</span><span class="o">.</span><span class="n">postprocess</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Extension</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">Option</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``extension`` option to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;extension&quot;</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;greedy&quot;</span><span class="p">,</span> <span class="s2">&quot;domain&quot;</span><span class="p">,</span> <span class="s2">&quot;split&quot;</span><span class="p">,</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="s2">&quot;modulus&quot;</span><span class="p">,</span> <span class="s2">&quot;symmetric&quot;</span><span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">extension</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">extension</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">extension</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">extension</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span><span class="s2">&quot;&#39;False&#39; is an invalid argument for &#39;extension&#39;&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">extension</span><span class="p">,</span> <span class="s2">&quot;__iter__&quot;</span><span class="p">):</span>
+                <span class="n">extension</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">extension</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">extension</span><span class="p">:</span>
+                    <span class="n">extension</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">extension</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">extension</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">extension</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">postprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">&quot;extension&quot;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">and</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension&quot;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">options</span><span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">QQ</span><span class="o">.</span><span class="n">algebraic_field</span><span class="p">(</span><span class="o">*</span><span class="n">options</span><span class="p">[</span><span class="s2">&quot;extension&quot;</span><span class="p">])</span>
+
+
+<span class="k">class</span> <span class="nc">Modulus</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">Option</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``modulus`` option to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;modulus&quot;</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;greedy&quot;</span><span class="p">,</span> <span class="s2">&quot;split&quot;</span><span class="p">,</span> <span class="s2">&quot;domain&quot;</span><span class="p">,</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="s2">&quot;extension&quot;</span><span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">modulus</span><span class="p">):</span>
+        <span class="n">modulus</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">modulus</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">modulus</span><span class="o">.</span><span class="n">is_Integer</span> <span class="ow">and</span> <span class="n">modulus</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">modulus</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span><span class="s2">&quot;&#39;modulus&#39; must a positive integer, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">modulus</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">postprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s2">&quot;modulus&quot;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+            <span class="n">modulus</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;modulus&quot;</span><span class="p">]</span>
+            <span class="n">symmetric</span> <span class="o">=</span> <span class="n">options</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;symmetric&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="n">options</span><span class="p">[</span><span class="s2">&quot;domain&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">polys</span><span class="o">.</span><span class="n">domains</span><span class="o">.</span><span class="n">FF</span><span class="p">(</span><span class="n">modulus</span><span class="p">,</span> <span class="n">symmetric</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Symmetric</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">BooleanOption</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``symmetric`` option to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;symmetric&quot;</span>
+
+    <span class="n">requires</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;modulus&quot;</span><span class="p">]</span>
+    <span class="n">excludes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;greedy&quot;</span><span class="p">,</span> <span class="s2">&quot;domain&quot;</span><span class="p">,</span> <span class="s2">&quot;split&quot;</span><span class="p">,</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">,</span> <span class="s2">&quot;extension&quot;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">Strict</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">BooleanOption</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``strict`` option to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;strict&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+
+<span class="k">class</span> <span class="nc">Auto</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">BooleanOption</span><span class="p">,</span> <span class="n">Flag</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``auto`` flag to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span>
+
+    <span class="n">after</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;field&quot;</span><span class="p">,</span> <span class="s2">&quot;domain&quot;</span><span class="p">,</span> <span class="s2">&quot;extension&quot;</span><span class="p">,</span> <span class="s2">&quot;gaussian&quot;</span><span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">postprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s2">&quot;domain&quot;</span> <span class="ow">in</span> <span class="n">options</span> <span class="ow">or</span> <span class="s2">&quot;field&quot;</span> <span class="ow">in</span> <span class="n">options</span><span class="p">)</span> <span class="ow">and</span> <span class="s2">&quot;auto&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+            <span class="n">options</span><span class="p">[</span><span class="s2">&quot;auto&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<span class="k">class</span> <span class="nc">Frac</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">BooleanOption</span><span class="p">,</span> <span class="n">Flag</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``auto`` option to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;frac&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">class</span> <span class="nc">Formal</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">BooleanOption</span><span class="p">,</span> <span class="n">Flag</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``formal`` flag to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;formal&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">class</span> <span class="nc">Polys</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">BooleanOption</span><span class="p">,</span> <span class="n">Flag</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``polys`` flag to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;polys&quot;</span>
+
+
+<span class="k">class</span> <span class="nc">Include</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">BooleanOption</span><span class="p">,</span> <span class="n">Flag</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``include`` flag to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;include&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">class</span> <span class="nc">All</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">BooleanOption</span><span class="p">,</span> <span class="n">Flag</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``all`` flag to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">class</span> <span class="nc">Gen</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">Flag</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``gen`` flag to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;gen&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">gen</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="p">(</span><span class="n">Basic</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="n">gen</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span><span class="s2">&quot;invalid argument for &#39;gen&#39; option&quot;</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Series</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">BooleanOption</span><span class="p">,</span> <span class="n">Flag</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``series`` flag to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;series&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+
+<span class="k">class</span> <span class="nc">Symbols</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">Flag</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``symbols`` flag to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;symbols&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">numbered_symbols</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">symbols</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="s2">&quot;__iter__&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span>
+                <span class="s2">&quot;expected an iterator or iterable container, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">symbols</span>
+            <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Method</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">OptionType</span><span class="p">,</span> <span class="n">Flag</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;``method`` flag to polynomial manipulation functions.&quot;&quot;&quot;</span>
+
+    <span class="n">option</span> <span class="o">=</span> <span class="s2">&quot;method&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">method</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span><span class="s2">&quot;expected a string, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">method</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">build_options</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct options from keyword arguments or ... options.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">args</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">gens</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="p">(),</span> <span class="n">gens</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="s2">&quot;opt&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">args</span> <span class="ow">or</span> <span class="n">gens</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Options</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="s2">&quot;opt&quot;</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">allowed_flags</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">flags</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Allow specified flags to be used in the given context.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .polyoptions import allowed_flags</span>
+<span class="sd">    &gt;&gt;&gt; from .domains import ZZ</span>
+
+<span class="sd">    &gt;&gt;&gt; allowed_flags({&#39;domain&#39;: ZZ}, [])</span>
+
+<span class="sd">    &gt;&gt;&gt; allowed_flags({&#39;domain&#39;: ZZ, &#39;frac&#39;: True}, [])</span>
+<span class="sd">    Traceback (most recent call last):</span>
+<span class="sd">    ...</span>
+<span class="sd">    FlagError: &#39;frac&#39; flag is not allowed in this context</span>
+
+<span class="sd">    &gt;&gt;&gt; allowed_flags({&#39;domain&#39;: ZZ, &#39;frac&#39;: True}, [&#39;frac&#39;])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">flags</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">flags</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Options</span><span class="o">.</span><span class="n">__options__</span><span class="p">[</span><span class="n">arg</span><span class="p">]</span><span class="o">.</span><span class="n">is_Flag</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">flags</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">FlagError</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="si">%s</span><span class="s2">&#39; flag is not allowed in this context&quot;</span> <span class="o">%</span> <span class="n">arg</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">OptionError</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="si">%s</span><span class="s2">&#39; is not a valid option&quot;</span> <span class="o">%</span> <span class="n">arg</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">set_defaults</span><span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="o">**</span><span class="n">defaults</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Update options with default values.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="s2">&quot;defaults&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">options</span><span class="p">:</span>
+        <span class="n">options</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+        <span class="n">options</span><span class="p">[</span><span class="s2">&quot;defaults&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaults</span>
+
+    <span class="k">return</span> <span class="n">options</span>
+
+
+<span class="n">Options</span><span class="o">.</span><span class="n">_init_dependencies_order</span><span class="p">()</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.polys.polyoptions</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

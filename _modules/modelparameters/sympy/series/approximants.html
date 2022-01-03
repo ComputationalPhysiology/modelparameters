@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.series.approximants &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.series.approximants</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.series.approximants</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..utilities</span> <span class="kn">import</span> <span class="n">public</span>
+
+<span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="nb">range</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Integer</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">Symbol</span>
+
+<div class="viewcode-block" id="approximants"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.approximants.approximants">[docs]</a><span class="nd">@public</span>
+<span class="k">def</span> <span class="nf">approximants</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">),</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return a generator for consecutive Pade approximants for a series.</span>
+<span class="sd">    It can also be used for computing the rational generating function of a</span>
+<span class="sd">    series when possible, since the last approximant returned by the generator</span>
+<span class="sd">    will be the generating function (if any).</span>
+
+<span class="sd">    The input list can contain more complex expressions than integer or rational</span>
+<span class="sd">    numbers; symbols may also be involved in the computation. An example below</span>
+<span class="sd">    show how to compute the generating function of the whole Pascal triangle.</span>
+
+<span class="sd">    The generator can be asked to apply the sympy.simplify function on each</span>
+<span class="sd">    generated term, which will make the computation slower; however it may be</span>
+<span class="sd">    useful when symbols are involved in the expressions.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from ..series import approximants</span>
+<span class="sd">    &gt;&gt;&gt; from .. import lucas, fibonacci, symbols, binomial</span>
+<span class="sd">    &gt;&gt;&gt; g = [lucas(k) for k in range(16)]</span>
+<span class="sd">    &gt;&gt;&gt; [e for e in approximants(g)]</span>
+<span class="sd">    [2, -4/(x - 2), (5*x - 2)/(3*x - 1), (x - 2)/(x**2 + x - 1)]</span>
+
+<span class="sd">    &gt;&gt;&gt; h = [fibonacci(k) for k in range(16)]</span>
+<span class="sd">    &gt;&gt;&gt; [e for e in approximants(h)]</span>
+<span class="sd">    [x, -x/(x - 1), (x**2 - x)/(2*x - 1), -x/(x**2 + x - 1)]</span>
+
+<span class="sd">    &gt;&gt;&gt; x, t = symbols(&quot;x,t&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; p=[sum(binomial(k,i)*x**i for i in range(k+1)) for k in range(16)]</span>
+<span class="sd">    &gt;&gt;&gt; y = approximants(p, t)</span>
+<span class="sd">    &gt;&gt;&gt; for k in range(3): print(next(y))</span>
+<span class="sd">    1</span>
+<span class="sd">    (x + 1)/((-x - 1)*(t*(x + 1) + (x + 1)/(-x - 1)))</span>
+<span class="sd">    nan</span>
+
+<span class="sd">    &gt;&gt;&gt; y = approximants(p, t, simplify=True)</span>
+<span class="sd">    &gt;&gt;&gt; for k in range(3): print(next(y))</span>
+<span class="sd">    1</span>
+<span class="sd">    -1/(t*(x + 1) - 1)</span>
+<span class="sd">    nan</span>
+
+<span class="sd">    See also</span>
+<span class="sd">    ========</span>
+<span class="sd">    See function sympy.concrete.guess.guess_generating_function_rational and</span>
+<span class="sd">    function mpmath.pade</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">p1</span><span class="p">,</span> <span class="n">q1</span> <span class="o">=</span> <span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)],</span> <span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span>
+    <span class="n">p2</span><span class="p">,</span> <span class="n">q2</span> <span class="o">=</span> <span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="mi">0</span><span class="p">)],</span> <span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">l</span><span class="p">[</span><span class="n">b</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">b</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+                <span class="k">return</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="p">[</span><span class="n">Integer</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">l</span><span class="p">[</span><span class="n">b</span><span class="p">]]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">b</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+                <span class="n">s</span> <span class="o">-=</span> <span class="n">l</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">m</span><span class="p">[</span><span class="n">b</span><span class="o">-</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span><span class="o">/</span><span class="n">l</span><span class="p">[</span><span class="n">b</span><span class="p">])</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">m</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p2</span><span class="p">),</span> <span class="n">b</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">p1</span><span class="p">))</span>
+        <span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">q2</span><span class="p">),</span> <span class="n">b</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">q1</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p2</span><span class="p">)):</span>
+            <span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">p2</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">b</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">p1</span><span class="p">)):</span>
+            <span class="n">p</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">p1</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="n">b</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">q2</span><span class="p">)):</span>
+            <span class="n">q</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="n">q2</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">b</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">q1</span><span class="p">)):</span>
+            <span class="n">q</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+=</span> <span class="n">q1</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="n">b</span><span class="p">]</span>
+        <span class="k">while</span> <span class="n">p</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">q</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="n">q</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p</span>
+        <span class="n">q1</span><span class="p">,</span> <span class="n">q2</span> <span class="o">=</span> <span class="n">q2</span><span class="p">,</span> <span class="n">q</span>
+
+        <span class="c1"># yield result</span>
+        <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">denom</span><span class="p">,</span> <span class="n">lcm</span><span class="p">,</span> <span class="n">simplify</span> <span class="k">as</span> <span class="n">simp</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">p</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">lcm</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">denom</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">q</span><span class="p">:</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">lcm</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">denom</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="p">(</span> <span class="nb">sum</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">e</span><span class="o">*</span><span class="n">X</span><span class="o">**</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+              <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">e</span><span class="o">*</span><span class="n">X</span><span class="o">**</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">q</span><span class="p">))</span> <span class="p">)</span>
+        <span class="k">if</span> <span class="n">simplify</span><span class="p">:</span> <span class="k">yield</span><span class="p">(</span><span class="n">simp</span><span class="p">(</span><span class="n">out</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span> <span class="k">yield</span> <span class="n">out</span>
+    <span class="k">return</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.series.approximants</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

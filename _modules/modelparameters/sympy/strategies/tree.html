@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.strategies.tree &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.strategies.tree</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.strategies.tree</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">..strategies</span> <span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">minimize</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">branch</span>
+<span class="kn">from</span> <span class="nn">.branch</span> <span class="kn">import</span> <span class="n">yieldify</span>
+
+<span class="n">identity</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span>
+
+
+<div class="viewcode-block" id="treeapply"><a class="viewcode-back" href="../../../../modelparameters.sympy.strategies.html#modelparameters.sympy.strategies.tree.treeapply">[docs]</a><span class="k">def</span> <span class="nf">treeapply</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">join</span><span class="p">,</span> <span class="n">leaf</span><span class="o">=</span><span class="n">identity</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Apply functions onto recursive containers (tree)</span>
+
+<span class="sd">    join - a dictionary mapping container types to functions</span>
+<span class="sd">      e.g. ``{list: minimize, tuple: chain}``</span>
+
+<span class="sd">    Keys are containers/iterables.  Values are functions [a] -&gt; a.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .tree import treeapply</span>
+<span class="sd">    &gt;&gt;&gt; tree = [(3, 2), (4, 1)]</span>
+<span class="sd">    &gt;&gt;&gt; treeapply(tree, {list: max, tuple: min})</span>
+<span class="sd">    2</span>
+
+<span class="sd">    &gt;&gt;&gt; add = lambda *args: sum(args)</span>
+<span class="sd">    &gt;&gt;&gt; def mul(*args):</span>
+<span class="sd">    ...     total = 1</span>
+<span class="sd">    ...     for arg in args:</span>
+<span class="sd">    ...         total *= arg</span>
+<span class="sd">    ...     return total</span>
+<span class="sd">    &gt;&gt;&gt; treeapply(tree, {list: mul, tuple: add})</span>
+<span class="sd">    25</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">typ</span> <span class="ow">in</span> <span class="n">join</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">typ</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">join</span><span class="p">[</span><span class="n">typ</span><span class="p">](</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="n">partial</span><span class="p">(</span><span class="n">treeapply</span><span class="p">,</span> <span class="n">join</span><span class="o">=</span><span class="n">join</span><span class="p">,</span> <span class="n">leaf</span><span class="o">=</span><span class="n">leaf</span><span class="p">),</span> <span class="n">tree</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">leaf</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="greedy"><a class="viewcode-back" href="../../../../modelparameters.sympy.strategies.html#modelparameters.sympy.strategies.tree.greedy">[docs]</a><span class="k">def</span> <span class="nf">greedy</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">objective</span><span class="o">=</span><span class="n">identity</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Execute a strategic tree.  Select alternatives greedily</span>
+
+<span class="sd">    Trees</span>
+<span class="sd">    -----</span>
+
+<span class="sd">    Nodes in a tree can be either</span>
+
+<span class="sd">    function - a leaf</span>
+<span class="sd">    list     - a selection among operations</span>
+<span class="sd">    tuple    - a sequence of chained operations</span>
+
+<span class="sd">    Textual examples</span>
+<span class="sd">    ----------------</span>
+
+<span class="sd">    Text: Run f, then run g, e.g. ``lambda x: g(f(x))``</span>
+<span class="sd">    Code: ``(f, g)``</span>
+
+<span class="sd">    Text: Run either f or g, whichever minimizes the objective</span>
+<span class="sd">    Code: ``[f, g]``</span>
+
+<span class="sd">    Textx: Run either f or g, whichever is better, then run h</span>
+<span class="sd">    Code: ``([f, g], h)``</span>
+
+<span class="sd">    Text: Either expand then simplify or try factor then foosimp. Finally print</span>
+<span class="sd">    Code: ``([(expand, simplify), (factor, foosimp)], print)``</span>
+
+<span class="sd">    Objective</span>
+<span class="sd">    ---------</span>
+
+<span class="sd">    &quot;Better&quot; is determined by the objective keyword.  This function makes</span>
+<span class="sd">    choices to minimize the objective.  It defaults to the identity.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .tree import greedy</span>
+<span class="sd">    &gt;&gt;&gt; inc    = lambda x: x + 1</span>
+<span class="sd">    &gt;&gt;&gt; dec    = lambda x: x - 1</span>
+<span class="sd">    &gt;&gt;&gt; double = lambda x: 2*x</span>
+
+<span class="sd">    &gt;&gt;&gt; tree = [inc, (dec, double)] # either inc or dec-then-double</span>
+<span class="sd">    &gt;&gt;&gt; fn = greedy(tree)</span>
+<span class="sd">    &gt;&gt;&gt; fn(4)  # lowest value comes from the inc</span>
+<span class="sd">    5</span>
+<span class="sd">    &gt;&gt;&gt; fn(1)  # lowest value comes from dec then double</span>
+<span class="sd">    0</span>
+
+<span class="sd">    This function selects between options in a tuple.  The result is chosen that</span>
+<span class="sd">    minimizes the objective function.</span>
+
+<span class="sd">    &gt;&gt;&gt; fn = greedy(tree, objective=lambda x: -x)  # maximize</span>
+<span class="sd">    &gt;&gt;&gt; fn(4)  # highest value comes from the dec then double</span>
+<span class="sd">    6</span>
+<span class="sd">    &gt;&gt;&gt; fn(1)  # highest value comes from the inc</span>
+<span class="sd">    2</span>
+
+<span class="sd">    Greediness</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    This is a greedy algorithm.  In the example:</span>
+
+<span class="sd">        ([a, b], c)  # do either a or b, then do c</span>
+
+<span class="sd">    the choice between running ``a`` or ``b`` is made without foresight to c</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">optimize</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">minimize</span><span class="p">,</span> <span class="n">objective</span><span class="o">=</span><span class="n">objective</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">treeapply</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="p">{</span><span class="nb">list</span><span class="p">:</span> <span class="n">optimize</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">:</span> <span class="n">chain</span><span class="p">},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="allresults"><a class="viewcode-back" href="../../../../modelparameters.sympy.strategies.html#modelparameters.sympy.strategies.tree.allresults">[docs]</a><span class="k">def</span> <span class="nf">allresults</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">leaf</span><span class="o">=</span><span class="n">yieldify</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Execute a strategic tree.  Return all possibilities.</span>
+
+<span class="sd">    Returns a lazy iterator of all possible results</span>
+
+<span class="sd">    Exhaustiveness</span>
+<span class="sd">    --------------</span>
+
+<span class="sd">    This is an exhaustive algorithm.  In the example</span>
+
+<span class="sd">        ([a, b], [c, d])</span>
+
+<span class="sd">    All of the results from</span>
+
+<span class="sd">        (a, c), (b, c), (a, d), (b, d)</span>
+
+<span class="sd">    are returned.  This can lead to combinatorial blowup.</span>
+
+<span class="sd">    See sympy.strategies.greedy for details on input</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">treeapply</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="p">{</span><span class="nb">list</span><span class="p">:</span> <span class="n">branch</span><span class="o">.</span><span class="n">multiplex</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">:</span> <span class="n">branch</span><span class="o">.</span><span class="n">chain</span><span class="p">},</span> <span class="n">leaf</span><span class="o">=</span><span class="n">leaf</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="brute"><a class="viewcode-back" href="../../../../modelparameters.sympy.strategies.html#modelparameters.sympy.strategies.tree.brute">[docs]</a><span class="k">def</span> <span class="nf">brute</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">objective</span><span class="o">=</span><span class="n">identity</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">expr</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">allresults</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)(</span><span class="n">expr</span><span class="p">)),</span> <span class="n">key</span><span class="o">=</span><span class="n">objective</span><span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.strategies.tree</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

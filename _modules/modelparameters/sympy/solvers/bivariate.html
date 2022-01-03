@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.solvers.bivariate &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.solvers.bivariate</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.solvers.bivariate</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..core.add</span> <span class="kn">import</span> <span class="n">Add</span>
+<span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="n">ordered</span><span class="p">,</span> <span class="nb">range</span>
+<span class="kn">from</span> <span class="nn">..core.function</span> <span class="kn">import</span> <span class="n">expand_log</span>
+<span class="kn">from</span> <span class="nn">..core.power</span> <span class="kn">import</span> <span class="n">Pow</span>
+<span class="kn">from</span> <span class="nn">..core.singleton</span> <span class="kn">import</span> <span class="n">S</span>
+<span class="kn">from</span> <span class="nn">..core.symbol</span> <span class="kn">import</span> <span class="n">Dummy</span>
+<span class="kn">from</span> <span class="nn">..functions.elementary.exponential</span> <span class="kn">import</span> <span class="p">(</span><span class="n">LambertW</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">log</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">..functions.elementary.miscellaneous</span> <span class="kn">import</span> <span class="n">root</span>
+<span class="kn">from</span> <span class="nn">..polys.polytools</span> <span class="kn">import</span> <span class="n">Poly</span><span class="p">,</span> <span class="n">factor</span>
+<span class="kn">from</span> <span class="nn">..core.function</span> <span class="kn">import</span> <span class="n">_mexpand</span>
+<span class="kn">from</span> <span class="nn">..simplify.simplify</span> <span class="kn">import</span> <span class="n">separatevars</span>
+<span class="kn">from</span> <span class="nn">..simplify.radsimp</span> <span class="kn">import</span> <span class="n">collect</span>
+<span class="kn">from</span> <span class="nn">.solvers</span> <span class="kn">import</span> <span class="n">solve</span><span class="p">,</span> <span class="n">_invert</span>
+
+
+<span class="k">def</span> <span class="nf">_filtered_gens</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;process the generators of ``poly``, returning the set of generators that</span>
+<span class="sd">    have ``symbol``.  If there are two generators that are inverses of each other,</span>
+<span class="sd">    prefer the one that has no denominator.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .bivariate import _filtered_gens</span>
+<span class="sd">    &gt;&gt;&gt; from .. import Poly, exp</span>
+<span class="sd">    &gt;&gt;&gt; from ..abc import x</span>
+<span class="sd">    &gt;&gt;&gt; _filtered_gens(Poly(x + 1/x + exp(x)), x)</span>
+<span class="sd">    {x, exp(x)}</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">gens</span> <span class="o">=</span> <span class="p">{</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">poly</span><span class="o">.</span><span class="n">gens</span> <span class="k">if</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">gens</span><span class="p">):</span>
+        <span class="n">ag</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">g</span>
+        <span class="k">if</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">gens</span> <span class="ow">and</span> <span class="n">ag</span> <span class="ow">in</span> <span class="n">gens</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ag</span><span class="o">.</span><span class="n">as_numer_denom</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">:</span>
+                <span class="n">g</span> <span class="o">=</span> <span class="n">ag</span>
+            <span class="n">gens</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">gens</span>
+
+
+<span class="k">def</span> <span class="nf">_mostfunc</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the term in lhs which contains the most of the</span>
+<span class="sd">    func-type things e.g. log(log(x)) wins over log(x) if both terms appear.</span>
+
+<span class="sd">    ``func`` can be a function (exp, log, etc...) or any other SymPy object,</span>
+<span class="sd">    like Pow.</span>
+
+<span class="sd">    If ``X`` is not ``None``, then the function returns the term composed with the</span>
+<span class="sd">    most ``func`` having the specified variable.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .bivariate import _mostfunc</span>
+<span class="sd">    &gt;&gt;&gt; from ..functions.elementary.exponential import exp</span>
+<span class="sd">    &gt;&gt;&gt; from ..utilities.pytest import raises</span>
+<span class="sd">    &gt;&gt;&gt; from ..abc import x, y</span>
+<span class="sd">    &gt;&gt;&gt; _mostfunc(exp(x) + exp(exp(x) + 2), exp)</span>
+<span class="sd">    exp(exp(x) + 2)</span>
+<span class="sd">    &gt;&gt;&gt; _mostfunc(exp(x) + exp(exp(y) + 2), exp)</span>
+<span class="sd">    exp(exp(y) + 2)</span>
+<span class="sd">    &gt;&gt;&gt; _mostfunc(exp(x) + exp(exp(y) + 2), exp, x)</span>
+<span class="sd">    exp(x)</span>
+<span class="sd">    &gt;&gt;&gt; _mostfunc(x, exp, x) is None</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; _mostfunc(exp(x) + exp(x*y), exp, x)</span>
+<span class="sd">    exp(x)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fterms</span> <span class="o">=</span> <span class="p">[</span><span class="n">tmp</span> <span class="k">for</span> <span class="n">tmp</span> <span class="ow">in</span> <span class="n">lhs</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">func</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">X</span> <span class="ow">or</span>
+        <span class="n">X</span><span class="o">.</span><span class="n">is_Symbol</span> <span class="ow">and</span> <span class="n">X</span> <span class="ow">in</span> <span class="n">tmp</span><span class="o">.</span><span class="n">free_symbols</span> <span class="ow">or</span>
+        <span class="ow">not</span> <span class="n">X</span><span class="o">.</span><span class="n">is_Symbol</span> <span class="ow">and</span> <span class="n">tmp</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">X</span><span class="p">))]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fterms</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">fterms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">fterms</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">ordered</span><span class="p">(</span><span class="n">fterms</span><span class="p">)),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">func</span><span class="p">))</span>
+    <span class="k">return</span> <span class="kc">None</span>
+
+
+<span class="k">def</span> <span class="nf">_linab</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return ``a, b, X`` assuming ``arg`` can be written as ``a*X + b``</span>
+<span class="sd">    where ``X`` is a symbol-dependent factor and ``a`` and ``b`` are</span>
+<span class="sd">    independent of ``symbol``.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from ..functions.elementary.exponential import exp</span>
+<span class="sd">    &gt;&gt;&gt; from .bivariate import _linab</span>
+<span class="sd">    &gt;&gt;&gt; from ..abc import x, y</span>
+<span class="sd">    &gt;&gt;&gt; from .. import S</span>
+<span class="sd">    &gt;&gt;&gt; _linab(S(2), x)</span>
+<span class="sd">    (2, 0, 1)</span>
+<span class="sd">    &gt;&gt;&gt; _linab(2*x, x)</span>
+<span class="sd">    (2, 0, x)</span>
+<span class="sd">    &gt;&gt;&gt; _linab(y + y*x + 2*x, x)</span>
+<span class="sd">    (y + 2, y, x)</span>
+<span class="sd">    &gt;&gt;&gt; _linab(3 + 2*exp(x), x)</span>
+<span class="sd">    (2, 3, exp(x))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
+    <span class="n">ind</span><span class="p">,</span> <span class="n">dep</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">as_independent</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">arg</span><span class="o">.</span><span class="n">is_Add</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">ind</span><span class="p">,</span> <span class="n">dep</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">ind</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">separatevars</span><span class="p">(</span><span class="n">dep</span><span class="p">)</span><span class="o">.</span><span class="n">as_independent</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">as_Add</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">could_extract_minus_sign</span><span class="p">():</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="n">a</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span>
+    <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span>
+
+
+<span class="k">def</span> <span class="nf">_lambert</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Given an expression assumed to be in the form</span>
+<span class="sd">        ``F(X, a..f) = a*log(b*X + c) + d*X + f = 0``</span>
+<span class="sd">    where X = g(x) and x = g^-1(X), return the Lambert solution if possible:</span>
+<span class="sd">        ``x = g^-1(-c/b + (a/d)*W(d/(a*b)*exp(c*d/a/b)*exp(-f/a)))``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">eq</span> <span class="o">=</span> <span class="n">_mexpand</span><span class="p">(</span><span class="n">expand_log</span><span class="p">(</span><span class="n">eq</span><span class="p">))</span>
+    <span class="n">mainlog</span> <span class="o">=</span> <span class="n">_mostfunc</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">mainlog</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>  <span class="c1"># violated assumptions</span>
+    <span class="n">other</span> <span class="o">=</span> <span class="n">eq</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">mainlog</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">-</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="n">func</span> <span class="ow">is</span> <span class="n">log</span><span class="p">:</span>
+        <span class="n">eq</span> <span class="o">=</span> <span class="p">(</span><span class="n">eq</span> <span class="o">-</span> <span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">mainlog</span><span class="p">,</span> <span class="n">mainlog</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">mainlog</span> <span class="o">=</span> <span class="n">mainlog</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">mainlog</span><span class="o">.</span><span class="n">func</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">log</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>  <span class="c1"># violated assumptions</span>
+        <span class="n">other</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="o">-</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">eq</span> <span class="o">+=</span> <span class="n">other</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span> <span class="c1"># violated assumptions</span>
+    <span class="n">d</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">X2</span> <span class="o">=</span> <span class="n">_linab</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">logterm</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="n">eq</span> <span class="o">-</span> <span class="n">other</span><span class="p">,</span> <span class="n">mainlog</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">logterm</span><span class="o">.</span><span class="n">as_coefficient</span><span class="p">(</span><span class="n">mainlog</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>  <span class="c1"># violated assumptions</span>
+    <span class="n">logarg</span> <span class="o">=</span> <span class="n">mainlog</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">X1</span> <span class="o">=</span> <span class="n">_linab</span><span class="p">(</span><span class="n">logarg</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">X1</span> <span class="o">!=</span> <span class="n">X2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>  <span class="c1"># violated assumptions</span>
+
+    <span class="n">u</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;rhs&#39;</span><span class="p">)</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># check only real solutions:</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]:</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="n">LambertW</span><span class="p">(</span><span class="n">d</span><span class="o">/</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="n">c</span><span class="o">*</span><span class="n">d</span><span class="o">/</span><span class="n">a</span><span class="o">/</span><span class="n">b</span><span class="p">)</span><span class="o">*</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">f</span><span class="o">/</span><span class="n">a</span><span class="p">),</span> <span class="n">k</span><span class="p">)</span>
+        <span class="c1"># if W&#39;s arg is between -1/e and 0 there is</span>
+        <span class="c1"># a -1 branch real solution, too.</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">l</span><span class="o">.</span><span class="n">is_real</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">rhs</span> <span class="o">=</span> <span class="o">-</span><span class="n">c</span><span class="o">/</span><span class="n">b</span> <span class="o">+</span> <span class="p">(</span><span class="n">a</span><span class="o">/</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="n">l</span>
+
+        <span class="n">solns</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">X1</span> <span class="o">-</span> <span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">tmp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">solns</span><span class="p">):</span>
+            <span class="n">solns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">tmp</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">rhs</span><span class="p">)</span>
+            <span class="n">sol</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">solns</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">sol</span>
+
+
+<span class="k">def</span> <span class="nf">_solve_lambert</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">gens</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return solution to ``f`` if it is a Lambert-type expression</span>
+<span class="sd">    else raise NotImplementedError.</span>
+
+<span class="sd">    The equality, ``f(x, a..f) = a*log(b*X + c) + d*X - f = 0`` has the</span>
+<span class="sd">    solution,  `X = -c/b + (a/d)*W(d/(a*b)*exp(c*d/a/b)*exp(f/a))`. There</span>
+<span class="sd">    are a variety of forms for `f(X, a..f)` as enumerated below:</span>
+
+<span class="sd">    1a1)</span>
+<span class="sd">      if B**B = R for R not [0, 1] then</span>
+<span class="sd">      log(B) + log(log(B)) = log(log(R))</span>
+<span class="sd">      X = log(B), a = 1, b = 1, c = 0, d = 1, f = log(log(R))</span>
+<span class="sd">    1a2)</span>
+<span class="sd">      if B*(b*log(B) + c)**a = R then</span>
+<span class="sd">      log(B) + a*log(b*log(B) + c) = log(R)</span>
+<span class="sd">      X = log(B); d=1, f=log(R)</span>
+<span class="sd">    1b)</span>
+<span class="sd">      if a*log(b*B + c) + d*B = R then</span>
+<span class="sd">      X = B, f = R</span>
+<span class="sd">    2a)</span>
+<span class="sd">      if (b*B + c)*exp(d*B + g) = R then</span>
+<span class="sd">      log(b*B + c) + d*B + g = log(R)</span>
+<span class="sd">      a = 1, f = log(R) - g, X = B</span>
+<span class="sd">    2b)</span>
+<span class="sd">      if -b*B + g*exp(d*B + h) = c then</span>
+<span class="sd">      log(g) + d*B + h - log(b*B + c) = 0</span>
+<span class="sd">      a = -1, f = -h - log(g), X = B</span>
+<span class="sd">    3)</span>
+<span class="sd">      if d*p**(a*B + g) - b*B = c then</span>
+<span class="sd">      log(d) + (a*B + g)*log(p) - log(c + b*B) = 0</span>
+<span class="sd">      a = -1, d = a*log(p), f = -log(d) - g*log(p)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">nrhs</span><span class="p">,</span> <span class="n">lhs</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">as_independent</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">as_Add</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">rhs</span> <span class="o">=</span> <span class="o">-</span><span class="n">nrhs</span>
+
+    <span class="n">lamcheck</span> <span class="o">=</span> <span class="p">[</span><span class="n">tmp</span> <span class="k">for</span> <span class="n">tmp</span> <span class="ow">in</span> <span class="n">gens</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">func</span> <span class="ow">in</span> <span class="p">[</span><span class="n">exp</span><span class="p">,</span> <span class="n">log</span><span class="p">]</span> <span class="ow">or</span>
+                <span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">is_Pow</span> <span class="ow">and</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">tmp</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">))]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">lamcheck</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">lhs</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>
+        <span class="n">lhs</span> <span class="o">=</span> <span class="n">expand_log</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">lhs</span><span class="p">))</span>
+        <span class="n">rhs</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span>
+
+    <span class="n">lhs</span> <span class="o">=</span> <span class="n">factor</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># make sure we have inverted as completely as possible</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">()</span>
+    <span class="n">i</span><span class="p">,</span> <span class="n">lhs</span> <span class="o">=</span> <span class="n">_invert</span><span class="p">(</span><span class="n">lhs</span> <span class="o">-</span> <span class="n">r</span><span class="p">,</span> <span class="n">symbol</span><span class="p">)</span>
+    <span class="n">rhs</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">xreplace</span><span class="p">({</span><span class="n">r</span><span class="p">:</span> <span class="n">rhs</span><span class="p">})</span>
+
+    <span class="c1"># For the first ones:</span>
+    <span class="c1"># 1a1) B**B = R != 0 (when 0, there is only a solution if the base is 0,</span>
+    <span class="c1">#                     but if it is, the exp is 0 and 0**0=1</span>
+    <span class="c1">#                     comes back as B*log(B) = log(R)</span>
+    <span class="c1"># 1a2) B*(a + b*log(B))**p = R or with monomial expanded or with whole</span>
+    <span class="c1">#                              thing expanded comes back unchanged</span>
+    <span class="c1">#     log(B) + p*log(a + b*log(B)) = log(R)</span>
+    <span class="c1">#     lhs is Mul:</span>
+    <span class="c1">#         expand log of both sides to give:</span>
+    <span class="c1">#         log(B) + log(log(B)) = log(log(R))</span>
+    <span class="c1"># 1b) d*log(a*B + b) + c*B = R</span>
+    <span class="c1">#     lhs is Add:</span>
+    <span class="c1">#         isolate c*B and expand log of both sides:</span>
+    <span class="c1">#         log(c) + log(B) = log(R - d*log(a*B + b))</span>
+
+    <span class="n">soln</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">soln</span><span class="p">:</span>
+        <span class="n">mainlog</span> <span class="o">=</span> <span class="n">_mostfunc</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">symbol</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mainlog</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">lhs</span><span class="o">.</span><span class="n">is_Mul</span> <span class="ow">and</span> <span class="n">rhs</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">soln</span> <span class="o">=</span> <span class="n">_lambert</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">rhs</span><span class="p">),</span> <span class="n">symbol</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">lhs</span><span class="o">.</span><span class="n">is_Add</span><span class="p">:</span>
+                <span class="n">other</span> <span class="o">=</span> <span class="n">lhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">mainlog</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">other</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">other</span><span class="o">.</span><span class="n">is_Add</span> <span class="ow">and</span> <span class="p">[</span>
+                        <span class="n">tmp</span> <span class="k">for</span> <span class="n">tmp</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">Pow</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">tmp</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">rhs</span><span class="p">:</span>
+                        <span class="n">diff</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">other</span> <span class="o">-</span> <span class="n">lhs</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">diff</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">lhs</span> <span class="o">-</span> <span class="n">other</span><span class="p">)</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">rhs</span> <span class="o">-</span> <span class="n">other</span><span class="p">)</span>
+                    <span class="n">soln</span> <span class="o">=</span> <span class="n">_lambert</span><span class="p">(</span><span class="n">expand_log</span><span class="p">(</span><span class="n">diff</span><span class="p">),</span> <span class="n">symbol</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1">#it&#39;s ready to go</span>
+                    <span class="n">soln</span> <span class="o">=</span> <span class="n">_lambert</span><span class="p">(</span><span class="n">lhs</span> <span class="o">-</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">symbol</span><span class="p">)</span>
+
+    <span class="c1"># For the next two,</span>
+    <span class="c1">#     collect on main exp</span>
+    <span class="c1">#     2a) (b*B + c)*exp(d*B + g) = R</span>
+    <span class="c1">#         lhs is mul:</span>
+    <span class="c1">#             log to give</span>
+    <span class="c1">#             log(b*B + c) + d*B = log(R) - g</span>
+    <span class="c1">#     2b) -b*B + g*exp(d*B + h) = R</span>
+    <span class="c1">#         lhs is add:</span>
+    <span class="c1">#             add b*B</span>
+    <span class="c1">#             log and rearrange</span>
+    <span class="c1">#             log(R + b*B) - d*B = log(g) + h</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">soln</span><span class="p">:</span>
+        <span class="n">mainexp</span> <span class="o">=</span> <span class="n">_mostfunc</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">symbol</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mainexp</span><span class="p">:</span>
+            <span class="n">lhs</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">mainexp</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">lhs</span><span class="o">.</span><span class="n">is_Mul</span> <span class="ow">and</span> <span class="n">rhs</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">soln</span> <span class="o">=</span> <span class="n">_lambert</span><span class="p">(</span><span class="n">expand_log</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">rhs</span><span class="p">)),</span> <span class="n">symbol</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">lhs</span><span class="o">.</span><span class="n">is_Add</span><span class="p">:</span>
+                <span class="c1"># move all but mainexp-containing term to rhs</span>
+                <span class="n">other</span> <span class="o">=</span> <span class="n">lhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">mainexp</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">mainterm</span> <span class="o">=</span> <span class="n">lhs</span> <span class="o">-</span> <span class="n">other</span>
+                <span class="n">rhs</span> <span class="o">=</span> <span class="n">rhs</span> <span class="o">-</span> <span class="n">other</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">mainterm</span><span class="o">.</span><span class="n">could_extract_minus_sign</span><span class="p">()</span> <span class="ow">and</span>
+                    <span class="n">rhs</span><span class="o">.</span><span class="n">could_extract_minus_sign</span><span class="p">()):</span>
+                    <span class="n">mainterm</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+                    <span class="n">rhs</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="n">diff</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">mainterm</span><span class="p">)</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span>
+                <span class="n">soln</span> <span class="o">=</span> <span class="n">_lambert</span><span class="p">(</span><span class="n">expand_log</span><span class="p">(</span><span class="n">diff</span><span class="p">),</span> <span class="n">symbol</span><span class="p">)</span>
+
+    <span class="c1"># 3) d*p**(a*B + b) + c*B = R</span>
+    <span class="c1">#     collect on main pow</span>
+    <span class="c1">#     log(R - c*B) - a*B*log(p) = log(d) + b*log(p)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">soln</span><span class="p">:</span>
+        <span class="n">mainpow</span> <span class="o">=</span> <span class="n">_mostfunc</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span> <span class="n">symbol</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mainpow</span> <span class="ow">and</span> <span class="n">symbol</span> <span class="ow">in</span> <span class="n">mainpow</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">:</span>
+            <span class="n">lhs</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">mainpow</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">lhs</span><span class="o">.</span><span class="n">is_Mul</span> <span class="ow">and</span> <span class="n">rhs</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">soln</span> <span class="o">=</span> <span class="n">_lambert</span><span class="p">(</span><span class="n">expand_log</span><span class="p">(</span><span class="n">log</span><span class="p">(</span><span class="n">lhs</span><span class="p">)</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">rhs</span><span class="p">)),</span> <span class="n">symbol</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">lhs</span><span class="o">.</span><span class="n">is_Add</span><span class="p">:</span>
+                <span class="c1"># move all but mainpow-containing term to rhs</span>
+                <span class="n">other</span> <span class="o">=</span> <span class="n">lhs</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">mainpow</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="n">mainterm</span> <span class="o">=</span> <span class="n">lhs</span> <span class="o">-</span> <span class="n">other</span>
+                <span class="n">rhs</span> <span class="o">=</span> <span class="n">rhs</span> <span class="o">-</span> <span class="n">other</span>
+                <span class="n">diff</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">mainterm</span><span class="p">)</span> <span class="o">-</span> <span class="n">log</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span>
+                <span class="n">soln</span> <span class="o">=</span> <span class="n">_lambert</span><span class="p">(</span><span class="n">expand_log</span><span class="p">(</span><span class="n">diff</span><span class="p">),</span> <span class="n">symbol</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">soln</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> does not appear to have a solution in &#39;</span>
+            <span class="s1">&#39;terms of LambertW&#39;</span> <span class="o">%</span> <span class="n">f</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">ordered</span><span class="p">(</span><span class="n">soln</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="bivariate_type"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.bivariate.bivariate_type">[docs]</a><span class="k">def</span> <span class="nf">bivariate_type</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Given an expression, f, 3 tests will be done to see what type</span>
+<span class="sd">    of composite bivariate it might be, options for u(x, y) are::</span>
+
+<span class="sd">        x*y</span>
+<span class="sd">        x+y</span>
+<span class="sd">        x*y+x</span>
+<span class="sd">        x*y+y</span>
+
+<span class="sd">    If it matches one of these types, ``u(x, y)``, ``P(u)`` and dummy</span>
+<span class="sd">    variable ``u`` will be returned. Solving ``P(u)`` for ``u`` and</span>
+<span class="sd">    equating the solutions to ``u(x, y)`` and then solving for ``x`` or</span>
+<span class="sd">    ``y`` is equivalent to solving the original expression for ``x`` or</span>
+<span class="sd">    ``y``. If ``x`` and ``y`` represent two functions in the same</span>
+<span class="sd">    variable, e.g. ``x = g(t)`` and ``y = h(t)``, then if ``u(x, y) - p``</span>
+<span class="sd">    can be solved for ``t`` then these represent the solutions to</span>
+<span class="sd">    ``P(u) = 0`` when ``p`` are the solutions of ``P(u) = 0``.</span>
+
+<span class="sd">    Only positive values of ``u`` are considered.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .solvers import solve</span>
+<span class="sd">    &gt;&gt;&gt; from .bivariate import bivariate_type</span>
+<span class="sd">    &gt;&gt;&gt; from ..abc import x, y</span>
+<span class="sd">    &gt;&gt;&gt; eq = (x**2 - 3).subs(x, x + y)</span>
+<span class="sd">    &gt;&gt;&gt; bivariate_type(eq, x, y)</span>
+<span class="sd">    (x + y, _u**2 - 3, _u)</span>
+<span class="sd">    &gt;&gt;&gt; uxy, pu, u = _</span>
+<span class="sd">    &gt;&gt;&gt; usol = solve(pu, u); usol</span>
+<span class="sd">    [sqrt(3)]</span>
+<span class="sd">    &gt;&gt;&gt; [solve(uxy - s) for s in solve(pu, u)]</span>
+<span class="sd">    [[{x: -y + sqrt(3)}]]</span>
+<span class="sd">    &gt;&gt;&gt; all(eq.subs(s).equals(0) for sol in _ for s in sol)</span>
+<span class="sd">    True</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">u</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="n">positive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Poly</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">as_expr</span><span class="p">()</span>
+        <span class="n">_x</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">()</span>
+        <span class="n">_y</span> <span class="o">=</span> <span class="n">Dummy</span><span class="p">()</span>
+        <span class="n">rv</span> <span class="o">=</span> <span class="n">bivariate_type</span><span class="p">(</span><span class="n">Poly</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">({</span><span class="n">x</span><span class="p">:</span> <span class="n">_x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">_y</span><span class="p">}),</span> <span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">),</span> <span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rv</span><span class="p">:</span>
+            <span class="n">reps</span> <span class="o">=</span> <span class="p">{</span><span class="n">_x</span><span class="p">:</span> <span class="n">x</span><span class="p">,</span> <span class="n">_y</span><span class="p">:</span> <span class="n">y</span><span class="p">}</span>
+            <span class="k">return</span> <span class="n">rv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">xreplace</span><span class="p">(</span><span class="n">reps</span><span class="p">),</span> <span class="n">rv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xreplace</span><span class="p">(</span><span class="n">reps</span><span class="p">),</span> <span class="n">rv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="k">return</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="n">f</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">as_expr</span><span class="p">()</span>
+
+    <span class="c1"># f(x*y)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">Add</span><span class="o">.</span><span class="n">make_args</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">as_expr</span><span class="p">())</span>
+    <span class="n">new</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">_mexpand</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="o">/</span><span class="n">y</span><span class="p">))</span>
+        <span class="n">free</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">free_symbols</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">free</span> <span class="ow">or</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">free</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="n">Add</span><span class="p">(</span><span class="o">*</span><span class="n">new</span><span class="p">),</span> <span class="n">u</span>
+
+    <span class="k">def</span> <span class="nf">ok</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="n">_mexpand</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+        <span class="n">free</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">free_symbols</span>
+        <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="ow">in</span> <span class="n">free</span> <span class="ow">or</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">free</span><span class="p">)</span> <span class="k">else</span> <span class="n">new</span>
+
+    <span class="c1"># f(a*x + b*y)</span>
+    <span class="n">new</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="n">d</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">root</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">coeff_monomial</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">d</span><span class="p">),</span> <span class="n">d</span><span class="p">)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">root</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">coeff_monomial</span><span class="p">(</span><span class="n">y</span><span class="o">**</span><span class="n">d</span><span class="p">),</span> <span class="n">d</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="n">ok</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">a</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">new</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">u</span>
+
+    <span class="c1"># f(a*x*y + b*y)</span>
+    <span class="n">new</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">degree</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="n">d</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">itry</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">root</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">coeff_monomial</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">d</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="n">d</span><span class="p">),</span> <span class="n">d</span><span class="p">)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">root</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">coeff_monomial</span><span class="p">(</span><span class="n">y</span><span class="o">**</span><span class="n">d</span><span class="p">),</span> <span class="n">d</span><span class="p">)</span>
+            <span class="n">new</span> <span class="o">=</span> <span class="n">ok</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">b</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="n">a</span><span class="o">/</span><span class="n">y</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">new</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">u</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.solvers.bivariate</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

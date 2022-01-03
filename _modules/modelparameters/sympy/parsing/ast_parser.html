@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.parsing.ast_parser &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.parsing.ast_parser</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.parsing.ast_parser</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module implements the functionality to take any Python expression as a</span>
+<span class="sd">string and fix all numbers and other things before evaluating it,</span>
+<span class="sd">thus</span>
+
+<span class="sd">1/2</span>
+
+<span class="sd">returns</span>
+
+<span class="sd">Integer(1)/Integer(2)</span>
+
+<span class="sd">We use the Python ast module for that, which is in python2.6 and later. It is</span>
+<span class="sd">well documented at docs.python.org.</span>
+
+<span class="sd">Some tips to understand how this works: use dump() to get a nice</span>
+<span class="sd">representation of any node. Then write a string of what you want to get,</span>
+<span class="sd">e.g. &quot;Integer(1)&quot;, parse it, dump it and you&#39;ll see that you need to do</span>
+<span class="sd">&quot;Call(Name(&#39;Integer&#39;, Load()), [node], [], None, None)&quot;. You don&#39;t need</span>
+<span class="sd">to bother with lineno and col_offset, just call fix_missing_locations()</span>
+<span class="sd">before returning the node.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..core.basic</span> <span class="kn">import</span> <span class="n">Basic</span>
+<span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="n">exec_</span>
+<span class="kn">from</span> <span class="nn">..core.sympify</span> <span class="kn">import</span> <span class="n">SympifyError</span>
+
+<span class="kn">from</span> <span class="nn">ast</span> <span class="kn">import</span> <span class="n">parse</span><span class="p">,</span> <span class="n">NodeTransformer</span><span class="p">,</span> <span class="n">Call</span><span class="p">,</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Load</span><span class="p">,</span> \
+    <span class="n">fix_missing_locations</span><span class="p">,</span> <span class="n">Str</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<div class="viewcode-block" id="Transform"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.ast_parser.Transform">[docs]</a><span class="k">class</span> <span class="nc">Transform</span><span class="p">(</span><span class="n">NodeTransformer</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
+        <span class="n">NodeTransformer</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">local_dict</span> <span class="o">=</span> <span class="n">local_dict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">global_dict</span> <span class="o">=</span> <span class="n">global_dict</span>
+
+<div class="viewcode-block" id="Transform.visit_Num"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.ast_parser.Transform.visit_Num">[docs]</a>    <span class="k">def</span> <span class="nf">visit_Num</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">fix_missing_locations</span><span class="p">(</span><span class="n">Call</span><span class="p">(</span><span class="n">Name</span><span class="p">(</span><span class="s1">&#39;Integer&#39;</span><span class="p">,</span> <span class="n">Load</span><span class="p">()),</span>
+                    <span class="p">[</span><span class="n">node</span><span class="p">],</span> <span class="p">[],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">fix_missing_locations</span><span class="p">(</span><span class="n">Call</span><span class="p">(</span><span class="n">Name</span><span class="p">(</span><span class="s1">&#39;Float&#39;</span><span class="p">,</span> <span class="n">Load</span><span class="p">()),</span>
+                <span class="p">[</span><span class="n">node</span><span class="p">],</span> <span class="p">[],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">node</span></div>
+
+<div class="viewcode-block" id="Transform.visit_Name"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.ast_parser.Transform.visit_Name">[docs]</a>    <span class="k">def</span> <span class="nf">visit_Name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">local_dict</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">node</span>
+        <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_dict</span><span class="p">:</span>
+            <span class="n">name_obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">global_dict</span><span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">id</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name_obj</span><span class="p">,</span> <span class="p">(</span><span class="n">Basic</span><span class="p">,</span> <span class="nb">type</span><span class="p">))</span> <span class="ow">or</span> <span class="n">callable</span><span class="p">(</span><span class="n">name_obj</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">node</span>
+        <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">id</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;True&#39;</span><span class="p">,</span> <span class="s1">&#39;False&#39;</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">node</span>
+        <span class="k">return</span> <span class="n">fix_missing_locations</span><span class="p">(</span><span class="n">Call</span><span class="p">(</span><span class="n">Name</span><span class="p">(</span><span class="s1">&#39;Symbol&#39;</span><span class="p">,</span> <span class="n">Load</span><span class="p">()),</span>
+                <span class="p">[</span><span class="n">Str</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">id</span><span class="p">)],</span> <span class="p">[],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Transform.visit_Lambda"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.ast_parser.Transform.visit_Lambda">[docs]</a>    <span class="k">def</span> <span class="nf">visit_Lambda</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">node</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">args</span><span class="p">]</span>
+        <span class="n">body</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">Call</span><span class="p">(</span><span class="n">Name</span><span class="p">(</span><span class="s1">&#39;Lambda&#39;</span><span class="p">,</span> <span class="n">Load</span><span class="p">()),</span>
+            <span class="p">[</span><span class="n">Tuple</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">Load</span><span class="p">()),</span> <span class="n">body</span><span class="p">],</span> <span class="p">[],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fix_missing_locations</span><span class="p">(</span><span class="n">n</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="parse_expr"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.ast_parser.parse_expr">[docs]</a><span class="k">def</span> <span class="nf">parse_expr</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts the string &quot;s&quot; to a SymPy expression, in local_dict.</span>
+
+<span class="sd">    It converts all numbers to Integers before feeding it to Python and</span>
+<span class="sd">    automatically creates Symbols.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">global_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">exec_</span><span class="p">(</span><span class="s1">&#39;from .. import *&#39;</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;eval&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">SyntaxError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">SympifyError</span><span class="p">(</span><span class="s2">&quot;Cannot parse </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="nb">repr</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">Transform</span><span class="p">(</span><span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">)</span><span class="o">.</span><span class="n">visit</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="nb">compile</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s2">&quot;&lt;string&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;eval&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.parsing.ast_parser</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

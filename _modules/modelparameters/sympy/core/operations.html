@@ -1,0 +1,541 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.core.operations &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.core.operations</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.core.operations</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">.sympify</span> <span class="kn">import</span> <span class="n">_sympify</span><span class="p">,</span> <span class="n">sympify</span>
+<span class="kn">from</span> <span class="nn">.basic</span> <span class="kn">import</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">_aresame</span>
+<span class="kn">from</span> <span class="nn">.cache</span> <span class="kn">import</span> <span class="n">cacheit</span>
+<span class="kn">from</span> <span class="nn">.compatibility</span> <span class="kn">import</span> <span class="n">ordered</span><span class="p">,</span> <span class="nb">range</span>
+<span class="kn">from</span> <span class="nn">.logic</span> <span class="kn">import</span> <span class="n">fuzzy_and</span>
+<span class="kn">from</span> <span class="nn">.evaluate</span> <span class="kn">import</span> <span class="n">global_evaluate</span>
+
+
+<div class="viewcode-block" id="AssocOp"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.operations.AssocOp">[docs]</a><span class="k">class</span> <span class="nc">AssocOp</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Associative operations, can separate noncommutative and</span>
+<span class="sd">    commutative parts.</span>
+
+<span class="sd">    (a op b) op c == a op (b op c) == a op b op c.</span>
+
+<span class="sd">    Base class for Add and Mul.</span>
+
+<span class="sd">    This is an abstract base class, concrete derived classes must define</span>
+<span class="sd">    the attribute `identity`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># for performance reason, we don&#39;t let is_commutative go to assumptions,</span>
+    <span class="c1"># and keep it right here</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;is_commutative&#39;</span><span class="p">]</span>
+
+    <span class="nd">@cacheit</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Order</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">_sympify</span><span class="p">,</span> <span class="n">args</span><span class="p">))</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span> <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">cls</span><span class="o">.</span><span class="n">identity</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">options</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;evaluate&#39;</span><span class="p">,</span> <span class="n">global_evaluate</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_from_args</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">identity</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">c_part</span><span class="p">,</span> <span class="n">nc_part</span><span class="p">,</span> <span class="n">order_symbols</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">is_commutative</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">nc_part</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_from_args</span><span class="p">(</span><span class="n">c_part</span> <span class="o">+</span> <span class="n">nc_part</span><span class="p">,</span> <span class="n">is_commutative</span><span class="p">)</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_exec_constructor_postprocessors</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">order_symbols</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Order</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="o">*</span><span class="n">order_symbols</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_from_args</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">is_commutative</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create new instance with already-processed args&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">identity</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">obj</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">AssocOp</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">is_commutative</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">is_commutative</span> <span class="o">=</span> <span class="n">fuzzy_and</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">is_commutative</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">is_commutative</span> <span class="o">=</span> <span class="n">is_commutative</span>
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="k">def</span> <span class="nf">_new_rawargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create new instance of own class with args exactly as provided by</span>
+<span class="sd">        caller but returning the self class identity if args is empty.</span>
+
+<span class="sd">           This is handy when we want to optimize things, e.g.</span>
+
+<span class="sd">               &gt;&gt;&gt; from .. import Mul, S</span>
+<span class="sd">               &gt;&gt;&gt; from ..abc import x, y</span>
+<span class="sd">               &gt;&gt;&gt; e = Mul(3, x, y)</span>
+<span class="sd">               &gt;&gt;&gt; e.args</span>
+<span class="sd">               (3, x, y)</span>
+<span class="sd">               &gt;&gt;&gt; Mul(*e.args[1:])</span>
+<span class="sd">               x*y</span>
+<span class="sd">               &gt;&gt;&gt; e._new_rawargs(*e.args[1:])  # the same as above, but faster</span>
+<span class="sd">               x*y</span>
+
+<span class="sd">           Note: use this with caution. There is no checking of arguments at</span>
+<span class="sd">           all. This is best used when you are rebuilding an Add or Mul after</span>
+<span class="sd">           simply removing one or more terms. If modification which result,</span>
+<span class="sd">           for example, in extra 1s being inserted (as when collecting an</span>
+<span class="sd">           expression&#39;s numerators and denominators) they will not show up in</span>
+<span class="sd">           the result but a Mul will be returned nonetheless:</span>
+
+<span class="sd">               &gt;&gt;&gt; m = (x*y)._new_rawargs(S.One, x); m</span>
+<span class="sd">               x</span>
+<span class="sd">               &gt;&gt;&gt; m == x</span>
+<span class="sd">               False</span>
+<span class="sd">               &gt;&gt;&gt; m.is_Mul</span>
+<span class="sd">               True</span>
+
+<span class="sd">           Another issue to be aware of is that the commutativity of the result</span>
+<span class="sd">           is based on the commutativity of self. If you are rebuilding the</span>
+<span class="sd">           terms that came from a commutative object then there will be no</span>
+<span class="sd">           problem, but if self was non-commutative then what you are</span>
+<span class="sd">           rebuilding may now be commutative.</span>
+
+<span class="sd">           Although this routine tries to do as little as possible with the</span>
+<span class="sd">           input, getting the commutativity right is important, so this level</span>
+<span class="sd">           of safety is enforced: commutativity will always be recomputed if</span>
+<span class="sd">           self is non-commutative and kwarg `reeval=False` has not been</span>
+<span class="sd">           passed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">&#39;reeval&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_commutative</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="n">is_commutative</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">is_commutative</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_commutative</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_from_args</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">is_commutative</span><span class="p">)</span>
+
+<div class="viewcode-block" id="AssocOp.flatten"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.operations.AssocOp.flatten">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">seq</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return seq so that none of the elements are of type `cls`. This is</span>
+<span class="sd">        the vanilla routine that will be used if a class derived from AssocOp</span>
+<span class="sd">        does not define its own flatten routine.&quot;&quot;&quot;</span>
+        <span class="c1"># apply associativity, no commutativity property is used</span>
+        <span class="n">new_seq</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="n">seq</span><span class="p">:</span>
+            <span class="n">o</span> <span class="o">=</span> <span class="n">seq</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">o</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">is</span> <span class="bp">cls</span><span class="p">:</span>  <span class="c1"># classes must match exactly</span>
+                <span class="n">seq</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>
+        <span class="c1"># c_part, nc_part, order_symbols</span>
+        <span class="k">return</span> <span class="p">[],</span> <span class="n">new_seq</span><span class="p">,</span> <span class="kc">None</span></div>
+
+    <span class="k">def</span> <span class="nf">_matches_commutative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">repl_dict</span><span class="o">=</span><span class="p">{},</span> <span class="n">old</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Matches Add/Mul &quot;pattern&quot; to an expression &quot;expr&quot;.</span>
+
+<span class="sd">        repl_dict ... a dictionary of (wild: expression) pairs, that get</span>
+<span class="sd">                      returned with the results</span>
+
+<span class="sd">        This function is the main workhorse for Add/Mul.</span>
+
+<span class="sd">        For instance:</span>
+
+<span class="sd">        &gt;&gt;&gt; from .. import symbols, Wild, sin</span>
+<span class="sd">        &gt;&gt;&gt; a = Wild(&quot;a&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; b = Wild(&quot;b&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; c = Wild(&quot;c&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; x, y, z = symbols(&quot;x y z&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; (a+sin(b)*c)._matches_commutative(x+sin(y)*z)</span>
+<span class="sd">        {a_: x, b_: y, c_: z}</span>
+
+<span class="sd">        In the example above, &quot;a+sin(b)*c&quot; is the pattern, and &quot;x+sin(y)*z&quot; is</span>
+<span class="sd">        the expression.</span>
+
+<span class="sd">        The repl_dict contains parts that were already matched. For example</span>
+<span class="sd">        here:</span>
+
+<span class="sd">        &gt;&gt;&gt; (x+sin(b)*c)._matches_commutative(x+sin(y)*z, repl_dict={a: x})</span>
+<span class="sd">        {a_: x, b_: y, c_: z}</span>
+
+<span class="sd">        the only function of the repl_dict is to return it in the</span>
+<span class="sd">        result, e.g. if you omit it:</span>
+
+<span class="sd">        &gt;&gt;&gt; (x+sin(b)*c)._matches_commutative(x+sin(y)*z)</span>
+<span class="sd">        {b_: y, c_: z}</span>
+
+<span class="sd">        the &quot;a: x&quot; is not returned in the result, but otherwise it is</span>
+<span class="sd">        equivalent.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># make sure expr is Expr if pattern is Expr</span>
+        <span class="kn">from</span> <span class="nn">.expr</span> <span class="kn">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Expr</span>
+        <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Mul</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Expr</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Expr</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># handle simple patterns</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">expr</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">repl_dict</span>
+
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_matches_simple</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">repl_dict</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">d</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">d</span>
+
+        <span class="c1"># eliminate exact part from pattern: (2+a+w1+w2).matches(expr) -&gt; (w1+w2).matches(expr-a-2)</span>
+        <span class="kn">from</span> <span class="nn">.function</span> <span class="kn">import</span> <span class="n">WildFunction</span>
+        <span class="kn">from</span> <span class="nn">.symbol</span> <span class="kn">import</span> <span class="n">Wild</span>
+        <span class="n">wild_part</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">exact_part</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ordered</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">Wild</span><span class="p">,</span> <span class="n">WildFunction</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">expr</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">p</span><span class="p">)):</span>
+                <span class="c1"># not all Wild should stay Wilds, for example:</span>
+                <span class="c1"># (w2+w3).matches(w1) -&gt; (w1+w3).matches(w1) -&gt; w3.matches(0)</span>
+                <span class="n">wild_part</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">exact_part</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">exact_part</span><span class="p">:</span>
+            <span class="n">exact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">exact_part</span><span class="p">)</span>
+            <span class="n">free</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">free_symbols</span>
+            <span class="k">if</span> <span class="n">free</span> <span class="ow">and</span> <span class="p">(</span><span class="n">exact</span><span class="o">.</span><span class="n">free_symbols</span> <span class="o">-</span> <span class="n">free</span><span class="p">):</span>
+                <span class="c1"># there are symbols in the exact part that are not</span>
+                <span class="c1"># in the expr; but if there are no free symbols, let</span>
+                <span class="c1"># the matching continue</span>
+                <span class="k">return</span> <span class="kc">None</span>
+            <span class="n">newpattern</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">wild_part</span><span class="p">)</span>
+            <span class="n">newexpr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_combine_inverse</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">exact</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">old</span> <span class="ow">and</span> <span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">is_Add</span> <span class="ow">or</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">newexpr</span><span class="o">.</span><span class="n">count_ops</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">expr</span><span class="o">.</span><span class="n">count_ops</span><span class="p">():</span>
+                    <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">return</span> <span class="n">newpattern</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="n">newexpr</span><span class="p">,</span> <span class="n">repl_dict</span><span class="p">)</span>
+
+        <span class="c1"># now to real work ;)</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">saw</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">expr</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">saw</span><span class="p">:</span>
+            <span class="n">saw</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+            <span class="n">expr_list</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">identity</span><span class="p">,)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">ordered</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">make_args</span><span class="p">(</span><span class="n">expr</span><span class="p">)))</span>
+            <span class="k">for</span> <span class="n">last_op</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">expr_list</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">wild_part</span><span class="p">):</span>
+                    <span class="n">d1</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="n">last_op</span><span class="p">,</span> <span class="n">repl_dict</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">d1</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">d2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">xreplace</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">d1</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">d2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="k">return</span> <span class="n">d2</span>
+
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>
+                    <span class="c1"># make e**i look like Mul</span>
+                    <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Pow</span> <span class="ow">and</span> <span class="n">expr</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">is_Integer</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">exp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">expr</span> <span class="o">=</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">,</span> <span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="o">**</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">exp</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)],</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">expr</span> <span class="o">=</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">,</span> <span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="o">**</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">exp</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)],</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">continue</span>
+
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_Add</span><span class="p">:</span>
+                    <span class="c1"># make i*e look like Add</span>
+                    <span class="n">c</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">as_coeff_Mul</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">expr</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">e</span><span class="p">,</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">e</span><span class="p">],</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">expr</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="o">-</span><span class="n">e</span><span class="p">,</span> <span class="p">(</span><span class="n">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">e</span><span class="p">],</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">continue</span>
+
+                    <span class="c1"># try collection on non-Wild symbols</span>
+                    <span class="kn">from</span> <span class="nn">..simplify.radsimp</span> <span class="kn">import</span> <span class="n">collect</span>
+                    <span class="n">was</span> <span class="o">=</span> <span class="n">expr</span>
+                    <span class="n">did</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+                    <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">wild_part</span><span class="p">):</span>
+                        <span class="n">c</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">as_coeff_mul</span><span class="p">(</span><span class="n">Wild</span><span class="p">)</span>
+                        <span class="n">free</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">free_symbols</span> <span class="o">-</span> <span class="n">did</span>
+                        <span class="k">if</span> <span class="n">free</span><span class="p">:</span>
+                            <span class="n">did</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">free</span><span class="p">)</span>
+                            <span class="n">expr</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">free</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">expr</span> <span class="o">!=</span> <span class="n">was</span><span class="p">:</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">0</span>
+                        <span class="k">continue</span>
+
+                <span class="k">break</span>  <span class="c1"># if we didn&#39;t continue, there is nothing more to do</span>
+
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="nf">_has_matcher</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Helper for .has()&quot;&quot;&quot;</span>
+        <span class="k">def</span> <span class="nf">_ncsplit</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+            <span class="c1"># this is not the same as args_cnc because here</span>
+            <span class="c1"># we don&#39;t assume expr is a Mul -- hence deal with args --</span>
+            <span class="c1"># and always return a set.</span>
+            <span class="n">cpart</span><span class="p">,</span> <span class="n">ncpart</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">arg</span><span class="o">.</span><span class="n">is_commutative</span><span class="p">:</span>
+                    <span class="n">cpart</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">ncpart</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+            <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">cpart</span><span class="p">),</span> <span class="n">ncpart</span>
+
+        <span class="n">c</span><span class="p">,</span> <span class="n">nc</span> <span class="o">=</span> <span class="n">_ncsplit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">cls</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span>
+
+        <span class="k">def</span> <span class="nf">is_in</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">expr</span> <span class="o">==</span> <span class="bp">self</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">Basic</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+                <span class="n">_c</span><span class="p">,</span> <span class="n">_nc</span> <span class="o">=</span> <span class="n">_ncsplit</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">&amp;</span> <span class="n">_c</span><span class="p">)</span> <span class="o">==</span> <span class="n">c</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">nc</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="kc">True</span>
+                    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">nc</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">_nc</span><span class="p">):</span>
+                        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_nc</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">nc</span><span class="p">)):</span>
+                            <span class="k">if</span> <span class="n">_nc</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">nc</span><span class="p">)]</span> <span class="o">==</span> <span class="n">nc</span><span class="p">:</span>
+                                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="n">is_in</span>
+
+    <span class="k">def</span> <span class="nf">_eval_evalf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Evaluate the parts of self that are numbers; if the whole thing</span>
+<span class="sd">        was a number with no functions it would have been evaluated, but</span>
+<span class="sd">        it wasn&#39;t so we must judiciously extract the numbers and reconstruct</span>
+<span class="sd">        the object. This is *not* simply replacing numbers with evaluated</span>
+<span class="sd">        numbers. Nunmbers should be handled in the largest pure-number</span>
+<span class="sd">        expression as possible. So the code below separates ``self`` into</span>
+<span class="sd">        number and non-number parts and evaluates the number parts and</span>
+<span class="sd">        walks the args of the non-number part recursively (doing the same</span>
+<span class="sd">        thing).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">.add</span> <span class="kn">import</span> <span class="n">Add</span>
+        <span class="kn">from</span> <span class="nn">.mul</span> <span class="kn">import</span> <span class="n">Mul</span>
+        <span class="kn">from</span> <span class="nn">.symbol</span> <span class="kn">import</span> <span class="n">Symbol</span>
+        <span class="kn">from</span> <span class="nn">.function</span> <span class="kn">import</span> <span class="n">AppliedUndef</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">(</span><span class="n">Mul</span><span class="p">,</span> <span class="n">Add</span><span class="p">)):</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">tail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_independent</span><span class="p">(</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">AppliedUndef</span><span class="p">)</span>
+            <span class="c1"># if x is an AssocOp Function then the _evalf below will</span>
+            <span class="c1"># call _eval_evalf (here) so we must break the recursion</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">tail</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">identity</span> <span class="ow">or</span>
+                    <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">AssocOp</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="n">is_Function</span> <span class="ow">or</span>
+                    <span class="n">x</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">identity</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tail</span><span class="p">,</span> <span class="n">AssocOp</span><span class="p">)):</span>
+                <span class="c1"># here, we have a number so we just call to _evalf with prec;</span>
+                <span class="c1"># prec is not the same as n, it is the binary precision so</span>
+                <span class="c1"># that&#39;s why we don&#39;t call to evalf.</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">_evalf</span><span class="p">(</span><span class="n">prec</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">identity</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">identity</span>
+                <span class="n">args</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">tail_args</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="n">make_args</span><span class="p">(</span><span class="n">tail</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">tail_args</span><span class="p">:</span>
+                    <span class="c1"># here we call to _eval_evalf since we don&#39;t know what we</span>
+                    <span class="c1"># are dealing with and all other _eval_evalf routines should</span>
+                    <span class="c1"># be doing the same thing (i.e. taking binary prec and</span>
+                    <span class="c1"># finding the evalf-able args)</span>
+                    <span class="n">newa</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">_eval_evalf</span><span class="p">(</span><span class="n">prec</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">newa</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newa</span><span class="p">)</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">_aresame</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="n">tail_args</span><span class="p">):</span>
+                    <span class="n">tail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">tail</span><span class="p">)</span>
+
+        <span class="c1"># this is the same as above, but there were no pure-number args to</span>
+        <span class="c1"># deal with</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+            <span class="n">newa</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">_eval_evalf</span><span class="p">(</span><span class="n">prec</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">newa</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newa</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">_aresame</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+<div class="viewcode-block" id="AssocOp.make_args"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.operations.AssocOp.make_args">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">make_args</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a sequence of elements `args` such that cls(*args) == expr</span>
+
+<span class="sd">        &gt;&gt;&gt; from .. import Symbol, Mul, Add</span>
+<span class="sd">        &gt;&gt;&gt; x, y = map(Symbol, &#39;xy&#39;)</span>
+
+<span class="sd">        &gt;&gt;&gt; Mul.make_args(x*y)</span>
+<span class="sd">        (x, y)</span>
+<span class="sd">        &gt;&gt;&gt; Add.make_args(x*y)</span>
+<span class="sd">        (x*y,)</span>
+<span class="sd">        &gt;&gt;&gt; set(Add.make_args(x*y + y)) == set([y, x*y])</span>
+<span class="sd">        True</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="n">sympify</span><span class="p">(</span><span class="n">expr</span><span class="p">),)</span></div></div>
+
+
+<div class="viewcode-block" id="ShortCircuit"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.operations.ShortCircuit">[docs]</a><span class="k">class</span> <span class="nc">ShortCircuit</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="LatticeOp"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.operations.LatticeOp">[docs]</a><span class="k">class</span> <span class="nc">LatticeOp</span><span class="p">(</span><span class="n">AssocOp</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Join/meet operations of an algebraic lattice[1].</span>
+
+<span class="sd">    These binary operations are associative (op(op(a, b), c) = op(a, op(b, c))),</span>
+<span class="sd">    commutative (op(a, b) = op(b, a)) and idempotent (op(a, a) = op(a) = a).</span>
+<span class="sd">    Common examples are AND, OR, Union, Intersection, max or min. They have an</span>
+<span class="sd">    identity element (op(identity, a) = a) and an absorbing element</span>
+<span class="sd">    conventionally called zero (op(zero, a) = zero).</span>
+
+<span class="sd">    This is an abstract base class, concrete derived classes must declare</span>
+<span class="sd">    attributes zero and identity. All defining properties are then respected.</span>
+
+<span class="sd">    &gt;&gt;&gt; from .. import Integer</span>
+<span class="sd">    &gt;&gt;&gt; from .operations import LatticeOp</span>
+<span class="sd">    &gt;&gt;&gt; class my_join(LatticeOp):</span>
+<span class="sd">    ...     zero = Integer(0)</span>
+<span class="sd">    ...     identity = Integer(1)</span>
+<span class="sd">    &gt;&gt;&gt; my_join(2, 3) == my_join(3, 2)</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; my_join(2, my_join(3, 4)) == my_join(2, 3, 4)</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; my_join(0, 1, 4, 2, 3, 4)</span>
+<span class="sd">    0</span>
+<span class="sd">    &gt;&gt;&gt; my_join(1, 2)</span>
+<span class="sd">    2</span>
+
+<span class="sd">    References:</span>
+
+<span class="sd">    [1] - http://en.wikipedia.org/wiki/Lattice_%28order%29</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">is_commutative</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">_sympify</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">_args</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_new_args_filter</span><span class="p">(</span><span class="n">args</span><span class="p">))</span>
+        <span class="k">except</span> <span class="n">ShortCircuit</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">sympify</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">zero</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">_args</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">sympify</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">identity</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">_args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">_args</span><span class="p">)</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># XXX in almost every other case for __new__, *_args is</span>
+            <span class="c1"># passed along, but the expectation here is for _args</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">AssocOp</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">_args</span><span class="p">)</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">_argset</span> <span class="o">=</span> <span class="n">_args</span>
+            <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_new_args_filter</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">arg_sequence</span><span class="p">,</span> <span class="n">call_cls</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generator filtering args&quot;&quot;&quot;</span>
+        <span class="n">ncls</span> <span class="o">=</span> <span class="n">call_cls</span> <span class="ow">or</span> <span class="bp">cls</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">arg_sequence</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="n">ncls</span><span class="o">.</span><span class="n">zero</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ShortCircuit</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">arg</span> <span class="o">==</span> <span class="n">ncls</span><span class="o">.</span><span class="n">identity</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">elif</span> <span class="n">arg</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">ncls</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arg</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="n">x</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">arg</span>
+
+<div class="viewcode-block" id="LatticeOp.make_args"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.operations.LatticeOp.make_args">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">make_args</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a set of args such that cls(*arg_set) == expr.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">_argset</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">frozenset</span><span class="p">([</span><span class="n">sympify</span><span class="p">(</span><span class="n">expr</span><span class="p">)])</span></div>
+
+    <span class="nd">@property</span>
+    <span class="nd">@cacheit</span>
+    <span class="k">def</span> <span class="nf">args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">ordered</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_argset</span><span class="p">))</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_compare_pretty</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="o">-</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">))</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.core.operations</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

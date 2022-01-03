@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.matrices.expressions.hadamard &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.matrices.expressions.hadamard</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.matrices.expressions.hadamard</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">...core</span> <span class="kn">import</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">sympify</span>
+<span class="kn">from</span> <span class="nn">...strategies</span> <span class="kn">import</span> <span class="n">unpack</span><span class="p">,</span> <span class="n">flatten</span><span class="p">,</span> <span class="n">condition</span><span class="p">,</span> <span class="n">exhaust</span><span class="p">,</span> <span class="n">do_one</span>
+
+<span class="kn">from</span> <span class="nn">.matexpr</span> <span class="kn">import</span> <span class="n">MatrixExpr</span><span class="p">,</span> <span class="n">ShapeError</span>
+
+<div class="viewcode-block" id="hadamard_product"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.hadamard.hadamard_product">[docs]</a><span class="k">def</span> <span class="nf">hadamard_product</span><span class="p">(</span><span class="o">*</span><span class="n">matrices</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the elementwise (aka Hadamard) product of matrices.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from ...matrices import hadamard_product, MatrixSymbol</span>
+<span class="sd">    &gt;&gt;&gt; A = MatrixSymbol(&#39;A&#39;, 2, 3)</span>
+<span class="sd">    &gt;&gt;&gt; B = MatrixSymbol(&#39;B&#39;, 2, 3)</span>
+<span class="sd">    &gt;&gt;&gt; hadamard_product(A)</span>
+<span class="sd">    A</span>
+<span class="sd">    &gt;&gt;&gt; hadamard_product(A, B)</span>
+<span class="sd">    A.*B</span>
+<span class="sd">    &gt;&gt;&gt; hadamard_product(A, B)[0, 1]</span>
+<span class="sd">    A[0, 1]*B[0, 1]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">matrices</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Empty Hadamard product is undefined&quot;</span><span class="p">)</span>
+    <span class="n">validate</span><span class="p">(</span><span class="o">*</span><span class="n">matrices</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrices</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">matrices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HadamardProduct</span><span class="p">(</span><span class="o">*</span><span class="n">matrices</span><span class="p">)</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="HadamardProduct"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.hadamard.HadamardProduct">[docs]</a><span class="k">class</span> <span class="nc">HadamardProduct</span><span class="p">(</span><span class="n">MatrixExpr</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Elementwise product of matrix expressions</span>
+
+<span class="sd">    This is a symbolic object that simply stores its argument without</span>
+<span class="sd">    evaluating it. To actually compute the product, use the function</span>
+<span class="sd">    ``hadamard_product()``.</span>
+
+<span class="sd">    &gt;&gt;&gt; from ...matrices import hadamard_product, HadamardProduct, MatrixSymbol</span>
+<span class="sd">    &gt;&gt;&gt; A = MatrixSymbol(&#39;A&#39;, 5, 5)</span>
+<span class="sd">    &gt;&gt;&gt; B = MatrixSymbol(&#39;B&#39;, 5, 5)</span>
+<span class="sd">    &gt;&gt;&gt; isinstance(hadamard_product(A, B), HadamardProduct)</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">is_HadamardProduct</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">sympify</span><span class="p">,</span> <span class="n">args</span><span class="p">))</span>
+        <span class="n">check</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;check&#39;</span>   <span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">check</span><span class="p">:</span>
+            <span class="n">validate</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">HadamardProduct</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="k">def</span> <span class="nf">_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">arg</span><span class="o">.</span><span class="n">_entry</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">_eval_transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">.transpose</span> <span class="kn">import</span> <span class="n">transpose</span>
+        <span class="k">return</span> <span class="n">HadamardProduct</span><span class="p">(</span><span class="o">*</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">transpose</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)))</span>
+
+<div class="viewcode-block" id="HadamardProduct.doit"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.hadamard.HadamardProduct.doit">[docs]</a>    <span class="k">def</span> <span class="nf">doit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">ignored</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">canonicalize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="validate"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.hadamard.validate">[docs]</a><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">is_Matrix</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Mix of Matrix and Scalar symbols&quot;</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">B</span> <span class="ow">in</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+        <span class="k">if</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">B</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ShapeError</span><span class="p">(</span><span class="s2">&quot;Matrices </span><span class="si">%s</span><span class="s2"> and </span><span class="si">%s</span><span class="s2"> are not aligned&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span></div>
+
+<span class="n">rules</span> <span class="o">=</span> <span class="p">(</span><span class="n">unpack</span><span class="p">,</span>
+         <span class="n">flatten</span><span class="p">)</span>
+
+<span class="n">canonicalize</span> <span class="o">=</span> <span class="n">exhaust</span><span class="p">(</span><span class="n">condition</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">HadamardProduct</span><span class="p">),</span>
+                                 <span class="n">do_one</span><span class="p">(</span><span class="o">*</span><span class="n">rules</span><span class="p">)))</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.matrices.expressions.hadamard</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

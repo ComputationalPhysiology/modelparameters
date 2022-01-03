@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.matrices.densetools &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.matrices.densetools</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.matrices.densetools</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Fundamental operations of dense matrices.</span>
+<span class="sd">The dense matrix is stored as a list of lists</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="nb">range</span>
+<span class="kn">from</span> <span class="nn">..utilities.exceptions</span> <span class="kn">import</span> <span class="n">SymPyDeprecationWarning</span>
+
+<span class="n">SymPyDeprecationWarning</span><span class="p">(</span>
+    <span class="n">feature</span><span class="o">=</span><span class="s2">&quot;densetools&quot;</span><span class="p">,</span>
+    <span class="n">issue</span><span class="o">=</span><span class="mi">12695</span><span class="p">,</span>
+    <span class="n">deprecated_since_version</span><span class="o">=</span><span class="s2">&quot;1.1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">warn</span><span class="p">()</span>
+
+<div class="viewcode-block" id="trace"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densetools.trace">[docs]</a><span class="k">def</span> <span class="nf">trace</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the trace of a matrix.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densetools import trace, eye</span>
+<span class="sd">    &gt;&gt;&gt; from .. import ZZ</span>
+<span class="sd">    &gt;&gt;&gt; a = [</span>
+<span class="sd">    ... [ZZ(3), ZZ(7), ZZ(4)],</span>
+<span class="sd">    ... [ZZ(2), ZZ(4), ZZ(5)],</span>
+<span class="sd">    ... [ZZ(6), ZZ(2), ZZ(3)]]</span>
+<span class="sd">    &gt;&gt;&gt; b = eye(4, ZZ)</span>
+<span class="sd">    &gt;&gt;&gt; trace(a, ZZ)</span>
+<span class="sd">    10</span>
+<span class="sd">    &gt;&gt;&gt; trace(b, ZZ)</span>
+<span class="sd">    4</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">zero</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matlist</span><span class="p">)):</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">matlist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="transpose"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densetools.transpose">[docs]</a><span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the transpose of a matrix</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densetools import transpose</span>
+<span class="sd">    &gt;&gt;&gt; from .. import ZZ</span>
+<span class="sd">    &gt;&gt;&gt; a = [</span>
+<span class="sd">    ... [ZZ(3), ZZ(7), ZZ(4)],</span>
+<span class="sd">    ... [ZZ(2), ZZ(4), ZZ(5)],</span>
+<span class="sd">    ... [ZZ(6), ZZ(2), ZZ(3)]]</span>
+<span class="sd">    &gt;&gt;&gt; transpose(a, ZZ)</span>
+<span class="sd">    [[3, 2, 6], [7, 4, 2], [4, 5, 3]]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">matlist</span><span class="p">))]</span></div>
+
+
+<div class="viewcode-block" id="conjugate"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densetools.conjugate">[docs]</a><span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the conjugate of a matrix row-wise.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densetools import conjugate</span>
+<span class="sd">    &gt;&gt;&gt; from .. import ZZ</span>
+<span class="sd">    &gt;&gt;&gt; a = [</span>
+<span class="sd">    ... [ZZ(3), ZZ(2), ZZ(6)],</span>
+<span class="sd">    ... [ZZ(7), ZZ(4), ZZ(2)],</span>
+<span class="sd">    ... [ZZ(4), ZZ(5), ZZ(3)]]</span>
+<span class="sd">    &gt;&gt;&gt; conjugate(a, ZZ)</span>
+<span class="sd">    [[3, 2, 6], [7, 4, 2], [4, 5, 3]]</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    conjugate_row</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">conjugate_row</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matlist</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="conjugate_row"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densetools.conjugate_row">[docs]</a><span class="k">def</span> <span class="nf">conjugate_row</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the conjugate of a row element-wise</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densetools import conjugate_row</span>
+<span class="sd">    &gt;&gt;&gt; from .. import ZZ</span>
+<span class="sd">    &gt;&gt;&gt; a = [ZZ(3), ZZ(2), ZZ(6)]</span>
+<span class="sd">    &gt;&gt;&gt; conjugate_row(a, ZZ)</span>
+<span class="sd">    [3, 2, 6]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">conjugate</span><span class="p">())</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="conjugate_transpose"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densetools.conjugate_transpose">[docs]</a><span class="k">def</span> <span class="nf">conjugate_transpose</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the conjugate-transpose of a matrix</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .. import ZZ</span>
+<span class="sd">    &gt;&gt;&gt; from .densetools import conjugate_transpose</span>
+<span class="sd">    &gt;&gt;&gt; a = [</span>
+<span class="sd">    ... [ZZ(3), ZZ(7), ZZ(4)],</span>
+<span class="sd">    ... [ZZ(2), ZZ(4), ZZ(5)],</span>
+<span class="sd">    ... [ZZ(6), ZZ(2), ZZ(3)]]</span>
+<span class="sd">    &gt;&gt;&gt; conjugate_transpose(a, ZZ)</span>
+<span class="sd">    [[3, 2, 6], [7, 4, 2], [4, 5, 3]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">conjugate</span><span class="p">(</span><span class="n">transpose</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">K</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="augment"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densetools.augment">[docs]</a><span class="k">def</span> <span class="nf">augment</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Augments a matrix and a column.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densetools import augment</span>
+<span class="sd">    &gt;&gt;&gt; from .. import ZZ</span>
+<span class="sd">    &gt;&gt;&gt; a = [</span>
+<span class="sd">    ... [ZZ(3), ZZ(7), ZZ(4)],</span>
+<span class="sd">    ... [ZZ(2), ZZ(4), ZZ(5)],</span>
+<span class="sd">    ... [ZZ(6), ZZ(2), ZZ(3)]]</span>
+<span class="sd">    &gt;&gt;&gt; b = [</span>
+<span class="sd">    ... [ZZ(4)],</span>
+<span class="sd">    ... [ZZ(5)],</span>
+<span class="sd">    ... [ZZ(6)]]</span>
+<span class="sd">    &gt;&gt;&gt; augment(a, b, ZZ)</span>
+<span class="sd">    [[3, 7, 4, 4], [2, 4, 5, 5], [6, 2, 3, 6]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">row</span> <span class="o">+</span> <span class="n">element</span> <span class="k">for</span> <span class="n">row</span><span class="p">,</span> <span class="n">element</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">column</span><span class="p">)]</span></div>
+
+
+<div class="viewcode-block" id="eye"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densetools.eye">[docs]</a><span class="k">def</span> <span class="nf">eye</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns an identity matrix of size n.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densetools import eye</span>
+<span class="sd">    &gt;&gt;&gt; from .. import ZZ</span>
+<span class="sd">    &gt;&gt;&gt; eye(3, ZZ)</span>
+<span class="sd">    [[1, 0, 0], [0, 1, 0], [0, 0, 1]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">):</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">K</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">zero</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="row"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densetools.row">[docs]</a><span class="k">def</span> <span class="nf">row</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the ith row of a matrix</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densetools import row</span>
+<span class="sd">    &gt;&gt;&gt; from .. import ZZ</span>
+<span class="sd">    &gt;&gt;&gt; a = [</span>
+<span class="sd">    ... [ZZ(3), ZZ(7), ZZ(4)],</span>
+<span class="sd">    ... [ZZ(2), ZZ(4), ZZ(5)],</span>
+<span class="sd">    ... [ZZ(6), ZZ(2), ZZ(3)]]</span>
+<span class="sd">    &gt;&gt;&gt; row(a, 2)</span>
+<span class="sd">    [6, 2, 3]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">matlist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="col"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densetools.col">[docs]</a><span class="k">def</span> <span class="nf">col</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the ith column of a matrix</span>
+<span class="sd">    Note: Currently very expensive</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densetools import col</span>
+<span class="sd">    &gt;&gt;&gt; from .. import ZZ</span>
+<span class="sd">    &gt;&gt;&gt; a = [</span>
+<span class="sd">    ... [ZZ(3), ZZ(7), ZZ(4)],</span>
+<span class="sd">    ... [ZZ(2), ZZ(4), ZZ(5)],</span>
+<span class="sd">    ... [ZZ(6), ZZ(2), ZZ(3)]]</span>
+<span class="sd">    &gt;&gt;&gt; col(a, 1)</span>
+<span class="sd">    [[7], [4], [2]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">matcol</span> <span class="o">=</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">matlist</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="p">[[</span><span class="n">l</span><span class="p">]</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">matcol</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span></div>
+
+
+<div class="viewcode-block" id="rowswap"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densetools.rowswap">[docs]</a><span class="k">def</span> <span class="nf">rowswap</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">index1</span><span class="p">,</span> <span class="n">index2</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the matrix with index1 row and index2 row swapped</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">matlist</span><span class="p">[</span><span class="n">index1</span><span class="p">],</span> <span class="n">matlist</span><span class="p">[</span><span class="n">index2</span><span class="p">]</span> <span class="o">=</span> <span class="n">matlist</span><span class="p">[</span><span class="n">index2</span><span class="p">],</span> <span class="n">matlist</span><span class="p">[</span><span class="n">index1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">matlist</span></div>
+
+
+<div class="viewcode-block" id="rowmul"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densetools.rowmul">[docs]</a><span class="k">def</span> <span class="nf">rowmul</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span>  <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Multiplies index row with k</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matlist</span><span class="p">[</span><span class="n">index</span><span class="p">])):</span>
+        <span class="n">matlist</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">k</span><span class="o">*</span><span class="n">matlist</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">matlist</span></div>
+
+
+<div class="viewcode-block" id="rowadd"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densetools.rowadd">[docs]</a><span class="k">def</span> <span class="nf">rowadd</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">index1</span><span class="p">,</span> <span class="n">index2</span> <span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds the index1 row with index2 row which in turn is multiplied by k</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matlist</span><span class="p">[</span><span class="n">index1</span><span class="p">])):</span>
+        <span class="n">matlist</span><span class="p">[</span><span class="n">index1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">matlist</span><span class="p">[</span><span class="n">index1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">k</span><span class="o">*</span><span class="n">matlist</span><span class="p">[</span><span class="n">index2</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">matlist</span></div>
+
+
+<div class="viewcode-block" id="isHermitian"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densetools.isHermitian">[docs]</a><span class="k">def</span> <span class="nf">isHermitian</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks whether matrix is hermitian</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densetools import isHermitian</span>
+<span class="sd">    &gt;&gt;&gt; from .. import QQ</span>
+<span class="sd">    &gt;&gt;&gt; a = [</span>
+<span class="sd">    ... [QQ(2,1), QQ(-1,1), QQ(-1,1)],</span>
+<span class="sd">    ... [QQ(0,1), QQ(4,1), QQ(-1,1)],</span>
+<span class="sd">    ... [QQ(0,1), QQ(0,1), QQ(3,1)]]</span>
+<span class="sd">    &gt;&gt;&gt; isHermitian(a, QQ)</span>
+<span class="sd">    False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">conjugate_transpose</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span> <span class="o">==</span> <span class="n">matlist</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.matrices.densetools</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1335 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.combinatorics.free_groups &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.combinatorics.free_groups</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.combinatorics.free_groups</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..core.basic</span> <span class="kn">import</span> <span class="n">Basic</span>
+<span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="n">is_sequence</span><span class="p">,</span> <span class="n">as_int</span><span class="p">,</span> <span class="n">string_types</span>
+<span class="kn">from</span> <span class="nn">..core.expr</span> <span class="kn">import</span> <span class="n">Expr</span>
+<span class="kn">from</span> <span class="nn">..core.symbol</span> <span class="kn">import</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">symbols</span> <span class="k">as</span> <span class="n">_symbols</span>
+<span class="kn">from</span> <span class="nn">..core.sympify</span> <span class="kn">import</span> <span class="n">CantSympify</span>
+<span class="kn">from</span> <span class="nn">mpmath</span> <span class="kn">import</span> <span class="n">isint</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">S</span>
+<span class="kn">from</span> <span class="nn">..printing.defaults</span> <span class="kn">import</span> <span class="n">DefaultPrinting</span>
+<span class="kn">from</span> <span class="nn">..utilities</span> <span class="kn">import</span> <span class="n">public</span>
+<span class="kn">from</span> <span class="nn">..utilities.iterables</span> <span class="kn">import</span> <span class="n">flatten</span>
+<span class="kn">from</span> <span class="nn">..utilities.magic</span> <span class="kn">import</span> <span class="n">pollute</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">sign</span>
+
+
+<div class="viewcode-block" id="free_group"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.free_groups.free_group">[docs]</a><span class="nd">@public</span>
+<span class="k">def</span> <span class="nf">free_group</span><span class="p">(</span><span class="n">symbols</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct a free group returning ``(FreeGroup, (f_0, f_1, ..., f_(n-1))``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    symbols : str, Symbol/Expr or sequence of str, Symbol/Expr (may be empty)</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">    &gt;&gt;&gt; F, x, y, z = free_group(&quot;x, y, z&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; F</span>
+<span class="sd">    &lt;free group on the generators (x, y, z)&gt;</span>
+<span class="sd">    &gt;&gt;&gt; x**2*y**-1</span>
+<span class="sd">    x**2*y**-1</span>
+<span class="sd">    &gt;&gt;&gt; type(_)</span>
+<span class="sd">    &lt;class &#39;sympy.combinatorics.free_groups.FreeGroupElement&#39;&gt;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_free_group</span> <span class="o">=</span> <span class="n">FreeGroup</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">_free_group</span><span class="p">,)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">_free_group</span><span class="o">.</span><span class="n">generators</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="xfree_group"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.free_groups.xfree_group">[docs]</a><span class="nd">@public</span>
+<span class="k">def</span> <span class="nf">xfree_group</span><span class="p">(</span><span class="n">symbols</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct a free group returning ``(FreeGroup, (f_0, f_1, ..., f_(n-1)))``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    symbols : str, Symbol/Expr or sequence of str, Symbol/Expr (may be empty)</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .free_groups import xfree_group</span>
+<span class="sd">    &gt;&gt;&gt; F, (x, y, z) = xfree_group(&quot;x, y, z&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; F</span>
+<span class="sd">    &lt;free group on the generators (x, y, z)&gt;</span>
+<span class="sd">    &gt;&gt;&gt; y**2*x**-2*z**-1</span>
+<span class="sd">    y**2*x**-2*z**-1</span>
+<span class="sd">    &gt;&gt;&gt; type(_)</span>
+<span class="sd">    &lt;class &#39;sympy.combinatorics.free_groups.FreeGroupElement&#39;&gt;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_free_group</span> <span class="o">=</span> <span class="n">FreeGroup</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">_free_group</span><span class="p">,</span> <span class="n">_free_group</span><span class="o">.</span><span class="n">generators</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="vfree_group"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.free_groups.vfree_group">[docs]</a><span class="nd">@public</span>
+<span class="k">def</span> <span class="nf">vfree_group</span><span class="p">(</span><span class="n">symbols</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct a free group and inject ``f_0, f_1, ..., f_(n-1)`` as symbols</span>
+<span class="sd">    into the global namespace.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    symbols : str, Symbol/Expr or sequence of str, Symbol/Expr (may be empty)</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .free_groups import vfree_group</span>
+<span class="sd">    &gt;&gt;&gt; vfree_group(&quot;x, y, z&quot;)</span>
+<span class="sd">    &lt;free group on the generators (x, y, z)&gt;</span>
+<span class="sd">    &gt;&gt;&gt; x**2*y**-2*z</span>
+<span class="sd">    x**2*y**-2*z</span>
+<span class="sd">    &gt;&gt;&gt; type(_)</span>
+<span class="sd">    &lt;class &#39;sympy.combinatorics.free_groups.FreeGroupElement&#39;&gt;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_free_group</span> <span class="o">=</span> <span class="n">FreeGroup</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+    <span class="n">pollute</span><span class="p">([</span><span class="n">sym</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">sym</span> <span class="ow">in</span> <span class="n">_free_group</span><span class="o">.</span><span class="n">symbols</span><span class="p">],</span> <span class="n">_free_group</span><span class="o">.</span><span class="n">generators</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_free_group</span></div>
+
+
+<span class="k">def</span> <span class="nf">_parse_symbols</span><span class="p">(</span><span class="n">symbols</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">symbols</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_symbols</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">seq</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">Expr</span> <span class="ow">or</span> <span class="n">FreeGroupElement</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">symbols</span><span class="p">,)</span>
+    <span class="k">elif</span> <span class="n">is_sequence</span><span class="p">(</span><span class="n">symbols</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">string_types</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">_symbols</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">Expr</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">symbols</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The type of `symbols` must be one of the following: &quot;</span>
+                     <span class="s2">&quot;a str, Symbol/Expr or a sequence of &quot;</span>
+                     <span class="s2">&quot;one of these types&quot;</span><span class="p">)</span>
+
+
+<span class="c1">##############################################################################</span>
+<span class="c1">#                          FREE GROUP                                        #</span>
+<span class="c1">##############################################################################</span>
+
+<span class="n">_free_group_cache</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">class</span> <span class="nc">FreeGroup</span><span class="p">(</span><span class="n">DefaultPrinting</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Free group with finite or infinite number of generators. Its input API</span>
+<span class="sd">    is that of a str, Symbol/Expr or a sequence of one of</span>
+<span class="sd">    these types (which may be empty)</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ==========</span>
+
+<span class="sd">    [1] http://www.gap-system.org/Manuals/doc/ref/chap37.html</span>
+
+<span class="sd">    [2] https://en.wikipedia.org/wiki/Free_group</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    sympy.polys.rings.PolyRing</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">is_associative</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">is_group</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">is_FreeGroup</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">is_PermutationGroup</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">symbols</span><span class="p">):</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">_parse_symbols</span><span class="p">(</span><span class="n">symbols</span><span class="p">))</span>
+        <span class="n">rank</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">symbols</span><span class="p">)</span>
+        <span class="n">_hash</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">rank</span><span class="p">))</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">_free_group_cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_hash</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">_hash</span> <span class="o">=</span> <span class="n">_hash</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">_rank</span> <span class="o">=</span> <span class="n">rank</span>
+            <span class="c1"># dtype method is used to create new instances of FreeGroupElement</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s2">&quot;FreeGroupElement&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">FreeGroupElement</span><span class="p">,),</span> <span class="p">{</span><span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="n">obj</span><span class="p">})</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">symbols</span> <span class="o">=</span> <span class="n">symbols</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">generators</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">_generators</span><span class="p">()</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">_gens_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">generators</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">generator</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">symbols</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">generators</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">):</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">.</span><span class="n">name</span>
+                    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+                        <span class="nb">setattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">generator</span><span class="p">)</span>
+
+            <span class="n">_free_group_cache</span><span class="p">[</span><span class="n">_hash</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj</span>
+
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="k">def</span> <span class="nf">_generators</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the generators of the FreeGroup.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; F, x, y, z = free_group(&quot;x, y, z&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; F.generators</span>
+<span class="sd">        (x, y, z)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">gens</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">sym</span> <span class="ow">in</span> <span class="n">group</span><span class="o">.</span><span class="n">symbols</span><span class="p">:</span>
+            <span class="n">elm</span> <span class="o">=</span> <span class="p">((</span><span class="n">sym</span><span class="p">,</span> <span class="mi">1</span><span class="p">),)</span>
+            <span class="n">gens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">elm</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">symbols</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return True if ``i`` is contained in FreeGroup.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">FreeGroupElement</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;FreeGroup contains only FreeGroupElement as elements &quot;</span>
+                        <span class="s2">&quot;, not elements of type </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">group</span>
+        <span class="k">return</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">group</span>
+
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hash</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">:</span>
+            <span class="n">str_form</span> <span class="o">=</span> <span class="s2">&quot;&lt;free group with </span><span class="si">%s</span><span class="s2"> generators&gt;&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">str_form</span> <span class="o">=</span> <span class="s2">&quot;&lt;free group on the generators &quot;</span>
+            <span class="n">gens</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generators</span>
+            <span class="n">str_form</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&gt;&quot;</span>
+        <span class="k">return</span> <span class="n">str_form</span>
+
+    <span class="fm">__repr__</span> <span class="o">=</span> <span class="fm">__str__</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">(</span><span class="n">symbols</span><span class="o">=</span><span class="n">symbols</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;No ``FreeGroup`` is equal to any &quot;other&quot; ``FreeGroup``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span> <span class="ow">is</span> <span class="n">other</span>
+
+    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gen</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the index of the generator `gen` from ``(f_0, ..., f_(n-1))``.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; F, x, y = free_group(&quot;x, y&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; F.index(y)</span>
+<span class="sd">        1</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">generators</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;expected a generator of Free Group </span><span class="si">%s</span><span class="s2">, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gen</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">order</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the order of the free group.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Infinity</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># A set containing Identity element of `FreeGroup` self is returned</span>
+            <span class="k">return</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">identity</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Group contains infinitely many elements&quot;</span>
+                            <span class="s2">&quot;, hence can&#39;t be represented&quot;</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rank</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        In group theory, the `rank` of a group `G`, denoted `G.rank`,</span>
+<span class="sd">        can refer to the smallest cardinality of a generating set</span>
+<span class="sd">        for G, that is</span>
+
+<span class="sd">        \operatorname{rank}(G)=\min\{ |X|: X\subseteq G, \langle X\rangle =G\}.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rank</span>
+
+    <span class="k">def</span> <span class="nf">_symbol_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the index of a generator for free group `self`, while</span>
+<span class="sd">        returns the -ve index of the inverse generator.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; from .. import Symbol</span>
+<span class="sd">        &gt;&gt;&gt; F, x, y = free_group(&quot;x, y&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; F._symbol_index(-Symbol(&#39;x&#39;))</span>
+<span class="sd">        0</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="o">-</span><span class="n">symbol</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_abelian</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns if the group is Abelian.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, x, y, z = free_group(&quot;x y z&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; f.is_abelian</span>
+<span class="sd">        False</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">identity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the identity element of free group.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Tests if Free Group element ``g`` belong to self, ``G``.</span>
+
+<span class="sd">        In mathematical terms any linear combination of generators</span>
+<span class="sd">        of a Free Group is contained in it.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, x, y, z = free_group(&quot;x y z&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; f.contains(x**3*y**2)</span>
+<span class="sd">        True</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">FreeGroupElement</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">elif</span> <span class="bp">self</span> <span class="o">!=</span> <span class="n">g</span><span class="o">.</span><span class="n">group</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">is_subgroup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">F</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return True if all elements of `self` belong to `F`.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">F</span><span class="o">.</span><span class="n">is_group</span> <span class="ow">and</span> <span class="nb">all</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span> <span class="k">for</span> <span class="n">gen</span> <span class="ow">in</span> <span class="n">F</span><span class="o">.</span><span class="n">generators</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the center of the free group `self`.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">identity</span><span class="p">}</span>
+
+
+<span class="c1">############################################################################</span>
+<span class="c1">#                          FreeGroupElement                                #</span>
+<span class="c1">############################################################################</span>
+
+
+<span class="k">class</span> <span class="nc">FreeGroupElement</span><span class="p">(</span><span class="n">CantSympify</span><span class="p">,</span> <span class="n">DefaultPrinting</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Used to create elements of FreeGroup. It can not be used directly to</span>
+<span class="sd">    create a free group element. It is called by the `dtype` method of the</span>
+<span class="sd">    `FreeGroup` class.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">is_assoc_word</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">init</span><span class="p">)</span>
+
+    <span class="n">_hash</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">_hash</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hash</span>
+        <span class="k">if</span> <span class="n">_hash</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_hash</span> <span class="o">=</span> <span class="n">_hash</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="p">,</span> <span class="nb">frozenset</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">))))</span>
+        <span class="k">return</span> <span class="n">_hash</span>
+
+    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_identity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">array_form</span> <span class="o">==</span> <span class="nb">tuple</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">array_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        SymPy provides two different internal kinds of representation</span>
+<span class="sd">        of associative words. The first one is called the `array_form`</span>
+<span class="sd">        which is a tuple containing `tuples` as its elements, where the</span>
+<span class="sd">        size of each tuple is two. At the first position the tuple</span>
+<span class="sd">        contains the `symbol-generator`, while at the second position</span>
+<span class="sd">        of tuple contains the exponent of that generator at the position.</span>
+<span class="sd">        Since elements (i.e. words) don&#39;t commute, the indexing of tuple</span>
+<span class="sd">        makes that property to stay.</span>
+
+<span class="sd">        The structure in ``array_form`` of ``FreeGroupElement`` is of form:</span>
+
+<span class="sd">        ``( ( symbol_of_gen , exponent ), ( , ), ... ( , ) )``</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, x, y, z = free_group(&quot;x y z&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; (x*z).array_form</span>
+<span class="sd">        ((x, 1), (z, 1))</span>
+<span class="sd">        &gt;&gt;&gt; (x**2*z*y*x**2).array_form</span>
+<span class="sd">        ((x, 2), (z, 1), (y, 1), (x, 2))</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        letter_repr</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">letter_form</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The letter representation of a ``FreeGroupElement`` is a tuple</span>
+<span class="sd">        of generator symbols, with each entry corresponding to a group</span>
+<span class="sd">        generator. Inverses of the generators are represented by</span>
+<span class="sd">        negative generator symbols.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, a, b, c, d = free_group(&quot;a b c d&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; (a**3).letter_form</span>
+<span class="sd">        (a, a, a)</span>
+<span class="sd">        &gt;&gt;&gt; (a**2*d**-2*a*b**-4).letter_form</span>
+<span class="sd">        (a, a, -d, -d, a, -b, -b, -b, -b)</span>
+<span class="sd">        &gt;&gt;&gt; (a**-2*b**3*d).letter_form</span>
+<span class="sd">        (-a, -a, b, b, b, d)</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        array_form</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">flatten</span><span class="p">([(</span><span class="n">i</span><span class="p">,)</span><span class="o">*</span><span class="n">j</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="p">(</span><span class="o">-</span><span class="n">i</span><span class="p">,)</span><span class="o">*</span><span class="p">(</span><span class="o">-</span><span class="n">j</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">array_form</span><span class="p">]))</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">letter_form</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">is_Symbol</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">(((</span><span class="n">r</span><span class="p">,</span> <span class="mi">1</span><span class="p">),))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">(((</span><span class="o">-</span><span class="n">r</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">),))</span>
+
+    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gen</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">()</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">letter_form</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">gen</span><span class="o">.</span><span class="n">letter_form</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">letter_form_elm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">letter_form</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">(((</span><span class="n">elm</span><span class="p">,</span><span class="mi">1</span><span class="p">),))</span> <span class="k">if</span> <span class="n">elm</span><span class="o">.</span><span class="n">is_Symbol</span> \
+                <span class="k">else</span> <span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">(((</span><span class="o">-</span><span class="n">elm</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),))</span> <span class="k">for</span> <span class="n">elm</span> <span class="ow">in</span> <span class="n">r</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ext_rep</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;This is called the External Representation of ``FreeGroupElement``</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">flatten</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">array_form</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gen</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">gen</span><span class="o">.</span><span class="n">array_form</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">array_form</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_identity</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&lt;identity&gt;&quot;</span>
+
+        <span class="n">symbols</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">symbols</span>
+        <span class="n">str_form</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">array_form</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">array_form</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">array_form</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">array_form</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">array_form</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">str_form</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">array_form</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">str_form</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">array_form</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> \
+                                    <span class="s2">&quot;**&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">array_form</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">array_form</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">str_form</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">array_form</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">str_form</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">array_form</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> \
+                                    <span class="s2">&quot;**&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">array_form</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span>
+        <span class="k">return</span> <span class="n">str_form</span>
+
+    <span class="fm">__repr__</span> <span class="o">=</span> <span class="fm">__str__</span>
+
+    <span class="k">def</span> <span class="fm">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">as_int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">identity</span>
+
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="o">-</span><span class="n">n</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inverse</span><span class="p">())</span><span class="o">**</span><span class="n">n</span>
+
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">*</span><span class="bp">self</span>
+        <span class="c1"># this method can be improved instead of just returning the</span>
+        <span class="c1"># multiplication of elements</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the product of elements belonging to the same ``FreeGroup``.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, x, y, z = free_group(&quot;x y z&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; x*y**2*y**-4</span>
+<span class="sd">        x*y**-2</span>
+<span class="sd">        &gt;&gt;&gt; z*y**-2</span>
+<span class="sd">        z*y**-2</span>
+<span class="sd">        &gt;&gt;&gt; x**2*y*y**-1*x**-2</span>
+<span class="sd">        &lt;identity&gt;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;only FreeGroup elements of same FreeGroup can &quot;</span>
+                    <span class="s2">&quot;be multiplied&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_identity</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">other</span>
+        <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">is_identity</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">array_form</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">array_form</span><span class="p">)</span>
+        <span class="n">zero_mul_simp</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">array_form</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__div__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;only FreeGroup elements of same FreeGroup can &quot;</span>
+                    <span class="s2">&quot;be multiplied&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">*</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">inverse</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">__rdiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;only FreeGroup elements of same FreeGroup can &quot;</span>
+                    <span class="s2">&quot;be multiplied&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">other</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inverse</span><span class="p">())</span>
+
+    <span class="fm">__truediv__</span> <span class="o">=</span> <span class="n">__div__</span>
+
+    <span class="fm">__rtruediv__</span> <span class="o">=</span> <span class="n">__rdiv__</span>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the inverse of a ``FreeGroupElement`` element</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, x, y, z = free_group(&quot;x y z&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; x.inverse()</span>
+<span class="sd">        x**-1</span>
+<span class="sd">        &gt;&gt;&gt; (x*y).inverse()</span>
+<span class="sd">        y**-1*x**-1</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([(</span><span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">array_form</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">order</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Find the order of a ``FreeGroupElement``.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, x, y = free_group(&quot;x y&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; (x**2*y*y**-1*x**-2).order()</span>
+<span class="sd">        1</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_identity</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Infinity</span>
+
+    <span class="k">def</span> <span class="nf">commutator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return the commutator of `self` and `x`: ``~x*~self*x*self``</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;commutator of only FreeGroupElement of the same &quot;</span>
+                    <span class="s2">&quot;FreeGroup exists&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span><span class="o">*</span><span class="n">other</span><span class="o">.</span><span class="n">inverse</span><span class="p">()</span><span class="o">*</span><span class="bp">self</span><span class="o">*</span><span class="n">other</span>
+
+    <span class="k">def</span> <span class="nf">eliminate_words</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">words</span><span class="p">,</span> <span class="n">_all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Replace each subword from the dictionary `words` by words[subword].</span>
+<span class="sd">        If words is a list, replace the words by the identity.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">words</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+                <span class="n">new</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">eliminate_word</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">words</span><span class="p">[</span><span class="n">sub</span><span class="p">],</span> <span class="n">_all</span><span class="o">=</span><span class="n">_all</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+                <span class="n">new</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">eliminate_word</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="n">_all</span><span class="o">=</span><span class="n">_all</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">new</span>
+
+    <span class="k">def</span> <span class="nf">eliminate_word</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gen</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">_all</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        For an associative word `self`, a subword `gen`, and an associative</span>
+<span class="sd">        word `by` (identity by default), return the associative word obtained by</span>
+<span class="sd">        replacing each occurrence of `gen` in `self` by `by`. If `_all = True`,</span>
+<span class="sd">        the occurrences of `gen` that may appear after the first substitution will</span>
+<span class="sd">        also be replaced and so on until no occurrences are found. This might not</span>
+<span class="sd">        always terminate (e.g. `(x).eliminate_word(x, x**2, _all=True)`).</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, x, y = free_group(&quot;x y&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; w = x**5*y*x**2*y**-4*x</span>
+<span class="sd">        &gt;&gt;&gt; w.eliminate_word( x, x**2 )</span>
+<span class="sd">        x**10*y*x**4*y**-4*x**2</span>
+<span class="sd">        &gt;&gt;&gt; w.eliminate_word( x, y**-1 )</span>
+<span class="sd">        y**-11</span>
+<span class="sd">        &gt;&gt;&gt; w.eliminate_word(x**5)</span>
+<span class="sd">        y*x**2*y**-4*x</span>
+<span class="sd">        &gt;&gt;&gt; w.eliminate_word(x*y, y)</span>
+<span class="sd">        x**4*y*x**2*y**-4*x</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        ========</span>
+<span class="sd">        substituted_word</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">by</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">by</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span><span class="o">.</span><span class="n">identity</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_independent</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span> <span class="ow">or</span> <span class="n">gen</span> <span class="o">==</span> <span class="n">by</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">if</span> <span class="n">gen</span> <span class="o">==</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">by</span>
+        <span class="k">if</span> <span class="n">gen</span><span class="o">**-</span><span class="mi">1</span> <span class="o">==</span> <span class="n">by</span><span class="p">:</span>
+            <span class="n">_all</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">subword_index</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">i</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">subword_index</span><span class="p">(</span><span class="n">gen</span><span class="o">**-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">word</span>
+
+        <span class="n">word</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">subword</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span><span class="o">*</span><span class="n">by</span><span class="o">**</span><span class="n">k</span><span class="o">*</span><span class="n">word</span><span class="o">.</span><span class="n">subword</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">l</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">))</span><span class="o">.</span><span class="n">eliminate_word</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="n">by</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">_all</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">word</span><span class="o">.</span><span class="n">eliminate_word</span><span class="p">(</span><span class="n">gen</span><span class="p">,</span> <span class="n">by</span><span class="p">,</span> <span class="n">_all</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">word</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        For an associative word `self`, returns the number of letters in it.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, a, b = free_group(&quot;a b&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; w = a**5*b*a**2*b**-4*a</span>
+<span class="sd">        &gt;&gt;&gt; len(w)</span>
+<span class="sd">        13</span>
+<span class="sd">        &gt;&gt;&gt; len(a**17)</span>
+<span class="sd">        17</span>
+<span class="sd">        &gt;&gt;&gt; len(w**0)</span>
+<span class="sd">        0</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Two  associative words are equal if they are words over the</span>
+<span class="sd">        same alphabet and if they are sequences of the same letters.</span>
+<span class="sd">        This is equivalent to saying that the external representations</span>
+<span class="sd">        of the words are equal.</span>
+<span class="sd">        There is no &quot;universal&quot; empty word, every alphabet has its own</span>
+<span class="sd">        empty word.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, swapnil0, swapnil1 = free_group(&quot;swapnil0 swapnil1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; f</span>
+<span class="sd">        &lt;free group on the generators (swapnil0, swapnil1)&gt;</span>
+<span class="sd">        &gt;&gt;&gt; g, swap0, swap1 = free_group(&quot;swap0 swap1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; g</span>
+<span class="sd">        &lt;free group on the generators (swap0, swap1)&gt;</span>
+
+<span class="sd">        &gt;&gt;&gt; swapnil0 == swapnil1</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; swapnil0*swapnil1 == swapnil1/swapnil1*swapnil0*swapnil1</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; swapnil0*swapnil1 == swapnil1*swapnil0</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; swapnil1**0 == swap0**0</span>
+<span class="sd">        False</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        The  ordering  of  associative  words is defined by length and</span>
+<span class="sd">        lexicography (this ordering is called short-lex ordering), that</span>
+<span class="sd">        is, shorter words are smaller than longer words, and words of the</span>
+<span class="sd">        same length are compared w.r.t. the lexicographical ordering induced</span>
+<span class="sd">        by the ordering of generators. Generators  are  sorted  according</span>
+<span class="sd">        to the order in which they were created. If the generators are</span>
+<span class="sd">        invertible then each generator `g` is larger than its inverse `g^{-1}`,</span>
+<span class="sd">        and `g^{-1}` is larger than every generator that is smaller than `g`.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, a, b = free_group(&quot;a b&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; b &lt; a</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; a &lt; a.inverse()</span>
+<span class="sd">        False</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;only FreeGroup elements of same FreeGroup can &quot;</span>
+                             <span class="s2">&quot;be compared&quot;</span><span class="p">)</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="c1"># implement lenlex order</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="n">l</span> <span class="o">&gt;</span> <span class="n">m</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">letter_form</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">letter_form</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">_symbol_index</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">_symbol_index</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="nb">abs</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">elif</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="n">q</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="n">q</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span> <span class="o">==</span> <span class="n">other</span> <span class="ow">or</span> <span class="bp">self</span> <span class="o">&lt;</span> <span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, x, y, z = free_group(&quot;x y z&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; y**2 &gt; x**2</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; y*z &gt; z*y</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; x &gt; x.inverse()</span>
+<span class="sd">        True</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;only FreeGroup elements of same FreeGroup can &quot;</span>
+                             <span class="s2">&quot;be compared&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span> <span class="o">&lt;=</span> <span class="n">other</span>
+
+    <span class="k">def</span> <span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span> <span class="o">&lt;</span> <span class="n">other</span>
+
+    <span class="k">def</span> <span class="nf">exponent_sum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gen</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        For an associative word `self` and a generator or inverse of generator</span>
+<span class="sd">        `gen`, ``exponent_sum`` returns the number of times `gen` appears in</span>
+<span class="sd">        `self` minus the number of times its inverse appears in `self`. If</span>
+<span class="sd">        neither `gen` nor its inverse occur in `self` then 0 is returned.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; F, x, y = free_group(&quot;x, y&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; w = x**2*y**3</span>
+<span class="sd">        &gt;&gt;&gt; w.exponent_sum(x)</span>
+<span class="sd">        2</span>
+<span class="sd">        &gt;&gt;&gt; w.exponent_sum(x**-1)</span>
+<span class="sd">        -2</span>
+<span class="sd">        &gt;&gt;&gt; w = x**2*y**4*x**-3</span>
+<span class="sd">        &gt;&gt;&gt; w.exponent_sum(x)</span>
+<span class="sd">        -1</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        ========</span>
+<span class="sd">        generator_count</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;gen must be a generator or inverse of a generator&quot;</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">array_form</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">array_form</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+
+    <span class="k">def</span> <span class="nf">generator_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gen</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        For an associative word `self` and a generator `gen`,</span>
+<span class="sd">        ``generator_count`` returns the multiplicity of generator</span>
+<span class="sd">        `gen` in `self`.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; F, x, y = free_group(&quot;x, y&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; w = x**2*y**3</span>
+<span class="sd">        &gt;&gt;&gt; w.generator_count(x)</span>
+<span class="sd">        2</span>
+<span class="sd">        &gt;&gt;&gt; w = x**2*y**4*x**-3</span>
+<span class="sd">        &gt;&gt;&gt; w.generator_count(x)</span>
+<span class="sd">        5</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        ========</span>
+<span class="sd">        exponent_sum</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">gen</span><span class="o">.</span><span class="n">array_form</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;gen must be a generator&quot;</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">gen</span><span class="o">.</span><span class="n">array_form</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="nb">sum</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">array_form</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+
+    <span class="k">def</span> <span class="nf">subword</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">from_i</span><span class="p">,</span> <span class="n">to_j</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        For an associative word `self` and two positive integers `from_i` and</span>
+<span class="sd">        `to_j`, `subword` returns the subword of `self` that begins at position</span>
+<span class="sd">        `from_i` and ends at `to_j - 1`, indexing is done with origin 0.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, a, b = free_group(&quot;a b&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; w = a**5*b*a**2*b**-4*a</span>
+<span class="sd">        &gt;&gt;&gt; w.subword(2, 6)</span>
+<span class="sd">        a**3*b</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+        <span class="k">if</span> <span class="n">from_i</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">to_j</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`from_i`, `to_j` must be positive and no greater than &quot;</span>
+                    <span class="s2">&quot;the length of associative word&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">to_j</span> <span class="o">&lt;=</span> <span class="n">from_i</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">identity</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">letter_form</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">letter_form</span><span class="p">[</span><span class="n">from_i</span><span class="p">:</span> <span class="n">to_j</span><span class="p">]</span>
+            <span class="n">array_form</span> <span class="o">=</span> <span class="n">letter_form_to_array_form</span><span class="p">(</span><span class="n">letter_form</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">array_form</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">subword_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">,</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Find the index of `word` in `self`.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, a, b = free_group(&quot;a b&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; w = a**2*b*a*b**3</span>
+<span class="sd">        &gt;&gt;&gt; w.subword_index(a*b*a*b)</span>
+<span class="sd">        1</span>
+
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+        <span class="n">self_lf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">letter_form</span>
+        <span class="n">word_lf</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">letter_form</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">self_lf</span><span class="p">)</span><span class="o">-</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">self_lf</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">l</span><span class="p">]</span> <span class="o">==</span> <span class="n">word_lf</span><span class="p">:</span>
+                <span class="n">index</span> <span class="o">=</span> <span class="n">i</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">index</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The given word is not a subword of self&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">is_dependent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; F, x, y = free_group(&quot;x, y&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; (x**4*y**-3).is_dependent(x**4*y**-2)</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; (x**2*y**-1).is_dependent(x*y)</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; (x*y**2*x*y**2).is_dependent(x*y**2)</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; (x**12).is_dependent(x**-4)</span>
+<span class="sd">        True</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        ========</span>
+<span class="sd">        is_independent</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subword_index</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subword_index</span><span class="p">(</span><span class="n">word</span><span class="o">**-</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">None</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">is_independent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        ========</span>
+<span class="sd">        is_dependent</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_dependent</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">contains_generators</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; F, x, y, z = free_group(&quot;x, y, z&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; (x**2*y**-1).contains_generators()</span>
+<span class="sd">        {x, y}</span>
+<span class="sd">        &gt;&gt;&gt; (x**3*z).contains_generators()</span>
+<span class="sd">        {x, z}</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+        <span class="n">gens</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">syllable</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">array_form</span><span class="p">:</span>
+            <span class="n">gens</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">(((</span><span class="n">syllable</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">),)))</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">gens</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">cyclic_subword</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">from_i</span><span class="p">,</span> <span class="n">to_j</span><span class="p">):</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+        <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">letter_form</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">letter_form</span>
+        <span class="n">period1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">from_i</span><span class="o">/</span><span class="n">l</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">from_i</span> <span class="o">&gt;=</span> <span class="n">l</span><span class="p">:</span>
+            <span class="n">from_i</span> <span class="o">-=</span> <span class="n">l</span><span class="o">*</span><span class="n">period1</span>
+            <span class="n">to_j</span> <span class="o">-=</span> <span class="n">l</span><span class="o">*</span><span class="n">period1</span>
+        <span class="n">diff</span> <span class="o">=</span> <span class="n">to_j</span> <span class="o">-</span> <span class="n">from_i</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">letter_form</span><span class="p">[</span><span class="n">from_i</span><span class="p">:</span> <span class="n">to_j</span><span class="p">]</span>
+        <span class="n">period2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">to_j</span><span class="o">/</span><span class="n">l</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">word</span> <span class="o">+=</span> <span class="n">letter_form</span><span class="o">*</span><span class="n">period2</span> <span class="o">+</span> <span class="n">letter_form</span><span class="p">[:</span><span class="n">diff</span><span class="o">-</span><span class="n">l</span><span class="o">+</span><span class="n">from_i</span><span class="o">-</span><span class="n">l</span><span class="o">*</span><span class="n">period2</span><span class="p">]</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="n">letter_form_to_array_form</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">cyclic_conjugates</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a words which are cyclic to the word `self`.</span>
+
+<span class="sd">        References</span>
+<span class="sd">        ==========</span>
+
+<span class="sd">        http://planetmath.org/cyclicpermutation</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; F, x, y = free_group(&quot;x, y&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; w = x*y*x*y*x</span>
+<span class="sd">        &gt;&gt;&gt; w.cyclic_conjugates()</span>
+<span class="sd">        {x*y*x**2*y, x**2*y*x*y, y*x*y*x**2, y*x**2*y*x, x*y*x*y*x}</span>
+<span class="sd">        &gt;&gt;&gt; s = x*y*x**2*y*x</span>
+<span class="sd">        &gt;&gt;&gt; s.cyclic_conjugates()</span>
+<span class="sd">        {x**2*y*x**2*y, y*x**2*y*x**2, x*y*x**2*y*x}</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cyclic_subword</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">))}</span>
+
+    <span class="k">def</span> <span class="nf">is_cyclic_conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks whether words ``self``, ``w`` are cyclic conjugates.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; F, x, y = free_group(&quot;x, y&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; w1 = x**2*y**5</span>
+<span class="sd">        &gt;&gt;&gt; w2 = x*y**5*x</span>
+<span class="sd">        &gt;&gt;&gt; w1.is_cyclic_conjugate(w2)</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; w3 = x**-1*y**5*x**-1</span>
+<span class="sd">        &gt;&gt;&gt; w3.is_cyclic_conjugate(w2)</span>
+<span class="sd">        False</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">l1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">l2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">l1</span> <span class="o">!=</span> <span class="n">l2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">w1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">identity_cyclic_reduction</span><span class="p">()</span>
+        <span class="n">w2</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">identity_cyclic_reduction</span><span class="p">()</span>
+        <span class="n">letter1</span> <span class="o">=</span> <span class="n">w1</span><span class="o">.</span><span class="n">letter_form</span>
+        <span class="n">letter2</span> <span class="o">=</span> <span class="n">w2</span><span class="o">.</span><span class="n">letter_form</span>
+        <span class="n">str1</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">letter1</span><span class="p">))</span>
+        <span class="n">str2</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">letter2</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">str1</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">str2</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="k">return</span> <span class="n">str1</span> <span class="ow">in</span> <span class="n">str2</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">str2</span>
+
+    <span class="k">def</span> <span class="nf">number_syllables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the number of syllables of the associative word `self`.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, swapnil0, swapnil1 = free_group(&quot;swapnil0 swapnil1&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; (swapnil1**3*swapnil0*swapnil1**-1).number_syllables()</span>
+<span class="sd">        3</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">array_form</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">exponent_syllable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the exponent of the `i`-th syllable of the associative word</span>
+<span class="sd">        `self`.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, a, b = free_group(&quot;a b&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; w = a**5*b*a**2*b**-4*a</span>
+<span class="sd">        &gt;&gt;&gt; w.exponent_syllable( 2 )</span>
+<span class="sd">        2</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">array_form</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">generator_syllable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the symbol of the generator that is involved in the</span>
+<span class="sd">        i-th syllable of the associative word `self`.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, a, b = free_group(&quot;a b&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; w = a**5*b*a**2*b**-4*a</span>
+<span class="sd">        &gt;&gt;&gt; w.generator_syllable( 3 )</span>
+<span class="sd">        b</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">array_form</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">sub_syllables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">from_i</span><span class="p">,</span> <span class="n">to_j</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        `sub_syllables` returns the subword of the associative word `self` that</span>
+<span class="sd">        consists of syllables from positions `from_to` to `to_j`, where</span>
+<span class="sd">        `from_to` and `to_j` must be positive integers and indexing is done</span>
+<span class="sd">        with origin 0.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; f, a, b = free_group(&quot;a, b&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; w = a**5*b*a**2*b**-4*a</span>
+<span class="sd">        &gt;&gt;&gt; w.sub_syllables(1, 2)</span>
+<span class="sd">        b</span>
+<span class="sd">        &gt;&gt;&gt; w.sub_syllables(3, 3)</span>
+<span class="sd">        &lt;identity&gt;</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">from_i</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">to_j</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;both arguments should be integers&quot;</span><span class="p">)</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+        <span class="k">if</span> <span class="n">to_j</span> <span class="o">&lt;=</span> <span class="n">from_i</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">identity</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">array_form</span><span class="p">[</span><span class="n">from_i</span><span class="p">:</span> <span class="n">to_j</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">substituted_word</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">from_i</span><span class="p">,</span> <span class="n">to_j</span><span class="p">,</span> <span class="n">by</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the associative word obtained by replacing the subword of</span>
+<span class="sd">        `self` that begins at position `from_i` and ends at position `to_j - 1`</span>
+<span class="sd">        by the associative word `by`. `from_i` and `to_j` must be positive</span>
+<span class="sd">        integers, indexing is done with origin 0. In other words,</span>
+<span class="sd">        `w.substituted_word(w, from_i, to_j, by)` is the product of the three</span>
+<span class="sd">        words: `w.subword(0, from_i)`, `by`, and</span>
+<span class="sd">        `w.subword(to_j len(w))`.</span>
+
+<span class="sd">        See Also</span>
+<span class="sd">        ========</span>
+<span class="sd">        eliminate_word</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lw</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">from_i</span> <span class="o">&gt;=</span> <span class="n">to_j</span> <span class="ow">or</span> <span class="n">from_i</span> <span class="o">&gt;</span> <span class="n">lw</span> <span class="ow">or</span> <span class="n">to_j</span> <span class="o">&gt;</span> <span class="n">lw</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;values should be within bounds&quot;</span><span class="p">)</span>
+
+        <span class="c1"># otherwise there are four possibilities</span>
+
+        <span class="c1"># first if from=1 and to=lw then</span>
+        <span class="k">if</span> <span class="n">from_i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">to_j</span> <span class="o">==</span> <span class="n">lw</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">by</span>
+        <span class="k">elif</span> <span class="n">from_i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># second if from_i=1 (and to_j &lt; lw) then</span>
+            <span class="k">return</span> <span class="n">by</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">subword</span><span class="p">(</span><span class="n">to_j</span><span class="p">,</span> <span class="n">lw</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">to_j</span> <span class="o">==</span> <span class="n">lw</span><span class="p">:</span>   <span class="c1"># third if to_j=1 (and from_i &gt; 1) then</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subword</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">from_i</span><span class="p">)</span><span class="o">*</span><span class="n">by</span>
+        <span class="k">else</span><span class="p">:</span>              <span class="c1"># finally</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">subword</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">from_i</span><span class="p">)</span><span class="o">*</span><span class="n">by</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">subword</span><span class="p">(</span><span class="n">to_j</span><span class="p">,</span> <span class="n">lw</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">is_cyclically_reduced</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Returns whether the word is cyclically reduced or not.</span>
+<span class="sd">        A word is cyclically reduced if by forming the cycle of the</span>
+<span class="sd">        word, the word is not reduced, i.e a word w = `a_1 ... a_n`</span>
+<span class="sd">        is called cyclically reduced if `a_1 \ne a_n^{−1}`.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; F, x, y = free_group(&quot;x, y&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; (x**2*y**-1*x**-1).is_cyclically_reduced()</span>
+<span class="sd">        False</span>
+<span class="sd">        &gt;&gt;&gt; (y*x**2*y**2).is_cyclically_reduced()</span>
+<span class="sd">        True</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">**-</span><span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">identity_cyclic_reduction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a unique cyclically reduced version of the word.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .free_groups import free_group</span>
+<span class="sd">        &gt;&gt;&gt; F, x, y = free_group(&quot;x, y&quot;)</span>
+<span class="sd">        &gt;&gt;&gt; (x**2*y**2*x**-1).identity_cyclic_reduction()</span>
+<span class="sd">        x*y**2</span>
+<span class="sd">        &gt;&gt;&gt; (x**-3*y**-1*x**5).identity_cyclic_reduction()</span>
+<span class="sd">        x**2*y**-1</span>
+
+<span class="sd">        References</span>
+<span class="sd">        ==========</span>
+
+<span class="sd">        http://planetmath.org/cyclicallyreduced</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">word</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">group</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">word</span><span class="o">.</span><span class="n">is_cyclically_reduced</span><span class="p">():</span>
+            <span class="n">exp1</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">exponent_syllable</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">exp2</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">exponent_syllable</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">exp1</span> <span class="o">+</span> <span class="n">exp2</span>
+            <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">rep</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">array_form</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="n">word</span><span class="o">.</span><span class="n">number_syllables</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rep</span> <span class="o">=</span> <span class="p">((</span><span class="n">word</span><span class="o">.</span><span class="n">generator_syllable</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">exp1</span> <span class="o">+</span> <span class="n">exp2</span><span class="p">),)</span> <span class="o">+</span> \
+                        <span class="n">word</span><span class="o">.</span><span class="n">array_form</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span> <span class="n">word</span><span class="o">.</span><span class="n">number_syllables</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">word</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">word</span>
+
+
+<span class="k">def</span> <span class="nf">letter_form_to_array_form</span><span class="p">(</span><span class="n">array_form</span><span class="p">,</span> <span class="n">group</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This method converts a list given with possible repetitions of elements in</span>
+<span class="sd">    it. It returns a new list such that repetitions of consecutive elements is</span>
+<span class="sd">    removed and replace with a tuple element of size two such that the first</span>
+<span class="sd">    index contains `value` and the second index contains the number of</span>
+<span class="sd">    consecutive repetitions of `value`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">array_form</span><span class="p">[:])</span>
+    <span class="n">new_array</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">symbols</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">symbols</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
+                    <span class="n">new_array</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="o">-</span><span class="n">n</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">new_array</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">n</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
+                    <span class="n">new_array</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">new_array</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">new_array</span>
+        <span class="k">elif</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">:</span>
+                <span class="n">new_array</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="o">-</span><span class="n">n</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new_array</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">n</span><span class="p">))</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+
+
+<span class="k">def</span> <span class="nf">zero_mul_simp</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Used to combine two reduced words.&quot;&quot;&quot;</span>
+    <span class="k">while</span> <span class="n">index</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">l</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="n">l</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">exp</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">l</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">l</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">exp</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">l</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">l</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">del</span> <span class="n">l</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+            <span class="n">index</span> <span class="o">-=</span> <span class="mi">1</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.combinatorics.free_groups</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

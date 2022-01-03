@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.polys.domains.ring &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.polys.domains.ring</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.polys.domains.ring</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Implementation of :class:`Ring` class. &quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">.domain</span> <span class="kn">import</span> <span class="n">Domain</span>
+<span class="kn">from</span> <span class="nn">..polyerrors</span> <span class="kn">import</span> <span class="n">ExactQuotientFailed</span><span class="p">,</span> <span class="n">NotInvertible</span><span class="p">,</span> <span class="n">NotReversible</span>
+
+<span class="kn">from</span> <span class="nn">...utilities</span> <span class="kn">import</span> <span class="n">public</span>
+
+<div class="viewcode-block" id="Ring"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.ring.Ring">[docs]</a><span class="nd">@public</span>
+<span class="k">class</span> <span class="nc">Ring</span><span class="p">(</span><span class="n">Domain</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Represents a ring domain. &quot;&quot;&quot;</span>
+
+    <span class="n">is_Ring</span> <span class="o">=</span> <span class="kc">True</span>
+
+<div class="viewcode-block" id="Ring.get_ring"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.ring.Ring.get_ring">[docs]</a>    <span class="k">def</span> <span class="nf">get_ring</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a ring associated with ``self``. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Ring.exquo"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.ring.Ring.exquo">[docs]</a>    <span class="k">def</span> <span class="nf">exquo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Exact quotient of ``a`` and ``b``, implies ``__floordiv__``.  &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ExactQuotientFailed</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">a</span> <span class="o">//</span> <span class="n">b</span></div>
+
+<div class="viewcode-block" id="Ring.quo"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.ring.Ring.quo">[docs]</a>    <span class="k">def</span> <span class="nf">quo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Quotient of ``a`` and ``b``, implies ``__floordiv__``. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">//</span> <span class="n">b</span></div>
+
+<div class="viewcode-block" id="Ring.rem"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.ring.Ring.rem">[docs]</a>    <span class="k">def</span> <span class="nf">rem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Remainder of ``a`` and ``b``, implies ``__mod__``.  &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span></div>
+
+<div class="viewcode-block" id="Ring.div"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.ring.Ring.div">[docs]</a>    <span class="k">def</span> <span class="nf">div</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Division of ``a`` and ``b``, implies ``__divmod__``. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Ring.invert"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.ring.Ring.invert">[docs]</a>    <span class="k">def</span> <span class="nf">invert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns inversion of ``a mod b``. &quot;&quot;&quot;</span>
+        <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gcdex</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_one</span><span class="p">(</span><span class="n">h</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">s</span> <span class="o">%</span> <span class="n">b</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NotInvertible</span><span class="p">(</span><span class="s2">&quot;zero divisor&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Ring.revert"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.ring.Ring.revert">[docs]</a>    <span class="k">def</span> <span class="nf">revert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns ``a**(-1)`` if possible. &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_one</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">a</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NotReversible</span><span class="p">(</span><span class="s1">&#39;only unity is reversible in a ring&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Ring.is_unit"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.ring.Ring.is_unit">[docs]</a>    <span class="k">def</span> <span class="nf">is_unit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">revert</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="n">NotReversible</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Ring.numer"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.ring.Ring.numer">[docs]</a>    <span class="k">def</span> <span class="nf">numer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns numerator of ``a``. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">a</span></div>
+
+<div class="viewcode-block" id="Ring.denom"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.ring.Ring.denom">[docs]</a>    <span class="k">def</span> <span class="nf">denom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns denominator of `a`. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">one</span></div>
+
+<div class="viewcode-block" id="Ring.free_module"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.ring.Ring.free_module">[docs]</a>    <span class="k">def</span> <span class="nf">free_module</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rank</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate a free module of rank ``rank`` over self.</span>
+
+<span class="sd">        &gt;&gt;&gt; from ...abc import x</span>
+<span class="sd">        &gt;&gt;&gt; from ... import QQ</span>
+<span class="sd">        &gt;&gt;&gt; QQ.old_poly_ring(x).free_module(2)</span>
+<span class="sd">        QQ[x]**2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+<div class="viewcode-block" id="Ring.ideal"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.ring.Ring.ideal">[docs]</a>    <span class="k">def</span> <span class="nf">ideal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate an ideal of ``self``.</span>
+
+<span class="sd">        &gt;&gt;&gt; from ...abc import x</span>
+<span class="sd">        &gt;&gt;&gt; from ... import QQ</span>
+<span class="sd">        &gt;&gt;&gt; QQ.old_poly_ring(x).ideal(x**2)</span>
+<span class="sd">        &lt;x**2&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">..agca.ideals</span> <span class="kn">import</span> <span class="n">ModuleImplementedIdeal</span>
+        <span class="k">return</span> <span class="n">ModuleImplementedIdeal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">free_module</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">submodule</span><span class="p">(</span>
+            <span class="o">*</span><span class="p">[[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">gens</span><span class="p">]))</span></div>
+
+<div class="viewcode-block" id="Ring.quotient_ring"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.ring.Ring.quotient_ring">[docs]</a>    <span class="k">def</span> <span class="nf">quotient_ring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Form a quotient ring of ``self``.</span>
+
+<span class="sd">        Here ``e`` can be an ideal or an iterable.</span>
+
+<span class="sd">        &gt;&gt;&gt; from ...abc import x</span>
+<span class="sd">        &gt;&gt;&gt; from ... import QQ</span>
+<span class="sd">        &gt;&gt;&gt; QQ.old_poly_ring(x).quotient_ring(QQ.old_poly_ring(x).ideal(x**2))</span>
+<span class="sd">        QQ[x]/&lt;x**2&gt;</span>
+<span class="sd">        &gt;&gt;&gt; QQ.old_poly_ring(x).quotient_ring([x**2])</span>
+<span class="sd">        QQ[x]/&lt;x**2&gt;</span>
+
+<span class="sd">        The division operator has been overloaded for this:</span>
+
+<span class="sd">        &gt;&gt;&gt; QQ.old_poly_ring(x)/[x**2]</span>
+<span class="sd">        QQ[x]/&lt;x**2&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">..agca.ideals</span> <span class="kn">import</span> <span class="n">Ideal</span>
+        <span class="kn">from</span> <span class="nn">.quotientring</span> <span class="kn">import</span> <span class="n">QuotientRing</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">Ideal</span><span class="p">):</span>
+            <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ideal</span><span class="p">(</span><span class="o">*</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">QuotientRing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__div__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">quotient_ring</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="fm">__truediv__</span> <span class="o">=</span> <span class="n">__div__</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.polys.domains.ring</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

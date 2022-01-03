@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.core.decorators &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.core.decorators</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.core.decorators</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">SymPy core decorators.</span>
+
+<span class="sd">The purpose of this module is to expose decorators without any other</span>
+<span class="sd">dependencies, so that they can be easily imported anywhere in sympy/core.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">.sympify</span> <span class="kn">import</span> <span class="n">SympifyError</span><span class="p">,</span> <span class="n">sympify</span>
+<span class="kn">from</span> <span class="nn">.compatibility</span> <span class="kn">import</span> <span class="n">get_function_code</span>
+
+
+<div class="viewcode-block" id="deprecated"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.decorators.deprecated">[docs]</a><span class="k">def</span> <span class="nf">deprecated</span><span class="p">(</span><span class="o">**</span><span class="n">decorator_kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This is a decorator which can be used to mark functions</span>
+<span class="sd">    as deprecated. It will result in a warning being emitted</span>
+<span class="sd">    when the function is used.&quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">..utilities.exceptions</span> <span class="kn">import</span> <span class="n">SymPyDeprecationWarning</span>
+
+    <span class="k">def</span> <span class="nf">_warn_deprecation</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="n">stacklevel</span><span class="p">):</span>
+        <span class="n">decorator_kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;feature&#39;</span><span class="p">,</span> <span class="n">wrapped</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="n">SymPyDeprecationWarning</span><span class="p">(</span><span class="o">**</span><span class="n">decorator_kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">deprecated_decorator</span><span class="p">(</span><span class="n">wrapped</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="s1">&#39;__mro__&#39;</span><span class="p">):</span>  <span class="c1"># wrapped is actually a class</span>
+            <span class="k">class</span> <span class="nc">wrapper</span><span class="p">(</span><span class="n">wrapped</span><span class="p">):</span>
+                <span class="vm">__doc__</span> <span class="o">=</span> <span class="n">wrapped</span><span class="o">.</span><span class="vm">__doc__</span>
+                <span class="vm">__name__</span> <span class="o">=</span> <span class="n">wrapped</span><span class="o">.</span><span class="vm">__name__</span>
+                <span class="vm">__module__</span> <span class="o">=</span> <span class="n">wrapped</span><span class="o">.</span><span class="vm">__module__</span>
+                <span class="n">_sympy_deprecated_func</span> <span class="o">=</span> <span class="n">wrapped</span>
+                <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                    <span class="n">_warn_deprecation</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+                    <span class="nb">super</span><span class="p">(</span><span class="n">wrapper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nd">@wraps</span><span class="p">(</span><span class="n">wrapped</span><span class="p">)</span>
+            <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="n">_warn_deprecation</span><span class="p">(</span><span class="n">wrapped</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">wrapper</span><span class="o">.</span><span class="n">_sympy_deprecated_func</span> <span class="o">=</span> <span class="n">wrapped</span>
+        <span class="k">return</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">deprecated_decorator</span></div>
+
+
+<span class="k">def</span> <span class="nf">_sympifyit</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">retval</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;decorator to smartly _sympify function arguments</span>
+
+<span class="sd">       @_sympifyit(&#39;other&#39;, NotImplemented)</span>
+<span class="sd">       def add(self, other):</span>
+<span class="sd">           ...</span>
+
+<span class="sd">       In add, other can be thought of as already being a SymPy object.</span>
+
+<span class="sd">       If it is not, the code is likely to catch an exception, then other will</span>
+<span class="sd">       be explicitly _sympified, and the whole code restarted.</span>
+
+<span class="sd">       if _sympify(arg) fails, NotImplemented will be returned</span>
+
+<span class="sd">       see: __sympifyit</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">deco</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">__sympifyit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">retval</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">deco</span>
+
+
+<span class="k">def</span> <span class="nf">__sympifyit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">retval</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;decorator to _sympify `arg` argument for function `func`</span>
+
+<span class="sd">       don&#39;t use directly -- use _sympifyit instead</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># we support f(a,b) only</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">get_function_code</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="o">.</span><span class="n">co_argcount</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">LookupError</span><span class="p">(</span><span class="s2">&quot;func not found&quot;</span><span class="p">)</span>
+    <span class="c1"># only b is _sympified</span>
+    <span class="k">assert</span> <span class="n">get_function_code</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="o">.</span><span class="n">co_varnames</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">arg</span>
+    <span class="k">if</span> <span class="n">retval</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">__sympifyit_wrapper</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">sympify</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">__sympifyit_wrapper</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># If an external class has _op_priority, it knows how to deal</span>
+                <span class="c1"># with sympy objects. Otherwise, it must be converted.</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="s1">&#39;_op_priority&#39;</span><span class="p">):</span>
+                    <span class="n">b</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">SympifyError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">retval</span>
+
+    <span class="k">return</span> <span class="n">__sympifyit_wrapper</span>
+
+
+<div class="viewcode-block" id="call_highest_priority"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.decorators.call_highest_priority">[docs]</a><span class="k">def</span> <span class="nf">call_highest_priority</span><span class="p">(</span><span class="n">method_name</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A decorator for binary special methods to handle _op_priority.</span>
+
+<span class="sd">    Binary special methods in Expr and its subclasses use a special attribute</span>
+<span class="sd">    &#39;_op_priority&#39; to determine whose special method will be called to</span>
+<span class="sd">    handle the operation. In general, the object having the highest value of</span>
+<span class="sd">    &#39;_op_priority&#39; will handle the operation. Expr and subclasses that define</span>
+<span class="sd">    custom binary special methods (__mul__, etc.) should decorate those</span>
+<span class="sd">    methods with this decorator to add the priority logic.</span>
+
+<span class="sd">    The ``method_name`` argument is the name of the method of the other class</span>
+<span class="sd">    that will be called.  Use this decorator in the following manner::</span>
+
+<span class="sd">        # Call other.__rmul__ if other._op_priority &gt; self._op_priority</span>
+<span class="sd">        @call_highest_priority(&#39;__rmul__&#39;)</span>
+<span class="sd">        def __mul__(self, other):</span>
+<span class="sd">            ...</span>
+
+<span class="sd">        # Call other.__mul__ if other._op_priority &gt; self._op_priority</span>
+<span class="sd">        @call_highest_priority(&#39;__mul__&#39;)</span>
+<span class="sd">        def __rmul__(self, other):</span>
+<span class="sd">        ...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">priority_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">binary_op_wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="s1">&#39;_op_priority&#39;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">_op_priority</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_op_priority</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">f</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">method_name</span><span class="p">)</span>
+                    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                        <span class="k">pass</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">binary_op_wrapper</span>
+    <span class="k">return</span> <span class="n">priority_decorator</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.core.decorators</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

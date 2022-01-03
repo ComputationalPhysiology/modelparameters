@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.external.importtools &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.external.importtools</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.external.importtools</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Tools to assist importing optional external modules.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">distutils.version</span> <span class="kn">import</span> <span class="n">StrictVersion</span>
+
+<span class="c1"># Override these in the module to change the default warning behavior.</span>
+<span class="c1"># For example, you might set both to False before running the tests so that</span>
+<span class="c1"># warnings are not printed to the console, or set both to True for debugging.</span>
+
+<span class="n">WARN_NOT_INSTALLED</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Default is False</span>
+<span class="n">WARN_OLD_VERSION</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Default is True</span>
+
+
+<span class="k">def</span> <span class="nf">__sympy_debug</span><span class="p">():</span>
+    <span class="c1"># helper function from sympy/__init__.py</span>
+    <span class="c1"># We don&#39;t just import SYMPY_DEBUG from that file because we don&#39;t want to</span>
+    <span class="c1"># import all of sympy just to use this module.</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="n">debug_str</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s1">&#39;SYMPY_DEBUG&#39;</span><span class="p">,</span> <span class="s1">&#39;False&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">debug_str</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;True&#39;</span><span class="p">,</span> <span class="s1">&#39;False&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="n">debug_str</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;unrecognized value for SYMPY_DEBUG: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span>
+                           <span class="n">debug_str</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">__sympy_debug</span><span class="p">():</span>
+    <span class="n">WARN_OLD_VERSION</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">WARN_NOT_INSTALLED</span> <span class="o">=</span> <span class="kc">True</span>
+
+
+<div class="viewcode-block" id="import_module"><a class="viewcode-back" href="../../../../modelparameters.sympy.external.html#modelparameters.sympy.external.importtools.import_module">[docs]</a><span class="k">def</span> <span class="nf">import_module</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">min_module_version</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">min_python_version</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">warn_not_installed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">warn_old_version</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">module_version_attr</span><span class="o">=</span><span class="s1">&#39;__version__&#39;</span><span class="p">,</span> <span class="n">module_version_attr_call_args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">__import__kwargs</span><span class="o">=</span><span class="p">{},</span> <span class="n">catch</span><span class="o">=</span><span class="p">()):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Import and return a module if it is installed.</span>
+
+<span class="sd">    If the module is not installed, it returns None.</span>
+
+<span class="sd">    A minimum version for the module can be given as the keyword argument</span>
+<span class="sd">    min_module_version.  This should be comparable against the module version.</span>
+<span class="sd">    By default, module.__version__ is used to get the module version.  To</span>
+<span class="sd">    override this, set the module_version_attr keyword argument.  If the</span>
+<span class="sd">    attribute of the module to get the version should be called (e.g.,</span>
+<span class="sd">    module.version()), then set module_version_attr_call_args to the args such</span>
+<span class="sd">    that module.module_version_attr(*module_version_attr_call_args) returns the</span>
+<span class="sd">    module&#39;s version.</span>
+
+<span class="sd">    If the module version is less than min_module_version using the Python &lt;</span>
+<span class="sd">    comparison, None will be returned, even if the module is installed. You can</span>
+<span class="sd">    use this to keep from importing an incompatible older version of a module.</span>
+
+<span class="sd">    You can also specify a minimum Python version by using the</span>
+<span class="sd">    min_python_version keyword argument.  This should be comparable against</span>
+<span class="sd">    sys.version_info.</span>
+
+<span class="sd">    If the keyword argument warn_not_installed is set to True, the function will</span>
+<span class="sd">    emit a UserWarning when the module is not installed.</span>
+
+<span class="sd">    If the keyword argument warn_old_version is set to True, the function will</span>
+<span class="sd">    emit a UserWarning when the library is installed, but cannot be imported</span>
+<span class="sd">    because of the min_module_version or min_python_version options.</span>
+
+<span class="sd">    Note that because of the way warnings are handled, a warning will be</span>
+<span class="sd">    emitted for each module only once.  You can change the default warning</span>
+<span class="sd">    behavior by overriding the values of WARN_NOT_INSTALLED and WARN_OLD_VERSION</span>
+<span class="sd">    in sympy.external.importtools.  By default, WARN_NOT_INSTALLED is False and</span>
+<span class="sd">    WARN_OLD_VERSION is True.</span>
+
+<span class="sd">    This function uses __import__() to import the module.  To pass additional</span>
+<span class="sd">    options to __import__(), use the __import__kwargs keyword argument.  For</span>
+<span class="sd">    example, to import a submodule A.B, you must pass a nonempty fromlist option</span>
+<span class="sd">    to __import__.  See the docstring of __import__().</span>
+
+<span class="sd">    This catches ImportError to determine if the module is not installed.  To</span>
+<span class="sd">    catch additional errors, pass them as a tuple to the catch keyword</span>
+<span class="sd">    argument.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from ..external import import_module</span>
+
+<span class="sd">    &gt;&gt;&gt; numpy = import_module(&#39;numpy&#39;)</span>
+
+<span class="sd">    &gt;&gt;&gt; numpy = import_module(&#39;numpy&#39;, min_python_version=(2, 7),</span>
+<span class="sd">    ... warn_old_version=False)</span>
+
+<span class="sd">    &gt;&gt;&gt; numpy = import_module(&#39;numpy&#39;, min_module_version=&#39;1.5&#39;,</span>
+<span class="sd">    ... warn_old_version=False) # numpy.__version__ is a string</span>
+
+<span class="sd">    &gt;&gt;&gt; # gmpy does not have __version__, but it does have gmpy.version()</span>
+
+<span class="sd">    &gt;&gt;&gt; gmpy = import_module(&#39;gmpy&#39;, min_module_version=&#39;1.14&#39;,</span>
+<span class="sd">    ... module_version_attr=&#39;version&#39;, module_version_attr_call_args=(),</span>
+<span class="sd">    ... warn_old_version=False)</span>
+
+<span class="sd">    &gt;&gt;&gt; # To import a submodule, you must pass a nonempty fromlist to</span>
+<span class="sd">    &gt;&gt;&gt; # __import__().  The values do not matter.</span>
+<span class="sd">    &gt;&gt;&gt; p3 = import_module(&#39;mpl_toolkits.mplot3d&#39;,</span>
+<span class="sd">    ... __import__kwargs={&#39;fromlist&#39;:[&#39;something&#39;]})</span>
+
+<span class="sd">    &gt;&gt;&gt; # matplotlib.pyplot can raise RuntimeError when the display cannot be opened</span>
+<span class="sd">    &gt;&gt;&gt; matplotlib = import_module(&#39;matplotlib&#39;,</span>
+<span class="sd">    ... __import__kwargs={&#39;fromlist&#39;:[&#39;pyplot&#39;]}, catch=(RuntimeError,))</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># keyword argument overrides default, and global variable overrides</span>
+    <span class="c1"># keyword argument.</span>
+    <span class="n">warn_old_version</span> <span class="o">=</span> <span class="p">(</span><span class="n">WARN_OLD_VERSION</span> <span class="k">if</span> <span class="n">WARN_OLD_VERSION</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="n">warn_old_version</span> <span class="ow">or</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">warn_not_installed</span> <span class="o">=</span> <span class="p">(</span><span class="n">WARN_NOT_INSTALLED</span> <span class="k">if</span> <span class="n">WARN_NOT_INSTALLED</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="k">else</span> <span class="n">warn_not_installed</span> <span class="ow">or</span> <span class="kc">False</span><span class="p">)</span>
+
+    <span class="kn">import</span> <span class="nn">warnings</span>
+
+    <span class="c1"># Check Python first so we don&#39;t waste time importing a module we can&#39;t use</span>
+    <span class="k">if</span> <span class="n">min_python_version</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="n">min_python_version</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">warn_old_version</span><span class="p">:</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Python version is too old to use </span><span class="si">%s</span><span class="s2"> &quot;</span>
+                    <span class="s2">&quot;(</span><span class="si">%s</span><span class="s2"> or newer required)&quot;</span> <span class="o">%</span> <span class="p">(</span>
+                        <span class="n">module</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">min_python_version</span><span class="p">))),</span>
+                    <span class="ne">UserWarning</span><span class="p">)</span>
+            <span class="k">return</span>
+
+    <span class="c1"># PyPy 1.6 has rudimentary NumPy support and importing it produces errors, so skip it</span>
+    <span class="k">if</span> <span class="n">module</span> <span class="o">==</span> <span class="s1">&#39;numpy&#39;</span> <span class="ow">and</span> <span class="s1">&#39;__pypy__&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">builtin_module_names</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">mod</span> <span class="o">=</span> <span class="nb">__import__</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="o">**</span><span class="n">__import__kwargs</span><span class="p">)</span>
+
+        <span class="c1">## there&#39;s something funny about imports with matplotlib and py3k. doing</span>
+        <span class="c1">##    from matplotlib import collections</span>
+        <span class="c1">## gives python&#39;s stdlib collections module. explicitly re-importing</span>
+        <span class="c1">## the module fixes this.</span>
+        <span class="n">from_list</span> <span class="o">=</span> <span class="n">__import__kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;fromlist&#39;</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">submod</span> <span class="ow">in</span> <span class="n">from_list</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">submod</span> <span class="o">==</span> <span class="s1">&#39;collections&#39;</span> <span class="ow">and</span> <span class="n">mod</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;matplotlib&#39;</span><span class="p">:</span>
+                <span class="nb">__import__</span><span class="p">(</span><span class="n">module</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">submod</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">warn_not_installed</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> module is not installed&quot;</span> <span class="o">%</span> <span class="n">module</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="k">except</span> <span class="n">catch</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">warn_not_installed</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> module could not be used (</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="nb">repr</span><span class="p">(</span><span class="n">e</span><span class="p">)))</span>
+        <span class="k">return</span>
+
+    <span class="k">if</span> <span class="n">min_module_version</span><span class="p">:</span>
+        <span class="n">modversion</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">module_version_attr</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">module_version_attr_call_args</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">modversion</span> <span class="o">=</span> <span class="n">modversion</span><span class="p">(</span><span class="o">*</span><span class="n">module_version_attr_call_args</span><span class="p">)</span>
+        <span class="c1"># NOTE: StrictVersion() is use here to make sure a comparison like</span>
+        <span class="c1"># &#39;1.11.2&#39; &lt; &#39;1.6.1&#39; doesn&#39;t fail. There is not a straight forward way</span>
+        <span class="c1"># to create a unit test for this.</span>
+        <span class="k">if</span> <span class="n">StrictVersion</span><span class="p">(</span><span class="n">modversion</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">StrictVersion</span><span class="p">(</span><span class="n">min_module_version</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">warn_old_version</span><span class="p">:</span>
+                <span class="c1"># Attempt to create a pretty string version of the version</span>
+                <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="n">string_types</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">min_module_version</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
+                    <span class="n">verstr</span> <span class="o">=</span> <span class="n">min_module_version</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">min_module_version</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
+                    <span class="n">verstr</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">min_module_version</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># Either don&#39;t know what this is.  Hopefully</span>
+                    <span class="c1"># it&#39;s something that has a nice str version, like an int.</span>
+                    <span class="n">verstr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">min_module_version</span><span class="p">)</span>
+                <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> version is too old to use &quot;</span>
+                    <span class="s2">&quot;(</span><span class="si">%s</span><span class="s2"> or newer required)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">verstr</span><span class="p">),</span>
+                    <span class="ne">UserWarning</span><span class="p">)</span>
+            <span class="k">return</span>
+
+    <span class="k">return</span> <span class="n">mod</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.external.importtools</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

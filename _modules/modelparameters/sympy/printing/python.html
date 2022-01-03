@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.printing.python &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.printing.python</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.printing.python</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">keyword</span> <span class="k">as</span> <span class="nn">kw</span>
+<span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">sympy</span>
+<span class="kn">from</span> <span class="nn">.repr</span> <span class="kn">import</span> <span class="n">ReprPrinter</span>
+<span class="kn">from</span> <span class="nn">.str</span> <span class="kn">import</span> <span class="n">StrPrinter</span>
+
+<span class="c1"># A list of classes that should be printed using StrPrinter</span>
+<span class="n">STRPRINT</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Add&quot;</span><span class="p">,</span> <span class="s2">&quot;Infinity&quot;</span><span class="p">,</span> <span class="s2">&quot;Integer&quot;</span><span class="p">,</span> <span class="s2">&quot;Mul&quot;</span><span class="p">,</span> <span class="s2">&quot;NegativeInfinity&quot;</span><span class="p">,</span> <span class="s2">&quot;Pow&quot;</span><span class="p">,</span> <span class="s2">&quot;Zero&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="PythonPrinter"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.python.PythonPrinter">[docs]</a><span class="k">class</span> <span class="nc">PythonPrinter</span><span class="p">(</span><span class="n">ReprPrinter</span><span class="p">,</span> <span class="n">StrPrinter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A printer which converts an expression into its Python interpretation.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settings</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">ReprPrinter</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">StrPrinter</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">settings</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">symbols</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">functions</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Create print methods for classes that should use StrPrinter instead</span>
+        <span class="c1"># of ReprPrinter.</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">STRPRINT</span><span class="p">:</span>
+            <span class="n">f_name</span> <span class="o">=</span> <span class="s2">&quot;_print_</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">name</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">StrPrinter</span><span class="p">,</span> <span class="n">f_name</span><span class="p">)</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">PythonPrinter</span><span class="p">,</span> <span class="n">f_name</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_print_Function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="n">func</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">sympy</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">func</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">functions</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">functions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">StrPrinter</span><span class="o">.</span><span class="n">_print_Function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+
+    <span class="c1"># procedure (!) for defining symbols which have be defined in print_python()</span>
+    <span class="k">def</span> <span class="nf">_print_Symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="n">symbol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_str</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">symbol</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">StrPrinter</span><span class="o">.</span><span class="n">_print_Symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_print_module</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Modules in the expression are unacceptable&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="python"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.python.python">[docs]</a><span class="k">def</span> <span class="nf">python</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return Python interpretation of passed expression</span>
+<span class="sd">    (can be passed to the exec() function without any modifications)&quot;&quot;&quot;</span>
+
+    <span class="n">printer</span> <span class="o">=</span> <span class="n">PythonPrinter</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+    <span class="n">exprp</span> <span class="o">=</span> <span class="n">printer</span><span class="o">.</span><span class="n">doprint</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="c1"># Returning found symbols and functions</span>
+    <span class="n">renamings</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">symbolname</span> <span class="ow">in</span> <span class="n">printer</span><span class="o">.</span><span class="n">symbols</span><span class="p">:</span>
+        <span class="n">newsymbolname</span> <span class="o">=</span> <span class="n">symbolname</span>
+        <span class="c1"># Escape symbol names that are reserved python keywords</span>
+        <span class="k">if</span> <span class="n">kw</span><span class="o">.</span><span class="n">iskeyword</span><span class="p">(</span><span class="n">newsymbolname</span><span class="p">):</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">newsymbolname</span> <span class="o">+=</span> <span class="s2">&quot;_&quot;</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="n">newsymbolname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">printer</span><span class="o">.</span><span class="n">symbols</span>
+                    <span class="ow">and</span> <span class="n">newsymbolname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">printer</span><span class="o">.</span><span class="n">functions</span>
+                <span class="p">):</span>
+                    <span class="n">renamings</span><span class="p">[</span><span class="n">sympy</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">symbolname</span><span class="p">)]</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Symbol</span><span class="p">(</span><span class="n">newsymbolname</span><span class="p">)</span>
+                    <span class="k">break</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">newsymbolname</span> <span class="o">+</span> <span class="s2">&quot; = Symbol(&#39;&quot;</span> <span class="o">+</span> <span class="n">symbolname</span> <span class="o">+</span> <span class="s2">&quot;&#39;)</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="k">for</span> <span class="n">functionname</span> <span class="ow">in</span> <span class="n">printer</span><span class="o">.</span><span class="n">functions</span><span class="p">:</span>
+        <span class="n">newfunctionname</span> <span class="o">=</span> <span class="n">functionname</span>
+        <span class="c1"># Escape function names that are reserved python keywords</span>
+        <span class="k">if</span> <span class="n">kw</span><span class="o">.</span><span class="n">iskeyword</span><span class="p">(</span><span class="n">newfunctionname</span><span class="p">):</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="n">newfunctionname</span> <span class="o">+=</span> <span class="s2">&quot;_&quot;</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="n">newfunctionname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">printer</span><span class="o">.</span><span class="n">symbols</span>
+                    <span class="ow">and</span> <span class="n">newfunctionname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">printer</span><span class="o">.</span><span class="n">functions</span>
+                <span class="p">):</span>
+                    <span class="n">renamings</span><span class="p">[</span><span class="n">sympy</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span><span class="n">functionname</span><span class="p">)]</span> <span class="o">=</span> <span class="n">sympy</span><span class="o">.</span><span class="n">Function</span><span class="p">(</span>
+                        <span class="n">newfunctionname</span>
+                    <span class="p">)</span>
+                    <span class="k">break</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="n">newfunctionname</span> <span class="o">+</span> <span class="s2">&quot; = Function(&#39;&quot;</span> <span class="o">+</span> <span class="n">functionname</span> <span class="o">+</span> <span class="s2">&quot;&#39;)</span><span class="se">\n</span><span class="s2">&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">renamings</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">exprp</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">renamings</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;e = &quot;</span> <span class="o">+</span> <span class="n">printer</span><span class="o">.</span><span class="n">_str</span><span class="p">(</span><span class="n">exprp</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+
+<div class="viewcode-block" id="print_python"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.python.print_python">[docs]</a><span class="k">def</span> <span class="nf">print_python</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Print output of python() function&quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">python</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">))</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.printing.python</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

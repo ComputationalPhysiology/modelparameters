@@ -1,0 +1,678 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.polys.fields &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.polys.fields</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.polys.fields</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Sparse rational function fields. &quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="n">mul</span><span class="p">,</span> <span class="n">lt</span><span class="p">,</span> <span class="n">le</span><span class="p">,</span> <span class="n">gt</span><span class="p">,</span> <span class="n">ge</span>
+
+<span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="n">is_sequence</span><span class="p">,</span> <span class="n">reduce</span><span class="p">,</span> <span class="n">string_types</span>
+<span class="kn">from</span> <span class="nn">..core.expr</span> <span class="kn">import</span> <span class="n">Expr</span>
+<span class="kn">from</span> <span class="nn">..core.symbol</span> <span class="kn">import</span> <span class="n">Symbol</span>
+<span class="kn">from</span> <span class="nn">..core.sympify</span> <span class="kn">import</span> <span class="n">CantSympify</span><span class="p">,</span> <span class="n">sympify</span>
+<span class="kn">from</span> <span class="nn">.rings</span> <span class="kn">import</span> <span class="n">PolyElement</span>
+<span class="kn">from</span> <span class="nn">.orderings</span> <span class="kn">import</span> <span class="n">lex</span>
+<span class="kn">from</span> <span class="nn">.polyerrors</span> <span class="kn">import</span> <span class="n">CoercionFailed</span>
+<span class="kn">from</span> <span class="nn">.polyoptions</span> <span class="kn">import</span> <span class="n">build_options</span>
+<span class="kn">from</span> <span class="nn">.polyutils</span> <span class="kn">import</span> <span class="n">_parallel_dict_from_expr</span>
+<span class="kn">from</span> <span class="nn">.domains.domainelement</span> <span class="kn">import</span> <span class="n">DomainElement</span>
+<span class="kn">from</span> <span class="nn">.domains.polynomialring</span> <span class="kn">import</span> <span class="n">PolynomialRing</span>
+<span class="kn">from</span> <span class="nn">.domains.fractionfield</span> <span class="kn">import</span> <span class="n">FractionField</span>
+<span class="kn">from</span> <span class="nn">.constructor</span> <span class="kn">import</span> <span class="n">construct_domain</span>
+<span class="kn">from</span> <span class="nn">..printing.defaults</span> <span class="kn">import</span> <span class="n">DefaultPrinting</span>
+<span class="kn">from</span> <span class="nn">..utilities</span> <span class="kn">import</span> <span class="n">public</span>
+<span class="kn">from</span> <span class="nn">..utilities.magic</span> <span class="kn">import</span> <span class="n">pollute</span>
+
+<div class="viewcode-block" id="field"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.fields.field">[docs]</a><span class="nd">@public</span>
+<span class="k">def</span> <span class="nf">field</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">lex</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct new rational function field returning (field, x1, ..., xn). &quot;&quot;&quot;</span>
+    <span class="n">_field</span> <span class="o">=</span> <span class="n">FracField</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">_field</span><span class="p">,)</span> <span class="o">+</span> <span class="n">_field</span><span class="o">.</span><span class="n">gens</span></div>
+
+<div class="viewcode-block" id="xfield"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.fields.xfield">[docs]</a><span class="nd">@public</span>
+<span class="k">def</span> <span class="nf">xfield</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">lex</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct new rational function field returning (field, (x1, ..., xn)). &quot;&quot;&quot;</span>
+    <span class="n">_field</span> <span class="o">=</span> <span class="n">FracField</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">_field</span><span class="p">,</span> <span class="n">_field</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="vfield"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.fields.vfield">[docs]</a><span class="nd">@public</span>
+<span class="k">def</span> <span class="nf">vfield</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">lex</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct new rational function field and inject generators into global namespace. &quot;&quot;&quot;</span>
+    <span class="n">_field</span> <span class="o">=</span> <span class="n">FracField</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
+    <span class="n">pollute</span><span class="p">([</span> <span class="n">sym</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">sym</span> <span class="ow">in</span> <span class="n">_field</span><span class="o">.</span><span class="n">symbols</span> <span class="p">],</span> <span class="n">_field</span><span class="o">.</span><span class="n">gens</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_field</span></div>
+
+<div class="viewcode-block" id="sfield"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.fields.sfield">[docs]</a><span class="nd">@public</span>
+<span class="k">def</span> <span class="nf">sfield</span><span class="p">(</span><span class="n">exprs</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Construct a field deriving generators and domain</span>
+<span class="sd">    from options and input expressions.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    exprs : :class:`Expr` or sequence of :class:`Expr` (sympifiable)</span>
+<span class="sd">    symbols : sequence of :class:`Symbol`/:class:`Expr`</span>
+<span class="sd">    options : keyword arguments understood by :class:`Options`</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from ..core import symbols</span>
+<span class="sd">    &gt;&gt;&gt; from ..functions import exp, log</span>
+<span class="sd">    &gt;&gt;&gt; from .fields import sfield</span>
+
+<span class="sd">    &gt;&gt;&gt; x = symbols(&quot;x&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; K, f = sfield((x*log(x) + 4*x**2)*exp(1/x + log(x)/3)/x**2)</span>
+<span class="sd">    &gt;&gt;&gt; K</span>
+<span class="sd">    Rational function field in x, exp(1/x), log(x), x**(1/3) over ZZ with lex order</span>
+<span class="sd">    &gt;&gt;&gt; f</span>
+<span class="sd">    (4*x**2*(exp(1/x)) + x*(exp(1/x))*(log(x)))/((x**(1/3))**5)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">single</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_sequence</span><span class="p">(</span><span class="n">exprs</span><span class="p">):</span>
+        <span class="n">exprs</span><span class="p">,</span> <span class="n">single</span> <span class="o">=</span> <span class="p">[</span><span class="n">exprs</span><span class="p">],</span> <span class="kc">True</span>
+
+    <span class="n">exprs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">sympify</span><span class="p">,</span> <span class="n">exprs</span><span class="p">))</span>
+    <span class="n">opt</span> <span class="o">=</span> <span class="n">build_options</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+    <span class="n">numdens</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">exprs</span><span class="p">:</span>
+        <span class="n">numdens</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">as_numer_denom</span><span class="p">())</span>
+    <span class="n">reps</span><span class="p">,</span> <span class="n">opt</span> <span class="o">=</span> <span class="n">_parallel_dict_from_expr</span><span class="p">(</span><span class="n">numdens</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">opt</span><span class="o">.</span><span class="n">domain</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># NOTE: this is inefficient because construct_domain() automatically</span>
+        <span class="c1"># performs conversion to the target domain. It shouldn&#39;t do this.</span>
+        <span class="n">coeffs</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">list</span><span class="p">(</span><span class="n">rep</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="k">for</span> <span class="n">rep</span> <span class="ow">in</span> <span class="n">reps</span><span class="p">],</span> <span class="p">[])</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">construct_domain</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">opt</span><span class="o">=</span><span class="n">opt</span><span class="p">)</span>
+
+    <span class="n">_field</span> <span class="o">=</span> <span class="n">FracField</span><span class="p">(</span><span class="n">opt</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">opt</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
+    <span class="n">fracs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">reps</span><span class="p">),</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="n">fracs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_field</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">reps</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">])))</span>
+
+    <span class="k">if</span> <span class="n">single</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">_field</span><span class="p">,</span> <span class="n">fracs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">_field</span><span class="p">,</span> <span class="n">fracs</span><span class="p">)</span></div>
+
+<span class="n">_field_cache</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">class</span> <span class="nc">FracField</span><span class="p">(</span><span class="n">DefaultPrinting</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Multivariate distributed rational function field. &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">lex</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">.rings</span> <span class="kn">import</span> <span class="n">PolyRing</span>
+        <span class="n">ring</span> <span class="o">=</span> <span class="n">PolyRing</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
+        <span class="n">symbols</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">symbols</span>
+        <span class="n">ngens</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">ngens</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">domain</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">order</span>
+
+        <span class="n">_hash_tuple</span> <span class="o">=</span> <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">ngens</span><span class="p">,</span> <span class="n">domain</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">_field_cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_hash_tuple</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">_hash_tuple</span> <span class="o">=</span> <span class="n">_hash_tuple</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">_hash</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">(</span><span class="n">_hash_tuple</span><span class="p">)</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">ring</span> <span class="o">=</span> <span class="n">ring</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s2">&quot;FracElement&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">FracElement</span><span class="p">,),</span> <span class="p">{</span><span class="s2">&quot;field&quot;</span><span class="p">:</span> <span class="n">obj</span><span class="p">})</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">symbols</span> <span class="o">=</span> <span class="n">symbols</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">ngens</span> <span class="o">=</span> <span class="n">ngens</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">domain</span> <span class="o">=</span> <span class="n">domain</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
+
+            <span class="n">obj</span><span class="o">.</span><span class="n">zero</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">ring</span><span class="o">.</span><span class="n">zero</span><span class="p">)</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">one</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">ring</span><span class="o">.</span><span class="n">one</span><span class="p">)</span>
+
+            <span class="n">obj</span><span class="o">.</span><span class="n">gens</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">_gens</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">generator</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">symbols</span><span class="p">,</span> <span class="n">obj</span><span class="o">.</span><span class="n">gens</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">):</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="n">symbol</span><span class="o">.</span><span class="n">name</span>
+
+                    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+                        <span class="nb">setattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">generator</span><span class="p">)</span>
+
+            <span class="n">_field_cache</span><span class="p">[</span><span class="n">_hash_tuple</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj</span>
+
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="k">def</span> <span class="nf">_gens</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a list of polynomial generators. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">([</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">gen</span><span class="p">)</span> <span class="k">for</span> <span class="n">gen</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">gens</span> <span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">__getnewargs__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hash</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">FracField</span><span class="p">)</span> <span class="ow">and</span> \
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ngens</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span> <span class="o">==</span> \
+            <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">symbols</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">ngens</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">raw_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">denom</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">denom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">one</span>
+        <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span> <span class="o">=</span> <span class="n">numer</span><span class="o">.</span><span class="n">cancel</span><span class="p">(</span><span class="n">denom</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_new</span><span class="p">(</span><span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">domain_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">ground_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">ground_new</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
+        <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
+            <span class="n">domain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">domain</span><span class="o">.</span><span class="n">is_Field</span> <span class="ow">and</span> <span class="n">domain</span><span class="o">.</span><span class="n">has_assoc_Field</span><span class="p">:</span>
+                <span class="n">ring</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span>
+                <span class="n">ground_field</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">get_field</span><span class="p">()</span>
+                <span class="n">element</span> <span class="o">=</span> <span class="n">ground_field</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+                <span class="n">numer</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">ground_new</span><span class="p">(</span><span class="n">ground_field</span><span class="o">.</span><span class="n">numer</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
+                <span class="n">denom</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">ground_new</span><span class="p">(</span><span class="n">ground_field</span><span class="o">.</span><span class="n">denom</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_new</span><span class="p">(</span><span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span>
+
+    <span class="k">def</span> <span class="nf">field_new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">FracElement</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">element</span><span class="o">.</span><span class="n">field</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">element</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;conversion&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">PolyElement</span><span class="p">):</span>
+            <span class="n">denom</span><span class="p">,</span> <span class="n">numer</span> <span class="o">=</span> <span class="n">element</span><span class="o">.</span><span class="n">clear_denoms</span><span class="p">()</span>
+            <span class="n">numer</span> <span class="o">=</span> <span class="n">numer</span><span class="o">.</span><span class="n">set_ring</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span>
+            <span class="n">denom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">ground_new</span><span class="p">(</span><span class="n">denom</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_new</span><span class="p">(</span><span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">element</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">ring_new</span><span class="p">,</span> <span class="n">element</span><span class="p">))</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;parsing&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">Expr</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_expr</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ground_new</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+
+    <span class="fm">__call__</span> <span class="o">=</span> <span class="n">field_new</span>
+
+    <span class="k">def</span> <span class="nf">_rebuild_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">mapping</span><span class="p">):</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span>
+
+        <span class="k">def</span> <span class="nf">_rebuild</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+            <span class="n">generator</span> <span class="o">=</span> <span class="n">mapping</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">generator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">generator</span>
+            <span class="k">elif</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Add</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">_rebuild</span><span class="p">,</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">)))</span>
+            <span class="k">elif</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">mul</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">_rebuild</span><span class="p">,</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">)))</span>
+            <span class="k">elif</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Pow</span> <span class="ow">and</span> <span class="n">expr</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">is_Integer</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">_rebuild</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">)</span><span class="o">**</span><span class="nb">int</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">exp</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+                <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">domain</span><span class="o">.</span><span class="n">is_Field</span> <span class="ow">and</span> <span class="n">domain</span><span class="o">.</span><span class="n">has_assoc_Field</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">domain</span><span class="o">.</span><span class="n">get_field</span><span class="p">()</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span>
+
+        <span class="k">return</span> <span class="n">_rebuild</span><span class="p">(</span><span class="n">sympify</span><span class="p">(</span><span class="n">expr</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">from_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="n">mapping</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span><span class="p">)))</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">frac</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rebuild_expr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;expected an expression convertible to a rational function in </span><span class="si">%s</span><span class="s2">, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_new</span><span class="p">(</span><span class="n">frac</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">to_domain</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">FractionField</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">to_ring</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">.rings</span> <span class="kn">import</span> <span class="n">PolyRing</span>
+        <span class="k">return</span> <span class="n">PolyRing</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">FracElement</span><span class="p">(</span><span class="n">DomainElement</span><span class="p">,</span> <span class="n">DefaultPrinting</span><span class="p">,</span> <span class="n">CantSympify</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Element of multivariate distributed rational function field. &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">denom</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">denom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">one</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">denom</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span><span class="p">(</span><span class="s2">&quot;zero denominator&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">numer</span> <span class="o">=</span> <span class="n">numer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">denom</span> <span class="o">=</span> <span class="n">denom</span>
+
+    <span class="k">def</span> <span class="nf">raw_new</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">raw_new</span><span class="p">(</span><span class="o">*</span><span class="n">numer</span><span class="o">.</span><span class="n">cancel</span><span class="p">(</span><span class="n">denom</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">to_poly</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;f.denom should be 1&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">numer</span>
+
+    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">to_domain</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__getnewargs__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+
+    <span class="n">_hash</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">_hash</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hash</span>
+        <span class="k">if</span> <span class="n">_hash</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_hash</span> <span class="o">=</span> <span class="n">_hash</span> <span class="o">=</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">_hash</span>
+
+    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">set_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_field</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span> <span class="o">==</span> <span class="n">new_field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new_ring</span> <span class="o">=</span> <span class="n">new_field</span><span class="o">.</span><span class="n">ring</span>
+            <span class="n">numer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="o">.</span><span class="n">set_ring</span><span class="p">(</span><span class="n">new_ring</span><span class="p">)</span>
+            <span class="n">denom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="o">.</span><span class="n">set_ring</span><span class="p">(</span><span class="n">new_ring</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">new_field</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">as_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="o">.</span><span class="n">as_expr</span><span class="p">(</span><span class="o">*</span><span class="n">symbols</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="o">.</span><span class="n">as_expr</span><span class="p">(</span><span class="o">*</span><span class="n">symbols</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">FracElement</span><span class="p">)</span> <span class="ow">and</span> <span class="n">f</span><span class="o">.</span><span class="n">field</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">field</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">numer</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">numer</span> <span class="ow">and</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">denom</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">numer</span> <span class="o">==</span> <span class="n">g</span> <span class="ow">and</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span> <span class="o">==</span> <span class="n">f</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">one</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="n">f</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__nonzero__</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="p">)</span>
+
+    <span class="fm">__bool__</span> <span class="o">=</span> <span class="n">__nonzero__</span>
+
+    <span class="k">def</span> <span class="nf">sort_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">denom</span><span class="o">.</span><span class="n">sort_key</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">numer</span><span class="o">.</span><span class="n">sort_key</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">_cmp</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">op</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="n">f1</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">op</span><span class="p">(</span><span class="n">f1</span><span class="o">.</span><span class="n">sort_key</span><span class="p">(),</span> <span class="n">f2</span><span class="o">.</span><span class="n">sort_key</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f1</span><span class="o">.</span><span class="n">_cmp</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="n">lt</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f1</span><span class="o">.</span><span class="n">_cmp</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="n">le</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f1</span><span class="o">.</span><span class="n">_cmp</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="n">gt</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__ge__</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="n">f2</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f1</span><span class="o">.</span><span class="n">_cmp</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="n">ge</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__pos__</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Negate all coefficients in ``f``. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">raw_new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__neg__</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Negate all coefficients in ``f``. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">raw_new</span><span class="p">(</span><span class="o">-</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_extract_ground</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="n">domain</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">element</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">domain</span><span class="o">.</span><span class="n">is_Field</span> <span class="ow">and</span> <span class="n">domain</span><span class="o">.</span><span class="n">has_assoc_Field</span><span class="p">:</span>
+                <span class="n">ground_field</span> <span class="o">=</span> <span class="n">domain</span><span class="o">.</span><span class="n">get_field</span><span class="p">()</span>
+
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">element</span> <span class="o">=</span> <span class="n">ground_field</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+                <span class="k">except</span> <span class="n">CoercionFailed</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ground_field</span><span class="o">.</span><span class="n">numer</span><span class="p">(</span><span class="n">element</span><span class="p">),</span> <span class="n">ground_field</span><span class="o">.</span><span class="n">denom</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">1</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add rational functions ``f`` and ``g``. &quot;&quot;&quot;</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">field</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">g</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">g</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">denom</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span> <span class="o">+</span> <span class="n">g</span><span class="o">.</span><span class="n">numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">g</span><span class="o">.</span><span class="n">denom</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g</span><span class="o">.</span><span class="n">numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">FracElement</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">FractionField</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">field</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">FractionField</span><span class="p">)</span> <span class="ow">and</span> <span class="n">g</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span> <span class="o">==</span> <span class="n">field</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">g</span><span class="o">.</span><span class="fm">__radd__</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">NotImplemented</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">PolyElement</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">PolynomialRing</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ring</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">ring</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">g</span><span class="o">.</span><span class="fm">__radd__</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="fm">__radd__</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">c</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+
+        <span class="n">op</span><span class="p">,</span> <span class="n">g_numer</span><span class="p">,</span> <span class="n">g_denom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">_extract_ground</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g_numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">g_denom</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g_numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g_denom</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Subtract rational functions ``f`` and ``g``. &quot;&quot;&quot;</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">field</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">g</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="n">g</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">denom</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span> <span class="o">-</span> <span class="n">g</span><span class="o">.</span><span class="n">numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">g</span><span class="o">.</span><span class="n">denom</span> <span class="o">-</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g</span><span class="o">.</span><span class="n">numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span> <span class="o">-</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">FracElement</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">FractionField</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">field</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">FractionField</span><span class="p">)</span> <span class="ow">and</span> <span class="n">g</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span> <span class="o">==</span> <span class="n">field</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">g</span><span class="o">.</span><span class="fm">__rsub__</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">NotImplemented</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">PolyElement</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">PolynomialRing</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ring</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">ring</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">g</span><span class="o">.</span><span class="fm">__rsub__</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="n">op</span><span class="p">,</span> <span class="n">g_numer</span><span class="p">,</span> <span class="n">g_denom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">_extract_ground</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span> <span class="o">-</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g_numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">g_denom</span> <span class="o">-</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g_numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g_denom</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__rsub__</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">-</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">c</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+
+        <span class="n">op</span><span class="p">,</span> <span class="n">g_numer</span><span class="p">,</span> <span class="n">g_denom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">_extract_ground</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">-</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g_numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">-</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">g_denom</span> <span class="o">+</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g_numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g_denom</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Multiply rational functions ``f`` and ``g``. &quot;&quot;&quot;</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">field</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">g</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">field</span><span class="o">.</span><span class="n">zero</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">g</span><span class="o">.</span><span class="n">numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">g</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">FracElement</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">FractionField</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">field</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">FractionField</span><span class="p">)</span> <span class="ow">and</span> <span class="n">g</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span> <span class="o">==</span> <span class="n">field</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">g</span><span class="o">.</span><span class="fm">__rmul__</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">NotImplemented</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">PolyElement</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">PolynomialRing</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ring</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">ring</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">g</span><span class="o">.</span><span class="fm">__rmul__</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="fm">__rmul__</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__rmul__</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">c</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+
+        <span class="n">op</span><span class="p">,</span> <span class="n">g_numer</span><span class="p">,</span> <span class="n">g_denom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">_extract_ground</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">g_numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">g_numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g_denom</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__truediv__</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Computes quotient of fractions ``f`` and ``g``. &quot;&quot;&quot;</span>
+        <span class="n">field</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">field</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">g</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">g</span><span class="o">.</span><span class="n">denom</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g</span><span class="o">.</span><span class="n">numer</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">field</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">FracElement</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">FractionField</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">field</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">FractionField</span><span class="p">)</span> <span class="ow">and</span> <span class="n">g</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">field</span> <span class="o">==</span> <span class="n">field</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">g</span><span class="o">.</span><span class="fm">__rtruediv__</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">NotImplemented</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">PolyElement</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">PolynomialRing</span><span class="p">)</span> <span class="ow">and</span> <span class="n">field</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">ring</span> <span class="o">==</span> <span class="n">g</span><span class="o">.</span><span class="n">ring</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">g</span><span class="o">.</span><span class="fm">__rtruediv__</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="n">op</span><span class="p">,</span> <span class="n">g_numer</span><span class="p">,</span> <span class="n">g_denom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">_extract_ground</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g_numer</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">g_denom</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g_numer</span><span class="p">)</span>
+
+    <span class="n">__div__</span> <span class="o">=</span> <span class="fm">__truediv__</span>
+
+    <span class="k">def</span> <span class="fm">__rtruediv__</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">c</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="p">)</span>
+
+        <span class="n">op</span><span class="p">,</span> <span class="n">g_numer</span><span class="p">,</span> <span class="n">g_denom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">_extract_ground</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g_numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">op</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">NotImplemented</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">*</span><span class="n">g_numer</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">g_denom</span><span class="p">)</span>
+
+    <span class="n">__rdiv__</span> <span class="o">=</span> <span class="fm">__rtruediv__</span>
+
+    <span class="k">def</span> <span class="fm">__pow__</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Raise ``f`` to a non-negative power ``n``. &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">raw_new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">**</span><span class="n">n</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">**</span><span class="n">n</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ZeroDivisionError</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">raw_new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">**-</span><span class="n">n</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">**-</span><span class="n">n</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Computes partial derivative in ``x``.</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        ========</span>
+
+<span class="sd">        &gt;&gt;&gt; from .fields import field</span>
+<span class="sd">        &gt;&gt;&gt; from .domains import ZZ</span>
+
+<span class="sd">        &gt;&gt;&gt; _, x, y, z = field(&quot;x,y,z&quot;, ZZ)</span>
+<span class="sd">        &gt;&gt;&gt; ((x**2 + y)/(z + 1)).diff(x)</span>
+<span class="sd">        2*x/(z + 1)</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">to_poly</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">f</span><span class="o">.</span><span class="n">denom</span> <span class="o">-</span> <span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">*</span><span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">values</span><span class="p">):</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">f</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">ngens</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">gens</span><span class="p">,</span> <span class="n">values</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;expected at least 1 and at most </span><span class="si">%s</span><span class="s2"> values, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">ngens</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">values</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">to_poly</span><span class="p">(),</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">X</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">x</span> <span class="p">]</span>
+            <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">to_poly</span><span class="p">()</span>
+            <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+
+        <span class="n">field</span> <span class="o">=</span> <span class="n">numer</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">to_field</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">field</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">subs</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">to_poly</span><span class="p">(),</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">X</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">x</span> <span class="p">]</span>
+            <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">to_poly</span><span class="p">()</span>
+            <span class="n">numer</span><span class="p">,</span> <span class="n">denom</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">numer</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">),</span> <span class="n">f</span><span class="o">.</span><span class="n">denom</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">compose</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.polys.fields</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

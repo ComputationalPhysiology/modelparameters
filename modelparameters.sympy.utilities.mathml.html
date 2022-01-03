@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>modelparameters.sympy.utilities.mathml package &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="modelparameters.sympy.vector package" href="modelparameters.sympy.vector.html" />
+    <link rel="prev" title="modelparameters.sympy.utilities package" href="modelparameters.sympy.utilities.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.vector.html" title="modelparameters.sympy.vector package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.utilities.html" title="modelparameters.sympy.utilities package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" >modelparameters.sympy package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="modelparameters.sympy.utilities.html" accesskey="U">modelparameters.sympy.utilities package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.utilities.mathml package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="modelparameters-sympy-utilities-mathml-package">
+<h1>modelparameters.sympy.utilities.mathml package<a class="headerlink" href="#modelparameters-sympy-utilities-mathml-package" title="Permalink to this headline">¶</a></h1>
+<section id="module-modelparameters.sympy.utilities.mathml">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.utilities.mathml" title="Permalink to this headline">¶</a></h2>
+<p>Module with some functions for MathML, like transforming MathML
+content in MathML presentation.</p>
+<p>To use this module, you will need lxml.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.utilities.mathml.add_mathml_headers">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.utilities.mathml.</span></span><span class="sig-name descname"><span class="pre">add_mathml_headers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/utilities/mathml.html#add_mathml_headers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.utilities.mathml.add_mathml_headers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.utilities.mathml.apply_xsl">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.utilities.mathml.</span></span><span class="sig-name descname"><span class="pre">apply_xsl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mml</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xsl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/utilities/mathml.html#apply_xsl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.utilities.mathml.apply_xsl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a xsl to a MathML string
+&#64;param mml: a string with MathML code
+&#64;param xsl: a string representing a path to a xsl (xml stylesheet)</p>
+<blockquote>
+<div><p>file. This file name is relative to the PYTHONPATH</p>
+</div></blockquote>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..mathml</span> <span class="kn">import</span> <span class="n">apply_xsl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xsl</span> <span class="o">=</span> <span class="s1">&#39;mathml/data/simple_mmlctop.xsl&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mml</span> <span class="o">=</span> <span class="s1">&#39;&lt;apply&gt; &lt;plus/&gt; &lt;ci&gt;a&lt;/ci&gt; &lt;ci&gt;b&lt;/ci&gt; &lt;/apply&gt;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">apply_xsl</span><span class="p">(</span><span class="n">mml</span><span class="p">,</span><span class="n">xsl</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">splitlines</span><span class="p">())</span>
+<span class="go">&#39;&lt;?xml version=&quot;1.0&quot;?&gt;&lt;mrow xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;  &lt;mi&gt;a&lt;/mi&gt;  &lt;mo&gt; + &lt;/mo&gt;  &lt;mi&gt;b&lt;/mi&gt;&lt;/mrow&gt;&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.utilities.mathml.c2p">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.utilities.mathml.</span></span><span class="sig-name descname"><span class="pre">c2p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mml</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simple</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/utilities/mathml.html#c2p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.utilities.mathml.c2p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transforms a document in MathML content (like the one that sympy produces)
+in one document in MathML presentation, more suitable for printing, and more
+widely accepted</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..mathml</span> <span class="kn">import</span> <span class="n">c2p</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mml</span> <span class="o">=</span> <span class="s1">&#39;&lt;apply&gt; &lt;exp/&gt; &lt;cn&gt;2&lt;/cn&gt; &lt;/apply&gt;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c2p</span><span class="p">(</span><span class="n">mml</span><span class="p">,</span><span class="n">simple</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">!=</span> <span class="n">c2p</span><span class="p">(</span><span class="n">mml</span><span class="p">,</span><span class="n">simple</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">modelparameters.sympy.utilities.mathml package</a><ul>
+<li><a class="reference internal" href="#module-modelparameters.sympy.utilities.mathml">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.utilities.html"
+                        title="previous chapter">modelparameters.sympy.utilities package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.vector.html"
+                        title="next chapter">modelparameters.sympy.vector package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modelparameters.sympy.utilities.mathml.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.vector.html" title="modelparameters.sympy.vector package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.utilities.html" title="modelparameters.sympy.utilities package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" >modelparameters.sympy package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="modelparameters.sympy.utilities.html" >modelparameters.sympy.utilities package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.utilities.mathml package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

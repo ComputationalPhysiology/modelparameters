@@ -1,0 +1,562 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>modelparameters.sympy.strategies package &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="modelparameters.sympy.strategies.branch package" href="modelparameters.sympy.strategies.branch.html" />
+    <link rel="prev" title="modelparameters.sympy.stats package" href="modelparameters.sympy.stats.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.strategies.branch.html" title="modelparameters.sympy.strategies.branch package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.stats.html" title="modelparameters.sympy.stats package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" accesskey="U">modelparameters.sympy package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.strategies package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="modelparameters-sympy-strategies-package">
+<h1>modelparameters.sympy.strategies package<a class="headerlink" href="#modelparameters-sympy-strategies-package" title="Permalink to this headline">¶</a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.strategies.branch.html">modelparameters.sympy.strategies.branch package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.strategies.branch.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.strategies.branch.html#module-modelparameters.sympy.strategies.branch.core">modelparameters.sympy.strategies.branch.core module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.strategies.branch.html#module-modelparameters.sympy.strategies.branch.tools">modelparameters.sympy.strategies.branch.tools module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.strategies.branch.html#module-modelparameters.sympy.strategies.branch.traverse">modelparameters.sympy.strategies.branch.traverse module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.strategies.branch.html#module-modelparameters.sympy.strategies.branch">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-modelparameters.sympy.strategies.core">
+<span id="modelparameters-sympy-strategies-core-module"></span><h2>modelparameters.sympy.strategies.core module<a class="headerlink" href="#module-modelparameters.sympy.strategies.core" title="Permalink to this headline">¶</a></h2>
+<p>Generic SymPy-Independent Strategies</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.core.chain">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.core.</span></span><span class="sig-name descname"><span class="pre">chain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">rules</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/core.html#chain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.core.chain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compose a sequence of rules so that they apply to the expr sequentially</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.core.condition">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.core.</span></span><span class="sig-name descname"><span class="pre">condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cond</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rule</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/core.html#condition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.core.condition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Only apply rule if condition is true</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.core.debug">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.core.</span></span><span class="sig-name descname"><span class="pre">debug</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/core.html#debug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.core.debug" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print out before and after expressions each time rule is used</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.core.do_one">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.core.</span></span><span class="sig-name descname"><span class="pre">do_one</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">rules</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/core.html#do_one"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.core.do_one" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try each of the rules until one works. Then stop.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.core.exhaust">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.core.</span></span><span class="sig-name descname"><span class="pre">exhaust</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/core.html#exhaust"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.core.exhaust" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a rule repeatedly until it has no effect</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.core.identity">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.core.</span></span><span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelparameters.sympy.strategies.core.identity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.core.memoize">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.core.</span></span><span class="sig-name descname"><span class="pre">memoize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/core.html#memoize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.core.memoize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Memoized version of a rule</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.core.minimize">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.core.</span></span><span class="sig-name descname"><span class="pre">minimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">rules</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/core.html#minimize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.core.minimize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select result of rules that minimizes objective</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..strategies</span> <span class="kn">import</span> <span class="n">minimize</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dec</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rl</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">inc</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rl</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">3</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rl</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">inc</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">objective</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># maximize</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rl</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go">5</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.core.null_safe">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.core.</span></span><span class="sig-name descname"><span class="pre">null_safe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/core.html#null_safe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.core.null_safe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return original expr if rule returns None</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.core.switch">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.core.</span></span><span class="sig-name descname"><span class="pre">switch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ruledict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/core.html#switch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.core.switch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select a rule based on the result of key called on the function</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.core.tryit">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.core.</span></span><span class="sig-name descname"><span class="pre">tryit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/core.html#tryit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.core.tryit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return original expr if rule raises exception</p>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.strategies.rl">
+<span id="modelparameters-sympy-strategies-rl-module"></span><h2>modelparameters.sympy.strategies.rl module<a class="headerlink" href="#module-modelparameters.sympy.strategies.rl" title="Permalink to this headline">¶</a></h2>
+<p>Generic Rules for SymPy</p>
+<p>This file assumes knowledge of Basic and little else.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.rl.distribute">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.rl.</span></span><span class="sig-name descname"><span class="pre">distribute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">A</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/rl.html#distribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.rl.distribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turns an A containing Bs into a B of As</p>
+<p>where A, B are container types</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..strategies</span> <span class="kn">import</span> <span class="n">distribute</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">symbols</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;x,y&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dist</span> <span class="o">=</span> <span class="n">distribute</span><span class="p">(</span><span class="n">Mul</span><span class="p">,</span> <span class="n">Add</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">Mul</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span>
+<span class="go">2*(x + y)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dist</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+<span class="go">2*x + 2*y</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.rl.flatten">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.rl.</span></span><span class="sig-name descname"><span class="pre">flatten</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new=&lt;function</span> <span class="pre">Basic.__new__&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/rl.html#flatten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.rl.flatten" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flatten T(a, b, T(c, d), T2(e)) to T(a, b, c, d, T2(e))</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.rl.glom">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.rl.</span></span><span class="sig-name descname"><span class="pre">glom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combine</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/rl.html#glom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.rl.glom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a rule to conglomerate identical args</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..strategies</span> <span class="kn">import</span> <span class="n">glom</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Add</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..abc</span> <span class="kn">import</span> <span class="n">x</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">key</span>     <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">as_coeff_Mul</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span>   <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">as_coeff_Mul</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">combine</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">cnt</span><span class="p">,</span> <span class="n">arg</span><span class="p">:</span> <span class="n">cnt</span> <span class="o">*</span> <span class="n">arg</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rl</span> <span class="o">=</span> <span class="n">glom</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">combine</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">rl</span><span class="p">(</span><span class="n">Add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="go">3*x + 5</span>
+</pre></div>
+</div>
+<p>Wait, how are key, count and combine supposed to work?</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">key</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="go">x</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">count</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">combine</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">2*x</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.rl.rebuild">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.rl.</span></span><span class="sig-name descname"><span class="pre">rebuild</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/rl.html#rebuild"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.rl.rebuild" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rebuild a SymPy tree</p>
+<p>This function recursively calls constructors in the expression tree.
+This forces canonicalization and removes ugliness introduced by the use of
+Basic.__new__</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.rl.rm_id">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.rl.</span></span><span class="sig-name descname"><span class="pre">rm_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">isid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new=&lt;function</span> <span class="pre">Basic.__new__&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/rl.html#rm_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.rl.rm_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a rule to remove identities</p>
+<p>isid - fn :: x -&gt; Bool  — whether or not this element is an identity</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..strategies</span> <span class="kn">import</span> <span class="n">rm_id</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Basic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">remove_zeros</span> <span class="o">=</span> <span class="n">rm_id</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">remove_zeros</span><span class="p">(</span><span class="n">Basic</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go">Basic(1, 2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">remove_zeros</span><span class="p">(</span><span class="n">Basic</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="c1"># If only identites then we keep one</span>
+<span class="go">Basic(0)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>unpack</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.rl.sort">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.rl.</span></span><span class="sig-name descname"><span class="pre">sort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new=&lt;function</span> <span class="pre">Basic.__new__&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/rl.html#sort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.rl.sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a rule to sort by a key function</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..strategies</span> <span class="kn">import</span> <span class="n">sort</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Basic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sort_rl</span> <span class="o">=</span> <span class="n">sort</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sort_rl</span><span class="p">(</span><span class="n">Basic</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go">Basic(1, 2, 3)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.rl.subs">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.rl.</span></span><span class="sig-name descname"><span class="pre">subs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/rl.html#subs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.rl.subs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Replace expressions exactly</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.rl.unpack">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.rl.</span></span><span class="sig-name descname"><span class="pre">unpack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/rl.html#unpack"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.rl.unpack" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rule to unpack singleton args</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..strategies</span> <span class="kn">import</span> <span class="n">unpack</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Basic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unpack</span><span class="p">(</span><span class="n">Basic</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.strategies.tools">
+<span id="modelparameters-sympy-strategies-tools-module"></span><h2>modelparameters.sympy.strategies.tools module<a class="headerlink" href="#module-modelparameters.sympy.strategies.tools" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.tools.canon">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.tools.</span></span><span class="sig-name descname"><span class="pre">canon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">rules</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/tools.html#canon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.tools.canon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Strategy for canonicalization</p>
+<p>Apply each rule in a bottom_up fashion through the tree.
+Do each one in turn.
+Keep doing this until there is no change.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.tools.subs">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.tools.</span></span><span class="sig-name descname"><span class="pre">subs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/tools.html#subs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.tools.subs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Full simultaneous exact substitution</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.tools</span> <span class="kn">import</span> <span class="n">subs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Basic</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mapping</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Basic</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span> <span class="n">Basic</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">)}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">Basic</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Basic</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">Basic</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">Basic</span><span class="p">(</span><span class="mi">5</span><span class="p">)))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">subs</span><span class="p">(</span><span class="n">mapping</span><span class="p">)(</span><span class="n">expr</span><span class="p">)</span>
+<span class="go">Basic(4, Basic(2, 3), Basic(1, Basic(6, 7)))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.tools.typed">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.tools.</span></span><span class="sig-name descname"><span class="pre">typed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ruletypes</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/tools.html#typed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.tools.typed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply rules based on the expression type</p>
+<dl class="simple">
+<dt>inputs:</dt><dd><p>ruletypes – a dict mapping {Type: rule}</p>
+</dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..strategies</span> <span class="kn">import</span> <span class="n">rm_id</span><span class="p">,</span> <span class="n">typed</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Mul</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rm_zeros</span> <span class="o">=</span> <span class="n">rm_id</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rm_ones</span>  <span class="o">=</span> <span class="n">rm_id</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">remove_idents</span> <span class="o">=</span> <span class="n">typed</span><span class="p">({</span><span class="n">Add</span><span class="p">:</span> <span class="n">rm_zeros</span><span class="p">,</span> <span class="n">Mul</span><span class="p">:</span> <span class="n">rm_ones</span><span class="p">})</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.strategies.traverse">
+<span id="modelparameters-sympy-strategies-traverse-module"></span><h2>modelparameters.sympy.strategies.traverse module<a class="headerlink" href="#module-modelparameters.sympy.strategies.traverse" title="Permalink to this headline">¶</a></h2>
+<p>Strategies to Traverse a Tree.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.traverse.bottom_up">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.traverse.</span></span><span class="sig-name descname"><span class="pre">bottom_up</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fns={'children':</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'leaf':</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'new':</span> <span class="pre">&lt;function</span> <span class="pre">Basic.__new__&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'op':</span> <span class="pre">&lt;class</span> <span class="pre">'type'&gt;}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/traverse.html#bottom_up"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.traverse.bottom_up" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a rule down a tree running it on the bottom nodes first.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.traverse.bottom_up_once">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.traverse.</span></span><span class="sig-name descname"><span class="pre">bottom_up_once</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fns={'children':</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'leaf':</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'new':</span> <span class="pre">&lt;function</span> <span class="pre">Basic.__new__&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'op':</span> <span class="pre">&lt;class</span> <span class="pre">'type'&gt;}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/traverse.html#bottom_up_once"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.traverse.bottom_up_once" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a rule up a tree - stop on success.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.traverse.sall">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.traverse.</span></span><span class="sig-name descname"><span class="pre">sall</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fns={'children':</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'leaf':</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'new':</span> <span class="pre">&lt;function</span> <span class="pre">Basic.__new__&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'op':</span> <span class="pre">&lt;class</span> <span class="pre">'type'&gt;}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/traverse.html#sall"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.traverse.sall" title="Permalink to this definition">¶</a></dt>
+<dd><p>Strategic all - apply rule to args.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.traverse.top_down">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.traverse.</span></span><span class="sig-name descname"><span class="pre">top_down</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fns={'children':</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'leaf':</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'new':</span> <span class="pre">&lt;function</span> <span class="pre">Basic.__new__&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'op':</span> <span class="pre">&lt;class</span> <span class="pre">'type'&gt;}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/traverse.html#top_down"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.traverse.top_down" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a rule down a tree running it on the top nodes first.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.traverse.top_down_once">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.traverse.</span></span><span class="sig-name descname"><span class="pre">top_down_once</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rule</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fns={'children':</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'leaf':</span> <span class="pre">&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'new':</span> <span class="pre">&lt;function</span> <span class="pre">Basic.__new__&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'op':</span> <span class="pre">&lt;class</span> <span class="pre">'type'&gt;}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/traverse.html#top_down_once"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.traverse.top_down_once" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a rule down a tree - stop on success.</p>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.strategies.tree">
+<span id="modelparameters-sympy-strategies-tree-module"></span><h2>modelparameters.sympy.strategies.tree module<a class="headerlink" href="#module-modelparameters.sympy.strategies.tree" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.tree.allresults">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.tree.</span></span><span class="sig-name descname"><span class="pre">allresults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leaf=&lt;function</span> <span class="pre">yieldify&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/tree.html#allresults"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.tree.allresults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a strategic tree.  Return all possibilities.</p>
+<p>Returns a lazy iterator of all possible results</p>
+<p>This is an exhaustive algorithm.  In the example</p>
+<blockquote>
+<div><p>([a, b], [c, d])</p>
+</div></blockquote>
+<p>All of the results from</p>
+<blockquote>
+<div><p>(a, c), (b, c), (a, d), (b, d)</p>
+</div></blockquote>
+<p>are returned.  This can lead to combinatorial blowup.</p>
+<p>See sympy.strategies.greedy for details on input</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.tree.brute">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.tree.</span></span><span class="sig-name descname"><span class="pre">brute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objective=&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/tree.html#brute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.tree.brute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.tree.greedy">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.tree.</span></span><span class="sig-name descname"><span class="pre">greedy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objective=&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/tree.html#greedy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.tree.greedy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Execute a strategic tree.  Select alternatives greedily</p>
+<p>Nodes in a tree can be either</p>
+<p>function - a leaf
+list     - a selection among operations
+tuple    - a sequence of chained operations</p>
+<p>Text: Run f, then run g, e.g. <code class="docutils literal notranslate"><span class="pre">lambda</span> <span class="pre">x:</span> <span class="pre">g(f(x))</span></code>
+Code: <code class="docutils literal notranslate"><span class="pre">(f,</span> <span class="pre">g)</span></code></p>
+<p>Text: Run either f or g, whichever minimizes the objective
+Code: <code class="docutils literal notranslate"><span class="pre">[f,</span> <span class="pre">g]</span></code></p>
+<p>Textx: Run either f or g, whichever is better, then run h
+Code: <code class="docutils literal notranslate"><span class="pre">([f,</span> <span class="pre">g],</span> <span class="pre">h)</span></code></p>
+<p>Text: Either expand then simplify or try factor then foosimp. Finally print
+Code: <code class="docutils literal notranslate"><span class="pre">([(expand,</span> <span class="pre">simplify),</span> <span class="pre">(factor,</span> <span class="pre">foosimp)],</span> <span class="pre">print)</span></code></p>
+<p>“Better” is determined by the objective keyword.  This function makes
+choices to minimize the objective.  It defaults to the identity.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.tree</span> <span class="kn">import</span> <span class="n">greedy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inc</span>    <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dec</span>    <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">double</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="p">[</span><span class="n">inc</span><span class="p">,</span> <span class="p">(</span><span class="n">dec</span><span class="p">,</span> <span class="n">double</span><span class="p">)]</span> <span class="c1"># either inc or dec-then-double</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fn</span> <span class="o">=</span> <span class="n">greedy</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fn</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># lowest value comes from the inc</span>
+<span class="go">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fn</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># lowest value comes from dec then double</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+<p>This function selects between options in a tuple.  The result is chosen that
+minimizes the objective function.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fn</span> <span class="o">=</span> <span class="n">greedy</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">objective</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># maximize</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fn</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>  <span class="c1"># highest value comes from the dec then double</span>
+<span class="go">6</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fn</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># highest value comes from the inc</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<p>This is a greedy algorithm.  In the example:</p>
+<blockquote>
+<div><p>([a, b], c)  # do either a or b, then do c</p>
+</div></blockquote>
+<p>the choice between running <code class="docutils literal notranslate"><span class="pre">a</span></code> or <code class="docutils literal notranslate"><span class="pre">b</span></code> is made without foresight to c</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.tree.identity">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.tree.</span></span><span class="sig-name descname"><span class="pre">identity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelparameters.sympy.strategies.tree.identity" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.tree.treeapply">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.tree.</span></span><span class="sig-name descname"><span class="pre">treeapply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tree</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">join</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">leaf=&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/tree.html#treeapply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.tree.treeapply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply functions onto recursive containers (tree)</p>
+<dl class="simple">
+<dt>join - a dictionary mapping container types to functions</dt><dd><p>e.g. <code class="docutils literal notranslate"><span class="pre">{list:</span> <span class="pre">minimize,</span> <span class="pre">tuple:</span> <span class="pre">chain}</span></code></p>
+</dd>
+</dl>
+<p>Keys are containers/iterables.  Values are functions [a] -&gt; a.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.tree</span> <span class="kn">import</span> <span class="n">treeapply</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tree</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">treeapply</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="p">{</span><span class="nb">list</span><span class="p">:</span> <span class="nb">max</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">:</span> <span class="nb">min</span><span class="p">})</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">total</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+<span class="gp">... </span>        <span class="n">total</span> <span class="o">*=</span> <span class="n">arg</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">total</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">treeapply</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="p">{</span><span class="nb">list</span><span class="p">:</span> <span class="n">mul</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">:</span> <span class="n">add</span><span class="p">})</span>
+<span class="go">25</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.strategies.util">
+<span id="modelparameters-sympy-strategies-util-module"></span><h2>modelparameters.sympy.strategies.util module<a class="headerlink" href="#module-modelparameters.sympy.strategies.util" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.strategies.util.assoc">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.strategies.util.</span></span><span class="sig-name descname"><span class="pre">assoc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/strategies/util.html#assoc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.strategies.util.assoc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.strategies">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.strategies" title="Permalink to this headline">¶</a></h2>
+<p>Rewrite Rules</p>
+<p>DISCLAIMER: This module is experimental. The interface is subject to change.</p>
+<p>A rule is a function that transforms one expression into another</p>
+<blockquote>
+<div><p>Rule :: Expr -&gt; Expr</p>
+</div></blockquote>
+<p>A strategy is a function that says how a rule should be applied to a syntax
+tree. In general strategies take rules and produce a new rule</p>
+<blockquote>
+<div><p>Strategy :: [Rules], Other-stuff -&gt; Rule</p>
+</div></blockquote>
+<p>This allows developers to separate a mathematical transformation from the
+algorithmic details of applying that transformation. The goal is to separate
+the work of mathematical programming from algorithmic programming.</p>
+<p>Submodules</p>
+<p>strategies.rl         - some fundamental rules
+strategies.core       - generic non-SymPy specific strategies
+strategies.traverse   - strategies that traverse a SymPy tree
+strategies.tools      - some conglomerate strategies that do depend on SymPy</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">modelparameters.sympy.strategies package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.strategies.core">modelparameters.sympy.strategies.core module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.strategies.rl">modelparameters.sympy.strategies.rl module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.strategies.tools">modelparameters.sympy.strategies.tools module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.strategies.traverse">modelparameters.sympy.strategies.traverse module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.strategies.tree">modelparameters.sympy.strategies.tree module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.strategies.util">modelparameters.sympy.strategies.util module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.strategies">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.stats.html"
+                        title="previous chapter">modelparameters.sympy.stats package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.strategies.branch.html"
+                        title="next chapter">modelparameters.sympy.strategies.branch package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modelparameters.sympy.strategies.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.strategies.branch.html" title="modelparameters.sympy.strategies.branch package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.stats.html" title="modelparameters.sympy.stats package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" >modelparameters.sympy package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.strategies package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

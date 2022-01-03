@@ -1,0 +1,531 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.matrices.densesolve &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.matrices.densesolve</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.matrices.densesolve</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Solution of equations using dense matrices.</span>
+
+<span class="sd">The dense matrix is stored as a list of lists.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">.densetools</span> <span class="kn">import</span> <span class="n">col</span><span class="p">,</span> <span class="n">eye</span><span class="p">,</span> <span class="n">augment</span>
+<span class="kn">from</span> <span class="nn">.densetools</span> <span class="kn">import</span> <span class="n">rowadd</span><span class="p">,</span> <span class="n">rowmul</span><span class="p">,</span> <span class="n">conjugate_transpose</span>
+<span class="kn">from</span> <span class="nn">..core.symbol</span> <span class="kn">import</span> <span class="n">symbols</span>
+<span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="nb">range</span>
+<span class="kn">from</span> <span class="nn">..core.power</span> <span class="kn">import</span> <span class="n">isqrt</span>
+<span class="kn">from</span> <span class="nn">..utilities.exceptions</span> <span class="kn">import</span> <span class="n">SymPyDeprecationWarning</span>
+
+<span class="kn">import</span> <span class="nn">copy</span>
+
+<span class="n">SymPyDeprecationWarning</span><span class="p">(</span>
+    <span class="n">feature</span><span class="o">=</span><span class="s2">&quot;densesolve&quot;</span><span class="p">,</span>
+    <span class="n">issue</span><span class="o">=</span><span class="mi">12695</span><span class="p">,</span>
+    <span class="n">deprecated_since_version</span><span class="o">=</span><span class="s2">&quot;1.1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">warn</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="row_echelon"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densesolve.row_echelon">[docs]</a><span class="k">def</span> <span class="nf">row_echelon</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the row echelon form of a matrix with diagonal elements</span>
+<span class="sd">    reduced to 1.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densesolve import row_echelon</span>
+<span class="sd">    &gt;&gt;&gt; from .. import QQ</span>
+<span class="sd">    &gt;&gt;&gt; a = [</span>
+<span class="sd">    ... [QQ(3), QQ(7), QQ(4)],</span>
+<span class="sd">    ... [QQ(2), QQ(4), QQ(5)],</span>
+<span class="sd">    ... [QQ(6), QQ(2), QQ(3)]]</span>
+<span class="sd">    &gt;&gt;&gt; row_echelon(a, QQ)</span>
+<span class="sd">    [[1, 7/3, 4/3], [0, 1, -7/2], [0, 0, 1]]</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    rref</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result_matlist</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">matlist</span><span class="p">)</span>
+    <span class="n">nrow</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result_matlist</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrow</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">result_matlist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">result_matlist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="n">rowmul</span><span class="p">(</span><span class="n">result_matlist</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">result_matlist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">K</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nrow</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">result_matlist</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="n">rowadd</span><span class="p">(</span><span class="n">result_matlist</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="n">result_matlist</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">K</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result_matlist</span></div>
+
+
+<div class="viewcode-block" id="rref"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densesolve.rref">[docs]</a><span class="k">def</span> <span class="nf">rref</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the reduced row echelon form of a Matrix.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densesolve import rref</span>
+<span class="sd">    &gt;&gt;&gt; from .. import QQ</span>
+<span class="sd">    &gt;&gt;&gt; a = [</span>
+<span class="sd">    ... [QQ(1), QQ(2), QQ(1)],</span>
+<span class="sd">    ... [QQ(-2), QQ(-3), QQ(1)],</span>
+<span class="sd">    ... [QQ(3), QQ(5), QQ(0)]]</span>
+<span class="sd">    &gt;&gt;&gt; rref(a, QQ)</span>
+<span class="sd">    [[1, 0, -5], [0, 1, 3], [0, 0, 0]]</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    row_echelon</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">result_matlist</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">matlist</span><span class="p">)</span>
+    <span class="n">result_matlist</span> <span class="o">=</span> <span class="n">row_echelon</span><span class="p">(</span><span class="n">result_matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="n">nrow</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">result_matlist</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrow</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">result_matlist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                <span class="n">rowadd</span><span class="p">(</span><span class="n">result_matlist</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="n">result_matlist</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">K</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result_matlist</span></div>
+
+
+<div class="viewcode-block" id="LU"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densesolve.LU">[docs]</a><span class="k">def</span> <span class="nf">LU</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">reverse</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    It computes the LU decomposition of a matrix and returns L and U</span>
+<span class="sd">    matrices.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densesolve import LU</span>
+<span class="sd">    &gt;&gt;&gt; from .. import QQ</span>
+<span class="sd">    &gt;&gt;&gt; a = [</span>
+<span class="sd">    ... [QQ(1), QQ(2), QQ(3)],</span>
+<span class="sd">    ... [QQ(2), QQ(-4), QQ(6)],</span>
+<span class="sd">    ... [QQ(3), QQ(-9), QQ(-3)]]</span>
+<span class="sd">    &gt;&gt;&gt; LU(a, QQ)</span>
+<span class="sd">    ([[1, 0, 0], [2, 1, 0], [3, 15/8, 1]], [[1, 2, 3], [0, -8, 0], [0, 0, -12]])</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    upper_triangle</span>
+<span class="sd">    lower_triangle</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nrow</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">matlist</span><span class="p">)</span>
+    <span class="n">new_matlist1</span><span class="p">,</span> <span class="n">new_matlist2</span> <span class="o">=</span> <span class="n">eye</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">matlist</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrow</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nrow</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">new_matlist2</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="n">new_matlist1</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_matlist2</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">new_matlist2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">rowadd</span><span class="p">(</span><span class="n">new_matlist2</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="o">-</span><span class="n">new_matlist2</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">new_matlist2</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">K</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">new_matlist1</span><span class="p">,</span> <span class="n">new_matlist2</span></div>
+
+
+<div class="viewcode-block" id="cholesky"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densesolve.cholesky">[docs]</a><span class="k">def</span> <span class="nf">cholesky</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Performs the cholesky decomposition of a Hermitian matrix and</span>
+<span class="sd">    returns L and it&#39;s conjugate transpose.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densesolve import cholesky</span>
+<span class="sd">    &gt;&gt;&gt; from .. import QQ</span>
+<span class="sd">    &gt;&gt;&gt; cholesky([[QQ(25), QQ(15), QQ(-5)], [QQ(15), QQ(18), QQ(0)], [QQ(-5), QQ(0), QQ(11)]], QQ)</span>
+<span class="sd">    ([[5, 0, 0], [3, 3, 0], [-1, 1, 3]], [[5, 3, -1], [0, 3, 1], [0, 0, 3]])</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    cholesky_solve</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_matlist</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">matlist</span><span class="p">)</span>
+    <span class="n">nrow</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_matlist</span><span class="p">)</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">eye</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrow</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">zero</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="p">):</span>
+                <span class="n">a</span> <span class="o">+=</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+                <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">isqrt</span><span class="p">(</span><span class="n">new_matlist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_matlist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">L</span><span class="p">,</span> <span class="n">conjugate_transpose</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LDL"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densesolve.LDL">[docs]</a><span class="k">def</span> <span class="nf">LDL</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Performs the LDL decomposition of a hermitian matrix and returns L, D and</span>
+<span class="sd">    transpose of L. Only applicable to rational entries.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densesolve import LDL</span>
+<span class="sd">    &gt;&gt;&gt; from .. import QQ</span>
+
+<span class="sd">    &gt;&gt;&gt; a = [</span>
+<span class="sd">    ... [QQ(4), QQ(12), QQ(-16)],</span>
+<span class="sd">    ... [QQ(12), QQ(37), QQ(-43)],</span>
+<span class="sd">    ... [QQ(-16), QQ(-43), QQ(98)]]</span>
+<span class="sd">    &gt;&gt;&gt; LDL(a, QQ)</span>
+<span class="sd">    ([[1, 0, 0], [3, 1, 0], [-4, 5, 1]], [[4, 0, 0], [0, 1, 0], [0, 0, 9]], [[1, 3, -4], [0, 1, 5], [0, 0, 1]])</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_matlist</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">matlist</span><span class="p">)</span>
+    <span class="n">nrow</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_matlist</span><span class="p">)</span>
+    <span class="n">L</span><span class="p">,</span> <span class="n">D</span> <span class="o">=</span> <span class="n">eye</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">K</span><span class="p">),</span> <span class="n">eye</span><span class="p">(</span><span class="n">nrow</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrow</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">zero</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="p">):</span>
+                <span class="n">a</span> <span class="o">+=</span> <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">L</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">k</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+                <span class="n">D</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_matlist</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_matlist</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">D</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">j</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">L</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">conjugate_transpose</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="upper_triangle"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densesolve.upper_triangle">[docs]</a><span class="k">def</span> <span class="nf">upper_triangle</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transforms a given matrix to an upper triangle matrix by performing</span>
+<span class="sd">    row operations on it.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densesolve import upper_triangle</span>
+<span class="sd">    &gt;&gt;&gt; from .. import QQ</span>
+<span class="sd">    &gt;&gt;&gt; a = [</span>
+<span class="sd">    ... [QQ(4,1), QQ(12,1), QQ(-16,1)],</span>
+<span class="sd">    ... [QQ(12,1), QQ(37,1), QQ(-43,1)],</span>
+<span class="sd">    ... [QQ(-16,1), QQ(-43,1), QQ(98,1)]]</span>
+<span class="sd">    &gt;&gt;&gt; upper_triangle(a, QQ)</span>
+<span class="sd">    [[4, 12, -16], [0, 1, 5], [0, 0, 9]]</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    LU</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">copy_matlist</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">matlist</span><span class="p">)</span>
+    <span class="n">lower_triangle</span><span class="p">,</span> <span class="n">upper_triangle</span> <span class="o">=</span> <span class="n">LU</span><span class="p">(</span><span class="n">copy_matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">upper_triangle</span></div>
+
+
+<div class="viewcode-block" id="lower_triangle"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densesolve.lower_triangle">[docs]</a><span class="k">def</span> <span class="nf">lower_triangle</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Transforms a given matrix to a lower triangle matrix by performing</span>
+<span class="sd">    row operations on it.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densesolve import lower_triangle</span>
+<span class="sd">    &gt;&gt;&gt; from .. import QQ</span>
+<span class="sd">    &gt;&gt;&gt; a = [</span>
+<span class="sd">    ... [QQ(4,1), QQ(12,1), QQ(-16)],</span>
+<span class="sd">    ... [QQ(12,1), QQ(37,1), QQ(-43,1)],</span>
+<span class="sd">    ... [QQ(-16,1), QQ(-43,1), QQ(98,1)]]</span>
+<span class="sd">    &gt;&gt;&gt; lower_triangle(a, QQ)</span>
+<span class="sd">    [[1, 0, 0], [3, 1, 0], [-4, 5, 1]]</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    LU</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">copy_matlist</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">matlist</span><span class="p">)</span>
+    <span class="n">lower_triangle</span><span class="p">,</span> <span class="n">upper_triangle</span> <span class="o">=</span> <span class="n">LU</span><span class="p">(</span><span class="n">copy_matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">reverse</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">lower_triangle</span></div>
+
+
+<div class="viewcode-block" id="rref_solve"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densesolve.rref_solve">[docs]</a><span class="k">def</span> <span class="nf">rref_solve</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">constant</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solves a system of equations using reduced row echelon form given</span>
+<span class="sd">    a matrix of coefficients, a vector of variables and a vector of constants.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densesolve import rref_solve</span>
+<span class="sd">    &gt;&gt;&gt; from .. import QQ</span>
+<span class="sd">    &gt;&gt;&gt; from .. import Dummy</span>
+<span class="sd">    &gt;&gt;&gt; x, y, z = Dummy(&#39;x&#39;), Dummy(&#39;y&#39;), Dummy(&#39;z&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; coefficients = [</span>
+<span class="sd">    ... [QQ(25), QQ(15), QQ(-5)],</span>
+<span class="sd">    ... [QQ(15), QQ(18), QQ(0)],</span>
+<span class="sd">    ... [QQ(-5), QQ(0), QQ(11)]]</span>
+<span class="sd">    &gt;&gt;&gt; constants = [</span>
+<span class="sd">    ... [QQ(2)],</span>
+<span class="sd">    ... [QQ(3)],</span>
+<span class="sd">    ... [QQ(1)]]</span>
+<span class="sd">    &gt;&gt;&gt; variables = [</span>
+<span class="sd">    ... [x],</span>
+<span class="sd">    ... [y],</span>
+<span class="sd">    ... [z]]</span>
+<span class="sd">    &gt;&gt;&gt; rref_solve(coefficients, variables, constants, QQ)</span>
+<span class="sd">    [[-1/225], [23/135], [4/45]]</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    row_echelon</span>
+<span class="sd">    augment</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_matlist</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">matlist</span><span class="p">)</span>
+    <span class="n">augmented</span> <span class="o">=</span> <span class="n">augment</span><span class="p">(</span><span class="n">new_matlist</span><span class="p">,</span> <span class="n">constant</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="n">solution</span> <span class="o">=</span> <span class="n">rref</span><span class="p">(</span><span class="n">augmented</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">col</span><span class="p">(</span><span class="n">solution</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LU_solve"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densesolve.LU_solve">[docs]</a><span class="k">def</span> <span class="nf">LU_solve</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">constant</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solves a system of equations using  LU decomposition given a matrix</span>
+<span class="sd">    of coefficients, a vector of variables and a vector of constants.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densesolve import LU_solve</span>
+<span class="sd">    &gt;&gt;&gt; from .. import QQ</span>
+<span class="sd">    &gt;&gt;&gt; from .. import Dummy</span>
+<span class="sd">    &gt;&gt;&gt; x, y, z = Dummy(&#39;x&#39;), Dummy(&#39;y&#39;), Dummy(&#39;z&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; coefficients = [</span>
+<span class="sd">    ... [QQ(2), QQ(-1), QQ(-2)],</span>
+<span class="sd">    ... [QQ(-4), QQ(6), QQ(3)],</span>
+<span class="sd">    ... [QQ(-4), QQ(-2), QQ(8)]]</span>
+<span class="sd">    &gt;&gt;&gt; variables = [</span>
+<span class="sd">    ... [x],</span>
+<span class="sd">    ... [y],</span>
+<span class="sd">    ... [z]]</span>
+<span class="sd">    &gt;&gt;&gt; constants = [</span>
+<span class="sd">    ... [QQ(-1)],</span>
+<span class="sd">    ... [QQ(13)],</span>
+<span class="sd">    ... [QQ(-6)]]</span>
+<span class="sd">    &gt;&gt;&gt; LU_solve(coefficients, variables, constants, QQ)</span>
+<span class="sd">    [[2], [3], [1]]</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    LU</span>
+<span class="sd">    forward_substitution</span>
+<span class="sd">    backward_substitution</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_matlist</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">matlist</span><span class="p">)</span>
+    <span class="n">nrow</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_matlist</span><span class="p">)</span>
+    <span class="n">L</span><span class="p">,</span> <span class="n">U</span> <span class="o">=</span> <span class="n">LU</span><span class="p">(</span><span class="n">new_matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;y:</span><span class="si">%i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">nrow</span><span class="p">)]</span>
+    <span class="n">forward_substitution</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">constant</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="n">backward_substitution</span><span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">variable</span></div>
+
+
+<div class="viewcode-block" id="cholesky_solve"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densesolve.cholesky_solve">[docs]</a><span class="k">def</span> <span class="nf">cholesky_solve</span><span class="p">(</span><span class="n">matlist</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">constant</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Solves a system of equations using Cholesky decomposition given</span>
+<span class="sd">    a matrix of coefficients, a vector of variables and a vector of constants.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densesolve import cholesky_solve</span>
+<span class="sd">    &gt;&gt;&gt; from .. import QQ</span>
+<span class="sd">    &gt;&gt;&gt; from .. import Dummy</span>
+<span class="sd">    &gt;&gt;&gt; x, y, z = Dummy(&#39;x&#39;), Dummy(&#39;y&#39;), Dummy(&#39;z&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; coefficients = [</span>
+<span class="sd">    ... [QQ(25), QQ(15), QQ(-5)],</span>
+<span class="sd">    ... [QQ(15), QQ(18), QQ(0)],</span>
+<span class="sd">    ... [QQ(-5), QQ(0), QQ(11)]]</span>
+<span class="sd">    &gt;&gt;&gt; variables = [</span>
+<span class="sd">    ... [x],</span>
+<span class="sd">    ... [y],</span>
+<span class="sd">    ... [z]]</span>
+<span class="sd">    &gt;&gt;&gt; coefficients = [</span>
+<span class="sd">    ... [QQ(2)],</span>
+<span class="sd">    ... [QQ(3)],</span>
+<span class="sd">    ... [QQ(1)]]</span>
+<span class="sd">    &gt;&gt;&gt; cholesky_solve([[QQ(25), QQ(15), QQ(-5)], [QQ(15), QQ(18), QQ(0)], [QQ(-5), QQ(0), QQ(11)]], [[x], [y], [z]], [[QQ(2)], [QQ(3)], [QQ(1)]], QQ)</span>
+<span class="sd">    [[-1/225], [23/135], [4/45]]</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    cholesky</span>
+<span class="sd">    forward_substitution</span>
+<span class="sd">    backward_substitution</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_matlist</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">matlist</span><span class="p">)</span>
+    <span class="n">nrow</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_matlist</span><span class="p">)</span>
+    <span class="n">L</span><span class="p">,</span> <span class="n">Lstar</span> <span class="o">=</span> <span class="n">cholesky</span><span class="p">(</span><span class="n">new_matlist</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;y:</span><span class="si">%i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">nrow</span><span class="p">)]</span>
+    <span class="n">forward_substitution</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">constant</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="n">backward_substitution</span><span class="p">(</span><span class="n">Lstar</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">variable</span></div>
+
+
+<div class="viewcode-block" id="forward_substitution"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densesolve.forward_substitution">[docs]</a><span class="k">def</span> <span class="nf">forward_substitution</span><span class="p">(</span><span class="n">lower_triangle</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">constant</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Performs forward substitution given a lower triangular matrix, a</span>
+<span class="sd">    vector of variables and a vector of constants.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densesolve import forward_substitution</span>
+<span class="sd">    &gt;&gt;&gt; from .. import QQ</span>
+<span class="sd">    &gt;&gt;&gt; from .. import Dummy</span>
+<span class="sd">    &gt;&gt;&gt; x, y, z = Dummy(&#39;x&#39;), Dummy(&#39;y&#39;), Dummy(&#39;z&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; a = [</span>
+<span class="sd">    ... [QQ(1), QQ(0), QQ(0)],</span>
+<span class="sd">    ... [QQ(-2), QQ(1), QQ(0)],</span>
+<span class="sd">    ... [QQ(-2), QQ(-1), QQ(1)]]</span>
+<span class="sd">    &gt;&gt;&gt; variables = [</span>
+<span class="sd">    ... [x],</span>
+<span class="sd">    ... [y],</span>
+<span class="sd">    ... [z]]</span>
+<span class="sd">    &gt;&gt;&gt; constants = [</span>
+<span class="sd">    ... [QQ(-1)],</span>
+<span class="sd">    ... [QQ(13)],</span>
+<span class="sd">    ... [QQ(-6)]]</span>
+<span class="sd">    &gt;&gt;&gt; forward_substitution(a, variables, constants, QQ)</span>
+<span class="sd">    [[-1], [11], [3]]</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    LU_solve</span>
+<span class="sd">    cholesky_solve</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">copy_lower_triangle</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">lower_triangle</span><span class="p">)</span>
+    <span class="n">nrow</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">copy_lower_triangle</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrow</span><span class="p">):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">zero</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+            <span class="n">a</span> <span class="o">+=</span> <span class="n">copy_lower_triangle</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">variable</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">variable</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">constant</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">copy_lower_triangle</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">variable</span></div>
+
+
+<div class="viewcode-block" id="backward_substitution"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.densesolve.backward_substitution">[docs]</a><span class="k">def</span> <span class="nf">backward_substitution</span><span class="p">(</span><span class="n">upper_triangle</span><span class="p">,</span> <span class="n">variable</span><span class="p">,</span> <span class="n">constant</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Performs forward substitution given a lower triangular matrix,</span>
+<span class="sd">    a vector of variables and a vector constants.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .densesolve import backward_substitution</span>
+<span class="sd">    &gt;&gt;&gt; from .. import QQ</span>
+<span class="sd">    &gt;&gt;&gt; from .. import Dummy</span>
+<span class="sd">    &gt;&gt;&gt; x, y, z = Dummy(&#39;x&#39;), Dummy(&#39;y&#39;), Dummy(&#39;z&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; a = [</span>
+<span class="sd">    ... [QQ(2), QQ(-1), QQ(-2)],</span>
+<span class="sd">    ... [QQ(0), QQ(4), QQ(-1)],</span>
+<span class="sd">    ... [QQ(0), QQ(0), QQ(3)]]</span>
+<span class="sd">    &gt;&gt;&gt; variables = [</span>
+<span class="sd">    ... [x],</span>
+<span class="sd">    ... [y],</span>
+<span class="sd">    ... [z]]</span>
+<span class="sd">    &gt;&gt;&gt; constants = [</span>
+<span class="sd">    ... [QQ(-1)],</span>
+<span class="sd">    ... [QQ(11)],</span>
+<span class="sd">    ... [QQ(3)]]</span>
+<span class="sd">    &gt;&gt;&gt; backward_substitution(a, variables, constants, QQ)</span>
+<span class="sd">    [[2], [3], [1]]</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    LU_solve</span>
+<span class="sd">    cholesky_solve</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">copy_upper_triangle</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">upper_triangle</span><span class="p">)</span>
+    <span class="n">nrow</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">copy_upper_triangle</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nrow</span><span class="p">)):</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">zero</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nrow</span><span class="p">)):</span>
+            <span class="n">a</span> <span class="o">+=</span> <span class="n">copy_upper_triangle</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">*</span><span class="n">variable</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">variable</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">constant</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="n">copy_upper_triangle</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">variable</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.matrices.densesolve</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

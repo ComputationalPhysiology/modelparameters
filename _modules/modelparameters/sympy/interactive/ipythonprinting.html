@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.interactive.ipythonprinting &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.interactive.ipythonprinting</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.interactive.ipythonprinting</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A print function that pretty prints SymPy objects.</span>
+
+<span class="sd">:moduleauthor: Brian Granger</span>
+
+<span class="sd">Usage</span>
+<span class="sd">=====</span>
+
+<span class="sd">To use this extension, execute:</span>
+
+<span class="sd">    %load_ext sympy.interactive.ipythonprinting</span>
+
+<span class="sd">Once the extension is loaded, SymPy Basic objects are automatically</span>
+<span class="sd">pretty-printed in the terminal and rendered in LaTeX in the Qt console and</span>
+<span class="sd">notebook.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1">#-----------------------------------------------------------------------------</span>
+<span class="c1">#  Copyright (C) 2008  The IPython Development Team</span>
+<span class="c1">#</span>
+<span class="c1">#  Distributed under the terms of the BSD License.  The full license is in</span>
+<span class="c1">#  the file COPYING, distributed as part of this software.</span>
+<span class="c1">#-----------------------------------------------------------------------------</span>
+
+<span class="c1">#-----------------------------------------------------------------------------</span>
+<span class="c1"># Imports</span>
+<span class="c1">#-----------------------------------------------------------------------------</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">from</span> <span class="nn">.printing</span> <span class="kn">import</span> <span class="n">init_printing</span>
+<span class="kn">from</span> <span class="nn">..utilities.exceptions</span> <span class="kn">import</span> <span class="n">SymPyDeprecationWarning</span>
+
+<span class="c1">#-----------------------------------------------------------------------------</span>
+<span class="c1"># Definitions of special display functions for use with IPython</span>
+<span class="c1">#-----------------------------------------------------------------------------</span>
+
+<div class="viewcode-block" id="load_ipython_extension"><a class="viewcode-back" href="../../../../modelparameters.sympy.interactive.html#modelparameters.sympy.interactive.ipythonprinting.load_ipython_extension">[docs]</a><span class="k">def</span> <span class="nf">load_ipython_extension</span><span class="p">(</span><span class="n">ip</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Load the extension in IPython.&quot;&quot;&quot;</span>
+    <span class="c1"># Since Python filters deprecation warnings by default,</span>
+    <span class="c1"># we add a filter to make sure this message will be shown.</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;once&quot;</span><span class="p">,</span> <span class="n">SymPyDeprecationWarning</span><span class="p">)</span>
+    <span class="n">SymPyDeprecationWarning</span><span class="p">(</span>
+        <span class="n">feature</span><span class="o">=</span><span class="s2">&quot;using </span><span class="si">%lo</span><span class="s2">ad_ext sympy.interactive.ipythonprinting&quot;</span><span class="p">,</span>
+        <span class="n">useinstead</span><span class="o">=</span><span class="s2">&quot;from .. import init_printing ; init_printing()&quot;</span><span class="p">,</span>
+        <span class="n">deprecated_since_version</span><span class="o">=</span><span class="s2">&quot;0.7.3&quot;</span><span class="p">,</span>
+        <span class="n">issue</span><span class="o">=</span><span class="mi">7013</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">warn</span><span class="p">()</span>
+    <span class="n">init_printing</span><span class="p">(</span><span class="n">ip</span><span class="o">=</span><span class="n">ip</span><span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.interactive.ipythonprinting</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

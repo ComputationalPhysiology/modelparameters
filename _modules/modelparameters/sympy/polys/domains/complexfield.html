@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.polys.domains.complexfield &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.polys.domains.complexfield</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.polys.domains.complexfield</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Implementation of :class:`ComplexField` class. &quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">...core.numbers</span> <span class="kn">import</span> <span class="n">Float</span><span class="p">,</span> <span class="n">I</span>
+<span class="kn">from</span> <span class="nn">...utilities</span> <span class="kn">import</span> <span class="n">public</span>
+
+<span class="kn">from</span> <span class="nn">.field</span> <span class="kn">import</span> <span class="n">Field</span>
+<span class="kn">from</span> <span class="nn">.simpledomain</span> <span class="kn">import</span> <span class="n">SimpleDomain</span>
+<span class="kn">from</span> <span class="nn">.characteristiczero</span> <span class="kn">import</span> <span class="n">CharacteristicZero</span>
+<span class="kn">from</span> <span class="nn">.mpelements</span> <span class="kn">import</span> <span class="n">MPContext</span>
+<span class="kn">from</span> <span class="nn">..polyerrors</span> <span class="kn">import</span> <span class="n">DomainError</span><span class="p">,</span> <span class="n">CoercionFailed</span>
+
+<div class="viewcode-block" id="ComplexField"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ComplexField">[docs]</a><span class="nd">@public</span>
+<span class="k">class</span> <span class="nc">ComplexField</span><span class="p">(</span><span class="n">Field</span><span class="p">,</span> <span class="n">CharacteristicZero</span><span class="p">,</span> <span class="n">SimpleDomain</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Complex numbers up to the given precision. &quot;&quot;&quot;</span>
+
+    <span class="n">rep</span> <span class="o">=</span> <span class="s1">&#39;CC&#39;</span>
+
+    <span class="n">is_ComplexField</span> <span class="o">=</span> <span class="n">is_CC</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">is_Exact</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_Numerical</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">has_assoc_Ring</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">has_assoc_Field</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">_default_precision</span> <span class="o">=</span> <span class="mi">53</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">has_default_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">precision</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_default_precision</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">precision</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">prec</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">dps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">dps</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tolerance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">tolerance</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prec</span><span class="o">=</span><span class="n">_default_precision</span><span class="p">,</span> <span class="n">dps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">MPContext</span><span class="p">(</span><span class="n">prec</span><span class="p">,</span> <span class="n">dps</span><span class="p">,</span> <span class="n">tol</span><span class="p">)</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">_parent</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">=</span> <span class="n">context</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">mpc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zero</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">one</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">ComplexField</span><span class="p">)</span>
+           <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">precision</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">precision</span>
+           <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">tolerance</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">precision</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tolerance</span><span class="p">))</span>
+
+<div class="viewcode-block" id="ComplexField.to_sympy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ComplexField.to_sympy">[docs]</a>    <span class="k">def</span> <span class="nf">to_sympy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert ``element`` to SymPy number. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dps</span><span class="p">)</span> <span class="o">+</span> <span class="n">I</span><span class="o">*</span><span class="n">Float</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dps</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ComplexField.from_sympy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ComplexField.from_sympy">[docs]</a>    <span class="k">def</span> <span class="nf">from_sympy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert SymPy&#39;s number to ``dtype``. &quot;&quot;&quot;</span>
+        <span class="n">number</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dps</span><span class="p">)</span>
+        <span class="n">real</span><span class="p">,</span> <span class="n">imag</span> <span class="o">=</span> <span class="n">number</span><span class="o">.</span><span class="n">as_real_imag</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">real</span><span class="o">.</span><span class="n">is_Number</span> <span class="ow">and</span> <span class="n">imag</span><span class="o">.</span><span class="n">is_Number</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">real</span><span class="p">,</span> <span class="n">imag</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">CoercionFailed</span><span class="p">(</span><span class="s2">&quot;expected complex number, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">expr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ComplexField.from_ZZ_python"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ComplexField.from_ZZ_python">[docs]</a>    <span class="k">def</span> <span class="nf">from_ZZ_python</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">element</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ComplexField.from_QQ_python"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ComplexField.from_QQ_python">[docs]</a>    <span class="k">def</span> <span class="nf">from_QQ_python</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">numerator</span><span class="p">)</span> <span class="o">/</span> <span class="n">element</span><span class="o">.</span><span class="n">denominator</span></div>
+
+<div class="viewcode-block" id="ComplexField.from_ZZ_gmpy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ComplexField.from_ZZ_gmpy">[docs]</a>    <span class="k">def</span> <span class="nf">from_ZZ_gmpy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">element</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="ComplexField.from_QQ_gmpy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ComplexField.from_QQ_gmpy">[docs]</a>    <span class="k">def</span> <span class="nf">from_QQ_gmpy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">numerator</span><span class="p">))</span> <span class="o">/</span> <span class="nb">int</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">denominator</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ComplexField.from_RealField"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ComplexField.from_RealField">[docs]</a>    <span class="k">def</span> <span class="nf">from_RealField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">element</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ComplexField.from_ComplexField"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ComplexField.from_ComplexField">[docs]</a>    <span class="k">def</span> <span class="nf">from_ComplexField</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">base</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">element</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">element</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ComplexField.get_ring"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ComplexField.get_ring">[docs]</a>    <span class="k">def</span> <span class="nf">get_ring</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a ring associated with ``self``. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="n">DomainError</span><span class="p">(</span><span class="s2">&quot;there is no ring associated with </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ComplexField.get_exact"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ComplexField.get_exact">[docs]</a>    <span class="k">def</span> <span class="nf">get_exact</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns an exact domain associated with ``self``. &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="n">DomainError</span><span class="p">(</span><span class="s2">&quot;there is no exact domain associated with </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ComplexField.gcd"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ComplexField.gcd">[docs]</a>    <span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns GCD of ``a`` and ``b``. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">one</span></div>
+
+<div class="viewcode-block" id="ComplexField.lcm"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ComplexField.lcm">[docs]</a>    <span class="k">def</span> <span class="nf">lcm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns LCM of ``a`` and ``b``. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">b</span></div>
+
+<div class="viewcode-block" id="ComplexField.almosteq"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ComplexField.almosteq">[docs]</a>    <span class="k">def</span> <span class="nf">almosteq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check if ``a`` and ``b`` are almost equal. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">almosteq</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tolerance</span><span class="p">)</span></div></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.polys.domains.complexfield</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

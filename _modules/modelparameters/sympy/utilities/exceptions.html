@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.utilities.exceptions &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.utilities.exceptions</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.utilities.exceptions</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">General SymPy exceptions and warnings.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">from</span> <span class="nn">.misc</span> <span class="kn">import</span> <span class="n">filldedent</span>
+
+
+<div class="viewcode-block" id="SymPyDeprecationWarning"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.exceptions.SymPyDeprecationWarning">[docs]</a><span class="k">class</span> <span class="nc">SymPyDeprecationWarning</span><span class="p">(</span><span class="ne">DeprecationWarning</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;A warning for deprecated features of SymPy.</span>
+
+<span class="sd">    This class is expected to be used with the warnings.warn function (note</span>
+<span class="sd">    that one has to explicitly turn on deprecation warnings):</span>
+
+<span class="sd">    &gt;&gt;&gt; import warnings</span>
+<span class="sd">    &gt;&gt;&gt; from .exceptions import SymPyDeprecationWarning</span>
+<span class="sd">    &gt;&gt;&gt; warnings.simplefilter(</span>
+<span class="sd">    ...     &quot;always&quot;, SymPyDeprecationWarning)</span>
+<span class="sd">    &gt;&gt;&gt; warnings.warn(</span>
+<span class="sd">    ...     SymPyDeprecationWarning(feature=&quot;Old deprecated thing&quot;,</span>
+<span class="sd">    ...     issue=1065, deprecated_since_version=&quot;1.0&quot;)) #doctest:+SKIP</span>
+<span class="sd">    __main__:3: SymPyDeprecationWarning:</span>
+
+<span class="sd">    Old deprecated thing has been deprecated since SymPy 1.0. See</span>
+<span class="sd">    https://github.com/sympy/sympy/issues/1065 for more info.</span>
+
+<span class="sd">    &gt;&gt;&gt; SymPyDeprecationWarning(feature=&quot;Old deprecated thing&quot;,</span>
+<span class="sd">    ... issue=1065, deprecated_since_version=&quot;1.1&quot;).warn() #doctest:+SKIP</span>
+<span class="sd">    __main__:1: SymPyDeprecationWarning:</span>
+
+<span class="sd">    Old deprecated thing has been deprecated since SymPy 1.1.</span>
+<span class="sd">    See https://github.com/sympy/sympy/issues/1065 for more info.</span>
+
+<span class="sd">    Three arguments to this class are required: ``feature``, ``issue`` and</span>
+<span class="sd">    ``deprecated_since_version``.</span>
+
+<span class="sd">    The ``issue`` flag should be an integer referencing for a &quot;Deprecation</span>
+<span class="sd">    Removal&quot; issue in the SymPy issue tracker. See</span>
+<span class="sd">    https://github.com/sympy/sympy/wiki/Deprecating-policy.</span>
+
+<span class="sd">    &gt;&gt;&gt; SymPyDeprecationWarning(</span>
+<span class="sd">    ...    feature=&quot;Old feature&quot;,</span>
+<span class="sd">    ...    useinstead=&quot;new feature&quot;,</span>
+<span class="sd">    ...    issue=5241,</span>
+<span class="sd">    ...    deprecated_since_version=&quot;1.1&quot;)</span>
+<span class="sd">    Old feature has been deprecated since SymPy 1.1. Use new feature</span>
+<span class="sd">    instead. See https://github.com/sympy/sympy/issues/5241 for more info.</span>
+
+<span class="sd">    Every formal deprecation should have an associated issue in the GitHub</span>
+<span class="sd">    issue tracker.  All such issues should have the DeprecationRemoval</span>
+<span class="sd">    tag.</span>
+
+<span class="sd">    Additionally, each formal deprecation should mark the first release for</span>
+<span class="sd">    which it was deprecated.  Use the ``deprecated_since_version`` flag for</span>
+<span class="sd">    this.</span>
+
+<span class="sd">    &gt;&gt;&gt; SymPyDeprecationWarning(</span>
+<span class="sd">    ...    feature=&quot;Old feature&quot;,</span>
+<span class="sd">    ...    useinstead=&quot;new feature&quot;,</span>
+<span class="sd">    ...    deprecated_since_version=&quot;0.7.2&quot;,</span>
+<span class="sd">    ...    issue=1065)</span>
+<span class="sd">    Old feature has been deprecated since SymPy 0.7.2. Use new feature</span>
+<span class="sd">    instead. See https://github.com/sympy/sympy/issues/1065 for more info.</span>
+
+<span class="sd">    To provide additional information, create an instance of this</span>
+<span class="sd">    class in this way:</span>
+
+<span class="sd">    &gt;&gt;&gt; SymPyDeprecationWarning(</span>
+<span class="sd">    ...     feature=&quot;Such and such&quot;,</span>
+<span class="sd">    ...     last_supported_version=&quot;1.2.3&quot;,</span>
+<span class="sd">    ...     useinstead=&quot;this other feature&quot;,</span>
+<span class="sd">    ...     issue=1065,</span>
+<span class="sd">    ...     deprecated_since_version=&quot;1.1&quot;)</span>
+<span class="sd">    Such and such has been deprecated since SymPy 1.1. It will be last</span>
+<span class="sd">    supported in SymPy version 1.2.3. Use this other feature instead. See</span>
+<span class="sd">    https://github.com/sympy/sympy/issues/1065 for more info.</span>
+
+<span class="sd">    Note that the text in ``feature`` begins a sentence, so if it begins with</span>
+<span class="sd">    a plain English word, the first letter of that word should be capitalized.</span>
+
+<span class="sd">    Either (or both) of the arguments ``last_supported_version`` and</span>
+<span class="sd">    ``useinstead`` can be omitted. In this case the corresponding sentence</span>
+<span class="sd">    will not be shown:</span>
+
+<span class="sd">    &gt;&gt;&gt; SymPyDeprecationWarning(feature=&quot;Such and such&quot;,</span>
+<span class="sd">    ...     useinstead=&quot;this other feature&quot;, issue=1065,</span>
+<span class="sd">    ...     deprecated_since_version=&quot;1.1&quot;)</span>
+<span class="sd">    Such and such has been deprecated since SymPy 1.1. Use this other</span>
+<span class="sd">    feature instead. See https://github.com/sympy/sympy/issues/1065 for</span>
+<span class="sd">    more info.</span>
+
+<span class="sd">    You can still provide the argument value.  If it is a string, it</span>
+<span class="sd">    will be appended to the end of the message:</span>
+
+<span class="sd">    &gt;&gt;&gt; SymPyDeprecationWarning(</span>
+<span class="sd">    ...     feature=&quot;Such and such&quot;,</span>
+<span class="sd">    ...     useinstead=&quot;this other feature&quot;,</span>
+<span class="sd">    ...     value=&quot;Contact the developers for further information.&quot;,</span>
+<span class="sd">    ...     issue=1065,</span>
+<span class="sd">    ...     deprecated_since_version=&quot;1.1&quot;)</span>
+<span class="sd">    Such and such has been deprecated since SymPy 1.1. Use this other</span>
+<span class="sd">    feature instead. See https://github.com/sympy/sympy/issues/1065 for</span>
+<span class="sd">    more info.  Contact the developers for further information.</span>
+
+<span class="sd">    If, however, the argument value does not hold a string, a string</span>
+<span class="sd">    representation of the object will be appended to the message:</span>
+
+<span class="sd">    &gt;&gt;&gt; SymPyDeprecationWarning(</span>
+<span class="sd">    ...     feature=&quot;Such and such&quot;,</span>
+<span class="sd">    ...     useinstead=&quot;this other feature&quot;,</span>
+<span class="sd">    ...     value=[1,2,3],</span>
+<span class="sd">    ...     issue=1065,</span>
+<span class="sd">    ...     deprecated_since_version=&quot;1.1&quot;)</span>
+<span class="sd">    Such and such has been deprecated since SymPy 1.1. Use this other</span>
+<span class="sd">    feature instead. See https://github.com/sympy/sympy/issues/1065 for</span>
+<span class="sd">    more info.  ([1, 2, 3])</span>
+
+<span class="sd">    Note that it may be necessary to go back through all the deprecations</span>
+<span class="sd">    before a release to make sure that the version number is correct.  So just</span>
+<span class="sd">    use what you believe will be the next release number (this usually means</span>
+<span class="sd">    bumping the minor number by one).</span>
+
+<span class="sd">    To mark a function as deprecated, you can use the decorator</span>
+<span class="sd">    @deprecated.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    ========</span>
+<span class="sd">    sympy.core.decorators.deprecated</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">feature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">last_supported_version</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">useinstead</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">issue</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">deprecated_since_version</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fullMessage</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">feature</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;feature is required argument of SymPyDeprecationWarning&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">deprecated_since_version</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;deprecated_since_version is a required argument of SymPyDeprecationWarning&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fullMessage</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> has been deprecated since SymPy </span><span class="si">%s</span><span class="s2">. &quot;</span> <span class="o">%</span> \
+                                   <span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">deprecated_since_version</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">last_supported_version</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fullMessage</span> <span class="o">+=</span> <span class="p">(</span><span class="s2">&quot;It will be last supported in SymPy &quot;</span>
+                <span class="s2">&quot;version </span><span class="si">%s</span><span class="s2">. &quot;</span><span class="p">)</span> <span class="o">%</span> <span class="n">last_supported_version</span>
+        <span class="k">if</span> <span class="n">useinstead</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fullMessage</span> <span class="o">+=</span> <span class="s2">&quot;Use </span><span class="si">%s</span><span class="s2"> instead. &quot;</span> <span class="o">%</span> <span class="n">useinstead</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">issue</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
+<span class="s2">The issue argument of SymPyDeprecationWarning is required.</span>
+<span class="s2">This should be a separate issue with the &quot;Deprecation Removal&quot; label. See</span>
+<span class="s2">https://github.com/sympy/sympy/wiki/Deprecating-policy.</span><span class="se">\</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fullMessage</span> <span class="o">+=</span> <span class="p">(</span><span class="s2">&quot;See &quot;</span>
+            <span class="s2">&quot;https://github.com/sympy/sympy/issues/</span><span class="si">%d</span><span class="s2"> for more &quot;</span>
+            <span class="s2">&quot;info. &quot;</span><span class="p">)</span> <span class="o">%</span> <span class="n">issue</span>
+
+        <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="nb">repr</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">value</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">fullMessage</span> <span class="o">+=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">filldedent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fullMessage</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SymPyDeprecationWarning.warn"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.exceptions.SymPyDeprecationWarning.warn">[docs]</a>    <span class="k">def</span> <span class="nf">warn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="c1"># the next line is what the user would see after the error is printed</span>
+        <span class="c1"># if stacklevel was set to 1. If you are writing a wrapper around this,</span>
+        <span class="c1"># increase the stacklevel accordingly.</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">)</span></div></div>
+
+<span class="c1"># Python by default hides DeprecationWarnings, which we do not want.</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;once&quot;</span><span class="p">,</span> <span class="n">SymPyDeprecationWarning</span><span class="p">)</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.utilities.exceptions</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

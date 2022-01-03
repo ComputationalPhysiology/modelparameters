@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.matrices.expressions.factorizations &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.matrices.expressions.factorizations</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.matrices.expressions.factorizations</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..expressions</span> <span class="kn">import</span> <span class="n">MatrixExpr</span>
+<span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">Q</span>
+
+<div class="viewcode-block" id="Factorization"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.factorizations.Factorization">[docs]</a><span class="k">class</span> <span class="nc">Factorization</span><span class="p">(</span><span class="n">MatrixExpr</span><span class="p">):</span>
+    <span class="n">arg</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="k">lambda</span> <span class="bp">self</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">arg</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LofLU"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.factorizations.LofLU">[docs]</a><span class="k">class</span> <span class="nc">LofLU</span><span class="p">(</span><span class="n">Factorization</span><span class="p">):</span>
+    <span class="n">predicates</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">lower_triangular</span><span class="p">,</span></div>
+<div class="viewcode-block" id="UofLU"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.factorizations.UofLU">[docs]</a><span class="k">class</span> <span class="nc">UofLU</span><span class="p">(</span><span class="n">Factorization</span><span class="p">):</span>
+    <span class="n">predicates</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">upper_triangular</span><span class="p">,</span></div>
+
+<div class="viewcode-block" id="LofCholesky"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.factorizations.LofCholesky">[docs]</a><span class="k">class</span> <span class="nc">LofCholesky</span><span class="p">(</span><span class="n">LofLU</span><span class="p">):</span> <span class="k">pass</span></div>
+<div class="viewcode-block" id="UofCholesky"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.factorizations.UofCholesky">[docs]</a><span class="k">class</span> <span class="nc">UofCholesky</span><span class="p">(</span><span class="n">UofLU</span><span class="p">):</span> <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="QofQR"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.factorizations.QofQR">[docs]</a><span class="k">class</span> <span class="nc">QofQR</span><span class="p">(</span><span class="n">Factorization</span><span class="p">):</span>
+    <span class="n">predicates</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">orthogonal</span><span class="p">,</span></div>
+<div class="viewcode-block" id="RofQR"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.factorizations.RofQR">[docs]</a><span class="k">class</span> <span class="nc">RofQR</span><span class="p">(</span><span class="n">Factorization</span><span class="p">):</span>
+    <span class="n">predicates</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">upper_triangular</span><span class="p">,</span></div>
+
+<div class="viewcode-block" id="EigenVectors"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.factorizations.EigenVectors">[docs]</a><span class="k">class</span> <span class="nc">EigenVectors</span><span class="p">(</span><span class="n">Factorization</span><span class="p">):</span>
+    <span class="n">predicates</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">orthogonal</span><span class="p">,</span></div>
+<div class="viewcode-block" id="EigenValues"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.factorizations.EigenValues">[docs]</a><span class="k">class</span> <span class="nc">EigenValues</span><span class="p">(</span><span class="n">Factorization</span><span class="p">):</span>
+    <span class="n">predicates</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">diagonal</span><span class="p">,</span></div>
+
+<div class="viewcode-block" id="UofSVD"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.factorizations.UofSVD">[docs]</a><span class="k">class</span> <span class="nc">UofSVD</span><span class="p">(</span><span class="n">Factorization</span><span class="p">):</span>
+    <span class="n">predicates</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">orthogonal</span><span class="p">,</span></div>
+<div class="viewcode-block" id="SofSVD"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.factorizations.SofSVD">[docs]</a><span class="k">class</span> <span class="nc">SofSVD</span><span class="p">(</span><span class="n">Factorization</span><span class="p">):</span>
+    <span class="n">predicates</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">diagonal</span><span class="p">,</span></div>
+<div class="viewcode-block" id="VofSVD"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.factorizations.VofSVD">[docs]</a><span class="k">class</span> <span class="nc">VofSVD</span><span class="p">(</span><span class="n">Factorization</span><span class="p">):</span>
+    <span class="n">predicates</span> <span class="o">=</span> <span class="n">Q</span><span class="o">.</span><span class="n">orthogonal</span><span class="p">,</span></div>
+
+
+<div class="viewcode-block" id="lu"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.factorizations.lu">[docs]</a><span class="k">def</span> <span class="nf">lu</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">LofLU</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">UofLU</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="qr"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.factorizations.qr">[docs]</a><span class="k">def</span> <span class="nf">qr</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">QofQR</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">RofQR</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="eig"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.factorizations.eig">[docs]</a><span class="k">def</span> <span class="nf">eig</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">EigenValues</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">EigenVectors</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="svd"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.factorizations.svd">[docs]</a><span class="k">def</span> <span class="nf">svd</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">UofSVD</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">SofSVD</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">VofSVD</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.matrices.expressions.factorizations</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

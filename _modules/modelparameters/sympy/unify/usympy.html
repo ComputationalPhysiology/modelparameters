@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.unify.usympy &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.unify.usympy</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.unify.usympy</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; SymPy interface to Unification engine</span>
+
+<span class="sd">See sympy.unify for module level docstring</span>
+<span class="sd">See sympy.unify.core for algorithmic docstring &quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Mul</span><span class="p">,</span> <span class="n">Pow</span>
+<span class="kn">from</span> <span class="nn">..matrices</span> <span class="kn">import</span> <span class="n">MatAdd</span><span class="p">,</span> <span class="n">MatMul</span><span class="p">,</span> <span class="n">MatrixExpr</span>
+<span class="kn">from</span> <span class="nn">..sets.sets</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Intersection</span><span class="p">,</span> <span class="n">FiniteSet</span>
+<span class="kn">from</span> <span class="nn">..core.operations</span> <span class="kn">import</span> <span class="n">AssocOp</span><span class="p">,</span> <span class="n">LatticeOp</span>
+<span class="kn">from</span> <span class="nn">.core</span> <span class="kn">import</span> <span class="n">Compound</span><span class="p">,</span> <span class="n">Variable</span><span class="p">,</span> <span class="n">CondVariable</span>
+<span class="kn">from</span> <span class="nn">..unify</span> <span class="kn">import</span> <span class="n">core</span>
+
+<span class="n">basic_new_legal</span> <span class="o">=</span> <span class="p">[</span><span class="n">MatrixExpr</span><span class="p">]</span>
+<span class="n">eval_false_legal</span> <span class="o">=</span> <span class="p">[</span><span class="n">AssocOp</span><span class="p">,</span> <span class="n">Pow</span><span class="p">,</span> <span class="n">FiniteSet</span><span class="p">]</span>
+<span class="n">illegal</span> <span class="o">=</span> <span class="p">[</span><span class="n">LatticeOp</span><span class="p">]</span>
+
+<div class="viewcode-block" id="sympy_associative"><a class="viewcode-back" href="../../../../modelparameters.sympy.unify.html#modelparameters.sympy.unify.usympy.sympy_associative">[docs]</a><span class="k">def</span> <span class="nf">sympy_associative</span><span class="p">(</span><span class="n">op</span><span class="p">):</span>
+    <span class="n">assoc_ops</span> <span class="o">=</span> <span class="p">(</span><span class="n">AssocOp</span><span class="p">,</span> <span class="n">MatAdd</span><span class="p">,</span> <span class="n">MatMul</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Intersection</span><span class="p">,</span> <span class="n">FiniteSet</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="nb">issubclass</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">aop</span><span class="p">)</span> <span class="k">for</span> <span class="n">aop</span> <span class="ow">in</span> <span class="n">assoc_ops</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="sympy_commutative"><a class="viewcode-back" href="../../../../modelparameters.sympy.unify.html#modelparameters.sympy.unify.usympy.sympy_commutative">[docs]</a><span class="k">def</span> <span class="nf">sympy_commutative</span><span class="p">(</span><span class="n">op</span><span class="p">):</span>
+    <span class="n">comm_ops</span> <span class="o">=</span> <span class="p">(</span><span class="n">Add</span><span class="p">,</span> <span class="n">MatAdd</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Intersection</span><span class="p">,</span> <span class="n">FiniteSet</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="nb">issubclass</span><span class="p">(</span><span class="n">op</span><span class="p">,</span> <span class="n">cop</span><span class="p">)</span> <span class="k">for</span> <span class="n">cop</span> <span class="ow">in</span> <span class="n">comm_ops</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="is_associative"><a class="viewcode-back" href="../../../../modelparameters.sympy.unify.html#modelparameters.sympy.unify.usympy.is_associative">[docs]</a><span class="k">def</span> <span class="nf">is_associative</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Compound</span><span class="p">)</span> <span class="ow">and</span> <span class="n">sympy_associative</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">op</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="is_commutative"><a class="viewcode-back" href="../../../../modelparameters.sympy.unify.html#modelparameters.sympy.unify.usympy.is_commutative">[docs]</a><span class="k">def</span> <span class="nf">is_commutative</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Compound</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">sympy_commutative</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">op</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">op</span><span class="p">,</span> <span class="n">Mul</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">construct</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="o">.</span><span class="n">is_commutative</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">x</span><span class="o">.</span><span class="n">args</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="mk_matchtype"><a class="viewcode-back" href="../../../../modelparameters.sympy.unify.html#modelparameters.sympy.unify.usympy.mk_matchtype">[docs]</a><span class="k">def</span> <span class="nf">mk_matchtype</span><span class="p">(</span><span class="n">typ</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">matchtype</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span> <span class="ow">or</span>
+                <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Compound</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">op</span><span class="p">,</span> <span class="n">typ</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">matchtype</span></div>
+
+<div class="viewcode-block" id="deconstruct"><a class="viewcode-back" href="../../../../modelparameters.sympy.unify.html#modelparameters.sympy.unify.usympy.deconstruct">[docs]</a><span class="k">def</span> <span class="nf">deconstruct</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">variables</span><span class="o">=</span><span class="p">()):</span>
+    <span class="sd">&quot;&quot;&quot; Turn a SymPy object into a Compound &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Variable</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">(</span><span class="n">Variable</span><span class="p">,</span> <span class="n">CondVariable</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">s</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">Basic</span><span class="p">)</span> <span class="ow">or</span> <span class="n">s</span><span class="o">.</span><span class="n">is_Atom</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">s</span>
+    <span class="k">return</span> <span class="n">Compound</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span>
+                    <span class="nb">tuple</span><span class="p">(</span><span class="n">deconstruct</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">variables</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">args</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="construct"><a class="viewcode-back" href="../../../../modelparameters.sympy.unify.html#modelparameters.sympy.unify.usympy.construct">[docs]</a><span class="k">def</span> <span class="nf">construct</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Turn a Compound into a SymPy object &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="p">(</span><span class="n">Variable</span><span class="p">,</span> <span class="n">CondVariable</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">arg</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Compound</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">t</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="nb">issubclass</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">op</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span> <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">eval_false_legal</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="n">construct</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">args</span><span class="p">),</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">any</span><span class="p">(</span><span class="nb">issubclass</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">op</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span> <span class="k">for</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="n">basic_new_legal</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Basic</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">op</span><span class="p">,</span> <span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="n">construct</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">args</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="n">construct</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">args</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="rebuild"><a class="viewcode-back" href="../../../../modelparameters.sympy.unify.html#modelparameters.sympy.unify.usympy.rebuild">[docs]</a><span class="k">def</span> <span class="nf">rebuild</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Rebuild a SymPy expression</span>
+
+<span class="sd">    This removes harm caused by Expr-Rules interactions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">construct</span><span class="p">(</span><span class="n">deconstruct</span><span class="p">(</span><span class="n">s</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="unify"><a class="viewcode-back" href="../../../../modelparameters.sympy.unify.html#modelparameters.sympy.unify.usympy.unify">[docs]</a><span class="k">def</span> <span class="nf">unify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">variables</span><span class="o">=</span><span class="p">(),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Structural unification of two expressions/patterns</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .usympy import unify</span>
+<span class="sd">    &gt;&gt;&gt; from .. import Basic, cos</span>
+<span class="sd">    &gt;&gt;&gt; from ..abc import x, y, z, p, q</span>
+
+<span class="sd">    &gt;&gt;&gt; next(unify(Basic(1, 2), Basic(1, x), variables=[x]))</span>
+<span class="sd">    {x: 2}</span>
+
+<span class="sd">    &gt;&gt;&gt; expr = 2*x + y + z</span>
+<span class="sd">    &gt;&gt;&gt; pattern = 2*p + q</span>
+<span class="sd">    &gt;&gt;&gt; next(unify(expr, pattern, {}, variables=(p, q)))</span>
+<span class="sd">    {p: x, q: y + z}</span>
+
+<span class="sd">    Unification supports commutative and associative matching</span>
+
+<span class="sd">    &gt;&gt;&gt; expr = x + y + z</span>
+<span class="sd">    &gt;&gt;&gt; pattern = p + q</span>
+<span class="sd">    &gt;&gt;&gt; len(list(unify(expr, pattern, {}, variables=(p, q))))</span>
+<span class="sd">    12</span>
+
+<span class="sd">    Symbols not indicated to be variables are treated as literal,</span>
+<span class="sd">    else they are wild-like and match anything in a sub-expression.</span>
+
+<span class="sd">    &gt;&gt;&gt; expr = x*y*z + 3</span>
+<span class="sd">    &gt;&gt;&gt; pattern = x*y + 3</span>
+<span class="sd">    &gt;&gt;&gt; next(unify(expr, pattern, {}, variables=[x, y]))</span>
+<span class="sd">    {x: y, y: x*z}</span>
+
+<span class="sd">    The x and y of the pattern above were in a Mul and matched factors</span>
+<span class="sd">    in the Mul of expr. Here, a single symbol matches an entire term:</span>
+
+<span class="sd">    &gt;&gt;&gt; expr = x*y + 3</span>
+<span class="sd">    &gt;&gt;&gt; pattern = p + 3</span>
+<span class="sd">    &gt;&gt;&gt; next(unify(expr, pattern, {}, variables=[p]))</span>
+<span class="sd">    {p: x*y}</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">decons</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">deconstruct</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">variables</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="ow">or</span> <span class="p">{}</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">((</span><span class="n">decons</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">decons</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">unify</span><span class="p">(</span><span class="n">decons</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">decons</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">s</span><span class="p">,</span>
+                                     <span class="n">is_associative</span><span class="o">=</span><span class="n">is_associative</span><span class="p">,</span>
+                                     <span class="n">is_commutative</span><span class="o">=</span><span class="n">is_commutative</span><span class="p">,</span>
+                                     <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">ds</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="nb">dict</span><span class="p">((</span><span class="n">construct</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">construct</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">())</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.unify.usympy</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

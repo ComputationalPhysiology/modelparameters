@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.simplify.cse_opts &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.simplify.cse_opts</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.simplify.cse_opts</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; Optimizations of the expression tree representation for better CSE</span>
+<span class="sd">opportunities.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">Add</span><span class="p">,</span> <span class="n">Basic</span><span class="p">,</span> <span class="n">Mul</span>
+<span class="kn">from</span> <span class="nn">..core.basic</span> <span class="kn">import</span> <span class="n">preorder_traversal</span>
+<span class="kn">from</span> <span class="nn">..core.singleton</span> <span class="kn">import</span> <span class="n">S</span>
+<span class="kn">from</span> <span class="nn">..utilities.iterables</span> <span class="kn">import</span> <span class="n">default_sort_key</span>
+
+
+<div class="viewcode-block" id="sub_pre"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.cse_opts.sub_pre">[docs]</a><span class="k">def</span> <span class="nf">sub_pre</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Replace y - x with -(x - y) if -1 can be extracted from y - x.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">reps</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">e</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">Add</span><span class="p">)</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">could_extract_minus_sign</span><span class="p">()]</span>
+
+    <span class="c1"># make it canonical</span>
+    <span class="n">reps</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">default_sort_key</span><span class="p">)</span>
+
+    <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">xreplace</span><span class="p">(</span><span class="nb">dict</span><span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">Mul</span><span class="o">.</span><span class="n">_from_args</span><span class="p">([</span><span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">,</span> <span class="o">-</span><span class="n">a</span><span class="p">]))</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">reps</span><span class="p">))</span>
+    <span class="c1"># repeat again for persisting Adds but mark these with a leading 1, -1</span>
+    <span class="c1"># e.g. y - x -&gt; 1*-1*(x - y)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">Basic</span><span class="p">):</span>
+        <span class="n">negs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">Add</span><span class="p">),</span> <span class="n">key</span><span class="o">=</span><span class="n">default_sort_key</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">reps</span> <span class="ow">or</span> <span class="n">a</span><span class="o">.</span><span class="n">could_extract_minus_sign</span><span class="p">():</span>
+                <span class="n">negs</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">Mul</span><span class="o">.</span><span class="n">_from_args</span><span class="p">([</span><span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">,</span> <span class="o">-</span><span class="n">a</span><span class="p">])</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">xreplace</span><span class="p">(</span><span class="n">negs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">e</span></div>
+
+
+<div class="viewcode-block" id="sub_post"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.cse_opts.sub_post">[docs]</a><span class="k">def</span> <span class="nf">sub_post</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Replace 1*-1*x with -x.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">replacements</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">preorder_traversal</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">Mul</span><span class="p">)</span> <span class="ow">and</span> \
+            <span class="n">node</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span> <span class="ow">and</span> <span class="n">node</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeOne</span><span class="p">:</span>
+            <span class="n">replacements</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">node</span><span class="p">,</span> <span class="o">-</span><span class="n">Mul</span><span class="o">.</span><span class="n">_from_args</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">:])))</span>
+    <span class="k">for</span> <span class="n">node</span><span class="p">,</span> <span class="n">replacement</span> <span class="ow">in</span> <span class="n">replacements</span><span class="p">:</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">xreplace</span><span class="p">({</span><span class="n">node</span><span class="p">:</span> <span class="n">replacement</span><span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">e</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.simplify.cse_opts</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

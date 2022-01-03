@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>modelparameters.sympy.logic.algorithms package &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="modelparameters.sympy.logic.utilities package" href="modelparameters.sympy.logic.utilities.html" />
+    <link rel="prev" title="modelparameters.sympy.logic package" href="modelparameters.sympy.logic.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.logic.utilities.html" title="modelparameters.sympy.logic.utilities package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.logic.html" title="modelparameters.sympy.logic package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" >modelparameters.sympy package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="modelparameters.sympy.logic.html" accesskey="U">modelparameters.sympy.logic package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.logic.algorithms package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="modelparameters-sympy-logic-algorithms-package">
+<h1>modelparameters.sympy.logic.algorithms package<a class="headerlink" href="#modelparameters-sympy-logic-algorithms-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-modelparameters.sympy.logic.algorithms.dpll">
+<span id="modelparameters-sympy-logic-algorithms-dpll-module"></span><h2>modelparameters.sympy.logic.algorithms.dpll module<a class="headerlink" href="#module-modelparameters.sympy.logic.algorithms.dpll" title="Permalink to this headline">¶</a></h2>
+<p>Implementation of DPLL algorithm</p>
+<p>Further improvements: eliminate calls to pl_true, implement branching rules,
+efficient unit propagation.</p>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://en.wikipedia.org/wiki/DPLL_algorithm">http://en.wikipedia.org/wiki/DPLL_algorithm</a></p></li>
+<li><p><a class="reference external" href="https://www.researchgate.net/publication/242384772_Implementations_of_the_DPLL_Algorithm">https://www.researchgate.net/publication/242384772_Implementations_of_the_DPLL_Algorithm</a></p></li>
+</ul>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.logic.algorithms.dpll.dpll">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.algorithms.dpll.</span></span><span class="sig-name descname"><span class="pre">dpll</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clauses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/algorithms/dpll.html#dpll"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.algorithms.dpll.dpll" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute satisfiability in a partial model.
+Clauses is an array of conjuncts.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...abc</span> <span class="kn">import</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.dpll</span> <span class="kn">import</span> <span class="n">dpll</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dpll</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span><span class="p">],</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">],</span> <span class="p">{</span><span class="n">D</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.logic.algorithms.dpll.dpll_int_repr">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.algorithms.dpll.</span></span><span class="sig-name descname"><span class="pre">dpll_int_repr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clauses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/algorithms/dpll.html#dpll_int_repr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.algorithms.dpll.dpll_int_repr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute satisfiability in a partial model.
+Arguments are expected to be in integer representation</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.dpll</span> <span class="kn">import</span> <span class="n">dpll_int_repr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dpll_int_repr</span><span class="p">([{</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">}],</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.logic.algorithms.dpll.dpll_satisfiable">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.algorithms.dpll.</span></span><span class="sig-name descname"><span class="pre">dpll_satisfiable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/algorithms/dpll.html#dpll_satisfiable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.algorithms.dpll.dpll_satisfiable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check satisfiability of a propositional sentence.
+It returns a model rather than True when it succeeds</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...abc</span> <span class="kn">import</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.dpll</span> <span class="kn">import</span> <span class="n">dpll_satisfiable</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dpll_satisfiable</span><span class="p">(</span><span class="n">A</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">B</span><span class="p">)</span>
+<span class="go">{A: True, B: False}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dpll_satisfiable</span><span class="p">(</span><span class="n">A</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">A</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.logic.algorithms.dpll.find_pure_symbol">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.algorithms.dpll.</span></span><span class="sig-name descname"><span class="pre">find_pure_symbol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unknown_clauses</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/algorithms/dpll.html#find_pure_symbol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.algorithms.dpll.find_pure_symbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find a symbol and its value if it appears only as a positive literal
+(or only as a negative) in clauses.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">symbols</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...abc</span> <span class="kn">import</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.dpll</span> <span class="kn">import</span> <span class="n">find_pure_symbol</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find_pure_symbol</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span><span class="p">],</span> <span class="p">[</span><span class="n">A</span><span class="o">|~</span><span class="n">B</span><span class="p">,</span><span class="o">~</span><span class="n">B</span><span class="o">|~</span><span class="n">D</span><span class="p">,</span><span class="n">D</span><span class="o">|</span><span class="n">A</span><span class="p">])</span>
+<span class="go">(A, True)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.logic.algorithms.dpll.find_pure_symbol_int_repr">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.algorithms.dpll.</span></span><span class="sig-name descname"><span class="pre">find_pure_symbol_int_repr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unknown_clauses</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/algorithms/dpll.html#find_pure_symbol_int_repr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.algorithms.dpll.find_pure_symbol_int_repr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as find_pure_symbol, but arguments are expected
+to be in integer representation</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.dpll</span> <span class="kn">import</span> <span class="n">find_pure_symbol_int_repr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find_pure_symbol_int_repr</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="p">[{</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">}])</span>
+<span class="go">(1, True)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.logic.algorithms.dpll.find_unit_clause">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.algorithms.dpll.</span></span><span class="sig-name descname"><span class="pre">find_unit_clause</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clauses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/algorithms/dpll.html#find_unit_clause"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.algorithms.dpll.find_unit_clause" title="Permalink to this definition">¶</a></dt>
+<dd><p>A unit clause has only 1 variable that is not bound in the model.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">symbols</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...abc</span> <span class="kn">import</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.dpll</span> <span class="kn">import</span> <span class="n">find_unit_clause</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find_unit_clause</span><span class="p">([</span><span class="n">A</span> <span class="o">|</span> <span class="n">B</span> <span class="o">|</span> <span class="n">D</span><span class="p">,</span> <span class="n">B</span> <span class="o">|</span> <span class="o">~</span><span class="n">D</span><span class="p">,</span> <span class="n">A</span> <span class="o">|</span> <span class="o">~</span><span class="n">B</span><span class="p">],</span> <span class="p">{</span><span class="n">A</span><span class="p">:</span><span class="kc">True</span><span class="p">})</span>
+<span class="go">(B, False)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.logic.algorithms.dpll.find_unit_clause_int_repr">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.algorithms.dpll.</span></span><span class="sig-name descname"><span class="pre">find_unit_clause_int_repr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clauses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/algorithms/dpll.html#find_unit_clause_int_repr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.algorithms.dpll.find_unit_clause_int_repr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as find_unit_clause, but arguments are expected to be in
+integer representation.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.dpll</span> <span class="kn">import</span> <span class="n">find_unit_clause_int_repr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find_unit_clause_int_repr</span><span class="p">([{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">}],</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+<span class="go">(2, False)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.logic.algorithms.dpll.pl_true_int_repr">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.algorithms.dpll.</span></span><span class="sig-name descname"><span class="pre">pl_true_int_repr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clause</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/algorithms/dpll.html#pl_true_int_repr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.algorithms.dpll.pl_true_int_repr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lightweight version of pl_true.
+Argument clause represents the set of args of an Or clause. This is used
+inside dpll_int_repr, it is not meant to be used directly.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.dpll</span> <span class="kn">import</span> <span class="n">pl_true_int_repr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pl_true_int_repr</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pl_true_int_repr</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.logic.algorithms.dpll.unit_propagate">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.algorithms.dpll.</span></span><span class="sig-name descname"><span class="pre">unit_propagate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clauses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/algorithms/dpll.html#unit_propagate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.algorithms.dpll.unit_propagate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an equivalent set of clauses
+If a set of clauses contains the unit clause l, the other clauses are
+simplified by the application of the two following rules:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>every clause containing l is removed</p></li>
+<li><p>in every clause that contains ~l this literal is deleted</p></li>
+</ol>
+</div></blockquote>
+<p>Arguments are expected to be in CNF.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">symbols</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...abc</span> <span class="kn">import</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.dpll</span> <span class="kn">import</span> <span class="n">unit_propagate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unit_propagate</span><span class="p">([</span><span class="n">A</span> <span class="o">|</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span> <span class="o">|</span> <span class="o">~</span><span class="n">B</span><span class="p">,</span> <span class="n">B</span><span class="p">],</span> <span class="n">B</span><span class="p">)</span>
+<span class="go">[D, B]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.logic.algorithms.dpll.unit_propagate_int_repr">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.algorithms.dpll.</span></span><span class="sig-name descname"><span class="pre">unit_propagate_int_repr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clauses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/algorithms/dpll.html#unit_propagate_int_repr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.algorithms.dpll.unit_propagate_int_repr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as unit_propagate, but arguments are expected to be in integer
+representation</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.dpll</span> <span class="kn">import</span> <span class="n">unit_propagate_int_repr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">unit_propagate_int_repr</span><span class="p">([{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">}],</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">[{3}]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.logic.algorithms.dpll2">
+<span id="modelparameters-sympy-logic-algorithms-dpll2-module"></span><h2>modelparameters.sympy.logic.algorithms.dpll2 module<a class="headerlink" href="#module-modelparameters.sympy.logic.algorithms.dpll2" title="Permalink to this headline">¶</a></h2>
+<p>Implementation of DPLL algorithm</p>
+<dl class="simple">
+<dt>Features:</dt><dd><ul class="simple">
+<li><p>Clause learning</p></li>
+<li><p>Watch literal scheme</p></li>
+<li><p>VSIDS heuristic</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://en.wikipedia.org/wiki/DPLL_algorithm">http://en.wikipedia.org/wiki/DPLL_algorithm</a></p></li>
+</ul>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.logic.algorithms.dpll2.Level">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.algorithms.dpll2.</span></span><span class="sig-name descname"><span class="pre">Level</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decision</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flipped</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/algorithms/dpll2.html#Level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.algorithms.dpll2.Level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Represents a single level in the DPLL algorithm, and contains
+enough information for a sound backtracking procedure.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.logic.algorithms.dpll2.SATSolver">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.algorithms.dpll2.</span></span><span class="sig-name descname"><span class="pre">SATSolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clauses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heuristic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vsids'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clause_learning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'none'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">INTERVAL</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/algorithms/dpll2.html#SATSolver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.algorithms.dpll2.SATSolver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="simple">
+<dt>Class for representing a SAT solver capable of</dt><dd><p>finding a model to a boolean theory in conjunctive
+normal form.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.logic.algorithms.dpll2.dpll_satisfiable">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.algorithms.dpll2.</span></span><span class="sig-name descname"><span class="pre">dpll_satisfiable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">all_models</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/algorithms/dpll2.html#dpll_satisfiable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.algorithms.dpll2.dpll_satisfiable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check satisfiability of a propositional sentence.
+It returns a model rather than True when it succeeds.
+Returns a generator of all models if all_models is True.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...abc</span> <span class="kn">import</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.dpll2</span> <span class="kn">import</span> <span class="n">dpll_satisfiable</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dpll_satisfiable</span><span class="p">(</span><span class="n">A</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">B</span><span class="p">)</span>
+<span class="go">{A: True, B: False}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dpll_satisfiable</span><span class="p">(</span><span class="n">A</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">A</span><span class="p">)</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.logic.algorithms">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.logic.algorithms" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">modelparameters.sympy.logic.algorithms package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.logic.algorithms.dpll">modelparameters.sympy.logic.algorithms.dpll module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.logic.algorithms.dpll2">modelparameters.sympy.logic.algorithms.dpll2 module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.logic.algorithms">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.logic.html"
+                        title="previous chapter">modelparameters.sympy.logic package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.logic.utilities.html"
+                        title="next chapter">modelparameters.sympy.logic.utilities package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modelparameters.sympy.logic.algorithms.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.logic.utilities.html" title="modelparameters.sympy.logic.utilities package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.logic.html" title="modelparameters.sympy.logic package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" >modelparameters.sympy package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="modelparameters.sympy.logic.html" >modelparameters.sympy.logic package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.logic.algorithms package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

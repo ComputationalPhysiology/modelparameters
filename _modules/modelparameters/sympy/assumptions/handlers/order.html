@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.assumptions.handlers.order &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
+    <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.assumptions.handlers.order</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.assumptions.handlers.order</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">AskHandlers related to order relations: positive, negative, etc.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">...assumptions</span> <span class="kn">import</span> <span class="n">Q</span><span class="p">,</span> <span class="n">ask</span>
+<span class="kn">from</span> <span class="nn">..handlers</span> <span class="kn">import</span> <span class="n">CommonHandler</span>
+<span class="kn">from</span> <span class="nn">...core.logic</span> <span class="kn">import</span> <span class="n">fuzzy_not</span><span class="p">,</span> <span class="n">fuzzy_and</span><span class="p">,</span> <span class="n">fuzzy_or</span>
+
+
+<div class="viewcode-block" id="AskNegativeHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler">[docs]</a><span class="k">class</span> <span class="nc">AskNegativeHandler</span><span class="p">(</span><span class="n">CommonHandler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This is called by ask() when key=&#39;negative&#39;</span>
+
+<span class="sd">    Test that an expression is less (strict) than zero.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from ... import ask, Q, pi</span>
+<span class="sd">    &gt;&gt;&gt; ask(Q.negative(pi+1)) # this calls AskNegativeHandler.Add</span>
+<span class="sd">    False</span>
+<span class="sd">    &gt;&gt;&gt; ask(Q.negative(pi**2)) # this calls AskNegativeHandler.Pow</span>
+<span class="sd">    False</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AskNegativeHandler.Expr"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler.Expr">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Expr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_negative</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_number</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="n">r</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">as_real_imag</span><span class="p">()</span>
+        <span class="c1"># If the imaginary part can symbolically be shown to be zero then</span>
+        <span class="c1"># we just evaluate the real part; otherwise we evaluate the imaginary</span>
+        <span class="c1"># part to see if it actually evaluates to zero and if it does then</span>
+        <span class="c1"># we make the comparison between the real part and zero.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">_prec</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">_prec</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">_prec</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">r</span> <span class="o">&lt;</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="AskNegativeHandler.Basic"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler.Basic">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Basic</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">AskNegativeHandler</span><span class="o">.</span><span class="n">_number</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AskNegativeHandler.Add"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler.Add">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Positive + Positive -&gt; Positive,</span>
+<span class="sd">        Negative + Negative -&gt; Negative</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">AskNegativeHandler</span><span class="o">.</span><span class="n">_number</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">)</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">r</span>
+
+        <span class="n">nonpos</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">negative</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                    <span class="n">nonpos</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">nonpos</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="AskNegativeHandler.Mul"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler.Mul">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Mul</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">AskNegativeHandler</span><span class="o">.</span><span class="n">_number</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">negative</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">result</span>
+            <span class="k">elif</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="AskNegativeHandler.Pow"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler.Pow">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Pow</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Real ** Even -&gt; NonNegative</span>
+<span class="sd">        Real ** Odd  -&gt; same_as_base</span>
+<span class="sd">        NonNegative ** Positive -&gt; NonNegative</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">AskNegativeHandler</span><span class="o">.</span><span class="n">_number</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">exp</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">even</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">exp</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">odd</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">exp</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">negative</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)</span></div>
+
+    <span class="n">ImaginaryUnit</span><span class="p">,</span> <span class="n">Abs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">staticmethod</span><span class="p">(</span><span class="n">CommonHandler</span><span class="o">.</span><span class="n">AlwaysFalse</span><span class="p">)]</span><span class="o">*</span><span class="mi">2</span>
+
+<div class="viewcode-block" id="AskNegativeHandler.exp"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler.exp">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">exp</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">assumptions</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span></div></div>
+
+
+<div class="viewcode-block" id="AskNonNegativeHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNonNegativeHandler">[docs]</a><span class="k">class</span> <span class="nc">AskNonNegativeHandler</span><span class="p">(</span><span class="n">CommonHandler</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AskNonNegativeHandler.Expr"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNonNegativeHandler.Expr">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Expr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_nonnegative</span></div>
+
+<div class="viewcode-block" id="AskNonNegativeHandler.Basic"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNonNegativeHandler.Basic">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Basic</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
+            <span class="n">notnegative</span> <span class="o">=</span> <span class="n">fuzzy_not</span><span class="p">(</span><span class="n">AskNegativeHandler</span><span class="o">.</span><span class="n">_number</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">notnegative</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">notnegative</span></div></div>
+
+
+<div class="viewcode-block" id="AskNonZeroHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler">[docs]</a><span class="k">class</span> <span class="nc">AskNonZeroHandler</span><span class="p">(</span><span class="n">CommonHandler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handler for key &#39;zero&#39;</span>
+<span class="sd">    Test that an expression is not identically zero</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AskNonZeroHandler.Expr"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler.Expr">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Expr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_nonzero</span></div>
+
+<div class="viewcode-block" id="AskNonZeroHandler.Basic"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler.Basic">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Basic</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">expr</span><span class="p">))</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
+            <span class="c1"># if there are no symbols just evalf</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">def</span> <span class="nf">nonz</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">_prec</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span>
+            <span class="k">return</span> <span class="n">fuzzy_or</span><span class="p">(</span><span class="n">nonz</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">as_real_imag</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="AskNonZeroHandler.Add"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler.Add">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> \
+                <span class="ow">or</span> <span class="nb">all</span><span class="p">(</span><span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">negative</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="AskNonZeroHandler.Mul"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler.Mul">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Mul</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="AskNonZeroHandler.Pow"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler.Pow">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Pow</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)</span></div>
+
+    <span class="n">NaN</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">CommonHandler</span><span class="o">.</span><span class="n">AlwaysTrue</span><span class="p">)</span>
+
+<div class="viewcode-block" id="AskNonZeroHandler.Abs"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler.Abs">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Abs</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">assumptions</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="AskZeroHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskZeroHandler">[docs]</a><span class="k">class</span> <span class="nc">AskZeroHandler</span><span class="p">(</span><span class="n">CommonHandler</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AskZeroHandler.Expr"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskZeroHandler.Expr">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Expr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_zero</span></div>
+
+<div class="viewcode-block" id="AskZeroHandler.Basic"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskZeroHandler.Basic">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Basic</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">fuzzy_and</span><span class="p">([</span><span class="n">fuzzy_not</span><span class="p">(</span><span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)),</span>
+            <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)])</span></div>
+
+<div class="viewcode-block" id="AskZeroHandler.Mul"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskZeroHandler.Mul">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Mul</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="c1"># TODO: This should be deducible from the nonzero handler</span>
+        <span class="k">return</span> <span class="n">fuzzy_or</span><span class="p">(</span><span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">zero</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="AskNonPositiveHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNonPositiveHandler">[docs]</a><span class="k">class</span> <span class="nc">AskNonPositiveHandler</span><span class="p">(</span><span class="n">CommonHandler</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AskNonPositiveHandler.Expr"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNonPositiveHandler.Expr">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Expr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_nonpositive</span></div>
+
+<div class="viewcode-block" id="AskNonPositiveHandler.Basic"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskNonPositiveHandler.Basic">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Basic</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
+            <span class="n">notpositive</span> <span class="o">=</span> <span class="n">fuzzy_not</span><span class="p">(</span><span class="n">AskPositiveHandler</span><span class="o">.</span><span class="n">_number</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">notpositive</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">notpositive</span></div></div>
+
+<div class="viewcode-block" id="AskPositiveHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler">[docs]</a><span class="k">class</span> <span class="nc">AskPositiveHandler</span><span class="p">(</span><span class="n">CommonHandler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Handler for key &#39;positive&#39;</span>
+<span class="sd">    Test that an expression is greater (strict) than zero</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AskPositiveHandler.Expr"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.Expr">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Expr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_positive</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_number</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="n">r</span><span class="p">,</span> <span class="n">i</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">as_real_imag</span><span class="p">()</span>
+        <span class="c1"># If the imaginary part can symbolically be shown to be zero then</span>
+        <span class="c1"># we just evaluate the real part; otherwise we evaluate the imaginary</span>
+        <span class="c1"># part to see if it actually evaluates to zero and if it does then</span>
+        <span class="c1"># we make the comparison between the real part and zero.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">i</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">_prec</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span><span class="o">.</span><span class="n">_prec</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                <span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">_prec</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">r</span> <span class="o">&gt;</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="AskPositiveHandler.Basic"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.Basic">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Basic</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">AskPositiveHandler</span><span class="o">.</span><span class="n">_number</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AskPositiveHandler.Mul"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.Mul">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Mul</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">AskPositiveHandler</span><span class="o">.</span><span class="n">_number</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="k">elif</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">negative</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">result</span> <span class="o">^</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="AskPositiveHandler.Add"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.Add">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">AskPositiveHandler</span><span class="o">.</span><span class="n">_number</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">)</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">r</span>
+
+        <span class="n">nonneg</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">negative</span><span class="p">(</span><span class="n">arg</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                    <span class="n">nonneg</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">nonneg</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="AskPositiveHandler.Pow"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.Pow">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Pow</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">AskPositiveHandler</span><span class="o">.</span><span class="n">_number</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">exp</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">negative</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">base</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">even</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">exp</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">odd</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">exp</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+                <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="AskPositiveHandler.exp"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.exp">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">exp</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">assumptions</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">imaginary</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">assumptions</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="AskPositiveHandler.log"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.log">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">assumptions</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">r</span>
+        <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">negative</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="AskPositiveHandler.factorial"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.factorial">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">integer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span></div>
+
+    <span class="n">ImaginaryUnit</span> <span class="o">=</span> <span class="nb">staticmethod</span><span class="p">(</span><span class="n">CommonHandler</span><span class="o">.</span><span class="n">AlwaysFalse</span><span class="p">)</span>
+
+<div class="viewcode-block" id="AskPositiveHandler.Abs"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.Abs">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Abs</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">expr</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AskPositiveHandler.Trace"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.Trace">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Trace</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive_definite</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">arg</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="AskPositiveHandler.Determinant"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.Determinant">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">Determinant</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive_definite</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">arg</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="AskPositiveHandler.MatrixElement"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.MatrixElement">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">MatrixElement</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">i</span> <span class="o">==</span> <span class="n">expr</span><span class="o">.</span><span class="n">j</span>
+                <span class="ow">and</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive_definite</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">parent</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="AskPositiveHandler.atan"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.atan">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">atan</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">assumptions</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="AskPositiveHandler.asin"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.asin">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">asin</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">positive</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Q</span><span class="o">.</span><span class="n">nonpositive</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">negative</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Q</span><span class="o">.</span><span class="n">nonnegative</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="AskPositiveHandler.acos"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.acos">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">acos</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">nonpositive</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">Q</span><span class="o">.</span><span class="n">nonnegative</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">assumptions</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="AskPositiveHandler.acot"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.acot">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">acot</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ask</span><span class="p">(</span><span class="n">Q</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">assumptions</span><span class="p">)</span></div></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.assumptions.handlers.order</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

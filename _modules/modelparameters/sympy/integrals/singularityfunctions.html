@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.integrals.singularityfunctions &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.integrals.singularityfunctions</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.integrals.singularityfunctions</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..functions</span> <span class="kn">import</span> <span class="n">SingularityFunction</span><span class="p">,</span> <span class="n">DiracDelta</span><span class="p">,</span> <span class="n">Heaviside</span>
+<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">sympify</span>
+<span class="kn">from</span> <span class="nn">..integrals</span> <span class="kn">import</span> <span class="n">integrate</span>
+
+
+<div class="viewcode-block" id="singularityintegrate"><a class="viewcode-back" href="../../../../modelparameters.sympy.integrals.html#modelparameters.sympy.integrals.singularityfunctions.singularityintegrate">[docs]</a><span class="k">def</span> <span class="nf">singularityintegrate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function handles the indefinite integrations of Singularity functions.</span>
+<span class="sd">    The ``integrate`` function calls this function internally whenever an</span>
+<span class="sd">    instance of SingularityFunction is passed as argument.</span>
+
+<span class="sd">    The idea for integration is the following:</span>
+
+<span class="sd">    - If we are dealing with a SingularityFunction expression,</span>
+<span class="sd">      i.e. ``SingularityFunction(x, a, n)``, we just return</span>
+<span class="sd">      ``SingularityFunction(x, a, n + 1)/(n + 1)`` if ``n &gt;= 0`` and</span>
+<span class="sd">      ``SingularityFunction(x, a, n + 1)`` if ``n &lt; 0``.</span>
+
+<span class="sd">    - If the node is a multiplication or power node having a</span>
+<span class="sd">      SingularityFunction term we rewrite the whole expression in terms of</span>
+<span class="sd">      Heaviside and DiracDelta and then integrate the output. Lastly, we</span>
+<span class="sd">      rewrite the output of integration back in terms of SingularityFunction.</span>
+
+<span class="sd">    - If none of the above case arises, we return None.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+<span class="sd">    &gt;&gt;&gt; from .singularityfunctions import singularityintegrate</span>
+<span class="sd">    &gt;&gt;&gt; from .. import SingularityFunction, symbols, Function</span>
+<span class="sd">    &gt;&gt;&gt; x, a, n, y = symbols(&#39;x a n y&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; f = Function(&#39;f&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; singularityintegrate(SingularityFunction(x, a, 3), x)</span>
+<span class="sd">    SingularityFunction(x, a, 4)/4</span>
+<span class="sd">    &gt;&gt;&gt; singularityintegrate(5*SingularityFunction(x, 5, -2), x)</span>
+<span class="sd">    5*SingularityFunction(x, 5, -1)</span>
+<span class="sd">    &gt;&gt;&gt; singularityintegrate(6*SingularityFunction(x, 5, -1), x)</span>
+<span class="sd">    6*SingularityFunction(x, 5, 0)</span>
+<span class="sd">    &gt;&gt;&gt; singularityintegrate(x*SingularityFunction(x, 0, -1), x)</span>
+<span class="sd">    0</span>
+<span class="sd">    &gt;&gt;&gt; singularityintegrate(SingularityFunction(x, 1, -1) * f(x), x)</span>
+<span class="sd">    f(1)*SingularityFunction(x, 1, 0)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">SingularityFunction</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">SingularityFunction</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">is_positive</span> <span class="ow">or</span> <span class="n">n</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">SingularityFunction</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">SingularityFunction</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">is_Mul</span> <span class="ow">or</span> <span class="n">f</span><span class="o">.</span><span class="n">is_Pow</span><span class="p">:</span>
+
+        <span class="n">expr</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">DiracDelta</span><span class="p">)</span>
+        <span class="n">expr</span> <span class="o">=</span> <span class="n">integrate</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="n">SingularityFunction</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.integrals.singularityfunctions</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

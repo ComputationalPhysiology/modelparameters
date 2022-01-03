@@ -1,0 +1,438 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>modelparameters.sympy.plotting.pygletplot package &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="modelparameters.sympy.polys package" href="modelparameters.sympy.polys.html" />
+    <link rel="prev" title="modelparameters.sympy.plotting.intervalmath package" href="modelparameters.sympy.plotting.intervalmath.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.polys.html" title="modelparameters.sympy.polys package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.plotting.intervalmath.html" title="modelparameters.sympy.plotting.intervalmath package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" >modelparameters.sympy package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="modelparameters.sympy.plotting.html" accesskey="U">modelparameters.sympy.plotting package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.plotting.pygletplot package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="modelparameters-sympy-plotting-pygletplot-package">
+<h1>modelparameters.sympy.plotting.pygletplot package<a class="headerlink" href="#modelparameters-sympy-plotting-pygletplot-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modelparameters-sympy-plotting-pygletplot-color-scheme-module">
+<h2>modelparameters.sympy.plotting.pygletplot.color_scheme module<a class="headerlink" href="#modelparameters-sympy-plotting-pygletplot-color-scheme-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modelparameters-sympy-plotting-pygletplot-managed-window-module">
+<h2>modelparameters.sympy.plotting.pygletplot.managed_window module<a class="headerlink" href="#modelparameters-sympy-plotting-pygletplot-managed-window-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modelparameters-sympy-plotting-pygletplot-plot-module">
+<h2>modelparameters.sympy.plotting.pygletplot.plot module<a class="headerlink" href="#modelparameters-sympy-plotting-pygletplot-plot-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modelparameters-sympy-plotting-pygletplot-plot-axes-module">
+<h2>modelparameters.sympy.plotting.pygletplot.plot_axes module<a class="headerlink" href="#modelparameters-sympy-plotting-pygletplot-plot-axes-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modelparameters-sympy-plotting-pygletplot-plot-camera-module">
+<h2>modelparameters.sympy.plotting.pygletplot.plot_camera module<a class="headerlink" href="#modelparameters-sympy-plotting-pygletplot-plot-camera-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modelparameters-sympy-plotting-pygletplot-plot-controller-module">
+<h2>modelparameters.sympy.plotting.pygletplot.plot_controller module<a class="headerlink" href="#modelparameters-sympy-plotting-pygletplot-plot-controller-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modelparameters-sympy-plotting-pygletplot-plot-curve-module">
+<h2>modelparameters.sympy.plotting.pygletplot.plot_curve module<a class="headerlink" href="#modelparameters-sympy-plotting-pygletplot-plot-curve-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-modelparameters.sympy.plotting.pygletplot.plot_interval">
+<span id="modelparameters-sympy-plotting-pygletplot-plot-interval-module"></span><h2>modelparameters.sympy.plotting.pygletplot.plot_interval module<a class="headerlink" href="#module-modelparameters.sympy.plotting.pygletplot.plot_interval" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.pygletplot.plot_interval.</span></span><span class="sig-name descname"><span class="pre">PlotInterval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.assert_complete">
+<span class="sig-name descname"><span class="pre">assert_complete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval.assert_complete"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.assert_complete" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.fill_from">
+<span class="sig-name descname"><span class="pre">fill_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval.fill_from"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.fill_from" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.frange">
+<span class="sig-name descname"><span class="pre">frange</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval.frange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.frange" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.get_v">
+<span class="sig-name descname"><span class="pre">get_v</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval.get_v"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.get_v" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.get_v_len">
+<span class="sig-name descname"><span class="pre">get_v_len</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval.get_v_len"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.get_v_len" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.get_v_max">
+<span class="sig-name descname"><span class="pre">get_v_max</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval.get_v_max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.get_v_max" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.get_v_min">
+<span class="sig-name descname"><span class="pre">get_v_min</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval.get_v_min"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.get_v_min" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.get_v_steps">
+<span class="sig-name descname"><span class="pre">get_v_steps</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval.get_v_steps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.get_v_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.require_all_args">
+<span class="sig-name descname"><span class="pre">require_all_args</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval.require_all_args"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.require_all_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.set_v">
+<span class="sig-name descname"><span class="pre">set_v</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval.set_v"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.set_v" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.set_v_max">
+<span class="sig-name descname"><span class="pre">set_v_max</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v_max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval.set_v_max"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.set_v_max" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.set_v_min">
+<span class="sig-name descname"><span class="pre">set_v_min</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v_min</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval.set_v_min"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.set_v_min" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.set_v_steps">
+<span class="sig-name descname"><span class="pre">set_v_steps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v_steps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval.set_v_steps"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.set_v_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.try_parse">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">try_parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval.try_parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.try_parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a PlotInterval if args can be interpreted
+as such, otherwise None.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.v">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v</span></span><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.v" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.v_len">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_len</span></span><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.v_len" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.v_max">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_max</span></span><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.v_max" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.v_min">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_min</span></span><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.v_min" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.v_steps">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_steps</span></span><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.v_steps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.vrange">
+<span class="sig-name descname"><span class="pre">vrange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval.vrange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.vrange" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.vrange2">
+<span class="sig-name descname"><span class="pre">vrange2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_interval.html#PlotInterval.vrange2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_interval.PlotInterval.vrange2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="modelparameters-sympy-plotting-pygletplot-plot-mode-module">
+<h2>modelparameters.sympy.plotting.pygletplot.plot_mode module<a class="headerlink" href="#modelparameters-sympy-plotting-pygletplot-plot-mode-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modelparameters-sympy-plotting-pygletplot-plot-mode-base-module">
+<h2>modelparameters.sympy.plotting.pygletplot.plot_mode_base module<a class="headerlink" href="#modelparameters-sympy-plotting-pygletplot-plot-mode-base-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modelparameters-sympy-plotting-pygletplot-plot-modes-module">
+<h2>modelparameters.sympy.plotting.pygletplot.plot_modes module<a class="headerlink" href="#modelparameters-sympy-plotting-pygletplot-plot-modes-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-modelparameters.sympy.plotting.pygletplot.plot_object">
+<span id="modelparameters-sympy-plotting-pygletplot-plot-object-module"></span><h2>modelparameters.sympy.plotting.pygletplot.plot_object module<a class="headerlink" href="#module-modelparameters.sympy.plotting.pygletplot.plot_object" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_object.PlotObject">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.pygletplot.plot_object.</span></span><span class="sig-name descname"><span class="pre">PlotObject</span></span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_object.html#PlotObject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_object.PlotObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Base class for objects which can be displayed in
+a Plot.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_object.PlotObject.draw">
+<span class="sig-name descname"><span class="pre">draw</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot/plot_object.html#PlotObject.draw"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_object.PlotObject.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>OpenGL rendering code for the plot object.
+Override in base class.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.plot_object.PlotObject.visible">
+<span class="sig-name descname"><span class="pre">visible</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.plot_object.PlotObject.visible" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="modelparameters-sympy-plotting-pygletplot-plot-rotation-module">
+<h2>modelparameters.sympy.plotting.pygletplot.plot_rotation module<a class="headerlink" href="#modelparameters-sympy-plotting-pygletplot-plot-rotation-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modelparameters-sympy-plotting-pygletplot-plot-surface-module">
+<h2>modelparameters.sympy.plotting.pygletplot.plot_surface module<a class="headerlink" href="#modelparameters-sympy-plotting-pygletplot-plot-surface-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modelparameters-sympy-plotting-pygletplot-plot-window-module">
+<h2>modelparameters.sympy.plotting.pygletplot.plot_window module<a class="headerlink" href="#modelparameters-sympy-plotting-pygletplot-plot-window-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="modelparameters-sympy-plotting-pygletplot-util-module">
+<h2>modelparameters.sympy.plotting.pygletplot.util module<a class="headerlink" href="#modelparameters-sympy-plotting-pygletplot-util-module" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-modelparameters.sympy.plotting.pygletplot">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.plotting.pygletplot" title="Permalink to this headline">¶</a></h2>
+<p>Plotting module that can plot 2D and 3D functions</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.plotting.pygletplot.PygletPlot">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.plotting.pygletplot.</span></span><span class="sig-name descname"><span class="pre">PygletPlot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/plotting/pygletplot.html#PygletPlot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.plotting.pygletplot.PygletPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>See examples/advanced/pyglet_plotting.py for many more examples.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..pygletplot</span> <span class="kn">import</span> <span class="n">PygletPlot</span> <span class="k">as</span> <span class="n">Plot</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">symbols</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...abc</span> <span class="kn">import</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Plot</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">3</span><span class="o">-</span><span class="n">y</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">[0]: -x**3*y + x*y**3, &#39;mode=cartesian&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Plot</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">z</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.9</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.9</span><span class="p">,</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.4</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Plot</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span>  <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span>
+</pre></div>
+</div>
+<p>The basic format is [var, min, max, steps], but the
+syntax is flexible and arguments left out are taken
+from the defaults for the current coordinate mode:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Plot</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># implies [x,-5,5,100]</span>
+<span class="go">[0]: x**2, &#39;mode=cartesian&#39;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Plot</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[])</span> <span class="c1"># [x,-1,1,40], [y,-1,1,40]</span>
+<span class="go">[0]: x**2, &#39;mode=cartesian&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Plot</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">100</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">])</span> <span class="c1"># [x,-1,1,100], [y,-1,1,100]</span>
+<span class="go">[0]: x**2 - y**2, &#39;mode=cartesian&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Plot</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="o">-</span><span class="mi">13</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
+<span class="go">[0]: x**2, &#39;mode=cartesian&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Plot</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="o">-</span><span class="mi">13</span><span class="p">,</span><span class="mi">13</span><span class="p">])</span> <span class="c1"># [x,-13,13,100]</span>
+<span class="go">[0]: x**2, &#39;mode=cartesian&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Plot</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="o">-</span><span class="mi">13</span><span class="p">,</span><span class="mi">13</span><span class="p">])</span> <span class="c1"># [x,-13,13,100]</span>
+<span class="go">[0]: x**2, &#39;mode=cartesian&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Plot</span><span class="p">(</span><span class="mi">1</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="p">[],</span> <span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;cylindrical&#39;</span><span class="p">)</span>
+<span class="gp">... </span><span class="c1"># [unbound_theta,0,2*Pi,40], [x,-1,1,20]</span>
+<span class="go">[0]: x, &#39;mode=cartesian&#39;</span>
+</pre></div>
+</div>
+<p>Plot supports several curvilinear coordinate modes, and
+they independent for each plotted function. You can specify
+a coordinate mode explicitly with the ‘mode’ named argument,
+but it can be automatically determined for Cartesian or
+parametric plots, and therefore must only be specified for
+polar, cylindrical, and spherical modes.</p>
+<p>Specifically, Plot(function arguments) and Plot[n] =
+(function arguments) will interpret your arguments as a
+Cartesian plot if you provide one function and a parametric
+plot if you provide two or three functions. Similarly, the
+arguments will be interpreted as a curve if one variable is
+used, and a surface if two are used.</p>
+<p>Supported mode names by number of variables:</p>
+<p>1: parametric, cartesian, polar
+2: parametric, cartesian, cylindrical = polar, spherical</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Plot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;spherical&#39;</span><span class="p">)</span> 
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Plot</span><span class="p">(</span><span class="n">visible</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> 
+<span class="go">[1]: x**2, &#39;mode=cartesian&#39;</span>
+<span class="go">[2]: 2*x, &#39;mode=cartesian&#39;</span>
+<span class="go">[3]: 2, &#39;mode=cartesian&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span>
+<span class="go">&lt;blank plot&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span>  <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="s1">&#39;solid&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">y</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="s1">&#39;wireframe&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">z</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.9</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.9</span><span class="p">,</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="s1">&#39;both&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="s1">&#39;both&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Screen Rotation:</dt><dd><p>X,Y axis      Arrow Keys, A,S,D,W, Numpad 4,6,8,2
+Z axis        Q,E, Numpad 7,9</p>
+</dd>
+<dt>Model Rotation:</dt><dd><p>Z axis        Z,C, Numpad 1,3</p>
+</dd>
+</dl>
+<p>Zoom:             R,F, PgUp,PgDn, Numpad +,-</p>
+<p>Reset Camera:     X, Numpad 5</p>
+<dl class="simple">
+<dt>Camera Presets:</dt><dd><p>XY            F1
+XZ            F2
+YZ            F3
+Perspective   F4</p>
+</dd>
+</dl>
+<p>Sensitivity Modifier: SHIFT</p>
+<dl class="simple">
+<dt>Axes Toggle:</dt><dd><p>Visible       F5
+Colors        F6</p>
+</dd>
+</dl>
+<p>Close Window:     ESCAPE</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">modelparameters.sympy.plotting.pygletplot package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-plotting-pygletplot-color-scheme-module">modelparameters.sympy.plotting.pygletplot.color_scheme module</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-plotting-pygletplot-managed-window-module">modelparameters.sympy.plotting.pygletplot.managed_window module</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-plotting-pygletplot-plot-module">modelparameters.sympy.plotting.pygletplot.plot module</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-plotting-pygletplot-plot-axes-module">modelparameters.sympy.plotting.pygletplot.plot_axes module</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-plotting-pygletplot-plot-camera-module">modelparameters.sympy.plotting.pygletplot.plot_camera module</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-plotting-pygletplot-plot-controller-module">modelparameters.sympy.plotting.pygletplot.plot_controller module</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-plotting-pygletplot-plot-curve-module">modelparameters.sympy.plotting.pygletplot.plot_curve module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.plotting.pygletplot.plot_interval">modelparameters.sympy.plotting.pygletplot.plot_interval module</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-plotting-pygletplot-plot-mode-module">modelparameters.sympy.plotting.pygletplot.plot_mode module</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-plotting-pygletplot-plot-mode-base-module">modelparameters.sympy.plotting.pygletplot.plot_mode_base module</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-plotting-pygletplot-plot-modes-module">modelparameters.sympy.plotting.pygletplot.plot_modes module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.plotting.pygletplot.plot_object">modelparameters.sympy.plotting.pygletplot.plot_object module</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-plotting-pygletplot-plot-rotation-module">modelparameters.sympy.plotting.pygletplot.plot_rotation module</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-plotting-pygletplot-plot-surface-module">modelparameters.sympy.plotting.pygletplot.plot_surface module</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-plotting-pygletplot-plot-window-module">modelparameters.sympy.plotting.pygletplot.plot_window module</a></li>
+<li><a class="reference internal" href="#modelparameters-sympy-plotting-pygletplot-util-module">modelparameters.sympy.plotting.pygletplot.util module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.plotting.pygletplot">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.plotting.intervalmath.html"
+                        title="previous chapter">modelparameters.sympy.plotting.intervalmath package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.polys.html"
+                        title="next chapter">modelparameters.sympy.polys package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modelparameters.sympy.plotting.pygletplot.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.polys.html" title="modelparameters.sympy.polys package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.plotting.intervalmath.html" title="modelparameters.sympy.plotting.intervalmath package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" >modelparameters.sympy package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="modelparameters.sympy.plotting.html" >modelparameters.sympy.plotting package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.plotting.pygletplot package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

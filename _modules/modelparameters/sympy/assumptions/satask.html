@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.assumptions.satask &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.assumptions.satask</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.assumptions.satask</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">..core</span> <span class="kn">import</span> <span class="n">oo</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">from</span> <span class="nn">.assume</span> <span class="kn">import</span> <span class="n">global_assumptions</span><span class="p">,</span> <span class="n">AppliedPredicate</span>
+<span class="kn">from</span> <span class="nn">..logic.inference</span> <span class="kn">import</span> <span class="n">satisfiable</span>
+<span class="kn">from</span> <span class="nn">..logic.boolalg</span> <span class="kn">import</span> <span class="n">And</span>
+<span class="kn">from</span> <span class="nn">.ask_generated</span> <span class="kn">import</span> <span class="n">get_known_facts_cnf</span>
+<span class="kn">from</span> <span class="nn">.sathandlers</span> <span class="kn">import</span> <span class="n">fact_registry</span>
+
+
+<div class="viewcode-block" id="satask"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.satask.satask">[docs]</a><span class="k">def</span> <span class="nf">satask</span><span class="p">(</span><span class="n">proposition</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">global_assumptions</span><span class="p">,</span>
+    <span class="n">use_known_facts</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">oo</span><span class="p">):</span>
+    <span class="n">relevant_facts</span> <span class="o">=</span> <span class="n">get_all_relevant_facts</span><span class="p">(</span><span class="n">proposition</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span>
+        <span class="n">use_known_facts</span><span class="o">=</span><span class="n">use_known_facts</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">iterations</span><span class="p">)</span>
+
+    <span class="n">can_be_true</span> <span class="o">=</span> <span class="n">satisfiable</span><span class="p">(</span><span class="n">And</span><span class="p">(</span><span class="n">proposition</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">,</span>
+        <span class="n">relevant_facts</span><span class="p">,</span> <span class="o">*</span><span class="n">context</span><span class="p">))</span>
+    <span class="n">can_be_false</span> <span class="o">=</span> <span class="n">satisfiable</span><span class="p">(</span><span class="n">And</span><span class="p">(</span><span class="o">~</span><span class="n">proposition</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">,</span>
+        <span class="n">relevant_facts</span><span class="p">,</span> <span class="o">*</span><span class="n">context</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">can_be_true</span> <span class="ow">and</span> <span class="n">can_be_false</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">can_be_true</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">can_be_false</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">can_be_true</span> <span class="ow">and</span> <span class="n">can_be_false</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">can_be_true</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">can_be_false</span><span class="p">:</span>
+        <span class="c1"># TODO: Run additional checks to see which combination of the</span>
+        <span class="c1"># assumptions, global_assumptions, and relevant_facts are</span>
+        <span class="c1"># inconsistent.</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Inconsistent assumptions&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="get_relevant_facts"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.satask.get_relevant_facts">[docs]</a><span class="k">def</span> <span class="nf">get_relevant_facts</span><span class="p">(</span><span class="n">proposition</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="p">(</span><span class="kc">True</span><span class="p">,),</span>
+    <span class="n">context</span><span class="o">=</span><span class="n">global_assumptions</span><span class="p">,</span> <span class="n">use_known_facts</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exprs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">relevant_facts</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="n">newexprs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">exprs</span><span class="p">:</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">proposition</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">AppliedPredicate</span><span class="p">)</span>
+        <span class="c1"># XXX: We need this since True/False are not Basic</span>
+        <span class="n">keys</span> <span class="o">|=</span> <span class="n">Tuple</span><span class="p">(</span><span class="o">*</span><span class="n">assumptions</span><span class="p">)</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">AppliedPredicate</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">context</span><span class="p">:</span>
+            <span class="n">keys</span> <span class="o">|=</span> <span class="n">And</span><span class="p">(</span><span class="o">*</span><span class="n">context</span><span class="p">)</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">AppliedPredicate</span><span class="p">)</span>
+
+        <span class="n">exprs</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">}</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">relevant_facts</span><span class="p">:</span>
+        <span class="n">relevant_facts</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([])</span>
+
+    <span class="k">if</span> <span class="n">use_known_facts</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">exprs</span><span class="p">:</span>
+            <span class="n">relevant_facts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">get_known_facts_cnf</span><span class="p">()</span><span class="o">.</span><span class="n">rcall</span><span class="p">(</span><span class="n">expr</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">exprs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">fact</span> <span class="ow">in</span> <span class="n">fact_registry</span><span class="p">[</span><span class="n">expr</span><span class="o">.</span><span class="n">func</span><span class="p">]:</span>
+            <span class="n">newfact</span> <span class="o">=</span> <span class="n">fact</span><span class="o">.</span><span class="n">rcall</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span>
+            <span class="n">relevant_facts</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">newfact</span><span class="p">)</span>
+            <span class="n">newexprs</span> <span class="o">|=</span> <span class="nb">set</span><span class="p">([</span><span class="n">key</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span>
+                <span class="n">newfact</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">AppliedPredicate</span><span class="p">)])</span>
+
+    <span class="k">return</span> <span class="n">relevant_facts</span><span class="p">,</span> <span class="n">newexprs</span> <span class="o">-</span> <span class="n">exprs</span></div>
+
+
+<div class="viewcode-block" id="get_all_relevant_facts"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.satask.get_all_relevant_facts">[docs]</a><span class="k">def</span> <span class="nf">get_all_relevant_facts</span><span class="p">(</span><span class="n">proposition</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">=</span><span class="n">global_assumptions</span><span class="p">,</span> <span class="n">use_known_facts</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">oo</span><span class="p">):</span>
+    <span class="c1"># The relevant facts might introduce new keys, e.g., Q.zero(x*y) will</span>
+    <span class="c1"># introduce the keys Q.zero(x) and Q.zero(y), so we need to run it until</span>
+    <span class="c1"># we stop getting new things. Hopefully this strategy won&#39;t lead to an</span>
+    <span class="c1"># infinite loop in the future.</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">relevant_facts</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">exprs</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">while</span> <span class="n">exprs</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">():</span>
+        <span class="p">(</span><span class="n">relevant_facts</span><span class="p">,</span> <span class="n">exprs</span><span class="p">)</span> <span class="o">=</span> <span class="n">get_relevant_facts</span><span class="p">(</span><span class="n">proposition</span><span class="p">,</span>
+                <span class="n">And</span><span class="o">.</span><span class="n">make_args</span><span class="p">(</span><span class="n">assumptions</span><span class="p">),</span> <span class="n">context</span><span class="p">,</span>
+                <span class="n">use_known_facts</span><span class="o">=</span><span class="n">use_known_facts</span><span class="p">,</span> <span class="n">exprs</span><span class="o">=</span><span class="n">exprs</span><span class="p">,</span>
+                <span class="n">relevant_facts</span><span class="o">=</span><span class="n">relevant_facts</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">iterations</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">And</span><span class="p">(</span><span class="o">*</span><span class="n">relevant_facts</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">And</span><span class="p">(</span><span class="o">*</span><span class="n">relevant_facts</span><span class="p">)</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.assumptions.satask</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

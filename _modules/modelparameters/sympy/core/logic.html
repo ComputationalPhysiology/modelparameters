@@ -1,0 +1,477 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>modelparameters.sympy.core.logic &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.core.logic</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for modelparameters.sympy.core.logic</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Logic expressions handling</span>
+
+<span class="sd">NOTE</span>
+<span class="sd">----</span>
+
+<span class="sd">at present this is mainly needed for facts.py , feel free however to improve</span>
+<span class="sd">this stuff for general purpose.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+
+<span class="kn">from</span> <span class="nn">.compatibility</span> <span class="kn">import</span> <span class="nb">range</span>
+
+
+<span class="k">def</span> <span class="nf">_torf</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return True if all args are True, False if they</span>
+<span class="sd">    are all False, else None.</span>
+
+<span class="sd">    &gt;&gt;&gt; from .logic import _torf</span>
+<span class="sd">    &gt;&gt;&gt; _torf((True, True))</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; _torf((False, False))</span>
+<span class="sd">    False</span>
+<span class="sd">    &gt;&gt;&gt; _torf((True, False))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sawT</span> <span class="o">=</span> <span class="n">sawF</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">sawF</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="n">sawT</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">elif</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">sawT</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="n">sawF</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span>
+    <span class="k">return</span> <span class="n">sawT</span>
+
+
+<span class="k">def</span> <span class="nf">_fuzzy_group</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">quick_exit</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return True if all args are True, None if there is any None else False</span>
+<span class="sd">    unless ``quick_exit`` is True (then return None as soon as a second False</span>
+<span class="sd">    is seen.</span>
+
+<span class="sd">     ``_fuzzy_group`` is like ``fuzzy_and`` except that it is more</span>
+<span class="sd">    conservative in returning a False, waiting to make sure that all</span>
+<span class="sd">    arguments are True or False and returning None if any arguments are</span>
+<span class="sd">    None. It also has the capability of permiting only a single False and</span>
+<span class="sd">    returning None if more than one is seen. For example, the presence of a</span>
+<span class="sd">    single transcendental amongst rationals would indicate that the group is</span>
+<span class="sd">    no longer rational; but a second transcendental in the group would make the</span>
+<span class="sd">    determination impossible.</span>
+
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .logic import _fuzzy_group</span>
+
+<span class="sd">    By default, multiple Falses mean the group is broken:</span>
+
+<span class="sd">    &gt;&gt;&gt; _fuzzy_group([False, False, True])</span>
+<span class="sd">    False</span>
+
+<span class="sd">    If multiple Falses mean the group status is unknown then set</span>
+<span class="sd">    `quick_exit` to True so None can be returned when the 2nd False is seen:</span>
+
+<span class="sd">    &gt;&gt;&gt; _fuzzy_group([False, False, True], quick_exit=True)</span>
+
+<span class="sd">    But if only a single False is seen then the group is known to</span>
+<span class="sd">    be broken:</span>
+
+<span class="sd">    &gt;&gt;&gt; _fuzzy_group([False, True, True], quick_exit=True)</span>
+<span class="sd">    False</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">saw_other</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">if</span> <span class="n">quick_exit</span> <span class="ow">and</span> <span class="n">saw_other</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">saw_other</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="ow">not</span> <span class="n">saw_other</span>
+
+
+<div class="viewcode-block" id="fuzzy_bool"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.fuzzy_bool">[docs]</a><span class="k">def</span> <span class="nf">fuzzy_bool</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return True, False or None according to x.</span>
+
+<span class="sd">    Whereas bool(x) returns True or False, fuzzy_bool allows</span>
+<span class="sd">    for the None value and non-false values (which become None), too.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .logic import fuzzy_bool</span>
+<span class="sd">    &gt;&gt;&gt; from ..abc import x</span>
+<span class="sd">    &gt;&gt;&gt; fuzzy_bool(x), fuzzy_bool(None)</span>
+<span class="sd">    (None, None)</span>
+<span class="sd">    &gt;&gt;&gt; bool(x), bool(None)</span>
+<span class="sd">    (True, False)</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="fuzzy_and"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.fuzzy_and">[docs]</a><span class="k">def</span> <span class="nf">fuzzy_and</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return True (all True), False (any False) or None.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .logic import fuzzy_and</span>
+<span class="sd">    &gt;&gt;&gt; from .. import Dummy</span>
+
+<span class="sd">    If you had a list of objects to test the commutivity of</span>
+<span class="sd">    and you want the fuzzy_and logic applied, passing an</span>
+<span class="sd">    iterator will allow the commutativity to only be computed</span>
+<span class="sd">    as many times as necessary. With this list, False can be</span>
+<span class="sd">    returned after analyzing the first symbol:</span>
+
+<span class="sd">    &gt;&gt;&gt; syms = [Dummy(commutative=False), Dummy()]</span>
+<span class="sd">    &gt;&gt;&gt; fuzzy_and(s.is_commutative for s in syms)</span>
+<span class="sd">    False</span>
+
+<span class="sd">    That False would require less work than if a list of pre-computed</span>
+<span class="sd">    items was sent:</span>
+
+<span class="sd">    &gt;&gt;&gt; fuzzy_and([s.is_commutative for s in syms])</span>
+<span class="sd">    False</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">rv</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">ai</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+        <span class="n">ai</span> <span class="o">=</span> <span class="n">fuzzy_bool</span><span class="p">(</span><span class="n">ai</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ai</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">rv</span><span class="p">:</span>  <span class="c1"># this will stop updating if a None is ever trapped</span>
+            <span class="n">rv</span> <span class="o">=</span> <span class="n">ai</span>
+    <span class="k">return</span> <span class="n">rv</span></div>
+
+
+<div class="viewcode-block" id="fuzzy_not"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.fuzzy_not">[docs]</a><span class="k">def</span> <span class="nf">fuzzy_not</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Not in fuzzy logic</span>
+
+<span class="sd">    Return None if `v` is None else `not v`.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    ========</span>
+
+<span class="sd">    &gt;&gt;&gt; from .logic import fuzzy_not</span>
+<span class="sd">    &gt;&gt;&gt; fuzzy_not(True)</span>
+<span class="sd">    False</span>
+<span class="sd">    &gt;&gt;&gt; fuzzy_not(None)</span>
+<span class="sd">    &gt;&gt;&gt; fuzzy_not(False)</span>
+<span class="sd">    True</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">v</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="n">v</span></div>
+
+
+<div class="viewcode-block" id="fuzzy_or"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.fuzzy_or">[docs]</a><span class="k">def</span> <span class="nf">fuzzy_or</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Or in fuzzy logic. Returns True (any True), False (all False), or None</span>
+
+<span class="sd">    See the docstrings of fuzzy_and and fuzzy_not for more info.  fuzzy_or is</span>
+<span class="sd">    related to the two by the standard De Morgan&#39;s law.</span>
+
+<span class="sd">    &gt;&gt;&gt; from .logic import fuzzy_or</span>
+<span class="sd">    &gt;&gt;&gt; fuzzy_or([True, False])</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; fuzzy_or([True, None])</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; fuzzy_or([False, False])</span>
+<span class="sd">    False</span>
+<span class="sd">    &gt;&gt;&gt; print(fuzzy_or([False, None]))</span>
+<span class="sd">    None</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">fuzzy_not</span><span class="p">(</span><span class="n">fuzzy_and</span><span class="p">(</span><span class="n">fuzzy_not</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">args</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="Logic"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.Logic">[docs]</a><span class="k">class</span> <span class="nc">Logic</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Logical expression&quot;&quot;&quot;</span>
+    <span class="c1"># {} &#39;op&#39; -&gt; LogicClass</span>
+    <span class="n">op_2class</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="nb">object</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+        <span class="n">obj</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="k">return</span> <span class="n">obj</span>
+
+    <span class="k">def</span> <span class="nf">__getnewargs__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span>
+
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,)</span> <span class="o">+</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">args</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">args</span>
+
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">args</span> <span class="o">!=</span> <span class="n">b</span><span class="o">.</span><span class="n">args</span>
+
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cmp__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">__cmp__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">args</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">))</span>
+
+    <span class="fm">__repr__</span> <span class="o">=</span> <span class="fm">__str__</span>
+
+<div class="viewcode-block" id="Logic.fromstring"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.Logic.fromstring">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">fromstring</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Logic from string with space around &amp; and | but none after !.</span>
+
+<span class="sd">           e.g.</span>
+
+<span class="sd">           !a &amp; b | c</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lexpr</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># current logical expression</span>
+        <span class="n">schedop</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># scheduled operation</span>
+        <span class="k">for</span> <span class="n">term</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+            <span class="c1"># operation symbol</span>
+            <span class="k">if</span> <span class="n">term</span> <span class="ow">in</span> <span class="s1">&#39;&amp;|&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">schedop</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="s1">&#39;double op forbidden: &quot;</span><span class="si">%s</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">term</span><span class="p">,</span> <span class="n">schedop</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">lexpr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> cannot be in the beginning of expression&#39;</span> <span class="o">%</span> <span class="n">term</span><span class="p">)</span>
+                <span class="n">schedop</span> <span class="o">=</span> <span class="n">term</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="s1">&#39;&amp;&#39;</span> <span class="ow">in</span> <span class="n">term</span> <span class="ow">or</span> <span class="s1">&#39;|&#39;</span> <span class="ow">in</span> <span class="n">term</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;&amp; and | must have space around them&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">term</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;!&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">term</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;do not include space after &quot;!&quot;&#39;</span><span class="p">)</span>
+                <span class="n">term</span> <span class="o">=</span> <span class="n">Not</span><span class="p">(</span><span class="n">term</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+            <span class="c1"># already scheduled operation, e.g. &#39;&amp;&#39;</span>
+            <span class="k">if</span> <span class="n">schedop</span><span class="p">:</span>
+                <span class="n">lexpr</span> <span class="o">=</span> <span class="n">Logic</span><span class="o">.</span><span class="n">op_2class</span><span class="p">[</span><span class="n">schedop</span><span class="p">](</span><span class="n">lexpr</span><span class="p">,</span> <span class="n">term</span><span class="p">)</span>
+                <span class="n">schedop</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># this should be atom</span>
+            <span class="k">if</span> <span class="n">lexpr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s1">&#39;missing op between &quot;</span><span class="si">%s</span><span class="s1">&quot; and &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">lexpr</span><span class="p">,</span> <span class="n">term</span><span class="p">))</span>
+
+            <span class="n">lexpr</span> <span class="o">=</span> <span class="n">term</span>
+
+        <span class="c1"># let&#39;s check that we ended up in correct state</span>
+        <span class="k">if</span> <span class="n">schedop</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;premature end-of-expression in &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="n">text</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">lexpr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;&quot;</span><span class="si">%s</span><span class="s1">&quot; is empty&#39;</span> <span class="o">%</span> <span class="n">text</span><span class="p">)</span>
+
+        <span class="c1"># everything looks good now</span>
+        <span class="k">return</span> <span class="n">lexpr</span></div></div>
+
+
+<div class="viewcode-block" id="AndOr_Base"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.AndOr_Base">[docs]</a><span class="k">class</span> <span class="nc">AndOr_Base</span><span class="p">(</span><span class="n">Logic</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">bargs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">op_x_notx</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">a</span>
+            <span class="k">elif</span> <span class="n">a</span> <span class="o">==</span> <span class="p">(</span><span class="ow">not</span> <span class="bp">cls</span><span class="o">.</span><span class="n">op_x_notx</span><span class="p">):</span>
+                <span class="k">continue</span>    <span class="c1"># skip this argument</span>
+            <span class="n">bargs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+        <span class="n">args</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">bargs</span><span class="p">)),</span> <span class="n">key</span><span class="o">=</span><span class="nb">hash</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Not</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">op_x_notx</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">args</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="ow">not</span> <span class="bp">cls</span><span class="o">.</span><span class="n">op_x_notx</span>
+
+        <span class="k">return</span> <span class="n">Logic</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+
+<div class="viewcode-block" id="AndOr_Base.flatten"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.AndOr_Base.flatten">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="c1"># quick-n-dirty flattening for And and Or</span>
+        <span class="n">args_queue</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">arg</span> <span class="o">=</span> <span class="n">args_queue</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">Logic</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+                    <span class="n">args_queue</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+                    <span class="k">continue</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+
+        <span class="n">args</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">args</span></div></div>
+
+
+<div class="viewcode-block" id="And"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.And">[docs]</a><span class="k">class</span> <span class="nc">And</span><span class="p">(</span><span class="n">AndOr_Base</span><span class="p">):</span>
+    <span class="n">op_x_notx</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">_eval_propagate_not</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># !(a&amp;b&amp;c ...) == !a | !b | !c ...</span>
+        <span class="k">return</span> <span class="n">Or</span><span class="p">(</span> <span class="o">*</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">]</span> <span class="p">)</span>
+
+    <span class="c1"># (a|b|...) &amp; c == (a&amp;c) | (b&amp;c) | ...</span>
+<div class="viewcode-block" id="And.expand"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.And.expand">[docs]</a>    <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="c1"># first locate Or</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)):</span>
+            <span class="n">arg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">Or</span><span class="p">):</span>
+                <span class="n">arest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+
+                <span class="n">orterms</span> <span class="o">=</span> <span class="p">[</span><span class="n">And</span><span class="p">(</span> <span class="o">*</span><span class="p">(</span><span class="n">arest</span> <span class="o">+</span> <span class="p">(</span><span class="n">a</span><span class="p">,))</span> <span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">arg</span><span class="o">.</span><span class="n">args</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">orterms</span><span class="p">)):</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">orterms</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">Logic</span><span class="p">):</span>
+                        <span class="n">orterms</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">orterms</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span>
+
+                <span class="n">res</span> <span class="o">=</span> <span class="n">Or</span><span class="p">(</span><span class="o">*</span><span class="n">orterms</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">res</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span></div></div>
+
+
+<div class="viewcode-block" id="Or"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.Or">[docs]</a><span class="k">class</span> <span class="nc">Or</span><span class="p">(</span><span class="n">AndOr_Base</span><span class="p">):</span>
+    <span class="n">op_x_notx</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">_eval_propagate_not</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># !(a|b|c ...) == !a &amp; !b &amp; !c ...</span>
+        <span class="k">return</span> <span class="n">And</span><span class="p">(</span> <span class="o">*</span><span class="p">[</span><span class="n">Not</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">]</span> <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Not"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.Not">[docs]</a><span class="k">class</span> <span class="nc">Not</span><span class="p">(</span><span class="n">Logic</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">Logic</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">return</span> <span class="ow">not</span> <span class="n">arg</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">Not</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">arg</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">Logic</span><span class="p">):</span>
+            <span class="c1"># XXX this is a hack to expand right from the beginning</span>
+            <span class="n">arg</span> <span class="o">=</span> <span class="n">arg</span><span class="o">.</span><span class="n">_eval_propagate_not</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">arg</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Not: unknown argument </span><span class="si">%r</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">arg</span><span class="p">,))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">arg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<span class="n">Logic</span><span class="o">.</span><span class="n">op_2class</span><span class="p">[</span><span class="s1">&#39;&amp;&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">And</span>
+<span class="n">Logic</span><span class="o">.</span><span class="n">op_2class</span><span class="p">[</span><span class="s1">&#39;|&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Or</span>
+<span class="n">Logic</span><span class="o">.</span><span class="n">op_2class</span><span class="p">[</span><span class="s1">&#39;!&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Not</span>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.core.logic</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>

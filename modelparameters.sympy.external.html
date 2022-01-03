@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>modelparameters.sympy.external package &#8212; modelparameters 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="modelparameters.sympy.functions package" href="modelparameters.sympy.functions.html" />
+    <link rel="prev" title="modelparameters.sympy.diffgeom package" href="modelparameters.sympy.diffgeom.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.functions.html" title="modelparameters.sympy.functions package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.diffgeom.html" title="modelparameters.sympy.diffgeom package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" accesskey="U">modelparameters.sympy package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.external package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="modelparameters-sympy-external-package">
+<h1>modelparameters.sympy.external package<a class="headerlink" href="#modelparameters-sympy-external-package" title="Permalink to this headline">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="module-modelparameters.sympy.external.importtools">
+<span id="modelparameters-sympy-external-importtools-module"></span><h2>modelparameters.sympy.external.importtools module<a class="headerlink" href="#module-modelparameters.sympy.external.importtools" title="Permalink to this headline">¶</a></h2>
+<p>Tools to assist importing optional external modules.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="modelparameters.sympy.external.importtools.import_module">
+<span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.external.importtools.</span></span><span class="sig-name descname"><span class="pre">import_module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_module_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_python_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warn_not_installed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warn_old_version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module_version_attr</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'__version__'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module_version_attr_call_args</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">__import__kwargs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">catch</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/external/importtools.html#import_module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.external.importtools.import_module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import and return a module if it is installed.</p>
+<p>If the module is not installed, it returns None.</p>
+<p>A minimum version for the module can be given as the keyword argument
+min_module_version.  This should be comparable against the module version.
+By default, module.__version__ is used to get the module version.  To
+override this, set the module_version_attr keyword argument.  If the
+attribute of the module to get the version should be called (e.g.,
+module.version()), then set module_version_attr_call_args to the args such
+that module.module_version_attr(<a href="#id1"><span class="problematic" id="id2">*</span></a>module_version_attr_call_args) returns the
+module’s version.</p>
+<p>If the module version is less than min_module_version using the Python &lt;
+comparison, None will be returned, even if the module is installed. You can
+use this to keep from importing an incompatible older version of a module.</p>
+<p>You can also specify a minimum Python version by using the
+min_python_version keyword argument.  This should be comparable against
+sys.version_info.</p>
+<p>If the keyword argument warn_not_installed is set to True, the function will
+emit a UserWarning when the module is not installed.</p>
+<p>If the keyword argument warn_old_version is set to True, the function will
+emit a UserWarning when the library is installed, but cannot be imported
+because of the min_module_version or min_python_version options.</p>
+<p>Note that because of the way warnings are handled, a warning will be
+emitted for each module only once.  You can change the default warning
+behavior by overriding the values of WARN_NOT_INSTALLED and WARN_OLD_VERSION
+in sympy.external.importtools.  By default, WARN_NOT_INSTALLED is False and
+WARN_OLD_VERSION is True.</p>
+<p>This function uses __import__() to import the module.  To pass additional
+options to __import__(), use the __import__kwargs keyword argument.  For
+example, to import a submodule A.B, you must pass a nonempty fromlist option
+to __import__.  See the docstring of __import__().</p>
+<p>This catches ImportError to determine if the module is not installed.  To
+catch additional errors, pass them as a tuple to the catch keyword
+argument.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..external</span> <span class="kn">import</span> <span class="n">import_module</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">,</span> <span class="n">min_python_version</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span>
+<span class="gp">... </span><span class="n">warn_old_version</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">,</span> <span class="n">min_module_version</span><span class="o">=</span><span class="s1">&#39;1.5&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">warn_old_version</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># numpy.__version__ is a string</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># gmpy does not have __version__, but it does have gmpy.version()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gmpy</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;gmpy&#39;</span><span class="p">,</span> <span class="n">min_module_version</span><span class="o">=</span><span class="s1">&#39;1.14&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">module_version_attr</span><span class="o">=</span><span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="n">module_version_attr_call_args</span><span class="o">=</span><span class="p">(),</span>
+<span class="gp">... </span><span class="n">warn_old_version</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># To import a submodule, you must pass a nonempty fromlist to</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># __import__().  The values do not matter.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p3</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;mpl_toolkits.mplot3d&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">__import__kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fromlist&#39;</span><span class="p">:[</span><span class="s1">&#39;something&#39;</span><span class="p">]})</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># matplotlib.pyplot can raise RuntimeError when the display cannot be opened</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matplotlib</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;matplotlib&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="n">__import__kwargs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;fromlist&#39;</span><span class="p">:[</span><span class="s1">&#39;pyplot&#39;</span><span class="p">]},</span> <span class="n">catch</span><span class="o">=</span><span class="p">(</span><span class="ne">RuntimeError</span><span class="p">,))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-modelparameters.sympy.external">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.external" title="Permalink to this headline">¶</a></h2>
+<p>Unified place for determining if external dependencies are installed or not.</p>
+<p>You should import all external modules using the import_module() function.</p>
+<p>For example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..external</span> <span class="kn">import</span> <span class="n">import_module</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">numpy</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the resulting library is not installed, or if the installed version
+is less than a given minimum version, the function will return None.
+Otherwise, it will return the library. See the docstring of
+import_module() for more information.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">modelparameters.sympy.external package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.external.importtools">modelparameters.sympy.external.importtools module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.external">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.diffgeom.html"
+                        title="previous chapter">modelparameters.sympy.diffgeom package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modelparameters.sympy.functions.html"
+                        title="next chapter">modelparameters.sympy.functions package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modelparameters.sympy.external.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.functions.html" title="modelparameters.sympy.functions package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modelparameters.sympy.diffgeom.html" title="modelparameters.sympy.diffgeom package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">modelparameters 1.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modelparameters.html" >modelparameters package</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="modelparameters.sympy.html" >modelparameters.sympy package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">modelparameters.sympy.external package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+  </body>
+</html>
