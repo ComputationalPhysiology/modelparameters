@@ -2,7 +2,7 @@
 
 from __future__ import print_function, division
 import sys
-from distutils.version import StrictVersion
+from pkg_resources import parse_version as StrictVersion
 
 # Override these in the module to change the default warning behavior.
 # For example, you might set both to False before running the tests so that
@@ -17,22 +17,30 @@ def __sympy_debug():
     # We don't just import SYMPY_DEBUG from that file because we don't want to
     # import all of sympy just to use this module.
     import os
-    debug_str = os.getenv('SYMPY_DEBUG', 'False')
-    if debug_str in ('True', 'False'):
+
+    debug_str = os.getenv("SYMPY_DEBUG", "False")
+    if debug_str in ("True", "False"):
         return eval(debug_str)
     else:
-        raise RuntimeError("unrecognized value for SYMPY_DEBUG: %s" %
-                           debug_str)
+        raise RuntimeError("unrecognized value for SYMPY_DEBUG: %s" % debug_str)
+
 
 if __sympy_debug():
     WARN_OLD_VERSION = True
     WARN_NOT_INSTALLED = True
 
 
-def import_module(module, min_module_version=None, min_python_version=None,
-        warn_not_installed=None, warn_old_version=None,
-        module_version_attr='__version__', module_version_attr_call_args=None,
-        __import__kwargs={}, catch=()):
+def import_module(
+    module,
+    min_module_version=None,
+    min_python_version=None,
+    warn_not_installed=None,
+    warn_old_version=None,
+    module_version_attr="__version__",
+    module_version_attr_call_args=None,
+    __import__kwargs={},
+    catch=(),
+):
     """
     Import and return a module if it is installed.
 
@@ -108,10 +116,14 @@ def import_module(module, min_module_version=None, min_python_version=None,
     """
     # keyword argument overrides default, and global variable overrides
     # keyword argument.
-    warn_old_version = (WARN_OLD_VERSION if WARN_OLD_VERSION is not None
-        else warn_old_version or True)
-    warn_not_installed = (WARN_NOT_INSTALLED if WARN_NOT_INSTALLED is not None
-        else warn_not_installed or False)
+    warn_old_version = (
+        WARN_OLD_VERSION if WARN_OLD_VERSION is not None else warn_old_version or True
+    )
+    warn_not_installed = (
+        WARN_NOT_INSTALLED
+        if WARN_NOT_INSTALLED is not None
+        else warn_not_installed or False
+    )
 
     import warnings
 
@@ -119,14 +131,16 @@ def import_module(module, min_module_version=None, min_python_version=None,
     if min_python_version:
         if sys.version_info < min_python_version:
             if warn_old_version:
-                warnings.warn("Python version is too old to use %s "
-                    "(%s or newer required)" % (
-                        module, '.'.join(map(str, min_python_version))),
-                    UserWarning)
+                warnings.warn(
+                    "Python version is too old to use %s "
+                    "(%s or newer required)"
+                    % (module, ".".join(map(str, min_python_version))),
+                    UserWarning,
+                )
             return
 
     # PyPy 1.6 has rudimentary NumPy support and importing it produces errors, so skip it
-    if module == 'numpy' and '__pypy__' in sys.builtin_module_names:
+    if module == "numpy" and "__pypy__" in sys.builtin_module_names:
         return
 
     try:
@@ -136,18 +150,17 @@ def import_module(module, min_module_version=None, min_python_version=None,
         ##    from matplotlib import collections
         ## gives python's stdlib collections module. explicitly re-importing
         ## the module fixes this.
-        from_list = __import__kwargs.get('fromlist', tuple())
+        from_list = __import__kwargs.get("fromlist", tuple())
         for submod in from_list:
-            if submod == 'collections' and mod.__name__ == 'matplotlib':
-                __import__(module + '.' + submod)
+            if submod == "collections" and mod.__name__ == "matplotlib":
+                __import__(module + "." + submod)
     except ImportError:
         if warn_not_installed:
             warnings.warn("%s module is not installed" % module, UserWarning)
         return
     except catch as e:
         if warn_not_installed:
-            warnings.warn(
-                "%s module could not be used (%s)" % (module, repr(e)))
+            warnings.warn("%s module could not be used (%s)" % (module, repr(e)))
         return
 
     if min_module_version:
@@ -161,17 +174,20 @@ def import_module(module, min_module_version=None, min_python_version=None,
             if warn_old_version:
                 # Attempt to create a pretty string version of the version
                 from ..core.compatibility import string_types
+
                 if isinstance(min_module_version, string_types):
                     verstr = min_module_version
                 elif isinstance(min_module_version, (tuple, list)):
-                    verstr = '.'.join(map(str, min_module_version))
+                    verstr = ".".join(map(str, min_module_version))
                 else:
                     # Either don't know what this is.  Hopefully
                     # it's something that has a nice str version, like an int.
                     verstr = str(min_module_version)
-                warnings.warn("%s version is too old to use "
+                warnings.warn(
+                    "%s version is too old to use "
                     "(%s or newer required)" % (module, verstr),
-                    UserWarning)
+                    UserWarning,
+                )
             return
 
     return mod

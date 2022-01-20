@@ -3,7 +3,7 @@
 from __future__ import print_function, division
 
 import sys
-from distutils.version import LooseVersion as V
+from pkg_resources import parse_version as V
 from io import BytesIO
 
 from .. import latex as default_latex
@@ -13,16 +13,16 @@ from ..utilities.misc import debug
 
 
 def _init_python_printing(stringify_func, **settings):
-    """Setup printing in Python interactive session. """
+    """Setup printing in Python interactive session."""
     import sys
     from ..core.compatibility import builtins
 
     def _displayhook(arg):
         """Python's pretty-printer display hook.
 
-           This function was adapted from:
+        This function was adapted from:
 
-            http://www.python.org/dev/peps/pep-0217/
+         http://www.python.org/dev/peps/pep-0217/
 
         """
         if arg is not None:
@@ -33,29 +33,46 @@ def _init_python_printing(stringify_func, **settings):
     sys.displayhook = _displayhook
 
 
-def _init_ipython_printing(ip, stringify_func, use_latex, euler, forecolor,
-                           backcolor, fontsize, latex_mode, print_builtin,
-                           latex_printer, **settings):
-    """Setup printing in IPython interactive session. """
+def _init_ipython_printing(
+    ip,
+    stringify_func,
+    use_latex,
+    euler,
+    forecolor,
+    backcolor,
+    fontsize,
+    latex_mode,
+    print_builtin,
+    latex_printer,
+    **settings
+):
+    """Setup printing in IPython interactive session."""
     try:
         from IPython.lib.latextools import latex_to_png
     except ImportError:
         pass
 
-    preamble = "\\documentclass[%s]{article}\n" \
-               "\\pagestyle{empty}\n" \
-               "\\usepackage{amsmath,amsfonts}%s\\begin{document}"
+    preamble = (
+        "\\documentclass[%s]{article}\n"
+        "\\pagestyle{empty}\n"
+        "\\usepackage{amsmath,amsfonts}%s\\begin{document}"
+    )
     if euler:
-        addpackages = '\\usepackage{euler}'
+        addpackages = "\\usepackage{euler}"
     else:
-        addpackages = ''
+        addpackages = ""
     preamble = preamble % (fontsize, addpackages)
 
-    imagesize = 'tight'
+    imagesize = "tight"
     offset = "0cm,0cm"
     resolution = 150
     dvi = r"-T %s -D %d -bg %s -fg %s -O %s" % (
-        imagesize, resolution, backcolor, forecolor, offset)
+        imagesize,
+        resolution,
+        backcolor,
+        forecolor,
+        offset,
+    )
     dvioptions = dvi.split()
     debug("init_printing: DVIOPTIONS:", dvioptions)
     debug("init_printing: PREAMBLE:", preamble)
@@ -72,28 +89,32 @@ def _init_ipython_printing(ip, stringify_func, use_latex, euler, forecolor,
     def _preview_wrapper(o):
         exprbuffer = BytesIO()
         try:
-            preview(o, output='png', viewer='BytesIO',
-                    outputbuffer=exprbuffer, preamble=preamble,
-                    dvioptions=dvioptions)
+            preview(
+                o,
+                output="png",
+                viewer="BytesIO",
+                outputbuffer=exprbuffer,
+                preamble=preamble,
+                dvioptions=dvioptions,
+            )
         except Exception as e:
             # IPython swallows exceptions
-            debug("png printing:", "_preview_wrapper exception raised:",
-                  repr(e))
+            debug("png printing:", "_preview_wrapper exception raised:", repr(e))
             raise
         return exprbuffer.getvalue()
 
     def _matplotlib_wrapper(o):
         # mathtext does not understand certain latex flags, so we try to
         # replace them with suitable subs
-        o = o.replace(r'\operatorname', '')
-        o = o.replace(r'\overline', r'\bar')
+        o = o.replace(r"\operatorname", "")
+        o = o.replace(r"\overline", r"\bar")
         # mathtext can't render some LaTeX commands. For example, it can't
         # render any LaTeX environments such as array or matrix. So here we
         # ensure that if mathtext fails to render, we return None.
         try:
             return latex_to_png(o)
         except ValueError as e:
-            debug('matplotlib exception caught:', repr(e))
+            debug("matplotlib exception caught:", repr(e))
             return None
 
     def _can_print_latex(o):
@@ -108,21 +129,22 @@ def _init_ipython_printing(ip, stringify_func, use_latex, euler, forecolor,
             from ..matrices import MatrixBase
             from ..physics.vector import Vector, Dyadic
             from ..tensor.array import NDimArray
+
             # If you're adding another type, make sure you add it to printable_types
             # later in this file as well
 
             if isinstance(o, (list, tuple, set, frozenset)):
-               return all(_can_print_latex(i) for i in o)
+                return all(_can_print_latex(i) for i in o)
             elif isinstance(o, dict):
-               return all(_can_print_latex(i) and _can_print_latex(o[i]) for i in o)
+                return all(_can_print_latex(i) and _can_print_latex(o[i]) for i in o)
             elif isinstance(o, bool):
-               return False
+                return False
             # TODO : Investigate if "elif hasattr(o, '_latex')" is more useful
             # to use here, than these explicit imports.
             elif isinstance(o, (Basic, MatrixBase, Vector, Dyadic, NDimArray)):
-               return True
+                return True
             elif isinstance(o, (float, integer_types)) and print_builtin:
-               return True
+                return True
             return False
         except RuntimeError:
             return False
@@ -140,10 +162,13 @@ def _init_ipython_printing(ip, stringify_func, use_latex, euler, forecolor,
             try:
                 return _preview_wrapper(s)
             except RuntimeError as e:
-                debug('preview failed with:', repr(e),
-                      ' Falling back to matplotlib backend')
-                if latex_mode != 'inline':
-                    s = latex(o, mode='inline', **settings)
+                debug(
+                    "preview failed with:",
+                    repr(e),
+                    " Falling back to matplotlib backend",
+                )
+                if latex_mode != "inline":
+                    s = latex(o, mode="inline", **settings)
                 return _matplotlib_wrapper(s)
 
     def _print_latex_matplotlib(o):
@@ -151,7 +176,7 @@ def _init_ipython_printing(ip, stringify_func, use_latex, euler, forecolor,
         A function that returns a png rendered by mathtext
         """
         if _can_print_latex(o):
-            s = latex(o, mode='inline', **settings)
+            s = latex(o, mode="inline", **settings)
             return _matplotlib_wrapper(s)
 
     def _print_latex_text(o):
@@ -159,23 +184,23 @@ def _init_ipython_printing(ip, stringify_func, use_latex, euler, forecolor,
         A function to generate the latex representation of sympy expressions.
         """
         if _can_print_latex(o):
-            s = latex(o, mode='plain', **settings)
-            s = s.replace(r'\dag', r'\dagger')
-            s = s.strip('$')
-            return '$$%s$$' % s
+            s = latex(o, mode="plain", **settings)
+            s = s.replace(r"\dag", r"\dagger")
+            s = s.strip("$")
+            return "$$%s$$" % s
 
     def _result_display(self, arg):
         """IPython's pretty-printer display hook, for use in IPython 0.10
 
-           This function was adapted from:
+        This function was adapted from:
 
-            ipython/IPython/hooks.py:155
+         ipython/IPython/hooks.py:155
 
         """
         if self.rc.pprint:
             out = stringify_func(arg)
 
-            if '\n' in out:
+            if "\n" in out:
                 print
 
             print(out)
@@ -183,26 +208,38 @@ def _init_ipython_printing(ip, stringify_func, use_latex, euler, forecolor,
             print(repr(arg))
 
     import IPython
-    if V(IPython.__version__) >= '0.11':
+
+    if V(IPython.__version__) >= "0.11":
         from ..core.basic import Basic
         from ..matrices.matrices import MatrixBase
         from ..physics.vector import Vector, Dyadic
         from ..tensor.array import NDimArray
 
-        printable_types = [Basic, MatrixBase, float, tuple, list, set,
-                frozenset, dict, Vector, Dyadic, NDimArray] + list(integer_types)
+        printable_types = [
+            Basic,
+            MatrixBase,
+            float,
+            tuple,
+            list,
+            set,
+            frozenset,
+            dict,
+            Vector,
+            Dyadic,
+            NDimArray,
+        ] + list(integer_types)
 
-        plaintext_formatter = ip.display_formatter.formatters['text/plain']
+        plaintext_formatter = ip.display_formatter.formatters["text/plain"]
 
         for cls in printable_types:
             plaintext_formatter.for_type(cls, _print_plain)
 
-        png_formatter = ip.display_formatter.formatters['image/png']
-        if use_latex in (True, 'png'):
+        png_formatter = ip.display_formatter.formatters["image/png"]
+        if use_latex in (True, "png"):
             debug("init_printing: using png formatter")
             for cls in printable_types:
                 png_formatter.for_type(cls, _print_latex_png)
-        elif use_latex == 'matplotlib':
+        elif use_latex == "matplotlib":
             debug("init_printing: using matplotlib formatter")
             for cls in printable_types:
                 png_formatter.for_type(cls, _print_latex_matplotlib)
@@ -210,12 +247,12 @@ def _init_ipython_printing(ip, stringify_func, use_latex, euler, forecolor,
             debug("init_printing: not using any png formatter")
             for cls in printable_types:
                 # Better way to set this, but currently does not work in IPython
-                #png_formatter.for_type(cls, None)
+                # png_formatter.for_type(cls, None)
                 if cls in png_formatter.type_printers:
                     png_formatter.type_printers.pop(cls)
 
-        latex_formatter = ip.display_formatter.formatters['text/latex']
-        if use_latex in (True, 'mathjax'):
+        latex_formatter = ip.display_formatter.formatters["text/latex"]
+        if use_latex in (True, "mathjax"):
             debug("init_printing: using mathjax formatter")
             for cls in printable_types:
                 latex_formatter.for_type(cls, _print_latex_text)
@@ -223,17 +260,18 @@ def _init_ipython_printing(ip, stringify_func, use_latex, euler, forecolor,
             debug("init_printing: not using text/latex formatter")
             for cls in printable_types:
                 # Better way to set this, but currently does not work in IPython
-                #latex_formatter.for_type(cls, None)
+                # latex_formatter.for_type(cls, None)
                 if cls in latex_formatter.type_printers:
                     latex_formatter.type_printers.pop(cls)
 
     else:
-        ip.set_hook('result_display', _result_display)
+        ip.set_hook("result_display", _result_display)
+
 
 def _is_ipython(shell):
     """Is a shell instance an IPython shell?"""
     # shortcut, so we don't import IPython if we don't have to
-    if 'IPython' not in sys.modules:
+    if "IPython" not in sys.modules:
         return False
     try:
         from IPython.core.interactiveshell import InteractiveShell
@@ -248,13 +286,26 @@ def _is_ipython(shell):
     return isinstance(shell, InteractiveShell)
 
 
-def init_printing(pretty_print=True, order=None, use_unicode=None,
-                  use_latex=None, wrap_line=None, num_columns=None,
-                  no_global=False, ip=None, euler=False, forecolor='Black',
-                  backcolor='Transparent', fontsize='10pt',
-                  latex_mode='equation*', print_builtin=True,
-                  str_printer=None, pretty_printer=None,
-                  latex_printer=None, **settings):
+def init_printing(
+    pretty_print=True,
+    order=None,
+    use_unicode=None,
+    use_latex=None,
+    wrap_line=None,
+    num_columns=None,
+    no_global=False,
+    ip=None,
+    euler=False,
+    forecolor="Black",
+    backcolor="Transparent",
+    fontsize="10pt",
+    latex_mode="equation*",
+    print_builtin=True,
+    str_printer=None,
+    pretty_printer=None,
+    latex_printer=None,
+    **settings
+):
     r"""
     Initializes pretty-printer depending on the environment.
 
@@ -380,7 +431,7 @@ def init_printing(pretty_print=True, order=None, use_unicode=None,
         except NameError:
             pass
         else:
-            in_ipython = (ip is not None)
+            in_ipython = ip is not None
 
     if ip and not in_ipython:
         in_ipython = _is_ipython(ip)
@@ -388,20 +439,24 @@ def init_printing(pretty_print=True, order=None, use_unicode=None,
     if in_ipython and pretty_print:
         try:
             import IPython
+
             # IPython 1.0 deprecates the frontend module, so we import directly
             # from the terminal module to prevent a deprecation message from being
             # shown.
-            if V(IPython.__version__) >= '1.0':
+            if V(IPython.__version__) >= "1.0":
                 from IPython.terminal.interactiveshell import TerminalInteractiveShell
             else:
-                from IPython.frontend.terminal.interactiveshell import TerminalInteractiveShell
+                from IPython.frontend.terminal.interactiveshell import (
+                    TerminalInteractiveShell,
+                )
             from code import InteractiveConsole
         except ImportError:
             pass
         else:
             # This will be True if we are in the qtconsole or notebook
-            if not isinstance(ip, (InteractiveConsole, TerminalInteractiveShell)) \
-                    and 'ipython-console' not in ''.join(sys.argv):
+            if not isinstance(
+                ip, (InteractiveConsole, TerminalInteractiveShell)
+            ) and "ipython-console" not in "".join(sys.argv):
                 if use_unicode is None:
                     debug("init_printing: Setting use_unicode to True")
                     use_unicode = True
@@ -410,27 +465,45 @@ def init_printing(pretty_print=True, order=None, use_unicode=None,
                     use_latex = True
 
     if not no_global:
-        Printer.set_global_settings(order=order, use_unicode=use_unicode,
-                                    wrap_line=wrap_line, num_columns=num_columns)
+        Printer.set_global_settings(
+            order=order,
+            use_unicode=use_unicode,
+            wrap_line=wrap_line,
+            num_columns=num_columns,
+        )
     else:
         _stringify_func = stringify_func
 
         if pretty_print:
-            stringify_func = lambda expr: \
-                             _stringify_func(expr, order=order,
-                                             use_unicode=use_unicode,
-                                             wrap_line=wrap_line,
-                                             num_columns=num_columns)
+            stringify_func = lambda expr: _stringify_func(
+                expr,
+                order=order,
+                use_unicode=use_unicode,
+                wrap_line=wrap_line,
+                num_columns=num_columns,
+            )
         else:
             stringify_func = lambda expr: _stringify_func(expr, order=order)
 
     if in_ipython:
         mode_in_settings = settings.pop("mode", None)
         if mode_in_settings:
-            debug("init_printing: Mode is not able to be set due to internals"
-                  "of IPython printing")
-        _init_ipython_printing(ip, stringify_func, use_latex, euler,
-                               forecolor, backcolor, fontsize, latex_mode,
-                               print_builtin, latex_printer, **settings)
+            debug(
+                "init_printing: Mode is not able to be set due to internals"
+                "of IPython printing"
+            )
+        _init_ipython_printing(
+            ip,
+            stringify_func,
+            use_latex,
+            euler,
+            forecolor,
+            backcolor,
+            fontsize,
+            latex_mode,
+            print_builtin,
+            latex_printer,
+            **settings
+        )
     else:
         _init_python_printing(stringify_func, **settings)

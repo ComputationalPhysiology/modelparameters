@@ -16,26 +16,20 @@
 # along with ModelParameters. If not, see <http://www.gnu.org/licenses/>.
 # System imports
 import re
-from distutils.version import LooseVersion as _V
 
 from . import sympy as sp
+from .logger import error
 from .sympy.core.function import AppliedUndef as _AppliedUndef
 from .sympy.printing import StrPrinter as _StrPrinter
 from .sympy.printing.latex import latex as _sympy_latex
 from .sympy.printing.latex import LatexPrinter as _LatexPrinter
 from .sympy.printing.precedence import precedence as _precedence
-
-from .logger import error
 from .utils import check_arg as _check_arg
 from .utils import scalars as _scalars
 
-_current_sympy_version = _V(sp.__version__)
 
-# Check version for order arguments
-if _current_sympy_version >= _V("0.7.2"):
-    _order = "none"
-else:
-    _order = None
+_order = "none"
+
 
 # A collection of language specific keywords
 _cpp_keywords = [

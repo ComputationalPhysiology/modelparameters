@@ -2,7 +2,7 @@
 
 from __future__ import print_function, division
 
-from distutils.version import LooseVersion as V
+from pkg_resources import parse_version as V
 
 from ..external import import_module
 from .printing import init_printing
@@ -30,7 +30,7 @@ just install the 'ipython' package and start isympy again.
 
 
 def _make_message(ipython=True, quiet=False, source=None):
-    """Create a banner for an interactive session. """
+    """Create a banner for an interactive session."""
     from .. import __version__ as sympy_version
     from ..polys.domains import GROUND_TYPES
     from ..utilities.misc import ARCH
@@ -49,17 +49,17 @@ def _make_message(ipython=True, quiet=False, source=None):
     else:
         shell_name = "Python"
 
-    info = ['ground types: %s' % GROUND_TYPES]
+    info = ["ground types: %s" % GROUND_TYPES]
 
-    cache = os.getenv('SYMPY_USE_CACHE')
+    cache = os.getenv("SYMPY_USE_CACHE")
 
-    if cache is not None and cache.lower() == 'no':
-        info.append('cache: off')
+    if cache is not None and cache.lower() == "no":
+        info.append("cache: off")
 
     if SYMPY_DEBUG:
-        info.append('debugging: on')
+        info.append("debugging: on")
 
-    args = shell_name, sympy_version, python_version, ARCH, ', '.join(info)
+    args = shell_name, sympy_version, python_version, ARCH, ", ".join(info)
     message = "%s console for SymPy %s (Python %s-%s) (%s)\n" % args
 
     if source is None:
@@ -67,20 +67,19 @@ def _make_message(ipython=True, quiet=False, source=None):
 
     _source = ""
 
-    for line in source.split('\n')[:-1]:
+    for line in source.split("\n")[:-1]:
         if not line:
-            _source += '\n'
+            _source += "\n"
         else:
-            _source += '>>> ' + line + '\n'
+            _source += ">>> " + line + "\n"
 
     doc_version = sympy_version
-    if 'dev' in doc_version:
+    if "dev" in doc_version:
         doc_version = "dev"
     else:
         doc_version = "%s/" % doc_version
 
-    message += '\n' + verbose_message % {'source': _source,
-                                         'version': doc_version}
+    message += "\n" + verbose_message % {"source": _source, "version": doc_version}
 
     return message
 
@@ -118,20 +117,15 @@ def int_to_Integer(s):
         Returns true if string value num (with token NUMBER) represents an integer.
         """
         # XXX: Is there something in the standard library that will do this?
-        if '.' in num or 'j' in num.lower() or 'e' in num.lower():
+        if "." in num or "j" in num.lower() or "e" in num.lower():
             return False
         return True
 
     result = []
-    g = generate_tokens(StringIO(s).readline)   # tokenize the string
+    g = generate_tokens(StringIO(s).readline)  # tokenize the string
     for toknum, tokval, _, _, _ in g:
         if toknum == NUMBER and _is_int(tokval):  # replace NUMBER tokens
-            result.extend([
-                (NAME, 'Integer'),
-                (OP, '('),
-                (NUMBER, tokval),
-                (OP, ')')
-            ])
+            result.extend([(NAME, "Integer"), (OP, "("), (NUMBER, tokval), (OP, ")")])
         else:
             result.append((toknum, tokval))
     return untokenize(result)
@@ -141,9 +135,10 @@ def enable_automatic_int_sympification(app):
     """
     Allow IPython to automatically convert integer literals to Integer.
     """
-    hasshell = hasattr(app, 'shell')
+    hasshell = hasattr(app, "shell")
 
     import ast
+
     if hasshell:
         old_run_cell = app.shell.run_cell
     else:
@@ -170,7 +165,7 @@ def enable_automatic_int_sympification(app):
 
 
 def enable_automatic_symbols(app):
-    """Allow IPython to automatially create symbols (``isympy -a``). """
+    """Allow IPython to automatially create symbols (``isympy -a``)."""
     # XXX: This should perhaps use tokenize, like int_to_Integer() above.
     # This would avoid re-executing the code, which can lead to subtle
     # issues.  For example:
@@ -209,35 +204,40 @@ def enable_automatic_symbols(app):
     # multiple times.
 
     import re
+
     re_nameerror = re.compile(
-        "name '(?P<symbol>[A-Za-z_][A-Za-z0-9_]*)' is not defined")
+        "name '(?P<symbol>[A-Za-z_][A-Za-z0-9_]*)' is not defined"
+    )
 
     def _handler(self, etype, value, tb, tb_offset=None):
-        """Handle :exc:`NameError` exception and allow injection of missing symbols. """
+        """Handle :exc:`NameError` exception and allow injection of missing symbols."""
         if etype is NameError and tb.tb_next and not tb.tb_next.tb_next:
             match = re_nameerror.match(str(value))
 
             if match is not None:
                 # XXX: Make sure Symbol is in scope. Otherwise you'll get infinite recursion.
-                self.run_cell("%(symbol)s = Symbol('%(symbol)s')" %
-                    {'symbol': match.group("symbol")}, store_history=False)
+                self.run_cell(
+                    "%(symbol)s = Symbol('%(symbol)s')"
+                    % {"symbol": match.group("symbol")},
+                    store_history=False,
+                )
 
                 try:
-                    code = self.user_ns['In'][-1]
+                    code = self.user_ns["In"][-1]
                 except (KeyError, IndexError):
                     pass
                 else:
                     self.run_cell(code, store_history=False)
                     return None
                 finally:
-                    self.run_cell("del %s" % match.group("symbol"),
-                                  store_history=False)
+                    self.run_cell("del %s" % match.group("symbol"), store_history=False)
 
         stb = self.InteractiveTB.structured_traceback(
-            etype, value, tb, tb_offset=tb_offset)
+            etype, value, tb, tb_offset=tb_offset
+        )
         self._showtraceback(etype, value, stb)
 
-    if hasattr(app, 'shell'):
+    if hasattr(app, "shell"):
         app.shell.set_custom_exc((NameError,), _handler)
     else:
         # This was restructured in IPython 0.13
@@ -245,15 +245,15 @@ def enable_automatic_symbols(app):
 
 
 def init_ipython_session(argv=[], auto_symbols=False, auto_int_to_Integer=False):
-    """Construct new IPython session. """
+    """Construct new IPython session."""
     import IPython
 
-    if V(IPython.__version__) >= '0.11':
+    if V(IPython.__version__) >= "0.11":
         # use an app to parse the command line, and init config
         # IPython 1.0 deprecates the frontend module, so we import directly
         # from the terminal module to prevent a deprecation message from being
         # shown.
-        if V(IPython.__version__) >= '1.0':
+        if V(IPython.__version__) >= "1.0":
             from IPython.terminal import ipapp
         else:
             from IPython.frontend.terminal import ipapp
@@ -273,15 +273,16 @@ def init_ipython_session(argv=[], auto_symbols=False, auto_int_to_Integer=False)
         return app.shell
     else:
         from IPython.Shell import make_IPython
+
         return make_IPython(argv)
 
 
 def init_python_session():
-    """Construct new Python session. """
+    """Construct new Python session."""
     from code import InteractiveConsole
 
     class SymPyConsole(InteractiveConsole):
-        """An interactive console with readline support. """
+        """An interactive console with readline support."""
 
         def __init__(self):
             InteractiveConsole.__init__(self)
@@ -294,10 +295,10 @@ def init_python_session():
                 import os
                 import atexit
 
-                readline.parse_and_bind('tab: complete')
+                readline.parse_and_bind("tab: complete")
 
-                if hasattr(readline, 'read_history_file'):
-                    history = os.path.expanduser('~/.sympy-history')
+                if hasattr(readline, "read_history_file"):
+                    history = os.path.expanduser("~/.sympy-history")
 
                     try:
                         readline.read_history_file(history)
@@ -309,10 +310,20 @@ def init_python_session():
     return SymPyConsole()
 
 
-def init_session(ipython=None, pretty_print=True, order=None,
-        use_unicode=None, use_latex=None, quiet=False, auto_symbols=False,
-        auto_int_to_Integer=False, str_printer=None, pretty_printer=None,
-        latex_printer=None, argv=[]):
+def init_session(
+    ipython=None,
+    pretty_print=True,
+    order=None,
+    use_unicode=None,
+    use_latex=None,
+    quiet=False,
+    auto_symbols=False,
+    auto_int_to_Integer=False,
+    str_printer=None,
+    pretty_printer=None,
+    latex_printer=None,
+    argv=[],
+):
     """
     Initialize an embedded IPython or Python session. The IPython session is
     initiated with the --pylab option, without the numpy imports, so that
@@ -418,6 +429,7 @@ def init_session(ipython=None, pretty_print=True, order=None,
         else:
             try:
                 from IPython import get_ipython
+
                 ip = get_ipython()
             except ImportError:
                 ip = None
@@ -429,16 +441,19 @@ def init_session(ipython=None, pretty_print=True, order=None,
         ip = init_python_session()
         mainloop = ip.interact
     else:
-        ip = init_ipython_session(argv=argv, auto_symbols=auto_symbols,
-            auto_int_to_Integer=auto_int_to_Integer)
+        ip = init_ipython_session(
+            argv=argv,
+            auto_symbols=auto_symbols,
+            auto_int_to_Integer=auto_int_to_Integer,
+        )
 
-        if V(IPython.__version__) >= '0.11':
+        if V(IPython.__version__) >= "0.11":
             # runsource is gone, use run_cell instead, which doesn't
             # take a symbol arg.  The second arg is `store_history`,
             # and False means don't add the line to IPython's history.
-            ip.runsource = lambda src, symbol='exec': ip.run_cell(src, False)
+            ip.runsource = lambda src, symbol="exec": ip.run_cell(src, False)
 
-            #Enable interactive plotting using pylab.
+            # Enable interactive plotting using pylab.
             try:
                 ip.enable_pylab(import_all=False)
             except Exception:
@@ -451,26 +466,39 @@ def init_session(ipython=None, pretty_print=True, order=None,
             mainloop = ip.mainloop
 
     readline = import_module("readline")
-    if auto_symbols and (not ipython or V(IPython.__version__) < '0.11' or not readline):
-        raise RuntimeError("automatic construction of symbols is possible only in IPython 0.11 or above with readline support")
-    if auto_int_to_Integer and (not ipython or V(IPython.__version__) < '0.11'):
-        raise RuntimeError("automatic int to Integer transformation is possible only in IPython 0.11 or above")
+    if auto_symbols and (
+        not ipython or V(IPython.__version__) < "0.11" or not readline
+    ):
+        raise RuntimeError(
+            "automatic construction of symbols is possible only in IPython 0.11 or above with readline support"
+        )
+    if auto_int_to_Integer and (not ipython or V(IPython.__version__) < "0.11"):
+        raise RuntimeError(
+            "automatic int to Integer transformation is possible only in IPython 0.11 or above"
+        )
 
     _preexec_source = preexec_source
 
-    ip.runsource(_preexec_source, symbol='exec')
-    init_printing(pretty_print=pretty_print, order=order,
-                  use_unicode=use_unicode, use_latex=use_latex, ip=ip,
-                  str_printer=str_printer, pretty_printer=pretty_printer,
-                  latex_printer=latex_printer)
+    ip.runsource(_preexec_source, symbol="exec")
+    init_printing(
+        pretty_print=pretty_print,
+        order=order,
+        use_unicode=use_unicode,
+        use_latex=use_latex,
+        ip=ip,
+        str_printer=str_printer,
+        pretty_printer=pretty_printer,
+        latex_printer=latex_printer,
+    )
 
     message = _make_message(ipython, quiet, _preexec_source)
 
     if not in_ipython:
         print(message)
         mainloop()
-        sys.exit('Exiting ...')
+        sys.exit("Exiting ...")
     else:
         print(message)
         import atexit
+
         atexit.register(lambda: print("Exiting ...\n"))
