@@ -100,13 +100,13 @@ class NDimArray(object):
 
     def _setter_iterable_check(self, value):
         from ...matrices.matrices import MatrixBase
-        if isinstance(value, (collections.Iterable, MatrixBase, NDimArray)):
+        if isinstance(value, (collections.abc.Iterable, MatrixBase, NDimArray)):
             raise NotImplementedError
 
     @classmethod
     def _scan_iterable_shape(cls, iterable):
         def f(pointer):
-            if not isinstance(pointer, collections.Iterable):
+            if not isinstance(pointer, collections.abc.Iterable):
                 return [pointer], ()
 
             result = []
@@ -131,7 +131,7 @@ class NDimArray(object):
             shape = iterable.shape
             iterable = list(iterable)
         # Construct N-dim array from an iterable (numpy arrays included):
-        elif shape is None and isinstance(iterable, collections.Iterable):
+        elif shape is None and isinstance(iterable, collections.abc.Iterable):
             iterable, shape = cls._scan_iterable_shape(iterable)
 
         # Construct N-dim array from a Matrix:
@@ -310,7 +310,7 @@ class NDimArray(object):
     def __mul__(self, other):
         from ...matrices.matrices import MatrixBase
 
-        if isinstance(other, (collections.Iterable,NDimArray, MatrixBase)):
+        if isinstance(other, (collections.abc.Iterable,NDimArray, MatrixBase)):
             raise ValueError("scalar expected, use tensorproduct(...) for tensorial product")
         other = sympify(other)
         result_list = [i*other for i in self]
@@ -319,7 +319,7 @@ class NDimArray(object):
     def __rmul__(self, other):
         from ...matrices.matrices import MatrixBase
 
-        if isinstance(other, (collections.Iterable,NDimArray, MatrixBase)):
+        if isinstance(other, (collections.abc.Iterable,NDimArray, MatrixBase)):
             raise ValueError("scalar expected, use tensorproduct(...) for tensorial product")
         other = sympify(other)
         result_list = [other*i for i in self]
@@ -328,7 +328,7 @@ class NDimArray(object):
     def __div__(self, other):
         from ...matrices.matrices import MatrixBase
 
-        if isinstance(other, (collections.Iterable,NDimArray, MatrixBase)):
+        if isinstance(other, (collections.abc.Iterable,NDimArray, MatrixBase)):
             raise ValueError("scalar expected")
         other = sympify(other)
         result_list = [i/other for i in self]

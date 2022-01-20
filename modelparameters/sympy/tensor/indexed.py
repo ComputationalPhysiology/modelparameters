@@ -153,7 +153,7 @@ class Indexed(Expr):
             raise TypeError(filldedent("""
                 Indexed expects string, Symbol, or IndexedBase as base."""))
         args = list(map(sympify, args))
-        if isinstance(base, (NDimArray, collections.Iterable, Tuple, MatrixBase)) and all([i.is_number for i in args]):
+        if isinstance(base, (NDimArray, collections.abc.Iterable, Tuple, MatrixBase)) and all([i.is_number for i in args]):
             if len(args) == 1:
                 return base[args[0]]
             else:
@@ -376,7 +376,7 @@ class IndexedBase(Expr, NotIterable):
             pass
         elif isinstance(label, (MatrixBase, NDimArray)):
             return label
-        elif isinstance(label, collections.Iterable):
+        elif isinstance(label, collections.abc.Iterable):
             return _sympify(label)
         else:
             label = _sympify(label)

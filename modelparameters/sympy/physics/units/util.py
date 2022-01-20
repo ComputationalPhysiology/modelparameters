@@ -110,7 +110,7 @@ def convert_to(expr, target_units):
     7.62950196312651e-20*gravitational_constant**(-0.5)*hbar**0.5*speed_of_light**0.5
 
     """
-    if not isinstance(target_units, (collections.Iterable, Tuple)):
+    if not isinstance(target_units, (collections.abc.Iterable, Tuple)):
         target_units = [target_units]
 
     if isinstance(expr, Add):
