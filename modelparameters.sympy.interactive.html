@@ -88,15 +88,15 @@ notebook.</p>
 <li><p><strong>pretty_print</strong> (<em>boolean</em>) – If True, use pretty_print to stringify or the provided pretty
 printer; if False, use sstrrepr to stringify or the provided string
 printer.</p></li>
-<li><p><strong>order</strong> (<em>string</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – There are a few different settings for this parameter:
+<li><p><strong>order</strong> (<em>string</em><em> or </em><em>None</em>) – There are a few different settings for this parameter:
 lex (default), which is lexographic order;
 grlex, which is graded lexographic order;
 grevlex, which is reversed graded lexographic order;
 old, which is used for compatibility reasons and for long expressions;
 None, which sets it to lex.</p></li>
-<li><p><strong>use_unicode</strong> (<em>boolean</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – If True, use unicode characters;
+<li><p><strong>use_unicode</strong> (<em>boolean</em><em> or </em><em>None</em>) – If True, use unicode characters;
 if False, do not use unicode characters.</p></li>
-<li><p><strong>use_latex</strong> (<em>string</em><em>, </em><em>boolean</em><em>, or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – If True, use default latex rendering in GUI interfaces (png and
+<li><p><strong>use_latex</strong> (<em>string</em><em>, </em><em>boolean</em><em>, or </em><em>None</em>) – If True, use default latex rendering in GUI interfaces (png and
 mathjax);
 if False, do not use latex rendering;
 if ‘png’, enable latex rendering with an external latex compiler,
@@ -107,7 +107,7 @@ rendering in IPython notebook or text rendering in LaTeX documents</p></li>
 <li><p><strong>wrap_line</strong> (<em>boolean</em>) – If True, lines will wrap at the end; if False, they will not wrap
 but continue as one line. This is only relevant if <cite>pretty_print</cite> is
 True.</p></li>
-<li><p><strong>num_columns</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – If int, number of columns before wrapping is set to num_columns; if
+<li><p><strong>num_columns</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em> or </em><em>None</em>) – If int, number of columns before wrapping is set to num_columns; if
 None, number of columns before wrapping is set to terminal width.
 This is only relevant if <cite>pretty_print</cite> is True.</p></li>
 <li><p><strong>no_global</strong> (<em>boolean</em>) – If True, the settings become system wide;
@@ -207,15 +207,15 @@ matplotlib plotting can be interactive.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pretty_print</strong> (<em>boolean</em>) – If True, use pretty_print to stringify;
 if False, use sstrrepr to stringify.</p></li>
-<li><p><strong>order</strong> (<em>string</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – There are a few different settings for this parameter:
+<li><p><strong>order</strong> (<em>string</em><em> or </em><em>None</em>) – There are a few different settings for this parameter:
 lex (default), which is lexographic order;
 grlex, which is graded lexographic order;
 grevlex, which is reversed graded lexographic order;
 old, which is used for compatibility reasons and for long expressions;
 None, which sets it to lex.</p></li>
-<li><p><strong>use_unicode</strong> (<em>boolean</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – If True, use unicode characters;
+<li><p><strong>use_unicode</strong> (<em>boolean</em><em> or </em><em>None</em>) – If True, use unicode characters;
 if False, do not use unicode characters.</p></li>
-<li><p><strong>use_latex</strong> (<em>boolean</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – If True, use latex rendering if IPython GUI’s;
+<li><p><strong>use_latex</strong> (<em>boolean</em><em> or </em><em>None</em>) – If True, use latex rendering if IPython GUI’s;
 if False, do not use latex rendering.</p></li>
 <li><p><strong>quiet</strong> (<em>boolean</em>) – If True, init_session will not print messages regarding its status;
 if False, init_session will print messages regarding its status.</p></li>
@@ -226,7 +226,7 @@ The default is False.</p></li>
 that things like 1/2 give Rational(1, 2).
 If False, it will not.
 The default is False.</p></li>
-<li><p><strong>ipython</strong> (<em>boolean</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a>) – If True, printing will initialize for an IPython console;
+<li><p><strong>ipython</strong> (<em>boolean</em><em> or </em><em>None</em>) – If True, printing will initialize for an IPython console;
 if False, printing will initialize for a normal console;
 The default is None, which automatically determines whether we are in
 an ipython instance or not.</p></li>
@@ -319,8 +319,9 @@ This should mimic sympy.printing.latex().</p></li>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">modelparameters.sympy.interactive package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.interactive.ipythonprinting">modelparameters.sympy.interactive.ipythonprinting module</a><ul>
@@ -334,12 +335,17 @@ This should mimic sympy.printing.latex().</p></li>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="modelparameters.sympy.integrals.html"
-                        title="previous chapter">modelparameters.sympy.integrals package</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="modelparameters.sympy.liealgebras.html"
-                        title="next chapter">modelparameters.sympy.liealgebras package</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="modelparameters.sympy.integrals.html"
+                          title="previous chapter">modelparameters.sympy.integrals package</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="modelparameters.sympy.liealgebras.html"
+                          title="next chapter">modelparameters.sympy.liealgebras package</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -384,7 +390,7 @@ This should mimic sympy.printing.latex().</p></li>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>

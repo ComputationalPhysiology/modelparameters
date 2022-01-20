@@ -97,9 +97,9 @@ pass <code class="docutils literal notranslate"><span class="pre">num_columns=No
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<em>expression</em>) – the expression to print</p></li>
 <li><p><strong>wrap_line</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – line wrapping enabled/disabled, defaults to True</p></li>
-<li><p><strong>num_columns</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a><em>, </em><em>optional</em>) – number of columns before line breaking (default to None which reads
+<li><p><strong>num_columns</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – number of columns before line breaking (default to None which reads
 the terminal width), useful when using SymPy without terminal.</p></li>
-<li><p><strong>use_unicode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a><em>, </em><em>optional</em>) – use unicode characters, such as the Greek letter pi instead of
+<li><p><strong>use_unicode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – use unicode characters, such as the Greek letter pi instead of
 the string pi.</p></li>
 <li><p><strong>full_prec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em> or </em><em>string</em><em>, </em><em>optional</em>) – use full precision. Default to “auto”</p></li>
 <li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em> or </em><em>string</em><em>, </em><em>optional</em>) – set to ‘none’ for long expressions if slow; default is None</p></li>
@@ -127,9 +127,9 @@ default is True.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<em>expression</em>) – the expression to print</p></li>
 <li><p><strong>wrap_line</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – line wrapping enabled/disabled, defaults to True</p></li>
-<li><p><strong>num_columns</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a><em>, </em><em>optional</em>) – number of columns before line breaking (default to None which reads
+<li><p><strong>num_columns</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – number of columns before line breaking (default to None which reads
 the terminal width), useful when using SymPy without terminal.</p></li>
-<li><p><strong>use_unicode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em> or </em><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.10)"><em>None</em></a><em>, </em><em>optional</em>) – use unicode characters, such as the Greek letter pi instead of
+<li><p><strong>use_unicode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – use unicode characters, such as the Greek letter pi instead of
 the string pi.</p></li>
 <li><p><strong>full_prec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em> or </em><em>string</em><em>, </em><em>optional</em>) – use full precision. Default to “auto”</p></li>
 <li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em> or </em><em>string</em><em>, </em><em>optional</em>) – set to ‘none’ for long expressions if slow; default is None</p></li>
@@ -415,8 +415,9 @@ The special value stringPict.LINE is a row of ‘-’ extended to the width.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">modelparameters.sympy.printing.pretty package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.printing.pretty.pretty">modelparameters.sympy.printing.pretty.pretty module</a></li>
@@ -427,12 +428,17 @@ The special value stringPict.LINE is a row of ‘-’ extended to the width.</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="modelparameters.sympy.printing.html"
-                        title="previous chapter">modelparameters.sympy.printing package</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="modelparameters.sympy.sandbox.html"
-                        title="next chapter">modelparameters.sympy.sandbox package</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="modelparameters.sympy.printing.html"
+                          title="previous chapter">modelparameters.sympy.printing package</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="modelparameters.sympy.sandbox.html"
+                          title="next chapter">modelparameters.sympy.sandbox package</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -478,7 +484,7 @@ The special value stringPict.LINE is a row of ‘-’ extended to the width.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
     </div>
   </body>
 </html>
