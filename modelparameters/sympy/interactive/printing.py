@@ -209,7 +209,7 @@ def _init_ipython_printing(
 
     import IPython
 
-    if V(IPython.__version__) >= "0.11":
+    if V(IPython.__version__) >= V("0.11"):
         from ..core.basic import Basic
         from ..matrices.matrices import MatrixBase
         from ..physics.vector import Vector, Dyadic
@@ -443,7 +443,7 @@ def init_printing(
             # IPython 1.0 deprecates the frontend module, so we import directly
             # from the terminal module to prevent a deprecation message from being
             # shown.
-            if V(IPython.__version__) >= "1.0":
+            if V(IPython.__version__) >= V("1.0"):
                 from IPython.terminal.interactiveshell import TerminalInteractiveShell
             else:
                 from IPython.frontend.terminal.interactiveshell import (
