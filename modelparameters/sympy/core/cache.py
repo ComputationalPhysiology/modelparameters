@@ -54,7 +54,7 @@ try:
         warn("fastcache version >= 0.4.0 required", UserWarning)
         raise ImportError
         # ensure minimum required version of fastcache is present
-    if V(fastcache.__version__) < "0.4.0":
+    if V(fastcache.__version__) < V("0.4.0"):
         warn(
             "fastcache version >= 0.4.0 required, detected {}".format(
                 fastcache.__version__
