@@ -44,7 +44,6 @@ except ImportError:
     dummy_sym = None
 
 import copy
-import six
 
 # local imports
 from .logger import value_error, error, type_error, info, warning, debug
@@ -766,7 +765,7 @@ class ScalarParam(Param):
         self._range = Range(ge, le, gt, lt)
         self._in_range = self._range._in_range
 
-        check_kwarg(unit, "unit", six.string_types)
+        check_kwarg(unit, "unit", str)
         self._unit = unit
 
         # Define some string used for pretty print

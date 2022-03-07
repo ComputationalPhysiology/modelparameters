@@ -1,8 +1,6 @@
 """test for parameters module"""
 import unittest
 
-import six
-
 from modelparameters.logger import suppress_logging
 from modelparameters.parameters import ArrayParam
 from modelparameters.parameters import ConstParam
@@ -150,7 +148,7 @@ class TestOptionParam(unittest.TestCase):
         with self.assertRaises(ValueError) as cm:
             OptionParam(46, [45, 56])
         self.assertEqual(
-            six.text_type(cm.exception),
+            str(cm.exception),
             "Illegal value: 46 " + b"\xe2\x88\x89 [45, 56]".decode("utf-8"),
         )
 
@@ -167,7 +165,7 @@ class TestOptionParam(unittest.TestCase):
             "OptionParam(45, [45, 56], name='bada')",
         )
         self.assertEqual(
-            six.text_type(OptionParam(45, [45, 56], "bada")),
+            str(OptionParam(45, [45, 56], "bada")),
             b"45 \xe2\x88\x88 [45, 56]".decode("utf-8"),
         )
 
@@ -206,7 +204,7 @@ class TestOptionParam(unittest.TestCase):
             p = OptionParam(45, [45, 56], "jada")
             p.value = 57
         self.assertEqual(
-            six.text_type(cm.exception),
+            str(cm.exception),
             "Illegal value 'jada': 57 " + b"\xe2\x88\x89 [45, 56]".decode("utf-8"),
         )
 
@@ -324,7 +322,7 @@ class TestScalarParam(unittest.TestCase):
         with self.assertRaises(ValueError) as cm:
             ScalarParam(45, 50)
         self.assertEqual(
-            six.text_type(cm.exception),
+            str(cm.exception),
             b"Illegal value: 45 \xe2\x88\x89 ".decode("utf-8")
             + b"[50, \xe2\x88\x9e]".decode("utf-8"),
         )
@@ -332,7 +330,7 @@ class TestScalarParam(unittest.TestCase):
         with self.assertRaises(ValueError) as cm:
             ScalarParam(45, 0, lt=10)
         self.assertEqual(
-            six.text_type(cm.exception),
+            str(cm.exception),
             b"Illegal value: 45 \xe2\x88\x89 ".decode("utf-8") + "[0, 10)",
         )
 
@@ -367,7 +365,7 @@ class TestScalarParam(unittest.TestCase):
             p = ScalarParam(5, 0, lt=10)
             p.value = 56
         self.assertEqual(
-            six.text_type(cm.exception),
+            str(cm.exception),
             "Illegal value: 56 " + b"\xe2\x88\x89 [0, 10)".decode("utf-8"),
         )
 
@@ -518,7 +516,7 @@ if np is not None:
             with self.assertRaises(ValueError) as cm:
                 ArrayParam(45, 0)
             self.assertEqual(
-                six.text_type(cm.exception),
+                str(cm.exception),
                 b"0 \xe2\x88\x89 [1, ".decode("utf-8")
                 + b"\xe2\x88\x9e] as the 'size' argument while ".decode("utf-8")
                 + "instantiating 'ArrayParam'",
@@ -534,7 +532,7 @@ if np is not None:
             with self.assertRaises(ValueError) as cm:
                 ArrayParam(np.array([40, 60, 45]), ge=50)
             self.assertEqual(
-                six.text_type(cm.exception),
+                str(cm.exception),
                 "Illegal value: [40, 60, 45] "
                 + b"\xe2\x88\x89 [50, \xe2\x88\x9e]".decode("utf-8"),
             )
@@ -542,7 +540,7 @@ if np is not None:
             with self.assertRaises(ValueError) as cm:
                 ArrayParam(45, 4, ge=0, lt=10)
             self.assertEqual(
-                six.text_type(cm.exception),
+                str(cm.exception),
                 "Illegal value: [45, 45, 45, 45]"
                 + b" \xe2\x88\x89 [0, 10)".decode("utf-8"),
             )
@@ -580,7 +578,7 @@ if np is not None:
                 p = ArrayParam(5, 4, ge=0, lt=10)
                 p.value = 56
             self.assertEqual(
-                six.text_type(cm.exception),
+                str(cm.exception),
                 "Illegal value: 56 " + b"\xe2\x88\x89 [0, 10)".decode("utf-8"),
             )
 
