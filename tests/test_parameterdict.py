@@ -1,8 +1,6 @@
 """test for parameters module"""
 import unittest
 
-import six
-
 from modelparameters.logger import suppress_logging
 from modelparameters.parameterdict import ParameterDict
 from modelparameters.parameters import ConstParam
@@ -76,15 +74,15 @@ something_very_long =    '3'""".decode(
         if sp:
             cmp_str += "\nzlave           =    2.5 - SlaveParam(base0*base1)"
 
-        self.assertEqual(six.text_type(p), cmp_str)
+        self.assertEqual(str(p), cmp_str)
 
         p.b.bblal = 98
         p.b.bling = "jada"
         cmp_str = cmp_str.replace("987", " 98").replace(" 'akjh' ", " 'jada' ")
-        self.assertEqual(six.text_type(p), cmp_str)
+        self.assertEqual(str(p), cmp_str)
 
         # Test copy
-        self.assertEqual(six.text_type(p.copy()), cmp_str)
+        self.assertEqual(str(p.copy()), cmp_str)
         self.assertEqual(
             p.copy(True),
             eval(
@@ -98,7 +96,7 @@ something_very_long =    '3'""".decode(
         if sp:
             base1.value = 1.0
             cmp_str = cmp_str.replace("2.5", "5.0")
-            self.assertEqual(six.text_type(p), cmp_str)
+            self.assertEqual(str(p), cmp_str)
 
     def test_assignments(self):
 
@@ -122,7 +120,7 @@ something_very_long =    '3'""".decode(
         with self.assertRaises(ValueError) as cm:
             p.b.bling = "snada"
         self.assertEqual(
-            six.text_type(cm.exception),
+            str(cm.exception),
             "Illegal value 'bling': 'snada' "
             + b"\xe2\x88\x89 ['akjh', 'bla', 'jada', 'smada']".decode("utf-8"),
         )
@@ -193,7 +191,7 @@ something_very_long =    '3'""".decode(
         with self.assertRaises(ValueError) as cm:
             p.parse_args(["--other", "-1"])
         self.assertEqual(
-            six.text_type(cm.exception),
+            str(cm.exception),
             (
                 "Trying to set 'other' while parsing "
                 + "command line, but Illegal value 'other': -1.0 "

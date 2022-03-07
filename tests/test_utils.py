@@ -6,7 +6,6 @@ except ImportError:
     np = None
 
 import unittest
-import six
 
 from modelparameters.logger import suppress_logging
 from modelparameters.utils import (
@@ -62,7 +61,7 @@ class RangeTests(unittest.TestCase):
         self.assertEqual(Range(gt=0), Range(gt=0))
         self.assertEqual(repr(Range(gt=0)), "Range(gt=0)")
         self.assertEqual(
-            six.text_type(Range(gt=0)),
+            str(Range(gt=0)),
             b"(0, \xe2\x88\x9e]".decode("utf-8"),
         )
 
@@ -144,7 +143,7 @@ class CheckArgs(unittest.TestCase):
         with self.assertRaises(ValueError) as cm:
             check_arg(1, int, context=dummy, gt=2)
         self.assertEqual(
-            six.text_type(cm.exception),
+            str(cm.exception),
             b"1 \xe2\x88\x89 (2, \xe2\x88\x9e] ".decode("utf-8")
             + "while calling 'dummy'",
         )
@@ -152,14 +151,14 @@ class CheckArgs(unittest.TestCase):
         with self.assertRaises(ValueError) as cm:
             check_arg(1, int, gt=2, le=3)
         self.assertEqual(
-            six.text_type(cm.exception),
+            str(cm.exception),
             b"1 \xe2\x88\x89 (2, 3]".decode("utf-8"),
         )
 
         with self.assertRaises(ValueError) as cm:
             check_arg(5, int, ge=2, lt=3)
         self.assertEqual(
-            six.text_type(cm.exception),
+            str(cm.exception),
             b"5 \xe2\x88\x89 [2, 3)".decode("utf-8"),
         )
 
@@ -213,7 +212,7 @@ class CheckArgs(unittest.TestCase):
         with self.assertRaises(ValueError) as cm:
             check_kwarg(1, "bada", int, context=dummy, gt=2)
         self.assertEqual(
-            six.text_type(cm.exception),
+            str(cm.exception),
             b"1 \xe2\x88\x89 (2, \xe2\x88\x9e] ".decode("utf-8")
             + "as the 'bada' argument while calling 'dummy'",
         )
@@ -221,14 +220,14 @@ class CheckArgs(unittest.TestCase):
         with self.assertRaises(ValueError) as cm:
             check_kwarg(1, "bada", int, gt=2, le=3)
         self.assertEqual(
-            six.text_type(cm.exception),
+            str(cm.exception),
             b"1 \xe2\x88\x89 (2, 3] ".decode("utf-8") + "as the 'bada' argument",
         )
 
         with self.assertRaises(ValueError) as cm:
             check_kwarg(5, "bada", int, ge=2, lt=3)
         self.assertEqual(
-            six.text_type(cm.exception),
+            str(cm.exception),
             b"5 \xe2\x88\x89 [2, 3) ".decode("utf-8") + "as the 'bada' argument",
         )
 

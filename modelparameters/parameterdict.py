@@ -19,9 +19,6 @@ Contains the ParameterDict class, useful for defining
 recursive dictionaries of parameters and using attribute
 syntax for later access.
 """
-import six
-
-
 # System imports
 try:
     from .sympytools import sp
@@ -206,8 +203,7 @@ class ParameterDict(dict):
     def __repr__(self):
         return "ParameterDict(%s)" % (
             ", ".join(
-                "%s=%s" % (k, repr(v))
-                for k, v in sorted(six.iteritems(self), key=par_cmp)
+                "%s=%s" % (k, repr(v)) for k, v in sorted(self.items(), key=par_cmp)
             )
         )
 
@@ -288,7 +284,7 @@ class ParameterDict(dict):
             If True each encountered ParameterDict will be entered
 
         """
-        for key, value in sorted(six.iteritems(self), key=par_cmp):
+        for key, value in sorted(self.items(), key=par_cmp):
             if isinstance(value, ParameterDict) and recurse:
                 for new_value in value.iterparams(recurse):
                     yield new_value
@@ -305,7 +301,7 @@ class ParameterDict(dict):
             If True each encountered ParameterDict will also be entered
 
         """
-        for key, value in sorted(six.iteritems(self), key=par_cmp):
+        for key, value in sorted(self.items(), key=par_cmp):
             if isinstance(value, ParameterDict):
                 yield value
 
@@ -320,19 +316,19 @@ class ParameterDict(dict):
         max_key_length = 0
         max_value_length = 0
         max_length = 15
-        for key, value in six.iteritems(self):
+        for key, value in self.items():
             if not isinstance(value, ParameterDict):
                 if len(key) > max_key_length:
                     max_key_length = min(len(key), max_length)
                 value_length = (
                     value.format_width()
                     if isinstance(value, Param)
-                    else len(six.text_type(value))
+                    else len(str(value))
                 )
                 if value_length > max_value_length:
                     max_value_length = min(value_length, max_length)
         s = []
-        for key, value in sorted(six.iteritems(self), key=par_cmp):
+        for key, value in sorted(self.items(), key=par_cmp):
 
             # If the value is a ParameterDict
             if isinstance(value, ParameterDict):
@@ -354,7 +350,7 @@ class ParameterDict(dict):
                     + "%s = %s"
                     % (
                         KEY_JUST(key, max_key_length),
-                        VALUE_JUST(six.text_type(value), max_value_length),
+                        VALUE_JUST(str(value), max_value_length),
                     ),
                 )
 
@@ -372,7 +368,7 @@ class ParameterDict(dict):
             Parameters
         """
         items = {}
-        for key in six.iterkeys(self):
+        for key in self.keys():
             value = dict.__getitem__(self, key)
 
             # If the value is a ParameterDict
@@ -402,7 +398,7 @@ class ParameterDict(dict):
         """
         check_arg(other, dict, 0, ParameterDict.update)
 
-        for key in six.iterkeys(other):
+        for key in other.keys():
             if key not in self:
                 continue
             self_value = self[key]
@@ -452,7 +448,7 @@ class ParameterDict(dict):
                     except ValueError as e:
                         value_error(
                             "Trying to set '%s' while parsing "
-                            "command line, but %s" % (key, six.text_type(e)),
+                            "command line, but %s" % (key, str(e)),
                         )
 
             else:
@@ -481,7 +477,7 @@ class ParameterDict(dict):
                                         arg,
                                         sequence_type.__name__,
                                         key,
-                                        six.text_type(e),
+                                        str(e),
                                     ),
                                 )
 
@@ -495,13 +491,13 @@ class ParameterDict(dict):
                     except ValueError as e:
                         value_error(
                             "Trying to set '%s' while parsing "
-                            "command line, but %s" % (key, six.text_type(e)),
+                            "command line, but %s" % (key, str(e)),
                         )
 
             return par_setter
 
         def add_options(parent, opt_base):
-            for key, value in sorted(six.iteritems(parent), key=par_cmp):
+            for key, value in sorted(parent.items(), key=par_cmp):
                 opt_base_copy = opt_base[:]
                 if opt_base != PAR_PREFIX:
                     opt_base_copy += "."
@@ -579,7 +575,7 @@ class ParameterDict(dict):
             opt_base_copy = opt_base[:]
             if opt_base != PAR_PREFIX:
                 opt_base_copy += "."
-            for key, value in sorted(six.iteritems(parent), key=par_cmp):
+            for key, value in sorted(parent.items(), key=par_cmp):
                 # If the value is a ParameterDict
                 if isinstance(value, ParameterDict):
                     # Call the function recursively
@@ -597,10 +593,10 @@ class ParameterDict(dict):
                 ret_list.append(f"{opt_base_copy}{key}")
                 if type(value) in [list, tuple]:
                     for item in value:
-                        ret_list.append(six.text_type(item))
+                        ret_list.append(str(item))
                 else:
                     value = int(value) if isinstance(value, bool) else value
-                    ret_list.append(six.text_type(value))
+                    ret_list.append(str(value))
 
             return ret_list
 
