@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -44,7 +43,7 @@
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="nb">range</span>
 
 <div class="viewcode-block" id="matrix_fglm"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.fglmtools.matrix_fglm">[docs]</a><span class="k">def</span> <span class="nf">matrix_fglm</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">ring</span><span class="p">,</span> <span class="n">O_to</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts the reduced Groebner basis ``F`` of a zero-dimensional</span>
 <span class="sd">    ideal w.r.t. ``O_from`` to a reduced Groebner basis</span>
 <span class="sd">    w.r.t. ``O_to``.</span>
@@ -125,7 +124,7 @@
 
 
 <span class="k">def</span> <span class="nf">_update</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">_lambda</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Update ``P`` such that for the updated `P&#39;` `P&#39; v = e_{s}`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">k</span> <span class="o">=</span> <span class="nb">min</span><span class="p">([</span><span class="n">j</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">_lambda</span><span class="p">))</span> <span class="k">if</span> <span class="n">_lambda</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">])</span>
@@ -141,7 +140,7 @@
 
 
 <span class="k">def</span> <span class="nf">_representing_matrices</span><span class="p">(</span><span class="n">basis</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">ring</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the matrices corresponding to the linear maps `m \mapsto</span>
 <span class="sd">    x_i m` for all variables `x_i`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -167,7 +166,7 @@
 
 
 <span class="k">def</span> <span class="nf">_basis</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">ring</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes a list of monomials which are not divisible by the leading</span>
 <span class="sd">    monomials wrt to ``O`` of ``G``. These monomials are a basis of</span>
 <span class="sd">    `K[X_1, \ldots, X_n]/(G)`.</span>
@@ -208,7 +207,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -229,7 +228,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

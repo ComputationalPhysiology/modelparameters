@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -51,12 +50,12 @@
 
 
 <span class="k">def</span> <span class="nf">_init_python_printing</span><span class="p">(</span><span class="n">stringify_func</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Setup printing in Python interactive session.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Setup printing in Python interactive session.&quot;&quot;&quot;</span>
     <span class="kn">import</span> <span class="nn">sys</span>
     <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="n">builtins</span>
 
     <span class="k">def</span> <span class="nf">_displayhook</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Python&#39;s pretty-printer display hook.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Python&#39;s pretty-printer display hook.</span>
 
 <span class="sd">        This function was adapted from:</span>
 
@@ -84,7 +83,7 @@
     <span class="n">latex_printer</span><span class="p">,</span>
     <span class="o">**</span><span class="n">settings</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Setup printing in IPython interactive session.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Setup printing in IPython interactive session.&quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">from</span> <span class="nn">IPython.lib.latextools</span> <span class="kn">import</span> <span class="n">latex_to_png</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
@@ -118,7 +117,7 @@
     <span class="n">latex</span> <span class="o">=</span> <span class="n">latex_printer</span> <span class="ow">or</span> <span class="n">default_latex</span>
 
     <span class="k">def</span> <span class="nf">_print_plain</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">cycle</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;caller for pretty, for use in IPython 0.11&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;caller for pretty, for use in IPython 0.11&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">_can_print_latex</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
             <span class="n">p</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">stringify_func</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
@@ -156,7 +155,7 @@
             <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">_can_print_latex</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return True if type o can be printed with LaTeX.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if type o can be printed with LaTeX.</span>
 
 <span class="sd">        If o is a container type, this is True if and only if every element of</span>
 <span class="sd">        o can be printed with LaTeX.</span>
@@ -191,7 +190,7 @@
             <span class="c1"># so this is to guard against RecursionError for older versions.</span>
 
     <span class="k">def</span> <span class="nf">_print_latex_png</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A function that returns a png rendered by an external latex</span>
 <span class="sd">        distribution, falling back to matplotlib rendering</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -210,7 +209,7 @@
                 <span class="k">return</span> <span class="n">_matplotlib_wrapper</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_print_latex_matplotlib</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A function that returns a png rendered by mathtext</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">_can_print_latex</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
@@ -218,7 +217,7 @@
             <span class="k">return</span> <span class="n">_matplotlib_wrapper</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_print_latex_text</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A function to generate the latex representation of sympy expressions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">_can_print_latex</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
@@ -228,7 +227,7 @@
             <span class="k">return</span> <span class="s2">&quot;$$</span><span class="si">%s</span><span class="s2">$$&quot;</span> <span class="o">%</span> <span class="n">s</span>
 
     <span class="k">def</span> <span class="nf">_result_display</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;IPython&#39;s pretty-printer display hook, for use in IPython 0.10</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;IPython&#39;s pretty-printer display hook, for use in IPython 0.10</span>
 
 <span class="sd">        This function was adapted from:</span>
 
@@ -307,7 +306,7 @@
 
 
 <span class="k">def</span> <span class="nf">_is_ipython</span><span class="p">(</span><span class="n">shell</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Is a shell instance an IPython shell?&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Is a shell instance an IPython shell?&quot;&quot;&quot;</span>
     <span class="c1"># shortcut, so we don&#39;t import IPython if we don&#39;t have to</span>
     <span class="k">if</span> <span class="s2">&quot;IPython&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
@@ -344,7 +343,7 @@
     <span class="n">latex_printer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">settings</span>
 <span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Initializes pretty-printer depending on the environment.</span>
 
 <span class="sd">    Parameters</span>
@@ -562,7 +561,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -583,7 +582,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

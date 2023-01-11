@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -46,12 +45,12 @@
 <span class="kn">from</span> <span class="nn">.core</span> <span class="kn">import</span> <span class="n">chain</span><span class="p">,</span> <span class="n">identity</span><span class="p">,</span> <span class="n">do_one</span>
 
 <div class="viewcode-block" id="top_down"><a class="viewcode-back" href="../../../../../modelparameters.sympy.strategies.branch.html#modelparameters.sympy.strategies.branch.traverse.top_down">[docs]</a><span class="k">def</span> <span class="nf">top_down</span><span class="p">(</span><span class="n">brule</span><span class="p">,</span> <span class="n">fns</span><span class="o">=</span><span class="n">basic_fns</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Apply a rule down a tree running it on the top nodes first &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Apply a rule down a tree running it on the top nodes first &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">chain</span><span class="p">(</span><span class="n">do_one</span><span class="p">(</span><span class="n">brule</span><span class="p">,</span> <span class="n">identity</span><span class="p">),</span>
                  <span class="k">lambda</span> <span class="n">expr</span><span class="p">:</span> <span class="n">sall</span><span class="p">(</span><span class="n">top_down</span><span class="p">(</span><span class="n">brule</span><span class="p">,</span> <span class="n">fns</span><span class="p">),</span> <span class="n">fns</span><span class="p">)(</span><span class="n">expr</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="sall"><a class="viewcode-back" href="../../../../../modelparameters.sympy.strategies.branch.html#modelparameters.sympy.strategies.branch.traverse.sall">[docs]</a><span class="k">def</span> <span class="nf">sall</span><span class="p">(</span><span class="n">brule</span><span class="p">,</span> <span class="n">fns</span><span class="o">=</span><span class="n">basic_fns</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Strategic all - apply rule to args &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Strategic all - apply rule to args &quot;&quot;&quot;</span>
     <span class="n">op</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="n">children</span><span class="p">,</span> <span class="n">leaf</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">fns</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;op&#39;</span><span class="p">,</span> <span class="s1">&#39;new&#39;</span><span class="p">,</span> <span class="s1">&#39;children&#39;</span><span class="p">,</span> <span class="s1">&#39;leaf&#39;</span><span class="p">))</span>
     <span class="k">def</span> <span class="nf">all_rl</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">leaf</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
@@ -79,7 +78,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -100,7 +99,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

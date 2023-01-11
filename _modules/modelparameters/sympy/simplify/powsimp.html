@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -53,7 +52,7 @@
 
 
 <div class="viewcode-block" id="powsimp"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.powsimp.powsimp">[docs]</a><span class="k">def</span> <span class="nf">powsimp</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">measure</span><span class="o">=</span><span class="n">count_ops</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    reduces expression by combining powers with similar bases and exponents.</span>
 
 <span class="sd">    Notes</span>
@@ -258,12 +257,12 @@
         <span class="c1"># ---------------- helper functions</span>
 
         <span class="k">def</span> <span class="nf">ratq</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-            <span class="sd">&#39;&#39;&#39;Return Rational part of x&#39;s exponent as it appears in the bkey.</span>
+<span class="w">            </span><span class="sd">&#39;&#39;&#39;Return Rational part of x&#39;s exponent as it appears in the bkey.</span>
 <span class="sd">            &#39;&#39;&#39;</span>
             <span class="k">return</span> <span class="n">bkey</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
 
         <span class="k">def</span> <span class="nf">bkey</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-            <span class="sd">&#39;&#39;&#39;Return (b**s, c.q), c.p where e -&gt; c*s. If e is not given then</span>
+<span class="w">            </span><span class="sd">&#39;&#39;&#39;Return (b**s, c.q), c.p where e -&gt; c*s. If e is not given then</span>
 <span class="sd">            it will be taken by using as_base_exp() on the input b.</span>
 <span class="sd">            e.g.</span>
 <span class="sd">                x**3/2 -&gt; (x, 2), 3</span>
@@ -289,7 +288,7 @@
                 <span class="k">return</span> <span class="n">bkey</span><span class="p">(</span><span class="o">*</span><span class="n">b</span><span class="o">.</span><span class="n">as_base_exp</span><span class="p">())</span>
 
         <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
-            <span class="sd">&#39;&#39;&#39;Decide what to do with base, b. If its exponent is now an</span>
+<span class="w">            </span><span class="sd">&#39;&#39;&#39;Decide what to do with base, b. If its exponent is now an</span>
 <span class="sd">            integer multiple of the Rational denominator, then remove it</span>
 <span class="sd">            and put the factors of its base in the common_b dictionary or</span>
 <span class="sd">            update the existing bases if necessary. If it has been zeroed</span>
@@ -522,7 +521,7 @@
 
 
 <div class="viewcode-block" id="powdenest"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.powsimp.powdenest">[docs]</a><span class="k">def</span> <span class="nf">powdenest</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">polar</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Collect exponents on powers as assumptions allow.</span>
 
 <span class="sd">    Given ``(bb**be)**e``, this can be simplified as follows:</span>
@@ -627,7 +626,7 @@
 
 
 <span class="k">def</span> <span class="nf">_denest_pow</span><span class="p">(</span><span class="n">eq</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Denest powers.</span>
 
 <span class="sd">    This is a helper function for powdenest that performs the actual</span>
@@ -745,7 +744,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -766,7 +765,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

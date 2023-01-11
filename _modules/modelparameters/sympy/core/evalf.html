@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -115,7 +114,7 @@
 
 
 <div class="viewcode-block" id="fastlog"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.evalf.fastlog">[docs]</a><span class="k">def</span> <span class="nf">fastlog</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Fast approximation of log2(x) for an mpf value tuple x.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fast approximation of log2(x) for an mpf value tuple x.</span>
 
 <span class="sd">    Notes: Calculated as exponent + width of mantissa. This is an</span>
 <span class="sd">    approximation for two reasons: 1) it gives the ceil(log2(abs(x)))</span>
@@ -148,7 +147,7 @@
 
 
 <div class="viewcode-block" id="pure_complex"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.evalf.pure_complex">[docs]</a><span class="k">def</span> <span class="nf">pure_complex</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">or_real</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a and b if v matches a + I*b where b is not zero and</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a and b if v matches a + I*b where b is not zero and</span>
 <span class="sd">    a and b are Numbers, else None. If `or_real` is True then 0 will</span>
 <span class="sd">    be returned for `b` if `v` is a real number.</span>
 
@@ -175,7 +174,7 @@
 
 
 <div class="viewcode-block" id="scaled_zero"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.evalf.scaled_zero">[docs]</a><span class="k">def</span> <span class="nf">scaled_zero</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">sign</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return an mpf representing a power of two with magnitude ``mag``</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return an mpf representing a power of two with magnitude ``mag``</span>
 <span class="sd">    and -1 for precision. Or, if ``mag`` is a scaled_zero tuple, then just</span>
 <span class="sd">    remove the sign from within the list that it was initially wrapped</span>
 <span class="sd">    in.</span>
@@ -219,7 +218,7 @@
 
 
 <div class="viewcode-block" id="complex_accuracy"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.evalf.complex_accuracy">[docs]</a><span class="k">def</span> <span class="nf">complex_accuracy</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns relative accuracy of a complex number with given accuracies</span>
 <span class="sd">    for the real and imaginary parts. The relative accuracy is defined</span>
 <span class="sd">    in the complex norm sense as ||z|+|error|| / |z| where error</span>
@@ -266,7 +265,7 @@
 
 
 <div class="viewcode-block" id="get_complex_part"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.evalf.get_complex_part">[docs]</a><span class="k">def</span> <span class="nf">get_complex_part</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">no</span><span class="p">,</span> <span class="n">prec</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;no = 0 for real part, no = 1 for imaginary part&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;no = 0 for real part, no = 1 for imaginary part&quot;&quot;&quot;</span>
     <span class="n">workprec</span> <span class="o">=</span> <span class="n">prec</span>
     <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">while</span> <span class="mi">1</span><span class="p">:</span>
@@ -311,7 +310,7 @@
 
 
 <div class="viewcode-block" id="chop_parts"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.evalf.chop_parts">[docs]</a><span class="k">def</span> <span class="nf">chop_parts</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Chop off tiny real or complex parts.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">re</span><span class="p">,</span> <span class="n">im</span><span class="p">,</span> <span class="n">re_acc</span><span class="p">,</span> <span class="n">im_acc</span> <span class="o">=</span> <span class="n">value</span>
@@ -339,7 +338,7 @@
 
 
 <div class="viewcode-block" id="get_integer_part"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.evalf.get_integer_part">[docs]</a><span class="k">def</span> <span class="nf">get_integer_part</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">no</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">return_ints</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    With no = 1, computes ceiling(expr)</span>
 <span class="sd">    With no = -1, computes floor(expr)</span>
 
@@ -436,7 +435,7 @@
 
 
 <div class="viewcode-block" id="add_terms"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.evalf.add_terms">[docs]</a><span class="k">def</span> <span class="nf">add_terms</span><span class="p">(</span><span class="n">terms</span><span class="p">,</span> <span class="n">prec</span><span class="p">,</span> <span class="n">target_prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper for evalf_add. Adds a list of (mpfval, accuracy) terms.</span>
 
 <span class="sd">    Returns</span>
@@ -781,7 +780,7 @@
 <span class="c1">#                                                                            #</span>
 <span class="c1">#----------------------------------------------------------------------------#</span>
 <div class="viewcode-block" id="evalf_trig"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.evalf.evalf_trig">[docs]</a><span class="k">def</span> <span class="nf">evalf_trig</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">prec</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function handles sin and cos of complex arguments.</span>
 
 <span class="sd">    TODO: should also handle tan of complex arguments.</span>
@@ -888,7 +887,7 @@
 
 
 <div class="viewcode-block" id="evalf_subs"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.evalf.evalf_subs">[docs]</a><span class="k">def</span> <span class="nf">evalf_subs</span><span class="p">(</span><span class="n">prec</span><span class="p">,</span> <span class="n">subs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Change all Float entries in `subs` to have precision prec. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Change all Float entries in `subs` to have precision prec. &quot;&quot;&quot;</span>
     <span class="n">newsubs</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">subs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">b</span> <span class="o">=</span> <span class="n">S</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
@@ -1070,7 +1069,7 @@
 
 
 <div class="viewcode-block" id="check_convergence"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.evalf.check_convergence">[docs]</a><span class="k">def</span> <span class="nf">check_convergence</span><span class="p">(</span><span class="n">numer</span><span class="p">,</span> <span class="n">denom</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns (h, g, p) where</span>
 <span class="sd">    -- h is:</span>
 <span class="sd">        &gt; 0 for convergence of rate 1/factorial(n)**h</span>
@@ -1108,7 +1107,7 @@
 
 
 <div class="viewcode-block" id="hypsum"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.evalf.hypsum">[docs]</a><span class="k">def</span> <span class="nf">hypsum</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sum a rapidly convergent infinite hypergeometric series with</span>
 <span class="sd">    given general term, e.g. e = hypsum(1/factorial(n), n). The</span>
 <span class="sd">    quotient between successive terms must be a quotient of integer</span>
@@ -1369,12 +1368,12 @@
 
 
 <div class="viewcode-block" id="EvalfMixin"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.evalf.EvalfMixin">[docs]</a><span class="k">class</span> <span class="nc">EvalfMixin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Mixin class adding evalf capabililty.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mixin class adding evalf capabililty.&quot;&quot;&quot;</span>
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[]</span>
 
 <div class="viewcode-block" id="EvalfMixin.evalf"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.evalf.EvalfMixin.evalf">[docs]</a>    <span class="k">def</span> <span class="nf">evalf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">subs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">maxn</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">chop</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quad</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Evaluate the given formula to an accuracy of n digits.</span>
 <span class="sd">        Optional keyword arguments:</span>
 
@@ -1457,7 +1456,7 @@
     <span class="n">n</span> <span class="o">=</span> <span class="n">evalf</span>
 
     <span class="k">def</span> <span class="nf">_evalf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Helper for evalf. Does the same thing but takes binary precision&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper for evalf. Does the same thing but takes binary precision&quot;&quot;&quot;</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_evalf</span><span class="p">(</span><span class="n">prec</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span>
@@ -1507,7 +1506,7 @@
 
 
 <div class="viewcode-block" id="N"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.evalf.N">[docs]</a><span class="k">def</span> <span class="nf">N</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="o">**</span><span class="n">options</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calls x.evalf(n, \*\*options).</span>
 
 <span class="sd">    Both .n() and N() are equivalent to .evalf(); use the one that you like better.</span>
@@ -1542,7 +1541,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1563,7 +1562,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>modelparameters.sympy.tensor package &#8212; modelparameters 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="modelparameters.sympy.tensor.array package" href="modelparameters.sympy.tensor.array.html" />
@@ -46,18 +45,70 @@
           <div class="body" role="main">
             
   <section id="modelparameters-sympy-tensor-package">
-<h1>modelparameters.sympy.tensor package<a class="headerlink" href="#modelparameters-sympy-tensor-package" title="Permalink to this headline">¶</a></h1>
+<h1>modelparameters.sympy.tensor package<a class="headerlink" href="#modelparameters-sympy-tensor-package" title="Permalink to this heading">¶</a></h1>
 <section id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.tensor.array.html">modelparameters.sympy.tensor.array package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array.arrayop">modelparameters.sympy.tensor.array.arrayop module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array.dense_ndim_array">modelparameters.sympy.tensor.array.dense_ndim_array module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array.mutable_ndim_array">modelparameters.sympy.tensor.array.mutable_ndim_array module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array.ndim_array">modelparameters.sympy.tensor.array.ndim_array module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array.sparse_ndim_array">modelparameters.sympy.tensor.array.sparse_ndim_array module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array.arrayop">modelparameters.sympy.tensor.array.arrayop module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.arrayop.derive_by_array"><code class="docutils literal notranslate"><span class="pre">derive_by_array()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.arrayop.permutedims"><code class="docutils literal notranslate"><span class="pre">permutedims()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.arrayop.tensorcontraction"><code class="docutils literal notranslate"><span class="pre">tensorcontraction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.arrayop.tensorproduct"><code class="docutils literal notranslate"><span class="pre">tensorproduct()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array.dense_ndim_array">modelparameters.sympy.tensor.array.dense_ndim_array module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.dense_ndim_array.DenseNDimArray"><code class="docutils literal notranslate"><span class="pre">DenseNDimArray</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.dense_ndim_array.DenseNDimArray.reshape"><code class="docutils literal notranslate"><span class="pre">DenseNDimArray.reshape()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.dense_ndim_array.DenseNDimArray.tomatrix"><code class="docutils literal notranslate"><span class="pre">DenseNDimArray.tomatrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.dense_ndim_array.DenseNDimArray.zeros"><code class="docutils literal notranslate"><span class="pre">DenseNDimArray.zeros()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.dense_ndim_array.ImmutableDenseNDimArray"><code class="docutils literal notranslate"><span class="pre">ImmutableDenseNDimArray</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.dense_ndim_array.ImmutableDenseNDimArray.default_assumptions"><code class="docutils literal notranslate"><span class="pre">ImmutableDenseNDimArray.default_assumptions</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.dense_ndim_array.MutableDenseNDimArray"><code class="docutils literal notranslate"><span class="pre">MutableDenseNDimArray</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array.mutable_ndim_array">modelparameters.sympy.tensor.array.mutable_ndim_array module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.mutable_ndim_array.MutableNDimArray"><code class="docutils literal notranslate"><span class="pre">MutableNDimArray</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array.ndim_array">modelparameters.sympy.tensor.array.ndim_array module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.ImmutableNDimArray"><code class="docutils literal notranslate"><span class="pre">ImmutableNDimArray</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.ImmutableNDimArray.default_assumptions"><code class="docutils literal notranslate"><span class="pre">ImmutableNDimArray.default_assumptions</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray"><code class="docutils literal notranslate"><span class="pre">NDimArray</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.adjoint"><code class="docutils literal notranslate"><span class="pre">NDimArray.adjoint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.applyfunc"><code class="docutils literal notranslate"><span class="pre">NDimArray.applyfunc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.conjugate"><code class="docutils literal notranslate"><span class="pre">NDimArray.conjugate()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.diff"><code class="docutils literal notranslate"><span class="pre">NDimArray.diff()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.rank"><code class="docutils literal notranslate"><span class="pre">NDimArray.rank()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.shape"><code class="docutils literal notranslate"><span class="pre">NDimArray.shape</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.tolist"><code class="docutils literal notranslate"><span class="pre">NDimArray.tolist()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.transpose"><code class="docutils literal notranslate"><span class="pre">NDimArray.transpose()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array.sparse_ndim_array">modelparameters.sympy.tensor.array.sparse_ndim_array module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.sparse_ndim_array.ImmutableSparseNDimArray"><code class="docutils literal notranslate"><span class="pre">ImmutableSparseNDimArray</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.sparse_ndim_array.ImmutableSparseNDimArray.default_assumptions"><code class="docutils literal notranslate"><span class="pre">ImmutableSparseNDimArray.default_assumptions</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.sparse_ndim_array.MutableSparseNDimArray"><code class="docutils literal notranslate"><span class="pre">MutableSparseNDimArray</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.sparse_ndim_array.SparseNDimArray"><code class="docutils literal notranslate"><span class="pre">SparseNDimArray</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.sparse_ndim_array.SparseNDimArray.reshape"><code class="docutils literal notranslate"><span class="pre">SparseNDimArray.reshape()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.sparse_ndim_array.SparseNDimArray.tomatrix"><code class="docutils literal notranslate"><span class="pre">SparseNDimArray.tomatrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.sparse_ndim_array.SparseNDimArray.zeros"><code class="docutils literal notranslate"><span class="pre">SparseNDimArray.zeros()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#module-modelparameters.sympy.tensor.array">Module contents</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#products-and-contractions">Products and contractions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.tensor.array.html#derivatives-by-array">Derivatives by array</a></li>
@@ -69,10 +120,10 @@
 </div>
 </section>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.tensor.index_methods">
-<span id="modelparameters-sympy-tensor-index-methods-module"></span><h2>modelparameters.sympy.tensor.index_methods module<a class="headerlink" href="#module-modelparameters.sympy.tensor.index_methods" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-tensor-index-methods-module"></span><h2>modelparameters.sympy.tensor.index_methods module<a class="headerlink" href="#module-modelparameters.sympy.tensor.index_methods" title="Permalink to this heading">¶</a></h2>
 <p>Module with functions operating on IndexedBase, Indexed and Idx objects</p>
 <ul class="simple">
 <li><p>Check shape conformance</p></li>
@@ -85,7 +136,7 @@ refactoring.</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="modelparameters.sympy.tensor.index_methods.IndexConformanceException">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.index_methods.</span></span><span class="sig-name descname"><span class="pre">IndexConformanceException</span></span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/index_methods.html#IndexConformanceException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.index_methods.IndexConformanceException" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
 </dd></dl>
 
 <dl class="py function">
@@ -216,7 +267,7 @@ outer indices.  Else an IndexConformanceException is raised.</p>
 </pre></div>
 </div>
 <dl class="field-list simple">
-<dt class="field-odd">Exceptions</dt>
+<dt class="field-odd">Exceptions<span class="colon">:</span></dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
 <p>An IndexConformanceException means that the terms ar not compatible, e.g.</p>
@@ -245,7 +296,7 @@ for all contractions that should be held separate.</p>
 
 </section>
 <section id="module-modelparameters.sympy.tensor.indexed">
-<span id="modelparameters-sympy-tensor-indexed-module"></span><h2>modelparameters.sympy.tensor.indexed module<a class="headerlink" href="#module-modelparameters.sympy.tensor.indexed" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-tensor-indexed-module"></span><h2>modelparameters.sympy.tensor.indexed module<a class="headerlink" href="#module-modelparameters.sympy.tensor.indexed" title="Permalink to this heading">¶</a></h2>
 <p>Module that defines indexed objects</p>
 <p>The classes <code class="docutils literal notranslate"><span class="pre">IndexedBase</span></code>, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code>, and <code class="docutils literal notranslate"><span class="pre">Idx</span></code> represent a
 matrix element <code class="docutils literal notranslate"><span class="pre">M[i,</span> <span class="pre">j]</span></code> as in the following diagram:</p>
@@ -335,7 +386,7 @@ See the appropriate docstrings for a detailed explanation of the output.
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.tensor.indexed.Idx">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.indexed.</span></span><span class="sig-name descname"><span class="pre">Idx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/indexed.html#Idx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.indexed.Idx" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.expr.Expr</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code></a></p>
 <p>Represents an integer index as an <code class="docutils literal notranslate"><span class="pre">Integer</span></code> or integer expression.</p>
 <p>There are a number of ways to create an <code class="docutils literal notranslate"><span class="pre">Idx</span></code> object.  The constructor
 takes two arguments:</p>
@@ -543,13 +594,13 @@ free_symbols method.</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="modelparameters.sympy.tensor.indexed.IndexException">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.indexed.</span></span><span class="sig-name descname"><span class="pre">IndexException</span></span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/indexed.html#IndexException"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.indexed.IndexException" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.tensor.indexed.Indexed">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.indexed.</span></span><span class="sig-name descname"><span class="pre">Indexed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/indexed.html#Indexed"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.indexed.Indexed" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.expr.Expr</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code></a></p>
 <p>Represents a mathematical object with indices.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Indexed</span><span class="p">,</span> <span class="n">IndexedBase</span><span class="p">,</span> <span class="n">Idx</span><span class="p">,</span> <span class="n">symbols</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;i j&#39;</span><span class="p">,</span> <span class="bp">cls</span><span class="o">=</span><span class="n">Idx</span><span class="p">)</span>
@@ -685,7 +736,7 @@ that the ranges of the indices correspond to the shape of the array.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.tensor.indexed.IndexedBase">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.indexed.</span></span><span class="sig-name descname"><span class="pre">IndexedBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">label</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/indexed.html#IndexedBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.indexed.IndexedBase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.expr.Expr</span></code></a>, <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.compatibility.NotIterable" title="modelparameters.sympy.core.compatibility.NotIterable"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.compatibility.NotIterable</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code></a>, <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.compatibility.NotIterable" title="modelparameters.sympy.core.compatibility.NotIterable"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotIterable</span></code></a></p>
 <p>Represent the base or stem of an indexed object</p>
 <p>The IndexedBase class represent an array that contains elements. The main purpose
 of this class is to allow the convenient creation of objects of the Indexed
@@ -837,7 +888,7 @@ order.</p>
 
 </section>
 <section id="module-modelparameters.sympy.tensor.tensor">
-<span id="modelparameters-sympy-tensor-tensor-module"></span><h2>modelparameters.sympy.tensor.tensor module<a class="headerlink" href="#module-modelparameters.sympy.tensor.tensor" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-tensor-tensor-module"></span><h2>modelparameters.sympy.tensor.tensor module<a class="headerlink" href="#module-modelparameters.sympy.tensor.tensor" title="Permalink to this heading">¶</a></h2>
 <p>This module defines tensors with abstract index notation.</p>
 <p>The abstract index notation has been first formalized by Penrose.</p>
 <p>Tensor indices are formal objects, with a tensor type; there is no
@@ -861,7 +912,7 @@ lowered when the tensor is put in canonical form.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.tensor.tensor.TIDS">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.tensor.</span></span><span class="sig-name descname"><span class="pre">TIDS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">components</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">free</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dum</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#TIDS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.TIDS" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.sympify.CantSympify" title="modelparameters.sympy.core.sympify.CantSympify"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.sympify.CantSympify</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.sympify.CantSympify" title="modelparameters.sympy.core.sympify.CantSympify"><code class="xref py py-class docutils literal notranslate"><span class="pre">CantSympify</span></code></a></p>
 <p>DEPRECATED CLASS: DO NOT USE.</p>
 <p>Tensor-index data structure. This contains internal data structures about
 components of a tensor expression, its free and dummy indices.</p>
@@ -870,7 +921,7 @@ arguments are</p>
 <p>WARNING: this class is meant as an internal representation of tensor data
 structures and should not be directly accessed by end users.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>components</strong> (<code class="docutils literal notranslate"><span class="pre">TensorHead</span></code> objects representing the components of the tensor expression.) – </p></li>
 <li><p><strong>free</strong> (<em>Free indices in their internal representation.</em>) – </p></li>
@@ -1021,19 +1072,19 @@ of the component tensors.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.tensor.tensor.TensAdd">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.tensor.</span></span><span class="sig-name descname"><span class="pre">TensAdd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#TensAdd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.TensAdd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr" title="modelparameters.sympy.tensor.tensor.TensExpr"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.tensor.tensor.TensExpr</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr" title="modelparameters.sympy.tensor.tensor.TensExpr"><code class="xref py py-class docutils literal notranslate"><span class="pre">TensExpr</span></code></a></p>
 <p>Sum of tensors</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>free_args</strong> (<em>list of the free indices</em>) – </p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>free_args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em> of </em><em>the free indices</em>) – </p>
 </dd>
 </dl>
 <dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``args``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>tuple of addends</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)">tuple</a> of addends</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1042,7 +1093,7 @@ of the component tensors.</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``rank``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>rank of the tensor</p>
 </dd>
 </dl>
@@ -1052,8 +1103,8 @@ of the component tensors.</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``free_args``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>list of the free indices in sorted order</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a> of the free indices in sorted order</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1106,7 +1157,7 @@ under monoterm symmetries.</p>
 <span class="sig-name descname"><span class="pre">contract_metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#TensAdd.contract_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.TensAdd.contract_metric" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raise or lower indices with the metric <code class="docutils literal notranslate"><span class="pre">g</span></code></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>g</strong> (<em>metric</em>) – </p></li>
 <li><p><strong>contract_all</strong> (if True, eliminate all <code class="docutils literal notranslate"><span class="pre">g</span></code> which are contracted) – </p></li>
@@ -1142,7 +1193,7 @@ under monoterm symmetries.</p>
 <span class="sig-name descname"><span class="pre">fun_eval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">index_tuples</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#TensAdd.fun_eval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.TensAdd.fun_eval" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a tensor with free indices substituted according to <code class="docutils literal notranslate"><span class="pre">index_tuples</span></code></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>index_types</strong> (list of tuples <code class="docutils literal notranslate"><span class="pre">(old_index,</span> <span class="pre">new_index)</span></code>) – </p>
 </dd>
 </dl>
@@ -1268,7 +1319,7 @@ under monoterm symmetries.</p>
 <span class="sig-name descname"><span class="pre">substitute_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">index_tuples</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#TensAdd.substitute_indices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.TensAdd.substitute_indices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a tensor with free indices substituted according to <code class="docutils literal notranslate"><span class="pre">index_tuples</span></code></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>index_types</strong> (list of tuples <code class="docutils literal notranslate"><span class="pre">(old_index,</span> <span class="pre">new_index)</span></code>) – </p>
 </dd>
 </dl>
@@ -1290,7 +1341,7 @@ under monoterm symmetries.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.tensor.tensor.TensExpr">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.tensor.</span></span><span class="sig-name descname"><span class="pre">TensExpr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#TensExpr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.TensExpr" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.basic.Basic</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basic</span></code></a></p>
 <p>Abstract base class for tensor expressions</p>
 <p class="rubric">Notes</p>
 <p>A tensor expression is an expression formed by tensors;
@@ -1476,12 +1527,12 @@ matrix multiplication:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.tensor.tensor.TensMul">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.tensor.</span></span><span class="sig-name descname"><span class="pre">TensMul</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#TensMul"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.TensMul" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr" title="modelparameters.sympy.tensor.tensor.TensExpr"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.tensor.tensor.TensExpr</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr" title="modelparameters.sympy.tensor.tensor.TensExpr"><code class="xref py py-class docutils literal notranslate"><span class="pre">TensExpr</span></code></a></p>
 <p>Product of tensors</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>coeff</strong> (<em>SymPy coefficient of the tensor</em>) – </p></li>
+<li><p><strong>coeff</strong> (<em>SymPy coefficient</em><em> of </em><em>the tensor</em>) – </p></li>
 <li><p><strong>args</strong> – </p></li>
 </ul>
 </dd>
@@ -1490,7 +1541,7 @@ matrix multiplication:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``components``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list of <code class="docutils literal notranslate"><span class="pre">TensorHead</span></code> of the component tensors</p>
 </dd>
 </dl>
@@ -1500,7 +1551,7 @@ matrix multiplication:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``types``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list of nonrepeated <code class="docutils literal notranslate"><span class="pre">TensorIndexType</span></code></p>
 </dd>
 </dl>
@@ -1510,7 +1561,7 @@ matrix multiplication:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``free``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list of <code class="docutils literal notranslate"><span class="pre">(ind,</span> <span class="pre">ipos,</span> <span class="pre">icomp)</span></code>, see Notes</p>
 </dd>
 </dl>
@@ -1520,7 +1571,7 @@ matrix multiplication:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``dum``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list of <code class="docutils literal notranslate"><span class="pre">(ipos1,</span> <span class="pre">ipos2,</span> <span class="pre">icomp1,</span> <span class="pre">icomp2)</span></code>, see Notes</p>
 </dd>
 </dl>
@@ -1530,7 +1581,7 @@ matrix multiplication:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``ext_rank``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>rank of the tensor counting the dummy indices</p>
 </dd>
 </dl>
@@ -1540,7 +1591,7 @@ matrix multiplication:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``rank``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>rank of the tensor</p>
 </dd>
 </dl>
@@ -1550,7 +1601,7 @@ matrix multiplication:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``coeff``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>SymPy coefficient of the tensor</p>
 </dd>
 </dl>
@@ -1560,8 +1611,8 @@ matrix multiplication:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``free_args``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
-<dd class="field-odd"><p>list of the free indices in sorted order</p>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a> of the free indices in sorted order</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1570,7 +1621,7 @@ matrix multiplication:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``is_canon_bp``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> if the tensor in in canonical form</p>
 </dd>
 </dl>
@@ -1626,7 +1677,7 @@ under monoterm symmetries.</p>
 <span class="sig-name descname"><span class="pre">contract_metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#TensMul.contract_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.TensMul.contract_metric" title="Permalink to this definition">¶</a></dt>
 <dd><p>Raise or lower indices with the metric <code class="docutils literal notranslate"><span class="pre">g</span></code></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>g</strong> (<em>metric</em>) – </p>
 </dd>
 </dl>
@@ -1902,7 +1953,7 @@ represent the dummy indices.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.tensor.tensor.Tensor">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.tensor.</span></span><span class="sig-name descname"><span class="pre">Tensor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tensor_head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#Tensor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.Tensor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr" title="modelparameters.sympy.tensor.tensor.TensExpr"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.tensor.tensor.TensExpr</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr" title="modelparameters.sympy.tensor.tensor.TensExpr"><code class="xref py py-class docutils literal notranslate"><span class="pre">TensExpr</span></code></a></p>
 <p>Base tensor class, i.e. this represents a tensor, the single unit to be
 put into an expression.</p>
 <p>This object is usually created from a <code class="docutils literal notranslate"><span class="pre">TensorHead</span></code>, by attaching indices
@@ -1938,10 +1989,10 @@ otherwise covariant.</p>
 <dt class="sig sig-object py" id="modelparameters.sympy.tensor.tensor.Tensor.commutes_with">
 <span class="sig-name descname"><span class="pre">commutes_with</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#Tensor.commutes_with"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.Tensor.commutes_with" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>other</strong> – </p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>0  commute
 1  anticommute
 None  neither commute nor anticommute</p>
@@ -2183,13 +2234,13 @@ None  neither commute nor anticommute</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.tensor.tensor.TensorHead">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.tensor.</span></span><span class="sig-name descname"><span class="pre">TensorHead</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#TensorHead"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.TensorHead" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.basic.Basic</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basic</span></code></a></p>
 <p>Tensor head of the tensor</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>name of the tensor</em>) – </p></li>
-<li><p><strong>typ</strong> (<em>list of TensorIndexType</em>) – </p></li>
+<li><p><strong>name</strong> (<em>name</em><em> of </em><em>the tensor</em>) – </p></li>
+<li><p><strong>typ</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em> of </em><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndexType" title="modelparameters.sympy.tensor.tensor.TensorIndexType"><em>TensorIndexType</em></a>) – </p></li>
 <li><p><strong>comm</strong> (<em>commutation group number</em>) – </p></li>
 </ul>
 </dd>
@@ -2213,7 +2264,7 @@ None  neither commute nor anticommute</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``types``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>equal to <code class="docutils literal notranslate"><span class="pre">typ.types</span></code></p>
 </dd>
 </dl>
@@ -2223,7 +2274,7 @@ None  neither commute nor anticommute</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``symmetry``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>equal to <code class="docutils literal notranslate"><span class="pre">typ.symmetry</span></code></p>
 </dd>
 </dl>
@@ -2233,7 +2284,7 @@ None  neither commute nor anticommute</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``comm``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>commutation group</p>
 </dd>
 </dl>
@@ -2530,10 +2581,10 @@ simply contract the <code class="docutils literal notranslate"><span class="pre"
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.tensor.tensor.TensorIndex">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.tensor.</span></span><span class="sig-name descname"><span class="pre">TensorIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tensortype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_up</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#TensorIndex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.TensorIndex" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.basic.Basic</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basic</span></code></a></p>
 <p>Represents an abstract tensor index.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (name of the index, or <code class="docutils literal notranslate"><span class="pre">True</span></code> if you want it to be automatically assigned) – </p></li>
 <li><p><strong>tensortype</strong> (<code class="docutils literal notranslate"><span class="pre">TensorIndexType</span></code> of the index) – </p></li>
@@ -2619,12 +2670,12 @@ existing indices:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.tensor.tensor.TensorIndexType">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.tensor.</span></span><span class="sig-name descname"><span class="pre">TensorIndexType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps_dim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dummy_fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#TensorIndexType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.TensorIndexType" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.basic.Basic</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basic</span></code></a></p>
 <p>A TensorIndexType is characterized by its name and its metric.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>name of the tensor type</em>) – </p></li>
+<li><p><strong>name</strong> (<em>name</em><em> of </em><em>the tensor type</em>) – </p></li>
 <li><p><strong>metric</strong> (metric symmetry or metric object or <code class="docutils literal notranslate"><span class="pre">None</span></code>) – </p></li>
 </ul>
 </dd>
@@ -2641,7 +2692,7 @@ existing indices:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``metric_name``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>it is ‘metric’ or metric.name</p>
 </dd>
 </dl>
@@ -2656,7 +2707,7 @@ existing indices:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``metric``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the metric tensor</p>
 </dd>
 </dl>
@@ -2666,7 +2717,7 @@ existing indices:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``delta``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">Kronecker</span> <span class="pre">delta</span></code></p>
 </dd>
 </dl>
@@ -2676,7 +2727,7 @@ existing indices:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``epsilon``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>the <code class="docutils literal notranslate"><span class="pre">Levi-Civita</span> <span class="pre">epsilon</span></code> tensor</p>
 </dd>
 </dl>
@@ -2701,7 +2752,7 @@ existing indices:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``data``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>a property to add <code class="docutils literal notranslate"><span class="pre">ndarray</span></code> values, to work in a specified basis.</p>
 </dd>
 </dl>
@@ -2813,10 +2864,10 @@ fixed basis:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.tensor.tensor.TensorSymmetry">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.tensor.</span></span><span class="sig-name descname"><span class="pre">TensorSymmetry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#TensorSymmetry"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.TensorSymmetry" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.basic.Basic</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basic</span></code></a></p>
 <p>Monoterm symmetry of a tensor</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>bsgs</strong> (tuple <code class="docutils literal notranslate"><span class="pre">(base,</span> <span class="pre">sgs)</span></code> BSGS of the symmetry of the tensor) – </p>
 </dd>
 </dl>
@@ -2824,7 +2875,7 @@ fixed basis:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``base``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>base of the BSGS</p>
 </dd>
 </dl>
@@ -2834,7 +2885,7 @@ fixed basis:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``generators``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>generators of the BSGS</p>
 </dd>
 </dl>
@@ -2844,7 +2895,7 @@ fixed basis:</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``rank``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>rank of the tensor</p>
 </dd>
 </dl>
@@ -2892,10 +2943,10 @@ are not covered.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.tensor.tensor.TensorType">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.tensor.</span></span><span class="sig-name descname"><span class="pre">TensorType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index_types</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symmetry</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kw_args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#TensorType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.TensorType" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.basic.Basic</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basic</span></code></a></p>
 <p>Class of tensor types.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>index_types</strong> (list of <code class="docutils literal notranslate"><span class="pre">TensorIndexType</span></code> of the tensor indices) – </p></li>
 <li><p><strong>symmetry</strong> (<code class="docutils literal notranslate"><span class="pre">TensorSymmetry</span></code> of the tensor) – </p></li>
@@ -2916,7 +2967,7 @@ are not covered.</p>
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">``types``</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list of <code class="docutils literal notranslate"><span class="pre">TensorIndexType</span></code> without repetitions</p>
 </dd>
 </dl>
@@ -3154,9 +3205,9 @@ satisfying the cyclic identity.</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.tensor.</span></span><span class="sig-name descname"><span class="pre">tensor_indices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#tensor_indices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.tensor_indices" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns list of tensor indices given their names and their types</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>s</strong> (<em>string of comma separated names of indices</em>) – </p></li>
+<li><p><strong>s</strong> (<em>string</em><em> of </em><em>comma separated names</em><em> of </em><em>indices</em>) – </p></li>
 <li><p><strong>typ</strong> (<code class="docutils literal notranslate"><span class="pre">TensorIndexType</span></code> of the indices) – </p></li>
 </ul>
 </dd>
@@ -3180,7 +3231,7 @@ satisfying the cyclic identity.</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.tensor.tensor.</span></span><span class="sig-name descname"><span class="pre">tensorhead</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">typ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sym</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">comm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/tensor/tensor.html#tensorhead"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.tensor.tensor.tensorhead" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function generating tensorhead(s).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>name</strong> (name or sequence of names (as in <code class="docutils literal notranslate"><span class="pre">symbol</span></code>)) – </p></li>
 <li><p><strong>typ</strong> (<em>index types</em>) – </p></li>
@@ -3246,7 +3297,7 @@ cyclic symmetry.</p>
 
 </section>
 <section id="module-modelparameters.sympy.tensor">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.tensor" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.tensor" title="Permalink to this heading">¶</a></h2>
 <p>A module to manipulate symbolic objects with indices including tensors</p>
 </section>
 </section>
@@ -3264,9 +3315,348 @@ cyclic symmetry.</p>
 <li><a class="reference internal" href="#">modelparameters.sympy.tensor package</a><ul>
 <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.tensor.index_methods">modelparameters.sympy.tensor.index_methods module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.tensor.indexed">modelparameters.sympy.tensor.indexed module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.tensor.tensor">modelparameters.sympy.tensor.tensor module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.tensor.index_methods">modelparameters.sympy.tensor.index_methods module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.index_methods.IndexConformanceException"><code class="docutils literal notranslate"><span class="pre">IndexConformanceException</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.index_methods.get_contraction_structure"><code class="docutils literal notranslate"><span class="pre">get_contraction_structure()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.index_methods.get_indices"><code class="docutils literal notranslate"><span class="pre">get_indices()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.tensor.indexed">modelparameters.sympy.tensor.indexed module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx"><code class="docutils literal notranslate"><span class="pre">Idx</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Idx.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.free_symbols"><code class="docutils literal notranslate"><span class="pre">Idx.free_symbols</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.is_Atom"><code class="docutils literal notranslate"><span class="pre">Idx.is_Atom</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.is_Symbol"><code class="docutils literal notranslate"><span class="pre">Idx.is_Symbol</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.is_algebraic"><code class="docutils literal notranslate"><span class="pre">Idx.is_algebraic</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.is_commutative"><code class="docutils literal notranslate"><span class="pre">Idx.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.is_complex"><code class="docutils literal notranslate"><span class="pre">Idx.is_complex</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.is_finite"><code class="docutils literal notranslate"><span class="pre">Idx.is_finite</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.is_hermitian"><code class="docutils literal notranslate"><span class="pre">Idx.is_hermitian</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.is_imaginary"><code class="docutils literal notranslate"><span class="pre">Idx.is_imaginary</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.is_infinite"><code class="docutils literal notranslate"><span class="pre">Idx.is_infinite</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.is_integer"><code class="docutils literal notranslate"><span class="pre">Idx.is_integer</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.is_irrational"><code class="docutils literal notranslate"><span class="pre">Idx.is_irrational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.is_noninteger"><code class="docutils literal notranslate"><span class="pre">Idx.is_noninteger</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.is_rational"><code class="docutils literal notranslate"><span class="pre">Idx.is_rational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.is_real"><code class="docutils literal notranslate"><span class="pre">Idx.is_real</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.is_symbol"><code class="docutils literal notranslate"><span class="pre">Idx.is_symbol</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.is_transcendental"><code class="docutils literal notranslate"><span class="pre">Idx.is_transcendental</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.label"><code class="docutils literal notranslate"><span class="pre">Idx.label</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.lower"><code class="docutils literal notranslate"><span class="pre">Idx.lower</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Idx.upper"><code class="docutils literal notranslate"><span class="pre">Idx.upper</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.IndexException"><code class="docutils literal notranslate"><span class="pre">IndexException</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Indexed"><code class="docutils literal notranslate"><span class="pre">Indexed</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Indexed.base"><code class="docutils literal notranslate"><span class="pre">Indexed.base</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Indexed.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Indexed.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Indexed.indices"><code class="docutils literal notranslate"><span class="pre">Indexed.indices</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Indexed.is_Atom"><code class="docutils literal notranslate"><span class="pre">Indexed.is_Atom</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Indexed.is_Indexed"><code class="docutils literal notranslate"><span class="pre">Indexed.is_Indexed</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Indexed.is_Symbol"><code class="docutils literal notranslate"><span class="pre">Indexed.is_Symbol</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Indexed.is_commutative"><code class="docutils literal notranslate"><span class="pre">Indexed.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Indexed.is_symbol"><code class="docutils literal notranslate"><span class="pre">Indexed.is_symbol</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Indexed.ranges"><code class="docutils literal notranslate"><span class="pre">Indexed.ranges</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Indexed.rank"><code class="docutils literal notranslate"><span class="pre">Indexed.rank</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.Indexed.shape"><code class="docutils literal notranslate"><span class="pre">Indexed.shape</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.IndexedBase"><code class="docutils literal notranslate"><span class="pre">IndexedBase</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.IndexedBase.default_assumptions"><code class="docutils literal notranslate"><span class="pre">IndexedBase.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.IndexedBase.is_Atom"><code class="docutils literal notranslate"><span class="pre">IndexedBase.is_Atom</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.IndexedBase.is_Symbol"><code class="docutils literal notranslate"><span class="pre">IndexedBase.is_Symbol</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.IndexedBase.is_commutative"><code class="docutils literal notranslate"><span class="pre">IndexedBase.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.IndexedBase.is_symbol"><code class="docutils literal notranslate"><span class="pre">IndexedBase.is_symbol</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.IndexedBase.label"><code class="docutils literal notranslate"><span class="pre">IndexedBase.label</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.IndexedBase.offset"><code class="docutils literal notranslate"><span class="pre">IndexedBase.offset</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.IndexedBase.shape"><code class="docutils literal notranslate"><span class="pre">IndexedBase.shape</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.indexed.IndexedBase.strides"><code class="docutils literal notranslate"><span class="pre">IndexedBase.strides</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.tensor.tensor">modelparameters.sympy.tensor.tensor module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TIDS"><code class="docutils literal notranslate"><span class="pre">TIDS</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TIDS.canon_args"><code class="docutils literal notranslate"><span class="pre">TIDS.canon_args()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TIDS.contract_metric"><code class="docutils literal notranslate"><span class="pre">TIDS.contract_metric()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TIDS.free_dum_from_indices"><code class="docutils literal notranslate"><span class="pre">TIDS.free_dum_from_indices()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TIDS.from_components_and_indices"><code class="docutils literal notranslate"><span class="pre">TIDS.from_components_and_indices()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TIDS.get_components_with_free_indices"><code class="docutils literal notranslate"><span class="pre">TIDS.get_components_with_free_indices()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TIDS.get_indices"><code class="docutils literal notranslate"><span class="pre">TIDS.get_indices()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TIDS.get_tensors"><code class="docutils literal notranslate"><span class="pre">TIDS.get_tensors()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TIDS.mul"><code class="docutils literal notranslate"><span class="pre">TIDS.mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TIDS.perm2tensor"><code class="docutils literal notranslate"><span class="pre">TIDS.perm2tensor()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TIDS.sorted_components"><code class="docutils literal notranslate"><span class="pre">TIDS.sorted_components()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TIDS.to_indices"><code class="docutils literal notranslate"><span class="pre">TIDS.to_indices()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd"><code class="docutils literal notranslate"><span class="pre">TensAdd</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.canon_bp"><code class="docutils literal notranslate"><span class="pre">TensAdd.canon_bp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.contract_delta"><code class="docutils literal notranslate"><span class="pre">TensAdd.contract_delta()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.contract_metric"><code class="docutils literal notranslate"><span class="pre">TensAdd.contract_metric()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.data"><code class="docutils literal notranslate"><span class="pre">TensAdd.data</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.default_assumptions"><code class="docutils literal notranslate"><span class="pre">TensAdd.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.equals"><code class="docutils literal notranslate"><span class="pre">TensAdd.equals()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.free_args"><code class="docutils literal notranslate"><span class="pre">TensAdd.free_args</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.fun_eval"><code class="docutils literal notranslate"><span class="pre">TensAdd.fun_eval()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_algebraic"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_algebraic</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_commutative"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_complex"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_complex</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_composite"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_composite</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_even"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_even</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_imaginary"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_imaginary</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_integer"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_integer</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_irrational"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_irrational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_negative"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_negative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_noninteger"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_noninteger</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_nonnegative"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_nonnegative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_nonpositive"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_nonpositive</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_nonzero"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_nonzero</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_odd"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_odd</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_positive"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_positive</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_prime"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_prime</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_rational"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_rational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_real"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_real</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_transcendental"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_transcendental</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.is_zero"><code class="docutils literal notranslate"><span class="pre">TensAdd.is_zero</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.rank"><code class="docutils literal notranslate"><span class="pre">TensAdd.rank</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensAdd.substitute_indices"><code class="docutils literal notranslate"><span class="pre">TensAdd.substitute_indices()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr"><code class="docutils literal notranslate"><span class="pre">TensExpr</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.default_assumptions"><code class="docutils literal notranslate"><span class="pre">TensExpr.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.fun_eval"><code class="docutils literal notranslate"><span class="pre">TensExpr.fun_eval()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.get_matrix"><code class="docutils literal notranslate"><span class="pre">TensExpr.get_matrix()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_algebraic"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_algebraic</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_commutative"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_complex"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_complex</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_composite"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_composite</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_even"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_even</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_imaginary"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_imaginary</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_integer"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_integer</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_irrational"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_irrational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_negative"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_negative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_noninteger"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_noninteger</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_nonnegative"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_nonnegative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_nonpositive"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_nonpositive</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_nonzero"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_nonzero</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_odd"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_odd</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_positive"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_positive</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_prime"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_prime</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_rational"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_rational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_real"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_real</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_transcendental"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_transcendental</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensExpr.is_zero"><code class="docutils literal notranslate"><span class="pre">TensExpr.is_zero</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul"><code class="docutils literal notranslate"><span class="pre">TensMul</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.canon_bp"><code class="docutils literal notranslate"><span class="pre">TensMul.canon_bp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.coeff"><code class="docutils literal notranslate"><span class="pre">TensMul.coeff</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.components"><code class="docutils literal notranslate"><span class="pre">TensMul.components</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.contract_delta"><code class="docutils literal notranslate"><span class="pre">TensMul.contract_delta()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.contract_metric"><code class="docutils literal notranslate"><span class="pre">TensMul.contract_metric()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.data"><code class="docutils literal notranslate"><span class="pre">TensMul.data</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.default_assumptions"><code class="docutils literal notranslate"><span class="pre">TensMul.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.dum"><code class="docutils literal notranslate"><span class="pre">TensMul.dum</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.dum_in_args"><code class="docutils literal notranslate"><span class="pre">TensMul.dum_in_args</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.equals"><code class="docutils literal notranslate"><span class="pre">TensMul.equals()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.ext_rank"><code class="docutils literal notranslate"><span class="pre">TensMul.ext_rank</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.free"><code class="docutils literal notranslate"><span class="pre">TensMul.free</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.free_args"><code class="docutils literal notranslate"><span class="pre">TensMul.free_args</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.free_in_args"><code class="docutils literal notranslate"><span class="pre">TensMul.free_in_args</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.from_data"><code class="docutils literal notranslate"><span class="pre">TensMul.from_data()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.get_free_indices"><code class="docutils literal notranslate"><span class="pre">TensMul.get_free_indices()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.get_indices"><code class="docutils literal notranslate"><span class="pre">TensMul.get_indices()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.index_types"><code class="docutils literal notranslate"><span class="pre">TensMul.index_types</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_algebraic"><code class="docutils literal notranslate"><span class="pre">TensMul.is_algebraic</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_commutative"><code class="docutils literal notranslate"><span class="pre">TensMul.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_complex"><code class="docutils literal notranslate"><span class="pre">TensMul.is_complex</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_composite"><code class="docutils literal notranslate"><span class="pre">TensMul.is_composite</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_even"><code class="docutils literal notranslate"><span class="pre">TensMul.is_even</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_imaginary"><code class="docutils literal notranslate"><span class="pre">TensMul.is_imaginary</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_integer"><code class="docutils literal notranslate"><span class="pre">TensMul.is_integer</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_irrational"><code class="docutils literal notranslate"><span class="pre">TensMul.is_irrational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_negative"><code class="docutils literal notranslate"><span class="pre">TensMul.is_negative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_noninteger"><code class="docutils literal notranslate"><span class="pre">TensMul.is_noninteger</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_nonnegative"><code class="docutils literal notranslate"><span class="pre">TensMul.is_nonnegative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_nonpositive"><code class="docutils literal notranslate"><span class="pre">TensMul.is_nonpositive</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_nonzero"><code class="docutils literal notranslate"><span class="pre">TensMul.is_nonzero</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_odd"><code class="docutils literal notranslate"><span class="pre">TensMul.is_odd</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_positive"><code class="docutils literal notranslate"><span class="pre">TensMul.is_positive</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_prime"><code class="docutils literal notranslate"><span class="pre">TensMul.is_prime</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_rational"><code class="docutils literal notranslate"><span class="pre">TensMul.is_rational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_real"><code class="docutils literal notranslate"><span class="pre">TensMul.is_real</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_transcendental"><code class="docutils literal notranslate"><span class="pre">TensMul.is_transcendental</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.is_zero"><code class="docutils literal notranslate"><span class="pre">TensMul.is_zero</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.nocoeff"><code class="docutils literal notranslate"><span class="pre">TensMul.nocoeff</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.perm2tensor"><code class="docutils literal notranslate"><span class="pre">TensMul.perm2tensor()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.rank"><code class="docutils literal notranslate"><span class="pre">TensMul.rank</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.sorted_components"><code class="docutils literal notranslate"><span class="pre">TensMul.sorted_components()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.split"><code class="docutils literal notranslate"><span class="pre">TensMul.split()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensMul.substitute_indices"><code class="docutils literal notranslate"><span class="pre">TensMul.substitute_indices()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor"><code class="docutils literal notranslate"><span class="pre">Tensor</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.as_base_exp"><code class="docutils literal notranslate"><span class="pre">Tensor.as_base_exp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.canon_bp"><code class="docutils literal notranslate"><span class="pre">Tensor.canon_bp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.coeff"><code class="docutils literal notranslate"><span class="pre">Tensor.coeff</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.commutes_with"><code class="docutils literal notranslate"><span class="pre">Tensor.commutes_with()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.component"><code class="docutils literal notranslate"><span class="pre">Tensor.component</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.components"><code class="docutils literal notranslate"><span class="pre">Tensor.components</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.contract_delta"><code class="docutils literal notranslate"><span class="pre">Tensor.contract_delta()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.contract_metric"><code class="docutils literal notranslate"><span class="pre">Tensor.contract_metric()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.data"><code class="docutils literal notranslate"><span class="pre">Tensor.data</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Tensor.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.dum"><code class="docutils literal notranslate"><span class="pre">Tensor.dum</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.dum_in_args"><code class="docutils literal notranslate"><span class="pre">Tensor.dum_in_args</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.equals"><code class="docutils literal notranslate"><span class="pre">Tensor.equals()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.expand"><code class="docutils literal notranslate"><span class="pre">Tensor.expand()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.ext_rank"><code class="docutils literal notranslate"><span class="pre">Tensor.ext_rank</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.free"><code class="docutils literal notranslate"><span class="pre">Tensor.free</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.free_args"><code class="docutils literal notranslate"><span class="pre">Tensor.free_args</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.free_in_args"><code class="docutils literal notranslate"><span class="pre">Tensor.free_in_args</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.get_free_indices"><code class="docutils literal notranslate"><span class="pre">Tensor.get_free_indices()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.get_indices"><code class="docutils literal notranslate"><span class="pre">Tensor.get_indices()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.index_types"><code class="docutils literal notranslate"><span class="pre">Tensor.index_types</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.indices"><code class="docutils literal notranslate"><span class="pre">Tensor.indices</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_algebraic"><code class="docutils literal notranslate"><span class="pre">Tensor.is_algebraic</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_canon_bp"><code class="docutils literal notranslate"><span class="pre">Tensor.is_canon_bp</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_commutative"><code class="docutils literal notranslate"><span class="pre">Tensor.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_complex"><code class="docutils literal notranslate"><span class="pre">Tensor.is_complex</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_composite"><code class="docutils literal notranslate"><span class="pre">Tensor.is_composite</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_even"><code class="docutils literal notranslate"><span class="pre">Tensor.is_even</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_imaginary"><code class="docutils literal notranslate"><span class="pre">Tensor.is_imaginary</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_integer"><code class="docutils literal notranslate"><span class="pre">Tensor.is_integer</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_irrational"><code class="docutils literal notranslate"><span class="pre">Tensor.is_irrational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_negative"><code class="docutils literal notranslate"><span class="pre">Tensor.is_negative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_noninteger"><code class="docutils literal notranslate"><span class="pre">Tensor.is_noninteger</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_nonnegative"><code class="docutils literal notranslate"><span class="pre">Tensor.is_nonnegative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_nonpositive"><code class="docutils literal notranslate"><span class="pre">Tensor.is_nonpositive</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_nonzero"><code class="docutils literal notranslate"><span class="pre">Tensor.is_nonzero</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_odd"><code class="docutils literal notranslate"><span class="pre">Tensor.is_odd</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_positive"><code class="docutils literal notranslate"><span class="pre">Tensor.is_positive</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_prime"><code class="docutils literal notranslate"><span class="pre">Tensor.is_prime</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_rational"><code class="docutils literal notranslate"><span class="pre">Tensor.is_rational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_real"><code class="docutils literal notranslate"><span class="pre">Tensor.is_real</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_transcendental"><code class="docutils literal notranslate"><span class="pre">Tensor.is_transcendental</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.is_zero"><code class="docutils literal notranslate"><span class="pre">Tensor.is_zero</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.nocoeff"><code class="docutils literal notranslate"><span class="pre">Tensor.nocoeff</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.perm2tensor"><code class="docutils literal notranslate"><span class="pre">Tensor.perm2tensor()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.rank"><code class="docutils literal notranslate"><span class="pre">Tensor.rank</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.sorted_components"><code class="docutils literal notranslate"><span class="pre">Tensor.sorted_components()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.split"><code class="docutils literal notranslate"><span class="pre">Tensor.split()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.Tensor.substitute_indices"><code class="docutils literal notranslate"><span class="pre">Tensor.substitute_indices()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead"><code class="docutils literal notranslate"><span class="pre">TensorHead</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.comm"><code class="docutils literal notranslate"><span class="pre">TensorHead.comm</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.commutes_with"><code class="docutils literal notranslate"><span class="pre">TensorHead.commutes_with()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.data"><code class="docutils literal notranslate"><span class="pre">TensorHead.data</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.default_assumptions"><code class="docutils literal notranslate"><span class="pre">TensorHead.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.index_types"><code class="docutils literal notranslate"><span class="pre">TensorHead.index_types</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_algebraic"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_algebraic</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_commutative"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_complex"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_complex</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_composite"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_composite</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_even"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_even</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_imaginary"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_imaginary</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_integer"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_integer</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_irrational"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_irrational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_negative"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_negative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_noninteger"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_noninteger</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_nonnegative"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_nonnegative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_nonpositive"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_nonpositive</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_nonzero"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_nonzero</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_odd"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_odd</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_positive"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_positive</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_prime"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_prime</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_rational"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_rational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_real"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_real</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_transcendental"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_transcendental</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.is_zero"><code class="docutils literal notranslate"><span class="pre">TensorHead.is_zero</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.name"><code class="docutils literal notranslate"><span class="pre">TensorHead.name</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.rank"><code class="docutils literal notranslate"><span class="pre">TensorHead.rank</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.symmetry"><code class="docutils literal notranslate"><span class="pre">TensorHead.symmetry</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.typ"><code class="docutils literal notranslate"><span class="pre">TensorHead.typ</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorHead.types"><code class="docutils literal notranslate"><span class="pre">TensorHead.types</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndex"><code class="docutils literal notranslate"><span class="pre">TensorIndex</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndex.default_assumptions"><code class="docutils literal notranslate"><span class="pre">TensorIndex.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndex.is_up"><code class="docutils literal notranslate"><span class="pre">TensorIndex.is_up</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndex.name"><code class="docutils literal notranslate"><span class="pre">TensorIndex.name</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndex.tensor_index_type"><code class="docutils literal notranslate"><span class="pre">TensorIndex.tensor_index_type</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndex.tensortype"><code class="docutils literal notranslate"><span class="pre">TensorIndex.tensortype</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndexType"><code class="docutils literal notranslate"><span class="pre">TensorIndexType</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndexType.auto_index"><code class="docutils literal notranslate"><span class="pre">TensorIndexType.auto_index</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndexType.auto_left"><code class="docutils literal notranslate"><span class="pre">TensorIndexType.auto_left</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndexType.auto_right"><code class="docutils literal notranslate"><span class="pre">TensorIndexType.auto_right</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndexType.data"><code class="docutils literal notranslate"><span class="pre">TensorIndexType.data</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndexType.default_assumptions"><code class="docutils literal notranslate"><span class="pre">TensorIndexType.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndexType.delta"><code class="docutils literal notranslate"><span class="pre">TensorIndexType.delta</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndexType.dim"><code class="docutils literal notranslate"><span class="pre">TensorIndexType.dim</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndexType.dummy_fmt"><code class="docutils literal notranslate"><span class="pre">TensorIndexType.dummy_fmt</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndexType.eps_dim"><code class="docutils literal notranslate"><span class="pre">TensorIndexType.eps_dim</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndexType.epsilon"><code class="docutils literal notranslate"><span class="pre">TensorIndexType.epsilon</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndexType.get_epsilon"><code class="docutils literal notranslate"><span class="pre">TensorIndexType.get_epsilon()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndexType.get_kronecker_delta"><code class="docutils literal notranslate"><span class="pre">TensorIndexType.get_kronecker_delta()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorIndexType.name"><code class="docutils literal notranslate"><span class="pre">TensorIndexType.name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorSymmetry"><code class="docutils literal notranslate"><span class="pre">TensorSymmetry</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorSymmetry.base"><code class="docutils literal notranslate"><span class="pre">TensorSymmetry.base</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorSymmetry.default_assumptions"><code class="docutils literal notranslate"><span class="pre">TensorSymmetry.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorSymmetry.generators"><code class="docutils literal notranslate"><span class="pre">TensorSymmetry.generators</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorSymmetry.rank"><code class="docutils literal notranslate"><span class="pre">TensorSymmetry.rank</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType"><code class="docutils literal notranslate"><span class="pre">TensorType</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.default_assumptions"><code class="docutils literal notranslate"><span class="pre">TensorType.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.index_types"><code class="docutils literal notranslate"><span class="pre">TensorType.index_types</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_algebraic"><code class="docutils literal notranslate"><span class="pre">TensorType.is_algebraic</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_commutative"><code class="docutils literal notranslate"><span class="pre">TensorType.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_complex"><code class="docutils literal notranslate"><span class="pre">TensorType.is_complex</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_composite"><code class="docutils literal notranslate"><span class="pre">TensorType.is_composite</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_even"><code class="docutils literal notranslate"><span class="pre">TensorType.is_even</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_imaginary"><code class="docutils literal notranslate"><span class="pre">TensorType.is_imaginary</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_integer"><code class="docutils literal notranslate"><span class="pre">TensorType.is_integer</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_irrational"><code class="docutils literal notranslate"><span class="pre">TensorType.is_irrational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_negative"><code class="docutils literal notranslate"><span class="pre">TensorType.is_negative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_noninteger"><code class="docutils literal notranslate"><span class="pre">TensorType.is_noninteger</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_nonnegative"><code class="docutils literal notranslate"><span class="pre">TensorType.is_nonnegative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_nonpositive"><code class="docutils literal notranslate"><span class="pre">TensorType.is_nonpositive</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_nonzero"><code class="docutils literal notranslate"><span class="pre">TensorType.is_nonzero</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_odd"><code class="docutils literal notranslate"><span class="pre">TensorType.is_odd</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_positive"><code class="docutils literal notranslate"><span class="pre">TensorType.is_positive</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_prime"><code class="docutils literal notranslate"><span class="pre">TensorType.is_prime</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_rational"><code class="docutils literal notranslate"><span class="pre">TensorType.is_rational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_real"><code class="docutils literal notranslate"><span class="pre">TensorType.is_real</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_transcendental"><code class="docutils literal notranslate"><span class="pre">TensorType.is_transcendental</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.is_zero"><code class="docutils literal notranslate"><span class="pre">TensorType.is_zero</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.symmetry"><code class="docutils literal notranslate"><span class="pre">TensorType.symmetry</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.TensorType.types"><code class="docutils literal notranslate"><span class="pre">TensorType.types</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.canon_bp"><code class="docutils literal notranslate"><span class="pre">canon_bp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.components_canon_args"><code class="docutils literal notranslate"><span class="pre">components_canon_args()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.contract_metric"><code class="docutils literal notranslate"><span class="pre">contract_metric()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.get_coeff"><code class="docutils literal notranslate"><span class="pre">get_coeff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.get_free_indices"><code class="docutils literal notranslate"><span class="pre">get_free_indices()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.get_index_structure"><code class="docutils literal notranslate"><span class="pre">get_index_structure()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.get_indices"><code class="docutils literal notranslate"><span class="pre">get_indices()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.get_lines"><code class="docutils literal notranslate"><span class="pre">get_lines()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.perm2tensor"><code class="docutils literal notranslate"><span class="pre">perm2tensor()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.riemann_cyclic"><code class="docutils literal notranslate"><span class="pre">riemann_cyclic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.riemann_cyclic_replace"><code class="docutils literal notranslate"><span class="pre">riemann_cyclic_replace()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.substitute_indices"><code class="docutils literal notranslate"><span class="pre">substitute_indices()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.tensor_indices"><code class="docutils literal notranslate"><span class="pre">tensor_indices()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.tensor_mul"><code class="docutils literal notranslate"><span class="pre">tensor_mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.tensorhead"><code class="docutils literal notranslate"><span class="pre">tensorhead()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.tensor.tensor.tensorsymmetry"><code class="docutils literal notranslate"><span class="pre">tensorsymmetry()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.tensor">Module contents</a></li>
 </ul>
 </li>
@@ -3299,7 +3689,7 @@ cyclic symmetry.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -3327,7 +3717,7 @@ cyclic symmetry.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

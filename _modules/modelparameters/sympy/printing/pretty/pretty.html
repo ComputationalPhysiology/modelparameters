@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -73,7 +72,7 @@
 
 
 <div class="viewcode-block" id="PrettyPrinter"><a class="viewcode-back" href="../../../../../modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty.PrettyPrinter">[docs]</a><span class="k">class</span> <span class="nc">PrettyPrinter</span><span class="p">(</span><span class="n">Printer</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Printer, which converts an expression into 2D ASCII-art figure.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Printer, which converts an expression into 2D ASCII-art figure.&quot;&quot;&quot;</span>
     <span class="n">printmethod</span> <span class="o">=</span> <span class="s2">&quot;_pretty&quot;</span>
 
     <span class="n">_default_settings</span> <span class="o">=</span> <span class="p">{</span>
@@ -637,7 +636,7 @@
         <span class="k">return</span> <span class="n">Lim</span>
 
     <span class="k">def</span> <span class="nf">_print_matrix_contents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method factors out what is essentially grid printing.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">M</span> <span class="o">=</span> <span class="n">e</span>   <span class="c1"># matrix</span>
@@ -1377,7 +1376,7 @@
         <span class="n">pforms</span><span class="p">,</span> <span class="n">indices</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
 
         <span class="k">def</span> <span class="nf">pretty_negative</span><span class="p">(</span><span class="n">pform</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Prepend a minus sign to a pretty form. &quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Prepend a minus sign to a pretty form. &quot;&quot;&quot;</span>
             <span class="c1">#TODO: Move this code to prettyForm</span>
             <span class="k">if</span> <span class="n">index</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">pform</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -2187,7 +2186,7 @@
 
 
 <div class="viewcode-block" id="pretty"><a class="viewcode-back" href="../../../../../modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty.pretty">[docs]</a><span class="k">def</span> <span class="nf">pretty</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns a string containing the prettified form of expr.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a string containing the prettified form of expr.</span>
 
 <span class="sd">    For information on keyword arguments see pretty_print function.</span>
 
@@ -2205,7 +2204,7 @@
 
 
 <div class="viewcode-block" id="pretty_print"><a class="viewcode-back" href="../../../../../modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty.pretty_print">[docs]</a><span class="k">def</span> <span class="nf">pretty_print</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Prints expr in pretty form.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prints expr in pretty form.</span>
 
 <span class="sd">    pprint is just a shortcut for this function.</span>
 
@@ -2238,7 +2237,7 @@
 
 
 <div class="viewcode-block" id="pager_print"><a class="viewcode-back" href="../../../../../modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty.pager_print">[docs]</a><span class="k">def</span> <span class="nf">pager_print</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Prints expr using the pager, in pretty form.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prints expr using the pager, in pretty form.</span>
 
 <span class="sd">    This invokes a pager command using pydoc. Lines are not wrapped</span>
 <span class="sd">    automatically. This routine is meant to be used with a pager that allows</span>
@@ -2270,7 +2269,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2291,7 +2290,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

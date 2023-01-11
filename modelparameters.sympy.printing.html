@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>modelparameters.sympy.printing package &#8212; modelparameters 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="modelparameters.sympy.printing.pretty package" href="modelparameters.sympy.printing.pretty.html" />
@@ -46,16 +45,68 @@
           <div class="body" role="main">
             
   <section id="modelparameters-sympy-printing-package">
-<h1>modelparameters.sympy.printing package<a class="headerlink" href="#modelparameters-sympy-printing-package" title="Permalink to this headline">¶</a></h1>
+<h1>modelparameters.sympy.printing package<a class="headerlink" href="#modelparameters-sympy-printing-package" title="Permalink to this heading">¶</a></h1>
 <section id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html">modelparameters.sympy.printing.pretty package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#module-modelparameters.sympy.printing.pretty.pretty">modelparameters.sympy.printing.pretty.pretty module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#module-modelparameters.sympy.printing.pretty.pretty_symbology">modelparameters.sympy.printing.pretty.pretty_symbology module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#module-modelparameters.sympy.printing.pretty.stringpict">modelparameters.sympy.printing.pretty.stringpict module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#module-modelparameters.sympy.printing.pretty.pretty">modelparameters.sympy.printing.pretty.pretty module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty.PrettyPrinter"><code class="docutils literal notranslate"><span class="pre">PrettyPrinter</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty.PrettyPrinter.doprint"><code class="docutils literal notranslate"><span class="pre">PrettyPrinter.doprint()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty.PrettyPrinter.join"><code class="docutils literal notranslate"><span class="pre">PrettyPrinter.join()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty.PrettyPrinter.printmethod"><code class="docutils literal notranslate"><span class="pre">PrettyPrinter.printmethod</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty.pager_print"><code class="docutils literal notranslate"><span class="pre">pager_print()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty.pprint"><code class="docutils literal notranslate"><span class="pre">pprint()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty.pretty"><code class="docutils literal notranslate"><span class="pre">pretty()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty.pretty_print"><code class="docutils literal notranslate"><span class="pre">pretty_print()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#module-modelparameters.sympy.printing.pretty.pretty_symbology">modelparameters.sympy.printing.pretty.pretty_symbology module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty_symbology.annotated"><code class="docutils literal notranslate"><span class="pre">annotated()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty_symbology.hobj"><code class="docutils literal notranslate"><span class="pre">hobj()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty_symbology.pretty_symbol"><code class="docutils literal notranslate"><span class="pre">pretty_symbol()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty_symbology.vobj"><code class="docutils literal notranslate"><span class="pre">vobj()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.pretty_symbology.xsym"><code class="docutils literal notranslate"><span class="pre">xsym()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#module-modelparameters.sympy.printing.pretty.stringpict">modelparameters.sympy.printing.pretty.stringpict module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.prettyForm"><code class="docutils literal notranslate"><span class="pre">prettyForm</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.prettyForm.ADD"><code class="docutils literal notranslate"><span class="pre">prettyForm.ADD</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.prettyForm.ATOM"><code class="docutils literal notranslate"><span class="pre">prettyForm.ATOM</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.prettyForm.DIV"><code class="docutils literal notranslate"><span class="pre">prettyForm.DIV</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.prettyForm.FUNC"><code class="docutils literal notranslate"><span class="pre">prettyForm.FUNC</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.prettyForm.MUL"><code class="docutils literal notranslate"><span class="pre">prettyForm.MUL</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.prettyForm.NEG"><code class="docutils literal notranslate"><span class="pre">prettyForm.NEG</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.prettyForm.OPEN"><code class="docutils literal notranslate"><span class="pre">prettyForm.OPEN</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.prettyForm.POW"><code class="docutils literal notranslate"><span class="pre">prettyForm.POW</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.prettyForm.apply"><code class="docutils literal notranslate"><span class="pre">prettyForm.apply()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.prettyForm.simpleFunctions"><code class="docutils literal notranslate"><span class="pre">prettyForm.simpleFunctions</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.stringPict"><code class="docutils literal notranslate"><span class="pre">stringPict</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.stringPict.LINE"><code class="docutils literal notranslate"><span class="pre">stringPict.LINE</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.stringPict.above"><code class="docutils literal notranslate"><span class="pre">stringPict.above()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.stringPict.below"><code class="docutils literal notranslate"><span class="pre">stringPict.below()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.stringPict.equalLengths"><code class="docutils literal notranslate"><span class="pre">stringPict.equalLengths()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.stringPict.height"><code class="docutils literal notranslate"><span class="pre">stringPict.height()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.stringPict.left"><code class="docutils literal notranslate"><span class="pre">stringPict.left()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.stringPict.leftslash"><code class="docutils literal notranslate"><span class="pre">stringPict.leftslash()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.stringPict.next"><code class="docutils literal notranslate"><span class="pre">stringPict.next()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.stringPict.parens"><code class="docutils literal notranslate"><span class="pre">stringPict.parens()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.stringPict.render"><code class="docutils literal notranslate"><span class="pre">stringPict.render()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.stringPict.right"><code class="docutils literal notranslate"><span class="pre">stringPict.right()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.stringPict.root"><code class="docutils literal notranslate"><span class="pre">stringPict.root()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.stringPict.stack"><code class="docutils literal notranslate"><span class="pre">stringPict.stack()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.stringPict.terminal_width"><code class="docutils literal notranslate"><span class="pre">stringPict.terminal_width()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#modelparameters.sympy.printing.pretty.stringpict.stringPict.width"><code class="docutils literal notranslate"><span class="pre">stringPict.width()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.printing.pretty.html#module-modelparameters.sympy.printing.pretty">Module contents</a></li>
 </ul>
 </li>
@@ -63,10 +114,10 @@
 </div>
 </section>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.printing.ccode">
-<span id="modelparameters-sympy-printing-ccode-module"></span><h2>modelparameters.sympy.printing.ccode module<a class="headerlink" href="#module-modelparameters.sympy.printing.ccode" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-ccode-module"></span><h2>modelparameters.sympy.printing.ccode module<a class="headerlink" href="#module-modelparameters.sympy.printing.ccode" title="Permalink to this heading">¶</a></h2>
 <p>C code printer</p>
 <p>The C89CodePrinter &amp; C99CodePrinter converts single sympy expressions into
 single C expressions, using the functions defined in math.h where possible.</p>
@@ -76,7 +127,7 @@ source code files that are compilable without further modifications.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.ccode.C89CodePrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.ccode.</span></span><span class="sig-name descname"><span class="pre">C89CodePrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/ccode.html#C89CodePrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.ccode.C89CodePrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.codeprinter.CodePrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CodePrinter</span></code></a></p>
 <p>A printer to convert python expressions to strings of c code</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.ccode.C89CodePrinter.indent_code">
@@ -109,7 +160,7 @@ source code files that are compilable without further modifications.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.ccode.C99CodePrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.ccode.</span></span><span class="sig-name descname"><span class="pre">C99CodePrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/ccode.html#C99CodePrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.ccode.C99CodePrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.ccode._C9XCodePrinter</span></code>, <a class="reference internal" href="#modelparameters.sympy.printing.ccode.C89CodePrinter" title="modelparameters.sympy.printing.ccode.C89CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.ccode.C89CodePrinter</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_C9XCodePrinter</span></code>, <a class="reference internal" href="#modelparameters.sympy.printing.ccode.C89CodePrinter" title="modelparameters.sympy.printing.ccode.C89CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">C89CodePrinter</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.ccode.C99CodePrinter.reserved_words">
 <span class="sig-name descname"><span class="pre">reserved_words</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'auto',</span> <span class="pre">'break',</span> <span class="pre">'case',</span> <span class="pre">'char',</span> <span class="pre">'const',</span> <span class="pre">'continue',</span> <span class="pre">'default',</span> <span class="pre">'do',</span> <span class="pre">'double',</span> <span class="pre">'else',</span> <span class="pre">'entry',</span> <span class="pre">'enum',</span> <span class="pre">'extern',</span> <span class="pre">'float',</span> <span class="pre">'for',</span> <span class="pre">'goto',</span> <span class="pre">'if',</span> <span class="pre">'inline',</span> <span class="pre">'int',</span> <span class="pre">'long',</span> <span class="pre">'register',</span> <span class="pre">'restrict',</span> <span class="pre">'return',</span> <span class="pre">'short',</span> <span class="pre">'signed',</span> <span class="pre">'sizeof',</span> <span class="pre">'static',</span> <span class="pre">'struct',</span> <span class="pre">'switch',</span> <span class="pre">'typedef',</span> <span class="pre">'union',</span> <span class="pre">'unsigned',</span> <span class="pre">'void',</span> <span class="pre">'volatile',</span> <span class="pre">'while'}</span></em><a class="headerlink" href="#modelparameters.sympy.printing.ccode.C99CodePrinter.reserved_words" title="Permalink to this definition">¶</a></dt>
@@ -125,7 +176,7 @@ source code files that are compilable without further modifications.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.ccode.CCodePrinter">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.ccode.</span></span><span class="sig-name descname"><span class="pre">CCodePrinter</span></span><a class="reference internal" href="_modules/modelparameters/sympy/printing/ccode.html#CCodePrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.ccode.CCodePrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.ccode.deprecated.&lt;locals&gt;.deprecated_decorator.&lt;locals&gt;.wrapper</span></code></p>
+<dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">wrapper</span></code></p>
 </dd></dl>
 
 <dl class="py function">
@@ -133,18 +184,18 @@ source code files that are compilable without further modifications.</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.ccode.</span></span><span class="sig-name descname"><span class="pre">ccode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assign_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">standard</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'c99'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">settings</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/ccode.html#ccode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.ccode.ccode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts an expr to a string of c code</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><em>Expr</em></a>) – A sympy expression to be converted.</p></li>
 <li><p><strong>assign_to</strong> (<em>optional</em>) – When given, the argument is used as the name of the variable to which
 the expression is assigned. Can be a string, <code class="docutils literal notranslate"><span class="pre">Symbol</span></code>,
 <code class="docutils literal notranslate"><span class="pre">MatrixSymbol</span></code>, or <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> type. This is helpful in case of
 line-wrapping, or for expressions that generate multi-line statements.</p></li>
-<li><p><strong>standard</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>, </em><em>optional</em>) – String specifying the standard. If your compiler supports a more modern
+<li><p><strong>standard</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em>, </em><em>optional</em>) – String specifying the standard. If your compiler supports a more modern
 standard you may set this to ‘c99’ to allow the printer to use more math
 functions. [default=’c89’].</p></li>
 <li><p><strong>precision</strong> (<em>integer</em><em>, </em><em>optional</em>) – The precision for numbers such as pi [default=15].</p></li>
-<li><p><strong>user_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary where the keys are string representations of either
+<li><p><strong>user_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary where the keys are string representations of either
 <code class="docutils literal notranslate"><span class="pre">FunctionClass</span></code> or <code class="docutils literal notranslate"><span class="pre">UndefinedFunction</span></code> instances and the values
 are their desired C string representations. Alternatively, the
 dictionary value can be a list of tuples i.e. [(argument_test,
@@ -154,11 +205,11 @@ for examples.</p></li>
 expression. These would be values passed by address to the function.
 For example, if <code class="docutils literal notranslate"><span class="pre">dereference=[a]</span></code>, the resulting code would print
 <code class="docutils literal notranslate"><span class="pre">(*a)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></li>
-<li><p><strong>human</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the result is a single string that may contain some constant
+<li><p><strong>human</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the result is a single string that may contain some constant
 declarations for the number symbols. If False, the same information is
 returned in a tuple of (symbols_to_declare, not_supported_functions,
 code_text). [default=True].</p></li>
-<li><p><strong>contract</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
+<li><p><strong>contract</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
 rules and the corresponding nested loops over indices are generated.
 Setting contract=False will not generate loops, instead the user is
 responsible to provide values for the indices in the code.
@@ -256,7 +307,7 @@ generated normally can also exist inside a Matrix:</p>
 For MSVC they are enabled by defining “_USE_MATH_DEFINES” (preferably
 via a compilation flag).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Dictionary mapping sympy expressions to strings (macro names)</p>
 </dd>
 </dl>
@@ -270,25 +321,25 @@ via a compilation flag).</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.codeprinter">
-<span id="modelparameters-sympy-printing-codeprinter-module"></span><h2>modelparameters.sympy.printing.codeprinter module<a class="headerlink" href="#module-modelparameters.sympy.printing.codeprinter" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-codeprinter-module"></span><h2>modelparameters.sympy.printing.codeprinter module<a class="headerlink" href="#module-modelparameters.sympy.printing.codeprinter" title="Permalink to this heading">¶</a></h2>
 <dl class="py exception">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.codeprinter.AssignmentError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.codeprinter.</span></span><span class="sig-name descname"><span class="pre">AssignmentError</span></span><a class="reference internal" href="_modules/modelparameters/sympy/printing/codeprinter.html#AssignmentError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.codeprinter.AssignmentError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
 <p>Raised if an assignment variable for a loop is missing.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.codeprinter.CodePrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.codeprinter.</span></span><span class="sig-name descname"><span class="pre">CodePrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/codeprinter.html#CodePrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.str.StrPrinter" title="modelparameters.sympy.printing.str.StrPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.str.StrPrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.str.StrPrinter" title="modelparameters.sympy.printing.str.StrPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">StrPrinter</span></code></a></p>
 <p>The base class for code-printing subclasses.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.codeprinter.CodePrinter.doprint">
 <span class="sig-name descname"><span class="pre">doprint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assign_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/codeprinter.html#CodePrinter.doprint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.codeprinter.CodePrinter.doprint" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print the expression as code.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<a class="reference internal" href="modelparameters.sympy.polys.html#modelparameters.sympy.polys.ExpressionDomain.Expression" title="modelparameters.sympy.polys.ExpressionDomain.Expression"><em>Expression</em></a>) – The expression to be printed.</p></li>
 <li><p><strong>assign_to</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.symbol.Symbol" title="modelparameters.sympy.core.symbol.Symbol"><em>Symbol</em></a><em>, </em><a class="reference internal" href="modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.matexpr.MatrixSymbol" title="modelparameters.sympy.matrices.expressions.matexpr.MatrixSymbol"><em>MatrixSymbol</em></a><em>, or </em><em>string</em><em> (</em><em>optional</em><em>)</em>) – If provided, the printed code will set the expression to a
@@ -302,7 +353,7 @@ variable with name <code class="docutils literal notranslate"><span class="pre">
 
 </section>
 <section id="module-modelparameters.sympy.printing.conventions">
-<span id="modelparameters-sympy-printing-conventions-module"></span><h2>modelparameters.sympy.printing.conventions module<a class="headerlink" href="#module-modelparameters.sympy.printing.conventions" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-conventions-module"></span><h2>modelparameters.sympy.printing.conventions module<a class="headerlink" href="#module-modelparameters.sympy.printing.conventions" title="Permalink to this heading">¶</a></h2>
 <p>A few practical conventions common to all printers.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.conventions.requires_partial">
@@ -334,11 +385,11 @@ list with superscripts and a list with subscripts.</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.cxxcode">
-<span id="modelparameters-sympy-printing-cxxcode-module"></span><h2>modelparameters.sympy.printing.cxxcode module<a class="headerlink" href="#module-modelparameters.sympy.printing.cxxcode" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-cxxcode-module"></span><h2>modelparameters.sympy.printing.cxxcode module<a class="headerlink" href="#module-modelparameters.sympy.printing.cxxcode" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.cxxcode.CXX11CodePrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.cxxcode.</span></span><span class="sig-name descname"><span class="pre">CXX11CodePrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/cxxcode.html#CXX11CodePrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.cxxcode.CXX11CodePrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.cxxcode._CXXCodePrinterBase</span></code>, <a class="reference internal" href="#modelparameters.sympy.printing.ccode.C99CodePrinter" title="modelparameters.sympy.printing.ccode.C99CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.ccode.C99CodePrinter</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_CXXCodePrinterBase</span></code>, <a class="reference internal" href="#modelparameters.sympy.printing.ccode.C99CodePrinter" title="modelparameters.sympy.printing.ccode.C99CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">C99CodePrinter</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.cxxcode.CXX11CodePrinter.reserved_words">
 <span class="sig-name descname"><span class="pre">reserved_words</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'alignas',</span> <span class="pre">'alignof',</span> <span class="pre">'and',</span> <span class="pre">'and_eq',</span> <span class="pre">'asm',</span> <span class="pre">'auto',</span> <span class="pre">'bitand',</span> <span class="pre">'bitor',</span> <span class="pre">'bool',</span> <span class="pre">'break',</span> <span class="pre">'case',</span> <span class="pre">'catch,',</span> <span class="pre">'char',</span> <span class="pre">'char16_t',</span> <span class="pre">'char32_t',</span> <span class="pre">'class',</span> <span class="pre">'compl',</span> <span class="pre">'const',</span> <span class="pre">'const_cast',</span> <span class="pre">'constexpr',</span> <span class="pre">'continue',</span> <span class="pre">'decltype',</span> <span class="pre">'default',</span> <span class="pre">'delete',</span> <span class="pre">'do',</span> <span class="pre">'double',</span> <span class="pre">'dynamic_cast',</span> <span class="pre">'else',</span> <span class="pre">'enum',</span> <span class="pre">'explicit',</span> <span class="pre">'export',</span> <span class="pre">'extern',</span> <span class="pre">'false',</span> <span class="pre">'float',</span> <span class="pre">'for',</span> <span class="pre">'friend',</span> <span class="pre">'goto',</span> <span class="pre">'if',</span> <span class="pre">'inline',</span> <span class="pre">'int',</span> <span class="pre">'long',</span> <span class="pre">'mutable',</span> <span class="pre">'namespace',</span> <span class="pre">'new',</span> <span class="pre">'noexcept',</span> <span class="pre">'not',</span> <span class="pre">'not_eq',</span> <span class="pre">'nullptr',</span> <span class="pre">'operator',</span> <span class="pre">'or',</span> <span class="pre">'or_eq',</span> <span class="pre">'private',</span> <span class="pre">'protected',</span> <span class="pre">'public',</span> <span class="pre">'register',</span> <span class="pre">'reinterpret_cast',</span> <span class="pre">'return',</span> <span class="pre">'short',</span> <span class="pre">'signed',</span> <span class="pre">'sizeof',</span> <span class="pre">'static',</span> <span class="pre">'static_assert',</span> <span class="pre">'static_cast',</span> <span class="pre">'struct',</span> <span class="pre">'switch',</span> <span class="pre">'template',</span> <span class="pre">'this',</span> <span class="pre">'thread_local',</span> <span class="pre">'throw',</span> <span class="pre">'true',</span> <span class="pre">'try',</span> <span class="pre">'typedef',</span> <span class="pre">'typeid',</span> <span class="pre">'typename',</span> <span class="pre">'union',</span> <span class="pre">'unsigned',</span> <span class="pre">'using',</span> <span class="pre">'virtual',</span> <span class="pre">'void',</span> <span class="pre">'volatile',</span> <span class="pre">'wchar_t',</span> <span class="pre">'while',</span> <span class="pre">'xor',</span> <span class="pre">'xor_eq'}</span></em><a class="headerlink" href="#modelparameters.sympy.printing.cxxcode.CXX11CodePrinter.reserved_words" title="Permalink to this definition">¶</a></dt>
@@ -354,7 +405,7 @@ list with superscripts and a list with subscripts.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.cxxcode.CXX17CodePrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.cxxcode.</span></span><span class="sig-name descname"><span class="pre">CXX17CodePrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/cxxcode.html#CXX17CodePrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.cxxcode.CXX17CodePrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.cxxcode._CXXCodePrinterBase</span></code>, <a class="reference internal" href="#modelparameters.sympy.printing.ccode.C99CodePrinter" title="modelparameters.sympy.printing.ccode.C99CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.ccode.C99CodePrinter</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_CXXCodePrinterBase</span></code>, <a class="reference internal" href="#modelparameters.sympy.printing.ccode.C99CodePrinter" title="modelparameters.sympy.printing.ccode.C99CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">C99CodePrinter</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.cxxcode.CXX17CodePrinter.reserved_words">
 <span class="sig-name descname"><span class="pre">reserved_words</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#modelparameters.sympy.printing.cxxcode.CXX17CodePrinter.reserved_words" title="Permalink to this definition">¶</a></dt>
@@ -370,7 +421,7 @@ list with superscripts and a list with subscripts.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.cxxcode.CXX98CodePrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.cxxcode.</span></span><span class="sig-name descname"><span class="pre">CXX98CodePrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/cxxcode.html#CXX98CodePrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.cxxcode.CXX98CodePrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.cxxcode._CXXCodePrinterBase</span></code>, <a class="reference internal" href="#modelparameters.sympy.printing.ccode.C89CodePrinter" title="modelparameters.sympy.printing.ccode.C89CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.ccode.C89CodePrinter</span></code></a></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_CXXCodePrinterBase</span></code>, <a class="reference internal" href="#modelparameters.sympy.printing.ccode.C89CodePrinter" title="modelparameters.sympy.printing.ccode.C89CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">C89CodePrinter</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.cxxcode.CXX98CodePrinter.reserved_words">
 <span class="sig-name descname"><span class="pre">reserved_words</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'and',</span> <span class="pre">'and_eq',</span> <span class="pre">'asm',</span> <span class="pre">'auto',</span> <span class="pre">'bitand',</span> <span class="pre">'bitor',</span> <span class="pre">'bool',</span> <span class="pre">'break',</span> <span class="pre">'case',</span> <span class="pre">'catch,',</span> <span class="pre">'char',</span> <span class="pre">'class',</span> <span class="pre">'compl',</span> <span class="pre">'const',</span> <span class="pre">'const_cast',</span> <span class="pre">'continue',</span> <span class="pre">'default',</span> <span class="pre">'delete',</span> <span class="pre">'do',</span> <span class="pre">'double',</span> <span class="pre">'dynamic_cast',</span> <span class="pre">'else',</span> <span class="pre">'enum',</span> <span class="pre">'explicit',</span> <span class="pre">'export',</span> <span class="pre">'extern',</span> <span class="pre">'false',</span> <span class="pre">'float',</span> <span class="pre">'for',</span> <span class="pre">'friend',</span> <span class="pre">'goto',</span> <span class="pre">'if',</span> <span class="pre">'inline',</span> <span class="pre">'int',</span> <span class="pre">'long',</span> <span class="pre">'mutable',</span> <span class="pre">'namespace',</span> <span class="pre">'new',</span> <span class="pre">'not',</span> <span class="pre">'not_eq',</span> <span class="pre">'operator',</span> <span class="pre">'or',</span> <span class="pre">'or_eq',</span> <span class="pre">'private',</span> <span class="pre">'protected',</span> <span class="pre">'public',</span> <span class="pre">'register',</span> <span class="pre">'reinterpret_cast',</span> <span class="pre">'return',</span> <span class="pre">'short',</span> <span class="pre">'signed',</span> <span class="pre">'sizeof',</span> <span class="pre">'static',</span> <span class="pre">'static_cast',</span> <span class="pre">'struct',</span> <span class="pre">'switch',</span> <span class="pre">'template',</span> <span class="pre">'this',</span> <span class="pre">'throw',</span> <span class="pre">'true',</span> <span class="pre">'try',</span> <span class="pre">'typedef',</span> <span class="pre">'typeid',</span> <span class="pre">'typename',</span> <span class="pre">'union',</span> <span class="pre">'unsigned',</span> <span class="pre">'using',</span> <span class="pre">'virtual',</span> <span class="pre">'void',</span> <span class="pre">'volatile',</span> <span class="pre">'wchar_t',</span> <span class="pre">'while',</span> <span class="pre">'xor',</span> <span class="pre">'xor_eq'}</span></em><a class="headerlink" href="#modelparameters.sympy.printing.cxxcode.CXX98CodePrinter.reserved_words" title="Permalink to this definition">¶</a></dt>
@@ -391,11 +442,11 @@ list with superscripts and a list with subscripts.</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.defaults">
-<span id="modelparameters-sympy-printing-defaults-module"></span><h2>modelparameters.sympy.printing.defaults module<a class="headerlink" href="#module-modelparameters.sympy.printing.defaults" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-defaults-module"></span><h2>modelparameters.sympy.printing.defaults module<a class="headerlink" href="#module-modelparameters.sympy.printing.defaults" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.defaults.DefaultPrinting">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.defaults.</span></span><span class="sig-name descname"><span class="pre">DefaultPrinting</span></span><a class="reference internal" href="_modules/modelparameters/sympy/printing/defaults.html#DefaultPrinting"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.defaults.DefaultPrinting" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>The default implementation of printing for SymPy classes.</p>
 <p>This implements a hack that allows us to print elements of built-in
 Python containers in a readable way. Natively Python uses <code class="docutils literal notranslate"><span class="pre">repr()</span></code>
@@ -405,7 +456,7 @@ a class to get proper default printing.</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.dot">
-<span id="modelparameters-sympy-printing-dot-module"></span><h2>modelparameters.sympy.printing.dot module<a class="headerlink" href="#module-modelparameters.sympy.printing.dot" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-dot-module"></span><h2>modelparameters.sympy.printing.dot module<a class="headerlink" href="#module-modelparameters.sympy.printing.dot" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.dot.dotprint">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.dot.</span></span><span class="sig-name descname"><span class="pre">dotprint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">expr,</span> <span class="pre">styles=[(&lt;class</span> <span class="pre">'modelparameters.sympy.core.basic.Basic'&gt;,</span> <span class="pre">{'color':</span> <span class="pre">'blue',</span> <span class="pre">'shape':</span> <span class="pre">'ellipse'}),</span> <span class="pre">(&lt;class</span> <span class="pre">'modelparameters.sympy.core.expr.Expr'&gt;,</span> <span class="pre">{'color':</span> <span class="pre">'black'})],</span> <span class="pre">atom=&lt;function</span> <span class="pre">&lt;lambda&gt;&gt;,</span> <span class="pre">maxdepth=None,</span> <span class="pre">repeat=True,</span> <span class="pre">labelfunc=&lt;class</span> <span class="pre">'str'&gt;,</span> <span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/dot.html#dotprint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.dot.dotprint" title="Permalink to this definition">¶</a></dt>
@@ -467,7 +518,7 @@ are labeled <code class="docutils literal notranslate"><span class="pre">Symbol(
 
 </section>
 <section id="module-modelparameters.sympy.printing.fcode">
-<span id="modelparameters-sympy-printing-fcode-module"></span><h2>modelparameters.sympy.printing.fcode module<a class="headerlink" href="#module-modelparameters.sympy.printing.fcode" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-fcode-module"></span><h2>modelparameters.sympy.printing.fcode module<a class="headerlink" href="#module-modelparameters.sympy.printing.fcode" title="Permalink to this heading">¶</a></h2>
 <p>Fortran code printer</p>
 <p>The FCodePrinter converts single sympy expressions into single Fortran
 expressions, using the functions defined in the Fortran 77 standard where
@@ -482,7 +533,7 @@ the responsibility for generating properly cased Fortran code to the user.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.fcode.FCodePrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.fcode.</span></span><span class="sig-name descname"><span class="pre">FCodePrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/fcode.html#FCodePrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.fcode.FCodePrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.codeprinter.CodePrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CodePrinter</span></code></a></p>
 <p>A printer to convert sympy expressions to strings of Fortran code</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.fcode.FCodePrinter.indent_code">
@@ -507,7 +558,7 @@ the responsibility for generating properly cased Fortran code to the user.</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.fcode.</span></span><span class="sig-name descname"><span class="pre">fcode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assign_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">settings</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/fcode.html#fcode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.fcode.fcode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts an expr to a string of c code</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><em>Expr</em></a>) – A sympy expression to be converted.</p></li>
 <li><p><strong>assign_to</strong> (<em>optional</em>) – When given, the argument is used as the name of the variable to which
@@ -515,15 +566,15 @@ the expression is assigned. Can be a string, <code class="docutils literal notra
 <code class="docutils literal notranslate"><span class="pre">MatrixSymbol</span></code>, or <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> type. This is helpful in case of
 line-wrapping, or for expressions that generate multi-line statements.</p></li>
 <li><p><strong>precision</strong> (<em>integer</em><em>, </em><em>optional</em>) – The precision for numbers such as pi [default=15].</p></li>
-<li><p><strong>user_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary where keys are <code class="docutils literal notranslate"><span class="pre">FunctionClass</span></code> instances and values are
+<li><p><strong>user_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary where keys are <code class="docutils literal notranslate"><span class="pre">FunctionClass</span></code> instances and values are
 their string representations. Alternatively, the dictionary value can
 be a list of tuples i.e. [(argument_test, cfunction_string)]. See below
 for examples.</p></li>
-<li><p><strong>human</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the result is a single string that may contain some constant
+<li><p><strong>human</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the result is a single string that may contain some constant
 declarations for the number symbols. If False, the same information is
 returned in a tuple of (symbols_to_declare, not_supported_functions,
 code_text). [default=True].</p></li>
-<li><p><strong>contract</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
+<li><p><strong>contract</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
 rules and the corresponding nested loops over indices are generated.
 Setting contract=False will not generate loops, instead the user is
 responsible to provide values for the indices in the code.
@@ -617,7 +668,7 @@ generated normally can also exist inside a Matrix:</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.gtk">
-<span id="modelparameters-sympy-printing-gtk-module"></span><h2>modelparameters.sympy.printing.gtk module<a class="headerlink" href="#module-modelparameters.sympy.printing.gtk" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-gtk-module"></span><h2>modelparameters.sympy.printing.gtk module<a class="headerlink" href="#module-modelparameters.sympy.printing.gtk" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.gtk.print_gtk">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.gtk.</span></span><span class="sig-name descname"><span class="pre">print_gtk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_viewer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/gtk.html#print_gtk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.gtk.print_gtk" title="Permalink to this definition">¶</a></dt>
@@ -627,7 +678,7 @@ generated normally can also exist inside a Matrix:</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.jscode">
-<span id="modelparameters-sympy-printing-jscode-module"></span><h2>modelparameters.sympy.printing.jscode module<a class="headerlink" href="#module-modelparameters.sympy.printing.jscode" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-jscode-module"></span><h2>modelparameters.sympy.printing.jscode module<a class="headerlink" href="#module-modelparameters.sympy.printing.jscode" title="Permalink to this heading">¶</a></h2>
 <p>Javascript code printer</p>
 <p>The JavascriptCodePrinter converts single sympy expressions into single
 Javascript expressions, using the functions defined in the Javascript
@@ -635,7 +686,7 @@ Math object where possible.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.jscode.JavascriptCodePrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.jscode.</span></span><span class="sig-name descname"><span class="pre">JavascriptCodePrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/jscode.html#JavascriptCodePrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.jscode.JavascriptCodePrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.codeprinter.CodePrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CodePrinter</span></code></a></p>
 <p>“A Printer to convert python expressions to strings of javascript code</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.jscode.JavascriptCodePrinter.indent_code">
@@ -660,7 +711,7 @@ Math object where possible.</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.jscode.</span></span><span class="sig-name descname"><span class="pre">jscode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assign_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">settings</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/jscode.html#jscode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.jscode.jscode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts an expr to a string of javascript code</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><em>Expr</em></a>) – A sympy expression to be converted.</p></li>
 <li><p><strong>assign_to</strong> (<em>optional</em>) – When given, the argument is used as the name of the variable to which
@@ -668,15 +719,15 @@ the expression is assigned. Can be a string, <code class="docutils literal notra
 <code class="docutils literal notranslate"><span class="pre">MatrixSymbol</span></code>, or <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> type. This is helpful in case of
 line-wrapping, or for expressions that generate multi-line statements.</p></li>
 <li><p><strong>precision</strong> (<em>integer</em><em>, </em><em>optional</em>) – The precision for numbers such as pi [default=15].</p></li>
-<li><p><strong>user_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary where keys are <code class="docutils literal notranslate"><span class="pre">FunctionClass</span></code> instances and values are
+<li><p><strong>user_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary where keys are <code class="docutils literal notranslate"><span class="pre">FunctionClass</span></code> instances and values are
 their string representations. Alternatively, the dictionary value can
 be a list of tuples i.e. [(argument_test, js_function_string)]. See
 below for examples.</p></li>
-<li><p><strong>human</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the result is a single string that may contain some constant
+<li><p><strong>human</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the result is a single string that may contain some constant
 declarations for the number symbols. If False, the same information is
 returned in a tuple of (symbols_to_declare, not_supported_functions,
 code_text). [default=True].</p></li>
-<li><p><strong>contract</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
+<li><p><strong>contract</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
 rules and the corresponding nested loops over indices are generated.
 Setting contract=False will not generate loops, instead the user is
 responsible to provide values for the indices in the code.
@@ -766,7 +817,7 @@ generated normally can also exist inside a Matrix:</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.julia">
-<span id="modelparameters-sympy-printing-julia-module"></span><h2>modelparameters.sympy.printing.julia module<a class="headerlink" href="#module-modelparameters.sympy.printing.julia" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-julia-module"></span><h2>modelparameters.sympy.printing.julia module<a class="headerlink" href="#module-modelparameters.sympy.printing.julia" title="Permalink to this heading">¶</a></h2>
 <p>Julia code printer</p>
 <p>The <cite>JuliaCodePrinter</cite> converts SymPy expressions into Julia expressions.</p>
 <p>A complete code generator, which uses <cite>julia_code</cite> extensively, can be found
@@ -775,7 +826,7 @@ complete source code files.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.julia.JuliaCodePrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.julia.</span></span><span class="sig-name descname"><span class="pre">JuliaCodePrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/julia.html#JuliaCodePrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.julia.JuliaCodePrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.codeprinter.CodePrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CodePrinter</span></code></a></p>
 <p>A printer to convert expressions to strings of Julia code.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.julia.JuliaCodePrinter.indent_code">
@@ -800,7 +851,7 @@ complete source code files.</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.julia.</span></span><span class="sig-name descname"><span class="pre">julia_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assign_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">settings</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/julia.html#julia_code"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.julia.julia_code" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts <cite>expr</cite> to a string of Julia code.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><em>Expr</em></a>) – A sympy expression to be converted.</p></li>
 <li><p><strong>assign_to</strong> (<em>optional</em>) – When given, the argument is used as the name of the variable to which
@@ -808,20 +859,20 @@ the expression is assigned.  Can be a string, <code class="docutils literal notr
 <code class="docutils literal notranslate"><span class="pre">MatrixSymbol</span></code>, or <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> type.  This can be helpful for
 expressions that generate multi-line statements.</p></li>
 <li><p><strong>precision</strong> (<em>integer</em><em>, </em><em>optional</em>) – The precision for numbers such as pi  [default=16].</p></li>
-<li><p><strong>user_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary where keys are <code class="docutils literal notranslate"><span class="pre">FunctionClass</span></code> instances and values are
+<li><p><strong>user_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary where keys are <code class="docutils literal notranslate"><span class="pre">FunctionClass</span></code> instances and values are
 their string representations.  Alternatively, the dictionary value can
 be a list of tuples i.e. [(argument_test, cfunction_string)].  See
 below for examples.</p></li>
-<li><p><strong>human</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the result is a single string that may contain some constant
+<li><p><strong>human</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the result is a single string that may contain some constant
 declarations for the number symbols.  If False, the same information is
 returned in a tuple of (symbols_to_declare, not_supported_functions,
 code_text).  [default=True].</p></li>
-<li><p><strong>contract</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
+<li><p><strong>contract</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
 rules and the corresponding nested loops over indices are generated.
 Setting contract=False will not generate loops, instead the user is
 responsible to provide values for the indices in the code.
 [default=True].</p></li>
-<li><p><strong>inline</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, we try to create single-statement code instead of multiple
+<li><p><strong>inline</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, we try to create single-statement code instead of multiple
 statements.  [default=True].</p></li>
 </ul>
 </dd>
@@ -936,11 +987,11 @@ looped over:</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.lambdarepr">
-<span id="modelparameters-sympy-printing-lambdarepr-module"></span><h2>modelparameters.sympy.printing.lambdarepr module<a class="headerlink" href="#module-modelparameters.sympy.printing.lambdarepr" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-lambdarepr-module"></span><h2>modelparameters.sympy.printing.lambdarepr module<a class="headerlink" href="#module-modelparameters.sympy.printing.lambdarepr" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.lambdarepr.LambdaPrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.lambdarepr.</span></span><span class="sig-name descname"><span class="pre">LambdaPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/lambdarepr.html#LambdaPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.lambdarepr.LambdaPrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.str.StrPrinter" title="modelparameters.sympy.printing.str.StrPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.str.StrPrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.str.StrPrinter" title="modelparameters.sympy.printing.str.StrPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">StrPrinter</span></code></a></p>
 <p>This printer converts expressions into strings that can be used by
 lambdify.</p>
 </dd></dl>
@@ -948,14 +999,14 @@ lambdify.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.lambdarepr.MpmathPrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.lambdarepr.</span></span><span class="sig-name descname"><span class="pre">MpmathPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/lambdarepr.html#MpmathPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.lambdarepr.MpmathPrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.lambdarepr.LambdaPrinter" title="modelparameters.sympy.printing.lambdarepr.LambdaPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.lambdarepr.LambdaPrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.lambdarepr.LambdaPrinter" title="modelparameters.sympy.printing.lambdarepr.LambdaPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">LambdaPrinter</span></code></a></p>
 <p>Lambda printer for mpmath which maintains precision for floats</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.lambdarepr.NumExprPrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.lambdarepr.</span></span><span class="sig-name descname"><span class="pre">NumExprPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/lambdarepr.html#NumExprPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.lambdarepr.NumExprPrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.lambdarepr.LambdaPrinter" title="modelparameters.sympy.printing.lambdarepr.LambdaPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.lambdarepr.LambdaPrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.lambdarepr.LambdaPrinter" title="modelparameters.sympy.printing.lambdarepr.LambdaPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">LambdaPrinter</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.lambdarepr.NumExprPrinter.blacklisted">
 <span class="sig-name descname"><span class="pre">blacklisted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/lambdarepr.html#NumExprPrinter.blacklisted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.lambdarepr.NumExprPrinter.blacklisted" title="Permalink to this definition">¶</a></dt>
@@ -972,7 +1023,7 @@ lambdify.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.lambdarepr.NumPyPrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.lambdarepr.</span></span><span class="sig-name descname"><span class="pre">NumPyPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/lambdarepr.html#NumPyPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.lambdarepr.NumPyPrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.lambdarepr.LambdaPrinter" title="modelparameters.sympy.printing.lambdarepr.LambdaPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.lambdarepr.LambdaPrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.lambdarepr.LambdaPrinter" title="modelparameters.sympy.printing.lambdarepr.LambdaPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">LambdaPrinter</span></code></a></p>
 <p>Numpy printer which handles vectorized piecewise functions,
 logical operators, etc.</p>
 </dd></dl>
@@ -980,7 +1031,7 @@ logical operators, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.lambdarepr.TensorflowPrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.lambdarepr.</span></span><span class="sig-name descname"><span class="pre">TensorflowPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/lambdarepr.html#TensorflowPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.lambdarepr.TensorflowPrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.lambdarepr.LambdaPrinter" title="modelparameters.sympy.printing.lambdarepr.LambdaPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.lambdarepr.LambdaPrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.lambdarepr.LambdaPrinter" title="modelparameters.sympy.printing.lambdarepr.LambdaPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">LambdaPrinter</span></code></a></p>
 <p>Tensorflow printer which handles vectorized piecewise functions,
 logical operators, max/min, and relational operators.</p>
 </dd></dl>
@@ -993,12 +1044,12 @@ logical operators, max/min, and relational operators.</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.latex">
-<span id="modelparameters-sympy-printing-latex-module"></span><h2>modelparameters.sympy.printing.latex module<a class="headerlink" href="#module-modelparameters.sympy.printing.latex" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-latex-module"></span><h2>modelparameters.sympy.printing.latex module<a class="headerlink" href="#module-modelparameters.sympy.printing.latex" title="Permalink to this heading">¶</a></h2>
 <p>A Printer which converts an expression into its LaTeX equivalent.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.latex.LatexPrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.latex.</span></span><span class="sig-name descname"><span class="pre">LatexPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/latex.html#LatexPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.latex.LatexPrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.printer.Printer" title="modelparameters.sympy.printing.printer.Printer"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.printer.Printer</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.printer.Printer" title="modelparameters.sympy.printing.printer.Printer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Printer</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.latex.LatexPrinter.doprint">
 <span class="sig-name descname"><span class="pre">doprint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/latex.html#LatexPrinter.doprint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.latex.LatexPrinter.doprint" title="Permalink to this definition">¶</a></dt>
@@ -1170,35 +1221,35 @@ return the appropriate latex.</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.llvmjitcode">
-<span id="modelparameters-sympy-printing-llvmjitcode-module"></span><h2>modelparameters.sympy.printing.llvmjitcode module<a class="headerlink" href="#module-modelparameters.sympy.printing.llvmjitcode" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-llvmjitcode-module"></span><h2>modelparameters.sympy.printing.llvmjitcode module<a class="headerlink" href="#module-modelparameters.sympy.printing.llvmjitcode" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.llvmjitcode.CodeSignature">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.llvmjitcode.</span></span><span class="sig-name descname"><span class="pre">CodeSignature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ret_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/llvmjitcode.html#CodeSignature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.llvmjitcode.CodeSignature" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.llvmjitcode.LLVMJitCallbackPrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.llvmjitcode.</span></span><span class="sig-name descname"><span class="pre">LLVMJitCallbackPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/llvmjitcode.html#LLVMJitCallbackPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.llvmjitcode.LLVMJitCallbackPrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.llvmjitcode.LLVMJitPrinter" title="modelparameters.sympy.printing.llvmjitcode.LLVMJitPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.llvmjitcode.LLVMJitPrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.llvmjitcode.LLVMJitPrinter" title="modelparameters.sympy.printing.llvmjitcode.LLVMJitPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">LLVMJitPrinter</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.llvmjitcode.LLVMJitCode">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.llvmjitcode.</span></span><span class="sig-name descname"><span class="pre">LLVMJitCode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signature</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/llvmjitcode.html#LLVMJitCode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.llvmjitcode.LLVMJitCode" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.llvmjitcode.LLVMJitCodeCallback">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.llvmjitcode.</span></span><span class="sig-name descname"><span class="pre">LLVMJitCodeCallback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signature</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/llvmjitcode.html#LLVMJitCodeCallback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.llvmjitcode.LLVMJitCodeCallback" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.llvmjitcode.LLVMJitCode" title="modelparameters.sympy.printing.llvmjitcode.LLVMJitCode"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.llvmjitcode.LLVMJitCode</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.llvmjitcode.LLVMJitCode" title="modelparameters.sympy.printing.llvmjitcode.LLVMJitCode"><code class="xref py py-class docutils literal notranslate"><span class="pre">LLVMJitCode</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.llvmjitcode.LLVMJitPrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.llvmjitcode.</span></span><span class="sig-name descname"><span class="pre">LLVMJitPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">builder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/llvmjitcode.html#LLVMJitPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.llvmjitcode.LLVMJitPrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.printer.Printer" title="modelparameters.sympy.printing.printer.Printer"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.printer.Printer</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.printer.Printer" title="modelparameters.sympy.printing.printer.Printer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Printer</span></code></a></p>
 <p>Convert expressions to LLVM IR</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.llvmjitcode.LLVMJitPrinter.emptyPrinter">
@@ -1224,9 +1275,9 @@ errors defaults to ‘strict’.</p>
 Some single argument math functions (exp, sin, cos, etc.) are supported
 in expressions.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>args</strong> (<em>List of Symbol</em>) – Arguments to the generated function.  Usually the free symbols in
+<li><p><strong>args</strong> (<em>List</em><em> of </em><a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.symbol.Symbol" title="modelparameters.sympy.core.symbol.Symbol"><em>Symbol</em></a>) – Arguments to the generated function.  Usually the free symbols in
 the expression.  Currently each one is assumed to convert to
 a double precision scalar.</p></li>
 <li><p><strong>expr</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><em>Expr</em></a><em>, or </em><em>(</em><em>Replacements</em><em>, </em><a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><em>Expr</em></a><em>) </em><em>as returned from 'cse'</em>) – Expression to compile.</p></li>
@@ -1240,7 +1291,7 @@ Currently supported:</p>
 </p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>Compiled function that can evaluate the expression.</p>
 </dd>
 </dl>
@@ -1295,12 +1346,12 @@ to match in the integration call.)
 
 </section>
 <section id="module-modelparameters.sympy.printing.mathematica">
-<span id="modelparameters-sympy-printing-mathematica-module"></span><h2>modelparameters.sympy.printing.mathematica module<a class="headerlink" href="#module-modelparameters.sympy.printing.mathematica" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-mathematica-module"></span><h2>modelparameters.sympy.printing.mathematica module<a class="headerlink" href="#module-modelparameters.sympy.printing.mathematica" title="Permalink to this heading">¶</a></h2>
 <p>Mathematica code printer</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.mathematica.MCodePrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.mathematica.</span></span><span class="sig-name descname"><span class="pre">MCodePrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/mathematica.html#MCodePrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.mathematica.MCodePrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.codeprinter.CodePrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CodePrinter</span></code></a></p>
 <p>A printer to convert python expressions to
 strings of the Wolfram’s Mathematica code</p>
 <dl class="py method">
@@ -1331,12 +1382,12 @@ strings of the Wolfram’s Mathematica code</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.mathml">
-<span id="modelparameters-sympy-printing-mathml-module"></span><h2>modelparameters.sympy.printing.mathml module<a class="headerlink" href="#module-modelparameters.sympy.printing.mathml" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-mathml-module"></span><h2>modelparameters.sympy.printing.mathml module<a class="headerlink" href="#module-modelparameters.sympy.printing.mathml" title="Permalink to this heading">¶</a></h2>
 <p>A MathML printer.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.mathml.MathMLPrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.mathml.</span></span><span class="sig-name descname"><span class="pre">MathMLPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/mathml.html#MathMLPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.mathml.MathMLPrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.printer.Printer" title="modelparameters.sympy.printing.printer.Printer"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.printer.Printer</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.printer.Printer" title="modelparameters.sympy.printing.printer.Printer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Printer</span></code></a></p>
 <p>Prints an expression to the MathML markup language</p>
 <p>Whenever possible tries to use Content markup and not Presentation markup.</p>
 <p>References: <a class="reference external" href="https://www.w3.org/TR/MathML3/">https://www.w3.org/TR/MathML3/</a></p>
@@ -1395,7 +1446,7 @@ strings of the Wolfram’s Mathematica code</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.octave">
-<span id="modelparameters-sympy-printing-octave-module"></span><h2>modelparameters.sympy.printing.octave module<a class="headerlink" href="#module-modelparameters.sympy.printing.octave" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-octave-module"></span><h2>modelparameters.sympy.printing.octave module<a class="headerlink" href="#module-modelparameters.sympy.printing.octave" title="Permalink to this heading">¶</a></h2>
 <p>Octave (and Matlab) code printer</p>
 <p>The <cite>OctaveCodePrinter</cite> converts SymPy expressions into Octave expressions.
 It uses a subset of the Octave language for Matlab compatibility.</p>
@@ -1405,7 +1456,7 @@ complete source code files.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.octave.OctaveCodePrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.octave.</span></span><span class="sig-name descname"><span class="pre">OctaveCodePrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/octave.html#OctaveCodePrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.octave.OctaveCodePrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.codeprinter.CodePrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CodePrinter</span></code></a></p>
 <p>A printer to convert expressions to strings of Octave/Matlab code.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.octave.OctaveCodePrinter.indent_code">
@@ -1431,7 +1482,7 @@ complete source code files.</p>
 <dd><p>Converts <cite>expr</cite> to a string of Octave (or Matlab) code.</p>
 <p>The string uses a subset of the Octave language for Matlab compatibility.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><em>Expr</em></a>) – A sympy expression to be converted.</p></li>
 <li><p><strong>assign_to</strong> (<em>optional</em>) – When given, the argument is used as the name of the variable to which
@@ -1439,20 +1490,20 @@ the expression is assigned.  Can be a string, <code class="docutils literal notr
 <code class="docutils literal notranslate"><span class="pre">MatrixSymbol</span></code>, or <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> type.  This can be helpful for
 expressions that generate multi-line statements.</p></li>
 <li><p><strong>precision</strong> (<em>integer</em><em>, </em><em>optional</em>) – The precision for numbers such as pi  [default=16].</p></li>
-<li><p><strong>user_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary where keys are <code class="docutils literal notranslate"><span class="pre">FunctionClass</span></code> instances and values are
+<li><p><strong>user_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary where keys are <code class="docutils literal notranslate"><span class="pre">FunctionClass</span></code> instances and values are
 their string representations.  Alternatively, the dictionary value can
 be a list of tuples i.e. [(argument_test, cfunction_string)].  See
 below for examples.</p></li>
-<li><p><strong>human</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the result is a single string that may contain some constant
+<li><p><strong>human</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the result is a single string that may contain some constant
 declarations for the number symbols.  If False, the same information is
 returned in a tuple of (symbols_to_declare, not_supported_functions,
 code_text).  [default=True].</p></li>
-<li><p><strong>contract</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
+<li><p><strong>contract</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
 rules and the corresponding nested loops over indices are generated.
 Setting contract=False will not generate loops, instead the user is
 responsible to provide values for the indices in the code.
 [default=True].</p></li>
-<li><p><strong>inline</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, we try to create single-statement code instead of multiple
+<li><p><strong>inline</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, we try to create single-statement code instead of multiple
 statements.  [default=True].</p></li>
 </ul>
 </dd>
@@ -1567,7 +1618,7 @@ looped over:</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.precedence">
-<span id="modelparameters-sympy-printing-precedence-module"></span><h2>modelparameters.sympy.printing.precedence module<a class="headerlink" href="#module-modelparameters.sympy.printing.precedence" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-precedence-module"></span><h2>modelparameters.sympy.printing.precedence module<a class="headerlink" href="#module-modelparameters.sympy.printing.precedence" title="Permalink to this heading">¶</a></h2>
 <p>A module providing information about the necessity of brackets</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.precedence.precedence">
@@ -1619,7 +1670,7 @@ of mathematics. This is the precedence for the LaTeX and pretty printer.</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.preview">
-<span id="modelparameters-sympy-printing-preview-module"></span><h2>modelparameters.sympy.printing.preview module<a class="headerlink" href="#module-modelparameters.sympy.printing.preview" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-preview-module"></span><h2>modelparameters.sympy.printing.preview module<a class="headerlink" href="#module-modelparameters.sympy.printing.preview" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.preview.preview">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.preview.</span></span><span class="sig-name descname"><span class="pre">preview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">viewer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">euler</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">packages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputbuffer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preamble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dvioptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputTexFile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">latex_settings</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/preview.html#preview"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.preview.preview" title="Permalink to this definition">¶</a></dt>
@@ -1704,7 +1755,7 @@ bitmap, do</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.printer">
-<span id="modelparameters-sympy-printing-printer-module"></span><h2>modelparameters.sympy.printing.printer module<a class="headerlink" href="#module-modelparameters.sympy.printing.printer" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-printer-module"></span><h2>modelparameters.sympy.printing.printer module<a class="headerlink" href="#module-modelparameters.sympy.printing.printer" title="Permalink to this heading">¶</a></h2>
 <p>Printing subsystem driver</p>
 <p>SymPy’s printing system works the following way: Any expression can be
 passed to a designated Printer who then is responsible to return an
@@ -1778,7 +1829,7 @@ not defined in the Printer subclass this will be the same as str(expr).</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.printer.Printer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.printer.</span></span><span class="sig-name descname"><span class="pre">Printer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/printer.html#Printer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.printer.Printer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Generic printer</p>
 <p>Its job is to provide infrastructure for implementing new printers easily.</p>
 <p>Basically, if you want to implement a printer, all you have to do is:</p>
@@ -1818,13 +1869,13 @@ that is when no appropriate print method was found for an expression.</p>
 <span class="kn">from</span> <span class="nn">.str</span> <span class="kn">import</span> <span class="n">StrPrinter</span>
 
 <span class="k">class</span> <span class="nc">CustomStrPrinter</span><span class="p">(</span><span class="n">StrPrinter</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Examples of how to customize the StrPrinter for both a SymPy class and a</span>
 <span class="sd">    user defined class subclassed from the SymPy Basic class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_print_Derivative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Custom printing of the SymPy Derivative class.</span>
 
 <span class="sd">        Instead of:</span>
@@ -1841,7 +1892,7 @@ that is when no appropriate print method was found for an expression.</p>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">func</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 
     <span class="k">def</span> <span class="nf">_print_MyClass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print the characters of MyClass.s alternatively lower case and upper</span>
 <span class="sd">        case</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1886,7 +1937,7 @@ is subclassed from Basic.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.printer.Printer.emptyPrinter">
 <span class="sig-name descname"><span class="pre">emptyPrinter</span></span><a class="headerlink" href="#modelparameters.sympy.printing.printer.Printer.emptyPrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd><p>alias of <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd></dl>
 
 <dl class="py property">
@@ -1909,11 +1960,11 @@ is subclassed from Basic.</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.python">
-<span id="modelparameters-sympy-printing-python-module"></span><h2>modelparameters.sympy.printing.python module<a class="headerlink" href="#module-modelparameters.sympy.printing.python" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-python-module"></span><h2>modelparameters.sympy.printing.python module<a class="headerlink" href="#module-modelparameters.sympy.printing.python" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.python.PythonPrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.python.</span></span><span class="sig-name descname"><span class="pre">PythonPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/python.html#PythonPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.python.PythonPrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.repr.ReprPrinter" title="modelparameters.sympy.printing.repr.ReprPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.repr.ReprPrinter</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.printing.str.StrPrinter" title="modelparameters.sympy.printing.str.StrPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.str.StrPrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.repr.ReprPrinter" title="modelparameters.sympy.printing.repr.ReprPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReprPrinter</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.printing.str.StrPrinter" title="modelparameters.sympy.printing.str.StrPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">StrPrinter</span></code></a></p>
 <p>A printer which converts an expression into its Python interpretation.</p>
 </dd></dl>
 
@@ -1932,14 +1983,14 @@ is subclassed from Basic.</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.rcode">
-<span id="modelparameters-sympy-printing-rcode-module"></span><h2>modelparameters.sympy.printing.rcode module<a class="headerlink" href="#module-modelparameters.sympy.printing.rcode" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-rcode-module"></span><h2>modelparameters.sympy.printing.rcode module<a class="headerlink" href="#module-modelparameters.sympy.printing.rcode" title="Permalink to this heading">¶</a></h2>
 <p>R code printer</p>
 <p>The RCodePrinter converts single sympy expressions into single R expressions,
 using the functions defined in math.h where possible.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.rcode.RCodePrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.rcode.</span></span><span class="sig-name descname"><span class="pre">RCodePrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/rcode.html#RCodePrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.rcode.RCodePrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.codeprinter.CodePrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CodePrinter</span></code></a></p>
 <p>A printer to convert python expressions to strings of R code</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.rcode.RCodePrinter.indent_code">
@@ -1970,7 +2021,7 @@ using the functions defined in math.h where possible.</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.rcode.</span></span><span class="sig-name descname"><span class="pre">rcode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assign_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">settings</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/rcode.html#rcode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.rcode.rcode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts an expr to a string of r code</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><em>Expr</em></a>) – A sympy expression to be converted.</p></li>
 <li><p><strong>assign_to</strong> (<em>optional</em>) – When given, the argument is used as the name of the variable to which
@@ -1978,17 +2029,17 @@ the expression is assigned. Can be a string, <code class="docutils literal notra
 <code class="docutils literal notranslate"><span class="pre">MatrixSymbol</span></code>, or <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> type. This is helpful in case of
 line-wrapping, or for expressions that generate multi-line statements.</p></li>
 <li><p><strong>precision</strong> (<em>integer</em><em>, </em><em>optional</em>) – The precision for numbers such as pi [default=15].</p></li>
-<li><p><strong>user_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary where the keys are string representations of either
+<li><p><strong>user_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary where the keys are string representations of either
 <code class="docutils literal notranslate"><span class="pre">FunctionClass</span></code> or <code class="docutils literal notranslate"><span class="pre">UndefinedFunction</span></code> instances and the values
 are their desired R string representations. Alternatively, the
 dictionary value can be a list of tuples i.e. [(argument_test,
 rfunction_string)] or [(argument_test, rfunction_formater)]. See below
 for examples.</p></li>
-<li><p><strong>human</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the result is a single string that may contain some constant
+<li><p><strong>human</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the result is a single string that may contain some constant
 declarations for the number symbols. If False, the same information is
 returned in a tuple of (symbols_to_declare, not_supported_functions,
 code_text). [default=True].</p></li>
-<li><p><strong>contract</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
+<li><p><strong>contract</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
 rules and the corresponding nested loops over indices are generated.
 Setting contract=False will not generate loops, instead the user is
 responsible to provide values for the indices in the code.
@@ -2070,14 +2121,14 @@ generated normally can also exist inside a Matrix:</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.repr">
-<span id="modelparameters-sympy-printing-repr-module"></span><h2>modelparameters.sympy.printing.repr module<a class="headerlink" href="#module-modelparameters.sympy.printing.repr" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-repr-module"></span><h2>modelparameters.sympy.printing.repr module<a class="headerlink" href="#module-modelparameters.sympy.printing.repr" title="Permalink to this heading">¶</a></h2>
 <p>A Printer for generating executable code.</p>
 <p>The most important function here is srepr that returns a string so that the
 relation eval(srepr(expr))=expr holds in an appropriate environment.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.repr.ReprPrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.repr.</span></span><span class="sig-name descname"><span class="pre">ReprPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/repr.html#ReprPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.repr.ReprPrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.printer.Printer" title="modelparameters.sympy.printing.printer.Printer"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.printer.Printer</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.printer.Printer" title="modelparameters.sympy.printing.printer.Printer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Printer</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.repr.ReprPrinter.emptyPrinter">
 <span class="sig-name descname"><span class="pre">emptyPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/repr.html#ReprPrinter.emptyPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.repr.ReprPrinter.emptyPrinter" title="Permalink to this definition">¶</a></dt>
@@ -2105,7 +2156,7 @@ relation eval(srepr(expr))=expr holds in an appropriate environment.</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.rust">
-<span id="modelparameters-sympy-printing-rust-module"></span><h2>modelparameters.sympy.printing.rust module<a class="headerlink" href="#module-modelparameters.sympy.printing.rust" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-rust-module"></span><h2>modelparameters.sympy.printing.rust module<a class="headerlink" href="#module-modelparameters.sympy.printing.rust" title="Permalink to this heading">¶</a></h2>
 <p>Rust code printer</p>
 <p>The <cite>RustCodePrinter</cite> converts SymPy expressions into Rust expressions.</p>
 <p>A complete code generator, which uses <cite>rust_code</cite> extensively, can be found
@@ -2114,7 +2165,7 @@ complete source code files.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.rust.RustCodePrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.rust.</span></span><span class="sig-name descname"><span class="pre">RustCodePrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/rust.html#RustCodePrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.rust.RustCodePrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.codeprinter.CodePrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter" title="modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">CodePrinter</span></code></a></p>
 <p>A printer to convert python expressions to strings of Rust code</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.rust.RustCodePrinter.indent_code">
@@ -2145,7 +2196,7 @@ complete source code files.</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.rust.</span></span><span class="sig-name descname"><span class="pre">rust_code</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assign_to</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">settings</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/rust.html#rust_code"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.rust.rust_code" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts an expr to a string of Rust code</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><em>Expr</em></a>) – A sympy expression to be converted.</p></li>
 <li><p><strong>assign_to</strong> (<em>optional</em>) – When given, the argument is used as the name of the variable to which
@@ -2153,7 +2204,7 @@ the expression is assigned. Can be a string, <code class="docutils literal notra
 <code class="docutils literal notranslate"><span class="pre">MatrixSymbol</span></code>, or <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> type. This is helpful in case of
 line-wrapping, or for expressions that generate multi-line statements.</p></li>
 <li><p><strong>precision</strong> (<em>integer</em><em>, </em><em>optional</em>) – The precision for numbers such as pi [default=15].</p></li>
-<li><p><strong>user_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary where the keys are string representations of either
+<li><p><strong>user_functions</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary where the keys are string representations of either
 <code class="docutils literal notranslate"><span class="pre">FunctionClass</span></code> or <code class="docutils literal notranslate"><span class="pre">UndefinedFunction</span></code> instances and the values
 are their desired C string representations. Alternatively, the
 dictionary value can be a list of tuples i.e. [(argument_test,
@@ -2162,11 +2213,11 @@ cfunction_string)].  See below for examples.</p></li>
 expression. These would be values passed by address to the function.
 For example, if <code class="docutils literal notranslate"><span class="pre">dereference=[a]</span></code>, the resulting code would print
 <code class="docutils literal notranslate"><span class="pre">(*a)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">a</span></code>.</p></li>
-<li><p><strong>human</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the result is a single string that may contain some constant
+<li><p><strong>human</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, the result is a single string that may contain some constant
 declarations for the number symbols. If False, the same information is
 returned in a tuple of (symbols_to_declare, not_supported_functions,
 code_text). [default=True].</p></li>
-<li><p><strong>contract</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
+<li><p><strong>contract</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – If True, <code class="docutils literal notranslate"><span class="pre">Indexed</span></code> instances are assumed to obey tensor contraction
 rules and the corresponding nested loops over indices are generated.
 Setting contract=False will not generate loops, instead the user is
 responsible to provide values for the indices in the code.
@@ -2247,12 +2298,12 @@ generated normally can also exist inside a Matrix:</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.str">
-<span id="modelparameters-sympy-printing-str-module"></span><h2>modelparameters.sympy.printing.str module<a class="headerlink" href="#module-modelparameters.sympy.printing.str" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-str-module"></span><h2>modelparameters.sympy.printing.str module<a class="headerlink" href="#module-modelparameters.sympy.printing.str" title="Permalink to this heading">¶</a></h2>
 <p>A Printer for generating readable representation of most sympy classes.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.str.StrPrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.str.</span></span><span class="sig-name descname"><span class="pre">StrPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/str.html#StrPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.str.StrPrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.printer.Printer" title="modelparameters.sympy.printing.printer.Printer"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.printer.Printer</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.printer.Printer" title="modelparameters.sympy.printing.printer.Printer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Printer</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.str.StrPrinter.emptyPrinter">
 <span class="sig-name descname"><span class="pre">emptyPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/str.html#StrPrinter.emptyPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.str.StrPrinter.emptyPrinter" title="Permalink to this definition">¶</a></dt>
@@ -2287,7 +2338,7 @@ errors defaults to ‘strict’.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.str.StrReprPrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.str.</span></span><span class="sig-name descname"><span class="pre">StrReprPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/str.html#StrReprPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.str.StrReprPrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.str.StrPrinter" title="modelparameters.sympy.printing.str.StrPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.str.StrPrinter</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.str.StrPrinter" title="modelparameters.sympy.printing.str.StrPrinter"><code class="xref py py-class docutils literal notranslate"><span class="pre">StrPrinter</span></code></a></p>
 <p>(internal) – see sstrrepr</p>
 </dd></dl>
 
@@ -2317,11 +2368,11 @@ is returned in str form.</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.tableform">
-<span id="modelparameters-sympy-printing-tableform-module"></span><h2>modelparameters.sympy.printing.tableform module<a class="headerlink" href="#module-modelparameters.sympy.printing.tableform" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-tableform-module"></span><h2>modelparameters.sympy.printing.tableform module<a class="headerlink" href="#module-modelparameters.sympy.printing.tableform" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.tableform.TableForm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.tableform.</span></span><span class="sig-name descname"><span class="pre">TableForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwarg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/tableform.html#TableForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.tableform.TableForm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Create a nice table representation of data.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">TableForm</span>
@@ -2378,10 +2429,10 @@ format (ascii, latex, html, …).</p>
 
 </section>
 <section id="modelparameters-sympy-printing-theanocode-module">
-<h2>modelparameters.sympy.printing.theanocode module<a class="headerlink" href="#modelparameters-sympy-printing-theanocode-module" title="Permalink to this headline">¶</a></h2>
+<h2>modelparameters.sympy.printing.theanocode module<a class="headerlink" href="#modelparameters-sympy-printing-theanocode-module" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.printing.tree">
-<span id="modelparameters-sympy-printing-tree-module"></span><h2>modelparameters.sympy.printing.tree module<a class="headerlink" href="#module-modelparameters.sympy.printing.tree" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-tree-module"></span><h2>modelparameters.sympy.printing.tree module<a class="headerlink" href="#module-modelparameters.sympy.printing.tree" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.tree.pprint_nodes">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.tree.</span></span><span class="sig-name descname"><span class="pre">pprint_nodes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subtrees</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/tree.html#pprint_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.tree.pprint_nodes" title="Permalink to this definition">¶</a></dt>
@@ -2460,7 +2511,7 @@ format (ascii, latex, html, …).</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.printing" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.printing" title="Permalink to this heading">¶</a></h2>
 <p>Printing subsystem</p>
 </section>
 </section>
@@ -2478,33 +2529,268 @@ format (ascii, latex, html, …).</p>
 <li><a class="reference internal" href="#">modelparameters.sympy.printing package</a><ul>
 <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.ccode">modelparameters.sympy.printing.ccode module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.codeprinter">modelparameters.sympy.printing.codeprinter module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.conventions">modelparameters.sympy.printing.conventions module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.cxxcode">modelparameters.sympy.printing.cxxcode module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.defaults">modelparameters.sympy.printing.defaults module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.dot">modelparameters.sympy.printing.dot module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.fcode">modelparameters.sympy.printing.fcode module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.gtk">modelparameters.sympy.printing.gtk module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.jscode">modelparameters.sympy.printing.jscode module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.julia">modelparameters.sympy.printing.julia module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.lambdarepr">modelparameters.sympy.printing.lambdarepr module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.latex">modelparameters.sympy.printing.latex module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.llvmjitcode">modelparameters.sympy.printing.llvmjitcode module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.mathematica">modelparameters.sympy.printing.mathematica module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.mathml">modelparameters.sympy.printing.mathml module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.octave">modelparameters.sympy.printing.octave module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.precedence">modelparameters.sympy.printing.precedence module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.preview">modelparameters.sympy.printing.preview module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.printer">modelparameters.sympy.printing.printer module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.python">modelparameters.sympy.printing.python module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.rcode">modelparameters.sympy.printing.rcode module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.repr">modelparameters.sympy.printing.repr module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.rust">modelparameters.sympy.printing.rust module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.str">modelparameters.sympy.printing.str module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.tableform">modelparameters.sympy.printing.tableform module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.ccode">modelparameters.sympy.printing.ccode module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.ccode.C89CodePrinter"><code class="docutils literal notranslate"><span class="pre">C89CodePrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.ccode.C89CodePrinter.indent_code"><code class="docutils literal notranslate"><span class="pre">C89CodePrinter.indent_code()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.ccode.C89CodePrinter.language"><code class="docutils literal notranslate"><span class="pre">C89CodePrinter.language</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.ccode.C89CodePrinter.printmethod"><code class="docutils literal notranslate"><span class="pre">C89CodePrinter.printmethod</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.ccode.C89CodePrinter.reserved_words"><code class="docutils literal notranslate"><span class="pre">C89CodePrinter.reserved_words</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.ccode.C89CodePrinter.standard"><code class="docutils literal notranslate"><span class="pre">C89CodePrinter.standard</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.ccode.C99CodePrinter"><code class="docutils literal notranslate"><span class="pre">C99CodePrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.ccode.C99CodePrinter.reserved_words"><code class="docutils literal notranslate"><span class="pre">C99CodePrinter.reserved_words</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.ccode.C99CodePrinter.standard"><code class="docutils literal notranslate"><span class="pre">C99CodePrinter.standard</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.ccode.CCodePrinter"><code class="docutils literal notranslate"><span class="pre">CCodePrinter</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.ccode.ccode"><code class="docutils literal notranslate"><span class="pre">ccode()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.ccode.get_math_macros"><code class="docutils literal notranslate"><span class="pre">get_math_macros()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.ccode.print_ccode"><code class="docutils literal notranslate"><span class="pre">print_ccode()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.codeprinter">modelparameters.sympy.printing.codeprinter module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.AssignmentError"><code class="docutils literal notranslate"><span class="pre">AssignmentError</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter"><code class="docutils literal notranslate"><span class="pre">CodePrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.codeprinter.CodePrinter.doprint"><code class="docutils literal notranslate"><span class="pre">CodePrinter.doprint()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.conventions">modelparameters.sympy.printing.conventions module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.conventions.requires_partial"><code class="docutils literal notranslate"><span class="pre">requires_partial()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.conventions.split_super_sub"><code class="docutils literal notranslate"><span class="pre">split_super_sub()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.cxxcode">modelparameters.sympy.printing.cxxcode module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.cxxcode.CXX11CodePrinter"><code class="docutils literal notranslate"><span class="pre">CXX11CodePrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.cxxcode.CXX11CodePrinter.reserved_words"><code class="docutils literal notranslate"><span class="pre">CXX11CodePrinter.reserved_words</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.cxxcode.CXX11CodePrinter.standard"><code class="docutils literal notranslate"><span class="pre">CXX11CodePrinter.standard</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.cxxcode.CXX17CodePrinter"><code class="docutils literal notranslate"><span class="pre">CXX17CodePrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.cxxcode.CXX17CodePrinter.reserved_words"><code class="docutils literal notranslate"><span class="pre">CXX17CodePrinter.reserved_words</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.cxxcode.CXX17CodePrinter.standard"><code class="docutils literal notranslate"><span class="pre">CXX17CodePrinter.standard</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.cxxcode.CXX98CodePrinter"><code class="docutils literal notranslate"><span class="pre">CXX98CodePrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.cxxcode.CXX98CodePrinter.reserved_words"><code class="docutils literal notranslate"><span class="pre">CXX98CodePrinter.reserved_words</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.cxxcode.CXX98CodePrinter.standard"><code class="docutils literal notranslate"><span class="pre">CXX98CodePrinter.standard</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.cxxcode.cxxcode"><code class="docutils literal notranslate"><span class="pre">cxxcode()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.defaults">modelparameters.sympy.printing.defaults module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.defaults.DefaultPrinting"><code class="docutils literal notranslate"><span class="pre">DefaultPrinting</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.dot">modelparameters.sympy.printing.dot module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.dot.dotprint"><code class="docutils literal notranslate"><span class="pre">dotprint()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.fcode">modelparameters.sympy.printing.fcode module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.fcode.FCodePrinter"><code class="docutils literal notranslate"><span class="pre">FCodePrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.fcode.FCodePrinter.indent_code"><code class="docutils literal notranslate"><span class="pre">FCodePrinter.indent_code()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.fcode.FCodePrinter.language"><code class="docutils literal notranslate"><span class="pre">FCodePrinter.language</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.fcode.FCodePrinter.printmethod"><code class="docutils literal notranslate"><span class="pre">FCodePrinter.printmethod</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.fcode.fcode"><code class="docutils literal notranslate"><span class="pre">fcode()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.fcode.print_fcode"><code class="docutils literal notranslate"><span class="pre">print_fcode()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.gtk">modelparameters.sympy.printing.gtk module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.gtk.print_gtk"><code class="docutils literal notranslate"><span class="pre">print_gtk()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.jscode">modelparameters.sympy.printing.jscode module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.jscode.JavascriptCodePrinter"><code class="docutils literal notranslate"><span class="pre">JavascriptCodePrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.jscode.JavascriptCodePrinter.indent_code"><code class="docutils literal notranslate"><span class="pre">JavascriptCodePrinter.indent_code()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.jscode.JavascriptCodePrinter.language"><code class="docutils literal notranslate"><span class="pre">JavascriptCodePrinter.language</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.jscode.JavascriptCodePrinter.printmethod"><code class="docutils literal notranslate"><span class="pre">JavascriptCodePrinter.printmethod</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.jscode.jscode"><code class="docutils literal notranslate"><span class="pre">jscode()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.jscode.print_jscode"><code class="docutils literal notranslate"><span class="pre">print_jscode()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.julia">modelparameters.sympy.printing.julia module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.julia.JuliaCodePrinter"><code class="docutils literal notranslate"><span class="pre">JuliaCodePrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.julia.JuliaCodePrinter.indent_code"><code class="docutils literal notranslate"><span class="pre">JuliaCodePrinter.indent_code()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.julia.JuliaCodePrinter.language"><code class="docutils literal notranslate"><span class="pre">JuliaCodePrinter.language</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.julia.JuliaCodePrinter.printmethod"><code class="docutils literal notranslate"><span class="pre">JuliaCodePrinter.printmethod</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.julia.julia_code"><code class="docutils literal notranslate"><span class="pre">julia_code()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.julia.print_julia_code"><code class="docutils literal notranslate"><span class="pre">print_julia_code()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.lambdarepr">modelparameters.sympy.printing.lambdarepr module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.lambdarepr.LambdaPrinter"><code class="docutils literal notranslate"><span class="pre">LambdaPrinter</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.lambdarepr.MpmathPrinter"><code class="docutils literal notranslate"><span class="pre">MpmathPrinter</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.lambdarepr.NumExprPrinter"><code class="docutils literal notranslate"><span class="pre">NumExprPrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.lambdarepr.NumExprPrinter.blacklisted"><code class="docutils literal notranslate"><span class="pre">NumExprPrinter.blacklisted()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.lambdarepr.NumExprPrinter.doprint"><code class="docutils literal notranslate"><span class="pre">NumExprPrinter.doprint()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.lambdarepr.NumPyPrinter"><code class="docutils literal notranslate"><span class="pre">NumPyPrinter</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.lambdarepr.TensorflowPrinter"><code class="docutils literal notranslate"><span class="pre">TensorflowPrinter</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.lambdarepr.lambdarepr"><code class="docutils literal notranslate"><span class="pre">lambdarepr()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.latex">modelparameters.sympy.printing.latex module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.latex.LatexPrinter"><code class="docutils literal notranslate"><span class="pre">LatexPrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.latex.LatexPrinter.doprint"><code class="docutils literal notranslate"><span class="pre">LatexPrinter.doprint()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.latex.LatexPrinter.parenthesize"><code class="docutils literal notranslate"><span class="pre">LatexPrinter.parenthesize()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.latex.LatexPrinter.printmethod"><code class="docutils literal notranslate"><span class="pre">LatexPrinter.printmethod</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.latex.latex"><code class="docutils literal notranslate"><span class="pre">latex()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.latex.print_latex"><code class="docutils literal notranslate"><span class="pre">print_latex()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.latex.translate"><code class="docutils literal notranslate"><span class="pre">translate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.llvmjitcode">modelparameters.sympy.printing.llvmjitcode module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.llvmjitcode.CodeSignature"><code class="docutils literal notranslate"><span class="pre">CodeSignature</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.llvmjitcode.LLVMJitCallbackPrinter"><code class="docutils literal notranslate"><span class="pre">LLVMJitCallbackPrinter</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.llvmjitcode.LLVMJitCode"><code class="docutils literal notranslate"><span class="pre">LLVMJitCode</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.llvmjitcode.LLVMJitCodeCallback"><code class="docutils literal notranslate"><span class="pre">LLVMJitCodeCallback</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.llvmjitcode.LLVMJitPrinter"><code class="docutils literal notranslate"><span class="pre">LLVMJitPrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.llvmjitcode.LLVMJitPrinter.emptyPrinter"><code class="docutils literal notranslate"><span class="pre">LLVMJitPrinter.emptyPrinter()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.llvmjitcode.llvm_callable"><code class="docutils literal notranslate"><span class="pre">llvm_callable()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.mathematica">modelparameters.sympy.printing.mathematica module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.mathematica.MCodePrinter"><code class="docutils literal notranslate"><span class="pre">MCodePrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.mathematica.MCodePrinter.doprint"><code class="docutils literal notranslate"><span class="pre">MCodePrinter.doprint()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.mathematica.MCodePrinter.printmethod"><code class="docutils literal notranslate"><span class="pre">MCodePrinter.printmethod</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.mathematica.mathematica_code"><code class="docutils literal notranslate"><span class="pre">mathematica_code()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.mathml">modelparameters.sympy.printing.mathml module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.mathml.MathMLPrinter"><code class="docutils literal notranslate"><span class="pre">MathMLPrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.mathml.MathMLPrinter.apply_patch"><code class="docutils literal notranslate"><span class="pre">MathMLPrinter.apply_patch()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.mathml.MathMLPrinter.doprint"><code class="docutils literal notranslate"><span class="pre">MathMLPrinter.doprint()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.mathml.MathMLPrinter.mathml_tag"><code class="docutils literal notranslate"><span class="pre">MathMLPrinter.mathml_tag()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.mathml.MathMLPrinter.printmethod"><code class="docutils literal notranslate"><span class="pre">MathMLPrinter.printmethod</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.mathml.MathMLPrinter.restore_patch"><code class="docutils literal notranslate"><span class="pre">MathMLPrinter.restore_patch()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.mathml.mathml"><code class="docutils literal notranslate"><span class="pre">mathml()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.mathml.print_mathml"><code class="docutils literal notranslate"><span class="pre">print_mathml()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.octave">modelparameters.sympy.printing.octave module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.octave.OctaveCodePrinter"><code class="docutils literal notranslate"><span class="pre">OctaveCodePrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.octave.OctaveCodePrinter.indent_code"><code class="docutils literal notranslate"><span class="pre">OctaveCodePrinter.indent_code()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.octave.OctaveCodePrinter.language"><code class="docutils literal notranslate"><span class="pre">OctaveCodePrinter.language</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.octave.OctaveCodePrinter.printmethod"><code class="docutils literal notranslate"><span class="pre">OctaveCodePrinter.printmethod</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.octave.octave_code"><code class="docutils literal notranslate"><span class="pre">octave_code()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.octave.print_octave_code"><code class="docutils literal notranslate"><span class="pre">print_octave_code()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.precedence">modelparameters.sympy.printing.precedence module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.precedence.precedence"><code class="docutils literal notranslate"><span class="pre">precedence()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.precedence.precedence_Float"><code class="docutils literal notranslate"><span class="pre">precedence_Float()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.precedence.precedence_FracElement"><code class="docutils literal notranslate"><span class="pre">precedence_FracElement()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.precedence.precedence_Integer"><code class="docutils literal notranslate"><span class="pre">precedence_Integer()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.precedence.precedence_Mul"><code class="docutils literal notranslate"><span class="pre">precedence_Mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.precedence.precedence_PolyElement"><code class="docutils literal notranslate"><span class="pre">precedence_PolyElement()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.precedence.precedence_Rational"><code class="docutils literal notranslate"><span class="pre">precedence_Rational()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.precedence.precedence_UnevaluatedExpr"><code class="docutils literal notranslate"><span class="pre">precedence_UnevaluatedExpr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.precedence.precedence_traditional"><code class="docutils literal notranslate"><span class="pre">precedence_traditional()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.preview">modelparameters.sympy.printing.preview module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.preview.preview"><code class="docutils literal notranslate"><span class="pre">preview()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.printer">modelparameters.sympy.printing.printer module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.printer.Printer"><code class="docutils literal notranslate"><span class="pre">Printer</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.printer.Printer.doprint"><code class="docutils literal notranslate"><span class="pre">Printer.doprint()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.printer.Printer.emptyPrinter"><code class="docutils literal notranslate"><span class="pre">Printer.emptyPrinter</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.printer.Printer.order"><code class="docutils literal notranslate"><span class="pre">Printer.order</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.printer.Printer.printmethod"><code class="docutils literal notranslate"><span class="pre">Printer.printmethod</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.printer.Printer.set_global_settings"><code class="docutils literal notranslate"><span class="pre">Printer.set_global_settings()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.python">modelparameters.sympy.printing.python module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.python.PythonPrinter"><code class="docutils literal notranslate"><span class="pre">PythonPrinter</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.python.print_python"><code class="docutils literal notranslate"><span class="pre">print_python()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.python.python"><code class="docutils literal notranslate"><span class="pre">python()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.rcode">modelparameters.sympy.printing.rcode module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.rcode.RCodePrinter"><code class="docutils literal notranslate"><span class="pre">RCodePrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.rcode.RCodePrinter.indent_code"><code class="docutils literal notranslate"><span class="pre">RCodePrinter.indent_code()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.rcode.RCodePrinter.language"><code class="docutils literal notranslate"><span class="pre">RCodePrinter.language</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.rcode.RCodePrinter.printmethod"><code class="docutils literal notranslate"><span class="pre">RCodePrinter.printmethod</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.rcode.print_rcode"><code class="docutils literal notranslate"><span class="pre">print_rcode()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.rcode.rcode"><code class="docutils literal notranslate"><span class="pre">rcode()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.repr">modelparameters.sympy.printing.repr module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.repr.ReprPrinter"><code class="docutils literal notranslate"><span class="pre">ReprPrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.repr.ReprPrinter.emptyPrinter"><code class="docutils literal notranslate"><span class="pre">ReprPrinter.emptyPrinter()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.repr.ReprPrinter.printmethod"><code class="docutils literal notranslate"><span class="pre">ReprPrinter.printmethod</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.repr.ReprPrinter.reprify"><code class="docutils literal notranslate"><span class="pre">ReprPrinter.reprify()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.repr.srepr"><code class="docutils literal notranslate"><span class="pre">srepr()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.rust">modelparameters.sympy.printing.rust module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.rust.RustCodePrinter"><code class="docutils literal notranslate"><span class="pre">RustCodePrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.rust.RustCodePrinter.indent_code"><code class="docutils literal notranslate"><span class="pre">RustCodePrinter.indent_code()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.rust.RustCodePrinter.language"><code class="docutils literal notranslate"><span class="pre">RustCodePrinter.language</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.rust.RustCodePrinter.printmethod"><code class="docutils literal notranslate"><span class="pre">RustCodePrinter.printmethod</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.rust.print_rust_code"><code class="docutils literal notranslate"><span class="pre">print_rust_code()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.rust.rust_code"><code class="docutils literal notranslate"><span class="pre">rust_code()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.str">modelparameters.sympy.printing.str module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.str.StrPrinter"><code class="docutils literal notranslate"><span class="pre">StrPrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.str.StrPrinter.emptyPrinter"><code class="docutils literal notranslate"><span class="pre">StrPrinter.emptyPrinter()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.str.StrPrinter.parenthesize"><code class="docutils literal notranslate"><span class="pre">StrPrinter.parenthesize()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.str.StrPrinter.printmethod"><code class="docutils literal notranslate"><span class="pre">StrPrinter.printmethod</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.str.StrPrinter.stringify"><code class="docutils literal notranslate"><span class="pre">StrPrinter.stringify()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.str.StrReprPrinter"><code class="docutils literal notranslate"><span class="pre">StrReprPrinter</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.str.sstr"><code class="docutils literal notranslate"><span class="pre">sstr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.str.sstrrepr"><code class="docutils literal notranslate"><span class="pre">sstrrepr()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.tableform">modelparameters.sympy.printing.tableform module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.tableform.TableForm"><code class="docutils literal notranslate"><span class="pre">TableForm</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.tableform.TableForm.as_latex"><code class="docutils literal notranslate"><span class="pre">TableForm.as_latex()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.tableform.TableForm.as_matrix"><code class="docutils literal notranslate"><span class="pre">TableForm.as_matrix()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.tableform.TableForm.as_str"><code class="docutils literal notranslate"><span class="pre">TableForm.as_str()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#modelparameters-sympy-printing-theanocode-module">modelparameters.sympy.printing.theanocode module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.tree">modelparameters.sympy.printing.tree module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.tree">modelparameters.sympy.printing.tree module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.tree.pprint_nodes"><code class="docutils literal notranslate"><span class="pre">pprint_nodes()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.tree.print_node"><code class="docutils literal notranslate"><span class="pre">print_node()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.tree.print_tree"><code class="docutils literal notranslate"><span class="pre">print_tree()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.tree.tree"><code class="docutils literal notranslate"><span class="pre">tree()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.printing">Module contents</a></li>
 </ul>
 </li>
@@ -2537,7 +2823,7 @@ format (ascii, latex, html, …).</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2565,7 +2851,7 @@ format (ascii, latex, html, …).</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

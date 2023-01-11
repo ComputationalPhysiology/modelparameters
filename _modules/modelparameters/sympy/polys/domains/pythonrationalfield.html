@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -48,7 +47,7 @@
 
 <div class="viewcode-block" id="PythonRationalField"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonRationalField">[docs]</a><span class="nd">@public</span>
 <span class="k">class</span> <span class="nc">PythonRationalField</span><span class="p">(</span><span class="n">RationalField</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Rational field based on Python rational number type. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Rational field based on Python rational number type. &quot;&quot;&quot;</span>
 
     <span class="n">dtype</span> <span class="o">=</span> <span class="n">PythonRational</span>
     <span class="n">zero</span> <span class="o">=</span> <span class="n">dtype</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -59,16 +58,16 @@
         <span class="k">pass</span>
 
 <div class="viewcode-block" id="PythonRationalField.get_ring"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonRationalField.get_ring">[docs]</a>    <span class="k">def</span> <span class="nf">get_ring</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns ring associated with ``self``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns ring associated with ``self``. &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..domains</span> <span class="kn">import</span> <span class="n">PythonIntegerRing</span>
         <span class="k">return</span> <span class="n">PythonIntegerRing</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="PythonRationalField.to_sympy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonRationalField.to_sympy">[docs]</a>    <span class="k">def</span> <span class="nf">to_sympy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert `a` to a SymPy object. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert `a` to a SymPy object. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">SymPyRational</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">numerator</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">denominator</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PythonRationalField.from_sympy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonRationalField.from_sympy">[docs]</a>    <span class="k">def</span> <span class="nf">from_sympy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert SymPy&#39;s Rational to `dtype`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert SymPy&#39;s Rational to `dtype`. &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">is_Rational</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">PythonRational</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">p</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">q</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">a</span><span class="o">.</span><span class="n">is_Float</span><span class="p">:</span>
@@ -79,33 +78,33 @@
             <span class="k">raise</span> <span class="n">CoercionFailed</span><span class="p">(</span><span class="s2">&quot;expected `Rational` object, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">a</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PythonRationalField.from_ZZ_python"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonRationalField.from_ZZ_python">[docs]</a>    <span class="k">def</span> <span class="nf">from_ZZ_python</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a Python `int` object to `dtype`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a Python `int` object to `dtype`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">PythonRational</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PythonRationalField.from_QQ_python"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonRationalField.from_QQ_python">[docs]</a>    <span class="k">def</span> <span class="nf">from_QQ_python</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a Python `Fraction` object to `dtype`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a Python `Fraction` object to `dtype`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span></div>
 
 <div class="viewcode-block" id="PythonRationalField.from_ZZ_gmpy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonRationalField.from_ZZ_gmpy">[docs]</a>    <span class="k">def</span> <span class="nf">from_ZZ_gmpy</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a GMPY `mpz` object to `dtype`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a GMPY `mpz` object to `dtype`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">PythonRational</span><span class="p">(</span><span class="n">PythonInteger</span><span class="p">(</span><span class="n">a</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="PythonRationalField.from_QQ_gmpy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonRationalField.from_QQ_gmpy">[docs]</a>    <span class="k">def</span> <span class="nf">from_QQ_gmpy</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a GMPY `mpq` object to `dtype`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a GMPY `mpq` object to `dtype`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">PythonRational</span><span class="p">(</span><span class="n">PythonInteger</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">numer</span><span class="p">()),</span>
                               <span class="n">PythonInteger</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">denom</span><span class="p">()))</span></div>
 
 <div class="viewcode-block" id="PythonRationalField.from_RealField"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonRationalField.from_RealField">[docs]</a>    <span class="k">def</span> <span class="nf">from_RealField</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a mpmath `mpf` object to `dtype`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a mpmath `mpf` object to `dtype`. &quot;&quot;&quot;</span>
         <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">K0</span><span class="o">.</span><span class="n">to_rational</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">PythonRational</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">q</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="PythonRationalField.numer"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonRationalField.numer">[docs]</a>    <span class="k">def</span> <span class="nf">numer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns numerator of `a`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns numerator of `a`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">numerator</span></div>
 
 <div class="viewcode-block" id="PythonRationalField.denom"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonRationalField.denom">[docs]</a>    <span class="k">def</span> <span class="nf">denom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns denominator of `a`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns denominator of `a`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">denominator</span></div></div>
 </pre></div>
 
@@ -124,7 +123,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -145,7 +144,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

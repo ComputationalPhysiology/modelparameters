@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -260,7 +259,7 @@
 <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="p">(</span><span class="n">QQ</span><span class="p">,</span> <span class="n">quo</span><span class="p">,</span> <span class="n">rem</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">sign</span><span class="p">,</span> <span class="n">simplify</span><span class="p">,</span> <span class="n">summation</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">zeros</span><span class="p">)</span>
 
 <div class="viewcode-block" id="sylvester"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.sylvester">[docs]</a><span class="k">def</span> <span class="nf">sylvester</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">      The input polynomials f, g are in Z[x] or in Q[x].</span>
 <span class="sd">      Let mx = max( degree(f, x) , degree(g, x) ).</span>
 
@@ -365,7 +364,7 @@
         <span class="k">return</span> <span class="n">M</span></div>
 
 <div class="viewcode-block" id="sign_seq"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.sign_seq">[docs]</a><span class="k">def</span> <span class="nf">sign_seq</span><span class="p">(</span><span class="n">poly_seq</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given a sequence of polynomials poly_seq, it returns</span>
 <span class="sd">    the sequence of signs of the leading coefficients of</span>
 <span class="sd">    the polynomials in poly_seq.</span>
@@ -374,7 +373,7 @@
     <span class="k">return</span> <span class="p">[</span><span class="n">sign</span><span class="p">(</span><span class="n">LC</span><span class="p">(</span><span class="n">poly_seq</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x</span><span class="p">))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">poly_seq</span><span class="p">))]</span></div>
 
 <div class="viewcode-block" id="bezout"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.bezout">[docs]</a><span class="k">def</span> <span class="nf">bezout</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bz&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The input polynomials p, q are in Z[x] or in Q[x]. Let</span>
 <span class="sd">    mx = max( degree(p, x) , degree(q, x) ).</span>
 
@@ -457,7 +456,7 @@
     <span class="k">return</span> <span class="n">B</span></div>
 
 <div class="viewcode-block" id="backward_eye"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.backward_eye">[docs]</a><span class="k">def</span> <span class="nf">backward_eye</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Returns the backward identity matrix of dimensions n x n.</span>
 
 <span class="sd">    Needed to &quot;turn&quot; the Bezout matrices</span>
@@ -472,7 +471,7 @@
     <span class="k">return</span> <span class="n">M</span></div>
 
 <div class="viewcode-block" id="process_bezout_output"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.process_bezout_output">[docs]</a><span class="k">def</span> <span class="nf">process_bezout_output</span><span class="p">(</span><span class="n">poly_seq</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    poly_seq is a polynomial remainder sequence computed either by</span>
 <span class="sd">    subresultants_bezout or by modified_subresultants_bezout.</span>
 
@@ -499,7 +498,7 @@
     <span class="k">return</span> <span class="n">L</span></div>
 
 <div class="viewcode-block" id="subresultants_bezout"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.subresultants_bezout">[docs]</a><span class="k">def</span> <span class="nf">subresultants_bezout</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The input polynomials p, q are in Z[x] or in Q[x]. It is assumed</span>
 <span class="sd">    that degree(p, x) &gt;= degree(q, x).</span>
 
@@ -570,7 +569,7 @@
     <span class="k">return</span> <span class="n">process_bezout_output</span><span class="p">(</span><span class="n">SR_L</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="modified_subresultants_bezout"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.modified_subresultants_bezout">[docs]</a><span class="k">def</span> <span class="nf">modified_subresultants_bezout</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The input polynomials p, q are in Z[x] or in Q[x]. It is assumed</span>
 <span class="sd">    that degree(p, x) &gt;= degree(q, x).</span>
 
@@ -646,7 +645,7 @@
     <span class="k">return</span> <span class="n">process_bezout_output</span><span class="p">(</span><span class="n">SR_L</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="sturm_pg"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.sturm_pg">[docs]</a><span class="k">def</span> <span class="nf">sturm_pg</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    p, q are polynomials in Z[x] or Q[x]. It is assumed</span>
 <span class="sd">    that degree(p, x) &gt;= degree(q, x).</span>
 
@@ -774,7 +773,7 @@
     <span class="k">return</span> <span class="n">sturm_seq</span></div>
 
 <div class="viewcode-block" id="sturm_q"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.sturm_q">[docs]</a><span class="k">def</span> <span class="nf">sturm_q</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    p, q are polynomials in Z[x] or Q[x]. It is assumed</span>
 <span class="sd">    that degree(p, x) &gt;= degree(q, x).</span>
 
@@ -852,7 +851,7 @@
     <span class="k">return</span> <span class="n">sturm_seq</span></div>
 
 <div class="viewcode-block" id="sturm_amv"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.sturm_amv">[docs]</a><span class="k">def</span> <span class="nf">sturm_amv</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    p, q are polynomials in Z[x] or Q[x]. It is assumed</span>
 <span class="sd">    that degree(p, x) &gt;= degree(q, x).</span>
 
@@ -953,7 +952,7 @@
     <span class="k">return</span> <span class="n">sturm_seq</span></div>
 
 <div class="viewcode-block" id="euclid_pg"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.euclid_pg">[docs]</a><span class="k">def</span> <span class="nf">euclid_pg</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    p, q are polynomials in Z[x] or Q[x]. It is assumed</span>
 <span class="sd">    that degree(p, x) &gt;= degree(q, x).</span>
 
@@ -1028,7 +1027,7 @@
     <span class="k">return</span> <span class="n">euclid_seq</span></div>
 
 <div class="viewcode-block" id="euclid_q"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.euclid_q">[docs]</a><span class="k">def</span> <span class="nf">euclid_q</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    p, q are polynomials in Z[x] or Q[x]. It is assumed</span>
 <span class="sd">    that degree(p, x) &gt;= degree(q, x).</span>
 
@@ -1107,7 +1106,7 @@
     <span class="k">return</span> <span class="n">euclid_seq</span></div>
 
 <div class="viewcode-block" id="euclid_amv"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.euclid_amv">[docs]</a><span class="k">def</span> <span class="nf">euclid_amv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    f, g are polynomials in Z[x] or Q[x]. It is assumed</span>
 <span class="sd">    that degree(f, x) &gt;= degree(g, x).</span>
 
@@ -1186,7 +1185,7 @@
     <span class="k">return</span> <span class="n">euclid_seq</span></div>
 
 <div class="viewcode-block" id="modified_subresultants_pg"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.modified_subresultants_pg">[docs]</a><span class="k">def</span> <span class="nf">modified_subresultants_pg</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    p, q are polynomials in Z[x] or Q[x]. It is assumed</span>
 <span class="sd">    that degree(p, x) &gt;= degree(q, x).</span>
 
@@ -1370,7 +1369,7 @@
     <span class="k">return</span>  <span class="n">subres_l</span></div>
 
 <div class="viewcode-block" id="subresultants_pg"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.subresultants_pg">[docs]</a><span class="k">def</span> <span class="nf">subresultants_pg</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    p, q are polynomials in Z[x] or Q[x]. It is assumed</span>
 <span class="sd">    that degree(p, x) &gt;= degree(q, x).</span>
 
@@ -1435,7 +1434,7 @@
     <span class="k">return</span> <span class="n">subr_seq</span></div>
 
 <div class="viewcode-block" id="subresultants_amv_q"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.subresultants_amv_q">[docs]</a><span class="k">def</span> <span class="nf">subresultants_amv_q</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    p, q are polynomials in Z[x] or Q[x]. It is assumed</span>
 <span class="sd">    that degree(p, x) &gt;= degree(q, x).</span>
 
@@ -1540,7 +1539,7 @@
     <span class="k">return</span>  <span class="n">subres_l</span></div>
 
 <div class="viewcode-block" id="compute_sign"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.compute_sign">[docs]</a><span class="k">def</span> <span class="nf">compute_sign</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">expo</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    base != 0 and expo &gt;= 0 are integers;</span>
 
 <span class="sd">    returns the sign of base**expo without</span>
@@ -1556,7 +1555,7 @@
         <span class="k">return</span> <span class="n">sb</span></div>
 
 <div class="viewcode-block" id="rem_z"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.rem_z">[docs]</a><span class="k">def</span> <span class="nf">rem_z</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Intended mainly for p, q polynomials in Z[x] so that,</span>
 <span class="sd">    on dividing p by q, the remainder will also be in Z[x]. (However,</span>
 <span class="sd">    it also works fine for polynomials in Q[x].) It is assumed</span>
@@ -1592,7 +1591,7 @@
     <span class="k">return</span> <span class="n">rem</span><span class="p">(</span><span class="n">Abs</span><span class="p">(</span><span class="n">LC</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span><span class="o">**</span><span class="n">delta</span>  <span class="o">*</span>  <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="quo_z"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.quo_z">[docs]</a><span class="k">def</span> <span class="nf">quo_z</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Intended mainly for p, q polynomials in Z[x] so that,</span>
 <span class="sd">    on dividing p by q, the quotient will also be in Z[x]. (However,</span>
 <span class="sd">    it also works fine for polynomials in Q[x].) It is assumed</span>
@@ -1612,7 +1611,7 @@
     <span class="k">return</span> <span class="n">quo</span><span class="p">(</span><span class="n">Abs</span><span class="p">(</span><span class="n">LC</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span><span class="o">**</span><span class="n">delta</span>  <span class="o">*</span>  <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="subresultants_amv"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.subresultants_amv">[docs]</a><span class="k">def</span> <span class="nf">subresultants_amv</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    p, q are polynomials in Z[x] or Q[x]. It is assumed</span>
 <span class="sd">    that degree(f, x) &gt;= degree(g, x).</span>
 
@@ -1754,7 +1753,7 @@
     <span class="k">return</span> <span class="n">subres_l</span></div>
 
 <div class="viewcode-block" id="modified_subresultants_amv"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.modified_subresultants_amv">[docs]</a><span class="k">def</span> <span class="nf">modified_subresultants_amv</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    p, q are polynomials in Z[x] or Q[x]. It is assumed</span>
 <span class="sd">    that degree(p, x) &gt;= degree(q, x).</span>
 
@@ -1818,7 +1817,7 @@
     <span class="k">return</span> <span class="n">subr_seq</span></div>
 
 <div class="viewcode-block" id="correct_sign"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.correct_sign">[docs]</a><span class="k">def</span> <span class="nf">correct_sign</span><span class="p">(</span><span class="n">deg_f</span><span class="p">,</span> <span class="n">deg_g</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">rdel</span><span class="p">,</span> <span class="n">cdel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Used in various subresultant prs algorithms.</span>
 
 <span class="sd">    Evaluates the determinant, (a.k.a. subresultant) of a properly selected</span>
@@ -1863,7 +1862,7 @@
     <span class="k">return</span> <span class="n">Md</span><span class="o">.</span><span class="n">det</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="subresultants_rem"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.subresultants_rem">[docs]</a><span class="k">def</span> <span class="nf">subresultants_rem</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    p, q are polynomials in Z[x] or Q[x]. It is assumed</span>
 <span class="sd">    that degree(p, x) &gt;= degree(q, x).</span>
 
@@ -1936,7 +1935,7 @@
     <span class="k">return</span> <span class="n">sr_list</span></div>
 
 <div class="viewcode-block" id="pivot"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.pivot">[docs]</a><span class="k">def</span> <span class="nf">pivot</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    M is a matrix, and M[i, j] specifies the pivot element.</span>
 
 <span class="sd">    All elements below M[i, j], in the j-th column, will</span>
@@ -1965,7 +1964,7 @@
     <span class="k">return</span> <span class="n">ma</span></div>
 
 <div class="viewcode-block" id="rotate_r"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.rotate_r">[docs]</a><span class="k">def</span> <span class="nf">rotate_r</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Rotates right by k. L is a row of a matrix or a list.</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -1978,7 +1977,7 @@
     <span class="k">return</span> <span class="n">ll</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span> <span class="k">else</span> <span class="n">Matrix</span><span class="p">([</span><span class="n">ll</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="rotate_l"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.rotate_l">[docs]</a><span class="k">def</span> <span class="nf">rotate_l</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Rotates left by k. L is a row of a matrix or a list.</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -1991,7 +1990,7 @@
     <span class="k">return</span> <span class="n">ll</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">list</span> <span class="k">else</span> <span class="n">Matrix</span><span class="p">([</span><span class="n">ll</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="row2poly"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.row2poly">[docs]</a><span class="k">def</span> <span class="nf">row2poly</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Converts the row of a matrix to a poly of degree deg and variable x.</span>
 <span class="sd">    Some entries at the beginning and/or at the end of the row may be zero.</span>
 
@@ -2013,7 +2012,7 @@
     <span class="k">return</span> <span class="n">Poly</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="create_ma"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.create_ma">[docs]</a><span class="k">def</span> <span class="nf">create_ma</span><span class="p">(</span><span class="n">deg_f</span><span class="p">,</span> <span class="n">deg_g</span><span class="p">,</span> <span class="n">row1</span><span class="p">,</span> <span class="n">row2</span><span class="p">,</span> <span class="n">col_num</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Creates a ``small&#39;&#39; matrix M to be triangularized.</span>
 
 <span class="sd">    deg_f, deg_g are the degrees of the divident and of the</span>
@@ -2039,7 +2038,7 @@
     <span class="k">return</span> <span class="n">m</span></div>
 
 <div class="viewcode-block" id="find_degree"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.find_degree">[docs]</a><span class="k">def</span> <span class="nf">find_degree</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">deg_f</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Finds the degree of the poly corresponding (after triangularization)</span>
 <span class="sd">    to the _last_ row of the ``small&#39;&#39; matrix M, created by create_ma().</span>
 
@@ -2055,7 +2054,7 @@
             <span class="k">return</span> <span class="n">j</span> <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span></div>
 
 <div class="viewcode-block" id="final_touches"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.final_touches">[docs]</a><span class="k">def</span> <span class="nf">final_touches</span><span class="p">(</span><span class="n">s2</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">deg_g</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    s2 is sylvester2, r is the row pointer in s2,</span>
 <span class="sd">    deg_g is the degree of the poly last inserted in s2.</span>
 
@@ -2088,7 +2087,7 @@
     <span class="k">return</span> <span class="n">s2</span></div>
 
 <div class="viewcode-block" id="subresultants_vv"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.subresultants_vv">[docs]</a><span class="k">def</span> <span class="nf">subresultants_vv</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    p, q are polynomials in Z[x] (intended) or Q[x]. It is assumed</span>
 <span class="sd">    that degree(p, x) &gt;= degree(q, x).</span>
 
@@ -2234,7 +2233,7 @@
     <span class="k">return</span> <span class="n">sr_list</span></div>
 
 <div class="viewcode-block" id="subresultants_vv_2"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.subresultants_qq_zz.subresultants_vv_2">[docs]</a><span class="k">def</span> <span class="nf">subresultants_vv_2</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    p, q are polynomials in Z[x] (intended) or Q[x]. It is assumed</span>
 <span class="sd">    that degree(p, x) &gt;= degree(q, x).</span>
 
@@ -2352,7 +2351,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2373,7 +2372,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

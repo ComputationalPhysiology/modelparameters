@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -82,7 +81,7 @@
 
 
 <div class="viewcode-block" id="JuliaCodePrinter"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.julia.JuliaCodePrinter">[docs]</a><span class="k">class</span> <span class="nc">JuliaCodePrinter</span><span class="p">(</span><span class="n">CodePrinter</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A printer to convert expressions to strings of Julia code.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">printmethod</span> <span class="o">=</span> <span class="s2">&quot;_julia&quot;</span>
@@ -492,7 +491,7 @@
 
 
 <div class="viewcode-block" id="JuliaCodePrinter.indent_code"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.julia.JuliaCodePrinter.indent_code">[docs]</a>    <span class="k">def</span> <span class="nf">indent_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Accepts a string of code or a list of code lines&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Accepts a string of code or a list of code lines&quot;&quot;&quot;</span>
 
         <span class="c1"># code mostly copied from ccode</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
@@ -524,7 +523,7 @@
 
 
 <div class="viewcode-block" id="julia_code"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.julia.julia_code">[docs]</a><span class="k">def</span> <span class="nf">julia_code</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assign_to</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Converts `expr` to a string of Julia code.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Converts `expr` to a string of Julia code.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ==========</span>
@@ -661,7 +660,7 @@
 
 
 <div class="viewcode-block" id="print_julia_code"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.julia.print_julia_code">[docs]</a><span class="k">def</span> <span class="nf">print_julia_code</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Prints the Julia representation of the given expression.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prints the Julia representation of the given expression.</span>
 
 <span class="sd">    See `julia_code` for the meaning of the optional arguments.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -683,7 +682,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -704,7 +703,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

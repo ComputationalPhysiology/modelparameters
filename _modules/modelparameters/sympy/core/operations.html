@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -47,7 +46,7 @@
 
 
 <div class="viewcode-block" id="AssocOp"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.operations.AssocOp">[docs]</a><span class="k">class</span> <span class="nc">AssocOp</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Associative operations, can separate noncommutative and</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Associative operations, can separate noncommutative and</span>
 <span class="sd">    commutative parts.</span>
 
 <span class="sd">    (a op b) op c == a op (b op c) == a op b op c.</span>
@@ -87,7 +86,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_from_args</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">is_commutative</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create new instance with already-processed args&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create new instance with already-processed args&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">identity</span>
         <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -100,7 +99,7 @@
         <span class="k">return</span> <span class="n">obj</span>
 
     <span class="k">def</span> <span class="nf">_new_rawargs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create new instance of own class with args exactly as provided by</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create new instance of own class with args exactly as provided by</span>
 <span class="sd">        caller but returning the self class identity if args is empty.</span>
 
 <span class="sd">           This is handy when we want to optimize things, e.g.</span>
@@ -149,7 +148,7 @@
 
 <div class="viewcode-block" id="AssocOp.flatten"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.operations.AssocOp.flatten">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">seq</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return seq so that none of the elements are of type `cls`. This is</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return seq so that none of the elements are of type `cls`. This is</span>
 <span class="sd">        the vanilla routine that will be used if a class derived from AssocOp</span>
 <span class="sd">        does not define its own flatten routine.&quot;&quot;&quot;</span>
         <span class="c1"># apply associativity, no commutativity property is used</span>
@@ -164,7 +163,7 @@
         <span class="k">return</span> <span class="p">[],</span> <span class="n">new_seq</span><span class="p">,</span> <span class="kc">None</span></div>
 
     <span class="k">def</span> <span class="nf">_matches_commutative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">repl_dict</span><span class="o">=</span><span class="p">{},</span> <span class="n">old</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Matches Add/Mul &quot;pattern&quot; to an expression &quot;expr&quot;.</span>
 
 <span class="sd">        repl_dict ... a dictionary of (wild: expression) pairs, that get</span>
@@ -298,7 +297,7 @@
         <span class="k">return</span>
 
     <span class="k">def</span> <span class="nf">_has_matcher</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Helper for .has()&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper for .has()&quot;&quot;&quot;</span>
         <span class="k">def</span> <span class="nf">_ncsplit</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
             <span class="c1"># this is not the same as args_cnc because here</span>
             <span class="c1"># we don&#39;t assume expr is a Mul -- hence deal with args --</span>
@@ -332,7 +331,7 @@
         <span class="k">return</span> <span class="n">is_in</span>
 
     <span class="k">def</span> <span class="nf">_eval_evalf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Evaluate the parts of self that are numbers; if the whole thing</span>
 <span class="sd">        was a number with no functions it would have been evaluated, but</span>
 <span class="sd">        it wasn&#39;t so we must judiciously extract the numbers and reconstruct</span>
@@ -389,7 +388,7 @@
 
 <div class="viewcode-block" id="AssocOp.make_args"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.operations.AssocOp.make_args">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">make_args</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a sequence of elements `args` such that cls(*args) == expr</span>
 
 <span class="sd">        &gt;&gt;&gt; from .. import Symbol, Mul, Add</span>
@@ -414,7 +413,7 @@
 
 
 <div class="viewcode-block" id="LatticeOp"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.operations.LatticeOp">[docs]</a><span class="k">class</span> <span class="nc">LatticeOp</span><span class="p">(</span><span class="n">AssocOp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Join/meet operations of an algebraic lattice[1].</span>
 
 <span class="sd">    These binary operations are associative (op(op(a, b), c) = op(a, op(b, c))),</span>
@@ -466,7 +465,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_new_args_filter</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">arg_sequence</span><span class="p">,</span> <span class="n">call_cls</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generator filtering args&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generator filtering args&quot;&quot;&quot;</span>
         <span class="n">ncls</span> <span class="o">=</span> <span class="n">call_cls</span> <span class="ow">or</span> <span class="bp">cls</span>
         <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">arg_sequence</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">arg</span> <span class="o">==</span> <span class="n">ncls</span><span class="o">.</span><span class="n">zero</span><span class="p">:</span>
@@ -481,7 +480,7 @@
 
 <div class="viewcode-block" id="LatticeOp.make_args"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.operations.LatticeOp.make_args">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">make_args</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a set of args such that cls(*arg_set) == expr.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
@@ -514,7 +513,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -535,7 +534,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -55,7 +54,7 @@
 
 
 <div class="viewcode-block" id="fourier_cos_seq"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.fourier.fourier_cos_seq">[docs]</a><span class="k">def</span> <span class="nf">fourier_cos_seq</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the cos sequence in a Fourier series&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the cos sequence in a Fourier series&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..integrals</span> <span class="kn">import</span> <span class="n">integrate</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">limits</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">cos_term</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
@@ -66,7 +65,7 @@
 
 
 <div class="viewcode-block" id="fourier_sin_seq"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.fourier.fourier_sin_seq">[docs]</a><span class="k">def</span> <span class="nf">fourier_sin_seq</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the sin sequence in a Fourier series&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the sin sequence in a Fourier series&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..integrals</span> <span class="kn">import</span> <span class="n">integrate</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">L</span> <span class="o">=</span> <span class="n">limits</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">limits</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">sin_term</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">x</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
@@ -75,7 +74,7 @@
 
 
 <span class="k">def</span> <span class="nf">_process_limits</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">limits</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Limits should be of the form (x, start, stop).</span>
 <span class="sd">    x should be a symbol. Both start and stop should be bounded.</span>
 
@@ -129,7 +128,7 @@
 
 
 <div class="viewcode-block" id="FourierSeries"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.fourier.FourierSeries">[docs]</a><span class="k">class</span> <span class="nc">FourierSeries</span><span class="p">(</span><span class="n">SeriesBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents Fourier sine/cosine series.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents Fourier sine/cosine series.</span>
 
 <span class="sd">    This class only represents a fourier series.</span>
 <span class="sd">    No computation is performed.</span>
@@ -192,7 +191,7 @@
             <span class="k">return</span> <span class="bp">self</span>
 
 <div class="viewcode-block" id="FourierSeries.truncate"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.fourier.FourierSeries.truncate">[docs]</a>    <span class="k">def</span> <span class="nf">truncate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the first n nonzero terms of the series.</span>
 
 <span class="sd">        If n is None return an iterator.</span>
@@ -234,7 +233,7 @@
         <span class="k">return</span> <span class="n">Add</span><span class="p">(</span><span class="o">*</span><span class="n">terms</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="FourierSeries.sigma_approximation"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.fourier.FourierSeries.sigma_approximation">[docs]</a>    <span class="k">def</span> <span class="nf">sigma_approximation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return :math:`\sigma`-approximation of Fourier series with respect</span>
 <span class="sd">        to order n.</span>
 
@@ -299,7 +298,7 @@
         <span class="k">return</span> <span class="n">Add</span><span class="p">(</span><span class="o">*</span><span class="n">terms</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="FourierSeries.shift"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.fourier.FourierSeries.shift">[docs]</a>    <span class="k">def</span> <span class="nf">shift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Shift the function by a term independent of x.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Shift the function by a term independent of x.</span>
 
 <span class="sd">        f(x) -&gt; f(x) + s</span>
 
@@ -326,7 +325,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">sfunc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="n">a0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">an</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bn</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="FourierSeries.shiftx"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.fourier.FourierSeries.shiftx">[docs]</a>    <span class="k">def</span> <span class="nf">shiftx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Shift x by a term independent of x.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Shift x by a term independent of x.</span>
 
 <span class="sd">        f(x) -&gt; f(x + s)</span>
 
@@ -354,7 +353,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">sfunc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">a0</span><span class="p">,</span> <span class="n">an</span><span class="p">,</span> <span class="n">bn</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="FourierSeries.scale"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.fourier.FourierSeries.scale">[docs]</a>    <span class="k">def</span> <span class="nf">scale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Scale the function by a term independent of x.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Scale the function by a term independent of x.</span>
 
 <span class="sd">        f(x) -&gt; s * f(x)</span>
 
@@ -383,7 +382,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">sfunc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">(</span><span class="n">a0</span><span class="p">,</span> <span class="n">an</span><span class="p">,</span> <span class="n">bn</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="FourierSeries.scalex"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.fourier.FourierSeries.scalex">[docs]</a>    <span class="k">def</span> <span class="nf">scalex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Scale x by a term independent of x.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Scale x by a term independent of x.</span>
 
 <span class="sd">        f(x) -&gt; f(s*x)</span>
 
@@ -447,7 +446,7 @@
 
 
 <div class="viewcode-block" id="fourier_series"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.fourier.fourier_series">[docs]</a><span class="k">def</span> <span class="nf">fourier_series</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Computes Fourier sine/cosine series expansion.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes Fourier sine/cosine series expansion.</span>
 
 <span class="sd">    Returns a :class:`FourierSeries` object.</span>
 
@@ -539,7 +538,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -560,7 +559,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

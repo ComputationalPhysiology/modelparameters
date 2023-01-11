@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>modelparameters.sympy.printing.pretty package &#8212; modelparameters 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="modelparameters.sympy.sandbox package" href="modelparameters.sympy.sandbox.html" />
@@ -47,16 +46,16 @@
           <div class="body" role="main">
             
   <section id="modelparameters-sympy-printing-pretty-package">
-<h1>modelparameters.sympy.printing.pretty package<a class="headerlink" href="#modelparameters-sympy-printing-pretty-package" title="Permalink to this headline">¶</a></h1>
+<h1>modelparameters.sympy.printing.pretty package<a class="headerlink" href="#modelparameters-sympy-printing-pretty-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.printing.pretty.pretty">
-<span id="modelparameters-sympy-printing-pretty-pretty-module"></span><h2>modelparameters.sympy.printing.pretty.pretty module<a class="headerlink" href="#module-modelparameters.sympy.printing.pretty.pretty" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-pretty-pretty-module"></span><h2>modelparameters.sympy.printing.pretty.pretty module<a class="headerlink" href="#module-modelparameters.sympy.printing.pretty.pretty" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.pretty.pretty.PrettyPrinter">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.pretty.pretty.</span></span><span class="sig-name descname"><span class="pre">PrettyPrinter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/pretty/pretty.html#PrettyPrinter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.pretty.pretty.PrettyPrinter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.printing.html#modelparameters.sympy.printing.printer.Printer" title="modelparameters.sympy.printing.printer.Printer"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.printer.Printer</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.printing.html#modelparameters.sympy.printing.printer.Printer" title="modelparameters.sympy.printing.printer.Printer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Printer</span></code></a></p>
 <p>Printer, which converts an expression into 2D ASCII-art figure.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.pretty.pretty.PrettyPrinter.doprint">
@@ -93,17 +92,17 @@ pass <code class="docutils literal notranslate"><span class="pre">num_columns=No
 <dd><p>Prints expr in pretty form.</p>
 <p>pprint is just a shortcut for this function.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<em>expression</em>) – the expression to print</p></li>
-<li><p><strong>wrap_line</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – line wrapping enabled/disabled, defaults to True</p></li>
-<li><p><strong>num_columns</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – number of columns before line breaking (default to None which reads
+<li><p><strong>wrap_line</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – line wrapping enabled/disabled, defaults to True</p></li>
+<li><p><strong>num_columns</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – number of columns before line breaking (default to None which reads
 the terminal width), useful when using SymPy without terminal.</p></li>
-<li><p><strong>use_unicode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – use unicode characters, such as the Greek letter pi instead of
+<li><p><strong>use_unicode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – use unicode characters, such as the Greek letter pi instead of
 the string pi.</p></li>
-<li><p><strong>full_prec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em> or </em><em>string</em><em>, </em><em>optional</em>) – use full precision. Default to “auto”</p></li>
-<li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em> or </em><em>string</em><em>, </em><em>optional</em>) – set to ‘none’ for long expressions if slow; default is None</p></li>
-<li><p><strong>use_unicode_sqrt_char</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – use compact single-character square root symbol (when unambiguous);
+<li><p><strong>full_prec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em> or </em><em>string</em><em>, </em><em>optional</em>) – use full precision. Default to “auto”</p></li>
+<li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em> or </em><em>string</em><em>, </em><em>optional</em>) – set to ‘none’ for long expressions if slow; default is None</p></li>
+<li><p><strong>use_unicode_sqrt_char</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – use compact single-character square root symbol (when unambiguous);
 default is True.</p></li>
 </ul>
 </dd>
@@ -123,17 +122,17 @@ default is True.</p></li>
 <dd><p>Prints expr in pretty form.</p>
 <p>pprint is just a shortcut for this function.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<em>expression</em>) – the expression to print</p></li>
-<li><p><strong>wrap_line</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – line wrapping enabled/disabled, defaults to True</p></li>
-<li><p><strong>num_columns</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – number of columns before line breaking (default to None which reads
+<li><p><strong>wrap_line</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – line wrapping enabled/disabled, defaults to True</p></li>
+<li><p><strong>num_columns</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – number of columns before line breaking (default to None which reads
 the terminal width), useful when using SymPy without terminal.</p></li>
-<li><p><strong>use_unicode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – use unicode characters, such as the Greek letter pi instead of
+<li><p><strong>use_unicode</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em> or </em><em>None</em><em>, </em><em>optional</em>) – use unicode characters, such as the Greek letter pi instead of
 the string pi.</p></li>
-<li><p><strong>full_prec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em> or </em><em>string</em><em>, </em><em>optional</em>) – use full precision. Default to “auto”</p></li>
-<li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em> or </em><em>string</em><em>, </em><em>optional</em>) – set to ‘none’ for long expressions if slow; default is None</p></li>
-<li><p><strong>use_unicode_sqrt_char</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a><em>, </em><em>optional</em>) – use compact single-character square root symbol (when unambiguous);
+<li><p><strong>full_prec</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em> or </em><em>string</em><em>, </em><em>optional</em>) – use full precision. Default to “auto”</p></li>
+<li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em> or </em><em>string</em><em>, </em><em>optional</em>) – set to ‘none’ for long expressions if slow; default is None</p></li>
+<li><p><strong>use_unicode_sqrt_char</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a><em>, </em><em>optional</em>) – use compact single-character square root symbol (when unambiguous);
 default is True.</p></li>
 </ul>
 </dd>
@@ -142,7 +141,7 @@ default is True.</p></li>
 
 </section>
 <section id="module-modelparameters.sympy.printing.pretty.pretty_symbology">
-<span id="modelparameters-sympy-printing-pretty-pretty-symbology-module"></span><h2>modelparameters.sympy.printing.pretty.pretty_symbology module<a class="headerlink" href="#module-modelparameters.sympy.printing.pretty.pretty_symbology" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-pretty-pretty-symbology-module"></span><h2>modelparameters.sympy.printing.pretty.pretty_symbology module<a class="headerlink" href="#module-modelparameters.sympy.printing.pretty.pretty_symbology" title="Permalink to this heading">¶</a></h2>
 <p>Symbolic primitives + unicode/ASCII abstraction for pretty.py</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.pretty.pretty_symbology.annotated">
@@ -182,7 +181,7 @@ information.</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.pretty.stringpict">
-<span id="modelparameters-sympy-printing-pretty-stringpict-module"></span><h2>modelparameters.sympy.printing.pretty.stringpict module<a class="headerlink" href="#module-modelparameters.sympy.printing.pretty.stringpict" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-printing-pretty-stringpict-module"></span><h2>modelparameters.sympy.printing.pretty.stringpict module<a class="headerlink" href="#module-modelparameters.sympy.printing.pretty.stringpict" title="Permalink to this heading">¶</a></h2>
 <p>Prettyprinter by Jurjen Bos.
 (I hate spammers: mail me at pietjepuk314 at the reverse of ku.oc.oohay).
 All objects have a method that create a “stringPict”,
@@ -197,7 +196,7 @@ that can be used in the str method for pretty printing.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.pretty.stringpict.prettyForm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.pretty.stringpict.</span></span><span class="sig-name descname"><span class="pre">prettyForm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">binding</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unicode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/pretty/stringpict.html#prettyForm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.pretty.stringpict.prettyForm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict" title="modelparameters.sympy.printing.pretty.stringpict.stringPict"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.printing.pretty.stringpict.stringPict</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict" title="modelparameters.sympy.printing.pretty.stringpict.stringPict"><code class="xref py py-class docutils literal notranslate"><span class="pre">stringPict</span></code></a></p>
 <p>Extension of the stringPict class that knows about basic math applications,
 optimizing double minus signs.</p>
 <p>“Binding” is interpreted as follows:</p>
@@ -269,7 +268,7 @@ OPEN this is an open object: parenthesize if added, multiplied, or
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.printing.pretty.stringpict.stringPict">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.printing.pretty.stringpict.</span></span><span class="sig-name descname"><span class="pre">stringPict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">baseline</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/printing/pretty/stringpict.html#stringPict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>An ASCII picture.
 The pictures are represented as a list of equal length strings.</p>
 <dl class="py attribute">
@@ -403,7 +402,7 @@ The special value stringPict.LINE is a row of ‘-’ extended to the width.</p>
 
 </section>
 <section id="module-modelparameters.sympy.printing.pretty">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.printing.pretty" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.printing.pretty" title="Permalink to this heading">¶</a></h2>
 <p>ASCII-ART 2D pretty-printer</p>
 </section>
 </section>
@@ -420,9 +419,61 @@ The special value stringPict.LINE is a row of ‘-’ extended to the width.</p>
     <ul>
 <li><a class="reference internal" href="#">modelparameters.sympy.printing.pretty package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.pretty.pretty">modelparameters.sympy.printing.pretty.pretty module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.pretty.pretty_symbology">modelparameters.sympy.printing.pretty.pretty_symbology module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.printing.pretty.stringpict">modelparameters.sympy.printing.pretty.stringpict module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.pretty.pretty">modelparameters.sympy.printing.pretty.pretty module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.pretty.PrettyPrinter"><code class="docutils literal notranslate"><span class="pre">PrettyPrinter</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.pretty.PrettyPrinter.doprint"><code class="docutils literal notranslate"><span class="pre">PrettyPrinter.doprint()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.pretty.PrettyPrinter.join"><code class="docutils literal notranslate"><span class="pre">PrettyPrinter.join()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.pretty.PrettyPrinter.printmethod"><code class="docutils literal notranslate"><span class="pre">PrettyPrinter.printmethod</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.pretty.pager_print"><code class="docutils literal notranslate"><span class="pre">pager_print()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.pretty.pprint"><code class="docutils literal notranslate"><span class="pre">pprint()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.pretty.pretty"><code class="docutils literal notranslate"><span class="pre">pretty()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.pretty.pretty_print"><code class="docutils literal notranslate"><span class="pre">pretty_print()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.pretty.pretty_symbology">modelparameters.sympy.printing.pretty.pretty_symbology module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.pretty_symbology.annotated"><code class="docutils literal notranslate"><span class="pre">annotated()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.pretty_symbology.hobj"><code class="docutils literal notranslate"><span class="pre">hobj()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.pretty_symbology.pretty_symbol"><code class="docutils literal notranslate"><span class="pre">pretty_symbol()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.pretty_symbology.vobj"><code class="docutils literal notranslate"><span class="pre">vobj()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.pretty_symbology.xsym"><code class="docutils literal notranslate"><span class="pre">xsym()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.printing.pretty.stringpict">modelparameters.sympy.printing.pretty.stringpict module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.prettyForm"><code class="docutils literal notranslate"><span class="pre">prettyForm</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.prettyForm.ADD"><code class="docutils literal notranslate"><span class="pre">prettyForm.ADD</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.prettyForm.ATOM"><code class="docutils literal notranslate"><span class="pre">prettyForm.ATOM</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.prettyForm.DIV"><code class="docutils literal notranslate"><span class="pre">prettyForm.DIV</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.prettyForm.FUNC"><code class="docutils literal notranslate"><span class="pre">prettyForm.FUNC</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.prettyForm.MUL"><code class="docutils literal notranslate"><span class="pre">prettyForm.MUL</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.prettyForm.NEG"><code class="docutils literal notranslate"><span class="pre">prettyForm.NEG</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.prettyForm.OPEN"><code class="docutils literal notranslate"><span class="pre">prettyForm.OPEN</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.prettyForm.POW"><code class="docutils literal notranslate"><span class="pre">prettyForm.POW</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.prettyForm.apply"><code class="docutils literal notranslate"><span class="pre">prettyForm.apply()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.prettyForm.simpleFunctions"><code class="docutils literal notranslate"><span class="pre">prettyForm.simpleFunctions</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict"><code class="docutils literal notranslate"><span class="pre">stringPict</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict.LINE"><code class="docutils literal notranslate"><span class="pre">stringPict.LINE</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict.above"><code class="docutils literal notranslate"><span class="pre">stringPict.above()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict.below"><code class="docutils literal notranslate"><span class="pre">stringPict.below()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict.equalLengths"><code class="docutils literal notranslate"><span class="pre">stringPict.equalLengths()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict.height"><code class="docutils literal notranslate"><span class="pre">stringPict.height()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict.left"><code class="docutils literal notranslate"><span class="pre">stringPict.left()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict.leftslash"><code class="docutils literal notranslate"><span class="pre">stringPict.leftslash()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict.next"><code class="docutils literal notranslate"><span class="pre">stringPict.next()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict.parens"><code class="docutils literal notranslate"><span class="pre">stringPict.parens()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict.render"><code class="docutils literal notranslate"><span class="pre">stringPict.render()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict.right"><code class="docutils literal notranslate"><span class="pre">stringPict.right()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict.root"><code class="docutils literal notranslate"><span class="pre">stringPict.root()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict.stack"><code class="docutils literal notranslate"><span class="pre">stringPict.stack()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict.terminal_width"><code class="docutils literal notranslate"><span class="pre">stringPict.terminal_width()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.printing.pretty.stringpict.stringPict.width"><code class="docutils literal notranslate"><span class="pre">stringPict.width()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.printing.pretty">Module contents</a></li>
 </ul>
 </li>
@@ -455,7 +506,7 @@ The special value stringPict.LINE is a row of ‘-’ extended to the width.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -484,7 +535,7 @@ The special value stringPict.LINE is a row of ‘-’ extended to the width.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

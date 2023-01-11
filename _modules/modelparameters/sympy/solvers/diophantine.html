@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -131,7 +130,7 @@
 
 
 <div class="viewcode-block" id="diophantine"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.diophantine.diophantine">[docs]</a><span class="k">def</span> <span class="nf">diophantine</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">syms</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">permute</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Simplify the solution procedure of diophantine equation ``eq`` by</span>
 <span class="sd">    converting it into a product of terms which should equal zero.</span>
 
@@ -230,7 +229,7 @@
     <span class="k">except</span> <span class="p">(</span><span class="n">GeneratorsNeeded</span><span class="p">,</span> <span class="ne">AssertionError</span><span class="p">,</span> <span class="ne">AttributeError</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
             <span class="n">filldedent</span><span class="p">(</span>
-                <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Equation should be a polynomial with Rational coefficients.&quot;&quot;&quot;</span>
             <span class="p">)</span>
         <span class="p">)</span>
@@ -385,7 +384,7 @@
 
 
 <span class="k">def</span> <span class="nf">merge_solution</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">var_t</span><span class="p">,</span> <span class="n">solution</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This is used to construct the full solution from the solutions of sub</span>
 <span class="sd">    equations.</span>
 
@@ -417,7 +416,7 @@
 
 
 <span class="k">def</span> <span class="nf">diop_solve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves the diophantine equation ``eq``.</span>
 
 <span class="sd">    Unlike ``diophantine()``, factoring of ``eq`` is not attempted. Uses</span>
@@ -492,7 +491,7 @@
     <span class="k">if</span> <span class="n">eq_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">eq_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">diop_known</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="n">filldedent</span><span class="p">(</span>
-                <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Alhough this type of equation was identified, it is not yet</span>
 <span class="sd">    handled. It should, however, be listed in `diop_known` at the</span>
 <span class="sd">    top of this file. Developers should see comments at the end of</span>
@@ -582,7 +581,7 @@
     <span class="c1">#  * it should be passed to that handler in diop_solve</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
         <span class="n">filldedent</span><span class="p">(</span>
-            <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This equation is not yet recognized or else has not been</span>
 <span class="sd">        simplified sufficiently to put it in a form recognized by</span>
 <span class="sd">        diop_classify().&quot;&quot;&quot;</span>
@@ -599,7 +598,7 @@
 <span class="s2">    as a dict with the key being the respective term and the constant</span>
 <span class="s2">    term is keyed to 1. The type is one of the following:</span>
 
-<span class="s2">    * </span><span class="si">%s</span><span class="s2"></span>
+<span class="s2">    * </span><span class="si">%s</span>
 
 <span class="s2">    Usage</span>
 <span class="s2">    =====</span>
@@ -631,7 +630,7 @@
 
 
 <span class="k">def</span> <span class="nf">diop_linear</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves linear diophantine equations.</span>
 
 <span class="sd">    A linear diophantine equation is an equation of the form `a_{1}x_{1} +</span>
@@ -679,7 +678,7 @@
 
 
 <span class="k">def</span> <span class="nf">_diop_linear</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves diophantine equations of the form:</span>
 
 <span class="sd">    a_0*x_0 + a_1*x_1 + ... + a_n*x_n == c</span>
@@ -708,7 +707,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">(</span><span class="kc">None</span><span class="p">,)</span>
 
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    base_solution_linear() can solve diophantine equations of the form:</span>
 
 <span class="sd">    a*x + b*y == c</span>
@@ -763,7 +762,7 @@
             <span class="n">B</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">gcd</span><span class="p">)</span>
     <span class="n">B</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Consider the trivariate linear equation:</span>
 
 <span class="sd">    4*x_0 + 6*x_1 + 3*x_2 == 2</span>
@@ -856,7 +855,7 @@
 
 
 <span class="k">def</span> <span class="nf">base_solution_linear</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the base solution for the linear equation, `ax + by = c`.</span>
 
 <span class="sd">    Used by ``diop_linear()`` to find the base solution of a linear</span>
@@ -910,14 +909,14 @@
 
 
 <span class="k">def</span> <span class="nf">divisible</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns `True` if ``a`` is divisible by ``b`` and `False` otherwise.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="ow">not</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
 
 
 <span class="k">def</span> <span class="nf">diop_quadratic</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves quadratic diophantine equations.</span>
 
 <span class="sd">    i.e. equations of the form `Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0`. Returns a</span>
@@ -1157,7 +1156,7 @@
 
 
 <span class="k">def</span> <span class="nf">is_solution_quad</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check whether `(u, v)` is solution to the quadratic binary diophantine</span>
 <span class="sd">    equation with the variable list ``var`` and coefficient dictionary</span>
 <span class="sd">    ``coeff``.</span>
@@ -1170,7 +1169,7 @@
 
 
 <span class="k">def</span> <span class="nf">diop_DN</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves the equation `x^2 - Dy^2 = N`.</span>
 
 <span class="sd">    Mainly concerned with the case `D &gt; 0, D` is not a perfect square,</span>
@@ -1372,7 +1371,7 @@
 
 
 <span class="k">def</span> <span class="nf">_special_diop_DN</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves the equation `x^2 - Dy^2 = N` for the special case where</span>
 <span class="sd">    `1 &lt; N**2 &lt; D` and `D` is not a perfect square.</span>
 <span class="sd">    It is better to call `diop_DN` rather than this function, as</span>
@@ -1467,7 +1466,7 @@
 
 
 <span class="k">def</span> <span class="nf">cornacchia</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves `ax^2 + by^2 = m` where `\gcd(a, b) = 1 = gcd(a, m)` and `a, b &gt; 0`.</span>
 
 <span class="sd">    Uses the algorithm due to Cornacchia. The method only finds primitive</span>
@@ -1529,7 +1528,7 @@
 
 
 <span class="k">def</span> <span class="nf">PQa</span><span class="p">(</span><span class="n">P_0</span><span class="p">,</span> <span class="n">Q_0</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns useful information needed to solve the Pell equation.</span>
 
 <span class="sd">    There are six sequences of integers defined related to the continued</span>
@@ -1589,7 +1588,7 @@
 
 
 <span class="k">def</span> <span class="nf">diop_bf_DN</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Uses brute force to solve the equation, `x^2 - Dy^2 = N`.</span>
 
 <span class="sd">    Mainly concerned with the generalized Pell equation which is the case when</span>
@@ -1677,7 +1676,7 @@
 
 
 <span class="k">def</span> <span class="nf">equivalent</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns True if two solutions `(u, v)` and `(r, s)` of `x^2 - Dy^2 = N`</span>
 <span class="sd">    belongs to the same equivalence class and False otherwise.</span>
 
@@ -1713,7 +1712,7 @@
 
 
 <span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the (length of aperiodic part + length of periodic part) of</span>
 <span class="sd">    continued fraction representation of `\\frac{P + \sqrt{D}}{Q}`.</span>
 
@@ -1759,7 +1758,7 @@
 
 
 <span class="k">def</span> <span class="nf">transformation_to_DN</span><span class="p">(</span><span class="n">eq</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function transforms general quadratic,</span>
 <span class="sd">    `ax^2 + bxy + cy^2 + dx + ey + f = 0`</span>
 <span class="sd">    to more easy to deal with `X^2 - DY^2 = N` form.</span>
@@ -1919,7 +1918,7 @@
 
 
 <span class="k">def</span> <span class="nf">find_DN</span><span class="p">(</span><span class="n">eq</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function returns a tuple, `(D, N)` of the simplified form,</span>
 <span class="sd">    `x^2 - Dy^2 = N`, corresponding to the general quadratic,</span>
 <span class="sd">    `ax^2 + bxy + cy^2 + dx + ey + f = 0`.</span>
@@ -1987,7 +1986,7 @@
 
 
 <span class="k">def</span> <span class="nf">check_param</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    If there is a number modulo ``a`` such that ``x`` and ``y`` are both</span>
 <span class="sd">    integers, then return a parametric representation for ``x`` and ``y``</span>
 <span class="sd">    else return (None, None).</span>
@@ -2015,7 +2014,7 @@
 
 
 <span class="k">def</span> <span class="nf">diop_ternary_quadratic</span><span class="p">(</span><span class="n">eq</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves the general quadratic ternary form,</span>
 <span class="sd">    `ax^2 + by^2 + cz^2 + fxy + gyz + hxz = 0`.</span>
 
@@ -2156,7 +2155,7 @@
 
 
 <span class="k">def</span> <span class="nf">transformation_to_normal</span><span class="p">(</span><span class="n">eq</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the transformation Matrix that converts a general ternary</span>
 <span class="sd">    quadratic equation `eq` (`ax^2 + by^2 + cz^2 + dxy + eyz + fxz`)</span>
 <span class="sd">    to a form without cross terms: `ax^2 + by^2 + cz^2 = 0`. This is</span>
@@ -2259,7 +2258,7 @@
 
 
 <span class="k">def</span> <span class="nf">parametrize_ternary_quadratic</span><span class="p">(</span><span class="n">eq</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the parametrized general solution for the ternary quadratic</span>
 <span class="sd">    equation ``eq`` which has the form</span>
 <span class="sd">    `ax^2 + by^2 + cz^2 + fxy + gyz + hxz = 0`.</span>
@@ -2337,7 +2336,7 @@
 
 
 <span class="k">def</span> <span class="nf">diop_ternary_quadratic_normal</span><span class="p">(</span><span class="n">eq</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves the quadratic ternary diophantine equation,</span>
 <span class="sd">    `ax^2 + by^2 + cz^2 = 0`.</span>
 
@@ -2382,7 +2381,7 @@
     <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="n">filldedent</span><span class="p">(</span>
-                <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    coeff dict is not consistent with assumption of this routine:</span>
 <span class="sd">    coefficients should be those of an expression in the form</span>
 <span class="sd">    a*x**2 + b*y**2 + c*z**2 where a*b*c != 0.&quot;&quot;&quot;</span>
@@ -2437,7 +2436,7 @@
 
 
 <span class="k">def</span> <span class="nf">sqf_normal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">steps</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return `a&#39;, b&#39;, c&#39;`, the coefficients of the square-free normal</span>
 <span class="sd">    form of `ax^2 + by^2 + cz^2 = 0`, where `a&#39;, b&#39;, c&#39;` are pairwise</span>
 <span class="sd">    prime.  If `steps` is True then also return three tuples:</span>
@@ -2494,7 +2493,7 @@
 
 
 <span class="k">def</span> <span class="nf">square_factor</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns an integer `c` s.t. `a = c^2k, \ c,k \in Z`. Here `k` is square</span>
 <span class="sd">    free. `a` can be given as an integer or a dictionary of factors.</span>
 
@@ -2520,7 +2519,7 @@
 
 
 <span class="k">def</span> <span class="nf">reconstruct</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Reconstruct the `z` value of an equivalent solution of `ax^2 + by^2 + cz^2`</span>
 <span class="sd">    from the `z` value of a solution of the square-free normal form of the</span>
 <span class="sd">    equation, `a&#39;*x^2 + b&#39;*y^2 + c&#39;*z^2`, where `a&#39;`, `b&#39;` and `c&#39;` are square</span>
@@ -2535,7 +2534,7 @@
 
 
 <span class="k">def</span> <span class="nf">ldescent</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a non-trivial solution to `w^2 = Ax^2 + By^2` using</span>
 <span class="sd">    Lagrange&#39;s method; return None if there is no such solution.</span>
 <span class="sd">    .</span>
@@ -2604,7 +2603,7 @@
 
 
 <span class="k">def</span> <span class="nf">descent</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a non-trivial solution, (x, y, z), to `x^2 = Ay^2 + Bz^2`</span>
 <span class="sd">    using Lagrange&#39;s descent method with lattice-reduction. `A` and `B`</span>
 <span class="sd">    are assumed to be valid for such a solution to exist.</span>
@@ -2659,7 +2658,7 @@
 
 
 <span class="k">def</span> <span class="nf">gaussian_reduce</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a reduced solution `(x, z)` to the congruence</span>
 <span class="sd">    `X^2 - aZ^2 \equiv 0 \ (mod \ b)` so that `x^2 + |a|z^2` is minimal.</span>
 
@@ -2702,7 +2701,7 @@
 
 
 <span class="k">def</span> <span class="nf">dot</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a special dot product of the vectors `u = (u_{1}, u_{2})` and</span>
 <span class="sd">    `v = (v_{1}, v_{2})` which is defined in order to reduce solution of</span>
 <span class="sd">    the congruence equation `X^2 - aZ^2 \equiv 0 \ (mod \ b)`.</span>
@@ -2713,7 +2712,7 @@
 
 
 <span class="k">def</span> <span class="nf">norm</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the norm of the vector `u = (u_{1}, u_{2})` under the dot product</span>
 <span class="sd">    defined by `u \cdot v = (wu_{1} + bu_{2})(w*v_{1} + bv_{2}) + |a|*u_{1}*v_{1}`</span>
 <span class="sd">    where `u = (u_{1}, u_{2})` and `v = (v_{1}, v_{2})`.</span>
@@ -2723,7 +2722,7 @@
 
 
 <span class="k">def</span> <span class="nf">holzer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Simplify the solution `(x, y, z)` of the equation</span>
 <span class="sd">    `ax^2 + by^2 = cz^2` with `a, b, c &gt; 0` and `z^2 \geq \mid ab \mid` to</span>
 <span class="sd">    a new reduced solution `(x&#39;, y&#39;, z&#39;)` such that `z&#39;^2 \leq \mid ab \mid`.</span>
@@ -2787,7 +2786,7 @@
 
 
 <span class="k">def</span> <span class="nf">diop_general_pythagorean</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="n">symbols</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves the general pythagorean equation,</span>
 <span class="sd">    `a_{1}^2x_{1}^2 + a_{2}^2x_{2}^2 + . . . + a_{n}^2x_{n}^2 - a_{n + 1}^2x_{n + 1}^2 = 0`.</span>
 
@@ -2854,7 +2853,7 @@
 
 
 <span class="k">def</span> <span class="nf">diop_general_sum_of_squares</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves the equation `x_{1}^2 + x_{2}^2 + . . . + x_{n}^2 - k = 0`.</span>
 
 <span class="sd">    Returns at most ``limit`` number of solutions.</span>
@@ -2920,7 +2919,7 @@
 
 
 <span class="k">def</span> <span class="nf">diop_general_sum_of_even_powers</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves the equation `x_{1}^e + x_{2}^e + . . . + x_{n}^e - k = 0`</span>
 <span class="sd">    where `e` is an even, integer power.</span>
 
@@ -2984,7 +2983,7 @@
 
 
 <span class="k">def</span> <span class="nf">partition</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">zeros</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a generator that can be used to generate partitions of an integer</span>
 <span class="sd">    `n`.</span>
 
@@ -3039,7 +3038,7 @@
 
 
 <span class="k">def</span> <span class="nf">prime_as_sum_of_two_squares</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represent a prime `p` as a unique sum of two squares; this can</span>
 <span class="sd">    only be done if the prime is congruent to 1 mod 4.</span>
 
@@ -3082,7 +3081,7 @@
 
 
 <span class="k">def</span> <span class="nf">sum_of_three_squares</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a 3-tuple `(a, b, c)` such that `a^2 + b^2 + c^2 = n` and</span>
 <span class="sd">    `a, b, c \geq 0`.</span>
 
@@ -3177,7 +3176,7 @@
 
 
 <span class="k">def</span> <span class="nf">sum_of_four_squares</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a 4-tuple `(a, b, c, d)` such that `a^2 + b^2 + c^2 + d^2 = n`.</span>
 
 <span class="sd">    Here `a, b, c, d \geq 0`.</span>
@@ -3227,7 +3226,7 @@
 
 
 <span class="k">def</span> <span class="nf">power_representation</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">zeros</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a generator for finding k-tuples of integers,</span>
 <span class="sd">    `(n_{1}, n_{2}, . . . n_{k})`, such that</span>
 <span class="sd">    `n = n_{1}^p + n_{2}^p + . . . n_{k}^p`.</span>
@@ -3283,7 +3282,7 @@
     <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="n">filldedent</span><span class="p">(</span>
-                <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Expecting positive integers for `(p, k)`, but got `(%s, %s)`&quot;&quot;&quot;</span>
                 <span class="o">%</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
             <span class="p">)</span>
@@ -3322,7 +3321,7 @@
             <span class="ow">and</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="n">n</span>
             <span class="ow">and</span> <span class="n">n</span> <span class="o">-</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Todd G. Will, &quot;When Is n^2 a Sum of k Squares?&quot;, [online].</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Todd G. Will, &quot;When Is n^2 a Sum of k Squares?&quot;, [online].</span>
 <span class="sd">            Available: https://www.maa.org/sites/default/files/Will-MMz-201037918.pdf&quot;&quot;&quot;</span>
             <span class="k">return</span>
         <span class="k">if</span> <span class="n">feasible</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># it&#39;s prime and k == 2</span>
@@ -3364,7 +3363,7 @@
 
 
 <span class="k">def</span> <span class="nf">sum_of_squares</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">zeros</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a generator that yields the k-tuples of nonnegative</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a generator that yields the k-tuples of nonnegative</span>
 <span class="sd">    values, the squares of which sum to n. If zeros is False (default)</span>
 <span class="sd">    then the solution will not contain zeros. The nonnegative</span>
 <span class="sd">    elements of a tuple are sorted.</span>
@@ -3412,7 +3411,7 @@
 
 
 <span class="k">def</span> <span class="nf">_can_do_sum_of_squares</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return True if n can be written as the sum of k squares,</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True if n can be written as the sum of k squares,</span>
 <span class="sd">    False if it can&#39;t, or 1 if k == 2 and n is prime (in which</span>
 <span class="sd">    case it *can* be written as a sum of two squares). A False</span>
 <span class="sd">    is returned only if it can&#39;t be written as k-squares, even</span>
@@ -3464,7 +3463,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -3485,7 +3484,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -67,7 +66,7 @@
 
 
 <span class="k">def</span> <span class="nf">_monotonic_sign</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the value closest to 0 that ``self`` may have if all symbols</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the value closest to 0 that ``self`` may have if all symbols</span>
 <span class="sd">    are signed and the result is uniformly the same sign for all values of symbols.</span>
 <span class="sd">    If a symbol is only signed but not known to be an</span>
 <span class="sd">    integer or the result is 0 then a symbol representative of the sign of self</span>
@@ -242,7 +241,7 @@
 
 
 <div class="viewcode-block" id="decompose_power"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.exprtools.decompose_power">[docs]</a><span class="k">def</span> <span class="nf">decompose_power</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Decompose power into symbolic base and integer exponent.</span>
 
 <span class="sd">    This is strictly only valid if the exponent from which</span>
@@ -291,7 +290,7 @@
 
 
 <div class="viewcode-block" id="decompose_power_rat"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.exprtools.decompose_power_rat">[docs]</a><span class="k">def</span> <span class="nf">decompose_power_rat</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Decompose power into symbolic base and rational exponent.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -315,12 +314,12 @@
 
 
 <div class="viewcode-block" id="Factors"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.exprtools.Factors">[docs]</a><span class="k">class</span> <span class="nc">Factors</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Efficient representation of ``f_1*f_2*...*f_n``.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Efficient representation of ``f_1*f_2*...*f_n``.&quot;&quot;&quot;</span>
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;factors&#39;</span><span class="p">,</span> <span class="s1">&#39;gens&#39;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factors</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># Factors</span>
-        <span class="sd">&quot;&quot;&quot;Initialize Factors from dict or expr.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize Factors from dict or expr.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -439,7 +438,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_zero</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Factors</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &gt;&gt;&gt; from .exprtools import Factors</span>
 <span class="sd">        &gt;&gt;&gt; Factors(0).is_zero</span>
 <span class="sd">        True</span>
@@ -449,7 +448,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_one</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Factors</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &gt;&gt;&gt; from .exprtools import Factors</span>
 <span class="sd">        &gt;&gt;&gt; Factors(1).is_one</span>
 <span class="sd">        True</span>
@@ -457,7 +456,7 @@
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">factors</span>
 
 <div class="viewcode-block" id="Factors.as_expr"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.exprtools.Factors.as_expr">[docs]</a>    <span class="k">def</span> <span class="nf">as_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Factors</span>
-        <span class="sd">&quot;&quot;&quot;Return the underlying expression.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the underlying expression.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -485,7 +484,7 @@
         <span class="k">return</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Factors.mul"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.exprtools.Factors.mul">[docs]</a>    <span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># Factors</span>
-        <span class="sd">&quot;&quot;&quot;Return Factors of ``self * other``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return Factors of ``self * other``.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -518,7 +517,7 @@
         <span class="k">return</span> <span class="n">Factors</span><span class="p">(</span><span class="n">factors</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Factors.normal"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.exprtools.Factors.normal">[docs]</a>    <span class="k">def</span> <span class="nf">normal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return ``self`` and ``other`` with ``gcd`` removed from each.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return ``self`` and ``other`` with ``gcd`` removed from each.</span>
 <span class="sd">        The only differences between this and method ``div`` is that this</span>
 <span class="sd">        is 1) optimized for the case when there are few factors in common and</span>
 <span class="sd">        2) this does not raise an error if ``other`` is zero.</span>
@@ -588,7 +587,7 @@
         <span class="k">return</span> <span class="n">Factors</span><span class="p">(</span><span class="n">self_factors</span><span class="p">),</span> <span class="n">Factors</span><span class="p">(</span><span class="n">other_factors</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Factors.div"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.exprtools.Factors.div">[docs]</a>    <span class="k">def</span> <span class="nf">div</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># Factors</span>
-        <span class="sd">&quot;&quot;&quot;Return ``self`` and ``other`` with ``gcd`` removed from each.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return ``self`` and ``other`` with ``gcd`` removed from each.</span>
 <span class="sd">        This is optimized for the case when there are many factors in common.</span>
 
 <span class="sd">        Examples</span>
@@ -690,7 +689,7 @@
         <span class="k">return</span> <span class="n">Factors</span><span class="p">(</span><span class="n">quo</span><span class="p">),</span> <span class="n">Factors</span><span class="p">(</span><span class="n">rem</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Factors.quo"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.exprtools.Factors.quo">[docs]</a>    <span class="k">def</span> <span class="nf">quo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># Factors</span>
-        <span class="sd">&quot;&quot;&quot;Return numerator Factor of ``self / other``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return numerator Factor of ``self / other``.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -705,7 +704,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">other</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Factors.rem"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.exprtools.Factors.rem">[docs]</a>    <span class="k">def</span> <span class="nf">rem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># Factors</span>
-        <span class="sd">&quot;&quot;&quot;Return denominator Factors of ``self / other``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return denominator Factors of ``self / other``.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -722,7 +721,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">other</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Factors.pow"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.exprtools.Factors.pow">[docs]</a>    <span class="k">def</span> <span class="nf">pow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># Factors</span>
-        <span class="sd">&quot;&quot;&quot;Return self raised to a non-negative integer power.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return self raised to a non-negative integer power.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -750,7 +749,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;expected non-negative integer, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">other</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Factors.gcd"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.exprtools.Factors.gcd">[docs]</a>    <span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># Factors</span>
-        <span class="sd">&quot;&quot;&quot;Return Factors of ``gcd(self, other)``. The keys are</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return Factors of ``gcd(self, other)``. The keys are</span>
 <span class="sd">        the intersection of factors with the minimum exponent for</span>
 <span class="sd">        each factor.</span>
 
@@ -783,7 +782,7 @@
         <span class="k">return</span> <span class="n">Factors</span><span class="p">(</span><span class="n">factors</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Factors.lcm"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.exprtools.Factors.lcm">[docs]</a>    <span class="k">def</span> <span class="nf">lcm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># Factors</span>
-        <span class="sd">&quot;&quot;&quot;Return Factors of ``lcm(self, other)`` which are</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return Factors of ``lcm(self, other)`` which are</span>
 <span class="sd">        the union of factors with the maximum exponent for</span>
 <span class="sd">        each factor.</span>
 
@@ -839,7 +838,7 @@
 
 
 <div class="viewcode-block" id="Term"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.exprtools.Term">[docs]</a><span class="k">class</span> <span class="nc">Term</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Efficient representation of ``coeff*(numer/denom)``. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Efficient representation of ``coeff*(numer/denom)``. &quot;&quot;&quot;</span>
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;coeff&#39;</span><span class="p">,</span> <span class="s1">&#39;numer&#39;</span><span class="p">,</span> <span class="s1">&#39;denom&#39;</span><span class="p">]</span>
 
@@ -951,7 +950,7 @@
 
 
 <span class="k">def</span> <span class="nf">_gcd_terms</span><span class="p">(</span><span class="n">terms</span><span class="p">,</span> <span class="n">isprimitive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fraction</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper function for :func:`gcd_terms`.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function for :func:`gcd_terms`.</span>
 
 <span class="sd">    If ``isprimitive`` is True then the call to primitive</span>
 <span class="sd">    for an Add will be skipped. This is useful when the</span>
@@ -1011,7 +1010,7 @@
 
 
 <div class="viewcode-block" id="gcd_terms"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.exprtools.gcd_terms">[docs]</a><span class="k">def</span> <span class="nf">gcd_terms</span><span class="p">(</span><span class="n">terms</span><span class="p">,</span> <span class="n">isprimitive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">clear</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fraction</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute the GCD of ``terms`` and put them together.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the GCD of ``terms`` and put them together.</span>
 
 <span class="sd">    ``terms`` can be an expression or a non-Basic sequence of expressions</span>
 <span class="sd">    which will be handled as though they are terms from a sum.</span>
@@ -1064,7 +1063,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">mask</span><span class="p">(</span><span class="n">terms</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;replace nc portions of each term with a unique Dummy symbols</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;replace nc portions of each term with a unique Dummy symbols</span>
 <span class="sd">        and return the replacements to restore them&quot;&quot;&quot;</span>
         <span class="n">args</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="p">,</span> <span class="p">[])</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">is_commutative</span> <span class="k">else</span> <span class="n">a</span><span class="o">.</span><span class="n">args_cnc</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">terms</span><span class="p">]</span>
         <span class="n">reps</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1129,7 +1128,7 @@
 
 
 <div class="viewcode-block" id="factor_terms"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.exprtools.factor_terms">[docs]</a><span class="k">def</span> <span class="nf">factor_terms</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">radical</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">clear</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fraction</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sign</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Remove common factors from terms in all arguments without</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove common factors from terms in all arguments without</span>
 <span class="sd">    changing the underlying structure of the expr. No expansion or</span>
 <span class="sd">    simplification (and no processing of non-commutatives) is performed.</span>
 
@@ -1232,7 +1231,7 @@
 
 
 <span class="k">def</span> <span class="nf">_mask_nc</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return ``eq`` with non-commutative objects replaced with Dummy</span>
 <span class="sd">    symbols. A dictionary that can be used to restore the original</span>
 <span class="sd">    values is returned: if it is None, the expression is noncommutative</span>
@@ -1369,7 +1368,7 @@
 
 
 <div class="viewcode-block" id="factor_nc"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.exprtools.factor_nc">[docs]</a><span class="k">def</span> <span class="nf">factor_nc</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the factored form of ``expr`` while handling non-commutative</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the factored form of ``expr`` while handling non-commutative</span>
 <span class="sd">    expressions.</span>
 
 <span class="sd">    Examples</span>
@@ -1558,7 +1557,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1579,7 +1578,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

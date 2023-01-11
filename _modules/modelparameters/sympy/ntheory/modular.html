@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -47,7 +46,7 @@
 
 
 <div class="viewcode-block" id="symmetric_residue"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.modular.symmetric_residue">[docs]</a><span class="k">def</span> <span class="nf">symmetric_residue</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the residual mod m such that it is within half of the modulus.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the residual mod m such that it is within half of the modulus.</span>
 
 <span class="sd">    &gt;&gt;&gt; from .modular import symmetric_residue</span>
 <span class="sd">    &gt;&gt;&gt; symmetric_residue(1, 6)</span>
@@ -61,7 +60,7 @@
 
 
 <div class="viewcode-block" id="crt"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.modular.crt">[docs]</a><span class="k">def</span> <span class="nf">crt</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Chinese Remainder Theorem.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Chinese Remainder Theorem.</span>
 
 <span class="sd">    The moduli in m are assumed to be pairwise coprime.  The output</span>
 <span class="sd">    is then an integer f, such that f = v_i mod m_i for each pair out</span>
@@ -136,7 +135,7 @@
 
 
 <div class="viewcode-block" id="crt1"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.modular.crt1">[docs]</a><span class="k">def</span> <span class="nf">crt1</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;First part of Chinese Remainder Theorem, for multiple application.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;First part of Chinese Remainder Theorem, for multiple application.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -150,7 +149,7 @@
 
 
 <div class="viewcode-block" id="crt2"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.modular.crt2">[docs]</a><span class="k">def</span> <span class="nf">crt2</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">mm</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Second part of Chinese Remainder Theorem, for multiple application.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Second part of Chinese Remainder Theorem, for multiple application.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -169,7 +168,7 @@
 
 
 <div class="viewcode-block" id="solve_congruence"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.modular.solve_congruence">[docs]</a><span class="k">def</span> <span class="nf">solve_congruence</span><span class="p">(</span><span class="o">*</span><span class="n">remainder_modulus_pairs</span><span class="p">,</span> <span class="o">**</span><span class="n">hint</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute the integer ``n`` that has the residual ``ai`` when it is</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the integer ``n`` that has the residual ``ai`` when it is</span>
 <span class="sd">    divided by ``mi`` where the ``ai`` and ``mi`` are given as pairs to</span>
 <span class="sd">    this function: ((a1, m1), (a2, m2), ...). If there is no solution,</span>
 <span class="sd">    return None. Otherwise return ``n`` and its modulus.</span>
@@ -221,7 +220,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">combine</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the tuple (a, m) which satisfies the requirement</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the tuple (a, m) which satisfies the requirement</span>
 <span class="sd">        that n = a + i*m satisfy n = a1 + j*m1 and n = a2 = k*m2.</span>
 
 <span class="sd">        References</span>
@@ -305,7 +304,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -326,7 +325,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -55,7 +54,7 @@
 
 
 <div class="viewcode-block" id="is_square"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.primetest.is_square">[docs]</a><span class="k">def</span> <span class="nf">is_square</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">prep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return True if n == a * a for some integer a, else False.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True if n == a * a for some integer a, else False.</span>
 <span class="sd">    If n is suspected of *not* being a square then this is a</span>
 <span class="sd">    quick method of confirming that it is not.</span>
 
@@ -85,7 +84,7 @@
 
 
 <span class="k">def</span> <span class="nf">_test</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Miller-Rabin strong pseudoprime test for one base.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Miller-Rabin strong pseudoprime test for one base.</span>
 <span class="sd">    Return False if n is definitely composite, True if n is</span>
 <span class="sd">    probably prime, with a probability greater than 3/4.</span>
 
@@ -106,7 +105,7 @@
 
 
 <div class="viewcode-block" id="mr"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.primetest.mr">[docs]</a><span class="k">def</span> <span class="nf">mr</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">bases</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Perform a Miller-Rabin strong pseudoprime test on n using a</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform a Miller-Rabin strong pseudoprime test on n using a</span>
 <span class="sd">    given list of bases/witnesses.</span>
 
 <span class="sd">    References</span>
@@ -149,7 +148,7 @@
 
 
 <span class="k">def</span> <span class="nf">_lucas_sequence</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the modular Lucas sequence (U_k, V_k, Q_k).</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the modular Lucas sequence (U_k, V_k, Q_k).</span>
 
 <span class="sd">    Given a Lucas sequence defined by P, Q, returns the kth values for</span>
 <span class="sd">    U and V, along with Q^k, all modulo n.  This is intended for use with</span>
@@ -233,7 +232,7 @@
 
 
 <span class="k">def</span> <span class="nf">_lucas_selfridge_params</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Calculates the Selfridge parameters (D, P, Q) for n.  This is</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the Selfridge parameters (D, P, Q) for n.  This is</span>
 <span class="sd">       method A from page 1401 of Baillie and Wagstaff.</span>
 
 <span class="sd">    References</span>
@@ -258,7 +257,7 @@
 
 
 <span class="k">def</span> <span class="nf">_lucas_extrastrong_params</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Calculates the &quot;extra strong&quot; parameters (D, P, Q) for n.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the &quot;extra strong&quot; parameters (D, P, Q) for n.</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ==========</span>
@@ -281,7 +280,7 @@
 
 
 <div class="viewcode-block" id="is_lucas_prp"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.primetest.is_lucas_prp">[docs]</a><span class="k">def</span> <span class="nf">is_lucas_prp</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Standard Lucas compositeness test with Selfridge parameters.  Returns</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Standard Lucas compositeness test with Selfridge parameters.  Returns</span>
 <span class="sd">    False if n is definitely composite, and True if n is a Lucas probable</span>
 <span class="sd">    prime.</span>
 
@@ -328,7 +327,7 @@
 
 
 <div class="viewcode-block" id="is_strong_lucas_prp"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.primetest.is_strong_lucas_prp">[docs]</a><span class="k">def</span> <span class="nf">is_strong_lucas_prp</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Strong Lucas compositeness test with Selfridge parameters.  Returns</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Strong Lucas compositeness test with Selfridge parameters.  Returns</span>
 <span class="sd">    False if n is definitely composite, and True if n is a strong Lucas</span>
 <span class="sd">    probable prime.</span>
 
@@ -387,7 +386,7 @@
 
 
 <div class="viewcode-block" id="is_extra_strong_lucas_prp"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.primetest.is_extra_strong_lucas_prp">[docs]</a><span class="k">def</span> <span class="nf">is_extra_strong_lucas_prp</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Extra Strong Lucas compositeness test.  Returns False if n is</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Extra Strong Lucas compositeness test.  Returns False if n is</span>
 <span class="sd">    definitely composite, and True if n is a &quot;extra strong&quot; Lucas probable</span>
 <span class="sd">    prime.</span>
 
@@ -462,7 +461,7 @@
 
 
 <div class="viewcode-block" id="isprime"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.primetest.isprime">[docs]</a><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Test if n is a prime number (True) or not (False). For n &lt; 2^64 the</span>
 <span class="sd">    answer is definitive; larger n values have a small probability of actually</span>
 <span class="sd">    being pseudoprimes.</span>
@@ -624,7 +623,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -645,7 +644,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -63,14 +62,14 @@
 
 
 <div class="viewcode-block" id="SeqBase"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.SeqBase">[docs]</a><span class="k">class</span> <span class="nc">SeqBase</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class for sequences&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for sequences&quot;&quot;&quot;</span>
 
     <span class="n">is_commutative</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">_op_priority</span> <span class="o">=</span> <span class="mi">15</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_start_key</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return start (if possible) else S.Infinity.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return start (if possible) else S.Infinity.</span>
 
 <span class="sd">        adapted from Set._infimum_key</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -82,7 +81,7 @@
         <span class="k">return</span> <span class="n">start</span>
 
     <span class="k">def</span> <span class="nf">_intersect_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns start and stop.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns start and stop.</span>
 
 <span class="sd">        Takes intersection over the two intervals.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -91,37 +90,37 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">gen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the generator for the sequence&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the generator for the sequence&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">).gen&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">interval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The interval on which the sequence is defined&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The interval on which the sequence is defined&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">).interval&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The starting point of the sequence. This point is included&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The starting point of the sequence. This point is included&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">).start&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The ending point of the sequence. This point is included&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The ending point of the sequence. This point is included&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">).stop&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Length of the sequence&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Length of the sequence&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">).length&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a tuple of variables that are bounded&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a tuple of variables that are bounded&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">free_symbols</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method returns the symbols in the object, excluding those</span>
 <span class="sd">        that take on a specific value (i.e. the dummy symbols).</span>
 
@@ -138,7 +137,7 @@
 
 <div class="viewcode-block" id="SeqBase.coeff"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.SeqBase.coeff">[docs]</a>    <span class="nd">@cacheit</span>
     <span class="k">def</span> <span class="nf">coeff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the coefficient at point pt&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the coefficient at point pt&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">pt</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="ow">or</span> <span class="n">pt</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Index </span><span class="si">%s</span><span class="s2"> out of bounds </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interval</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_coeff</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span></div>
@@ -150,7 +149,7 @@
                                   <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_ith_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the i&#39;th point of a sequence.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the i&#39;th point of a sequence.</span>
 
 <span class="sd">        If start point is negative infinity, point is returned from the end.</span>
 <span class="sd">        Assumes the first point to be indexed zero.</span>
@@ -191,7 +190,7 @@
         <span class="k">return</span> <span class="n">initial</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="n">step</span>
 
     <span class="k">def</span> <span class="nf">_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Should only be used internally.</span>
 
 <span class="sd">        self._add(other) returns a new, term-wise added sequence if self</span>
@@ -204,7 +203,7 @@
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">_mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Should only be used internally.</span>
 
 <span class="sd">        self._mul(other) returns a new, term-wise multiplied sequence if self</span>
@@ -217,7 +216,7 @@
         <span class="k">return</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="SeqBase.coeff_mul"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.SeqBase.coeff_mul">[docs]</a>    <span class="k">def</span> <span class="nf">coeff_mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Should be used when ``other`` is not a sequence. Should be</span>
 <span class="sd">        defined to define custom behaviour.</span>
 
@@ -237,7 +236,7 @@
         <span class="k">return</span> <span class="n">Mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the term-wise addition of &#39;self&#39; and &#39;other&#39;.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the term-wise addition of &#39;self&#39; and &#39;other&#39;.</span>
 
 <span class="sd">        ``other`` should be a sequence.</span>
 
@@ -258,7 +257,7 @@
         <span class="k">return</span> <span class="bp">self</span> <span class="o">+</span> <span class="n">other</span>
 
     <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the term-wise subtraction of &#39;self&#39; and &#39;other&#39;.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the term-wise subtraction of &#39;self&#39; and &#39;other&#39;.</span>
 
 <span class="sd">        ``other`` should be a sequence.</span>
 
@@ -279,7 +278,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="p">)</span> <span class="o">+</span> <span class="n">other</span>
 
     <span class="k">def</span> <span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Negates the sequence.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Negates the sequence.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -292,7 +291,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">coeff_mul</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the term-wise multiplication of &#39;self&#39; and &#39;other&#39;.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the term-wise multiplication of &#39;self&#39; and &#39;other&#39;.</span>
 
 <span class="sd">        ``other`` should be a sequence. For ``other`` not being a</span>
 <span class="sd">        sequence see :func:`coeff_mul` method.</span>
@@ -332,7 +331,7 @@
                     <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">index</span><span class="o">.</span><span class="n">step</span> <span class="ow">or</span> <span class="mi">1</span><span class="p">)]</span>
 
 <div class="viewcode-block" id="SeqBase.find_linear_recurrence"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.SeqBase.find_linear_recurrence">[docs]</a>    <span class="k">def</span> <span class="nf">find_linear_recurrence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">d</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">gfvar</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Finds the shortest linear recurrence that satisfies the first n</span>
 <span class="sd">        terms of sequence of order `\leq` n/2 if possible.</span>
 <span class="sd">        If d is specified, find shortest linear recurrence of order</span>
@@ -407,7 +406,7 @@
                 <span class="k">return</span> <span class="n">coeffs</span><span class="p">,</span> <span class="n">simplify</span><span class="p">(</span><span class="n">factor</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">factor</span><span class="p">(</span><span class="n">d</span><span class="p">))</span></div></div>
 
 <div class="viewcode-block" id="EmptySequence"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.EmptySequence">[docs]</a><span class="k">class</span> <span class="nc">EmptySequence</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">SeqBase</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;Represents an empty sequence.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an empty sequence.</span>
 
 <span class="sd">    The empty sequence is available as a</span>
 <span class="sd">    singleton as ``S.EmptySequence``.</span>
@@ -436,7 +435,7 @@
         <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
 
 <div class="viewcode-block" id="EmptySequence.coeff_mul"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.EmptySequence.coeff_mul">[docs]</a>    <span class="k">def</span> <span class="nf">coeff_mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coeff</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See docstring of SeqBase.coeff_mul&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;See docstring of SeqBase.coeff_mul&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
     <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -444,7 +443,7 @@
 
 
 <div class="viewcode-block" id="SeqExpr"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.SeqExpr">[docs]</a><span class="k">class</span> <span class="nc">SeqExpr</span><span class="p">(</span><span class="n">SeqBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Sequence expression class.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sequence expression class.</span>
 
 <span class="sd">    Various sequences should inherit from this class.</span>
 
@@ -494,7 +493,7 @@
 
 
 <div class="viewcode-block" id="SeqPer"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.SeqPer">[docs]</a><span class="k">class</span> <span class="nc">SeqPer</span><span class="p">(</span><span class="n">SeqExpr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents a periodic sequence.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a periodic sequence.</span>
 
 <span class="sd">    The elements are repeated after a given period.</span>
 
@@ -597,7 +596,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">periodical</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pt</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See docstring of SeqBase._add&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;See docstring of SeqBase._add&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">SeqPer</span><span class="p">):</span>
             <span class="n">per1</span><span class="p">,</span> <span class="n">lper1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">periodical</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">period</span>
             <span class="n">per2</span><span class="p">,</span> <span class="n">lper2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">periodical</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">period</span>
@@ -614,7 +613,7 @@
             <span class="k">return</span> <span class="n">SeqPer</span><span class="p">(</span><span class="n">new_per</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See docstring of SeqBase._mul&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;See docstring of SeqBase._mul&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">SeqPer</span><span class="p">):</span>
             <span class="n">per1</span><span class="p">,</span> <span class="n">lper1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">periodical</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">period</span>
             <span class="n">per2</span><span class="p">,</span> <span class="n">lper2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">periodical</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">period</span>
@@ -631,14 +630,14 @@
             <span class="k">return</span> <span class="n">SeqPer</span><span class="p">(</span><span class="n">new_per</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">))</span>
 
 <div class="viewcode-block" id="SeqPer.coeff_mul"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.SeqPer.coeff_mul">[docs]</a>    <span class="k">def</span> <span class="nf">coeff_mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coeff</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See docstring of SeqBase.coeff_mul&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;See docstring of SeqBase.coeff_mul&quot;&quot;&quot;</span>
         <span class="n">coeff</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
         <span class="n">per</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="n">coeff</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">periodical</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">SeqPer</span><span class="p">(</span><span class="n">per</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div></div>
 
 
 <div class="viewcode-block" id="SeqFormula"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.SeqFormula">[docs]</a><span class="k">class</span> <span class="nc">SeqFormula</span><span class="p">(</span><span class="n">SeqExpr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents sequence based on a formula.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents sequence based on a formula.</span>
 
 <span class="sd">    Elements are generated using a formula.</span>
 
@@ -725,7 +724,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">pt</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See docstring of SeqBase._add&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;See docstring of SeqBase._add&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">SeqFormula</span><span class="p">):</span>
             <span class="n">form1</span><span class="p">,</span> <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">form2</span><span class="p">,</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">formula</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -734,7 +733,7 @@
             <span class="k">return</span> <span class="n">SeqFormula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See docstring of SeqBase._mul&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;See docstring of SeqBase._mul&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">SeqFormula</span><span class="p">):</span>
             <span class="n">form1</span><span class="p">,</span> <span class="n">v1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">form2</span><span class="p">,</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">formula</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -743,14 +742,14 @@
             <span class="k">return</span> <span class="n">SeqFormula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">))</span>
 
 <div class="viewcode-block" id="SeqFormula.coeff_mul"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.SeqFormula.coeff_mul">[docs]</a>    <span class="k">def</span> <span class="nf">coeff_mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">coeff</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;See docstring of SeqBase.coeff_mul&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;See docstring of SeqBase.coeff_mul&quot;&quot;&quot;</span>
         <span class="n">coeff</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">coeff</span><span class="p">)</span>
         <span class="n">formula</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">formula</span> <span class="o">*</span> <span class="n">coeff</span>
         <span class="k">return</span> <span class="n">SeqFormula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div></div>
 
 
 <div class="viewcode-block" id="sequence"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.sequence">[docs]</a><span class="k">def</span> <span class="nf">sequence</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns appropriate sequence object.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns appropriate sequence object.</span>
 
 <span class="sd">    If ``seq`` is a sympy sequence, returns :class:`SeqPer` object</span>
 <span class="sd">    otherwise returns :class:`SeqFormula` object.</span>
@@ -785,7 +784,7 @@
 
 
 <div class="viewcode-block" id="SeqExprOp"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.SeqExprOp">[docs]</a><span class="k">class</span> <span class="nc">SeqExprOp</span><span class="p">(</span><span class="n">SeqBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class for operations on sequences.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for operations on sequences.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -810,7 +809,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">gen</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generator for the sequence.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generator for the sequence.</span>
 
 <span class="sd">        returns a tuple of generators of all the argument sequences.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -818,7 +817,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">interval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Sequence is defined on the intersection</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sequence is defined on the intersection</span>
 <span class="sd">        of all the intervals of respective sequences</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Intersection</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">interval</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
@@ -833,7 +832,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Cumulative of all the bound variables&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Cumulative of all the bound variables&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">flatten</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">variables</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">]))</span>
 
     <span class="nd">@property</span>
@@ -842,7 +841,7 @@
 
 
 <div class="viewcode-block" id="SeqAdd"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.SeqAdd">[docs]</a><span class="k">class</span> <span class="nc">SeqAdd</span><span class="p">(</span><span class="n">SeqExprOp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents term-wise addition of sequences.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents term-wise addition of sequences.</span>
 
 <span class="sd">    Rules:</span>
 <span class="sd">        * The interval on which sequence is defined is the intersection</span>
@@ -908,7 +907,7 @@
 
 <div class="viewcode-block" id="SeqAdd.reduce"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.SeqAdd.reduce">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Simplify :class:`SeqAdd` using known rules.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simplify :class:`SeqAdd` using known rules.</span>
 
 <span class="sd">        Iterates through all pairs and ask the constituent</span>
 <span class="sd">        sequences if they can simplify themselves with any other constituent.</span>
@@ -943,12 +942,12 @@
             <span class="k">return</span> <span class="n">SeqAdd</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_coeff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;adds up the coefficients of all the sequences at point pt&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;adds up the coefficients of all the sequences at point pt&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">coeff</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="SeqMul"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.SeqMul">[docs]</a><span class="k">class</span> <span class="nc">SeqMul</span><span class="p">(</span><span class="n">SeqExprOp</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents term-wise multiplication of sequences.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents term-wise multiplication of sequences.</span>
 
 <span class="sd">    Handles multiplication of sequences only. For multiplication</span>
 <span class="sd">    with other objects see :func:`SeqBase.coeff_mul`.</span>
@@ -1015,7 +1014,7 @@
 
 <div class="viewcode-block" id="SeqMul.reduce"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.sequences.SeqMul.reduce">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Simplify a :class:`SeqMul` using known rules.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simplify a :class:`SeqMul` using known rules.</span>
 
 <span class="sd">        Iterates through all pairs and ask the constituent</span>
 <span class="sd">        sequences if they can simplify themselves with any other constituent.</span>
@@ -1050,7 +1049,7 @@
             <span class="k">return</span> <span class="n">SeqMul</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_coeff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;multiplies the coefficients of all the sequences at point pt&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;multiplies the coefficients of all the sequences at point pt&quot;&quot;&quot;</span>
         <span class="n">val</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
             <span class="n">val</span> <span class="o">*=</span> <span class="n">a</span><span class="o">.</span><span class="n">coeff</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span>
@@ -1072,7 +1071,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1093,7 +1092,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

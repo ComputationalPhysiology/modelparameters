@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -99,7 +98,7 @@
 
 
 <span class="k">def</span> <span class="nf">_create_lookup_table</span><span class="p">(</span><span class="n">table</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Add formulae for the function -&gt; meijerg lookup table. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Add formulae for the function -&gt; meijerg lookup table. &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">wild</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">Wild</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="n">z</span><span class="p">])</span>
     <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">wild</span><span class="p">,</span> <span class="s1">&#39;pqabc&#39;</span><span class="p">))</span>
@@ -321,7 +320,7 @@
 
 
 <span class="k">def</span> <span class="nf">_mytype</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Create a hashable entity describing the type of f. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Create a hashable entity describing the type of f. &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">()</span>
     <span class="k">elif</span> <span class="n">f</span><span class="o">.</span><span class="n">is_Function</span><span class="p">:</span>
@@ -336,14 +335,14 @@
 
 
 <span class="k">class</span> <span class="nc">_CoeffExpValueError</span><span class="p">(</span><span class="ne">ValueError</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Exception raised by _get_coeff_exp, for internal use only.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span>
 
 
 <span class="k">def</span> <span class="nf">_get_coeff_exp</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    When expr is known to be of the form c*x**b, with c and/or b possibly 1,</span>
 <span class="sd">    return c, b.</span>
 
@@ -374,7 +373,7 @@
 
 
 <span class="k">def</span> <span class="nf">_exponents</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find the exponents of ``x`` (not including zero) in ``expr``.</span>
 
 <span class="sd">    &gt;&gt;&gt; from .meijerint import _exponents</span>
@@ -404,13 +403,13 @@
 
 
 <span class="k">def</span> <span class="nf">_functions</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Find the types of functions in expr, to estimate the complexity. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Find the types of functions in expr, to estimate the complexity. &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Function</span>
     <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">func</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">Function</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">e</span><span class="o">.</span><span class="n">free_symbols</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">_find_splitting_points</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find numbers a such that a linear substitution x -&gt; x + a would</span>
 <span class="sd">    (hopefully) simplify expr.</span>
 
@@ -443,7 +442,7 @@
 
 
 <span class="k">def</span> <span class="nf">_split_mul</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Split expression ``f`` into fac, po, g, where fac is a constant factor,</span>
 <span class="sd">    po = x**s for some s independent of s, and g is &quot;the rest&quot;.</span>
 
@@ -480,7 +479,7 @@
 
 
 <span class="k">def</span> <span class="nf">_mul_args</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a list ``L`` such that Mul(*L) == f.</span>
 
 <span class="sd">    If f is not a Mul or Pow, L=[f].</span>
@@ -503,7 +502,7 @@
 
 
 <span class="k">def</span> <span class="nf">_mul_as_two_parts</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find all the ways to split f into a product of two terms.</span>
 <span class="sd">    Return None on failure.</span>
 
@@ -528,12 +527,12 @@
 
 
 <span class="k">def</span> <span class="nf">_inflate_g</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return C, h such that h is a G function of argument z**n and</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return C, h such that h is a G function of argument z**n and</span>
 <span class="sd">        g = C*h. &quot;&quot;&quot;</span>
     <span class="c1"># TODO should this be a method of meijerg?</span>
     <span class="c1"># See: [L, page 150, equation (5)]</span>
     <span class="k">def</span> <span class="nf">inflate</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; (a1, .., ak) -&gt; (a1/n, (a1+1)/n, ..., (ak + n-1)/n) &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; (a1, .., ak) -&gt; (a1/n, (a1+1)/n, ..., (ak + n-1)/n) &quot;&quot;&quot;</span>
         <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
@@ -548,7 +547,7 @@
 
 
 <span class="k">def</span> <span class="nf">_flip_g</span><span class="p">(</span><span class="n">g</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Turn the G function into one of inverse argument</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Turn the G function into one of inverse argument</span>
 <span class="sd">        (i.e. G(1/x) -&gt; G&#39;(x)) &quot;&quot;&quot;</span>
     <span class="c1"># See [L], section 5.2</span>
     <span class="k">def</span> <span class="nf">tr</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
@@ -557,7 +556,7 @@
 
 
 <span class="k">def</span> <span class="nf">_inflate_fox_h</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Let d denote the integrand in the definition of the G function ``g``.</span>
 <span class="sd">    Consider the function H which is defined in the same way, but with</span>
 <span class="sd">    integrand d/Gamma(a*s) (contour conventions as usual).</span>
@@ -585,7 +584,7 @@
 
 
 <span class="k">def</span> <span class="nf">_dummy</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a dummy. This will return the same dummy if the same token+name is</span>
 <span class="sd">    requested more than once, and it is not already in expr.</span>
 <span class="sd">    This is for being cache-friendly.</span>
@@ -597,7 +596,7 @@
 
 
 <span class="k">def</span> <span class="nf">_dummy_</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a dummy associated to name and token. Same effect as declaring</span>
 <span class="sd">    it globally.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -608,14 +607,14 @@
 
 
 <span class="k">def</span> <span class="nf">_is_analytic</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Check if f(x), when expressed using G functions on the positive reals,</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Check if f(x), when expressed using G functions on the positive reals,</span>
 <span class="sd">        will in fact agree with the G functions almost everywhere &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Heaviside</span><span class="p">,</span> <span class="n">Abs</span>
     <span class="k">return</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">x</span> <span class="ow">in</span> <span class="n">expr</span><span class="o">.</span><span class="n">free_symbols</span> <span class="k">for</span> <span class="n">expr</span> <span class="ow">in</span> <span class="n">f</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">Heaviside</span><span class="p">,</span> <span class="n">Abs</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">_condsimp</span><span class="p">(</span><span class="n">cond</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Do naive simplifications on ``cond``.</span>
 
 <span class="sd">    Note that this routine is completely ad-hoc, simplification rules being</span>
@@ -710,7 +709,7 @@
 
 
 <span class="k">def</span> <span class="nf">_eval_cond</span><span class="p">(</span><span class="n">cond</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Re-evaluate the conditions. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Re-evaluate the conditions. &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cond</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">cond</span>
     <span class="k">return</span> <span class="n">_condsimp</span><span class="p">(</span><span class="n">cond</span><span class="o">.</span><span class="n">doit</span><span class="p">())</span>
@@ -721,7 +720,7 @@
 
 
 <span class="k">def</span> <span class="nf">_my_principal_branch</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">full_pb</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Bring expr nearer to its principal branch by removing superfluous</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Bring expr nearer to its principal branch by removing superfluous</span>
 <span class="sd">        factors.</span>
 <span class="sd">        This function does *not* guarantee to yield the principal branch,</span>
 <span class="sd">        to avoid introducing opaque principal_branch() objects,</span>
@@ -734,7 +733,7 @@
 
 
 <span class="k">def</span> <span class="nf">_rewrite_saxena_1</span><span class="p">(</span><span class="n">fac</span><span class="p">,</span> <span class="n">po</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Rewrite the integral fac*po*g dx, from zero to infinity, as</span>
 <span class="sd">    integral fac*G, where G has argument a*x. Note po=x**s.</span>
 <span class="sd">    Return fac, G.</span>
@@ -755,7 +754,7 @@
 
 
 <span class="k">def</span> <span class="nf">_check_antecedents_1</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">helper</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a condition under which the mellin transform of g exists.</span>
 <span class="sd">    Any power of x has already been absorbed into the G function,</span>
 <span class="sd">    so this is just int_0^\infty g dx.</span>
@@ -872,7 +871,7 @@
 
 
 <span class="k">def</span> <span class="nf">_int0oo_1</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Evaluate int_0^\infty g dx using G functions,</span>
 <span class="sd">    assuming the necessary conditions are fulfilled.</span>
 
@@ -899,7 +898,7 @@
 
 
 <span class="k">def</span> <span class="nf">_rewrite_saxena</span><span class="p">(</span><span class="n">fac</span><span class="p">,</span> <span class="n">po</span><span class="p">,</span> <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">full_pb</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Rewrite the integral fac*po*g1*g2 from 0 to oo in terms of G functions</span>
 <span class="sd">    with argument c*x.</span>
 <span class="sd">    Return C, f1, f2 such that integral C f1 f2 from 0 to infinity equals</span>
@@ -966,7 +965,7 @@
 
 
 <span class="k">def</span> <span class="nf">_check_antecedents</span><span class="p">(</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return a condition under which the integral theorem applies. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return a condition under which the integral theorem applies. &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">re</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">Ne</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">sign</span><span class="p">,</span> <span class="n">unpolarify</span>
     <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">arg</span> <span class="k">as</span> <span class="n">arg_</span><span class="p">,</span> <span class="n">unbranched_argument</span> <span class="k">as</span> <span class="n">arg</span>
     <span class="c1">#  Yes, this is madness.</span>
@@ -1048,7 +1047,7 @@
                      <span class="n">And</span><span class="p">(</span><span class="n">re</span><span class="p">(</span><span class="n">mu</span> <span class="o">+</span> <span class="n">rho</span> <span class="o">+</span> <span class="n">v</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">Eq</span><span class="p">(</span><span class="n">zos</span><span class="p">,</span> <span class="mi">1</span><span class="p">))))</span>
 
         <span class="k">def</span> <span class="nf">_cond</span><span class="p">():</span>
-            <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">            </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Note: if `zso` is 1 then tmp will be NaN.  This raises a</span>
 <span class="sd">            TypeError on `NaN &lt; pi`.  Previously this gave `False` so</span>
 <span class="sd">            this behavior has been hardcoded here but someone should</span>
@@ -1071,7 +1070,7 @@
         <span class="c1"># Hence the following seems correct:</span>
         <span class="n">c14</span> <span class="o">=</span> <span class="n">Or</span><span class="p">(</span><span class="n">c14</span><span class="p">,</span> <span class="n">c14_alt</span><span class="p">)</span>
 
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    When `c15` is NaN (e.g. from `psi` being NaN as happens during</span>
 <span class="sd">    &#39;test_issue_4992&#39; and/or `theta` is NaN as in &#39;test_issue_6253&#39;,</span>
 <span class="sd">    both in `test_integrals.py`) the comparison to 0 formerly gave False</span>
@@ -1269,7 +1268,7 @@
 
 
 <span class="k">def</span> <span class="nf">_int0oo</span><span class="p">(</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Express integral from zero to infinity g1*g2 using a G function,</span>
 <span class="sd">    assuming the necessary conditions are fulfilled.</span>
 
@@ -1295,7 +1294,7 @@
 
 
 <span class="k">def</span> <span class="nf">_rewrite_inversion</span><span class="p">(</span><span class="n">fac</span><span class="p">,</span> <span class="n">po</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Absorb ``po`` == x**s into g. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Absorb ``po`` == x**s into g. &quot;&quot;&quot;</span>
     <span class="n">_</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">_get_coeff_exp</span><span class="p">(</span><span class="n">po</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">_get_coeff_exp</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">argument</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 
@@ -1306,7 +1305,7 @@
 
 
 <span class="k">def</span> <span class="nf">_check_antecedents_inversion</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Check antecedents for the laplace inversion integral. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Check antecedents for the laplace inversion integral. &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">re</span><span class="p">,</span> <span class="n">im</span><span class="p">,</span> <span class="n">Or</span><span class="p">,</span> <span class="n">And</span><span class="p">,</span> <span class="n">Eq</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">Add</span><span class="p">,</span> <span class="n">nan</span><span class="p">,</span> <span class="n">Ne</span>
     <span class="n">_debug</span><span class="p">(</span><span class="s1">&#39;Checking antecedents for inversion:&#39;</span><span class="p">)</span>
     <span class="n">z</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">argument</span>
@@ -1335,7 +1334,7 @@
         <span class="k">return</span> <span class="n">Or</span><span class="p">(</span><span class="o">*</span><span class="n">conds</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">statement</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Provide a convergence statement for z**a * exp(b*z**c),</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Provide a convergence statement for z**a * exp(b*z**c),</span>
 <span class="sd">             c/f sphinx docs. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">And</span><span class="p">(</span><span class="n">statement_half</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
                    <span class="n">statement_half</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="kc">False</span><span class="p">))</span>
@@ -1427,7 +1426,7 @@
 
 
 <span class="k">def</span> <span class="nf">_int_inversion</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the laplace inversion integral, assuming the formula applies.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">=</span> <span class="n">_get_coeff_exp</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">argument</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
@@ -1445,7 +1444,7 @@
 <span class="nd">@cacheit</span>
 <span class="nd">@timeit</span>
 <span class="k">def</span> <span class="nf">_rewrite_single</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Try to rewrite f as a sum of single G functions of the form</span>
 <span class="sd">    C*x**s*G(a*x**b), where b is a rational number and C is independent of x.</span>
 <span class="sd">    We guarantee that result.argument.as_coeff_mul(x) returns (a, (x**b,))</span>
@@ -1524,7 +1523,7 @@
     <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">oo</span><span class="p">,</span> <span class="n">nan</span><span class="p">,</span> <span class="n">zoo</span><span class="p">,</span> <span class="n">simplify</span><span class="p">,</span> <span class="n">cancel</span>
 
     <span class="k">def</span> <span class="nf">my_imt</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">strip</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Calling simplify() all the time is slow and not helpful, since</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Calling simplify() all the time is slow and not helpful, since</span>
 <span class="sd">            most of the time it only factors things in a way that has to be</span>
 <span class="sd">            un-done anyway. But sometimes it can remove apparent poles. &quot;&quot;&quot;</span>
         <span class="c1"># XXX should this be in inverse_mellin_transform?</span>
@@ -1587,7 +1586,7 @@
 
 
 <span class="k">def</span> <span class="nf">_rewrite1</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Try to rewrite f using a (sum of) single G functions with argument a*x**b.</span>
 <span class="sd">    Return fac, po, g such that f = fac*po*g, fac is independent of x</span>
 <span class="sd">    and po = x**s.</span>
@@ -1601,7 +1600,7 @@
 
 
 <span class="k">def</span> <span class="nf">_rewrite2</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Try to rewrite f as a product of two G functions of arguments a*x**b.</span>
 <span class="sd">    Return fac, po, g1, g2 such that f = fac*po*g1*g2, where fac is</span>
 <span class="sd">    independent of x and po is x**s.</span>
@@ -1631,7 +1630,7 @@
 
 
 <div class="viewcode-block" id="meijerint_indefinite"><a class="viewcode-back" href="../../../../modelparameters.sympy.integrals.html#modelparameters.sympy.integrals.meijerint.meijerint_indefinite">[docs]</a><span class="k">def</span> <span class="nf">meijerint_indefinite</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute an indefinite integral of ``f`` by rewriting it as a G function.</span>
 
 <span class="sd">    Examples</span>
@@ -1668,7 +1667,7 @@
 
 
 <span class="k">def</span> <span class="nf">_meijerint_indefinite_1</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Helper that does not attempt any substitution. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Helper that does not attempt any substitution. &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Integral</span><span class="p">,</span> <span class="n">piecewise_fold</span><span class="p">,</span> <span class="n">nan</span><span class="p">,</span> <span class="n">zoo</span>
     <span class="n">_debug</span><span class="p">(</span><span class="s1">&#39;Trying to compute the indefinite integral of&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="s1">&#39;wrt&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 
@@ -1719,7 +1718,7 @@
         <span class="n">res</span> <span class="o">+=</span> <span class="n">powdenest</span><span class="p">(</span><span class="n">fac_</span><span class="o">*</span><span class="n">r</span><span class="p">,</span> <span class="n">polar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_clean</span><span class="p">(</span><span class="n">res</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This multiplies out superfluous powers of x we created, and chops off</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This multiplies out superfluous powers of x we created, and chops off</span>
 <span class="sd">        constants:</span>
 
 <span class="sd">            &gt;&gt; _clean(x*(exp(x)/x - 1/x) + 3)</span>
@@ -1757,7 +1756,7 @@
 
 <div class="viewcode-block" id="meijerint_definite"><a class="viewcode-back" href="../../../../modelparameters.sympy.integrals.html#modelparameters.sympy.integrals.meijerint.meijerint_definite">[docs]</a><span class="nd">@timeit</span>
 <span class="k">def</span> <span class="nf">meijerint_definite</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Integrate ``f`` over the interval [``a``, ``b``], by rewriting it as a product</span>
 <span class="sd">    of two G functions, or as a single G function.</span>
 
@@ -1894,7 +1893,7 @@
 
 
 <span class="k">def</span> <span class="nf">_guess_expansion</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Try to guess sensible rewritings for integrand f(x). &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Try to guess sensible rewritings for integrand f(x). &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">expand_trig</span>
     <span class="kn">from</span> <span class="nn">..functions.elementary.trigonometric</span> <span class="kn">import</span> <span class="n">TrigonometricFunction</span>
     <span class="n">res</span> <span class="o">=</span> <span class="p">[(</span><span class="n">f</span><span class="p">,</span> <span class="s1">&#39;original integrand&#39;</span><span class="p">)]</span>
@@ -1921,7 +1920,7 @@
 
 
 <span class="k">def</span> <span class="nf">_meijerint_definite_2</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Try to integrate f dx from zero to infinty.</span>
 
 <span class="sd">    The body of this function computes various &#39;simplifications&#39;</span>
@@ -1951,7 +1950,7 @@
 
 
 <span class="k">def</span> <span class="nf">_meijerint_definite_3</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Try to integrate f dx from zero to infinity.</span>
 
 <span class="sd">    This function calls _meijerint_definite_4 to try to compute the</span>
@@ -1981,7 +1980,7 @@
 
 <span class="nd">@timeit</span>
 <span class="k">def</span> <span class="nf">_meijerint_definite_4</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">only_double</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Try to integrate f dx from zero to infinity.</span>
 
 <span class="sd">    This function tries to apply the integration theorems found in literature,</span>
@@ -2048,7 +2047,7 @@
 
 
 <div class="viewcode-block" id="meijerint_inversion"><a class="viewcode-back" href="../../../../modelparameters.sympy.integrals.html#modelparameters.sympy.integrals.meijerint.meijerint_inversion">[docs]</a><span class="k">def</span> <span class="nf">meijerint_inversion</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the inverse laplace transform</span>
 <span class="sd">    :math:\int_{c+i\infty}^{c-i\infty} f(x) e^{tx) dx,</span>
 <span class="sd">    for real c larger than the real part of all singularities of f.</span>
@@ -2155,7 +2154,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2176,7 +2175,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

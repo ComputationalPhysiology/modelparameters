@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -43,7 +42,7 @@
 
 
 <div class="viewcode-block" id="binomial_coefficients"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.multinomial.binomial_coefficients">[docs]</a><span class="k">def</span> <span class="nf">binomial_coefficients</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a dictionary containing pairs :math:`{(k1,k2) : C_kn}` where</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a dictionary containing pairs :math:`{(k1,k2) : C_kn}` where</span>
 <span class="sd">    :math:`C_kn` are binomial coefficients and :math:`n=k1+k2`.</span>
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -67,7 +66,7 @@
 
 
 <div class="viewcode-block" id="binomial_coefficients_list"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.multinomial.binomial_coefficients_list">[docs]</a><span class="k">def</span> <span class="nf">binomial_coefficients_list</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return a list of binomial coefficients as rows of the Pascal&#39;s</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return a list of binomial coefficients as rows of the Pascal&#39;s</span>
 <span class="sd">    triangle.</span>
 
 <span class="sd">    Examples</span>
@@ -91,7 +90,7 @@
 
 
 <div class="viewcode-block" id="multinomial_coefficients0"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.multinomial.multinomial_coefficients0">[docs]</a><span class="k">def</span> <span class="nf">multinomial_coefficients0</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">_tuple</span><span class="o">=</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">_zip</span><span class="o">=</span><span class="nb">zip</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a dictionary containing pairs ``{(k1,k2,..,km) : C_kn}``</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a dictionary containing pairs ``{(k1,k2,..,km) : C_kn}``</span>
 <span class="sd">    where ``C_kn`` are multinomial coefficients such that</span>
 <span class="sd">    ``n=k1+k2+..+km``.</span>
 
@@ -149,7 +148,7 @@
 
 
 <div class="viewcode-block" id="multinomial_coefficients"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.multinomial.multinomial_coefficients">[docs]</a><span class="k">def</span> <span class="nf">multinomial_coefficients</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return a dictionary containing pairs ``{(k1,k2,..,km) : C_kn}``</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return a dictionary containing pairs ``{(k1,k2,..,km) : C_kn}``</span>
 <span class="sd">    where ``C_kn`` are multinomial coefficients such that</span>
 <span class="sd">    ``n=k1+k2+..+km``.</span>
 
@@ -217,7 +216,7 @@
 
 
 <div class="viewcode-block" id="multinomial_coefficients_iterator"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.multinomial.multinomial_coefficients_iterator">[docs]</a><span class="k">def</span> <span class="nf">multinomial_coefficients_iterator</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">_tuple</span><span class="o">=</span><span class="nb">tuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;multinomial coefficient iterator</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;multinomial coefficient iterator</span>
 
 <span class="sd">    This routine has been optimized for `m` large with respect to `n` by taking</span>
 <span class="sd">    advantage of the fact that when the monomial tuples `t` are stripped of</span>
@@ -292,7 +291,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -313,7 +312,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

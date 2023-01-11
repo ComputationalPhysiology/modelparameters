@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>modelparameters.sympy.calculus package &#8212; modelparameters 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -47,12 +46,12 @@
           <div class="body" role="main">
             
   <section id="modelparameters-sympy-calculus-package">
-<h1>modelparameters.sympy.calculus package<a class="headerlink" href="#modelparameters-sympy-calculus-package" title="Permalink to this headline">¶</a></h1>
+<h1>modelparameters.sympy.calculus package<a class="headerlink" href="#modelparameters-sympy-calculus-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.calculus.euler">
-<span id="modelparameters-sympy-calculus-euler-module"></span><h2>modelparameters.sympy.calculus.euler module<a class="headerlink" href="#module-modelparameters.sympy.calculus.euler" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-calculus-euler-module"></span><h2>modelparameters.sympy.calculus.euler module<a class="headerlink" href="#module-modelparameters.sympy.calculus.euler" title="Permalink to this heading">¶</a></h2>
 <p>This module implements a method to find
 Euler-Lagrange Equations for given Lagrangian.</p>
 <dl class="py function">
@@ -60,7 +59,7 @@ Euler-Lagrange Equations for given Lagrangian.</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.calculus.euler.</span></span><span class="sig-name descname"><span class="pre">euler_equations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">funcs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/calculus/euler.html#euler_equations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.calculus.euler.euler_equations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find the Euler-Lagrange equations <a href="#id12"><span class="problematic" id="id1">[1]_</span></a> for a given Lagrangian.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>L</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><em>Expr</em></a>) – <p>The Lagrangian that should be a function of the functions listed
 in the second argument and their derivatives.</p>
@@ -77,16 +76,16 @@ two independent variables <cite>x</cite>, <cite>y</cite> the Lagrangian would ha
 Lagrangian, it will be auto-detected (and an error raised if this
 couldn’t be done).</p>
 </p></li>
-<li><p><strong>funcs</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><em>Function</em></a><em> or </em><em>an iterable of Functions</em>) – The functions that the Lagrangian depends on. The Euler equations
+<li><p><strong>funcs</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><em>Function</em></a><em> or </em><em>an iterable</em><em> of </em><em>Functions</em>) – The functions that the Lagrangian depends on. The Euler equations
 are differential equations for each of these functions.</p></li>
-<li><p><strong>vars</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.symbol.Symbol" title="modelparameters.sympy.core.symbol.Symbol"><em>Symbol</em></a><em> or </em><em>an iterable of Symbols</em>) – The Symbols that are the independent variables of the functions.</p></li>
+<li><p><strong>vars</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.symbol.Symbol" title="modelparameters.sympy.core.symbol.Symbol"><em>Symbol</em></a><em> or </em><em>an iterable</em><em> of </em><em>Symbols</em>) – The Symbols that are the independent variables of the functions.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>eqns</strong> – The list of differential equations, one for each function.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list of Eq</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a> of Eq</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -105,18 +104,19 @@ are differential equations for each of these functions.</p></li>
 </pre></div>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets">1</span></dt>
-<dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation">http://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation</a></p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation">http://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation</a></p>
+</aside>
+</aside>
 </dd></dl>
 
 </section>
 <section id="module-modelparameters.sympy.calculus.finite_diff">
-<span id="modelparameters-sympy-calculus-finite-diff-module"></span><h2>modelparameters.sympy.calculus.finite_diff module<a class="headerlink" href="#module-modelparameters.sympy.calculus.finite_diff" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-calculus-finite-diff-module"></span><h2>modelparameters.sympy.calculus.finite_diff module<a class="headerlink" href="#module-modelparameters.sympy.calculus.finite_diff" title="Permalink to this heading">¶</a></h2>
 <section id="finite-difference-weights">
-<h3>Finite difference weights<a class="headerlink" href="#finite-difference-weights" title="Permalink to this headline">¶</a></h3>
+<h3>Finite difference weights<a class="headerlink" href="#finite-difference-weights" title="Permalink to this heading">¶</a></h3>
 <p>This module implements an algorithm for efficient generation of finite
 difference weights for ordinary differentials of functions for
 derivatives from 0 (interpolation) up to arbitrary order.</p>
@@ -135,6 +135,7 @@ for:</p>
 </dl>
 </li>
 </ul>
+</section>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.calculus.finite_diff.apply_finite_diff">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.calculus.finite_diff.</span></span><span class="sig-name descname"><span class="pre">apply_finite_diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/calculus/finite_diff.html#apply_finite_diff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.calculus.finite_diff.apply_finite_diff" title="Permalink to this definition">¶</a></dt>
@@ -142,9 +143,9 @@ for:</p>
 the derivative of requested order at <code class="docutils literal notranslate"><span class="pre">x0</span></code> from points
 provided in <code class="docutils literal notranslate"><span class="pre">x_list</span></code> and <code class="docutils literal notranslate"><span class="pre">y_list</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – order of derivative to approximate. 0 corresponds to interpolation.</p></li>
+<li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – order of derivative to approximate. 0 corresponds to interpolation.</p></li>
 <li><p><strong>x_list</strong> (<em>sequence</em>) – Sequence of (unique) values for the independent variable.</p></li>
 <li><p><strong>y_list</strong> (<em>sequence</em>) – The function value at corresponding values for the independent
 variable in x_list.</p></li>
@@ -152,11 +153,11 @@ variable in x_list.</p></li>
 evaluated. Defaults to S(0).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The finite difference expression approximating the requested
 derivative order at <code class="docutils literal notranslate"><span class="pre">x0</span></code>.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.add.Add" title="modelparameters.sympy.core.add.Add">sympy.core.add.Add</a> or <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.numbers.Number" title="modelparameters.sympy.core.numbers.Number">sympy.core.numbers.Number</a></p>
 </dd>
 </dl>
@@ -201,7 +202,7 @@ the form of a finite difference formula. The expression is a
 weighted sum of the function at a number of discrete values of
 (one of) the independent variable(s).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>derivative</strong> (<em>a Derivative instance</em>) – </p></li>
 <li><p><strong>points</strong> (<em>sequence</em><em> or </em><em>coefficient</em><em>, </em><em>optional</em>) – If sequence: discrete values (length &gt;= order+1) of the
@@ -268,14 +269,14 @@ an expression estimating the derivative at an offset:</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.calculus.finite_diff.</span></span><span class="sig-name descname"><span class="pre">differentiate_finite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/calculus/finite_diff.html#differentiate_finite"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.calculus.finite_diff.differentiate_finite" title="Permalink to this definition">¶</a></dt>
 <dd><p>Differentiate expr and replace Derivatives with finite differences.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<em>expression</em>) – </p></li>
 <li><p><strong>*symbols</strong> (<em>differentiate with respect to symbols</em>) – </p></li>
 <li><p><strong>points</strong> (<em>sequence</em><em> or </em><em>coefficient</em><em>, </em><em>optional</em>) – see <code class="docutils literal notranslate"><span class="pre">Derivative.as_finite_difference</span></code></p></li>
 <li><p><strong>x0</strong> (<em>number</em><em> or </em><a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.symbol.Symbol" title="modelparameters.sympy.core.symbol.Symbol"><em>Symbol</em></a><em>, </em><em>optional</em>) – see <code class="docutils literal notranslate"><span class="pre">Derivative.as_finite_difference</span></code></p></li>
 <li><p><strong>wrt</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.symbol.Symbol" title="modelparameters.sympy.core.symbol.Symbol"><em>Symbol</em></a><em>, </em><em>optional</em>) – see <code class="docutils literal notranslate"><span class="pre">Derivative.as_finite_difference</span></code></p></li>
-<li><p><strong>evaluate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – kwarg passed on to <code class="docutils literal notranslate"><span class="pre">diff</span></code>, whether or not to
+<li><p><strong>evaluate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – kwarg passed on to <code class="docutils literal notranslate"><span class="pre">diff</span></code>, whether or not to
 evaluate the Derivative intermediately (default: <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p></li>
 </ul>
 </dd>
@@ -314,9 +315,9 @@ one-dimensional grid (<code class="docutils literal notranslate"><span class="pr
 0, 1, …, up to <code class="docutils literal notranslate"><span class="pre">order</span></code> using a recursive formula. Order of accuracy
 is at least <code class="docutils literal notranslate"><span class="pre">len(x_list)</span> <span class="pre">-</span> <span class="pre">order</span></code>, if <code class="docutils literal notranslate"><span class="pre">x_list</span></code> is defined correctly.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Up to what derivative order weights should be calculated.
+<li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Up to what derivative order weights should be calculated.
 0 corresponds to interpolation.</p></li>
 <li><p><strong>x_list</strong> (<em>sequence</em>) – Sequence of (unique) values for the independent variable.
 It is useful (but not necessary) to order <code class="docutils literal notranslate"><span class="pre">x_list</span></code> from
@@ -325,13 +326,13 @@ nearest to furthest from <code class="docutils literal notranslate"><span class=
 difference weights should be generated. Default is <code class="docutils literal notranslate"><span class="pre">S.One</span></code>.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A list of sublists, each corresponding to coefficients for
 increasing derivative order, and each containing lists of
 coefficients for increasing subsets of x_list.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -433,21 +434,21 @@ which might not grand an order of accuracy of <code class="docutils literal notr
 <p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sympy.calculus.finite_diff.apply_finite_diff</span></code></p>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id3"><span class="brackets">1</span></dt>
-<dd><p>Generation of Finite Difference Formulas on Arbitrarily Spaced
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id3" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>Generation of Finite Difference Formulas on Arbitrarily Spaced
 Grids, Bengt Fornberg; Mathematics of computation; 51; 184;
 (1988); 699-706; doi:10.1090/S0025-5718-1988-0935077-0</p>
-</dd>
-</dl>
+</aside>
+</aside>
 </dd></dl>
 
 </section>
-</section>
 <section id="module-modelparameters.sympy.calculus.singularities">
-<span id="modelparameters-sympy-calculus-singularities-module"></span><h2>modelparameters.sympy.calculus.singularities module<a class="headerlink" href="#module-modelparameters.sympy.calculus.singularities" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-calculus-singularities-module"></span><h2>modelparameters.sympy.calculus.singularities module<a class="headerlink" href="#module-modelparameters.sympy.calculus.singularities" title="Permalink to this heading">¶</a></h2>
 <section id="singularities">
-<h3>Singularities<a class="headerlink" href="#singularities" title="Permalink to this headline">¶</a></h3>
+<h3>Singularities<a class="headerlink" href="#singularities" title="Permalink to this heading">¶</a></h3>
 <p>This module implements algorithms for finding singularities for a function
 and identifying types of functions.</p>
 <p>The differential calculus methods in this module include methods to identify
@@ -457,6 +458,7 @@ the following function types in the given <code class="docutils literal notransl
 - Decreasing
 - Strictly Decreasing
 - Monotonic</p>
+</section>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.calculus.singularities.is_decreasing">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.calculus.singularities.</span></span><span class="sig-name descname"><span class="pre">is_decreasing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expression</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">S.Reals</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/calculus/singularities.html#is_decreasing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.calculus.singularities.is_decreasing" title="Permalink to this definition">¶</a></dt>
@@ -599,27 +601,27 @@ of the given interval.</p>
 <p>This function does not find nonisolated singularities
 nor does it find branch points of the expression.</p>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id4"><span class="brackets">1</span></dt>
-<dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Mathematical_singularity">http://en.wikipedia.org/wiki/Mathematical_singularity</a></p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id4" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Mathematical_singularity">http://en.wikipedia.org/wiki/Mathematical_singularity</a></p>
+</aside>
+</aside>
 </dd></dl>
 
 </section>
-</section>
 <section id="module-modelparameters.sympy.calculus.util">
-<span id="modelparameters-sympy-calculus-util-module"></span><h2>modelparameters.sympy.calculus.util module<a class="headerlink" href="#module-modelparameters.sympy.calculus.util" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-calculus-util-module"></span><h2>modelparameters.sympy.calculus.util module<a class="headerlink" href="#module-modelparameters.sympy.calculus.util" title="Permalink to this heading">¶</a></h2>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.calculus.util.AccumBounds">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.calculus.util.</span></span><span class="sig-name descname"><span class="pre">AccumBounds</span></span><a class="headerlink" href="#modelparameters.sympy.calculus.util.AccumBounds" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds" title="modelparameters.sympy.calculus.util.AccumulationBounds"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.calculus.util.AccumulationBounds</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds" title="modelparameters.sympy.calculus.util.AccumulationBounds"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccumulationBounds</span></code></a></p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.calculus.util.AccumulationBounds">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.calculus.util.</span></span><span class="sig-name descname"><span class="pre">AccumulationBounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/calculus/util.html#AccumulationBounds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.calculus.util.AccumulationBounds" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.AtomicExpr" title="modelparameters.sympy.core.expr.AtomicExpr"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.expr.AtomicExpr</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.AtomicExpr" title="modelparameters.sympy.core.expr.AtomicExpr"><code class="xref py py-class docutils literal notranslate"><span class="pre">AtomicExpr</span></code></a></p>
 <p># Note AccumulationBounds has an alias: AccumBounds</p>
 <p>AccumulationBounds represent an interval <cite>[a, b]</cite>, which is always closed
 at the ends. Here <cite>a</cite> and <cite>b</cite> can be any value from extended real numbers.</p>
@@ -744,14 +746,16 @@ the form it is used for substituion. For example:</p>
 </pre></div>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id5"><span class="brackets">1</span></dt>
-<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Interval_arithmetic">https://en.wikipedia.org/wiki/Interval_arithmetic</a></p>
-</dd>
-<dt class="label" id="id6"><span class="brackets">2</span></dt>
-<dd><p><a class="reference external" href="http://fab.cba.mit.edu/classes/S62.12/docs/Hickey_interval.pdf">http://fab.cba.mit.edu/classes/S62.12/docs/Hickey_interval.pdf</a></p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id5" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Interval_arithmetic">https://en.wikipedia.org/wiki/Interval_arithmetic</a></p>
+</aside>
+<aside class="footnote brackets" id="id6" role="note">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://fab.cba.mit.edu/classes/S62.12/docs/Hickey_interval.pdf">http://fab.cba.mit.edu/classes/S62.12/docs/Hickey_interval.pdf</a></p>
+</aside>
+</aside>
 <p class="rubric">Notes</p>
 <p>Do not use <code class="docutils literal notranslate"><span class="pre">AccumulationBounds</span></code> for floating point interval arithmetic
 calculations, use <code class="docutils literal notranslate"><span class="pre">mpmath.iv</span></code> instead.</p>
@@ -942,18 +946,18 @@ determine limits.</p>
 <dd><p>Finds the domain of the functions in <cite>finite_set</cite> in which the
 <cite>finite_set</cite> is not-empty</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>finset_intersection</strong> (<em>The unevaluated intersection of FiniteSet containing</em>) – real-valued functions with Union of Sets</p></li>
-<li><p><strong>syms</strong> (<em>Tuple of symbols</em>) – Symbol for which domain is to be found</p></li>
+<li><p><strong>finset_intersection</strong> (<em>The unevaluated intersection</em><em> of </em><em>FiniteSet containing</em>) – real-valued functions with Union of Sets</p></li>
+<li><p><strong>syms</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.containers.Tuple" title="modelparameters.sympy.core.containers.Tuple"><em>Tuple</em></a><em> of </em><em>symbols</em>) – Symbol for which domain is to be found</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NotImplementedError" title="(in Python v3.10)"><strong>NotImplementedError</strong></a> – The algorithms to find the non-emptiness of the given FiniteSet are
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NotImplementedError" title="(in Python v3.11)"><strong>NotImplementedError</strong></a> – The algorithms to find the non-emptiness of the given FiniteSet are
     not yet implemented.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.10)"><strong>ValueError</strong></a> – The input is not valid.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.10)"><strong>RuntimeError</strong></a> – It is a bug, please report it to the github issue tracker
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.11)"><strong>ValueError</strong></a> – The input is not valid.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.11)"><strong>RuntimeError</strong></a> – It is a bug, please report it to the github issue tracker
     (<a class="reference external" href="https://github.com/sympy/sympy/issues">https://github.com/sympy/sympy/issues</a>).</p></li>
 </ul>
 </dd>
@@ -976,23 +980,23 @@ determine limits.</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.calculus.util.</span></span><span class="sig-name descname"><span class="pre">periodicity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/calculus/util.html#periodicity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.calculus.util.periodicity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tests the given function for periodicity in the given symbol.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<em>Expr.</em>) – The concerned function.</p></li>
 <li><p><strong>symbol</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.symbol.Symbol" title="modelparameters.sympy.core.symbol.Symbol"><em>Symbol</em></a>) – The variable for which the period is to be determined.</p></li>
 <li><p><strong>check</strong> (<a class="reference internal" href="modelparameters.sympy.logic.html#modelparameters.sympy.logic.boolalg.Boolean" title="modelparameters.sympy.logic.boolalg.Boolean"><em>Boolean</em></a>) – The flag to verify whether the value being returned is a period or not.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The period of the function is returned.
 <cite>None</cite> is returned when the function is aperiodic or has a complex period.
 The value of <cite>0</cite> is returned as the period of a constant function.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>period</p>
 </dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NotImplementedError" title="(in Python v3.10)"><strong>NotImplementedError</strong></a> – The value of the period computed cannot be verified.</p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NotImplementedError" title="(in Python v3.11)"><strong>NotImplementedError</strong></a> – The value of the period computed cannot be verified.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -1024,12 +1028,12 @@ to <cite>False</cite> by default.</p>
 
 </section>
 <section id="module-modelparameters.sympy.calculus">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.calculus" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.calculus" title="Permalink to this heading">¶</a></h2>
 <p>Calculus-related methods.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.calculus.AccumBounds">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.calculus.</span></span><span class="sig-name descname"><span class="pre">AccumBounds</span></span><a class="headerlink" href="#modelparameters.sympy.calculus.AccumBounds" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds" title="modelparameters.sympy.calculus.util.AccumulationBounds"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.calculus.util.AccumulationBounds</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds" title="modelparameters.sympy.calculus.util.AccumulationBounds"><code class="xref py py-class docutils literal notranslate"><span class="pre">AccumulationBounds</span></code></a></p>
 </dd></dl>
 
 <dl class="py function">
@@ -1039,9 +1043,9 @@ to <cite>False</cite> by default.</p>
 the derivative of requested order at <code class="docutils literal notranslate"><span class="pre">x0</span></code> from points
 provided in <code class="docutils literal notranslate"><span class="pre">x_list</span></code> and <code class="docutils literal notranslate"><span class="pre">y_list</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – order of derivative to approximate. 0 corresponds to interpolation.</p></li>
+<li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – order of derivative to approximate. 0 corresponds to interpolation.</p></li>
 <li><p><strong>x_list</strong> (<em>sequence</em>) – Sequence of (unique) values for the independent variable.</p></li>
 <li><p><strong>y_list</strong> (<em>sequence</em>) – The function value at corresponding values for the independent
 variable in x_list.</p></li>
@@ -1049,11 +1053,11 @@ variable in x_list.</p></li>
 evaluated. Defaults to S(0).</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The finite difference expression approximating the requested
 derivative order at <code class="docutils literal notranslate"><span class="pre">x0</span></code>.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.add.Add" title="modelparameters.sympy.core.add.Add">sympy.core.add.Add</a> or <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.numbers.Number" title="modelparameters.sympy.core.numbers.Number">sympy.core.numbers.Number</a></p>
 </dd>
 </dl>
@@ -1098,7 +1102,7 @@ the form of a finite difference formula. The expression is a
 weighted sum of the function at a number of discrete values of
 (one of) the independent variable(s).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>derivative</strong> (<em>a Derivative instance</em>) – </p></li>
 <li><p><strong>points</strong> (<em>sequence</em><em> or </em><em>coefficient</em><em>, </em><em>optional</em>) – If sequence: discrete values (length &gt;= order+1) of the
@@ -1165,14 +1169,14 @@ an expression estimating the derivative at an offset:</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.calculus.</span></span><span class="sig-name descname"><span class="pre">differentiate_finite</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/calculus/finite_diff.html#differentiate_finite"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.calculus.differentiate_finite" title="Permalink to this definition">¶</a></dt>
 <dd><p>Differentiate expr and replace Derivatives with finite differences.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<em>expression</em>) – </p></li>
 <li><p><strong>*symbols</strong> (<em>differentiate with respect to symbols</em>) – </p></li>
 <li><p><strong>points</strong> (<em>sequence</em><em> or </em><em>coefficient</em><em>, </em><em>optional</em>) – see <code class="docutils literal notranslate"><span class="pre">Derivative.as_finite_difference</span></code></p></li>
 <li><p><strong>x0</strong> (<em>number</em><em> or </em><a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.symbol.Symbol" title="modelparameters.sympy.core.symbol.Symbol"><em>Symbol</em></a><em>, </em><em>optional</em>) – see <code class="docutils literal notranslate"><span class="pre">Derivative.as_finite_difference</span></code></p></li>
 <li><p><strong>wrt</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.symbol.Symbol" title="modelparameters.sympy.core.symbol.Symbol"><em>Symbol</em></a><em>, </em><em>optional</em>) – see <code class="docutils literal notranslate"><span class="pre">Derivative.as_finite_difference</span></code></p></li>
-<li><p><strong>evaluate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – kwarg passed on to <code class="docutils literal notranslate"><span class="pre">diff</span></code>, whether or not to
+<li><p><strong>evaluate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><em>bool</em></a>) – kwarg passed on to <code class="docutils literal notranslate"><span class="pre">diff</span></code>, whether or not to
 evaluate the Derivative intermediately (default: <code class="docutils literal notranslate"><span class="pre">False</span></code>).</p></li>
 </ul>
 </dd>
@@ -1208,7 +1212,7 @@ usually not what we want):</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.calculus.</span></span><span class="sig-name descname"><span class="pre">euler_equations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">L</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">funcs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/calculus/euler.html#euler_equations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.calculus.euler_equations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find the Euler-Lagrange equations <a href="#id13"><span class="problematic" id="id8">[1]_</span></a> for a given Lagrangian.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>L</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><em>Expr</em></a>) – <p>The Lagrangian that should be a function of the functions listed
 in the second argument and their derivatives.</p>
@@ -1225,16 +1229,16 @@ two independent variables <cite>x</cite>, <cite>y</cite> the Lagrangian would ha
 Lagrangian, it will be auto-detected (and an error raised if this
 couldn’t be done).</p>
 </p></li>
-<li><p><strong>funcs</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><em>Function</em></a><em> or </em><em>an iterable of Functions</em>) – The functions that the Lagrangian depends on. The Euler equations
+<li><p><strong>funcs</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><em>Function</em></a><em> or </em><em>an iterable</em><em> of </em><em>Functions</em>) – The functions that the Lagrangian depends on. The Euler equations
 are differential equations for each of these functions.</p></li>
-<li><p><strong>vars</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.symbol.Symbol" title="modelparameters.sympy.core.symbol.Symbol"><em>Symbol</em></a><em> or </em><em>an iterable of Symbols</em>) – The Symbols that are the independent variables of the functions.</p></li>
+<li><p><strong>vars</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.symbol.Symbol" title="modelparameters.sympy.core.symbol.Symbol"><em>Symbol</em></a><em> or </em><em>an iterable</em><em> of </em><em>Symbols</em>) – The Symbols that are the independent variables of the functions.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>eqns</strong> – The list of differential equations, one for each function.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>list of Eq</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a> of Eq</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -1253,11 +1257,12 @@ are differential equations for each of these functions.</p></li>
 </pre></div>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id9"><span class="brackets">1</span></dt>
-<dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation">http://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation</a></p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id9" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation">http://en.wikipedia.org/wiki/Euler%E2%80%93Lagrange_equation</a></p>
+</aside>
+</aside>
 </dd></dl>
 
 <dl class="py function">
@@ -1268,9 +1273,9 @@ one-dimensional grid (<code class="docutils literal notranslate"><span class="pr
 0, 1, …, up to <code class="docutils literal notranslate"><span class="pre">order</span></code> using a recursive formula. Order of accuracy
 is at least <code class="docutils literal notranslate"><span class="pre">len(x_list)</span> <span class="pre">-</span> <span class="pre">order</span></code>, if <code class="docutils literal notranslate"><span class="pre">x_list</span></code> is defined correctly.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – Up to what derivative order weights should be calculated.
+<li><p><strong>order</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – Up to what derivative order weights should be calculated.
 0 corresponds to interpolation.</p></li>
 <li><p><strong>x_list</strong> (<em>sequence</em>) – Sequence of (unique) values for the independent variable.
 It is useful (but not necessary) to order <code class="docutils literal notranslate"><span class="pre">x_list</span></code> from
@@ -1279,13 +1284,13 @@ nearest to furthest from <code class="docutils literal notranslate"><span class=
 difference weights should be generated. Default is <code class="docutils literal notranslate"><span class="pre">S.One</span></code>.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>A list of sublists, each corresponding to coefficients for
 increasing derivative order, and each containing lists of
 coefficients for increasing subsets of x_list.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a></p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)">list</a></p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -1387,13 +1392,14 @@ which might not grand an order of accuracy of <code class="docutils literal notr
 <p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sympy.calculus.finite_diff.apply_finite_diff</span></code></p>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id10"><span class="brackets">1</span></dt>
-<dd><p>Generation of Finite Difference Formulas on Arbitrarily Spaced
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id10" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>Generation of Finite Difference Formulas on Arbitrarily Spaced
 Grids, Bengt Fornberg; Mathematics of computation; 51; 184;
 (1988); 699-706; doi:10.1090/S0025-5718-1988-0935077-0</p>
-</dd>
-</dl>
+</aside>
+</aside>
 </dd></dl>
 
 <dl class="py function">
@@ -1510,18 +1516,18 @@ Grids, Bengt Fornberg; Mathematics of computation; 51; 184;
 <dd><p>Finds the domain of the functions in <cite>finite_set</cite> in which the
 <cite>finite_set</cite> is not-empty</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>finset_intersection</strong> (<em>The unevaluated intersection of FiniteSet containing</em>) – real-valued functions with Union of Sets</p></li>
-<li><p><strong>syms</strong> (<em>Tuple of symbols</em>) – Symbol for which domain is to be found</p></li>
+<li><p><strong>finset_intersection</strong> (<em>The unevaluated intersection</em><em> of </em><em>FiniteSet containing</em>) – real-valued functions with Union of Sets</p></li>
+<li><p><strong>syms</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.containers.Tuple" title="modelparameters.sympy.core.containers.Tuple"><em>Tuple</em></a><em> of </em><em>symbols</em>) – Symbol for which domain is to be found</p></li>
 </ul>
 </dd>
-<dt class="field-even">Raises</dt>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NotImplementedError" title="(in Python v3.10)"><strong>NotImplementedError</strong></a> – The algorithms to find the non-emptiness of the given FiniteSet are
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NotImplementedError" title="(in Python v3.11)"><strong>NotImplementedError</strong></a> – The algorithms to find the non-emptiness of the given FiniteSet are
     not yet implemented.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.10)"><strong>ValueError</strong></a> – The input is not valid.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.10)"><strong>RuntimeError</strong></a> – It is a bug, please report it to the github issue tracker
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.11)"><strong>ValueError</strong></a> – The input is not valid.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.11)"><strong>RuntimeError</strong></a> – It is a bug, please report it to the github issue tracker
     (<a class="reference external" href="https://github.com/sympy/sympy/issues">https://github.com/sympy/sympy/issues</a>).</p></li>
 </ul>
 </dd>
@@ -1544,23 +1550,23 @@ Grids, Bengt Fornberg; Mathematics of computation; 51; 184;
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.calculus.</span></span><span class="sig-name descname"><span class="pre">periodicity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">check</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/calculus/util.html#periodicity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.calculus.periodicity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Tests the given function for periodicity in the given symbol.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>f</strong> (<em>Expr.</em>) – The concerned function.</p></li>
 <li><p><strong>symbol</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.symbol.Symbol" title="modelparameters.sympy.core.symbol.Symbol"><em>Symbol</em></a>) – The variable for which the period is to be determined.</p></li>
 <li><p><strong>check</strong> (<a class="reference internal" href="modelparameters.sympy.logic.html#modelparameters.sympy.logic.boolalg.Boolean" title="modelparameters.sympy.logic.boolalg.Boolean"><em>Boolean</em></a>) – The flag to verify whether the value being returned is a period or not.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The period of the function is returned.
 <cite>None</cite> is returned when the function is aperiodic or has a complex period.
 The value of <cite>0</cite> is returned as the period of a constant function.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>period</p>
 </dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NotImplementedError" title="(in Python v3.10)"><strong>NotImplementedError</strong></a> – The value of the period computed cannot be verified.</p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NotImplementedError" title="(in Python v3.11)"><strong>NotImplementedError</strong></a> – The value of the period computed cannot be verified.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -1615,11 +1621,12 @@ to <cite>False</cite> by default.</p>
 <p>This function does not find nonisolated singularities
 nor does it find branch points of the expression.</p>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id11"><span class="brackets">1</span></dt>
-<dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Mathematical_singularity">http://en.wikipedia.org/wiki/Mathematical_singularity</a></p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id11" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Mathematical_singularity">http://en.wikipedia.org/wiki/Mathematical_singularity</a></p>
+</aside>
+</aside>
 </dd></dl>
 
 </section>
@@ -1637,17 +1644,70 @@ nor does it find branch points of the expression.</p>
     <ul>
 <li><a class="reference internal" href="#">modelparameters.sympy.calculus package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.calculus.euler">modelparameters.sympy.calculus.euler module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.calculus.euler">modelparameters.sympy.calculus.euler module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.euler.euler_equations"><code class="docutils literal notranslate"><span class="pre">euler_equations()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.calculus.finite_diff">modelparameters.sympy.calculus.finite_diff module</a><ul>
 <li><a class="reference internal" href="#finite-difference-weights">Finite difference weights</a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.finite_diff.apply_finite_diff"><code class="docutils literal notranslate"><span class="pre">apply_finite_diff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.finite_diff.as_finite_diff"><code class="docutils literal notranslate"><span class="pre">as_finite_diff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.finite_diff.differentiate_finite"><code class="docutils literal notranslate"><span class="pre">differentiate_finite()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.finite_diff.finite_diff_weights"><code class="docutils literal notranslate"><span class="pre">finite_diff_weights()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.calculus.singularities">modelparameters.sympy.calculus.singularities module</a><ul>
 <li><a class="reference internal" href="#singularities">Singularities</a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.singularities.is_decreasing"><code class="docutils literal notranslate"><span class="pre">is_decreasing()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.singularities.is_increasing"><code class="docutils literal notranslate"><span class="pre">is_increasing()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.singularities.is_monotonic"><code class="docutils literal notranslate"><span class="pre">is_monotonic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.singularities.is_strictly_decreasing"><code class="docutils literal notranslate"><span class="pre">is_strictly_decreasing()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.singularities.is_strictly_increasing"><code class="docutils literal notranslate"><span class="pre">is_strictly_increasing()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.singularities.monotonicity_helper"><code class="docutils literal notranslate"><span class="pre">monotonicity_helper()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.singularities.singularities"><code class="docutils literal notranslate"><span class="pre">singularities()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.calculus.util">modelparameters.sympy.calculus.util module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.calculus">Module contents</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.calculus.util">modelparameters.sympy.calculus.util module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumBounds"><code class="docutils literal notranslate"><span class="pre">AccumBounds</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds"><code class="docutils literal notranslate"><span class="pre">AccumulationBounds</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds.default_assumptions"><code class="docutils literal notranslate"><span class="pre">AccumulationBounds.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds.delta"><code class="docutils literal notranslate"><span class="pre">AccumulationBounds.delta</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds.intersection"><code class="docutils literal notranslate"><span class="pre">AccumulationBounds.intersection()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds.is_commutative"><code class="docutils literal notranslate"><span class="pre">AccumulationBounds.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds.is_complex"><code class="docutils literal notranslate"><span class="pre">AccumulationBounds.is_complex</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds.is_hermitian"><code class="docutils literal notranslate"><span class="pre">AccumulationBounds.is_hermitian</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds.is_imaginary"><code class="docutils literal notranslate"><span class="pre">AccumulationBounds.is_imaginary</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds.is_real"><code class="docutils literal notranslate"><span class="pre">AccumulationBounds.is_real</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds.max"><code class="docutils literal notranslate"><span class="pre">AccumulationBounds.max</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds.mid"><code class="docutils literal notranslate"><span class="pre">AccumulationBounds.mid</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds.min"><code class="docutils literal notranslate"><span class="pre">AccumulationBounds.min</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.AccumulationBounds.union"><code class="docutils literal notranslate"><span class="pre">AccumulationBounds.union()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.continuous_domain"><code class="docutils literal notranslate"><span class="pre">continuous_domain()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.function_range"><code class="docutils literal notranslate"><span class="pre">function_range()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.lcim"><code class="docutils literal notranslate"><span class="pre">lcim()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.not_empty_in"><code class="docutils literal notranslate"><span class="pre">not_empty_in()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.util.periodicity"><code class="docutils literal notranslate"><span class="pre">periodicity()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.calculus">Module contents</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.AccumBounds"><code class="docutils literal notranslate"><span class="pre">AccumBounds</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.apply_finite_diff"><code class="docutils literal notranslate"><span class="pre">apply_finite_diff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.as_finite_diff"><code class="docutils literal notranslate"><span class="pre">as_finite_diff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.differentiate_finite"><code class="docutils literal notranslate"><span class="pre">differentiate_finite()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.euler_equations"><code class="docutils literal notranslate"><span class="pre">euler_equations()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.finite_diff_weights"><code class="docutils literal notranslate"><span class="pre">finite_diff_weights()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.is_decreasing"><code class="docutils literal notranslate"><span class="pre">is_decreasing()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.is_increasing"><code class="docutils literal notranslate"><span class="pre">is_increasing()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.is_monotonic"><code class="docutils literal notranslate"><span class="pre">is_monotonic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.is_strictly_decreasing"><code class="docutils literal notranslate"><span class="pre">is_strictly_decreasing()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.is_strictly_increasing"><code class="docutils literal notranslate"><span class="pre">is_strictly_increasing()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.not_empty_in"><code class="docutils literal notranslate"><span class="pre">not_empty_in()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.periodicity"><code class="docutils literal notranslate"><span class="pre">periodicity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.calculus.singularities"><code class="docutils literal notranslate"><span class="pre">singularities()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1679,7 +1739,7 @@ nor does it find branch points of the expression.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1707,7 +1767,7 @@ nor does it find branch points of the expression.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

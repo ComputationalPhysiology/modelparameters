@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -76,7 +75,7 @@
 
 
 <div class="viewcode-block" id="LinearEntity"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity">[docs]</a><span class="k">class</span> <span class="nc">LinearEntity</span><span class="p">(</span><span class="n">GeometrySet</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A base class for all linear entities (Line, Ray and Segment)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A base class for all linear entities (Line, Ray and Segment)</span>
 <span class="sd">    in n-dimensional Euclidean space.</span>
 
 <span class="sd">    Attributes</span>
@@ -114,7 +113,7 @@
         <span class="k">return</span> <span class="n">GeometryEntity</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a definitive answer or else raise an error if it cannot</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a definitive answer or else raise an error if it cannot</span>
 <span class="sd">        be determined that other is on the boundaries of self.&quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -125,7 +124,7 @@
                 <span class="s2">&quot;can&#39;t decide whether &#39;</span><span class="si">%s</span><span class="s2">&#39; contains &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_span_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test whether the point `other` lies in the positive span of `self`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test whether the point `other` lies in the positive span of `self`.</span>
 <span class="sd">        A point x is &#39;in front&#39; of a point y if x.dot(y) &gt;= 0.  Return</span>
 <span class="sd">        -1 if `other` is behind `self.p1`, 0 if `other` is `self.p1` and</span>
 <span class="sd">        and 1 if `other` is in front of `self.p1`.&quot;&quot;&quot;</span>
@@ -144,7 +143,7 @@
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p1</span><span class="p">)</span>
 
 <div class="viewcode-block" id="LinearEntity.angle_between"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity.angle_between">[docs]</a>    <span class="k">def</span> <span class="nf">angle_between</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The angle formed between the two linear entities.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The angle formed between the two linear entities.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -195,7 +194,7 @@
         <span class="k">return</span> <span class="n">acos</span><span class="p">(</span><span class="n">v1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">v1</span><span class="p">)</span><span class="o">*</span><span class="nb">abs</span><span class="p">(</span><span class="n">v2</span><span class="p">)))</span></div>
 
 <div class="viewcode-block" id="LinearEntity.arbitrary_point"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity.arbitrary_point">[docs]</a>    <span class="k">def</span> <span class="nf">arbitrary_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s1">&#39;t&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;A parameterized point on the Line.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A parameterized point on the Line.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -247,7 +246,7 @@
 
 <div class="viewcode-block" id="LinearEntity.are_concurrent"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity.are_concurrent">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">are_concurrent</span><span class="p">(</span><span class="o">*</span><span class="n">lines</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Is a sequence of linear entities concurrent?</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Is a sequence of linear entities concurrent?</span>
 
 <span class="sd">        Two or more linear entities are concurrent if they all</span>
 <span class="sd">        intersect at a single point.</span>
@@ -298,7 +297,7 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="LinearEntity.contains"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Subclasses should implement this method and should return</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Subclasses should implement this method and should return</span>
 <span class="sd">            True if other is on the boundaries of self;</span>
 <span class="sd">            False if not on the boundaries of self;</span>
 <span class="sd">            None if a determination cannot be made.&quot;&quot;&quot;</span>
@@ -306,7 +305,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">direction</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The direction vector of the LinearEntity.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The direction vector of the LinearEntity.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        =======</span>
@@ -338,7 +337,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">p2</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p1</span>
 
 <div class="viewcode-block" id="LinearEntity.intersection"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity.intersection">[docs]</a>    <span class="k">def</span> <span class="nf">intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The intersection with another geometrical entity.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The intersection with another geometrical entity.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -493,7 +492,7 @@
         <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LinearEntity.is_parallel"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity.is_parallel">[docs]</a>    <span class="k">def</span> <span class="nf">is_parallel</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Are two linear entities parallel?</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Are two linear entities parallel?</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -544,7 +543,7 @@
         <span class="k">return</span> <span class="n">l1</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">is_scalar_multiple</span><span class="p">(</span><span class="n">l2</span><span class="o">.</span><span class="n">direction</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LinearEntity.is_perpendicular"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity.is_perpendicular">[docs]</a>    <span class="k">def</span> <span class="nf">is_perpendicular</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Are two linear entities perpendicular?</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Are two linear entities perpendicular?</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -592,7 +591,7 @@
         <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">l1</span><span class="o">.</span><span class="n">direction</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">l2</span><span class="o">.</span><span class="n">direction</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="LinearEntity.is_similar"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity.is_similar">[docs]</a>    <span class="k">def</span> <span class="nf">is_similar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return True if self and other are contained in the same line.</span>
 
 <span class="sd">        Examples</span>
@@ -610,7 +609,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The length of the line.</span>
 
 <span class="sd">        Examples</span>
@@ -626,7 +625,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">p1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The first defining point of a linear entity.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The first defining point of a linear entity.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -647,7 +646,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">p2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The second defining point of a linear entity.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The second defining point of a linear entity.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -667,7 +666,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
 <div class="viewcode-block" id="LinearEntity.parallel_line"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity.parallel_line">[docs]</a>    <span class="k">def</span> <span class="nf">parallel_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a new Line parallel to this linear entity which passes</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new Line parallel to this linear entity which passes</span>
 <span class="sd">        through the point `p`.</span>
 
 <span class="sd">        Parameters</span>
@@ -710,7 +709,7 @@
         <span class="k">return</span> <span class="n">Line</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">p</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LinearEntity.perpendicular_line"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity.perpendicular_line">[docs]</a>    <span class="k">def</span> <span class="nf">perpendicular_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a new Line perpendicular to this linear entity which passes</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new Line perpendicular to this linear entity which passes</span>
 <span class="sd">        through the point `p`.</span>
 
 <span class="sd">        Parameters</span>
@@ -755,7 +754,7 @@
         <span class="k">return</span> <span class="n">Line</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">projection</span><span class="p">(</span><span class="n">p</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="LinearEntity.perpendicular_segment"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity.perpendicular_segment">[docs]</a>    <span class="k">def</span> <span class="nf">perpendicular_segment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a perpendicular line segment from `p` to this line.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a perpendicular line segment from `p` to this line.</span>
 
 <span class="sd">        The enpoints of the segment are ``p`` and the closest point in</span>
 <span class="sd">        the line containing self. (If self is not a line, the point might</span>
@@ -817,7 +816,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">points</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The two points used to define this linear entity.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The two points used to define this linear entity.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        =======</span>
@@ -842,7 +841,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">p2</span><span class="p">)</span>
 
 <div class="viewcode-block" id="LinearEntity.projection"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity.projection">[docs]</a>    <span class="k">def</span> <span class="nf">projection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Project a point, line, ray, or segment onto this linear entity.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Project a point, line, ray, or segment onto this linear entity.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -926,7 +925,7 @@
             <span class="s2">&quot;Do not know how to project </span><span class="si">%s</span><span class="s2"> onto </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="LinearEntity.random_point"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity.random_point">[docs]</a>    <span class="k">def</span> <span class="nf">random_point</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;A random point on a LinearEntity.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A random point on a LinearEntity.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        =======</span>
@@ -969,7 +968,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="o">*</span><span class="n">t</span><span class="o">/</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">p1</span></div></div>
 
 <div class="viewcode-block" id="Line"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Line">[docs]</a><span class="k">class</span> <span class="nc">Line</span><span class="p">(</span><span class="n">LinearEntity</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;An infinite line in space.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An infinite line in space.</span>
 
 <span class="sd">    A line is declared with two distinct points.</span>
 <span class="sd">    A 2D line may be declared with a point and slope</span>
@@ -1044,7 +1043,7 @@
         <span class="k">return</span> <span class="n">LinearEntity</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Line.contains"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Line.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return True if `other` is on this Line, or False otherwise.</span>
 
 <span class="sd">        Examples</span>
@@ -1079,7 +1078,7 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="Line.distance"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Line.distance">[docs]</a>    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Finds the shortest distance between a line and a point.</span>
 
 <span class="sd">        Raises</span>
@@ -1116,13 +1115,13 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Line.equals"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Line.equals">[docs]</a>    <span class="k">def</span> <span class="nf">equals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns True if self and other are the same mathematical entities&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if self and other are the same mathematical entities&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Line</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="n">Point</span><span class="o">.</span><span class="n">is_collinear</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p1</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">p1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">p2</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">p2</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Line.plot_interval"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Line.plot_interval">[docs]</a>    <span class="k">def</span> <span class="nf">plot_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s1">&#39;t&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The plot interval for the default geometric plot of line. Gives</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The plot interval for the default geometric plot of line. Gives</span>
 <span class="sd">        values that will produce a line that is +/- 5 units long (where a</span>
 <span class="sd">        unit is the distance between the two points that define the line).</span>
 
@@ -1152,7 +1151,7 @@
         <span class="k">return</span> <span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span></div></div>
 
 <div class="viewcode-block" id="Ray"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Ray">[docs]</a><span class="k">class</span> <span class="nc">Ray</span><span class="p">(</span><span class="n">LinearEntity</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A Ray is a semi-line in the space with a source point and a direction.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A Ray is a semi-line in the space with a source point and a direction.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ==========</span>
@@ -1219,7 +1218,7 @@
         <span class="k">return</span> <span class="n">LinearEntity</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="o">*</span><span class="n">pts</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_svg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">fill_color</span><span class="o">=</span><span class="s2">&quot;#66cc99&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns SVG path element for the LinearEntity.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns SVG path element for the LinearEntity.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -1243,7 +1242,7 @@
             <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">scale_factor</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">fill_color</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Ray.contains"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Ray.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Is other GeometryEntity contained in this Ray?</span>
 
 <span class="sd">        Examples</span>
@@ -1291,7 +1290,7 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="Ray.distance"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Ray.distance">[docs]</a>    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Finds the shortest distance between the ray and a point.</span>
 
 <span class="sd">        Raises</span>
@@ -1331,13 +1330,13 @@
             <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">other</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Ray.equals"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Ray.equals">[docs]</a>    <span class="k">def</span> <span class="nf">equals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns True if self and other are the same mathematical entities&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if self and other are the same mathematical entities&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Ray</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">source</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">source</span> <span class="ow">and</span> <span class="n">other</span><span class="o">.</span><span class="n">p2</span> <span class="ow">in</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Ray.plot_interval"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Ray.plot_interval">[docs]</a>    <span class="k">def</span> <span class="nf">plot_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s1">&#39;t&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The plot interval for the default geometric plot of the Ray. Gives</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The plot interval for the default geometric plot of the Ray. Gives</span>
 <span class="sd">        values that will produce a ray that is 10 units long (where a unit is</span>
 <span class="sd">        the distance between the two points that define the ray).</span>
 
@@ -1367,7 +1366,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The point from which the ray emanates.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The point from which the ray emanates.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -1391,7 +1390,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">p1</span></div>
 
 <div class="viewcode-block" id="Segment"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Segment">[docs]</a><span class="k">class</span> <span class="nc">Segment</span><span class="p">(</span><span class="n">LinearEntity</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;An undirected line segment in space.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An undirected line segment in space.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ==========</span>
@@ -1462,7 +1461,7 @@
         <span class="k">return</span> <span class="n">LinearEntity</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Segment.contains"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Segment.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Is the other GeometryEntity contained within this Segment?</span>
 
 <span class="sd">        Examples</span>
@@ -1505,7 +1504,7 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="Segment.distance"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Segment.distance">[docs]</a>    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Finds the shortest distance between a line segment and a point.</span>
 
 <span class="sd">        Raises</span>
@@ -1549,7 +1548,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The length of the line segment.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The length of the line segment.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -1575,7 +1574,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">midpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The midpoint of the line segment.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The midpoint of the line segment.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -1600,7 +1599,7 @@
         <span class="k">return</span> <span class="n">Point</span><span class="o">.</span><span class="n">midpoint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">p2</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Segment.perpendicular_bisector"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Segment.perpendicular_bisector">[docs]</a>    <span class="k">def</span> <span class="nf">perpendicular_bisector</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The perpendicular bisector of this segment.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The perpendicular bisector of this segment.</span>
 
 <span class="sd">        If no point is specified or the point specified is not on the</span>
 <span class="sd">        bisector then the bisector is returned as a Line. Otherwise a</span>
@@ -1643,7 +1642,7 @@
         <span class="k">return</span> <span class="n">l</span></div>
 
 <div class="viewcode-block" id="Segment.plot_interval"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Segment.plot_interval">[docs]</a>    <span class="k">def</span> <span class="nf">plot_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s1">&#39;t&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The plot interval for the default geometric plot of the Segment gives</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The plot interval for the default geometric plot of the Segment gives</span>
 <span class="sd">        values that will produce the full segment in a plot.</span>
 
 <span class="sd">        Parameters</span>
@@ -1672,7 +1671,7 @@
         <span class="k">return</span> <span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span></div></div>
 
 <div class="viewcode-block" id="LinearEntity2D"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity2D">[docs]</a><span class="k">class</span> <span class="nc">LinearEntity2D</span><span class="p">(</span><span class="n">LinearEntity</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A base class for all linear entities (line, ray and segment)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A base class for all linear entities (line, ray and segment)</span>
 <span class="sd">    in a 2-dimensional Euclidean space.</span>
 
 <span class="sd">    Attributes</span>
@@ -1697,7 +1696,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a tuple (xmin, ymin, xmax, ymax) representing the bounding</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a tuple (xmin, ymin, xmax, ymax) representing the bounding</span>
 <span class="sd">        rectangle for the geometric figure.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1708,7 +1707,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">ys</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">ys</span><span class="p">))</span>
 
 <div class="viewcode-block" id="LinearEntity2D.perpendicular_line"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity2D.perpendicular_line">[docs]</a>    <span class="k">def</span> <span class="nf">perpendicular_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a new Line perpendicular to this linear entity which passes</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new Line perpendicular to this linear entity which passes</span>
 <span class="sd">        through the point `p`.</span>
 
 <span class="sd">        Parameters</span>
@@ -1746,7 +1745,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">slope</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The slope of this linear entity, or infinity if vertical.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The slope of this linear entity, or infinity if vertical.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        =======</span>
@@ -1779,7 +1778,7 @@
         <span class="k">return</span> <span class="n">simplify</span><span class="p">(</span><span class="n">d2</span><span class="o">/</span><span class="n">d1</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Line2D"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Line2D">[docs]</a><span class="k">class</span> <span class="nc">Line2D</span><span class="p">(</span><span class="n">LinearEntity2D</span><span class="p">,</span> <span class="n">Line</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;An infinite line in space 2D.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An infinite line in space 2D.</span>
 
 <span class="sd">    A line is declared with two distinct points or a point and slope</span>
 <span class="sd">    as defined using keyword `slope`.</span>
@@ -1854,7 +1853,7 @@
         <span class="k">return</span> <span class="n">LinearEntity2D</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_svg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">fill_color</span><span class="o">=</span><span class="s2">&quot;#66cc99&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns SVG path element for the LinearEntity.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns SVG path element for the LinearEntity.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -1879,7 +1878,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">coefficients</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The coefficients (`a`, `b`, `c`) for `ax + by + c = 0`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The coefficients (`a`, `b`, `c`) for `ax + by + c = 0`.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -1913,7 +1912,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">p1</span><span class="o">.</span><span class="n">x</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">p2</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">p1</span><span class="o">.</span><span class="n">y</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">p2</span><span class="o">.</span><span class="n">x</span><span class="p">)])</span>
 
 <div class="viewcode-block" id="Line2D.equation"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Line2D.equation">[docs]</a>    <span class="k">def</span> <span class="nf">equation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The equation of the line: ax + by + c.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The equation of the line: ax + by + c.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -1954,7 +1953,7 @@
         <span class="k">return</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">y</span> <span class="o">+</span> <span class="n">c</span></div></div>
 
 <div class="viewcode-block" id="Ray2D"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Ray2D">[docs]</a><span class="k">class</span> <span class="nc">Ray2D</span><span class="p">(</span><span class="n">LinearEntity2D</span><span class="p">,</span> <span class="n">Ray</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A Ray is a semi-line in the space with a source point and a direction.</span>
 
 <span class="sd">    Parameters</span>
@@ -2048,7 +2047,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">xdirection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The x direction of the ray.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The x direction of the ray.</span>
 
 <span class="sd">        Positive infinity if the ray points in the positive x direction,</span>
 <span class="sd">        negative infinity if the ray points in the negative x direction,</span>
@@ -2080,7 +2079,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ydirection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The y direction of the ray.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The y direction of the ray.</span>
 
 <span class="sd">        Positive infinity if the ray points in the positive y direction,</span>
 <span class="sd">        negative infinity if the ray points in the negative y direction,</span>
@@ -2111,7 +2110,7 @@
             <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeInfinity</span></div>
 
 <div class="viewcode-block" id="Segment2D"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Segment2D">[docs]</a><span class="k">class</span> <span class="nc">Segment2D</span><span class="p">(</span><span class="n">LinearEntity2D</span><span class="p">,</span> <span class="n">Segment</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;An undirected line segment in 2D space.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An undirected line segment in 2D space.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ==========</span>
@@ -2166,7 +2165,7 @@
         <span class="k">return</span> <span class="n">LinearEntity2D</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_svg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scale_factor</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">fill_color</span><span class="o">=</span><span class="s2">&quot;#66cc99&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns SVG path element for the LinearEntity.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns SVG path element for the LinearEntity.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -2188,7 +2187,7 @@
             <span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">2.</span> <span class="o">*</span> <span class="n">scale_factor</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">fill_color</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="LinearEntity3D"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.LinearEntity3D">[docs]</a><span class="k">class</span> <span class="nc">LinearEntity3D</span><span class="p">(</span><span class="n">LinearEntity</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;An base class for all linear entities (line, ray and segment)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An base class for all linear entities (line, ray and segment)</span>
 <span class="sd">    in a 3-dimensional Euclidean space.</span>
 
 <span class="sd">    Attributes</span>
@@ -2220,7 +2219,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">direction_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The direction ratio of a given line in 3D.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The direction ratio of a given line in 3D.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -2241,7 +2240,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">direction_cosine</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The normalized direction ratio of a given line in 3D.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The normalized direction ratio of a given line in 3D.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -2263,7 +2262,7 @@
         <span class="k">return</span> <span class="n">p1</span><span class="o">.</span><span class="n">direction_cosine</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Line3D"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Line3D">[docs]</a><span class="k">class</span> <span class="nc">Line3D</span><span class="p">(</span><span class="n">LinearEntity3D</span><span class="p">,</span> <span class="n">Line</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;An infinite 3D line in space.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An infinite 3D line in space.</span>
 
 <span class="sd">    A line is declared with two distinct points or a point and direction_ratio</span>
 <span class="sd">    as defined using keyword `direction_ratio`.</span>
@@ -2314,7 +2313,7 @@
         <span class="k">return</span> <span class="n">LinearEntity3D</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">pt</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Line3D.equation"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Line3D.equation">[docs]</a>    <span class="k">def</span> <span class="nf">equation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="s1">&#39;z&#39;</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The equation of the line in 3D</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The equation of the line in 3D</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -2348,7 +2347,7 @@
                 <span class="p">((</span><span class="n">z</span> <span class="o">-</span> <span class="n">p1</span><span class="o">.</span><span class="n">z</span><span class="p">)</span><span class="o">/</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">k</span><span class="p">)</span></div></div>
 
 <div class="viewcode-block" id="Ray3D"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Ray3D">[docs]</a><span class="k">class</span> <span class="nc">Ray3D</span><span class="p">(</span><span class="n">LinearEntity3D</span><span class="p">,</span> <span class="n">Ray</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A Ray is a semi-line in the space with a source point and a direction.</span>
 
 <span class="sd">    Parameters</span>
@@ -2416,7 +2415,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">xdirection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The x direction of the ray.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The x direction of the ray.</span>
 
 <span class="sd">        Positive infinity if the ray points in the positive x direction,</span>
 <span class="sd">        negative infinity if the ray points in the negative x direction,</span>
@@ -2448,7 +2447,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ydirection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The y direction of the ray.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The y direction of the ray.</span>
 
 <span class="sd">        Positive infinity if the ray points in the positive y direction,</span>
 <span class="sd">        negative infinity if the ray points in the negative y direction,</span>
@@ -2480,7 +2479,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">zdirection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The z direction of the ray.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The z direction of the ray.</span>
 
 <span class="sd">        Positive infinity if the ray points in the positive z direction,</span>
 <span class="sd">        negative infinity if the ray points in the negative z direction,</span>
@@ -2513,7 +2512,7 @@
             <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeInfinity</span></div>
 
 <div class="viewcode-block" id="Segment3D"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.line.Segment3D">[docs]</a><span class="k">class</span> <span class="nc">Segment3D</span><span class="p">(</span><span class="n">LinearEntity3D</span><span class="p">,</span> <span class="n">Segment</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A undirected line segment in a 3D space.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A undirected line segment in a 3D space.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ==========</span>
@@ -2584,7 +2583,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2605,7 +2604,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

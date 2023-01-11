@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>modelparameters.sympy.assumptions.handlers package &#8212; modelparameters 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="modelparameters.sympy.calculus package" href="modelparameters.sympy.calculus.html" />
@@ -47,18 +46,18 @@
           <div class="body" role="main">
             
   <section id="modelparameters-sympy-assumptions-handlers-package">
-<h1>modelparameters.sympy.assumptions.handlers package<a class="headerlink" href="#modelparameters-sympy-assumptions-handlers-package" title="Permalink to this headline">¶</a></h1>
+<h1>modelparameters.sympy.assumptions.handlers package<a class="headerlink" href="#modelparameters-sympy-assumptions-handlers-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.assumptions.handlers.calculus">
-<span id="modelparameters-sympy-assumptions-handlers-calculus-module"></span><h2>modelparameters.sympy.assumptions.handlers.calculus module<a class="headerlink" href="#module-modelparameters.sympy.assumptions.handlers.calculus" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-assumptions-handlers-calculus-module"></span><h2>modelparameters.sympy.assumptions.handlers.calculus module<a class="headerlink" href="#module-modelparameters.sympy.assumptions.handlers.calculus" title="Permalink to this heading">¶</a></h2>
 <p>This module contains query handlers responsible for calculus queries:
 infinitesimal, finite, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.calculus.</span></span><span class="sig-name descname"><span class="pre">AskFiniteHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/calculus.html#AskFiniteHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for key ‘finite’.</p>
 <p>Test that an expression is bounded respect to all its variables.</p>
 <p>Examples of usage:</p>
@@ -79,17 +78,6 @@ infinitesimal, finite, etc.</p>
 <div><p>Return True if expr is bounded, False if not and None if unknown.</p>
 <p>Truth Table:</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 17%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-<col style="width: 10%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td colspan="2"></td>
 <td><p>B</p></td>
@@ -196,13 +184,6 @@ result as in oo - oo, hence ‘bounded’ is also undefined.</p>
 <dd><p>Return True if expr is bounded, False if not and None if unknown.</p>
 <p>Truth Table:</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 19%" />
-<col style="width: 19%" />
-<col style="width: 19%" />
-<col style="width: 19%" />
-<col style="width: 25%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td></td>
 <td><p>B</p></td>
@@ -315,11 +296,11 @@ Otherwise unknown</p>
 
 </section>
 <section id="module-modelparameters.sympy.assumptions.handlers.common">
-<span id="modelparameters-sympy-assumptions-handlers-common-module"></span><h2>modelparameters.sympy.assumptions.handlers.common module<a class="headerlink" href="#module-modelparameters.sympy.assumptions.handlers.common" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-assumptions-handlers-common-module"></span><h2>modelparameters.sympy.assumptions.handlers.common module<a class="headerlink" href="#module-modelparameters.sympy.assumptions.handlers.common" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.common.AskCommutativeHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.common.</span></span><span class="sig-name descname"><span class="pre">AskCommutativeHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/common.html#AskCommutativeHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.common.AskCommutativeHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for key ‘commutative’</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.common.AskCommutativeHandler.Basic">
@@ -347,14 +328,14 @@ Otherwise unknown</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.common.AskHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.common.</span></span><span class="sig-name descname"><span class="pre">AskHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/common.html#AskHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.common.AskHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Base class that all Ask Handlers must inherit</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.common.CommonHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.common.</span></span><span class="sig-name descname"><span class="pre">CommonHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/common.html#CommonHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.AskHandler" title="modelparameters.sympy.assumptions.handlers.common.AskHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.AskHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.AskHandler" title="modelparameters.sympy.assumptions.handlers.common.AskHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">AskHandler</span></code></a></p>
 <p>Defines some useful methods common to most Handlers</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.common.CommonHandler.AlwaysFalse">
@@ -376,7 +357,7 @@ Otherwise unknown</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.common.TautologicalHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.common.</span></span><span class="sig-name descname"><span class="pre">TautologicalHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/common.html#TautologicalHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.common.TautologicalHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.AskHandler" title="modelparameters.sympy.assumptions.handlers.common.AskHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.AskHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.AskHandler" title="modelparameters.sympy.assumptions.handlers.common.AskHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">AskHandler</span></code></a></p>
 <p>Wrapper allowing to query the truth value of a boolean expression.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.common.TautologicalHandler.And">
@@ -434,13 +415,13 @@ to the current operation</p>
 
 </section>
 <section id="module-modelparameters.sympy.assumptions.handlers.matrices">
-<span id="modelparameters-sympy-assumptions-handlers-matrices-module"></span><h2>modelparameters.sympy.assumptions.handlers.matrices module<a class="headerlink" href="#module-modelparameters.sympy.assumptions.handlers.matrices" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-assumptions-handlers-matrices-module"></span><h2>modelparameters.sympy.assumptions.handlers.matrices module<a class="headerlink" href="#module-modelparameters.sympy.assumptions.handlers.matrices" title="Permalink to this heading">¶</a></h2>
 <p>This module contains query handlers responsible for calculus queries:
 infinitesimal, bounded, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskComplexElementsHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.matrices.</span></span><span class="sig-name descname"><span class="pre">AskComplexElementsHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/matrices.html#AskComplexElementsHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.matrices.AskComplexElementsHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskComplexElementsHandler.BlockMatrix">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BlockMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.matrices.AskComplexElementsHandler.BlockMatrix" title="Permalink to this definition">¶</a></dt>
@@ -503,7 +484,7 @@ infinitesimal, bounded, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskDiagonalHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.matrices.</span></span><span class="sig-name descname"><span class="pre">AskDiagonalHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/matrices.html#AskDiagonalHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.matrices.AskDiagonalHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for key ‘diagonal’</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskDiagonalHandler.DiagonalMatrix">
@@ -560,7 +541,7 @@ infinitesimal, bounded, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskFullRankHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.matrices.</span></span><span class="sig-name descname"><span class="pre">AskFullRankHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/matrices.html#AskFullRankHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.matrices.AskFullRankHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for key ‘fullrank’</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskFullRankHandler.Identity">
@@ -597,7 +578,7 @@ infinitesimal, bounded, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskIntegerElementsHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.matrices.</span></span><span class="sig-name descname"><span class="pre">AskIntegerElementsHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/matrices.html#AskIntegerElementsHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.matrices.AskIntegerElementsHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskIntegerElementsHandler.BlockMatrix">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BlockMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.matrices.AskIntegerElementsHandler.BlockMatrix" title="Permalink to this definition">¶</a></dt>
@@ -655,7 +636,7 @@ infinitesimal, bounded, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskInvertibleHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.matrices.</span></span><span class="sig-name descname"><span class="pre">AskInvertibleHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/matrices.html#AskInvertibleHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.matrices.AskInvertibleHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for key ‘invertible’</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskInvertibleHandler.Identity">
@@ -702,7 +683,7 @@ infinitesimal, bounded, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskLowerTriangularHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.matrices.</span></span><span class="sig-name descname"><span class="pre">AskLowerTriangularHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/matrices.html#AskLowerTriangularHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.matrices.AskLowerTriangularHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for key ‘lower_triangular’</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskLowerTriangularHandler.Factorization">
@@ -754,7 +735,7 @@ infinitesimal, bounded, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskOrthogonalHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.matrices.</span></span><span class="sig-name descname"><span class="pre">AskOrthogonalHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/matrices.html#AskOrthogonalHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.matrices.AskOrthogonalHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for key ‘orthogonal’</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskOrthogonalHandler.Factorization">
@@ -811,7 +792,7 @@ infinitesimal, bounded, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskPositiveDefiniteHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.matrices.</span></span><span class="sig-name descname"><span class="pre">AskPositiveDefiniteHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/matrices.html#AskPositiveDefiniteHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.matrices.AskPositiveDefiniteHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for key ‘positive_definite’</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskPositiveDefiniteHandler.Identity">
@@ -858,7 +839,7 @@ infinitesimal, bounded, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskRealElementsHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.matrices.</span></span><span class="sig-name descname"><span class="pre">AskRealElementsHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/matrices.html#AskRealElementsHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.matrices.AskRealElementsHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskRealElementsHandler.BlockMatrix">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BlockMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.matrices.AskRealElementsHandler.BlockMatrix" title="Permalink to this definition">¶</a></dt>
@@ -916,7 +897,7 @@ infinitesimal, bounded, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskSquareHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.matrices.</span></span><span class="sig-name descname"><span class="pre">AskSquareHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/matrices.html#AskSquareHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.matrices.AskSquareHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for key ‘square’</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskSquareHandler.MatrixExpr">
@@ -928,7 +909,7 @@ infinitesimal, bounded, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskSymmetricHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.matrices.</span></span><span class="sig-name descname"><span class="pre">AskSymmetricHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/matrices.html#AskSymmetricHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.matrices.AskSymmetricHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for key ‘symmetric’</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskSymmetricHandler.Identity">
@@ -975,7 +956,7 @@ infinitesimal, bounded, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskUnitaryHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.matrices.</span></span><span class="sig-name descname"><span class="pre">AskUnitaryHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/matrices.html#AskUnitaryHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUnitaryHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for key ‘unitary’</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskUnitaryHandler.DFT">
@@ -1032,7 +1013,7 @@ infinitesimal, bounded, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskUpperTriangularHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.matrices.</span></span><span class="sig-name descname"><span class="pre">AskUpperTriangularHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/matrices.html#AskUpperTriangularHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUpperTriangularHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for key ‘upper_triangular’</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.matrices.AskUpperTriangularHandler.Factorization">
@@ -1100,12 +1081,12 @@ infinitesimal, bounded, etc.</p>
 
 </section>
 <section id="module-modelparameters.sympy.assumptions.handlers.ntheory">
-<span id="modelparameters-sympy-assumptions-handlers-ntheory-module"></span><h2>modelparameters.sympy.assumptions.handlers.ntheory module<a class="headerlink" href="#module-modelparameters.sympy.assumptions.handlers.ntheory" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-assumptions-handlers-ntheory-module"></span><h2>modelparameters.sympy.assumptions.handlers.ntheory module<a class="headerlink" href="#module-modelparameters.sympy.assumptions.handlers.ntheory" title="Permalink to this heading">¶</a></h2>
 <p>Handlers for keys related to number theory: prime, even, odd, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.ntheory.AskCompositeHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.ntheory.</span></span><span class="sig-name descname"><span class="pre">AskCompositeHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/ntheory.html#AskCompositeHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskCompositeHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.ntheory.AskCompositeHandler.Basic">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Basic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/ntheory.html#AskCompositeHandler.Basic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskCompositeHandler.Basic" title="Permalink to this definition">¶</a></dt>
@@ -1121,7 +1102,7 @@ infinitesimal, bounded, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.ntheory.</span></span><span class="sig-name descname"><span class="pre">AskEvenHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/ntheory.html#AskEvenHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler.Abs">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Abs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/ntheory.html#AskEvenHandler.Abs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler.Abs" title="Permalink to this definition">¶</a></dt>
@@ -1209,7 +1190,7 @@ Integer * Integer -&gt; Even if Integer + Integer = Odd</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.ntheory.AskOddHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.ntheory.</span></span><span class="sig-name descname"><span class="pre">AskOddHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/ntheory.html#AskOddHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskOddHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for key ‘odd’
 Test that an expression represents an odd number</p>
 <dl class="py method">
@@ -1227,7 +1208,7 @@ Test that an expression represents an odd number</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.ntheory.AskPrimeHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.ntheory.</span></span><span class="sig-name descname"><span class="pre">AskPrimeHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/ntheory.html#AskPrimeHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskPrimeHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for key ‘prime’
 Test that an expression represents a prime number. When the
 expression is a number the result, when True, is subject to
@@ -1292,12 +1273,12 @@ the limitations of isprime() which is used to return the result.</p>
 
 </section>
 <section id="module-modelparameters.sympy.assumptions.handlers.order">
-<span id="modelparameters-sympy-assumptions-handlers-order-module"></span><h2>modelparameters.sympy.assumptions.handlers.order module<a class="headerlink" href="#module-modelparameters.sympy.assumptions.handlers.order" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-assumptions-handlers-order-module"></span><h2>modelparameters.sympy.assumptions.handlers.order module<a class="headerlink" href="#module-modelparameters.sympy.assumptions.handlers.order" title="Permalink to this heading">¶</a></h2>
 <p>AskHandlers related to order relations: positive, negative, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.order.</span></span><span class="sig-name descname"><span class="pre">AskNegativeHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/order.html#AskNegativeHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>This is called by ask() when key=’negative’</p>
 <p>Test that an expression is less (strict) than zero.</p>
 <p class="rubric">Examples</p>
@@ -1358,7 +1339,7 @@ NonNegative ** Positive -&gt; NonNegative</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.order.AskNonNegativeHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.order.</span></span><span class="sig-name descname"><span class="pre">AskNonNegativeHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/order.html#AskNonNegativeHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.order.AskNonNegativeHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.order.AskNonNegativeHandler.Basic">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Basic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/order.html#AskNonNegativeHandler.Basic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.order.AskNonNegativeHandler.Basic" title="Permalink to this definition">¶</a></dt>
@@ -1374,7 +1355,7 @@ NonNegative ** Positive -&gt; NonNegative</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.order.AskNonPositiveHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.order.</span></span><span class="sig-name descname"><span class="pre">AskNonPositiveHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/order.html#AskNonPositiveHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.order.AskNonPositiveHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.order.AskNonPositiveHandler.Basic">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Basic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/order.html#AskNonPositiveHandler.Basic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.order.AskNonPositiveHandler.Basic" title="Permalink to this definition">¶</a></dt>
@@ -1390,7 +1371,7 @@ NonNegative ** Positive -&gt; NonNegative</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.order.</span></span><span class="sig-name descname"><span class="pre">AskNonZeroHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/order.html#AskNonZeroHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for key ‘zero’
 Test that an expression is not identically zero</p>
 <dl class="py method">
@@ -1433,7 +1414,7 @@ Test that an expression is not identically zero</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.order.</span></span><span class="sig-name descname"><span class="pre">AskPositiveHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/order.html#AskPositiveHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for key ‘positive’
 Test that an expression is greater (strict) than zero</p>
 <dl class="py method">
@@ -1526,7 +1507,7 @@ Test that an expression is greater (strict) than zero</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.order.AskZeroHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.order.</span></span><span class="sig-name descname"><span class="pre">AskZeroHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/order.html#AskZeroHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.order.AskZeroHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.order.AskZeroHandler.Basic">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Basic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/order.html#AskZeroHandler.Basic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.order.AskZeroHandler.Basic" title="Permalink to this definition">¶</a></dt>
@@ -1546,12 +1527,12 @@ Test that an expression is greater (strict) than zero</p>
 
 </section>
 <section id="module-modelparameters.sympy.assumptions.handlers.sets">
-<span id="modelparameters-sympy-assumptions-handlers-sets-module"></span><h2>modelparameters.sympy.assumptions.handlers.sets module<a class="headerlink" href="#module-modelparameters.sympy.assumptions.handlers.sets" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-assumptions-handlers-sets-module"></span><h2>modelparameters.sympy.assumptions.handlers.sets module<a class="headerlink" href="#module-modelparameters.sympy.assumptions.handlers.sets" title="Permalink to this heading">¶</a></h2>
 <p>Handlers for predicates related to set membership: integer, rational, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.sets.</span></span><span class="sig-name descname"><span class="pre">AskAlgebraicHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/sets.html#AskAlgebraicHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for Q.algebraic key.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.Add">
@@ -1673,7 +1654,7 @@ Test that an expression is greater (strict) than zero</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.sets.AskAntiHermitianHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.sets.</span></span><span class="sig-name descname"><span class="pre">AskAntiHermitianHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/sets.html#AskAntiHermitianHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.sets.AskAntiHermitianHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler" title="modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler" title="modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">AskImaginaryHandler</span></code></a></p>
 <p>Handler for Q.antihermitian
 Test that an expression belongs to the field of anti-Hermitian operators,
 that is, operators in the form x*I, where x is Hermitian</p>
@@ -1706,7 +1687,7 @@ Antihermitian**Odd  -&gt; Antihermitian</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.sets.</span></span><span class="sig-name descname"><span class="pre">AskComplexHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/sets.html#AskComplexHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for Q.complex
 Test that an expression belongs to the field of complex numbers</p>
 <dl class="py method">
@@ -1809,7 +1790,7 @@ Test that an expression belongs to the field of complex numbers</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.sets.AskExtendedRealHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.sets.</span></span><span class="sig-name descname"><span class="pre">AskExtendedRealHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/sets.html#AskExtendedRealHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.sets.AskExtendedRealHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler" title="modelparameters.sympy.assumptions.handlers.sets.AskRealHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.sets.AskRealHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler" title="modelparameters.sympy.assumptions.handlers.sets.AskRealHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">AskRealHandler</span></code></a></p>
 <p>Handler for Q.extended_real
 Test that an expression belongs to the field of extended real numbers,
 that is real numbers union {Infinity, -Infinity}</p>
@@ -1857,7 +1838,7 @@ Real**Real                 -&gt; ? e.g. sqrt(-1) is imaginary and sqrt(2) is not
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.sets.AskHermitianHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.sets.</span></span><span class="sig-name descname"><span class="pre">AskHermitianHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/sets.html#AskHermitianHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.sets.AskHermitianHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler" title="modelparameters.sympy.assumptions.handlers.sets.AskRealHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.sets.AskRealHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler" title="modelparameters.sympy.assumptions.handlers.sets.AskRealHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">AskRealHandler</span></code></a></p>
 <p>Handler for Q.hermitian
 Test that an expression belongs to the field of Hermitian operators</p>
 <dl class="py method">
@@ -1902,7 +1883,7 @@ Antihermitian*Antihermitian -&gt; Hermitian</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.sets.</span></span><span class="sig-name descname"><span class="pre">AskImaginaryHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/sets.html#AskImaginaryHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for Q.imaginary
 Test that an expression belongs to the field of imaginary numbers,
 that is, numbers in the form x*I, where x is real</p>
@@ -1969,7 +1950,7 @@ Negative**Real        -&gt; not Imaginary if exponent is not Rational</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.sets.</span></span><span class="sig-name descname"><span class="pre">AskIntegerHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/sets.html#AskIntegerHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for Q.integer
 Test that an expression belongs to the field of integer numbers</p>
 <dl class="py method">
@@ -2072,7 +2053,7 @@ Integer + !Integer      -&gt; !Integer
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.sets.AskIrrationalHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.sets.</span></span><span class="sig-name descname"><span class="pre">AskIrrationalHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/sets.html#AskIrrationalHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.sets.AskIrrationalHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.sets.AskIrrationalHandler.Basic">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Basic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/sets.html#AskIrrationalHandler.Basic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.sets.AskIrrationalHandler.Basic" title="Permalink to this definition">¶</a></dt>
@@ -2088,7 +2069,7 @@ Integer + !Integer      -&gt; !Integer
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.sets.</span></span><span class="sig-name descname"><span class="pre">AskRationalHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/sets.html#AskRationalHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for Q.rational
 Test that an expression belongs to the field of rational numbers</p>
 <dl class="py method">
@@ -2215,7 +2196,7 @@ Rational ** Irrational   -&gt; ?</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.assumptions.handlers.sets.AskRealHandler">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.assumptions.handlers.sets.</span></span><span class="sig-name descname"><span class="pre">AskRealHandler</span></span><a class="reference internal" href="_modules/modelparameters/sympy/assumptions/handlers/sets.html#AskRealHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.assumptions.handlers.common.CommonHandler</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler" title="modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="xref py py-class docutils literal notranslate"><span class="pre">CommonHandler</span></code></a></p>
 <p>Handler for Q.real
 Test that an expression belongs to the field of real numbers</p>
 <dl class="py method">
@@ -2346,7 +2327,7 @@ Real**Real                 -&gt; ? e.g. sqrt(-1) is imaginary and sqrt(2) is not
 
 </section>
 <section id="module-modelparameters.sympy.assumptions.handlers">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.assumptions.handlers" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.assumptions.handlers" title="Permalink to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -2362,12 +2343,478 @@ Real**Real                 -&gt; ? e.g. sqrt(-1) is imaginary and sqrt(2) is not
     <ul>
 <li><a class="reference internal" href="#">modelparameters.sympy.assumptions.handlers package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.assumptions.handlers.calculus">modelparameters.sympy.assumptions.handlers.calculus module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.assumptions.handlers.common">modelparameters.sympy.assumptions.handlers.common module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.assumptions.handlers.matrices">modelparameters.sympy.assumptions.handlers.matrices module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.assumptions.handlers.ntheory">modelparameters.sympy.assumptions.handlers.ntheory module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.assumptions.handlers.order">modelparameters.sympy.assumptions.handlers.order module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.assumptions.handlers.sets">modelparameters.sympy.assumptions.handlers.sets module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.assumptions.handlers.calculus">modelparameters.sympy.assumptions.handlers.calculus module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.Add"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler.Add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.Exp1"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler.Exp1()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.GoldenRatio"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler.GoldenRatio()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.ImaginaryUnit"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler.ImaginaryUnit()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.Infinity"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler.Infinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.Mul"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler.Mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.NegativeInfinity"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler.NegativeInfinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.Number"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler.Number()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.Pi"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler.Pi()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.Pow"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler.Pow()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.Symbol"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler.Symbol()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.cos"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler.cos()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.exp"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler.exp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.log"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler.log()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.sign"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler.sign()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.sin"><code class="docutils literal notranslate"><span class="pre">AskFiniteHandler.sin()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.assumptions.handlers.common">modelparameters.sympy.assumptions.handlers.common module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.AskCommutativeHandler"><code class="docutils literal notranslate"><span class="pre">AskCommutativeHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.AskCommutativeHandler.Basic"><code class="docutils literal notranslate"><span class="pre">AskCommutativeHandler.Basic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.AskCommutativeHandler.NaN"><code class="docutils literal notranslate"><span class="pre">AskCommutativeHandler.NaN()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.AskCommutativeHandler.Number"><code class="docutils literal notranslate"><span class="pre">AskCommutativeHandler.Number()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.AskCommutativeHandler.Symbol"><code class="docutils literal notranslate"><span class="pre">AskCommutativeHandler.Symbol()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.AskHandler"><code class="docutils literal notranslate"><span class="pre">AskHandler</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler"><code class="docutils literal notranslate"><span class="pre">CommonHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler.AlwaysFalse"><code class="docutils literal notranslate"><span class="pre">CommonHandler.AlwaysFalse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler.AlwaysTrue"><code class="docutils literal notranslate"><span class="pre">CommonHandler.AlwaysTrue()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.CommonHandler.NaN"><code class="docutils literal notranslate"><span class="pre">CommonHandler.NaN()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.TautologicalHandler"><code class="docutils literal notranslate"><span class="pre">TautologicalHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.TautologicalHandler.And"><code class="docutils literal notranslate"><span class="pre">TautologicalHandler.And()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.TautologicalHandler.AppliedPredicate"><code class="docutils literal notranslate"><span class="pre">TautologicalHandler.AppliedPredicate()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.TautologicalHandler.BooleanFalse"><code class="docutils literal notranslate"><span class="pre">TautologicalHandler.BooleanFalse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.TautologicalHandler.BooleanTrue"><code class="docutils literal notranslate"><span class="pre">TautologicalHandler.BooleanTrue()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.TautologicalHandler.Equivalent"><code class="docutils literal notranslate"><span class="pre">TautologicalHandler.Equivalent()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.TautologicalHandler.Implies"><code class="docutils literal notranslate"><span class="pre">TautologicalHandler.Implies()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.TautologicalHandler.Not"><code class="docutils literal notranslate"><span class="pre">TautologicalHandler.Not()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.TautologicalHandler.Or"><code class="docutils literal notranslate"><span class="pre">TautologicalHandler.Or()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.TautologicalHandler.bool"><code class="docutils literal notranslate"><span class="pre">TautologicalHandler.bool()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.common.test_closed_group"><code class="docutils literal notranslate"><span class="pre">test_closed_group()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.assumptions.handlers.matrices">modelparameters.sympy.assumptions.handlers.matrices module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskComplexElementsHandler"><code class="docutils literal notranslate"><span class="pre">AskComplexElementsHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskComplexElementsHandler.BlockMatrix"><code class="docutils literal notranslate"><span class="pre">AskComplexElementsHandler.BlockMatrix()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskComplexElementsHandler.DFT"><code class="docutils literal notranslate"><span class="pre">AskComplexElementsHandler.DFT()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskComplexElementsHandler.Determinant"><code class="docutils literal notranslate"><span class="pre">AskComplexElementsHandler.Determinant()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskComplexElementsHandler.Factorization"><code class="docutils literal notranslate"><span class="pre">AskComplexElementsHandler.Factorization()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskComplexElementsHandler.HadamardProduct"><code class="docutils literal notranslate"><span class="pre">AskComplexElementsHandler.HadamardProduct()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskComplexElementsHandler.Inverse"><code class="docutils literal notranslate"><span class="pre">AskComplexElementsHandler.Inverse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskComplexElementsHandler.MatAdd"><code class="docutils literal notranslate"><span class="pre">AskComplexElementsHandler.MatAdd()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskComplexElementsHandler.MatMul"><code class="docutils literal notranslate"><span class="pre">AskComplexElementsHandler.MatMul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskComplexElementsHandler.MatrixSlice"><code class="docutils literal notranslate"><span class="pre">AskComplexElementsHandler.MatrixSlice()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskComplexElementsHandler.Trace"><code class="docutils literal notranslate"><span class="pre">AskComplexElementsHandler.Trace()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskComplexElementsHandler.Transpose"><code class="docutils literal notranslate"><span class="pre">AskComplexElementsHandler.Transpose()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskDiagonalHandler"><code class="docutils literal notranslate"><span class="pre">AskDiagonalHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskDiagonalHandler.DiagonalMatrix"><code class="docutils literal notranslate"><span class="pre">AskDiagonalHandler.DiagonalMatrix()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskDiagonalHandler.Factorization"><code class="docutils literal notranslate"><span class="pre">AskDiagonalHandler.Factorization()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskDiagonalHandler.Identity"><code class="docutils literal notranslate"><span class="pre">AskDiagonalHandler.Identity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskDiagonalHandler.Inverse"><code class="docutils literal notranslate"><span class="pre">AskDiagonalHandler.Inverse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskDiagonalHandler.MatAdd"><code class="docutils literal notranslate"><span class="pre">AskDiagonalHandler.MatAdd()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskDiagonalHandler.MatMul"><code class="docutils literal notranslate"><span class="pre">AskDiagonalHandler.MatMul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskDiagonalHandler.MatrixSlice"><code class="docutils literal notranslate"><span class="pre">AskDiagonalHandler.MatrixSlice()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskDiagonalHandler.MatrixSymbol"><code class="docutils literal notranslate"><span class="pre">AskDiagonalHandler.MatrixSymbol()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskDiagonalHandler.Transpose"><code class="docutils literal notranslate"><span class="pre">AskDiagonalHandler.Transpose()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskDiagonalHandler.ZeroMatrix"><code class="docutils literal notranslate"><span class="pre">AskDiagonalHandler.ZeroMatrix()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskFullRankHandler"><code class="docutils literal notranslate"><span class="pre">AskFullRankHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskFullRankHandler.Identity"><code class="docutils literal notranslate"><span class="pre">AskFullRankHandler.Identity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskFullRankHandler.Inverse"><code class="docutils literal notranslate"><span class="pre">AskFullRankHandler.Inverse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskFullRankHandler.MatMul"><code class="docutils literal notranslate"><span class="pre">AskFullRankHandler.MatMul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskFullRankHandler.MatrixSlice"><code class="docutils literal notranslate"><span class="pre">AskFullRankHandler.MatrixSlice()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskFullRankHandler.Transpose"><code class="docutils literal notranslate"><span class="pre">AskFullRankHandler.Transpose()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskFullRankHandler.ZeroMatrix"><code class="docutils literal notranslate"><span class="pre">AskFullRankHandler.ZeroMatrix()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskIntegerElementsHandler"><code class="docutils literal notranslate"><span class="pre">AskIntegerElementsHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskIntegerElementsHandler.BlockMatrix"><code class="docutils literal notranslate"><span class="pre">AskIntegerElementsHandler.BlockMatrix()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskIntegerElementsHandler.Determinant"><code class="docutils literal notranslate"><span class="pre">AskIntegerElementsHandler.Determinant()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskIntegerElementsHandler.HadamardProduct"><code class="docutils literal notranslate"><span class="pre">AskIntegerElementsHandler.HadamardProduct()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskIntegerElementsHandler.Identity"><code class="docutils literal notranslate"><span class="pre">AskIntegerElementsHandler.Identity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskIntegerElementsHandler.MatAdd"><code class="docutils literal notranslate"><span class="pre">AskIntegerElementsHandler.MatAdd()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskIntegerElementsHandler.MatMul"><code class="docutils literal notranslate"><span class="pre">AskIntegerElementsHandler.MatMul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskIntegerElementsHandler.MatrixSlice"><code class="docutils literal notranslate"><span class="pre">AskIntegerElementsHandler.MatrixSlice()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskIntegerElementsHandler.Trace"><code class="docutils literal notranslate"><span class="pre">AskIntegerElementsHandler.Trace()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskIntegerElementsHandler.Transpose"><code class="docutils literal notranslate"><span class="pre">AskIntegerElementsHandler.Transpose()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskIntegerElementsHandler.ZeroMatrix"><code class="docutils literal notranslate"><span class="pre">AskIntegerElementsHandler.ZeroMatrix()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskInvertibleHandler"><code class="docutils literal notranslate"><span class="pre">AskInvertibleHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskInvertibleHandler.Identity"><code class="docutils literal notranslate"><span class="pre">AskInvertibleHandler.Identity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskInvertibleHandler.Inverse"><code class="docutils literal notranslate"><span class="pre">AskInvertibleHandler.Inverse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskInvertibleHandler.MatAdd"><code class="docutils literal notranslate"><span class="pre">AskInvertibleHandler.MatAdd()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskInvertibleHandler.MatMul"><code class="docutils literal notranslate"><span class="pre">AskInvertibleHandler.MatMul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskInvertibleHandler.MatrixSlice"><code class="docutils literal notranslate"><span class="pre">AskInvertibleHandler.MatrixSlice()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskInvertibleHandler.MatrixSymbol"><code class="docutils literal notranslate"><span class="pre">AskInvertibleHandler.MatrixSymbol()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskInvertibleHandler.Transpose"><code class="docutils literal notranslate"><span class="pre">AskInvertibleHandler.Transpose()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskInvertibleHandler.ZeroMatrix"><code class="docutils literal notranslate"><span class="pre">AskInvertibleHandler.ZeroMatrix()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskLowerTriangularHandler"><code class="docutils literal notranslate"><span class="pre">AskLowerTriangularHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskLowerTriangularHandler.Factorization"><code class="docutils literal notranslate"><span class="pre">AskLowerTriangularHandler.Factorization()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskLowerTriangularHandler.Identity"><code class="docutils literal notranslate"><span class="pre">AskLowerTriangularHandler.Identity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskLowerTriangularHandler.Inverse"><code class="docutils literal notranslate"><span class="pre">AskLowerTriangularHandler.Inverse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskLowerTriangularHandler.MatAdd"><code class="docutils literal notranslate"><span class="pre">AskLowerTriangularHandler.MatAdd()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskLowerTriangularHandler.MatMul"><code class="docutils literal notranslate"><span class="pre">AskLowerTriangularHandler.MatMul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskLowerTriangularHandler.MatrixSlice"><code class="docutils literal notranslate"><span class="pre">AskLowerTriangularHandler.MatrixSlice()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskLowerTriangularHandler.MatrixSymbol"><code class="docutils literal notranslate"><span class="pre">AskLowerTriangularHandler.MatrixSymbol()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskLowerTriangularHandler.Transpose"><code class="docutils literal notranslate"><span class="pre">AskLowerTriangularHandler.Transpose()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskLowerTriangularHandler.ZeroMatrix"><code class="docutils literal notranslate"><span class="pre">AskLowerTriangularHandler.ZeroMatrix()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskOrthogonalHandler"><code class="docutils literal notranslate"><span class="pre">AskOrthogonalHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskOrthogonalHandler.Factorization"><code class="docutils literal notranslate"><span class="pre">AskOrthogonalHandler.Factorization()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskOrthogonalHandler.Identity"><code class="docutils literal notranslate"><span class="pre">AskOrthogonalHandler.Identity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskOrthogonalHandler.Inverse"><code class="docutils literal notranslate"><span class="pre">AskOrthogonalHandler.Inverse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskOrthogonalHandler.MatAdd"><code class="docutils literal notranslate"><span class="pre">AskOrthogonalHandler.MatAdd()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskOrthogonalHandler.MatMul"><code class="docutils literal notranslate"><span class="pre">AskOrthogonalHandler.MatMul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskOrthogonalHandler.MatrixSlice"><code class="docutils literal notranslate"><span class="pre">AskOrthogonalHandler.MatrixSlice()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskOrthogonalHandler.MatrixSymbol"><code class="docutils literal notranslate"><span class="pre">AskOrthogonalHandler.MatrixSymbol()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskOrthogonalHandler.Transpose"><code class="docutils literal notranslate"><span class="pre">AskOrthogonalHandler.Transpose()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskOrthogonalHandler.ZeroMatrix"><code class="docutils literal notranslate"><span class="pre">AskOrthogonalHandler.ZeroMatrix()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskOrthogonalHandler.predicate"><code class="docutils literal notranslate"><span class="pre">AskOrthogonalHandler.predicate</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskPositiveDefiniteHandler"><code class="docutils literal notranslate"><span class="pre">AskPositiveDefiniteHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskPositiveDefiniteHandler.Identity"><code class="docutils literal notranslate"><span class="pre">AskPositiveDefiniteHandler.Identity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskPositiveDefiniteHandler.Inverse"><code class="docutils literal notranslate"><span class="pre">AskPositiveDefiniteHandler.Inverse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskPositiveDefiniteHandler.MatAdd"><code class="docutils literal notranslate"><span class="pre">AskPositiveDefiniteHandler.MatAdd()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskPositiveDefiniteHandler.MatMul"><code class="docutils literal notranslate"><span class="pre">AskPositiveDefiniteHandler.MatMul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskPositiveDefiniteHandler.MatrixSlice"><code class="docutils literal notranslate"><span class="pre">AskPositiveDefiniteHandler.MatrixSlice()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskPositiveDefiniteHandler.MatrixSymbol"><code class="docutils literal notranslate"><span class="pre">AskPositiveDefiniteHandler.MatrixSymbol()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskPositiveDefiniteHandler.Transpose"><code class="docutils literal notranslate"><span class="pre">AskPositiveDefiniteHandler.Transpose()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskPositiveDefiniteHandler.ZeroMatrix"><code class="docutils literal notranslate"><span class="pre">AskPositiveDefiniteHandler.ZeroMatrix()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskRealElementsHandler"><code class="docutils literal notranslate"><span class="pre">AskRealElementsHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskRealElementsHandler.BlockMatrix"><code class="docutils literal notranslate"><span class="pre">AskRealElementsHandler.BlockMatrix()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskRealElementsHandler.Determinant"><code class="docutils literal notranslate"><span class="pre">AskRealElementsHandler.Determinant()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskRealElementsHandler.Factorization"><code class="docutils literal notranslate"><span class="pre">AskRealElementsHandler.Factorization()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskRealElementsHandler.HadamardProduct"><code class="docutils literal notranslate"><span class="pre">AskRealElementsHandler.HadamardProduct()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskRealElementsHandler.Inverse"><code class="docutils literal notranslate"><span class="pre">AskRealElementsHandler.Inverse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskRealElementsHandler.MatAdd"><code class="docutils literal notranslate"><span class="pre">AskRealElementsHandler.MatAdd()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskRealElementsHandler.MatMul"><code class="docutils literal notranslate"><span class="pre">AskRealElementsHandler.MatMul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskRealElementsHandler.MatrixSlice"><code class="docutils literal notranslate"><span class="pre">AskRealElementsHandler.MatrixSlice()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskRealElementsHandler.Trace"><code class="docutils literal notranslate"><span class="pre">AskRealElementsHandler.Trace()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskRealElementsHandler.Transpose"><code class="docutils literal notranslate"><span class="pre">AskRealElementsHandler.Transpose()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskSquareHandler"><code class="docutils literal notranslate"><span class="pre">AskSquareHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskSquareHandler.MatrixExpr"><code class="docutils literal notranslate"><span class="pre">AskSquareHandler.MatrixExpr()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskSymmetricHandler"><code class="docutils literal notranslate"><span class="pre">AskSymmetricHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskSymmetricHandler.Identity"><code class="docutils literal notranslate"><span class="pre">AskSymmetricHandler.Identity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskSymmetricHandler.Inverse"><code class="docutils literal notranslate"><span class="pre">AskSymmetricHandler.Inverse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskSymmetricHandler.MatAdd"><code class="docutils literal notranslate"><span class="pre">AskSymmetricHandler.MatAdd()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskSymmetricHandler.MatMul"><code class="docutils literal notranslate"><span class="pre">AskSymmetricHandler.MatMul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskSymmetricHandler.MatrixSlice"><code class="docutils literal notranslate"><span class="pre">AskSymmetricHandler.MatrixSlice()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskSymmetricHandler.MatrixSymbol"><code class="docutils literal notranslate"><span class="pre">AskSymmetricHandler.MatrixSymbol()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskSymmetricHandler.Transpose"><code class="docutils literal notranslate"><span class="pre">AskSymmetricHandler.Transpose()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskSymmetricHandler.ZeroMatrix"><code class="docutils literal notranslate"><span class="pre">AskSymmetricHandler.ZeroMatrix()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUnitaryHandler"><code class="docutils literal notranslate"><span class="pre">AskUnitaryHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUnitaryHandler.DFT"><code class="docutils literal notranslate"><span class="pre">AskUnitaryHandler.DFT()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUnitaryHandler.Factorization"><code class="docutils literal notranslate"><span class="pre">AskUnitaryHandler.Factorization()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUnitaryHandler.Identity"><code class="docutils literal notranslate"><span class="pre">AskUnitaryHandler.Identity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUnitaryHandler.Inverse"><code class="docutils literal notranslate"><span class="pre">AskUnitaryHandler.Inverse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUnitaryHandler.MatMul"><code class="docutils literal notranslate"><span class="pre">AskUnitaryHandler.MatMul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUnitaryHandler.MatrixSlice"><code class="docutils literal notranslate"><span class="pre">AskUnitaryHandler.MatrixSlice()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUnitaryHandler.MatrixSymbol"><code class="docutils literal notranslate"><span class="pre">AskUnitaryHandler.MatrixSymbol()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUnitaryHandler.Transpose"><code class="docutils literal notranslate"><span class="pre">AskUnitaryHandler.Transpose()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUnitaryHandler.ZeroMatrix"><code class="docutils literal notranslate"><span class="pre">AskUnitaryHandler.ZeroMatrix()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUnitaryHandler.predicate"><code class="docutils literal notranslate"><span class="pre">AskUnitaryHandler.predicate</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUpperTriangularHandler"><code class="docutils literal notranslate"><span class="pre">AskUpperTriangularHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUpperTriangularHandler.Factorization"><code class="docutils literal notranslate"><span class="pre">AskUpperTriangularHandler.Factorization()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUpperTriangularHandler.Identity"><code class="docutils literal notranslate"><span class="pre">AskUpperTriangularHandler.Identity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUpperTriangularHandler.Inverse"><code class="docutils literal notranslate"><span class="pre">AskUpperTriangularHandler.Inverse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUpperTriangularHandler.MatAdd"><code class="docutils literal notranslate"><span class="pre">AskUpperTriangularHandler.MatAdd()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUpperTriangularHandler.MatMul"><code class="docutils literal notranslate"><span class="pre">AskUpperTriangularHandler.MatMul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUpperTriangularHandler.MatrixSlice"><code class="docutils literal notranslate"><span class="pre">AskUpperTriangularHandler.MatrixSlice()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUpperTriangularHandler.MatrixSymbol"><code class="docutils literal notranslate"><span class="pre">AskUpperTriangularHandler.MatrixSymbol()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUpperTriangularHandler.Transpose"><code class="docutils literal notranslate"><span class="pre">AskUpperTriangularHandler.Transpose()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.AskUpperTriangularHandler.ZeroMatrix"><code class="docutils literal notranslate"><span class="pre">AskUpperTriangularHandler.ZeroMatrix()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.BM_elements"><code class="docutils literal notranslate"><span class="pre">BM_elements()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.MS_elements"><code class="docutils literal notranslate"><span class="pre">MS_elements()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.matrices.MatMul_elements"><code class="docutils literal notranslate"><span class="pre">MatMul_elements()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.assumptions.handlers.ntheory">modelparameters.sympy.assumptions.handlers.ntheory module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskCompositeHandler"><code class="docutils literal notranslate"><span class="pre">AskCompositeHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskCompositeHandler.Basic"><code class="docutils literal notranslate"><span class="pre">AskCompositeHandler.Basic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskCompositeHandler.Expr"><code class="docutils literal notranslate"><span class="pre">AskCompositeHandler.Expr()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler"><code class="docutils literal notranslate"><span class="pre">AskEvenHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler.Abs"><code class="docutils literal notranslate"><span class="pre">AskEvenHandler.Abs()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler.Add"><code class="docutils literal notranslate"><span class="pre">AskEvenHandler.Add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler.Basic"><code class="docutils literal notranslate"><span class="pre">AskEvenHandler.Basic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler.Expr"><code class="docutils literal notranslate"><span class="pre">AskEvenHandler.Expr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler.ImaginaryUnit"><code class="docutils literal notranslate"><span class="pre">AskEvenHandler.ImaginaryUnit()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler.Infinity"><code class="docutils literal notranslate"><span class="pre">AskEvenHandler.Infinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler.Integer"><code class="docutils literal notranslate"><span class="pre">AskEvenHandler.Integer()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler.Mul"><code class="docutils literal notranslate"><span class="pre">AskEvenHandler.Mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler.NegativeInfinity"><code class="docutils literal notranslate"><span class="pre">AskEvenHandler.NegativeInfinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler.NumberSymbol"><code class="docutils literal notranslate"><span class="pre">AskEvenHandler.NumberSymbol()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler.Pow"><code class="docutils literal notranslate"><span class="pre">AskEvenHandler.Pow()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler.Rational"><code class="docutils literal notranslate"><span class="pre">AskEvenHandler.Rational()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler.im"><code class="docutils literal notranslate"><span class="pre">AskEvenHandler.im()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskEvenHandler.re"><code class="docutils literal notranslate"><span class="pre">AskEvenHandler.re()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskOddHandler"><code class="docutils literal notranslate"><span class="pre">AskOddHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskOddHandler.Basic"><code class="docutils literal notranslate"><span class="pre">AskOddHandler.Basic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskOddHandler.Expr"><code class="docutils literal notranslate"><span class="pre">AskOddHandler.Expr()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskPrimeHandler"><code class="docutils literal notranslate"><span class="pre">AskPrimeHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskPrimeHandler.Basic"><code class="docutils literal notranslate"><span class="pre">AskPrimeHandler.Basic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskPrimeHandler.Expr"><code class="docutils literal notranslate"><span class="pre">AskPrimeHandler.Expr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskPrimeHandler.Float"><code class="docutils literal notranslate"><span class="pre">AskPrimeHandler.Float()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskPrimeHandler.ImaginaryUnit"><code class="docutils literal notranslate"><span class="pre">AskPrimeHandler.ImaginaryUnit()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskPrimeHandler.Infinity"><code class="docutils literal notranslate"><span class="pre">AskPrimeHandler.Infinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskPrimeHandler.Integer"><code class="docutils literal notranslate"><span class="pre">AskPrimeHandler.Integer()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskPrimeHandler.Mul"><code class="docutils literal notranslate"><span class="pre">AskPrimeHandler.Mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskPrimeHandler.NegativeInfinity"><code class="docutils literal notranslate"><span class="pre">AskPrimeHandler.NegativeInfinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskPrimeHandler.NumberSymbol"><code class="docutils literal notranslate"><span class="pre">AskPrimeHandler.NumberSymbol()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskPrimeHandler.Pow"><code class="docutils literal notranslate"><span class="pre">AskPrimeHandler.Pow()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.ntheory.AskPrimeHandler.Rational"><code class="docutils literal notranslate"><span class="pre">AskPrimeHandler.Rational()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.assumptions.handlers.order">modelparameters.sympy.assumptions.handlers.order module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler"><code class="docutils literal notranslate"><span class="pre">AskNegativeHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler.Abs"><code class="docutils literal notranslate"><span class="pre">AskNegativeHandler.Abs()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler.Add"><code class="docutils literal notranslate"><span class="pre">AskNegativeHandler.Add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler.Basic"><code class="docutils literal notranslate"><span class="pre">AskNegativeHandler.Basic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler.Expr"><code class="docutils literal notranslate"><span class="pre">AskNegativeHandler.Expr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler.ImaginaryUnit"><code class="docutils literal notranslate"><span class="pre">AskNegativeHandler.ImaginaryUnit()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler.Mul"><code class="docutils literal notranslate"><span class="pre">AskNegativeHandler.Mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler.Pow"><code class="docutils literal notranslate"><span class="pre">AskNegativeHandler.Pow()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNegativeHandler.exp"><code class="docutils literal notranslate"><span class="pre">AskNegativeHandler.exp()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNonNegativeHandler"><code class="docutils literal notranslate"><span class="pre">AskNonNegativeHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNonNegativeHandler.Basic"><code class="docutils literal notranslate"><span class="pre">AskNonNegativeHandler.Basic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNonNegativeHandler.Expr"><code class="docutils literal notranslate"><span class="pre">AskNonNegativeHandler.Expr()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNonPositiveHandler"><code class="docutils literal notranslate"><span class="pre">AskNonPositiveHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNonPositiveHandler.Basic"><code class="docutils literal notranslate"><span class="pre">AskNonPositiveHandler.Basic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNonPositiveHandler.Expr"><code class="docutils literal notranslate"><span class="pre">AskNonPositiveHandler.Expr()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler"><code class="docutils literal notranslate"><span class="pre">AskNonZeroHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler.Abs"><code class="docutils literal notranslate"><span class="pre">AskNonZeroHandler.Abs()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler.Add"><code class="docutils literal notranslate"><span class="pre">AskNonZeroHandler.Add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler.Basic"><code class="docutils literal notranslate"><span class="pre">AskNonZeroHandler.Basic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler.Expr"><code class="docutils literal notranslate"><span class="pre">AskNonZeroHandler.Expr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler.Mul"><code class="docutils literal notranslate"><span class="pre">AskNonZeroHandler.Mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler.NaN"><code class="docutils literal notranslate"><span class="pre">AskNonZeroHandler.NaN()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskNonZeroHandler.Pow"><code class="docutils literal notranslate"><span class="pre">AskNonZeroHandler.Pow()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.Abs"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.Abs()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.Add"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.Add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.Basic"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.Basic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.Determinant"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.Determinant()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.Expr"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.Expr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.ImaginaryUnit"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.ImaginaryUnit()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.MatrixElement"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.MatrixElement()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.Mul"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.Mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.Pow"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.Pow()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.Trace"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.Trace()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.acos"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.acos()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.acot"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.acot()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.asin"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.asin()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.atan"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.atan()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.exp"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.exp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.factorial"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.factorial()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskPositiveHandler.log"><code class="docutils literal notranslate"><span class="pre">AskPositiveHandler.log()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskZeroHandler"><code class="docutils literal notranslate"><span class="pre">AskZeroHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskZeroHandler.Basic"><code class="docutils literal notranslate"><span class="pre">AskZeroHandler.Basic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskZeroHandler.Expr"><code class="docutils literal notranslate"><span class="pre">AskZeroHandler.Expr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.order.AskZeroHandler.Mul"><code class="docutils literal notranslate"><span class="pre">AskZeroHandler.Mul()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.assumptions.handlers.sets">modelparameters.sympy.assumptions.handlers.sets module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.Add"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.Add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.AlgebraicNumber"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.AlgebraicNumber()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.ComplexInfinity"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.ComplexInfinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.Exp1"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.Exp1()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.Float"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.Float()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.GoldenRatio"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.GoldenRatio()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.ImaginaryUnit"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.ImaginaryUnit()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.Infinity"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.Infinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.Mul"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.Mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.NegativeInfinity"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.NegativeInfinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.Pi"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.Pi()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.Pow"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.Pow()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.Rational"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.Rational()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.acos"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.acos()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.acot"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.acot()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.asin"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.asin()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.atan"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.atan()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.cos"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.cos()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.cot"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.cot()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.exp"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.exp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.log"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.log()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.sin"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.sin()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.tan"><code class="docutils literal notranslate"><span class="pre">AskAlgebraicHandler.tan()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAntiHermitianHandler"><code class="docutils literal notranslate"><span class="pre">AskAntiHermitianHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAntiHermitianHandler.Add"><code class="docutils literal notranslate"><span class="pre">AskAntiHermitianHandler.Add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAntiHermitianHandler.Mul"><code class="docutils literal notranslate"><span class="pre">AskAntiHermitianHandler.Mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskAntiHermitianHandler.Pow"><code class="docutils literal notranslate"><span class="pre">AskAntiHermitianHandler.Pow()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.Abs"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.Abs()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.Add"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.Add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.Determinant"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.Determinant()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.Expr"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.Expr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.ImaginaryUnit"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.ImaginaryUnit()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.Infinity"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.Infinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.MatrixElement"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.MatrixElement()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.Mul"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.Mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.NegativeInfinity"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.NegativeInfinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.Number"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.Number()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.NumberSymbol"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.NumberSymbol()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.Pow"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.Pow()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.Trace"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.Trace()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.cos"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.cos()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.exp"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.exp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.im"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.im()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.log"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.log()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.re"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.re()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler.sin"><code class="docutils literal notranslate"><span class="pre">AskComplexHandler.sin()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskExtendedRealHandler"><code class="docutils literal notranslate"><span class="pre">AskExtendedRealHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskExtendedRealHandler.Add"><code class="docutils literal notranslate"><span class="pre">AskExtendedRealHandler.Add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskExtendedRealHandler.Infinity"><code class="docutils literal notranslate"><span class="pre">AskExtendedRealHandler.Infinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskExtendedRealHandler.Mul"><code class="docutils literal notranslate"><span class="pre">AskExtendedRealHandler.Mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskExtendedRealHandler.NegativeInfinity"><code class="docutils literal notranslate"><span class="pre">AskExtendedRealHandler.NegativeInfinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskExtendedRealHandler.Pow"><code class="docutils literal notranslate"><span class="pre">AskExtendedRealHandler.Pow()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskHermitianHandler"><code class="docutils literal notranslate"><span class="pre">AskHermitianHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskHermitianHandler.Add"><code class="docutils literal notranslate"><span class="pre">AskHermitianHandler.Add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskHermitianHandler.Mul"><code class="docutils literal notranslate"><span class="pre">AskHermitianHandler.Mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskHermitianHandler.Pow"><code class="docutils literal notranslate"><span class="pre">AskHermitianHandler.Pow()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskHermitianHandler.cos"><code class="docutils literal notranslate"><span class="pre">AskHermitianHandler.cos()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskHermitianHandler.exp"><code class="docutils literal notranslate"><span class="pre">AskHermitianHandler.exp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskHermitianHandler.sin"><code class="docutils literal notranslate"><span class="pre">AskHermitianHandler.sin()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler"><code class="docutils literal notranslate"><span class="pre">AskImaginaryHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler.Add"><code class="docutils literal notranslate"><span class="pre">AskImaginaryHandler.Add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler.Expr"><code class="docutils literal notranslate"><span class="pre">AskImaginaryHandler.Expr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler.ImaginaryUnit"><code class="docutils literal notranslate"><span class="pre">AskImaginaryHandler.ImaginaryUnit()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler.Mul"><code class="docutils literal notranslate"><span class="pre">AskImaginaryHandler.Mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler.Number"><code class="docutils literal notranslate"><span class="pre">AskImaginaryHandler.Number()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler.NumberSymbol"><code class="docutils literal notranslate"><span class="pre">AskImaginaryHandler.NumberSymbol()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler.Pow"><code class="docutils literal notranslate"><span class="pre">AskImaginaryHandler.Pow()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler.exp"><code class="docutils literal notranslate"><span class="pre">AskImaginaryHandler.exp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler.log"><code class="docutils literal notranslate"><span class="pre">AskImaginaryHandler.log()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.Abs"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.Abs()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.Add"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.Add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.Determinant"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.Determinant()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.Exp1"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.Exp1()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.Expr"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.Expr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.GoldenRatio"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.GoldenRatio()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.ImaginaryUnit"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.ImaginaryUnit()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.Infinity"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.Infinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.Integer"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.Integer()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.MatrixElement"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.MatrixElement()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.Mul"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.Mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.NegativeInfinity"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.NegativeInfinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.Pi"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.Pi()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.Pow"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.Pow()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.Rational"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.Rational()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.Trace"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.Trace()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.int"><code class="docutils literal notranslate"><span class="pre">AskIntegerHandler.int()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIrrationalHandler"><code class="docutils literal notranslate"><span class="pre">AskIrrationalHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIrrationalHandler.Basic"><code class="docutils literal notranslate"><span class="pre">AskIrrationalHandler.Basic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskIrrationalHandler.Expr"><code class="docutils literal notranslate"><span class="pre">AskIrrationalHandler.Expr()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.Add"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.Add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.Exp1"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.Exp1()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.Expr"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.Expr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.Float"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.Float()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.GoldenRatio"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.GoldenRatio()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.ImaginaryUnit"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.ImaginaryUnit()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.Infinity"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.Infinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.Mul"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.Mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.NegativeInfinity"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.NegativeInfinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.Pi"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.Pi()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.Pow"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.Pow()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.Rational"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.Rational()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.acos"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.acos()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.acot"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.acot()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.asin"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.asin()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.atan"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.atan()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.cos"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.cos()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.cot"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.cot()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.exp"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.exp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.log"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.log()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.sin"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.sin()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.tan"><code class="docutils literal notranslate"><span class="pre">AskRationalHandler.tan()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler"><code class="docutils literal notranslate"><span class="pre">AskRealHandler</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.Abs"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.Abs()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.Add"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.Add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.Determinant"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.Determinant()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.Exp1"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.Exp1()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.Expr"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.Expr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.Float"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.Float()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.GoldenRatio"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.GoldenRatio()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.ImaginaryUnit"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.ImaginaryUnit()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.Infinity"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.Infinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.MatrixElement"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.MatrixElement()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.Mul"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.Mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.NegativeInfinity"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.NegativeInfinity()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.Pi"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.Pi()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.Pow"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.Pow()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.Rational"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.Rational()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.Trace"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.Trace()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.cos"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.cos()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.exp"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.exp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.im"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.im()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.log"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.log()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.re"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.re()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.sin"><code class="docutils literal notranslate"><span class="pre">AskRealHandler.sin()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.assumptions.handlers">Module contents</a></li>
 </ul>
 </li>
@@ -2400,7 +2847,7 @@ Real**Real                 -&gt; ? e.g. sqrt(-1) is imaginary and sqrt(2) is not
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2429,7 +2876,7 @@ Real**Real                 -&gt; ? e.g. sqrt(-1) is imaginary and sqrt(2) is not
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

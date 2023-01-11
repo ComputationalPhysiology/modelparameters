@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -50,36 +49,36 @@
 
 
 <div class="viewcode-block" id="SeriesBase"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.series_class.SeriesBase">[docs]</a><span class="k">class</span> <span class="nc">SeriesBase</span><span class="p">(</span><span class="n">Expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base Class for series&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base Class for series&quot;&quot;&quot;</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">interval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The interval on which the series is defined&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The interval on which the series is defined&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">).interval&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The starting point of the series. This point is included&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The starting point of the series. This point is included&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">).start&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The ending point of the series. This point is included&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The ending point of the series. This point is included&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">).stop&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Length of the series expansion&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Length of the series expansion&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">).length&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a tuple of variables that are bounded&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a tuple of variables that are bounded&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">free_symbols</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method returns the symbols in the object, excluding those</span>
 <span class="sd">        that take on a specific value (i.e. the dummy symbols).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -88,7 +87,7 @@
 
 <div class="viewcode-block" id="SeriesBase.term"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.series_class.SeriesBase.term">[docs]</a>    <span class="nd">@cacheit</span>
     <span class="k">def</span> <span class="nf">term</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Term at point pt of a series&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Term at point pt of a series&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">pt</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="ow">or</span> <span class="n">pt</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Index </span><span class="si">%s</span><span class="s2"> out of bounds </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">pt</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">interval</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_term</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span></div>
@@ -100,7 +99,7 @@
                                   <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_ith_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the i&#39;th point of a series</span>
 <span class="sd">        If start point is negative infinity, point is returned from the end.</span>
 <span class="sd">        Assumes the first point to be indexed zero.</span>
@@ -155,7 +154,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -176,7 +175,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

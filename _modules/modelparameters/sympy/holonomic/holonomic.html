@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -69,7 +68,7 @@
 
 
 <div class="viewcode-block" id="DifferentialOperators"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.DifferentialOperators">[docs]</a><span class="k">def</span> <span class="nf">DifferentialOperators</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">generator</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function is used to create annihilators using ``Dx``.</span>
 
 <span class="sd">    Returns an Algebra of Differential Operators also called Weyl Algebra</span>
@@ -104,7 +103,7 @@
 
 
 <div class="viewcode-block" id="DifferentialOperatorAlgebra"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.DifferentialOperatorAlgebra">[docs]</a><span class="k">class</span> <span class="nc">DifferentialOperatorAlgebra</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    An Ore Algebra is a set of noncommutative polynomials in the</span>
 <span class="sd">    intermediate ``Dx`` and coefficients in a base polynomial ring :math:`A`.</span>
 <span class="sd">    It follows the commutation rule:</span>
@@ -173,7 +172,7 @@
 
 
 <div class="viewcode-block" id="DifferentialOperator"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.DifferentialOperator">[docs]</a><span class="k">class</span> <span class="nc">DifferentialOperator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Differential Operators are elements of Weyl Algebra. The Operators</span>
 <span class="sd">    are defined by a list of polynomials in the base ring and the</span>
 <span class="sd">    parent ring of the Operator i.e. the algebra it belongs to.</span>
@@ -208,7 +207,7 @@
     <span class="n">_op_priority</span> <span class="o">=</span> <span class="mi">20</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">list_of_poly</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
 
@@ -238,7 +237,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">listofpoly</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
 
     <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Multiplies two DifferentialOperator and returns another</span>
 <span class="sd">        DifferentialOperator instance using the commutation rule</span>
 <span class="sd">        Dx*a = a*Dx + a&#39;</span>
@@ -401,7 +400,7 @@
                 <span class="k">return</span> <span class="kc">False</span>
 
 <div class="viewcode-block" id="DifferentialOperator.is_singular"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.DifferentialOperator.is_singular">[docs]</a>    <span class="k">def</span> <span class="nf">is_singular</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks if the differential equation is singular at x0.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -410,7 +409,7 @@
 
 
 <div class="viewcode-block" id="HolonomicFunction"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.HolonomicFunction">[docs]</a><span class="k">class</span> <span class="nc">HolonomicFunction</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A Holonomic Function is a solution to a linear homogeneous ordinary</span>
 <span class="sd">    differential equation with polynomial coefficients. This differential</span>
 <span class="sd">    equation can also be represented by an annihilator i.e. a Differential</span>
@@ -476,7 +475,7 @@
     <span class="n">_op_priority</span> <span class="o">=</span> <span class="mi">20</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">annihilator</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -517,7 +516,7 @@
     <span class="fm">__repr__</span> <span class="o">=</span> <span class="fm">__str__</span>
 
 <div class="viewcode-block" id="HolonomicFunction.unify"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.unify">[docs]</a>    <span class="k">def</span> <span class="nf">unify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Unifies the base polynomial ring of a given two Holonomic</span>
 <span class="sd">        Functions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -547,7 +546,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">sol1</span><span class="p">,</span> <span class="n">sol2</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="HolonomicFunction.is_singularics"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.is_singularics">[docs]</a>    <span class="k">def</span> <span class="nf">is_singularics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if the function have singular initial condition</span>
 <span class="sd">        in the dictionary format.</span>
 
@@ -563,13 +562,13 @@
             <span class="k">return</span> <span class="kc">False</span></div>
 
     <span class="k">def</span> <span class="nf">_have_init_cond</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks if the function have initial condition.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y0</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_singularics_to_ord</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts a singular initial condition to ordinary if possible.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">a</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
@@ -745,7 +744,7 @@
         <span class="k">return</span> <span class="n">HolonomicFunction</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x0</span><span class="p">,</span> <span class="n">y0</span><span class="p">)</span>
 
 <div class="viewcode-block" id="HolonomicFunction.integrate"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.integrate">[docs]</a>    <span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limits</span><span class="p">,</span> <span class="n">initcond</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Integrates the given holonomic function.</span>
 
 <span class="sd">        Examples</span>
@@ -872,7 +871,7 @@
         <span class="k">return</span> <span class="n">HolonomicFunction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annihilator</span> <span class="o">*</span> <span class="n">D</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="HolonomicFunction.diff"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.diff">[docs]</a>    <span class="k">def</span> <span class="nf">diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Differentiation of the given Holonomic function.</span>
 
 <span class="sd">        Examples</span>
@@ -1182,14 +1181,14 @@
                 <span class="k">return</span> <span class="n">powreduce</span> <span class="o">*</span> <span class="n">powreduce</span>
 
 <div class="viewcode-block" id="HolonomicFunction.degree"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.degree">[docs]</a>    <span class="k">def</span> <span class="nf">degree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the highest power of `x` in the annihilator.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">sol</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">annihilator</span><span class="o">.</span><span class="n">listofpoly</span><span class="p">]</span>
         <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">sol</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="HolonomicFunction.composition"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.composition">[docs]</a>    <span class="k">def</span> <span class="nf">composition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns function after composition of a holonomic</span>
 <span class="sd">        function with an algebraic function. The method can&#39;t compute</span>
 <span class="sd">        initial conditions for the result by itself, so they can be also be</span>
@@ -1255,7 +1254,7 @@
         <span class="k">return</span> <span class="n">HolonomicFunction</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="HolonomicFunction.to_sequence"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.to_sequence">[docs]</a>    <span class="k">def</span> <span class="nf">to_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lb</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Finds recurrence relation for the coefficients in the series expansion</span>
 <span class="sd">        of the function about :math:`x_0`, where :math:`x_0` is the point at</span>
 <span class="sd">        which the initial condition is stored.</span>
@@ -1663,7 +1662,7 @@
         <span class="k">return</span> <span class="n">finalsol</span>
 
 <div class="viewcode-block" id="HolonomicFunction.series"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.series">[docs]</a>    <span class="k">def</span> <span class="nf">series</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">coefficient</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">_recur</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Finds the power series expansion of given holonomic function about :math:`x_0`.</span>
 
 <span class="sd">        A list of series might be returned if :math:`x_0` is a regular point with</span>
@@ -1752,7 +1751,7 @@
         <span class="k">return</span> <span class="n">ser</span></div>
 
     <span class="k">def</span> <span class="nf">_indicial</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes roots of the Indicial equation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -1792,7 +1791,7 @@
         <span class="k">return</span> <span class="n">roots</span><span class="p">(</span><span class="n">R</span><span class="o">.</span><span class="n">to_sympy</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span>
 
 <div class="viewcode-block" id="HolonomicFunction.evalf"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.evalf">[docs]</a>    <span class="k">def</span> <span class="nf">evalf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;RK4&#39;</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">derivatives</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Finds numerical value of a holonomic function using numerical methods.</span>
 <span class="sd">        (RK4 by default). A set of points (real or complex) must be provided</span>
 <span class="sd">        which will be the path for the numerical integration.</span>
@@ -1864,7 +1863,7 @@
         <span class="k">return</span> <span class="n">_evalf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">derivatives</span><span class="o">=</span><span class="n">derivatives</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="HolonomicFunction.change_x"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.change_x">[docs]</a>    <span class="k">def</span> <span class="nf">change_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Changes only the variable of Holonomic Function, for internal</span>
 <span class="sd">        purposes. For composition use HolonomicFunction.composition()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1879,7 +1878,7 @@
         <span class="k">return</span> <span class="n">HolonomicFunction</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y0</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="HolonomicFunction.shift_x"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.shift_x">[docs]</a>    <span class="k">def</span> <span class="nf">shift_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Substitute `x + a` for `x`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -1895,7 +1894,7 @@
         <span class="k">return</span> <span class="n">HolonomicFunction</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y0</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="HolonomicFunction.to_hyper"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.to_hyper">[docs]</a>    <span class="k">def</span> <span class="nf">to_hyper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">as_list</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">_recur</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a hypergeometric function (or linear combination of them)</span>
 <span class="sd">        representing the given holonomic function.</span>
 
@@ -2075,7 +2074,7 @@
         <span class="k">return</span> <span class="n">sol</span></div>
 
 <div class="viewcode-block" id="HolonomicFunction.to_expr"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.to_expr">[docs]</a>    <span class="k">def</span> <span class="nf">to_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts a Holonomic Function back to elementary functions.</span>
 
 <span class="sd">        Examples</span>
@@ -2096,7 +2095,7 @@
         <span class="k">return</span> <span class="n">hyperexpand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_hyper</span><span class="p">())</span><span class="o">.</span><span class="n">simplify</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="HolonomicFunction.change_ics"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.change_ics">[docs]</a>    <span class="k">def</span> <span class="nf">change_ics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">lenics</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Changes the point `x0` to `b` for initial conditions.</span>
 
 <span class="sd">        Examples</span>
@@ -2131,7 +2130,7 @@
         <span class="k">return</span> <span class="n">HolonomicFunction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">annihilator</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">y0</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="HolonomicFunction.to_meijerg"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.to_meijerg">[docs]</a>    <span class="k">def</span> <span class="nf">to_meijerg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a linear combination of Meijer G-functions.</span>
 
 <span class="sd">        Examples</span>
@@ -2166,7 +2165,7 @@
 
 
 <div class="viewcode-block" id="from_hyper"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.from_hyper">[docs]</a><span class="k">def</span> <span class="nf">from_hyper</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">evalf</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a hypergeometric function to holonomic.</span>
 <span class="sd">    ``func`` is the Hypergeometric Function and ``x0`` is the point at</span>
 <span class="sd">    which initial conditions are required.</span>
@@ -2240,7 +2239,7 @@
 
 
 <div class="viewcode-block" id="from_meijerg"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.from_meijerg">[docs]</a><span class="k">def</span> <span class="nf">from_meijerg</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">evalf</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">initcond</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="n">QQ</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a Meijer G-function to Holonomic.</span>
 <span class="sd">    ``func`` is the G-Function and ``x0`` is the point at</span>
 <span class="sd">    which initial conditions are required.</span>
@@ -2328,7 +2327,7 @@
 
 
 <div class="viewcode-block" id="expr_to_holonomic"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.holonomic.expr_to_holonomic">[docs]</a><span class="k">def</span> <span class="nf">expr_to_holonomic</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lenics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">initcond</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a function or an expression to a holonomic function.</span>
 
 <span class="sd">    Parameters</span>
@@ -2493,7 +2492,7 @@
 <span class="c1">## Some helper functions ##</span>
 
 <span class="k">def</span> <span class="nf">_normalize</span><span class="p">(</span><span class="n">list_of</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">negative</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Normalize a given annihilator</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -2550,7 +2549,7 @@
 
 
 <span class="k">def</span> <span class="nf">_derivate_diff_eq</span><span class="p">(</span><span class="n">listofpoly</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Let a differential equation a0(x)y(x) + a1(x)y&#39;(x) + ... = 0</span>
 <span class="sd">    where a0, a1,... are polynomials or rational functions. The function</span>
 <span class="sd">    returns b0, b1, b2... such that the differential equation</span>
@@ -2570,7 +2569,7 @@
 
 
 <span class="k">def</span> <span class="nf">_hyper_to_meijerg</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a `hyper` to meijerg.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ap</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">ap</span>
@@ -2603,7 +2602,7 @@
 
 
 <span class="k">def</span> <span class="nf">_add_lists</span><span class="p">(</span><span class="n">list1</span><span class="p">,</span> <span class="n">list2</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Takes polynomial sequences of two annihilators a and b and returns</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Takes polynomial sequences of two annihilators a and b and returns</span>
 <span class="sd">    the list of polynomials of sum of a and b.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">list1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">list2</span><span class="p">):</span>
@@ -2614,7 +2613,7 @@
 
 
 <span class="k">def</span> <span class="nf">_extend_y0</span><span class="p">(</span><span class="n">Holonomic</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Tries to find more initial conditions by substituting the initial</span>
 <span class="sd">    value point in the differential equation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -2708,7 +2707,7 @@
 
 
 <span class="k">def</span> <span class="nf">_convert_poly_rat_alg</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lenics</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="n">QQ</span><span class="p">,</span> <span class="n">initcond</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts polynomials, rationals and algebraic functions to holonomic.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -2862,13 +2861,13 @@
 
 
 <span class="k">def</span> <span class="nf">_create_table</span><span class="p">(</span><span class="n">table</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="n">QQ</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Creates the look-up table. For a similar implementation</span>
 <span class="sd">    see meijerint._create_lookup_table.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">annihilator</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y0</span><span class="o">=</span><span class="p">[]):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Adds a formula in the dictionary</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">table</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">_mytype</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">x_1</span><span class="p">),</span> <span class="p">[])</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">formula</span><span class="p">,</span>
@@ -2929,7 +2928,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2950,7 +2949,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

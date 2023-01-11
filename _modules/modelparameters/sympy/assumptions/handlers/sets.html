@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -49,7 +48,7 @@
 
 
 <div class="viewcode-block" id="AskIntegerHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler">[docs]</a><span class="k">class</span> <span class="nc">AskIntegerHandler</span><span class="p">(</span><span class="n">CommonHandler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handler for Q.integer</span>
 <span class="sd">    Test that an expression belongs to the field of integer numbers</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -71,7 +70,7 @@
 
 <div class="viewcode-block" id="AskIntegerHandler.Add"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.Add">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Integer + Integer       -&gt; Integer</span>
 <span class="sd">        Integer + !Integer      -&gt; !Integer</span>
 <span class="sd">        !Integer + !Integer -&gt; ?</span>
@@ -82,7 +81,7 @@
 
 <div class="viewcode-block" id="AskIntegerHandler.Mul"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskIntegerHandler.Mul">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Mul</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Integer*Integer      -&gt; Integer</span>
 <span class="sd">        Integer*Irrational   -&gt; !Integer</span>
 <span class="sd">        Odd/Even             -&gt; !Integer</span>
@@ -133,7 +132,7 @@
 
 
 <div class="viewcode-block" id="AskRationalHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler">[docs]</a><span class="k">class</span> <span class="nc">AskRationalHandler</span><span class="p">(</span><span class="n">CommonHandler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handler for Q.rational</span>
 <span class="sd">    Test that an expression belongs to the field of rational numbers</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -145,7 +144,7 @@
 
 <div class="viewcode-block" id="AskRationalHandler.Add"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.Add">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Rational + Rational     -&gt; Rational</span>
 <span class="sd">        Rational + !Rational    -&gt; !Rational</span>
 <span class="sd">        !Rational + !Rational   -&gt; ?</span>
@@ -159,7 +158,7 @@
 
 <div class="viewcode-block" id="AskRationalHandler.Pow"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskRationalHandler.Pow">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Pow</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Rational ** Integer      -&gt; Rational</span>
 <span class="sd">        Irrational ** Rational   -&gt; Irrational</span>
 <span class="sd">        Rational ** Irrational   -&gt; ?</span>
@@ -218,7 +217,7 @@
 
 
 <div class="viewcode-block" id="AskRealHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler">[docs]</a><span class="k">class</span> <span class="nc">AskRealHandler</span><span class="p">(</span><span class="n">CommonHandler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handler for Q.real</span>
 <span class="sd">    Test that an expression belongs to the field of real numbers</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -239,7 +238,7 @@
 
 <div class="viewcode-block" id="AskRealHandler.Add"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.Add">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Real + Real              -&gt; Real</span>
 <span class="sd">        Real + (Complex &amp; !Real) -&gt; !Real</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -249,7 +248,7 @@
 
 <div class="viewcode-block" id="AskRealHandler.Mul"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.Mul">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Mul</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Real*Real               -&gt; Real</span>
 <span class="sd">        Real*Imaginary          -&gt; !Real</span>
 <span class="sd">        Imaginary*Imaginary     -&gt; Real</span>
@@ -269,7 +268,7 @@
 
 <div class="viewcode-block" id="AskRealHandler.Pow"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskRealHandler.Pow">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Pow</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Real**Integer              -&gt; Real</span>
 <span class="sd">        Positive**Real             -&gt; Real</span>
 <span class="sd">        Real**(Integer/Even)       -&gt; Real if base is nonnegative</span>
@@ -351,7 +350,7 @@
 
 
 <div class="viewcode-block" id="AskExtendedRealHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskExtendedRealHandler">[docs]</a><span class="k">class</span> <span class="nc">AskExtendedRealHandler</span><span class="p">(</span><span class="n">AskRealHandler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handler for Q.extended_real</span>
 <span class="sd">    Test that an expression belongs to the field of extended real numbers,</span>
 <span class="sd">    that is real numbers union {Infinity, -Infinity}</span>
@@ -367,14 +366,14 @@
 
 
 <div class="viewcode-block" id="AskHermitianHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskHermitianHandler">[docs]</a><span class="k">class</span> <span class="nc">AskHermitianHandler</span><span class="p">(</span><span class="n">AskRealHandler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handler for Q.hermitian</span>
 <span class="sd">    Test that an expression belongs to the field of Hermitian operators</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="AskHermitianHandler.Add"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskHermitianHandler.Add">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Hermitian + Hermitian  -&gt; Hermitian</span>
 <span class="sd">        Hermitian + !Hermitian -&gt; !Hermitian</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -384,7 +383,7 @@
 
 <div class="viewcode-block" id="AskHermitianHandler.Mul"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskHermitianHandler.Mul">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Mul</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        As long as there is at most only one noncommutative term:</span>
 <span class="sd">        Hermitian*Hermitian         -&gt; Hermitian</span>
 <span class="sd">        Hermitian*Antihermitian     -&gt; !Hermitian</span>
@@ -408,7 +407,7 @@
 
 <div class="viewcode-block" id="AskHermitianHandler.Pow"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskHermitianHandler.Pow">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Pow</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Hermitian**Integer -&gt; Hermitian</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_number</span><span class="p">:</span>
@@ -426,7 +425,7 @@
 
 
 <div class="viewcode-block" id="AskComplexHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskComplexHandler">[docs]</a><span class="k">class</span> <span class="nc">AskComplexHandler</span><span class="p">(</span><span class="n">CommonHandler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handler for Q.complex</span>
 <span class="sd">    Test that an expression belongs to the field of complex numbers</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -454,7 +453,7 @@
 
 
 <div class="viewcode-block" id="AskImaginaryHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler">[docs]</a><span class="k">class</span> <span class="nc">AskImaginaryHandler</span><span class="p">(</span><span class="n">CommonHandler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handler for Q.imaginary</span>
 <span class="sd">    Test that an expression belongs to the field of imaginary numbers,</span>
 <span class="sd">    that is, numbers in the form x*I, where x is real</span>
@@ -476,7 +475,7 @@
 
 <div class="viewcode-block" id="AskImaginaryHandler.Add"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler.Add">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Imaginary + Imaginary -&gt; Imaginary</span>
 <span class="sd">        Imaginary + Complex   -&gt; ?</span>
 <span class="sd">        Imaginary + Real      -&gt; !Imaginary</span>
@@ -501,7 +500,7 @@
 
 <div class="viewcode-block" id="AskImaginaryHandler.Mul"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler.Mul">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Mul</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Real*Imaginary      -&gt; Imaginary</span>
 <span class="sd">        Imaginary*Imaginary -&gt; Real</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -521,7 +520,7 @@
 
 <div class="viewcode-block" id="AskImaginaryHandler.Pow"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskImaginaryHandler.Pow">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Pow</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Imaginary**Odd        -&gt; Imaginary</span>
 <span class="sd">        Imaginary**Even       -&gt; Real</span>
 <span class="sd">        b**Imaginary          -&gt; !Imaginary if exponent is an integer multiple of I*pi/log(b)</span>
@@ -602,7 +601,7 @@
 
 
 <div class="viewcode-block" id="AskAntiHermitianHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskAntiHermitianHandler">[docs]</a><span class="k">class</span> <span class="nc">AskAntiHermitianHandler</span><span class="p">(</span><span class="n">AskImaginaryHandler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handler for Q.antihermitian</span>
 <span class="sd">    Test that an expression belongs to the field of anti-Hermitian operators,</span>
 <span class="sd">    that is, operators in the form x*I, where x is Hermitian</span>
@@ -610,7 +609,7 @@
 
 <div class="viewcode-block" id="AskAntiHermitianHandler.Add"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskAntiHermitianHandler.Add">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Antihermitian + Antihermitian  -&gt; Antihermitian</span>
 <span class="sd">        Antihermitian + !Antihermitian -&gt; !Antihermitian</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -620,7 +619,7 @@
 
 <div class="viewcode-block" id="AskAntiHermitianHandler.Mul"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskAntiHermitianHandler.Mul">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Mul</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        As long as there is at most only one noncommutative term:</span>
 <span class="sd">        Hermitian*Hermitian         -&gt; !Antihermitian</span>
 <span class="sd">        Hermitian*Antihermitian     -&gt; Antihermitian</span>
@@ -644,7 +643,7 @@
 
 <div class="viewcode-block" id="AskAntiHermitianHandler.Pow"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskAntiHermitianHandler.Pow">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Pow</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Hermitian**Integer  -&gt; !Antihermitian</span>
 <span class="sd">        Antihermitian**Even -&gt; !Antihermitian</span>
 <span class="sd">        Antihermitian**Odd  -&gt; Antihermitian</span>
@@ -662,7 +661,7 @@
 
 
 <div class="viewcode-block" id="AskAlgebraicHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler">[docs]</a><span class="k">class</span> <span class="nc">AskAlgebraicHandler</span><span class="p">(</span><span class="n">CommonHandler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Handler for Q.algebraic key. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handler for Q.algebraic key. &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="AskAlgebraicHandler.Add"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.sets.AskAlgebraicHandler.Add">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
@@ -724,7 +723,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -745,7 +744,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

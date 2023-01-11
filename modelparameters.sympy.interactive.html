@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>modelparameters.sympy.interactive package &#8212; modelparameters 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="modelparameters.sympy.liealgebras package" href="modelparameters.sympy.liealgebras.html" />
@@ -46,20 +45,20 @@
           <div class="body" role="main">
             
   <section id="modelparameters-sympy-interactive-package">
-<h1>modelparameters.sympy.interactive package<a class="headerlink" href="#modelparameters-sympy-interactive-package" title="Permalink to this headline">¶</a></h1>
+<h1>modelparameters.sympy.interactive package<a class="headerlink" href="#modelparameters-sympy-interactive-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.interactive.ipythonprinting">
-<span id="modelparameters-sympy-interactive-ipythonprinting-module"></span><h2>modelparameters.sympy.interactive.ipythonprinting module<a class="headerlink" href="#module-modelparameters.sympy.interactive.ipythonprinting" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-interactive-ipythonprinting-module"></span><h2>modelparameters.sympy.interactive.ipythonprinting module<a class="headerlink" href="#module-modelparameters.sympy.interactive.ipythonprinting" title="Permalink to this heading">¶</a></h2>
 <p>A print function that pretty prints SymPy objects.</p>
 <dl class="field-list simple">
-<dt class="field-odd">moduleauthor</dt>
+<dt class="field-odd">moduleauthor<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Brian Granger</p>
 </dd>
 </dl>
 <section id="usage">
-<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h3>
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h3>
 <p>To use this extension, execute:</p>
 <blockquote>
 <div><p>%load_ext sympy.interactive.ipythonprinting</p>
@@ -67,6 +66,7 @@
 <p>Once the extension is loaded, SymPy Basic objects are automatically
 pretty-printed in the terminal and rendered in LaTeX in the Qt console and
 notebook.</p>
+</section>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.interactive.ipythonprinting.load_ipython_extension">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.interactive.ipythonprinting.</span></span><span class="sig-name descname"><span class="pre">load_ipython_extension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ip</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/interactive/ipythonprinting.html#load_ipython_extension"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.interactive.ipythonprinting.load_ipython_extension" title="Permalink to this definition">¶</a></dt>
@@ -74,16 +74,15 @@ notebook.</p>
 </dd></dl>
 
 </section>
-</section>
 <section id="module-modelparameters.sympy.interactive.printing">
-<span id="modelparameters-sympy-interactive-printing-module"></span><h2>modelparameters.sympy.interactive.printing module<a class="headerlink" href="#module-modelparameters.sympy.interactive.printing" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-interactive-printing-module"></span><h2>modelparameters.sympy.interactive.printing module<a class="headerlink" href="#module-modelparameters.sympy.interactive.printing" title="Permalink to this heading">¶</a></h2>
 <p>Tools for setting up printing in interactive sessions.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.interactive.printing.init_printing">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.interactive.printing.</span></span><span class="sig-name descname"><span class="pre">init_printing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pretty_print</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_unicode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_latex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wrap_line</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">no_global</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">euler</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forecolor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Black'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backcolor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Transparent'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'10pt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latex_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'equation*'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_builtin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">str_printer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pretty_printer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latex_printer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">settings</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/interactive/printing.html#init_printing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.interactive.printing.init_printing" title="Permalink to this definition">¶</a></dt>
 <dd><p>Initializes pretty-printer depending on the environment.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pretty_print</strong> (<em>boolean</em>) – If True, use pretty_print to stringify or the provided pretty
 printer; if False, use sstrrepr to stringify or the provided string
@@ -107,7 +106,7 @@ rendering in IPython notebook or text rendering in LaTeX documents</p></li>
 <li><p><strong>wrap_line</strong> (<em>boolean</em>) – If True, lines will wrap at the end; if False, they will not wrap
 but continue as one line. This is only relevant if <cite>pretty_print</cite> is
 True.</p></li>
-<li><p><strong>num_columns</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a><em> or </em><em>None</em>) – If int, number of columns before wrapping is set to num_columns; if
+<li><p><strong>num_columns</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em> or </em><em>None</em>) – If int, number of columns before wrapping is set to num_columns; if
 None, number of columns before wrapping is set to terminal width.
 This is only relevant if <cite>pretty_print</cite> is True.</p></li>
 <li><p><strong>no_global</strong> (<em>boolean</em>) – If True, the settings become system wide;
@@ -170,7 +169,7 @@ sympy.printing.sstrrepr().</p></li>
 
 </section>
 <section id="module-modelparameters.sympy.interactive.session">
-<span id="modelparameters-sympy-interactive-session-module"></span><h2>modelparameters.sympy.interactive.session module<a class="headerlink" href="#module-modelparameters.sympy.interactive.session" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-interactive-session-module"></span><h2>modelparameters.sympy.interactive.session module<a class="headerlink" href="#module-modelparameters.sympy.interactive.session" title="Permalink to this heading">¶</a></h2>
 <p>Tools for setting up interactive sessions.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.interactive.session.enable_automatic_int_sympification">
@@ -203,7 +202,7 @@ sympy.printing.sstrrepr().</p></li>
 initiated with the –pylab option, without the numpy imports, so that
 matplotlib plotting can be interactive.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>pretty_print</strong> (<em>boolean</em>) – If True, use pretty_print to stringify;
 if False, use sstrrepr to stringify.</p></li>
@@ -235,7 +234,7 @@ sympy.printing.sstrrepr().</p></li>
 <li><p><strong>pretty_printer</strong> (<em>function</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – A custom pretty printer. This should mimic sympy.printing.pretty().</p></li>
 <li><p><strong>latex_printer</strong> (<em>function</em><em>, </em><em>optional</em><em>, </em><em>default=None</em>) – A custom LaTeX printer. This should mimic sympy.printing.latex()
 This should mimic sympy.printing.latex().</p></li>
-<li><p><strong>argv</strong> (<em>list of arguments for IPython</em>) – See sympy.bin.isympy for options that can be used to initialize IPython.</p></li>
+<li><p><strong>argv</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em> of </em><em>arguments for IPython</em>) – See sympy.bin.isympy for options that can be used to initialize IPython.</p></li>
 </ul>
 </dd>
 </dl>
@@ -307,7 +306,7 @@ This should mimic sympy.printing.latex().</p></li>
 
 </section>
 <section id="module-modelparameters.sympy.interactive">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.interactive" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.interactive" title="Permalink to this heading">¶</a></h2>
 <p>Helper module for setting up interactive SymPy sessions.</p>
 </section>
 </section>
@@ -326,10 +325,22 @@ This should mimic sympy.printing.latex().</p></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.interactive.ipythonprinting">modelparameters.sympy.interactive.ipythonprinting module</a><ul>
 <li><a class="reference internal" href="#usage">Usage</a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.interactive.ipythonprinting.load_ipython_extension"><code class="docutils literal notranslate"><span class="pre">load_ipython_extension()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.interactive.printing">modelparameters.sympy.interactive.printing module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.interactive.session">modelparameters.sympy.interactive.session module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.interactive.printing">modelparameters.sympy.interactive.printing module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.interactive.printing.init_printing"><code class="docutils literal notranslate"><span class="pre">init_printing()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.interactive.session">modelparameters.sympy.interactive.session module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.interactive.session.enable_automatic_int_sympification"><code class="docutils literal notranslate"><span class="pre">enable_automatic_int_sympification()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.interactive.session.enable_automatic_symbols"><code class="docutils literal notranslate"><span class="pre">enable_automatic_symbols()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.interactive.session.init_ipython_session"><code class="docutils literal notranslate"><span class="pre">init_ipython_session()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.interactive.session.init_python_session"><code class="docutils literal notranslate"><span class="pre">init_python_session()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.interactive.session.init_session"><code class="docutils literal notranslate"><span class="pre">init_session()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.interactive.session.int_to_Integer"><code class="docutils literal notranslate"><span class="pre">int_to_Integer()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.interactive">Module contents</a></li>
 </ul>
 </li>
@@ -362,7 +373,7 @@ This should mimic sympy.printing.latex().</p></li>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -390,7 +401,7 @@ This should mimic sympy.printing.latex().</p></li>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

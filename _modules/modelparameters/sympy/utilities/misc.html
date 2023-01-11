@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -55,7 +54,7 @@
 
 
 <div class="viewcode-block" id="filldedent"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.misc.filldedent">[docs]</a><span class="k">def</span> <span class="nf">filldedent</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">70</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Strips leading and trailing empty lines from a copy of `s`, then dedents,</span>
 <span class="sd">    fills and returns it.</span>
 
@@ -66,7 +65,7 @@
 
 
 <div class="viewcode-block" id="rawlines"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.misc.rawlines">[docs]</a><span class="k">def</span> <span class="nf">rawlines</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a cut-and-pastable string that, when printed, is equivalent</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a cut-and-pastable string that, when printed, is equivalent</span>
 <span class="sd">    to the input. The string returned is formatted so it can be indented</span>
 <span class="sd">    nicely within tests; in some cases it is wrapped in the dedent</span>
 <span class="sd">    function which has to be imported from textwrap.</span>
@@ -158,7 +157,7 @@
 <span class="n">_debug_iter</span> <span class="o">=</span> <span class="mi">0</span>
 
 <div class="viewcode-block" id="debug_decorator"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.misc.debug_decorator">[docs]</a><span class="k">def</span> <span class="nf">debug_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;If SYMPY_DEBUG is True, it will print a nice execution tree with</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;If SYMPY_DEBUG is True, it will print a nice execution tree with</span>
 <span class="sd">    arguments and results of all decorated functions, else do nothing.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">SYMPY_DEBUG</span>
@@ -220,7 +219,7 @@
 
 
 <div class="viewcode-block" id="debug"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.misc.debug">[docs]</a><span class="k">def</span> <span class="nf">debug</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Print ``*args`` if SYMPY_DEBUG is True, else do nothing.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">SYMPY_DEBUG</span>
@@ -229,7 +228,7 @@
 
 
 <div class="viewcode-block" id="find_executable"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.misc.find_executable">[docs]</a><span class="k">def</span> <span class="nf">find_executable</span><span class="p">(</span><span class="n">executable</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Try to find &#39;executable&#39; in the directories listed in &#39;path&#39; (a</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Try to find &#39;executable&#39; in the directories listed in &#39;path&#39; (a</span>
 <span class="sd">    string listing directories separated by &#39;os.pathsep&#39;; defaults to</span>
 <span class="sd">    os.environ[&#39;PATH&#39;]).  Returns the complete filename or None if not</span>
 <span class="sd">    found</span>
@@ -263,7 +262,7 @@
 
 
 <div class="viewcode-block" id="func_name"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.misc.func_name">[docs]</a><span class="k">def</span> <span class="nf">func_name</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Return function name of `x` (if defined) else the `type(x)`.</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Return function name of `x` (if defined) else the `type(x)`.</span>
 <span class="sd">    See Also</span>
 <span class="sd">    ========</span>
 <span class="sd">    sympy.core.compatibility get_function_name</span>
@@ -275,7 +274,7 @@
 
 
 <span class="k">def</span> <span class="nf">_replace</span><span class="p">(</span><span class="n">reps</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a function that can make the replacements, given in</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a function that can make the replacements, given in</span>
 <span class="sd">    ``reps``, on a string. The replacements should be given as mapping.</span>
 
 <span class="sd">    Examples</span>
@@ -298,7 +297,7 @@
 
 
 <div class="viewcode-block" id="replace"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.misc.replace">[docs]</a><span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="o">*</span><span class="n">reps</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return ``string`` with all keys in ``reps`` replaced with</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return ``string`` with all keys in ``reps`` replaced with</span>
 <span class="sd">    their corresponding values, longer strings first, irrespective</span>
 <span class="sd">    of the order they are given.  ``reps`` may be passed as tuples</span>
 <span class="sd">    or a single mapping.</span>
@@ -340,7 +339,7 @@
 
 
 <div class="viewcode-block" id="translate"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.misc.translate">[docs]</a><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return ``s`` where characters have been replaced or deleted.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return ``s`` where characters have been replaced or deleted.</span>
 
 <span class="sd">    SYNTAX</span>
 <span class="sd">    ======</span>
@@ -455,7 +454,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -476,7 +475,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

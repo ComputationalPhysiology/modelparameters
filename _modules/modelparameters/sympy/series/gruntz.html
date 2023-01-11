@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -171,7 +170,7 @@
 
 
 <div class="viewcode-block" id="compare"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.gruntz.compare">[docs]</a><span class="k">def</span> <span class="nf">compare</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns &quot;&lt;&quot; if a&lt;b, &quot;=&quot; for a == b, &quot;&gt;&quot; for a&gt;b&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns &quot;&lt;&quot; if a&lt;b, &quot;=&quot; for a == b, &quot;&gt;&quot; for a&gt;b&quot;&quot;&quot;</span>
     <span class="c1"># log(exp(...)) must always be simplified here for termination</span>
     <span class="n">la</span><span class="p">,</span> <span class="n">lb</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">log</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">Basic</span><span class="p">)</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="n">func</span> <span class="ow">is</span> <span class="n">exp</span><span class="p">:</span>
@@ -189,7 +188,7 @@
 
 
 <div class="viewcode-block" id="SubsSet"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.gruntz.SubsSet">[docs]</a><span class="k">class</span> <span class="nc">SubsSet</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Stores (expr, dummy) pairs, and how to rewrite expr-s.</span>
 
 <span class="sd">    The gruntz algorithm needs to rewrite certain expressions in term of a new</span>
@@ -244,17 +243,17 @@
         <span class="k">return</span> <span class="nb">dict</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
 
 <div class="viewcode-block" id="SubsSet.do_subs"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.gruntz.SubsSet.do_subs">[docs]</a>    <span class="k">def</span> <span class="nf">do_subs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Substitute the variables with expressions&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Substitute the variables with expressions&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">expr</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">expr</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">e</span></div>
 
 <div class="viewcode-block" id="SubsSet.meets"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.gruntz.SubsSet.meets">[docs]</a>    <span class="k">def</span> <span class="nf">meets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s2</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Tell whether or not self and s2 have non-empty intersection&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Tell whether or not self and s2 have non-empty intersection&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="SubsSet.union"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.gruntz.SubsSet.union">[docs]</a>    <span class="k">def</span> <span class="nf">union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">exps</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute the union of self and s2, adjusting exps&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute the union of self and s2, adjusting exps&quot;&quot;&quot;</span>
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">tr</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">expr</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">s2</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -269,7 +268,7 @@
         <span class="k">return</span> <span class="n">res</span><span class="p">,</span> <span class="n">exps</span></div>
 
 <div class="viewcode-block" id="SubsSet.copy"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.gruntz.SubsSet.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a shallow copy of SubsSet&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a shallow copy of SubsSet&quot;&quot;&quot;</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">SubsSet</span><span class="p">()</span>
         <span class="n">r</span><span class="o">.</span><span class="n">rewrites</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rewrites</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">expr</span><span class="p">,</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -279,7 +278,7 @@
 
 <div class="viewcode-block" id="mrv"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.gruntz.mrv">[docs]</a><span class="nd">@debug</span>
 <span class="k">def</span> <span class="nf">mrv</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns a SubsSet of most rapidly varying (mrv) subexpressions of &#39;e&#39;,</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a SubsSet of most rapidly varying (mrv) subexpressions of &#39;e&#39;,</span>
 <span class="sd">       and e rewritten in terms of these&quot;&quot;&quot;</span>
     <span class="n">e</span> <span class="o">=</span> <span class="n">powsimp</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="s1">&#39;exp&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">Basic</span><span class="p">):</span>
@@ -348,7 +347,7 @@
 
 
 <div class="viewcode-block" id="mrv_max3"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.gruntz.mrv_max3">[docs]</a><span class="k">def</span> <span class="nf">mrv_max3</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">expsf</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">expsg</span><span class="p">,</span> <span class="n">union</span><span class="p">,</span> <span class="n">expsboth</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Computes the maximum of two sets of expressions f and g, which</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the maximum of two sets of expressions f and g, which</span>
 <span class="sd">    are in the same comparability class, i.e. max() compares (two elements of)</span>
 <span class="sd">    f and g and returns either (f, expsf) [if f is larger], (g, expsg)</span>
 <span class="sd">    [if g is larger] or (union, expsboth) [if f, g are of the same class].</span>
@@ -376,7 +375,7 @@
 
 
 <div class="viewcode-block" id="mrv_max1"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.gruntz.mrv_max1">[docs]</a><span class="k">def</span> <span class="nf">mrv_max1</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">exps</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Computes the maximum of two sets of expressions f and g, which</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the maximum of two sets of expressions f and g, which</span>
 <span class="sd">    are in the same comparability class, i.e. mrv_max1() compares (two elements of)</span>
 <span class="sd">    f and g and returns the set, which is in the higher comparability class</span>
 <span class="sd">    of the union of both, if they have the same order of variation.</span>
@@ -391,7 +390,7 @@
 <span class="nd">@cacheit</span>
 <span class="nd">@timeit</span>
 <span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a sign of an expression e(x) for x-&gt;oo.</span>
 
 <span class="sd">    ::</span>
@@ -448,7 +447,7 @@
 <span class="nd">@timeit</span>
 <span class="nd">@cacheit</span>
 <span class="k">def</span> <span class="nf">limitinf</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Limit e(x) for x-&gt; oo&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Limit e(x) for x-&gt; oo&quot;&quot;&quot;</span>
     <span class="c1"># rewrite e in terms of tractable functions only</span>
     <span class="n">e</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">rewrite</span><span class="p">(</span><span class="s1">&#39;tractable&#39;</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -495,7 +494,7 @@
 <div class="viewcode-block" id="calculate_series"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.gruntz.calculate_series">[docs]</a><span class="nd">@debug</span>
 <span class="nd">@timeit</span>
 <span class="k">def</span> <span class="nf">calculate_series</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">logx</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Calculates at least one term of the series of &quot;e&quot; in &quot;x&quot;.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculates at least one term of the series of &quot;e&quot; in &quot;x&quot;.</span>
 
 <span class="sd">    This is a place that fails most often, so it is in its own function.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -517,7 +516,7 @@
 <span class="nd">@timeit</span>
 <span class="nd">@cacheit</span>
 <span class="k">def</span> <span class="nf">mrv_leadterm</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns (c0, e0) for e.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns (c0, e0) for e.&quot;&quot;&quot;</span>
     <span class="n">Omega</span> <span class="o">=</span> <span class="n">SubsSet</span><span class="p">()</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">e</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">)</span>
@@ -553,7 +552,7 @@
 
 
 <div class="viewcode-block" id="build_expression_tree"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.gruntz.build_expression_tree">[docs]</a><span class="k">def</span> <span class="nf">build_expression_tree</span><span class="p">(</span><span class="n">Omega</span><span class="p">,</span> <span class="n">rewrites</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot; Helper function for rewrite.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot; Helper function for rewrite.</span>
 
 <span class="sd">    We need to sort Omega (mrv set) so that we replace an expression before</span>
 <span class="sd">    we replace any expression in terms of which it has to be rewritten::</span>
@@ -592,7 +591,7 @@
 <div class="viewcode-block" id="rewrite"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.gruntz.rewrite">[docs]</a><span class="nd">@debug</span>
 <span class="nd">@timeit</span>
 <span class="k">def</span> <span class="nf">rewrite</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">Omega</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">wsym</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;e(x) ... the function</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;e(x) ... the function</span>
 <span class="sd">    Omega ... the mrv set</span>
 <span class="sd">    wsym ... the symbol which is going to be used for w</span>
 
@@ -664,7 +663,7 @@
 
 
 <div class="viewcode-block" id="gruntz"><a class="viewcode-back" href="../../../../modelparameters.sympy.series.html#modelparameters.sympy.series.gruntz.gruntz">[docs]</a><span class="k">def</span> <span class="nf">gruntz</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">z0</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the limit of e(z) at the point z0 using the Gruntz algorithm.</span>
 
 <span class="sd">    z0 can be any expression, including oo and -oo.</span>
@@ -717,7 +716,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -738,7 +737,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

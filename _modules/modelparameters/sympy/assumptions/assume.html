@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -47,7 +46,7 @@
 
 
 <div class="viewcode-block" id="AssumptionsContext"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.assume.AssumptionsContext">[docs]</a><span class="k">class</span> <span class="nc">AssumptionsContext</span><span class="p">(</span><span class="nb">set</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set representing assumptions.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set representing assumptions.</span>
 
 <span class="sd">    This is used to represent global assumptions, but you can also use this</span>
 <span class="sd">    class to create your own local assumptions contexts. It is basically a thin</span>
@@ -72,7 +71,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="AssumptionsContext.add"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.assume.AssumptionsContext.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Add an assumption.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add an assumption.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">assumptions</span><span class="p">:</span>
             <span class="nb">super</span><span class="p">(</span><span class="n">AssumptionsContext</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
 
@@ -85,7 +84,7 @@
 
 
 <div class="viewcode-block" id="AppliedPredicate"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.assume.AppliedPredicate">[docs]</a><span class="k">class</span> <span class="nc">AppliedPredicate</span><span class="p">(</span><span class="n">Boolean</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The class of expressions resulting from applying a Predicate.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The class of expressions resulting from applying a Predicate.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -110,7 +109,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">arg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the expression used by this assumption.</span>
 
 <span class="sd">        Examples</span>
@@ -151,7 +150,7 @@
 
 
 <div class="viewcode-block" id="Predicate"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.assume.Predicate">[docs]</a><span class="k">class</span> <span class="nc">Predicate</span><span class="p">(</span><span class="n">Boolean</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A predicate is a function that returns a boolean value.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A predicate is a function that returns a boolean value.</span>
 
 <span class="sd">    Predicates merely wrap their argument and remain unevaluated:</span>
 
@@ -203,7 +202,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">class_key</span><span class="p">(),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,)),</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="o">.</span><span class="n">sort_key</span><span class="p">(),</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span></div>
 
 <div class="viewcode-block" id="Predicate.eval"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.assume.Predicate.eval">[docs]</a>    <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Evaluate self(expr) under the given assumptions.</span>
 
 <span class="sd">        This uses only direct resolution methods, not logical inference.</span>
@@ -237,7 +236,7 @@
 
 <div class="viewcode-block" id="assuming"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.assume.assuming">[docs]</a><span class="nd">@contextmanager</span>
 <span class="k">def</span> <span class="nf">assuming</span><span class="p">(</span><span class="o">*</span><span class="n">assumptions</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Context manager for assumptions</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Context manager for assumptions</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -276,7 +275,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -297,7 +296,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

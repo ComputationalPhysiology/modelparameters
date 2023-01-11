@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/nature.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
@@ -108,7 +107,7 @@
 
 
 <span class="k">def</span> <span class="nf">_process_other</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper function for magic methods</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function for magic methods</span>
 <span class="sd">    in ScalarParam.</span>
 
 <span class="sd">    Arguments</span>
@@ -158,12 +157,12 @@
 
 
 <div class="viewcode-block" id="Param"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.Param">[docs]</a><span class="k">class</span> <span class="nc">Param</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A simple type checking class for a single value</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the Param</span>
 
 <span class="sd">        Arguments</span>
@@ -186,7 +185,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_description</span> <span class="o">=</span> <span class="n">description</span>
 
 <div class="viewcode-block" id="Param.copy"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.Param.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include_checkarg</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_name</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_description</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a copy of the parameter</span>
 
 <span class="sd">        Arguments</span>
@@ -234,7 +233,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setvalue</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Param.setvalue"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.Param.setvalue">[docs]</a>    <span class="k">def</span> <span class="nf">setvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Try to set the value using the check</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">check</span><span class="p">:</span>
@@ -243,7 +242,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="n">value</span></div>
 
 <div class="viewcode-block" id="Param.getvalue"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.Param.getvalue">[docs]</a>    <span class="k">def</span> <span class="nf">getvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the value</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_value</span></div>
@@ -252,7 +251,7 @@
     <span class="n">value</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">getvalue</span><span class="p">,</span> <span class="n">setvalue</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Param.check"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.Param.check">[docs]</a>    <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check the value using the type and any range check</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Fist check if the value is an int or float.</span>
@@ -285,11 +284,11 @@
             <span class="n">type_error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;expected &#39;</span><span class="si">{</span><span class="n">type_name</span><span class="si">}</span><span class="s2">&#39; while setting parameter</span><span class="si">{</span><span class="n">name_str</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_in_range</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_in_range</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
-                <span class="n">value_error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Illegal value</span><span class="si">{</span><span class="n">name_str</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">format_data</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">value_error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Illegal value</span><span class="si">{</span><span class="n">name_str</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">format_data</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="kc">True</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">value</span></div>
 
 <div class="viewcode-block" id="Param.format_data"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.Param.format_data">[docs]</a>    <span class="k">def</span> <span class="nf">format_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">not_in</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">str_length</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print a nice formated version of the value and its range</span>
 
 <span class="sd">        Arguments</span>
@@ -315,19 +314,19 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_in_str</span> <span class="o">%</span> <span class="n">value_formatter</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">str_length</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Param.format_width"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.Param.format_width">[docs]</a>    <span class="k">def</span> <span class="nf">format_width</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the width of the formated str of value</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">value_formatter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_value</span><span class="p">))</span></div>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns an executable version of the Param</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">repr</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Param.repr"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.Param.repr">[docs]</a>    <span class="k">def</span> <span class="nf">repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include_checkarg</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_name</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_description</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns an executable version of the Param including optional arguments</span>
 
 <span class="sd">        Arguments</span>
@@ -364,13 +363,13 @@
         <span class="k">return</span> <span class="s2">&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a nice representation of the Param</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_data</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Param.convert_to"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.Param.convert_to">[docs]</a>    <span class="k">def</span> <span class="nf">convert_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert parameter to a different unit than the current one.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert parameter to a different unit than the current one.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -394,7 +393,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">new</span><span class="o">.</span><span class="n">magnitude</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">format_babel</span><span class="p">(</span><span class="n">new</span><span class="p">))</span></div>
 
     <span class="k">def</span> <span class="nf">_op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">operator</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">check_units</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute `self [op] other`.</span>
 <span class="sd">        For example if op = * if will return</span>
 <span class="sd">        the product in a pint Quantity object.</span>
@@ -466,7 +465,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">new</span><span class="o">.</span><span class="n">magnitude</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">format_babel</span><span class="p">(</span><span class="n">new</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_cmp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">cmp_op</span><span class="p">,</span> <span class="n">check_units</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compare self and other with custom</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compare self and other with custom</span>
 <span class="sd">        comparison operator</span>
 
 
@@ -508,7 +507,7 @@
         <span class="k">return</span> <span class="nb">eval</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;self_ureg </span><span class="si">{</span><span class="n">cmp_op</span><span class="si">}</span><span class="s2"> other_ureg&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This is what is saved when you pickle this object.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This is what is saved when you pickle this object.&quot;&quot;&quot;</span>
         <span class="n">unit</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span> <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
             <span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
@@ -518,7 +517,7 @@
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;This is how we retrieve the pickled object.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This is how we retrieve the pickled object.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">state</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -602,12 +601,12 @@
 
 
 <div class="viewcode-block" id="OptionParam"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.OptionParam">[docs]</a><span class="k">class</span> <span class="nc">OptionParam</span><span class="p">(</span><span class="n">Param</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A simple type and options checking class for a single value</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the OptionParam</span>
 
 <span class="sd">        Arguments</span>
@@ -675,7 +674,7 @@
         <span class="p">)</span>
 
 <div class="viewcode-block" id="OptionParam.repr"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.OptionParam.repr">[docs]</a>    <span class="k">def</span> <span class="nf">repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">include_checkarg</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_name</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_description</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns an executable version of the Param including optional arguments</span>
 
 <span class="sd">        Arguments</span>
@@ -699,12 +698,12 @@
 
 
 <div class="viewcode-block" id="ConstParam"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.ConstParam">[docs]</a><span class="k">class</span> <span class="nc">ConstParam</span><span class="p">(</span><span class="n">Param</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A Constant parameter which prevent any change of values</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the ConstParam</span>
 
 <span class="sd">        Arguments</span>
@@ -729,12 +728,12 @@
 
 
 <div class="viewcode-block" id="TypelessParam"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.TypelessParam">[docs]</a><span class="k">class</span> <span class="nc">TypelessParam</span><span class="p">(</span><span class="n">Param</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A Typeless parameter allowing any change of value, including type changes</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize the TypelessParam</span>
 
 <span class="sd">        Arguments</span>
@@ -754,7 +753,7 @@
 
 
 <div class="viewcode-block" id="ScalarParam"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.ScalarParam">[docs]</a><span class="k">class</span> <span class="nc">ScalarParam</span><span class="p">(</span><span class="n">Param</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A simple type and range checking class for a scalar value</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -769,7 +768,7 @@
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creating a ScalarParam</span>
 
 <span class="sd">        Arguments</span>
@@ -837,7 +836,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
 
     <span class="k">def</span> <span class="nf">_set_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the name. Can only be done if not set during instantiation</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">check_arg</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
@@ -867,7 +866,7 @@
         <span class="n">include_description</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">include_unit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a copy of the parameter</span>
 
 <span class="sd">        Arguments</span>
@@ -905,7 +904,7 @@
         <span class="n">include_description</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">include_unit</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns an executable version of the Param including optional arguments</span>
 
 <span class="sd">        Arguments</span>
@@ -936,7 +935,7 @@
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="ScalarParam.update"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.ScalarParam.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Update parameter with value of new parameter.</span>
 <span class="sd">        Take into account unit conversion if applicable.</span>
 
@@ -976,13 +975,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">unit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the unit</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unit</span>
 
     <span class="k">def</span> <span class="nf">_check_arg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a repr of the check arguments</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_range</span><span class="o">.</span><span class="n">arg_repr_str</span><span class="p">:</span>
@@ -1002,7 +1001,7 @@
 
 
 <div class="viewcode-block" id="ArrayParam"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.ArrayParam">[docs]</a><span class="k">class</span> <span class="nc">ArrayParam</span><span class="p">(</span><span class="n">ScalarParam</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A numpy Array based parameter</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -1018,7 +1017,7 @@
         <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creating an ArrayParam</span>
 
 <span class="sd">        Arguments</span>
@@ -1108,7 +1107,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">setvalue</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ArrayParam.setvalue"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.ArrayParam.setvalue">[docs]</a>    <span class="k">def</span> <span class="nf">setvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set value of ArrayParameter</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -1148,7 +1147,7 @@
     <span class="n">value</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">Param</span><span class="o">.</span><span class="n">getvalue</span><span class="p">,</span> <span class="n">setvalue</span><span class="p">)</span>
 
 <div class="viewcode-block" id="ArrayParam.resize"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.ArrayParam.resize">[docs]</a>    <span class="k">def</span> <span class="nf">resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">newsize</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Change the size of the Array</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">newsize</span><span class="p">,</span> <span class="n">integers</span><span class="p">):</span>
@@ -1162,7 +1161,7 @@
 
 
 <div class="viewcode-block" id="SlaveParam"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.SlaveParam">[docs]</a><span class="k">class</span> <span class="nc">SlaveParam</span><span class="p">(</span><span class="n">ScalarParam</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A slave parameter defined by other parameters</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -1199,13 +1198,13 @@
         <span class="c1">#        pass</span>
 
 <div class="viewcode-block" id="SlaveParam.setvalue"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.SlaveParam.setvalue">[docs]</a>    <span class="k">def</span> <span class="nf">setvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A setvalue method which always fails</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">type_error</span><span class="p">(</span><span class="s2">&quot;cannot assign to a SlaveParam&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SlaveParam.getvalue"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.SlaveParam.getvalue">[docs]</a>    <span class="k">def</span> <span class="nf">getvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a computed value of the Parameters</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">timer</span> <span class="o">=</span> <span class="n">Timer</span><span class="p">(</span><span class="s2">&quot;Eval Slave parameter&quot;</span><span class="p">)</span>  <span class="c1"># noqa: F841</span>
@@ -1220,7 +1219,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">expr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the stored expression</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_expr</span>
@@ -1236,7 +1235,7 @@
 
 
 <div class="viewcode-block" id="eval_param_expr"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.eval_param_expr">[docs]</a><span class="k">def</span> <span class="nf">eval_param_expr</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">param_ns</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include_derivatives</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ns</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Eval an expression of symbols of ScalarParam</span>
 
 <span class="sd">    Arguments</span>
@@ -1332,7 +1331,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1353,7 +1352,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

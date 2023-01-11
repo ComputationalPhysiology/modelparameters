@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -47,7 +46,7 @@
 
 
 <div class="viewcode-block" id="ExprCondPair"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.piecewise.ExprCondPair">[docs]</a><span class="k">class</span> <span class="nc">ExprCondPair</span><span class="p">(</span><span class="n">Tuple</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents an expression, condition pair.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an expression, condition pair.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">cond</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">cond</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
@@ -58,21 +57,21 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">expr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the expression of this pair.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">cond</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the condition of this pair.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">free_symbols</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the free symbols of this pair.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Overload Basic.free_symbols because self.args[1] may contain non-Basic</span>
@@ -91,7 +90,7 @@
 
 
 <div class="viewcode-block" id="Piecewise"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.piecewise.Piecewise">[docs]</a><span class="k">class</span> <span class="nc">Piecewise</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents a piecewise function.</span>
 
 <span class="sd">    Usage:</span>
@@ -203,7 +202,7 @@
         <span class="k">return</span> <span class="kc">None</span></div>
 
 <div class="viewcode-block" id="Piecewise.doit"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.piecewise.Piecewise.doit">[docs]</a>    <span class="k">def</span> <span class="nf">doit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Evaluate this piecewise function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">newargs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -238,7 +237,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="p">[(</span><span class="n">integrate</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">_eval_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sym</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Evaluates the function along the sym in a given interval ab&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluates the function along the sym in a given interval ab&quot;&quot;&quot;</span>
         <span class="c1"># FIXME: Currently complex intervals are not supported.  A possible</span>
         <span class="c1"># replacement algorithm, discussed in issue 5227, can be found in the</span>
         <span class="c1"># following papers;</span>
@@ -290,7 +289,7 @@
                         <span class="n">val</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">_eval_interval</span><span class="p">(</span><span class="n">sym</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-                            <span class="sd">&quot;&quot;&quot;The evaluation of a Piecewise interval when both the lower</span>
+<span class="w">                            </span><span class="sd">&quot;&quot;&quot;The evaluation of a Piecewise interval when both the lower</span>
 <span class="sd">                            and the upper limit are symbolic is not yet implemented.&quot;&quot;&quot;</span><span class="p">)</span>
                     <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">values</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -323,7 +322,7 @@
         <span class="k">return</span> <span class="n">mul</span> <span class="o">*</span> <span class="n">ret_fun</span>
 
     <span class="k">def</span> <span class="nf">_sort_expr_cond</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sym</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">targetcond</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Determine what intervals the expr, cond pairs affect.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine what intervals the expr, cond pairs affect.</span>
 
 <span class="sd">        1) If cond is True, then log it as default</span>
 <span class="sd">        1.1) Currently if cond can&#39;t be evaluated, throw NotImplementedError.</span>
@@ -480,7 +479,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="p">[(</span><span class="n">e</span><span class="o">**</span><span class="n">s</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">_eval_subs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Piecewise conditions may contain bool which are not of Basic type.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">args</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
@@ -537,7 +536,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">__eval_cond</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">cond</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the truth value of the condition.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the truth value of the condition.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">...solvers.solvers</span> <span class="kn">import</span> <span class="n">checksol</span>
         <span class="k">if</span> <span class="n">cond</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
@@ -558,7 +557,7 @@
 
 
 <div class="viewcode-block" id="piecewise_fold"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.piecewise.piecewise_fold">[docs]</a><span class="k">def</span> <span class="nf">piecewise_fold</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Takes an expression containing a piecewise function and returns the</span>
 <span class="sd">    expression in piecewise form.</span>
 
@@ -625,7 +624,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -646,7 +645,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

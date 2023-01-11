@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -59,12 +58,12 @@
                                      <span class="n">ShapeError</span><span class="p">,</span> <span class="n">a2idx</span><span class="p">,</span> <span class="n">classof</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">_iszero</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns True if x is zero.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns True if x is zero.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">is_zero</span>
 
 
 <span class="k">def</span> <span class="nf">_compare_sequence</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compares the elements of a list/tuple `a`</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compares the elements of a list/tuple `a`</span>
 <span class="sd">    and a list/tuple `b`.  `_compare_sequence((1,2), [1, 2])`</span>
 <span class="sd">    is True, whereas `(1,2) == [1, 2]` is False&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
@@ -94,7 +93,7 @@
             <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return portion of self defined by key. If the key involves a slice</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return portion of self defined by key. If the key involves a slice</span>
 <span class="sd">        then a list will be returned (if key is a single slice) or a matrix</span>
 <span class="sd">        (if key was a tuple involving a slice).</span>
 
@@ -167,7 +166,7 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_cholesky</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Helper function of cholesky.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper function of cholesky.</span>
 <span class="sd">        Without the error checks.</span>
 <span class="sd">        To be used privately. &quot;&quot;&quot;</span>
         <span class="n">L</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span>
@@ -180,7 +179,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_diagonal_solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Helper function of function diagonal_solve,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper function of function diagonal_solve,</span>
 <span class="sd">        without the error checks, to be used privately.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">rhs</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="n">rhs</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">rhs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
@@ -244,7 +243,7 @@
             <span class="k">return</span> <span class="n">Derivative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the matrix inverse using the method indicated (default</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the matrix inverse using the method indicated (default</span>
 <span class="sd">        is Gauss elimination).</span>
 
 <span class="sd">        kwargs</span>
@@ -320,7 +319,7 @@
         <span class="k">return</span> <span class="p">[</span><span class="n">mat</span><span class="p">[</span><span class="n">i</span><span class="o">*</span><span class="n">cols</span><span class="p">:(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">cols</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)]</span>
 
     <span class="k">def</span> <span class="nf">_LDLdecomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Helper function of LDLdecomposition.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper function of LDLdecomposition.</span>
 <span class="sd">        Without the error checks.</span>
 <span class="sd">        To be used privately.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -335,7 +334,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">L</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_lower_triangular_solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Helper function of function lower_triangular_solve.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper function of function lower_triangular_solve.</span>
 <span class="sd">        Without the error checks.</span>
 <span class="sd">        To be used privately.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -349,7 +348,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_upper_triangular_solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Helper function of function upper_triangular_solve.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper function of function upper_triangular_solve.</span>
 <span class="sd">        Without the error checks, to be used privately. &quot;&quot;&quot;</span>
         <span class="n">X</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="n">rhs</span><span class="o">.</span><span class="n">cols</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rhs</span><span class="o">.</span><span class="n">cols</span><span class="p">):</span>
@@ -361,7 +360,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 
 <div class="viewcode-block" id="DenseMatrix.as_immutable"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.DenseMatrix.as_immutable">[docs]</a>    <span class="k">def</span> <span class="nf">as_immutable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns an Immutable version of this Matrix</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns an Immutable version of this Matrix</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.immutable</span> <span class="kn">import</span> <span class="n">ImmutableDenseMatrix</span> <span class="k">as</span> <span class="bp">cls</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">:</span>
@@ -369,7 +368,7 @@
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="p">[])</span></div>
 
 <div class="viewcode-block" id="DenseMatrix.as_mutable"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.DenseMatrix.as_mutable">[docs]</a>    <span class="k">def</span> <span class="nf">as_mutable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a mutable version of this matrix</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a mutable version of this matrix</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -386,7 +385,7 @@
         <span class="k">return</span> <span class="n">Matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="DenseMatrix.equals"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.DenseMatrix.equals">[docs]</a>    <span class="k">def</span> <span class="nf">equals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">failing_expression</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Applies ``equals`` to corresponding elements of the matrices,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Applies ``equals`` to corresponding elements of the matrices,</span>
 <span class="sd">        trying to prove that the elements are equivalent, returning True</span>
 <span class="sd">        if they are, False if any pair is not, and None (or the first</span>
 <span class="sd">        failing expression if failing_expression is True) if it cannot</span>
@@ -431,7 +430,7 @@
 
 
 <span class="k">def</span> <span class="nf">_force_mutable</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a matrix as a Matrix, otherwise return x.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a matrix as a Matrix, otherwise return x.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;is_Matrix&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">as_mutable</span><span class="p">()</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Basic</span><span class="p">):</span>
@@ -467,7 +466,7 @@
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -515,7 +514,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="MutableDenseMatrix.col_del"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.MutableDenseMatrix.col_del">[docs]</a>    <span class="k">def</span> <span class="nf">col_del</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Delete the given column.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete the given column.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -543,7 +542,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">-=</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="MutableDenseMatrix.col_op"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.MutableDenseMatrix.col_op">[docs]</a>    <span class="k">def</span> <span class="nf">col_op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;In-place operation on col j using two-arg functor whose args are</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;In-place operation on col j using two-arg functor whose args are</span>
 <span class="sd">        interpreted as (self[i, j], i).</span>
 
 <span class="sd">        Examples</span>
@@ -565,7 +564,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_mat</span><span class="p">[</span><span class="n">j</span><span class="p">::</span><span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_mat</span><span class="p">[</span><span class="n">j</span><span class="p">::</span><span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">],</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">))))]</span></div>
 
 <div class="viewcode-block" id="MutableDenseMatrix.col_swap"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.MutableDenseMatrix.col_swap">[docs]</a>    <span class="k">def</span> <span class="nf">col_swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Swap the two given columns of the matrix in-place.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Swap the two given columns of the matrix in-place.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -592,7 +591,7 @@
             <span class="bp">self</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">],</span> <span class="bp">self</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">j</span><span class="p">],</span> <span class="bp">self</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="MutableDenseMatrix.copyin_list"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.MutableDenseMatrix.copyin_list">[docs]</a>    <span class="k">def</span> <span class="nf">copyin_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Copy in elements from a list.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Copy in elements from a list.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -630,7 +629,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">copyin_matrix</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">Matrix</span><span class="p">(</span><span class="n">value</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="MutableDenseMatrix.copyin_matrix"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.MutableDenseMatrix.copyin_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">copyin_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Copy in values from a matrix into the given bounds.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Copy in values from a matrix into the given bounds.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -677,7 +676,7 @@
                 <span class="bp">self</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">rlo</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="n">clo</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="MutableDenseMatrix.fill"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.MutableDenseMatrix.fill">[docs]</a>    <span class="k">def</span> <span class="nf">fill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Fill the matrix with the scalar value.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fill the matrix with the scalar value.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -688,7 +687,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_mat</span> <span class="o">=</span> <span class="p">[</span><span class="n">value</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MutableDenseMatrix.row_del"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.MutableDenseMatrix.row_del">[docs]</a>    <span class="k">def</span> <span class="nf">row_del</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Delete the given row.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete the given row.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -716,7 +715,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">-=</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="MutableDenseMatrix.row_op"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.MutableDenseMatrix.row_op">[docs]</a>    <span class="k">def</span> <span class="nf">row_op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;In-place operation on row ``i`` using two-arg functor whose args are</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;In-place operation on row ``i`` using two-arg functor whose args are</span>
 <span class="sd">        interpreted as ``(self[i, j], j)``.</span>
 
 <span class="sd">        Examples</span>
@@ -742,7 +741,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_mat</span><span class="p">[</span><span class="n">i0</span><span class="p">:</span> <span class="n">i0</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ri</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">)))]</span></div>
 
 <div class="viewcode-block" id="MutableDenseMatrix.row_swap"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.MutableDenseMatrix.row_swap">[docs]</a>    <span class="k">def</span> <span class="nf">row_swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Swap the two given rows of the matrix in-place.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Swap the two given rows of the matrix in-place.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -769,7 +768,7 @@
             <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">],</span> <span class="bp">self</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">],</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="MutableDenseMatrix.simplify"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.MutableDenseMatrix.simplify">[docs]</a>    <span class="k">def</span> <span class="nf">simplify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="mf">1.7</span><span class="p">,</span> <span class="n">measure</span><span class="o">=</span><span class="n">count_ops</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Applies simplify to the elements of a matrix in place.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Applies simplify to the elements of a matrix in place.</span>
 
 <span class="sd">        This is a shortcut for M.applyfunc(lambda x: simplify(x, ratio, measure))</span>
 
@@ -783,7 +782,7 @@
                                      <span class="n">measure</span><span class="o">=</span><span class="n">measure</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MutableDenseMatrix.zip_row_op"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.MutableDenseMatrix.zip_row_op">[docs]</a>    <span class="k">def</span> <span class="nf">zip_row_op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;In-place operation on row ``i`` using two-arg functor whose args are</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;In-place operation on row ``i`` using two-arg functor whose args are</span>
 <span class="sd">        interpreted as ``(self[i, j], self[k, j])``.</span>
 
 <span class="sd">        Examples</span>
@@ -823,7 +822,7 @@
 
 
 <div class="viewcode-block" id="list2numpy"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.list2numpy">[docs]</a><span class="k">def</span> <span class="nf">list2numpy</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;Converts python list of SymPy expressions to a NumPy array.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts python list of SymPy expressions to a NumPy array.</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    ========</span>
@@ -838,7 +837,7 @@
 
 
 <div class="viewcode-block" id="matrix2numpy"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.matrix2numpy">[docs]</a><span class="k">def</span> <span class="nf">matrix2numpy</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;Converts SymPy&#39;s matrix to a NumPy array.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts SymPy&#39;s matrix to a NumPy array.</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    ========</span>
@@ -854,7 +853,7 @@
 
 
 <div class="viewcode-block" id="rot_axis3"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.rot_axis3">[docs]</a><span class="k">def</span> <span class="nf">rot_axis3</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns a rotation matrix for a rotation of theta (in radians) about</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a rotation matrix for a rotation of theta (in radians) about</span>
 <span class="sd">    the 3-axis.</span>
 
 <span class="sd">    Examples</span>
@@ -897,7 +896,7 @@
 
 
 <div class="viewcode-block" id="rot_axis2"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.rot_axis2">[docs]</a><span class="k">def</span> <span class="nf">rot_axis2</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns a rotation matrix for a rotation of theta (in radians) about</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a rotation matrix for a rotation of theta (in radians) about</span>
 <span class="sd">    the 2-axis.</span>
 
 <span class="sd">    Examples</span>
@@ -940,7 +939,7 @@
 
 
 <div class="viewcode-block" id="rot_axis1"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.rot_axis1">[docs]</a><span class="k">def</span> <span class="nf">rot_axis1</span><span class="p">(</span><span class="n">theta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns a rotation matrix for a rotation of theta (in radians) about</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a rotation matrix for a rotation of theta (in radians) about</span>
 <span class="sd">    the 1-axis.</span>
 
 <span class="sd">    Examples</span>
@@ -984,7 +983,7 @@
 
 <div class="viewcode-block" id="symarray"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.symarray">[docs]</a><span class="nd">@doctest_depends_on</span><span class="p">(</span><span class="n">modules</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">,))</span>
 <span class="k">def</span> <span class="nf">symarray</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create a numpy ndarray of symbols (as an object array).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Create a numpy ndarray of symbols (as an object array).</span>
 
 <span class="sd">    The created symbols are named ``prefix_i1_i2_``...  You should thus provide a</span>
 <span class="sd">    non-empty prefix if you want your symbols to be unique for different output</span>
@@ -1060,7 +1059,7 @@
 <span class="c1">###############</span>
 
 <div class="viewcode-block" id="casoratian"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.casoratian">[docs]</a><span class="k">def</span> <span class="nf">casoratian</span><span class="p">(</span><span class="n">seqs</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">zero</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Given linear difference operator L of order &#39;k&#39; and homogeneous</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Given linear difference operator L of order &#39;k&#39; and homogeneous</span>
 <span class="sd">       equation Ly = 0 we want to compute kernel of L, which is a set</span>
 <span class="sd">       of &#39;k&#39; sequences: a(n), b(n), ... z(n).</span>
 
@@ -1104,7 +1103,7 @@
 
 
 <div class="viewcode-block" id="eye"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.eye">[docs]</a><span class="k">def</span> <span class="nf">eye</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create square identity matrix n x n</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create square identity matrix n x n</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    ========</span>
@@ -1119,7 +1118,7 @@
 
 
 <div class="viewcode-block" id="diag"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.diag">[docs]</a><span class="k">def</span> <span class="nf">diag</span><span class="p">(</span><span class="o">*</span><span class="n">values</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a sparse, diagonal matrix from a list of diagonal values.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a sparse, diagonal matrix from a list of diagonal values.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    =====</span>
@@ -1219,7 +1218,7 @@
 
 
 <div class="viewcode-block" id="GramSchmidt"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.GramSchmidt">[docs]</a><span class="k">def</span> <span class="nf">GramSchmidt</span><span class="p">(</span><span class="n">vlist</span><span class="p">,</span> <span class="n">orthonormal</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Apply the Gram-Schmidt process to a set of vectors.</span>
 
 <span class="sd">    see: http://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process</span>
@@ -1241,7 +1240,7 @@
 
 
 <div class="viewcode-block" id="hessian"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.hessian">[docs]</a><span class="k">def</span> <span class="nf">hessian</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">varlist</span><span class="p">,</span> <span class="n">constraints</span><span class="o">=</span><span class="p">[]):</span>
-    <span class="sd">&quot;&quot;&quot;Compute Hessian matrix for a function f wrt parameters in varlist</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute Hessian matrix for a function f wrt parameters in varlist</span>
 <span class="sd">    which may be given as a sequence or a row/column vector. A list of</span>
 <span class="sd">    constraints may optionally be given.</span>
 
@@ -1317,7 +1316,7 @@
     <span class="k">return</span> <span class="n">out</span></div>
 
 <div class="viewcode-block" id="jordan_cell"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.jordan_cell">[docs]</a><span class="k">def</span> <span class="nf">jordan_cell</span><span class="p">(</span><span class="n">eigenval</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a Jordan block:</span>
 
 <span class="sd">    Examples</span>
@@ -1338,7 +1337,7 @@
 
 
 <div class="viewcode-block" id="matrix_multiply_elementwise"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.matrix_multiply_elementwise">[docs]</a><span class="k">def</span> <span class="nf">matrix_multiply_elementwise</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the Hadamard product (elementwise product) of A and B</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the Hadamard product (elementwise product) of A and B</span>
 
 <span class="sd">    &gt;&gt;&gt; from ..matrices import matrix_multiply_elementwise</span>
 <span class="sd">    &gt;&gt;&gt; from ..matrices import Matrix</span>
@@ -1362,7 +1361,7 @@
 
 
 <div class="viewcode-block" id="ones"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.ones">[docs]</a><span class="k">def</span> <span class="nf">ones</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns a matrix of ones with ``rows`` rows and ``cols`` columns;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a matrix of ones with ``rows`` rows and ``cols`` columns;</span>
 <span class="sd">    if ``cols`` is omitted a square matrix will be returned.</span>
 
 <span class="sd">    See Also</span>
@@ -1382,7 +1381,7 @@
 
 <div class="viewcode-block" id="randMatrix"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.randMatrix">[docs]</a><span class="k">def</span> <span class="nf">randMatrix</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">99</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">symmetric</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                <span class="n">percent</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">prng</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create random matrix with dimensions ``r`` x ``c``. If ``c`` is omitted</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create random matrix with dimensions ``r`` x ``c``. If ``c`` is omitted</span>
 <span class="sd">    the matrix will be square. If ``symmetric`` is True the matrix must be</span>
 <span class="sd">    square. If ``percent`` is less than 100 then only approximately the given</span>
 <span class="sd">    percentage of elements will be non-zero.</span>
@@ -1455,7 +1454,7 @@
 
 
 <div class="viewcode-block" id="wronskian"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.wronskian">[docs]</a><span class="k">def</span> <span class="nf">wronskian</span><span class="p">(</span><span class="n">functions</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bareiss&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute Wronskian for [] of functions</span>
 
 <span class="sd">    ::</span>
@@ -1488,7 +1487,7 @@
 
 
 <div class="viewcode-block" id="zeros"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.zeros">[docs]</a><span class="k">def</span> <span class="nf">zeros</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns a matrix of zeros with ``rows`` rows and ``cols`` columns;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a matrix of zeros with ``rows`` rows and ``cols`` columns;</span>
 <span class="sd">    if ``cols`` is omitted a square matrix will be returned.</span>
 
 <span class="sd">    See Also</span>
@@ -1522,7 +1521,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1543,7 +1542,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

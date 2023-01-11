@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>modelparameters.sympy.logic.algorithms package &#8212; modelparameters 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="modelparameters.sympy.logic.utilities package" href="modelparameters.sympy.logic.utilities.html" />
@@ -47,12 +46,12 @@
           <div class="body" role="main">
             
   <section id="modelparameters-sympy-logic-algorithms-package">
-<h1>modelparameters.sympy.logic.algorithms package<a class="headerlink" href="#modelparameters-sympy-logic-algorithms-package" title="Permalink to this headline">¶</a></h1>
+<h1>modelparameters.sympy.logic.algorithms package<a class="headerlink" href="#modelparameters-sympy-logic-algorithms-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.logic.algorithms.dpll">
-<span id="modelparameters-sympy-logic-algorithms-dpll-module"></span><h2>modelparameters.sympy.logic.algorithms.dpll module<a class="headerlink" href="#module-modelparameters.sympy.logic.algorithms.dpll" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-logic-algorithms-dpll-module"></span><h2>modelparameters.sympy.logic.algorithms.dpll module<a class="headerlink" href="#module-modelparameters.sympy.logic.algorithms.dpll" title="Permalink to this heading">¶</a></h2>
 <p>Implementation of DPLL algorithm</p>
 <p>Further improvements: eliminate calls to pl_true, implement branching rules,
 efficient unit propagation.</p>
@@ -204,7 +203,7 @@ representation</p>
 
 </section>
 <section id="module-modelparameters.sympy.logic.algorithms.dpll2">
-<span id="modelparameters-sympy-logic-algorithms-dpll2-module"></span><h2>modelparameters.sympy.logic.algorithms.dpll2 module<a class="headerlink" href="#module-modelparameters.sympy.logic.algorithms.dpll2" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-logic-algorithms-dpll2-module"></span><h2>modelparameters.sympy.logic.algorithms.dpll2 module<a class="headerlink" href="#module-modelparameters.sympy.logic.algorithms.dpll2" title="Permalink to this heading">¶</a></h2>
 <p>Implementation of DPLL algorithm</p>
 <dl class="simple">
 <dt>Features:</dt><dd><ul class="simple">
@@ -221,7 +220,7 @@ representation</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.algorithms.dpll2.Level">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.algorithms.dpll2.</span></span><span class="sig-name descname"><span class="pre">Level</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">decision</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flipped</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/algorithms/dpll2.html#Level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.algorithms.dpll2.Level" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Represents a single level in the DPLL algorithm, and contains
 enough information for a sound backtracking procedure.</p>
 </dd></dl>
@@ -229,7 +228,7 @@ enough information for a sound backtracking procedure.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.algorithms.dpll2.SATSolver">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.algorithms.dpll2.</span></span><span class="sig-name descname"><span class="pre">SATSolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">clauses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">variables</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_settings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heuristic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vsids'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clause_learning</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'none'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">INTERVAL</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/algorithms/dpll2.html#SATSolver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.algorithms.dpll2.SATSolver" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <dl class="simple">
 <dt>Class for representing a SAT solver capable of</dt><dd><p>finding a model to a boolean theory in conjunctive
 normal form.</p>
@@ -256,7 +255,7 @@ Returns a generator of all models if all_models is True.</p>
 
 </section>
 <section id="module-modelparameters.sympy.logic.algorithms">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.logic.algorithms" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.logic.algorithms" title="Permalink to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -272,8 +271,25 @@ Returns a generator of all models if all_models is True.</p>
     <ul>
 <li><a class="reference internal" href="#">modelparameters.sympy.logic.algorithms package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.logic.algorithms.dpll">modelparameters.sympy.logic.algorithms.dpll module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.logic.algorithms.dpll2">modelparameters.sympy.logic.algorithms.dpll2 module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.logic.algorithms.dpll">modelparameters.sympy.logic.algorithms.dpll module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.algorithms.dpll.dpll"><code class="docutils literal notranslate"><span class="pre">dpll()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.algorithms.dpll.dpll_int_repr"><code class="docutils literal notranslate"><span class="pre">dpll_int_repr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.algorithms.dpll.dpll_satisfiable"><code class="docutils literal notranslate"><span class="pre">dpll_satisfiable()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.algorithms.dpll.find_pure_symbol"><code class="docutils literal notranslate"><span class="pre">find_pure_symbol()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.algorithms.dpll.find_pure_symbol_int_repr"><code class="docutils literal notranslate"><span class="pre">find_pure_symbol_int_repr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.algorithms.dpll.find_unit_clause"><code class="docutils literal notranslate"><span class="pre">find_unit_clause()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.algorithms.dpll.find_unit_clause_int_repr"><code class="docutils literal notranslate"><span class="pre">find_unit_clause_int_repr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.algorithms.dpll.pl_true_int_repr"><code class="docutils literal notranslate"><span class="pre">pl_true_int_repr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.algorithms.dpll.unit_propagate"><code class="docutils literal notranslate"><span class="pre">unit_propagate()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.algorithms.dpll.unit_propagate_int_repr"><code class="docutils literal notranslate"><span class="pre">unit_propagate_int_repr()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.logic.algorithms.dpll2">modelparameters.sympy.logic.algorithms.dpll2 module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.algorithms.dpll2.Level"><code class="docutils literal notranslate"><span class="pre">Level</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.algorithms.dpll2.SATSolver"><code class="docutils literal notranslate"><span class="pre">SATSolver</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.algorithms.dpll2.dpll_satisfiable"><code class="docutils literal notranslate"><span class="pre">dpll_satisfiable()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.logic.algorithms">Module contents</a></li>
 </ul>
 </li>
@@ -306,7 +322,7 @@ Returns a generator of all models if all_models is True.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -335,7 +351,7 @@ Returns a generator of all models if all_models is True.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

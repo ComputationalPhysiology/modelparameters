@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -81,7 +80,7 @@
 
 
 <div class="viewcode-block" id="sdm_monomial_mul"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_monomial_mul">[docs]</a><span class="k">def</span> <span class="nf">sdm_monomial_mul</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Multiply tuple ``X`` representing a monomial of `K[X]` into the tuple</span>
 <span class="sd">    ``M`` representing a monomial of `F`.</span>
 
@@ -98,7 +97,7 @@
 
 
 <div class="viewcode-block" id="sdm_monomial_deg"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_monomial_deg">[docs]</a><span class="k">def</span> <span class="nf">sdm_monomial_deg</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the total degree of ``M``.</span>
 
 <span class="sd">    Examples</span>
@@ -114,7 +113,7 @@
 
 
 <div class="viewcode-block" id="sdm_monomial_lcm"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_monomial_lcm">[docs]</a><span class="k">def</span> <span class="nf">sdm_monomial_lcm</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the &quot;least common multiple&quot; of ``A`` and ``B``.</span>
 
 <span class="sd">    IF `A = M e_j` and `B = N e_j`, where `M` and `N` are polynomial monomials,</span>
@@ -131,7 +130,7 @@
 
 
 <div class="viewcode-block" id="sdm_monomial_divides"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_monomial_divides">[docs]</a><span class="k">def</span> <span class="nf">sdm_monomial_divides</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Does there exist a (polynomial) monomial X such that XA = B?</span>
 
 <span class="sd">    Examples</span>
@@ -185,7 +184,7 @@
 <span class="c1"># The actual distributed modules code.</span>
 
 <div class="viewcode-block" id="sdm_LC"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_LC">[docs]</a><span class="k">def</span> <span class="nf">sdm_LC</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the leading coeffcient of ``f``. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the leading coeffcient of ``f``. &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">K</span><span class="o">.</span><span class="n">zero</span>
     <span class="k">else</span><span class="p">:</span>
@@ -193,12 +192,12 @@
 
 
 <div class="viewcode-block" id="sdm_to_dict"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_to_dict">[docs]</a><span class="k">def</span> <span class="nf">sdm_to_dict</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Make a dictionary from a distributed polynomial. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a dictionary from a distributed polynomial. &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="sdm_from_dict"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_from_dict">[docs]</a><span class="k">def</span> <span class="nf">sdm_from_dict</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">O</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create an sdm from a dictionary.</span>
 
 <span class="sd">    Here ``O`` is the monomial order to use.</span>
@@ -213,17 +212,17 @@
 
 
 <div class="viewcode-block" id="sdm_sort"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_sort">[docs]</a><span class="k">def</span> <span class="nf">sdm_sort</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">O</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Sort terms in ``f`` using the given monomial order ``O``. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sort terms in ``f`` using the given monomial order ``O``. &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">term</span><span class="p">:</span> <span class="n">O</span><span class="p">(</span><span class="n">term</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="sdm_strip"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_strip">[docs]</a><span class="k">def</span> <span class="nf">sdm_strip</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Remove terms with zero coefficients from ``f`` in ``K[X]``. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove terms with zero coefficients from ``f`` in ``K[X]``. &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">[</span> <span class="p">(</span><span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span><span class="p">)</span> <span class="k">for</span> <span class="n">monom</span><span class="p">,</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="n">f</span> <span class="k">if</span> <span class="n">coeff</span> <span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="sdm_add"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_add">[docs]</a><span class="k">def</span> <span class="nf">sdm_add</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">O</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Add two module elements ``f``, ``g``.</span>
 
 <span class="sd">    Addition is done over the ground field ``K``, monomials are ordered</span>
@@ -273,7 +272,7 @@
 
 
 <div class="viewcode-block" id="sdm_LM"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_LM">[docs]</a><span class="k">def</span> <span class="nf">sdm_LM</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the leading monomial of ``f``.</span>
 
 <span class="sd">    Only valid if `f \ne 0`.</span>
@@ -291,7 +290,7 @@
 
 
 <div class="viewcode-block" id="sdm_LT"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_LT">[docs]</a><span class="k">def</span> <span class="nf">sdm_LT</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the leading term of ``f``.</span>
 
 <span class="sd">    Only valid if `f \ne 0`.</span>
@@ -309,7 +308,7 @@
 
 
 <div class="viewcode-block" id="sdm_mul_term"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_mul_term">[docs]</a><span class="k">def</span> <span class="nf">sdm_mul_term</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">term</span><span class="p">,</span> <span class="n">O</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Multiply a distributed module element ``f`` by a (polynomial) term ``term``.</span>
 
 <span class="sd">    Multiplication of coefficients is done over the ground field ``K``, and</span>
@@ -353,12 +352,12 @@
 
 
 <div class="viewcode-block" id="sdm_zero"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_zero">[docs]</a><span class="k">def</span> <span class="nf">sdm_zero</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Return the zero module element.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the zero module element.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">[]</span></div>
 
 
 <div class="viewcode-block" id="sdm_deg"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_deg">[docs]</a><span class="k">def</span> <span class="nf">sdm_deg</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Degree of ``f``.</span>
 
 <span class="sd">    This is the maximum of the degrees of all its monomials.</span>
@@ -377,7 +376,7 @@
 <span class="c1"># Conversion</span>
 
 <div class="viewcode-block" id="sdm_from_vector"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_from_vector">[docs]</a><span class="k">def</span> <span class="nf">sdm_from_vector</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">O</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="o">**</span><span class="n">opts</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create an sdm from an iterable of expressions.</span>
 
 <span class="sd">    Coefficients are created in the ground field ``K``, and terms are ordered</span>
@@ -402,7 +401,7 @@
 
 
 <div class="viewcode-block" id="sdm_to_vector"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_to_vector">[docs]</a><span class="k">def</span> <span class="nf">sdm_to_vector</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">gens</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert sdm ``f`` into a list of polynomial expressions.</span>
 
 <span class="sd">    The generators for the polynomial ring are specified via ``gens``. The rank</span>
@@ -436,7 +435,7 @@
 
 
 <div class="viewcode-block" id="sdm_spoly"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_spoly">[docs]</a><span class="k">def</span> <span class="nf">sdm_spoly</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">O</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">phantom</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the generalized s-polynomial of ``f`` and ``g``.</span>
 
 <span class="sd">    The ground field is assumed to be ``K``, and monomials ordered according to</span>
@@ -488,7 +487,7 @@
 
 
 <div class="viewcode-block" id="sdm_ecart"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_ecart">[docs]</a><span class="k">def</span> <span class="nf">sdm_ecart</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the ecart of ``f``.</span>
 
 <span class="sd">    This is defined to be the difference of the total degree of `f` and the</span>
@@ -509,7 +508,7 @@
 
 
 <div class="viewcode-block" id="sdm_nf_mora"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_nf_mora">[docs]</a><span class="k">def</span> <span class="nf">sdm_nf_mora</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">O</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">phantom</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute a weak normal form of ``f`` with respect to ``G`` and order ``O``.</span>
 
 <span class="sd">    The ground field is assumed to be ``K``, and monomials ordered according to</span>
@@ -565,7 +564,7 @@
 
 
 <div class="viewcode-block" id="sdm_nf_buchberger"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_nf_buchberger">[docs]</a><span class="k">def</span> <span class="nf">sdm_nf_buchberger</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">O</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">phantom</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute a weak normal form of ``f`` with respect to ``G`` and order ``O``.</span>
 
 <span class="sd">    The ground field is assumed to be ``K``, and monomials ordered according to</span>
@@ -605,7 +604,7 @@
 
 
 <div class="viewcode-block" id="sdm_nf_buchberger_reduced"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_nf_buchberger_reduced">[docs]</a><span class="k">def</span> <span class="nf">sdm_nf_buchberger_reduced</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">O</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute a reduced normal form of ``f`` with respect to ``G`` and order ``O``.</span>
 
 <span class="sd">    The ground field is assumed to be ``K``, and monomials ordered according to</span>
@@ -631,7 +630,7 @@
 
 
 <div class="viewcode-block" id="sdm_groebner"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.distributedmodules.sdm_groebner">[docs]</a><span class="k">def</span> <span class="nf">sdm_groebner</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">NF</span><span class="p">,</span> <span class="n">O</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">extended</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute a minimal standard basis of ``G`` with respect to order ``O``.</span>
 
 <span class="sd">    The algorithm uses a normal form ``NF``, for example ``sdm_nf_mora``.</span>
@@ -672,7 +671,7 @@
     <span class="n">Sugars</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="nf">Ssugar</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute the sugar of the S-poly corresponding to (i, j).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute the sugar of the S-poly corresponding to (i, j).&quot;&quot;&quot;</span>
         <span class="n">LMi</span> <span class="o">=</span> <span class="n">sdm_LM</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
         <span class="n">LMj</span> <span class="o">=</span> <span class="n">sdm_LM</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
         <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">Sugars</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">sdm_monomial_deg</span><span class="p">(</span><span class="n">LMi</span><span class="p">),</span>
@@ -682,7 +681,7 @@
     <span class="n">ourkey</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">O</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">3</span><span class="p">]),</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sugar</span><span class="p">,</span> <span class="n">P</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Add f with sugar ``sugar`` to S, update P.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add f with sugar ``sugar`` to S, update P.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">f</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">P</span>
         <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
@@ -787,7 +786,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -808,7 +807,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

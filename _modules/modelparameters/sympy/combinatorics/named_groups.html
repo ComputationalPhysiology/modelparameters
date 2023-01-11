@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -47,7 +46,7 @@
 
 
 <div class="viewcode-block" id="AbelianGroup"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.named_groups.AbelianGroup">[docs]</a><span class="k">def</span> <span class="nf">AbelianGroup</span><span class="p">(</span><span class="o">*</span><span class="n">cyclic_orders</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the direct product of cyclic groups with the given orders.</span>
 
 <span class="sd">    According to the structure theorem for finite abelian groups ([1]),</span>
@@ -94,7 +93,7 @@
 
 
 <div class="viewcode-block" id="AlternatingGroup"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.named_groups.AlternatingGroup">[docs]</a><span class="k">def</span> <span class="nf">AlternatingGroup</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates the alternating group on ``n`` elements as a permutation group.</span>
 
 <span class="sd">    For ``n &gt; 2``, the generators taken are ``(0 1 2), (0 1 2 ... n-1)`` for</span>
@@ -165,7 +164,7 @@
 
 
 <div class="viewcode-block" id="CyclicGroup"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.named_groups.CyclicGroup">[docs]</a><span class="k">def</span> <span class="nf">CyclicGroup</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates the cyclic group of order ``n`` as a permutation group.</span>
 
 <span class="sd">    The generator taken is the ``n``-cycle ``(0 1 2 ... n-1)``</span>
@@ -206,7 +205,7 @@
 
 
 <div class="viewcode-block" id="DihedralGroup"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.named_groups.DihedralGroup">[docs]</a><span class="k">def</span> <span class="nf">DihedralGroup</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates the dihedral group `D_n` as a permutation group.</span>
 
 <span class="sd">    The dihedral group `D_n` is the group of symmetries of the regular</span>
@@ -270,7 +269,7 @@
 
 
 <div class="viewcode-block" id="SymmetricGroup"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.named_groups.SymmetricGroup">[docs]</a><span class="k">def</span> <span class="nf">SymmetricGroup</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates the symmetric group on ``n`` elements as a permutation group.</span>
 
 <span class="sd">    The generators taken are the ``n``-cycle</span>
@@ -334,7 +333,7 @@
 
 
 <div class="viewcode-block" id="RubikGroup"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.named_groups.RubikGroup">[docs]</a><span class="k">def</span> <span class="nf">RubikGroup</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a group of Rubik&#39;s cube generators</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a group of Rubik&#39;s cube generators</span>
 
 <span class="sd">    &gt;&gt;&gt; from .named_groups import RubikGroup</span>
 <span class="sd">    &gt;&gt;&gt; RubikGroup(2).is_group</span>
@@ -361,7 +360,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -382,7 +381,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

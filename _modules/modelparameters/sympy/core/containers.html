@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -53,7 +52,7 @@
 
 
 <div class="viewcode-block" id="Tuple"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.containers.Tuple">[docs]</a><span class="k">class</span> <span class="nc">Tuple</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrapper around the builtin tuple object</span>
 
 <span class="sd">    The Tuple is a subclass of Basic, so that it works well in the</span>
@@ -152,11 +151,11 @@
     <span class="c1"># XXX: Basic defines count() as something different, so we can&#39;t</span>
     <span class="c1"># redefine it here. Originally this lead to cse() test failure.</span>
 <div class="viewcode-block" id="Tuple.tuple_count"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.containers.Tuple.tuple_count">[docs]</a>    <span class="k">def</span> <span class="nf">tuple_count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;T.count(value) -&gt; integer -- return number of occurrences of value&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;T.count(value) -&gt; integer -- return number of occurrences of value&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Tuple.index"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.containers.Tuple.index">[docs]</a>    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;T.index(value, [start, [stop]]) -&gt; integer -- return first index of value.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;T.index(value, [start, [stop]]) -&gt; integer -- return first index of value.</span>
 <span class="sd">           Raises ValueError if the value is not present.&quot;&quot;&quot;</span>
         <span class="c1"># XXX: One would expect:</span>
         <span class="c1">#</span>
@@ -182,7 +181,7 @@
 
 
 <div class="viewcode-block" id="tuple_wrapper"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.containers.tuple_wrapper">[docs]</a><span class="k">def</span> <span class="nf">tuple_wrapper</span><span class="p">(</span><span class="n">method</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Decorator that converts any tuple in the function arguments into a Tuple.</span>
 
 <span class="sd">    The motivation for this is to provide simple user interfaces.  The user can</span>
@@ -212,7 +211,7 @@
 
 
 <div class="viewcode-block" id="Dict"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.containers.Dict">[docs]</a><span class="k">class</span> <span class="nc">Dict</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrapper around the builtin dict object</span>
 
 <span class="sd">    The Dict is a subclass of Basic, so that it works well in the</span>
@@ -257,7 +256,7 @@
         <span class="k">return</span> <span class="n">obj</span>
 
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;x.__getitem__(y) &lt;==&gt; x[y]&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;x.__getitem__(y) &lt;==&gt; x[y]&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="p">[</span><span class="n">sympify</span><span class="p">(</span><span class="n">key</span><span class="p">)]</span>
 
     <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
@@ -268,31 +267,31 @@
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Dict.items"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.containers.Dict.items">[docs]</a>    <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;D.items() -&gt; list of D&#39;s (key, value) pairs, as 2-tuples&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;D.items() -&gt; list of D&#39;s (key, value) pairs, as 2-tuples&#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="o">.</span><span class="n">items</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Dict.keys"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.containers.Dict.keys">[docs]</a>    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;D.keys() -&gt; list of D&#39;s keys&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;D.keys() -&gt; list of D&#39;s keys&#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Dict.values"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.containers.Dict.values">[docs]</a>    <span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;D.values() -&gt; list of D&#39;s values&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;D.values() -&gt; list of D&#39;s values&#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="o">.</span><span class="n">values</span><span class="p">()</span></div>
 
     <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;x.__iter__() &lt;==&gt; iter(x)&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;x.__iter__() &lt;==&gt; iter(x)&#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;x.__len__() &lt;==&gt; len(x)&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;x.__len__() &lt;==&gt; len(x)&#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Dict.get"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.containers.Dict.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;D.get(k[,d]) -&gt; D[k] if k in D, else d.  d defaults to None.&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;D.get(k[,d]) -&gt; D[k] if k in D, else d.  d defaults to None.&#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sympify</span><span class="p">(</span><span class="n">key</span><span class="p">),</span> <span class="n">default</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;D.__contains__(k) -&gt; True if D has a key k, else False&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;D.__contains__(k) -&gt; True if D has a key k, else False&#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="n">sympify</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dict</span>
 
     <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
@@ -319,7 +318,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -340,7 +339,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

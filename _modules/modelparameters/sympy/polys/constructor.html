@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -49,7 +48,7 @@
 
 
 <span class="k">def</span> <span class="nf">_construct_simple</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Handle simple domains, e.g.: ZZ, QQ, RR and algebraic domains. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle simple domains, e.g.: ZZ, QQ, RR and algebraic domains. &quot;&quot;&quot;</span>
     <span class="n">result</span><span class="p">,</span> <span class="n">rationals</span><span class="p">,</span> <span class="n">reals</span><span class="p">,</span> <span class="n">algebraics</span> <span class="o">=</span> <span class="p">{},</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span>
 
     <span class="k">if</span> <span class="n">opt</span><span class="o">.</span><span class="n">extension</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
@@ -101,7 +100,7 @@
 
 
 <span class="k">def</span> <span class="nf">_construct_algebraic</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;We know that coefficients are algebraic so construct the extension. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;We know that coefficients are algebraic so construct the extension. &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.numberfields</span> <span class="kn">import</span> <span class="n">primitive_element</span>
 
     <span class="n">result</span><span class="p">,</span> <span class="n">exts</span> <span class="o">=</span> <span class="p">[],</span> <span class="nb">set</span><span class="p">([])</span>
@@ -144,7 +143,7 @@
 
 
 <span class="k">def</span> <span class="nf">_construct_composite</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Handle composite domains, e.g.: ZZ[X], QQ[X], ZZ(X), QQ(X). &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle composite domains, e.g.: ZZ[X], QQ[X], ZZ(X), QQ(X). &quot;&quot;&quot;</span>
     <span class="n">numers</span><span class="p">,</span> <span class="n">denoms</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
 
     <span class="k">for</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="n">coeffs</span><span class="p">:</span>
@@ -246,7 +245,7 @@
 
 
 <span class="k">def</span> <span class="nf">_construct_expression</span><span class="p">(</span><span class="n">coeffs</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The last resort case, i.e. use the expression domain. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The last resort case, i.e. use the expression domain. &quot;&quot;&quot;</span>
     <span class="n">domain</span><span class="p">,</span> <span class="n">result</span> <span class="o">=</span> <span class="n">EX</span><span class="p">,</span> <span class="p">[]</span>
 
     <span class="k">for</span> <span class="n">coeff</span> <span class="ow">in</span> <span class="n">coeffs</span><span class="p">:</span>
@@ -257,7 +256,7 @@
 
 <div class="viewcode-block" id="construct_domain"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.constructor.construct_domain">[docs]</a><span class="nd">@public</span>
 <span class="k">def</span> <span class="nf">construct_domain</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Construct a minimal domain for the list of coefficients. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct a minimal domain for the list of coefficients. &quot;&quot;&quot;</span>
     <span class="n">opt</span> <span class="o">=</span> <span class="n">build_options</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s1">&#39;__iter__&#39;</span><span class="p">):</span>
@@ -314,7 +313,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -335,7 +334,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -64,12 +63,12 @@
 
 
 <div class="viewcode-block" id="Integral"><a class="viewcode-back" href="../../../../modelparameters.sympy.integrals.html#modelparameters.sympy.integrals.integrals.Integral">[docs]</a><span class="k">class</span> <span class="nc">Integral</span><span class="p">(</span><span class="n">AddWithLimits</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents unevaluated integral.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents unevaluated integral.&quot;&quot;&quot;</span>
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;is_commutative&#39;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create an unevaluated integral.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create an unevaluated integral.</span>
 
 <span class="sd">        Arguments are an integrand followed by one or more limits.</span>
 
@@ -118,7 +117,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">free_symbols</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method returns the symbols that will exist when the</span>
 <span class="sd">        integral is evaluated. This is useful if one is trying to</span>
 <span class="sd">        determine whether an integral depends on a certain</span>
@@ -175,7 +174,7 @@
             <span class="k">return</span> <span class="kc">False</span>
 
 <div class="viewcode-block" id="Integral.transform"><a class="viewcode-back" href="../../../../modelparameters.sympy.integrals.html#modelparameters.sympy.integrals.integrals.Integral.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Performs a change of variables from `x` to `u` using the relationship</span>
 <span class="sd">        given by `x` and `u` which will define the transformations `f` and `F`</span>
 <span class="sd">        (which are inverses of each other) as follows:</span>
@@ -347,7 +346,7 @@
         <span class="n">newfunc</span> <span class="o">=</span> <span class="n">newfuncs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 
         <span class="k">def</span> <span class="nf">_calc_limit_1</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            replace d with a, using subs if possible, otherwise limit</span>
 <span class="sd">            where sign of b is considered</span>
 <span class="sd">            &quot;&quot;&quot;</span>
@@ -357,7 +356,7 @@
             <span class="k">return</span> <span class="n">wok</span>
 
         <span class="k">def</span> <span class="nf">_calc_limit</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            replace d with a, using subs if possible, otherwise limit</span>
 <span class="sd">            where sign of b is considered</span>
 <span class="sd">            &quot;&quot;&quot;</span>
@@ -390,7 +389,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">newfunc</span><span class="p">,</span> <span class="o">*</span><span class="n">newlimits</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Integral.doit"><a class="viewcode-back" href="../../../../modelparameters.sympy.integrals.html#modelparameters.sympy.integrals.integrals.Integral.doit">[docs]</a>    <span class="k">def</span> <span class="nf">doit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Perform the integration using any hints given.</span>
 
 <span class="sd">        Examples</span>
@@ -601,7 +600,7 @@
         <span class="k">return</span> <span class="n">function</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_derivative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sym</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Evaluate the derivative of the current Integral object by</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the derivative of the current Integral object by</span>
 <span class="sd">        differentiating under the integral sign [1], using the Fundamental</span>
 <span class="sd">        Theorem of Calculus [2] when possible.</span>
 
@@ -688,7 +687,7 @@
 
     <span class="k">def</span> <span class="nf">_eval_integral</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">meijerg</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">risch</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">manual</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">conds</span><span class="o">=</span><span class="s1">&#39;piecewise&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate the anti-derivative to the function f(x).</span>
 
 <span class="sd">        The following algorithms are applied (roughly in this order):</span>
@@ -1029,7 +1028,7 @@
         <span class="k">return</span> <span class="n">integrate</span><span class="p">(</span><span class="n">leading_term</span><span class="p">,</span> <span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 
 <div class="viewcode-block" id="Integral.as_sum"><a class="viewcode-back" href="../../../../modelparameters.sympy.integrals.html#modelparameters.sympy.integrals.integrals.Integral.as_sum">[docs]</a>    <span class="k">def</span> <span class="nf">as_sum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;midpoint&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Approximates the definite integral by a sum.</span>
 
 <span class="sd">        method ... one of: left, right, midpoint, trapezoid</span>
@@ -1174,7 +1173,7 @@
 
 
 <div class="viewcode-block" id="integrate"><a class="viewcode-back" href="../../../../modelparameters.sympy.integrals.html#modelparameters.sympy.integrals.integrals.integrate">[docs]</a><span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;integrate(f, var, ...)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;integrate(f, var, ...)</span>
 
 <span class="sd">    Compute definite or indefinite integral of one or more variables</span>
 <span class="sd">    using Risch-Norman algorithm and table lookup. This procedure is</span>
@@ -1336,7 +1335,7 @@
 
 
 <div class="viewcode-block" id="line_integrate"><a class="viewcode-back" href="../../../../modelparameters.sympy.integrals.html#modelparameters.sympy.integrals.integrals.line_integrate">[docs]</a><span class="k">def</span> <span class="nf">line_integrate</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">curve</span><span class="p">,</span> <span class="nb">vars</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;line_integrate(field, Curve, variables)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;line_integrate(field, Curve, variables)</span>
 
 <span class="sd">    Compute the line integral.</span>
 
@@ -1400,7 +1399,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1421,7 +1420,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

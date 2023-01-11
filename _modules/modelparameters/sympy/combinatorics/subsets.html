@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -46,7 +45,7 @@
 
 
 <div class="viewcode-block" id="Subset"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.subsets.Subset">[docs]</a><span class="k">class</span> <span class="nc">Subset</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents a basic subset object.</span>
 
 <span class="sd">    We generate subsets using essentially two techniques,</span>
@@ -73,7 +72,7 @@
     <span class="n">_superset</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">subset</span><span class="p">,</span> <span class="n">superset</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Default constructor.</span>
 
 <span class="sd">        It takes the subset and its superset as its parameters.</span>
@@ -101,7 +100,7 @@
         <span class="k">return</span> <span class="n">obj</span>
 
 <div class="viewcode-block" id="Subset.iterate_binary"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.subsets.Subset.iterate_binary">[docs]</a>    <span class="k">def</span> <span class="nf">iterate_binary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This is a helper function. It iterates over the</span>
 <span class="sd">        binary subsets by k steps. This variable can be</span>
 <span class="sd">        both positive or negative.</span>
@@ -127,7 +126,7 @@
         <span class="k">return</span> <span class="n">Subset</span><span class="o">.</span><span class="n">subset_from_bitlist</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">superset</span><span class="p">,</span> <span class="n">bits</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Subset.next_binary"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.subsets.Subset.next_binary">[docs]</a>    <span class="k">def</span> <span class="nf">next_binary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates the next binary ordered subset.</span>
 
 <span class="sd">        Examples</span>
@@ -148,7 +147,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">iterate_binary</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Subset.prev_binary"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.subsets.Subset.prev_binary">[docs]</a>    <span class="k">def</span> <span class="nf">prev_binary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates the previous binary ordered subset.</span>
 
 <span class="sd">        Examples</span>
@@ -169,7 +168,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">iterate_binary</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Subset.next_lexicographic"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.subsets.Subset.next_lexicographic">[docs]</a>    <span class="k">def</span> <span class="nf">next_lexicographic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates the next lexicographically ordered subset.</span>
 
 <span class="sd">        Examples</span>
@@ -213,7 +212,7 @@
         <span class="k">return</span> <span class="n">Subset</span><span class="p">(</span><span class="n">ret_set</span><span class="p">,</span> <span class="n">super_set</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Subset.prev_lexicographic"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.subsets.Subset.prev_lexicographic">[docs]</a>    <span class="k">def</span> <span class="nf">prev_lexicographic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates the previous lexicographically ordered subset.</span>
 
 <span class="sd">        Examples</span>
@@ -252,7 +251,7 @@
         <span class="k">return</span> <span class="n">Subset</span><span class="p">(</span><span class="n">ret_set</span><span class="p">,</span> <span class="n">super_set</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Subset.iterate_graycode"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.subsets.Subset.iterate_graycode">[docs]</a>    <span class="k">def</span> <span class="nf">iterate_graycode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Helper function used for prev_gray and next_gray.</span>
 <span class="sd">        It performs k step overs to get the respective Gray codes.</span>
 
@@ -276,7 +275,7 @@
                                           <span class="n">unranked_code</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Subset.next_gray"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.subsets.Subset.next_gray">[docs]</a>    <span class="k">def</span> <span class="nf">next_gray</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates the next Gray code ordered subset.</span>
 
 <span class="sd">        Examples</span>
@@ -294,7 +293,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">iterate_graycode</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Subset.prev_gray"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.subsets.Subset.prev_gray">[docs]</a>    <span class="k">def</span> <span class="nf">prev_gray</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates the previous Gray code ordered subset.</span>
 
 <span class="sd">        Examples</span>
@@ -313,7 +312,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rank_binary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the binary ordered rank.</span>
 
 <span class="sd">        Examples</span>
@@ -339,7 +338,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rank_lexicographic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the lexicographic ranking of the subset.</span>
 
 <span class="sd">        Examples</span>
@@ -367,7 +366,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rank_gray</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the Gray code ranking of the subset.</span>
 
 <span class="sd">        Examples</span>
@@ -392,7 +391,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">subset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets the subset represented by the current instance.</span>
 
 <span class="sd">        Examples</span>
@@ -411,7 +410,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets the size of the subset.</span>
 
 <span class="sd">        Examples</span>
@@ -430,7 +429,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">superset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets the superset of the subset.</span>
 
 <span class="sd">        Examples</span>
@@ -449,7 +448,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">superset_size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the size of the superset.</span>
 
 <span class="sd">        Examples</span>
@@ -468,7 +467,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">cardinality</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the number of all possible subsets.</span>
 
 <span class="sd">        Examples</span>
@@ -487,7 +486,7 @@
 
 <div class="viewcode-block" id="Subset.subset_from_bitlist"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.subsets.Subset.subset_from_bitlist">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">subset_from_bitlist</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">super_set</span><span class="p">,</span> <span class="n">bitlist</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets the subset defined by the bitlist.</span>
 
 <span class="sd">        Examples</span>
@@ -511,7 +510,7 @@
 
 <div class="viewcode-block" id="Subset.bitlist_from_subset"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.subsets.Subset.bitlist_from_subset">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">bitlist_from_subset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subset</span><span class="p">,</span> <span class="n">superset</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets the bitlist corresponding to a subset.</span>
 
 <span class="sd">        Examples</span>
@@ -534,7 +533,7 @@
 
 <div class="viewcode-block" id="Subset.unrank_binary"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.subsets.Subset.unrank_binary">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">unrank_binary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">superset</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets the binary ordered subset of the specified rank.</span>
 
 <span class="sd">        Examples</span>
@@ -553,7 +552,7 @@
 
 <div class="viewcode-block" id="Subset.unrank_gray"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.subsets.Subset.unrank_gray">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">unrank_gray</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">superset</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets the Gray code ordered subset of the specified rank.</span>
 
 <span class="sd">        Examples</span>
@@ -574,7 +573,7 @@
 
 <div class="viewcode-block" id="Subset.subset_indices"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.subsets.Subset.subset_indices">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">subset_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subset</span><span class="p">,</span> <span class="n">superset</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return indices of subset in superset in a list; the list is empty</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return indices of subset in superset in a list; the list is empty</span>
 <span class="sd">        if all elements of subset are not in superset.</span>
 
 <span class="sd">        Examples</span>
@@ -605,7 +604,7 @@
 
 
 <div class="viewcode-block" id="ksubsets"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.subsets.ksubsets">[docs]</a><span class="k">def</span> <span class="nf">ksubsets</span><span class="p">(</span><span class="n">superset</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Finds the subsets of size k in lexicographic order.</span>
 
 <span class="sd">    This uses the itertools generator.</span>
@@ -642,7 +641,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -663,7 +662,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -256,7 +255,7 @@
 
 
 <div class="viewcode-block" id="TR0"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR0">[docs]</a><span class="k">def</span> <span class="nf">TR0</span><span class="p">(</span><span class="n">rv</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Simplification of rational polynomials, trying to simplify</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simplification of rational polynomials, trying to simplify</span>
 <span class="sd">    the expression, e.g. combine things like 3*x + 2*x, etc....</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># although it would be nice to use cancel, it doesn&#39;t work</span>
@@ -265,7 +264,7 @@
 
 
 <div class="viewcode-block" id="TR1"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR1">[docs]</a><span class="k">def</span> <span class="nf">TR1</span><span class="p">(</span><span class="n">rv</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Replace sec, csc with 1/cos, 1/sin</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Replace sec, csc with 1/cos, 1/sin</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -289,7 +288,7 @@
 
 
 <div class="viewcode-block" id="TR2"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR2">[docs]</a><span class="k">def</span> <span class="nf">TR2</span><span class="p">(</span><span class="n">rv</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Replace tan and cot with sin/cos and cos/sin</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Replace tan and cot with sin/cos and cos/sin</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -319,7 +318,7 @@
 
 
 <div class="viewcode-block" id="TR2i"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR2i">[docs]</a><span class="k">def</span> <span class="nf">TR2i</span><span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="n">half</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Converts ratios involving sin and cos as follows::</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts ratios involving sin and cos as follows::</span>
 <span class="sd">        sin(x)/cos(x) -&gt; tan(x)</span>
 <span class="sd">        sin(x)/(cos(x) + 1) -&gt; tan(x/2) if half=True</span>
 
@@ -435,7 +434,7 @@
 
 
 <div class="viewcode-block" id="TR3"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR3">[docs]</a><span class="k">def</span> <span class="nf">TR3</span><span class="p">(</span><span class="n">rv</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Induced formula: example sin(-a) = -sin(a)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Induced formula: example sin(-a) = -sin(a)</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -475,7 +474,7 @@
 
 
 <div class="viewcode-block" id="TR4"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR4">[docs]</a><span class="k">def</span> <span class="nf">TR4</span><span class="p">(</span><span class="n">rv</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Identify values of special angles.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Identify values of special angles.</span>
 
 <span class="sd">        a=  0   pi/6        pi/4        pi/3        pi/2</span>
 <span class="sd">    ----------------------------------------------------</span>
@@ -503,7 +502,7 @@
 
 
 <span class="k">def</span> <span class="nf">_TR56</span><span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="nb">max</span><span class="p">,</span> <span class="nb">pow</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper for TR5 and TR6 to replace f**2 with h(g**2)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper for TR5 and TR6 to replace f**2 with h(g**2)</span>
 
 <span class="sd">    Options</span>
 <span class="sd">    =======</span>
@@ -560,7 +559,7 @@
 
 
 <div class="viewcode-block" id="TR5"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR5">[docs]</a><span class="k">def</span> <span class="nf">TR5</span><span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="nb">pow</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Replacement of sin**2 with 1 - cos(x)**2.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Replacement of sin**2 with 1 - cos(x)**2.</span>
 
 <span class="sd">    See _TR56 docstring for advanced use of ``max`` and ``pow``.</span>
 
@@ -581,7 +580,7 @@
 
 
 <div class="viewcode-block" id="TR6"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR6">[docs]</a><span class="k">def</span> <span class="nf">TR6</span><span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="nb">pow</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Replacement of cos**2 with 1 - sin(x)**2.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Replacement of cos**2 with 1 - sin(x)**2.</span>
 
 <span class="sd">    See _TR56 docstring for advanced use of ``max`` and ``pow``.</span>
 
@@ -602,7 +601,7 @@
 
 
 <div class="viewcode-block" id="TR7"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR7">[docs]</a><span class="k">def</span> <span class="nf">TR7</span><span class="p">(</span><span class="n">rv</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Lowering the degree of cos(x)**2</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Lowering the degree of cos(x)**2</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -626,7 +625,7 @@
 
 
 <div class="viewcode-block" id="TR8"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR8">[docs]</a><span class="k">def</span> <span class="nf">TR8</span><span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Converting products of ``cos`` and/or ``sin`` to a sum or</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converting products of ``cos`` and/or ``sin`` to a sum or</span>
 <span class="sd">    difference of ``cos`` and or ``sin`` terms.</span>
 
 <span class="sd">    Examples</span>
@@ -701,7 +700,7 @@
 
 
 <div class="viewcode-block" id="TR9"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR9">[docs]</a><span class="k">def</span> <span class="nf">TR9</span><span class="p">(</span><span class="n">rv</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Sum of ``cos`` or ``sin`` terms as a product of ``cos`` or ``sin``.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sum of ``cos`` or ``sin`` terms as a product of ``cos`` or ``sin``.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -795,7 +794,7 @@
 
 
 <div class="viewcode-block" id="TR10"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR10">[docs]</a><span class="k">def</span> <span class="nf">TR10</span><span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Separate sums in ``cos`` and ``sin``.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Separate sums in ``cos`` and ``sin``.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -843,7 +842,7 @@
 
 
 <div class="viewcode-block" id="TR10i"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR10i">[docs]</a><span class="k">def</span> <span class="nf">TR10i</span><span class="p">(</span><span class="n">rv</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Sum of products to function of sum.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sum of products to function of sum.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -975,7 +974,7 @@
 
 
 <div class="viewcode-block" id="TR11"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR11">[docs]</a><span class="k">def</span> <span class="nf">TR11</span><span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Function of double angle to product. The ``base`` argument can be used</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Function of double angle to product. The ``base`` argument can be used</span>
 <span class="sd">    to indicate what is the un-doubled argument, e.g. if 3*pi/7 is the base</span>
 <span class="sd">    then cosine and sine functions with argument 6*pi/7 will be replaced.</span>
 
@@ -1055,7 +1054,7 @@
 
 
 <div class="viewcode-block" id="TR12"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR12">[docs]</a><span class="k">def</span> <span class="nf">TR12</span><span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Separate sums in ``tan``.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Separate sums in ``tan``.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -1091,7 +1090,7 @@
 
 
 <div class="viewcode-block" id="TR12i"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR12i">[docs]</a><span class="k">def</span> <span class="nf">TR12i</span><span class="p">(</span><span class="n">rv</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Combine tan arguments as</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Combine tan arguments as</span>
 <span class="sd">    (tan(y) + tan(x))/(tan(x)*tan(y) - 1) -&gt; -tan(x + y)</span>
 
 <span class="sd">    Examples</span>
@@ -1216,7 +1215,7 @@
 
 
 <div class="viewcode-block" id="TR13"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR13">[docs]</a><span class="k">def</span> <span class="nf">TR13</span><span class="p">(</span><span class="n">rv</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Change products of ``tan`` or ``cot``.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Change products of ``tan`` or ``cot``.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -1263,7 +1262,7 @@
 
 
 <div class="viewcode-block" id="TRmorrie"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TRmorrie">[docs]</a><span class="k">def</span> <span class="nf">TRmorrie</span><span class="p">(</span><span class="n">rv</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns cos(x)*cos(2*x)*...*cos(2**(k-1)*x) -&gt; sin(2**k*x)/(2**k*sin(x))</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns cos(x)*cos(2*x)*...*cos(2**(k-1)*x) -&gt; sin(2**k*x)/(2**k*sin(x))</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -1380,7 +1379,7 @@
 
 
 <div class="viewcode-block" id="TR14"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR14">[docs]</a><span class="k">def</span> <span class="nf">TR14</span><span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert factored powers of sin and cos identities into simpler</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert factored powers of sin and cos identities into simpler</span>
 <span class="sd">    expressions.</span>
 
 <span class="sd">    Examples</span>
@@ -1501,7 +1500,7 @@
 
 
 <div class="viewcode-block" id="TR15"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR15">[docs]</a><span class="k">def</span> <span class="nf">TR15</span><span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="nb">pow</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert sin(x)*-2 to 1 + cot(x)**2.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert sin(x)*-2 to 1 + cot(x)**2.</span>
 
 <span class="sd">    See _TR56 docstring for advanced use of ``max`` and ``pow``.</span>
 
@@ -1530,7 +1529,7 @@
 
 
 <div class="viewcode-block" id="TR16"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR16">[docs]</a><span class="k">def</span> <span class="nf">TR16</span><span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="nb">pow</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert cos(x)*-2 to 1 + tan(x)**2.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert cos(x)*-2 to 1 + tan(x)**2.</span>
 
 <span class="sd">    See _TR56 docstring for advanced use of ``max`` and ``pow``.</span>
 
@@ -1559,7 +1558,7 @@
 
 
 <div class="viewcode-block" id="TR111"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR111">[docs]</a><span class="k">def</span> <span class="nf">TR111</span><span class="p">(</span><span class="n">rv</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert f(x)**-i to g(x)**i where either ``i`` is an integer</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert f(x)**-i to g(x)**i where either ``i`` is an integer</span>
 <span class="sd">    or the base is positive and f, g are: tan, cot; sin, csc; or cos, sec.</span>
 
 <span class="sd">    Examples</span>
@@ -1591,7 +1590,7 @@
 
 
 <div class="viewcode-block" id="TR22"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.TR22">[docs]</a><span class="k">def</span> <span class="nf">TR22</span><span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="nb">pow</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert tan(x)**2 to sec(x)**2 - 1 and cot(x)**2 to csc(x)**2 - 1.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert tan(x)**2 to sec(x)**2 - 1 and cot(x)**2 to csc(x)**2 - 1.</span>
 
 <span class="sd">    See _TR56 docstring for advanced use of ``max`` and ``pow``.</span>
 
@@ -1620,7 +1619,7 @@
 
 
 <div class="viewcode-block" id="L"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.L">[docs]</a><span class="k">def</span> <span class="nf">L</span><span class="p">(</span><span class="n">rv</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return count of trigonometric functions in expression.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return count of trigonometric functions in expression.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -1672,7 +1671,7 @@
 
 
 <div class="viewcode-block" id="fu"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.fu">[docs]</a><span class="k">def</span> <span class="nf">fu</span><span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="n">measure</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">L</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="o">.</span><span class="n">count_ops</span><span class="p">())):</span>
-    <span class="sd">&quot;&quot;&quot;Attempt to simplify expression by using transformation rules given</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Attempt to simplify expression by using transformation rules given</span>
 <span class="sd">    in the algorithm by Fu et al.</span>
 
 <span class="sd">    :func:`fu` will try to minimize the objective function ``measure``.</span>
@@ -1763,7 +1762,7 @@
 
 
 <div class="viewcode-block" id="process_common_addends"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.process_common_addends">[docs]</a><span class="k">def</span> <span class="nf">process_common_addends</span><span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="n">do</span><span class="p">,</span> <span class="n">key2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">key1</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Apply ``do`` to addends of ``rv`` that (if key1=True) share at least</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply ``do`` to addends of ``rv`` that (if key1=True) share at least</span>
 <span class="sd">    a common absolute value of their coefficient and the value of ``key2`` when</span>
 <span class="sd">    applied to the argument. If ``key1`` is False ``key2`` must be supplied and</span>
 <span class="sd">    will be the only key applied.</span>
@@ -1819,7 +1818,7 @@
 
 
 <div class="viewcode-block" id="trig_split"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.trig_split">[docs]</a><span class="k">def</span> <span class="nf">trig_split</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">two</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the gcd, s1, s2, a1, a2, bool where</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the gcd, s1, s2, a1, a2, bool where</span>
 
 <span class="sd">    If two is False (default) then::</span>
 <span class="sd">        a + b = gcd*(s1*f(a1) + s2*f(a2)) where f = cos if bool else sin</span>
@@ -1885,7 +1884,7 @@
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">as_expr</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="n">ua</span><span class="p">,</span> <span class="n">ub</span><span class="p">)]</span>
 
     <span class="k">def</span> <span class="nf">pow_cos_sin</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">two</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return ``a`` as a tuple (r, c, s) such that</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return ``a`` as a tuple (r, c, s) such that</span>
 <span class="sd">        ``a = (r or 1)*(c or 1)*(s or 1)``.</span>
 
 <span class="sd">        Three arguments are returned (radical, c-factor, s-factor) as</span>
@@ -2001,7 +2000,7 @@
 
 
 <div class="viewcode-block" id="as_f_sign_1"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.as_f_sign_1">[docs]</a><span class="k">def</span> <span class="nf">as_f_sign_1</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;If ``e`` is a sum that can be written as ``g*(a + s)`` where</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;If ``e`` is a sum that can be written as ``g*(a + s)`` where</span>
 <span class="sd">    ``s`` is ``+/-1``, return ``g``, ``a``, and ``s`` where ``a`` does</span>
 <span class="sd">    not have a leading negative coefficient.</span>
 
@@ -2058,7 +2057,7 @@
 
 
 <span class="k">def</span> <span class="nf">_osborne</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Replace all hyperbolic functions with trig functions using</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Replace all hyperbolic functions with trig functions using</span>
 <span class="sd">    the Osborne rule.</span>
 
 <span class="sd">    Notes</span>
@@ -2094,7 +2093,7 @@
 
 
 <span class="k">def</span> <span class="nf">_osbornei</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Replace all trig functions with hyperbolic functions using</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Replace all trig functions with hyperbolic functions using</span>
 <span class="sd">    the Osborne rule.</span>
 
 <span class="sd">    Notes</span>
@@ -2132,7 +2131,7 @@
 
 
 <div class="viewcode-block" id="hyper_as_trig"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.fu.hyper_as_trig">[docs]</a><span class="k">def</span> <span class="nf">hyper_as_trig</span><span class="p">(</span><span class="n">rv</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return an expression containing hyperbolic functions in terms</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return an expression containing hyperbolic functions in terms</span>
 <span class="sd">    of trigonometric functions. Any trigonometric functions initially</span>
 <span class="sd">    present are replaced with Dummy symbols and the function to undo</span>
 <span class="sd">    the masking and the conversion back to hyperbolics is also returned. It</span>
@@ -2189,7 +2188,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2210,7 +2209,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -158,7 +157,7 @@
 
 
 <div class="viewcode-block" id="Indexed"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.indexed.Indexed">[docs]</a><span class="k">class</span> <span class="nc">Indexed</span><span class="p">(</span><span class="n">Expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents a mathematical object with indices.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a mathematical object with indices.</span>
 
 <span class="sd">    &gt;&gt;&gt; from .. import Indexed, IndexedBase, Idx, symbols</span>
 <span class="sd">    &gt;&gt;&gt; i, j = symbols(&#39;i j&#39;, cls=Idx)</span>
@@ -201,7 +200,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">_diff_wrt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Allow derivatives with respect to an ``Indexed`` object.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Allow derivatives with respect to an ``Indexed`` object.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="nf">_eval_derivative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrt</span><span class="p">):</span>
@@ -226,7 +225,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">base</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the ``IndexedBase`` of the ``Indexed`` object.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the ``IndexedBase`` of the ``Indexed`` object.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -244,7 +243,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the indices of the ``Indexed`` object.</span>
 
 <span class="sd">        Examples</span>
@@ -260,7 +259,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rank</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the rank of the ``Indexed`` object.</span>
 
 <span class="sd">        Examples</span>
@@ -281,7 +280,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a list with dimensions of each index.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a list with dimensions of each index.</span>
 
 <span class="sd">        Dimensions is a property of the array, not of the indices.  Still, if</span>
 <span class="sd">        the ``IndexedBase`` does not define a shape attribute, it is assumed</span>
@@ -314,7 +313,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ranges</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a list of tuples with lower and upper range of each index.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a list of tuples with lower and upper range of each index.</span>
 
 <span class="sd">        If an index does not define the data members upper and lower, the</span>
 <span class="sd">        corresponding slot in the list contains ``None`` instead of a tuple.</span>
@@ -350,7 +349,7 @@
 
 
 <div class="viewcode-block" id="IndexedBase"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.indexed.IndexedBase">[docs]</a><span class="k">class</span> <span class="nc">IndexedBase</span><span class="p">(</span><span class="n">Expr</span><span class="p">,</span> <span class="n">NotIterable</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represent the base or stem of an indexed object</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent the base or stem of an indexed object</span>
 
 <span class="sd">    The IndexedBase class represent an array that contains elements. The main purpose</span>
 <span class="sd">    of this class is to allow the convenient creation of objects of the Indexed</span>
@@ -449,7 +448,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the shape of the ``IndexedBase`` object.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the shape of the ``IndexedBase`` object.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -476,7 +475,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">strides</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the strided scheme for the ``IndexedBase`` object.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the strided scheme for the ``IndexedBase`` object.</span>
 
 <span class="sd">        Normally this is a tuple denoting the number of</span>
 <span class="sd">        steps to take in the respective dimension when traversing</span>
@@ -493,7 +492,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">offset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the offset for the ``IndexedBase`` object.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the offset for the ``IndexedBase`` object.</span>
 
 <span class="sd">        This is the value added to the resulting index when the</span>
 <span class="sd">        2D Indexed object is unrolled to a 1D form. Used in code</span>
@@ -515,7 +514,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the label of the ``IndexedBase`` object.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the label of the ``IndexedBase`` object.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -533,7 +532,7 @@
 
 
 <div class="viewcode-block" id="Idx"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.indexed.Idx">[docs]</a><span class="k">class</span> <span class="nc">Idx</span><span class="p">(</span><span class="n">Expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents an integer index as an ``Integer`` or integer expression.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an integer index as an ``Integer`` or integer expression.</span>
 
 <span class="sd">    There are a number of ways to create an ``Idx`` object.  The constructor</span>
 <span class="sd">    takes two arguments:</span>
@@ -640,7 +639,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the label (Integer or integer expression) of the Idx object.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the label (Integer or integer expression) of the Idx object.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -660,7 +659,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">lower</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the lower bound of the ``Idx``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the lower bound of the ``Idx``.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -681,7 +680,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">upper</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the upper bound of the ``Idx``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the upper bound of the ``Idx``.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -779,7 +778,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -800,7 +799,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -56,7 +55,7 @@
 
 
 <div class="viewcode-block" id="Curve"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.curve.Curve">[docs]</a><span class="k">class</span> <span class="nc">Curve</span><span class="p">(</span><span class="n">GeometrySet</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A curve in space.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A curve in space.</span>
 
 <span class="sd">    A curve is defined by parametric functions for the coordinates, a</span>
 <span class="sd">    parameter and the lower and upper bounds for the parameter value.</span>
@@ -125,7 +124,7 @@
             <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">functions</span><span class="p">])</span>
 
 <div class="viewcode-block" id="Curve.arbitrary_point"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.curve.Curve.arbitrary_point">[docs]</a>    <span class="k">def</span> <span class="nf">arbitrary_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s1">&#39;t&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A parameterized point on the curve.</span>
 
 <span class="sd">        Parameters</span>
@@ -182,7 +181,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">free_symbols</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a set of symbols other than the bound symbols used to</span>
 <span class="sd">        parametrically define the Curve.</span>
 
@@ -204,7 +203,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">functions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The functions specifying the curve.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The functions specifying the curve.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        =======</span>
@@ -230,7 +229,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">limits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The limits for the curve.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The limits for the curve.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        =======</span>
@@ -257,7 +256,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The curve function variable.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The curve function variable.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        =======</span>
@@ -282,7 +281,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
 <div class="viewcode-block" id="Curve.plot_interval"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.curve.Curve.plot_interval">[docs]</a>    <span class="k">def</span> <span class="nf">plot_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameter</span><span class="o">=</span><span class="s1">&#39;t&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The plot interval for the default geometric plot of the curve.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The plot interval for the default geometric plot of the curve.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -317,7 +316,7 @@
         <span class="k">return</span> <span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span></div>
 
 <div class="viewcode-block" id="Curve.rotate"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.curve.Curve.rotate">[docs]</a>    <span class="k">def</span> <span class="nf">rotate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">angle</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">pt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Rotate ``angle`` radians counterclockwise about Point ``pt``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rotate ``angle`` radians counterclockwise about Point ``pt``.</span>
 
 <span class="sd">        The default pt is the origin, Point(0, 0).</span>
 
@@ -347,7 +346,7 @@
         <span class="k">return</span> <span class="n">rv</span></div>
 
 <div class="viewcode-block" id="Curve.scale"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.curve.Curve.scale">[docs]</a>    <span class="k">def</span> <span class="nf">scale</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Override GeometryEntity.scale since Curve is not made up of Points.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Override GeometryEntity.scale since Curve is not made up of Points.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -365,7 +364,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">((</span><span class="n">fx</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">fy</span><span class="o">*</span><span class="n">y</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Curve.translate"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.curve.Curve.translate">[docs]</a>    <span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Translate the Curve by (x, y).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Translate the Curve by (x, y).</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -395,7 +394,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -416,7 +415,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -59,7 +58,7 @@
 
 
 <div class="viewcode-block" id="HyperbolicFunction"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.HyperbolicFunction">[docs]</a><span class="k">class</span> <span class="nc">HyperbolicFunction</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for hyperbolic functions.</span>
 
 <span class="sd">    See Also</span>
@@ -72,7 +71,7 @@
 
 
 <div class="viewcode-block" id="sinh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.sinh">[docs]</a><span class="k">class</span> <span class="nc">sinh</span><span class="p">(</span><span class="n">HyperbolicFunction</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The hyperbolic sine function, `\frac{e^x - e^{-x}}{2}`.</span>
 
 <span class="sd">    * sinh(x) -&gt; Returns the hyperbolic sine of x</span>
@@ -84,7 +83,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="sinh.fdiff"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.sinh.fdiff">[docs]</a>    <span class="k">def</span> <span class="nf">fdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the first derivative of this function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">argindex</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -93,7 +92,7 @@
             <span class="k">raise</span> <span class="n">ArgumentIndexError</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="sinh.inverse"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.sinh.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the inverse of this function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">asinh</span></div>
@@ -145,7 +144,7 @@
 <div class="viewcode-block" id="sinh.taylor_term"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.sinh.taylor_term">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="nd">@cacheit</span>
     <span class="k">def</span> <span class="nf">taylor_term</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">previous_terms</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the next term in the Taylor series expansion.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -163,7 +162,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">conjugate</span><span class="p">())</span>
 
 <div class="viewcode-block" id="sinh.as_real_imag"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.sinh.as_real_imag">[docs]</a>    <span class="k">def</span> <span class="nf">as_real_imag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns this function as a complex coordinate.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sin</span>
@@ -236,7 +235,7 @@
 
 
 <div class="viewcode-block" id="cosh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.cosh">[docs]</a><span class="k">class</span> <span class="nc">cosh</span><span class="p">(</span><span class="n">HyperbolicFunction</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The hyperbolic cosine function, `\frac{e^x + e^{-x}}{2}`.</span>
 
 <span class="sd">    * cosh(x) -&gt; Returns the hyperbolic cosine of x</span>
@@ -383,7 +382,7 @@
 
 
 <div class="viewcode-block" id="tanh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.tanh">[docs]</a><span class="k">class</span> <span class="nc">tanh</span><span class="p">(</span><span class="n">HyperbolicFunction</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The hyperbolic tangent function, `\frac{\sinh(x)}{\cosh(x)}`.</span>
 
 <span class="sd">    * tanh(x) -&gt; Returns the hyperbolic tangent of x</span>
@@ -401,7 +400,7 @@
             <span class="k">raise</span> <span class="n">ArgumentIndexError</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="tanh.inverse"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.tanh.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the inverse of this function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">atanh</span></div>
@@ -520,7 +519,7 @@
 
 
 <div class="viewcode-block" id="coth"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.coth">[docs]</a><span class="k">class</span> <span class="nc">coth</span><span class="p">(</span><span class="n">HyperbolicFunction</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The hyperbolic cotangent function, `\frac{\cosh(x)}{\sinh(x)}`.</span>
 
 <span class="sd">    * coth(x) -&gt; Returns the hyperbolic cotangent of x</span>
@@ -533,7 +532,7 @@
             <span class="k">raise</span> <span class="n">ArgumentIndexError</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="coth.inverse"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.coth.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the inverse of this function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">acoth</span></div>
@@ -644,7 +643,7 @@
 
 
 <div class="viewcode-block" id="ReciprocalHyperbolicFunction"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.ReciprocalHyperbolicFunction">[docs]</a><span class="k">class</span> <span class="nc">ReciprocalHyperbolicFunction</span><span class="p">(</span><span class="n">HyperbolicFunction</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class for reciprocal functions of hyperbolic functions. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for reciprocal functions of hyperbolic functions. &quot;&quot;&quot;</span>
 
     <span class="c1">#To be defined in class</span>
     <span class="n">_reciprocal_of</span> <span class="o">=</span> <span class="kc">None</span>
@@ -715,7 +714,7 @@
 
 
 <div class="viewcode-block" id="csch"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.csch">[docs]</a><span class="k">class</span> <span class="nc">csch</span><span class="p">(</span><span class="n">ReciprocalHyperbolicFunction</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The hyperbolic cosecant function, `\frac{2}{e^x - e^{-x}}`</span>
 
 <span class="sd">    * csch(x) -&gt; Returns the hyperbolic cosecant of x</span>
@@ -730,7 +729,7 @@
     <span class="n">_is_odd</span> <span class="o">=</span> <span class="kc">True</span>
 
 <div class="viewcode-block" id="csch.fdiff"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.csch.fdiff">[docs]</a>    <span class="k">def</span> <span class="nf">fdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the first derivative of this function</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">argindex</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -741,7 +740,7 @@
 <div class="viewcode-block" id="csch.taylor_term"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.csch.taylor_term">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="nd">@cacheit</span>
     <span class="k">def</span> <span class="nf">taylor_term</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">previous_terms</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the next term in the Taylor series expansion</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">bernoulli</span>
@@ -766,7 +765,7 @@
 
 
 <div class="viewcode-block" id="sech"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.sech">[docs]</a><span class="k">class</span> <span class="nc">sech</span><span class="p">(</span><span class="n">ReciprocalHyperbolicFunction</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The hyperbolic secant function, `\frac{2}{e^x + e^{-x}}`</span>
 
 <span class="sd">    * sech(x) -&gt; Returns the hyperbolic secant of x</span>
@@ -810,7 +809,7 @@
 <span class="c1">###############################################################################</span>
 
 <div class="viewcode-block" id="asinh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.asinh">[docs]</a><span class="k">class</span> <span class="nc">asinh</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The inverse hyperbolic sine function.</span>
 
 <span class="sd">    * asinh(x) -&gt; Returns the inverse hyperbolic sine of x</span>
@@ -885,20 +884,20 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_rewrite_as_log</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Rewrites asinh as log function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">log</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
 
 <div class="viewcode-block" id="asinh.inverse"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.asinh.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the inverse of this function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">sinh</span></div></div>
 
 
 <div class="viewcode-block" id="acosh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.acosh">[docs]</a><span class="k">class</span> <span class="nc">acosh</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The inverse hyperbolic cosine function.</span>
 
 <span class="sd">    * acosh(x) -&gt; Returns the inverse hyperbolic cosine of x</span>
@@ -993,14 +992,14 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
 
 <div class="viewcode-block" id="acosh.inverse"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.acosh.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the inverse of this function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">cosh</span></div></div>
 
 
 <div class="viewcode-block" id="atanh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.atanh">[docs]</a><span class="k">class</span> <span class="nc">atanh</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The inverse hyperbolic tangent function.</span>
 
 <span class="sd">    * atanh(x) -&gt; Returns the inverse hyperbolic tangent of x</span>
@@ -1068,14 +1067,14 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
 
 <div class="viewcode-block" id="atanh.inverse"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.atanh.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the inverse of this function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">tanh</span></div></div>
 
 
 <div class="viewcode-block" id="acoth"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.acoth">[docs]</a><span class="k">class</span> <span class="nc">acoth</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The inverse hyperbolic cotangent function.</span>
 
 <span class="sd">    * acoth(x) -&gt; Returns the inverse hyperbolic cotangent of x</span>
@@ -1140,14 +1139,14 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
 
 <div class="viewcode-block" id="acoth.inverse"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.acoth.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the inverse of this function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">coth</span></div></div>
 
 
 <div class="viewcode-block" id="asech"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.asech">[docs]</a><span class="k">class</span> <span class="nc">asech</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The inverse hyperbolic secant function.</span>
 
 <span class="sd">    * asech(x) -&gt; Returns the inverse hyperbolic secant of x</span>
@@ -1264,7 +1263,7 @@
                 <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">R</span> <span class="o">/</span> <span class="n">F</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="n">n</span> <span class="o">/</span> <span class="mi">4</span></div>
 
 <div class="viewcode-block" id="asech.inverse"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.asech.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the inverse of this function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">sech</span></div>
@@ -1274,7 +1273,7 @@
 
 
 <div class="viewcode-block" id="acsch"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.acsch">[docs]</a><span class="k">class</span> <span class="nc">acsch</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The inverse hyperbolic cosecant function.</span>
 
 <span class="sd">    * acsch(x) -&gt; Returns the inverse hyperbolic cosecant of x</span>
@@ -1358,7 +1357,7 @@
             <span class="k">return</span> <span class="o">-</span><span class="bp">cls</span><span class="p">(</span><span class="o">-</span><span class="n">arg</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="acsch.inverse"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.hyperbolic.acsch.inverse">[docs]</a>    <span class="k">def</span> <span class="nf">inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the inverse of this function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">csch</span></div>
@@ -1382,7 +1381,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1403,7 +1402,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

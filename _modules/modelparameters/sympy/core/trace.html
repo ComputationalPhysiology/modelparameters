@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -44,7 +43,7 @@
 
 
 <span class="k">def</span> <span class="nf">_is_scalar</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Helper method used in Tr&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Helper method used in Tr&quot;&quot;&quot;</span>
 
     <span class="c1"># sympify to set proper attributes</span>
     <span class="n">e</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
@@ -59,7 +58,7 @@
 
 
 <span class="k">def</span> <span class="nf">_cycle_permute</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Cyclic permutations based on canonical ordering</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Cyclic permutations based on canonical ordering</span>
 
 <span class="sd">    This method does the sort based ascii values while</span>
 <span class="sd">    a better approach would be to used lexicographic sort.</span>
@@ -95,7 +94,7 @@
 
 
 <span class="k">def</span> <span class="nf">_rearrange_args</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; this just moves the last arg to first position</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; this just moves the last arg to first position</span>
 <span class="sd">     to enable expansion of args</span>
 <span class="sd">     A,B,A ==&gt; A**2,B</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -108,7 +107,7 @@
 
 
 <div class="viewcode-block" id="Tr"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.trace.Tr">[docs]</a><span class="k">class</span> <span class="nc">Tr</span><span class="p">(</span><span class="n">Expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Generic Trace operation than can trace over:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Generic Trace operation than can trace over:</span>
 
 <span class="sd">    a) sympy matrix</span>
 <span class="sd">    b) operators</span>
@@ -139,7 +138,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Construct a Trace object.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Construct a Trace object.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -192,7 +191,7 @@
             <span class="k">return</span> <span class="n">Expr</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Tr.doit"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.trace.Tr.doit">[docs]</a>    <span class="k">def</span> <span class="nf">doit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Perform the trace operation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Perform the trace operation.</span>
 
 <span class="sd">        #TODO: Current version ignores the indices set for partial trace.</span>
 
@@ -217,7 +216,7 @@
     <span class="c1">#TODO: Review if the permute method is needed</span>
     <span class="c1"># and if it needs to return a new instance</span>
 <div class="viewcode-block" id="Tr.permute"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.trace.Tr.permute">[docs]</a>    <span class="k">def</span> <span class="nf">permute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Permute the arguments cyclically.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Permute the arguments cyclically.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -269,7 +268,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -290,7 +289,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

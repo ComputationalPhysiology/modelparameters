@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -96,7 +95,7 @@
 
 
 <span class="k">def</span> <span class="nf">_ispow</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return True if e is a Pow or is exp.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True if e is a Pow or is exp.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">Expr</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">is_Pow</span> <span class="ow">or</span> <span class="n">e</span><span class="o">.</span><span class="n">func</span> <span class="ow">is</span> <span class="n">exp</span><span class="p">)</span>
 
 
@@ -116,7 +115,7 @@
 
 
 <div class="viewcode-block" id="denoms"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.solvers.denoms">[docs]</a><span class="k">def</span> <span class="nf">denoms</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return (recursively) set of all denominators that appear in eq</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return (recursively) set of all denominators that appear in eq</span>
 <span class="sd">    that contain any symbol in ``symbols``; if ``symbols`` are not</span>
 <span class="sd">    provided then all denominators will be returned.</span>
 
@@ -168,7 +167,7 @@
 
 
 <div class="viewcode-block" id="checksol"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.solvers.checksol">[docs]</a><span class="k">def</span> <span class="nf">checksol</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">sol</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">flags</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Checks whether sol is a solution of equation f == 0.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks whether sol is a solution of equation f == 0.</span>
 
 <span class="sd">    Input can be either a single symbol and corresponding value</span>
 <span class="sd">    or a dictionary of symbols and values. When given as a dictionary</span>
@@ -348,7 +347,7 @@
 
 
 <div class="viewcode-block" id="check_assumptions"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.solvers.check_assumptions">[docs]</a><span class="k">def</span> <span class="nf">check_assumptions</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">against</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">assumptions</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Checks whether expression `expr` satisfies all assumptions.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Checks whether expression `expr` satisfies all assumptions.</span>
 
 <span class="sd">    `assumptions` is a dict of assumptions: {&#39;assumption&#39;: True|False, ...}.</span>
 
@@ -403,7 +402,7 @@
 
 
 <div class="viewcode-block" id="solve"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.solvers.solve">[docs]</a><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">flags</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Algebraically solves equations and systems of equations.</span>
 
 <span class="sd">    Currently supported are:</span>
@@ -1288,7 +1287,7 @@
 
 
 <span class="k">def</span> <span class="nf">_solve</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">flags</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a checked solution for f in terms of one or more of the</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a checked solution for f in terms of one or more of the</span>
 <span class="sd">    symbols. A list should be returned except for the case when a linear</span>
 <span class="sd">    undetermined-coefficients equation is encountered (in which case</span>
 <span class="sd">    a dictionary is returned).</span>
@@ -1470,7 +1469,7 @@
         <span class="n">gens</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">poly</span><span class="o">.</span><span class="n">gens</span> <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">symbol</span><span class="p">)]</span>
 
         <span class="k">def</span> <span class="nf">_as_base_q</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Return (b**e, q) for x = b**(p*e/q) where p/q is the leading</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Return (b**e, q) for x = b**(p*e/q) where p/q is the leading</span>
 <span class="sd">            Rational of the exponent of x, e.g. exp(-2*x/3) -&gt; (exp(x), 3)</span>
 <span class="sd">            &quot;&quot;&quot;</span>
             <span class="n">b</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">as_base_exp</span><span class="p">()</span>
@@ -1893,7 +1892,7 @@
 
 
 <div class="viewcode-block" id="solve_linear"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.solvers.solve_linear">[docs]</a><span class="k">def</span> <span class="nf">solve_linear</span><span class="p">(</span><span class="n">lhs</span><span class="p">,</span> <span class="n">rhs</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="p">[],</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[]):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot; Return a tuple derived from f = lhs - rhs that is one of</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot; Return a tuple derived from f = lhs - rhs that is one of</span>
 <span class="sd">    the following:</span>
 
 <span class="sd">        (0, 1) meaning that ``f`` is independent of the symbols in</span>
@@ -2076,7 +2075,7 @@
 
 
 <div class="viewcode-block" id="minsolve_linear_system"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.solvers.minsolve_linear_system">[docs]</a><span class="k">def</span> <span class="nf">minsolve_linear_system</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">flags</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find a particular solution to a linear system.</span>
 
 <span class="sd">    In particular, try to find a solution with the minimal possible number</span>
@@ -2156,7 +2155,7 @@
 
 
 <div class="viewcode-block" id="solve_linear_system"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.solvers.solve_linear_system">[docs]</a><span class="k">def</span> <span class="nf">solve_linear_system</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">flags</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solve system of N linear equations with M variables, which means</span>
 <span class="sd">    both under- and overdetermined systems are supported. The possible</span>
 <span class="sd">    number of solutions is zero, one or infinite. Respectively, this</span>
@@ -2354,7 +2353,7 @@
 
 
 <div class="viewcode-block" id="solve_undetermined_coeffs"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.solvers.solve_undetermined_coeffs">[docs]</a><span class="k">def</span> <span class="nf">solve_undetermined_coeffs</span><span class="p">(</span><span class="n">equ</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">,</span> <span class="n">sym</span><span class="p">,</span> <span class="o">**</span><span class="n">flags</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Solve equation of a type p(x; a_1, ..., a_k) == q(x) where both</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Solve equation of a type p(x; a_1, ..., a_k) == q(x) where both</span>
 <span class="sd">       p, q are univariate polynomials and f depends on k parameters.</span>
 <span class="sd">       The result of this functions is a dictionary with symbolic</span>
 <span class="sd">       values of those parameters with respect to coefficients in q.</span>
@@ -2393,7 +2392,7 @@
 
 
 <div class="viewcode-block" id="solve_linear_system_LU"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.solvers.solve_linear_system_LU">[docs]</a><span class="k">def</span> <span class="nf">solve_linear_system_LU</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">syms</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves the augmented matrix system using LUsolve and returns a dictionary</span>
 <span class="sd">    in which solutions are keyed to the symbols of syms *as ordered*.</span>
 
@@ -2430,7 +2429,7 @@
 
 
 <div class="viewcode-block" id="det_perm"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.solvers.det_perm">[docs]</a><span class="k">def</span> <span class="nf">det_perm</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the det(``M``) by using permutations to select factors.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the det(``M``) by using permutations to select factors.</span>
 <span class="sd">    For size larger than 8 the number of permutations becomes prohibitively</span>
 <span class="sd">    large, or if there are no symbols in the matrix, it is better to use the</span>
 <span class="sd">    standard determinant routines, e.g. `M.det()`.</span>
@@ -2460,7 +2459,7 @@
 
 
 <div class="viewcode-block" id="det_minor"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.solvers.det_minor">[docs]</a><span class="k">def</span> <span class="nf">det_minor</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the ``det(M)`` computed from minors without</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the ``det(M)`` computed from minors without</span>
 <span class="sd">    introducing new nesting in products.</span>
 
 <span class="sd">    See Also</span>
@@ -2478,7 +2477,7 @@
 
 
 <div class="viewcode-block" id="det_quick"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.solvers.det_quick">[docs]</a><span class="k">def</span> <span class="nf">det_quick</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return ``det(M)`` assuming that either</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return ``det(M)`` assuming that either</span>
 <span class="sd">    there are lots of zeros or the size of the matrix</span>
 <span class="sd">    is small. If this assumption is not met, then the normal</span>
 <span class="sd">    Matrix.det function will be used with method = ``method``.</span>
@@ -2497,7 +2496,7 @@
 
 
 <div class="viewcode-block" id="inv_quick"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.solvers.inv_quick">[docs]</a><span class="k">def</span> <span class="nf">inv_quick</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the inverse of ``M``, assuming that either</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the inverse of ``M``, assuming that either</span>
 <span class="sd">    there are lots of zeros or the size of the matrix</span>
 <span class="sd">    is small.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -2532,7 +2531,7 @@
 
 
 <span class="k">def</span> <span class="nf">_tsolve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">sym</span><span class="p">,</span> <span class="o">**</span><span class="n">flags</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper for _solve that solves a transcendental equation with respect</span>
 <span class="sd">    to the given symbol. Various equations containing powers and logarithms,</span>
 <span class="sd">    can be solved.</span>
@@ -2693,7 +2692,7 @@
 
 <div class="viewcode-block" id="nsolve"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.solvers.nsolve">[docs]</a><span class="nd">@conserve_mpmath_dps</span>
 <span class="k">def</span> <span class="nf">nsolve</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solve a nonlinear equation system numerically::</span>
 
 <span class="sd">        nsolve(f, [args,] x0, modules=[&#39;mpmath&#39;], **kwargs)</span>
@@ -2889,7 +2888,7 @@
 
 
 <span class="k">def</span> <span class="nf">_invert</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return tuple (i, d) where ``i`` is independent of ``symbols`` and ``d``</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return tuple (i, d) where ``i`` is independent of ``symbols`` and ``d``</span>
 <span class="sd">    contains symbols. ``i`` and ``d`` are obtained after recursively using</span>
 <span class="sd">    algebraic inversion until an uninvertible ``d`` remains. If there are no</span>
 <span class="sd">    free symbols then ``d`` will be zero. Some (but not necessarily all)</span>
@@ -3054,7 +3053,7 @@
 
 
 <div class="viewcode-block" id="unrad"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.solvers.unrad">[docs]</a><span class="k">def</span> <span class="nf">unrad</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="o">*</span><span class="n">syms</span><span class="p">,</span> <span class="o">**</span><span class="n">flags</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Remove radicals with symbolic arguments and return (eq, cov),</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Remove radicals with symbolic arguments and return (eq, cov),</span>
 <span class="sd">    None or raise an error:</span>
 
 <span class="sd">    None is returned if there are no radicals to remove.</span>
@@ -3448,7 +3447,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -3469,7 +3468,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

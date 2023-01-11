@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -67,13 +66,13 @@
 
 
 <div class="viewcode-block" id="AssumptionKeys"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.ask.AssumptionKeys">[docs]</a><span class="k">class</span> <span class="nc">AssumptionKeys</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class contains all the supported keys by ``ask``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">hermitian</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Hermitian predicate.</span>
 
 <span class="sd">        ``ask(Q.hermitian(x))`` is true iff ``x`` belongs to the set of</span>
@@ -90,7 +89,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">antihermitian</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Antihermitian predicate.</span>
 
 <span class="sd">        ``Q.antihermitian(x)`` is true iff ``x`` belongs to the field of</span>
@@ -108,7 +107,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">real</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Real number predicate.</span>
 
 <span class="sd">        ``Q.real(x)`` is true iff ``x`` is a real number, i.e., it is in the</span>
@@ -165,7 +164,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">extended_real</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Extended real predicate.</span>
 
 <span class="sd">        ``Q.extended_real(x)`` is true iff ``x`` is a real number or</span>
@@ -189,7 +188,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">imaginary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Imaginary number predicate.</span>
 
 <span class="sd">        ``Q.imaginary(x)`` is true iff ``x`` can be written as a real</span>
@@ -217,7 +216,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">complex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Complex number predicate.</span>
 
 <span class="sd">        ``Q.complex(x)`` is true iff ``x`` belongs to the set of complex</span>
@@ -245,7 +244,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">algebraic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Algebraic number predicate.</span>
 
 <span class="sd">        ``Q.algebraic(x)`` is true iff ``x`` belongs to the set of</span>
@@ -272,7 +271,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">transcendental</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Transcedental number predicate.</span>
 
 <span class="sd">        ``Q.transcendental(x)`` is true iff ``x`` belongs to the set of</span>
@@ -285,7 +284,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">integer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Integer predicate.</span>
 
 <span class="sd">        ``Q.integer(x)`` is true iff ``x`` belongs to the set of integer numbers.</span>
@@ -309,7 +308,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">rational</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Rational number predicate.</span>
 
 <span class="sd">        ``Q.rational(x)`` is true iff ``x`` belongs to the set of</span>
@@ -336,7 +335,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">irrational</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Irrational number predicate.</span>
 
 <span class="sd">        ``Q.irrational(x)`` is true iff ``x``  is any real number that</span>
@@ -365,7 +364,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">finite</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Finite predicate.</span>
 
 <span class="sd">        ``Q.finite(x)`` is true if ``x`` is neither an infinity</span>
@@ -397,14 +396,14 @@
     <span class="nd">@predicate_memo</span>
     <span class="nd">@deprecated</span><span class="p">(</span><span class="n">useinstead</span><span class="o">=</span><span class="s2">&quot;finite&quot;</span><span class="p">,</span> <span class="n">issue</span><span class="o">=</span><span class="mi">9425</span><span class="p">,</span> <span class="n">deprecated_since_version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">bounded</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        See documentation of ``Q.finite``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Predicate</span><span class="p">(</span><span class="s1">&#39;finite&#39;</span><span class="p">)</span>
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">infinite</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Infinite number predicate.</span>
 
 <span class="sd">        ``Q.infinite(x)`` is true iff the absolute value of ``x`` is</span>
@@ -417,7 +416,7 @@
     <span class="nd">@predicate_memo</span>
     <span class="nd">@deprecated</span><span class="p">(</span><span class="n">useinstead</span><span class="o">=</span><span class="s2">&quot;infinite&quot;</span><span class="p">,</span> <span class="n">issue</span><span class="o">=</span><span class="mi">9426</span><span class="p">,</span> <span class="n">deprecated_since_version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">infinity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        See documentation of ``Q.infinite``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Predicate</span><span class="p">(</span><span class="s1">&#39;infinite&#39;</span><span class="p">)</span>
@@ -425,14 +424,14 @@
     <span class="nd">@predicate_memo</span>
     <span class="nd">@deprecated</span><span class="p">(</span><span class="n">useinstead</span><span class="o">=</span><span class="s2">&quot;zero&quot;</span><span class="p">,</span> <span class="n">issue</span><span class="o">=</span><span class="mi">9675</span><span class="p">,</span> <span class="n">deprecated_since_version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">infinitesimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        See documentation of ``Q.zero``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Predicate</span><span class="p">(</span><span class="s1">&#39;zero&#39;</span><span class="p">)</span>
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">positive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Positive real number predicate.</span>
 
 <span class="sd">        ``Q.positive(x)`` is true iff ``x`` is real and `x &gt; 0`, that is if ``x``</span>
@@ -470,7 +469,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">negative</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Negative number predicate.</span>
 
 <span class="sd">        ``Q.negative(x)`` is true iff ``x`` is a real number and :math:`x &lt; 0`, that is,</span>
@@ -508,7 +507,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">zero</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Zero number predicate.</span>
 
 <span class="sd">        ``ask(Q.zero(x))`` is true iff the value of ``x`` is zero.</span>
@@ -534,7 +533,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">nonzero</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Nonzero real number predicate.</span>
 
 <span class="sd">        ``ask(Q.nonzero(x))`` is true iff ``x`` is real and ``x`` is not zero.  Note in</span>
@@ -574,7 +573,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">nonpositive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Nonpositive real number predicate.</span>
 
 <span class="sd">        ``ask(Q.nonpositive(x))`` is true iff ``x`` belongs to the set of</span>
@@ -607,7 +606,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">nonnegative</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Nonnegative real number predicate.</span>
 
 <span class="sd">        ``ask(Q.nonnegative(x))`` is true iff ``x`` belongs to the set of</span>
@@ -640,7 +639,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">even</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Even number predicate.</span>
 
 <span class="sd">        ``ask(Q.even(x))`` is true iff ``x`` belongs to the set of even</span>
@@ -664,7 +663,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">odd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Odd number predicate.</span>
 
 <span class="sd">        ``ask(Q.odd(x))`` is true iff ``x`` belongs to the set of odd numbers.</span>
@@ -687,7 +686,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">prime</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prime number predicate.</span>
 
 <span class="sd">        ``ask(Q.prime(x))`` is true iff ``x`` is a natural number greater</span>
@@ -714,7 +713,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">composite</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Composite number predicate.</span>
 
 <span class="sd">        ``ask(Q.composite(x))`` is true iff ``x`` is a positive integer and has</span>
@@ -738,7 +737,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">commutative</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Commutative predicate.</span>
 
 <span class="sd">        ``ask(Q.commutative(x))`` is true iff ``x`` commutes with any other</span>
@@ -750,7 +749,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">is_true</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generic predicate.</span>
 
 <span class="sd">        ``ask(Q.is_true(x))`` is true iff ``x`` is true. This only makes</span>
@@ -769,7 +768,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">symmetric</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Symmetric matrix predicate.</span>
 
 <span class="sd">        ``Q.symmetric(x)`` is true iff ``x`` is a square matrix and is equal to</span>
@@ -802,7 +801,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">invertible</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Invertible matrix predicate.</span>
 
 <span class="sd">        ``Q.invertible(x)`` is true iff ``x`` is an invertible matrix.</span>
@@ -832,7 +831,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">orthogonal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Orthogonal matrix predicate.</span>
 
 <span class="sd">        ``Q.orthogonal(x)`` is true iff ``x`` is an orthogonal matrix.</span>
@@ -867,7 +866,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">unitary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Unitary matrix predicate.</span>
 
 <span class="sd">        ``Q.unitary(x)`` is true iff ``x`` is a unitary matrix.</span>
@@ -899,7 +898,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">positive_definite</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Positive definite matrix predicate.</span>
 
 <span class="sd">        If ``M`` is a :math:``n \times n`` symmetric real matrix, it is said</span>
@@ -931,7 +930,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">upper_triangular</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Upper triangular matrix predicate.</span>
 
 <span class="sd">        A matrix ``M`` is called upper triangular matrix if :math:`M_{ij}=0`</span>
@@ -956,7 +955,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">lower_triangular</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Lower triangular matrix predicate.</span>
 
 <span class="sd">        A matrix ``M`` is called lower triangular matrix if :math:`a_{ij}=0`</span>
@@ -980,7 +979,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">diagonal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Diagonal matrix predicate.</span>
 
 <span class="sd">        ``Q.diagonal(x)`` is true iff ``x`` is a diagonal matrix. A diagonal</span>
@@ -1008,7 +1007,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">fullrank</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Fullrank matrix predicate.</span>
 
 <span class="sd">        ``Q.fullrank(x)`` is true iff ``x`` is a full rank matrix.</span>
@@ -1033,7 +1032,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Square matrix predicate.</span>
 
 <span class="sd">        ``Q.square(x)`` is true iff ``x`` is a square matrix. A square matrix</span>
@@ -1064,7 +1063,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">integer_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Integer elements matrix predicate.</span>
 
 <span class="sd">        ``Q.integer_elements(x)`` is true iff all the elements of ``x``</span>
@@ -1083,7 +1082,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">real_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Real elements matrix predicate.</span>
 
 <span class="sd">        ``Q.real_elements(x)`` is true iff all the elements of ``x``</span>
@@ -1102,7 +1101,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">complex_elements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Complex elements matrix predicate.</span>
 
 <span class="sd">        ``Q.complex_elements(x)`` is true iff all the elements of ``x``</span>
@@ -1123,7 +1122,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">singular</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Singular matrix predicate.</span>
 
 <span class="sd">        A matrix is singular iff the value of its determinant is 0.</span>
@@ -1148,7 +1147,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">normal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Normal matrix predicate.</span>
 
 <span class="sd">        A matrix is normal if it commutes with its conjugate transpose.</span>
@@ -1171,7 +1170,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">triangular</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Triangular matrix predicate.</span>
 
 <span class="sd">        ``Q.triangular(X)`` is true if ``X`` is one that is either lower</span>
@@ -1196,7 +1195,7 @@
 
     <span class="nd">@predicate_memo</span>
     <span class="k">def</span> <span class="nf">unit_triangular</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Unit triangular matrix predicate.</span>
 
 <span class="sd">        A unit triangular matrix is a triangular matrix with 1s</span>
@@ -1217,7 +1216,7 @@
 <span class="n">Q</span> <span class="o">=</span> <span class="n">AssumptionKeys</span><span class="p">()</span>
 
 <span class="k">def</span> <span class="nf">_extract_facts</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">check_reversed_rel</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper for ask().</span>
 
 <span class="sd">    Extracts the facts relevant to the symbol from an assumption.</span>
@@ -1250,7 +1249,7 @@
 
 
 <div class="viewcode-block" id="ask"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.ask.ask">[docs]</a><span class="k">def</span> <span class="nf">ask</span><span class="p">(</span><span class="n">proposition</span><span class="p">,</span> <span class="n">assumptions</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">global_assumptions</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method for inferring properties about objects.</span>
 
 <span class="sd">    **Syntax**</span>
@@ -1347,7 +1346,7 @@
 
 
 <div class="viewcode-block" id="ask_full_inference"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.ask.ask_full_inference">[docs]</a><span class="k">def</span> <span class="nf">ask_full_inference</span><span class="p">(</span><span class="n">proposition</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">,</span> <span class="n">known_facts_cnf</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method for inferring properties about objects.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1359,7 +1358,7 @@
 
 
 <div class="viewcode-block" id="register_handler"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.ask.register_handler">[docs]</a><span class="k">def</span> <span class="nf">register_handler</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">handler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Register a handler in the ask system. key must be a string and handler a</span>
 <span class="sd">    class inheriting from AskHandler::</span>
 
@@ -1385,7 +1384,7 @@
 
 
 <div class="viewcode-block" id="remove_handler"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.ask.remove_handler">[docs]</a><span class="k">def</span> <span class="nf">remove_handler</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">handler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Removes a handler from the ask system. Same syntax as register_handler&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Removes a handler from the ask system. Same syntax as register_handler&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="ow">is</span> <span class="n">Predicate</span><span class="p">:</span>
         <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">name</span>
     <span class="nb">getattr</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">remove_handler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span></div>
@@ -1404,7 +1403,7 @@
 
 
 <div class="viewcode-block" id="compute_known_facts"><a class="viewcode-back" href="../../../../modelparameters.sympy.assumptions.html#modelparameters.sympy.assumptions.ask.compute_known_facts">[docs]</a><span class="k">def</span> <span class="nf">compute_known_facts</span><span class="p">(</span><span class="n">known_facts</span><span class="p">,</span> <span class="n">known_facts_keys</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute the various forms of knowledge compilation used by the</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the various forms of knowledge compilation used by the</span>
 <span class="sd">    assumptions system.</span>
 
 <span class="sd">    This function is typically applied to the results of the ``get_known_facts``</span>
@@ -1430,14 +1429,14 @@
 <span class="s1">    @cacheit</span>
 <span class="s1">    def get_known_facts_cnf():</span>
 <span class="s1">        return And(</span>
-<span class="s1">            </span><span class="si">%s</span><span class="s1"></span>
+<span class="s1">            </span><span class="si">%s</span>
 <span class="s1">        )</span>
 
 <span class="s1">    # -{ Known facts in compressed sets }-</span>
 <span class="s1">    @cacheit</span>
 <span class="s1">    def get_known_facts_dict():</span>
 <span class="s1">        return {</span>
-<span class="s1">            </span><span class="si">%s</span><span class="s1"></span>
+<span class="s1">            </span><span class="si">%s</span>
 <span class="s1">        }</span>
 <span class="s1">    &#39;&#39;&#39;</span><span class="p">)</span>
     <span class="c1"># Compute the known facts in CNF form for logical inference</span>
@@ -1582,7 +1581,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1603,7 +1602,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

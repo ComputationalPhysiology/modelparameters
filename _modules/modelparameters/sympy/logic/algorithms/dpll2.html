@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -57,7 +56,7 @@
 
 
 <div class="viewcode-block" id="dpll_satisfiable"><a class="viewcode-back" href="../../../../../modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll2.dpll_satisfiable">[docs]</a><span class="k">def</span> <span class="nf">dpll_satisfiable</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">all_models</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check satisfiability of a propositional sentence.</span>
 <span class="sd">    It returns a model rather than True when it succeeds.</span>
 <span class="sd">    Returns a generator of all models if all_models is True.</span>
@@ -111,7 +110,7 @@
 
 
 <div class="viewcode-block" id="SATSolver"><a class="viewcode-back" href="../../../../../modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll2.SATSolver">[docs]</a><span class="k">class</span> <span class="nc">SATSolver</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class for representing a SAT solver capable of</span>
 <span class="sd">     finding a model to a boolean theory in conjunctive</span>
 <span class="sd">     normal form.</span>
@@ -168,13 +167,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">original_num_clauses</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clauses</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_initialize_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set up the variable data structures needed.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set up the variable data structures needed.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sentinels</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">set</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">occurrence_count</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">variable_set</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_initialize_clauses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clauses</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set up the clause data structures needed.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set up the clause data structures needed.</span>
 
 <span class="sd">        For each clause, the following changes are made:</span>
 <span class="sd">        - Unit clauses are queued for propagation right away.</span>
@@ -199,7 +198,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">occurrence_count</span><span class="p">[</span><span class="n">lit</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">def</span> <span class="nf">_find_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Main DPLL loop. Returns a generator of models.</span>
 
 <span class="sd">        Variables are chosen successively, and assigned to be either</span>
@@ -299,7 +298,7 @@
     <span class="c1">########################</span>
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">_current_level</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The current decision level data structure</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The current decision level data structure</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -318,7 +317,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">_clause_sat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Check if a clause is satisfied by the current variable setting.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a clause is satisfied by the current variable setting.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -340,7 +339,7 @@
         <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">_is_sentinel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lit</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Check if a literal is a sentinel of a given clause.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if a literal is a sentinel of a given clause.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -358,7 +357,7 @@
         <span class="k">return</span> <span class="bp">cls</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentinels</span><span class="p">[</span><span class="n">lit</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">_assign_literal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lit</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Make a literal assignment.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make a literal assignment.</span>
 
 <span class="sd">        The literal assignment must be recorded as part of the current</span>
 <span class="sd">        decision level. Additionally, if the literal is marked as a</span>
@@ -412,7 +411,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">_unit_prop_queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">other_sentinel</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_undo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        _undo the changes of the most recent decision level.</span>
 
 <span class="sd">        Examples</span>
@@ -443,13 +442,13 @@
     <span class="c1">#########################</span>
     <span class="c1">#      Propagation      #</span>
     <span class="c1">#########################</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Propagation methods should attempt to soundly simplify the boolean</span>
 <span class="sd">      theory, and return True if any simplification occurred and False</span>
 <span class="sd">      otherwise.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">_simplify</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Iterate over the various forms of propagation to simplify the theory.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Iterate over the various forms of propagation to simplify the theory.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -477,7 +476,7 @@
             <span class="n">changed</span> <span class="o">|=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pure_literal</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_unit_prop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Perform unit propagation on the current theory.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Perform unit propagation on the current theory.&quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_unit_prop_queue</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
         <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unit_prop_queue</span><span class="p">:</span>
             <span class="n">next_lit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_unit_prop_queue</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
@@ -491,14 +490,14 @@
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span> <span class="nf">_pure_literal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Look for pure literals and assign them when found.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Look for pure literals and assign them when found.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="kc">False</span>
 
     <span class="c1">#########################</span>
     <span class="c1">#      Heuristics       #</span>
     <span class="c1">#########################</span>
     <span class="k">def</span> <span class="nf">_vsids_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize the data structures needed for the VSIDS heuristic.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the data structures needed for the VSIDS heuristic.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lit_heap</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lit_scores</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -509,7 +508,7 @@
             <span class="n">heappush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lit_heap</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lit_scores</span><span class="p">[</span><span class="o">-</span><span class="n">var</span><span class="p">],</span> <span class="o">-</span><span class="n">var</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_vsids_decay</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Decay the VSIDS scores for every literal.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Decay the VSIDS scores for every literal.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -532,7 +531,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">lit_scores</span><span class="p">[</span><span class="n">lit</span><span class="p">]</span> <span class="o">/=</span> <span class="mf">2.0</span>
 
     <span class="k">def</span> <span class="nf">_vsids_calculate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            VSIDS Heuristic Calculation</span>
 
 <span class="sd">        Examples</span>
@@ -563,11 +562,11 @@
         <span class="k">return</span> <span class="n">heappop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lit_heap</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">_vsids_lit_assigned</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lit</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Handle the assignment of a literal for the VSIDS heuristic.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle the assignment of a literal for the VSIDS heuristic.&quot;&quot;&quot;</span>
         <span class="k">pass</span>
 
     <span class="k">def</span> <span class="nf">_vsids_lit_unset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lit</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Handle the unsetting of a literal for the VSIDS heuristic.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle the unsetting of a literal for the VSIDS heuristic.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -589,7 +588,7 @@
         <span class="n">heappush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lit_heap</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lit_scores</span><span class="p">[</span><span class="o">-</span><span class="n">var</span><span class="p">],</span> <span class="o">-</span><span class="n">var</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_vsids_clause_added</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Handle the addition of a new clause for the VSIDS heuristic.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle the addition of a new clause for the VSIDS heuristic.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -618,7 +617,7 @@
     <span class="c1">#   Clause Learning    #</span>
     <span class="c1">########################</span>
     <span class="k">def</span> <span class="nf">_simple_add_learned_clause</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Add a new clause to the theory.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a new clause to the theory.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -653,7 +652,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">heur_clause_added</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_simple_compute_conflict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Build a clause representing the fact that at least one decision made</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Build a clause representing the fact that at least one decision made</span>
 <span class="sd">        so far is wrong.</span>
 
 <span class="sd">        Examples</span>
@@ -670,12 +669,12 @@
         <span class="k">return</span> <span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">level</span><span class="o">.</span><span class="n">decision</span><span class="p">)</span> <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
 
     <span class="k">def</span> <span class="nf">_simple_clean_clauses</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Clean up learned clauses.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clean up learned clauses.&quot;&quot;&quot;</span>
         <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="Level"><a class="viewcode-back" href="../../../../../modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll2.Level">[docs]</a><span class="k">class</span> <span class="nc">Level</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents a single level in the DPLL algorithm, and contains</span>
 <span class="sd">    enough information for a sound backtracking procedure.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -701,7 +700,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -722,7 +721,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

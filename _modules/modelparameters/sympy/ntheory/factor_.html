@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -61,7 +60,7 @@
 
 
 <div class="viewcode-block" id="smoothness"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.smoothness">[docs]</a><span class="k">def</span> <span class="nf">smoothness</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the B-smooth and B-power smooth values of n.</span>
 
 <span class="sd">    The smoothness of n is the largest prime factor of n; the power-</span>
@@ -88,7 +87,7 @@
 
 
 <div class="viewcode-block" id="smoothness_p"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.smoothness_p">[docs]</a><span class="k">def</span> <span class="nf">smoothness_p</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">power</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a list of [m, (p, (M, sm(p + m), psm(p + m)))...]</span>
 <span class="sd">    where:</span>
 
@@ -191,7 +190,7 @@
 
 
 <div class="viewcode-block" id="trailing"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.trailing">[docs]</a><span class="k">def</span> <span class="nf">trailing</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Count the number of trailing zero digits in the binary</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Count the number of trailing zero digits in the binary</span>
 <span class="sd">    representation of n, i.e. determine the largest power of 2</span>
 <span class="sd">    that divides n.</span>
 
@@ -229,7 +228,7 @@
 
 
 <div class="viewcode-block" id="multiplicity"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.multiplicity">[docs]</a><span class="k">def</span> <span class="nf">multiplicity</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find the greatest integer m such that p**m divides n.</span>
 
 <span class="sd">    Examples</span>
@@ -300,7 +299,7 @@
 
 
 <div class="viewcode-block" id="perfect_power"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.perfect_power">[docs]</a><span class="k">def</span> <span class="nf">perfect_power</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">candidates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">big</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return ``(b, e)`` such that ``n`` == ``b**e`` if ``n`` is a</span>
 <span class="sd">    perfect power; otherwise return ``False``.</span>
 
@@ -404,7 +403,7 @@
 
 
 <div class="viewcode-block" id="pollard_rho"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.pollard_rho">[docs]</a><span class="k">def</span> <span class="nf">pollard_rho</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1234</span><span class="p">,</span> <span class="n">max_steps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">F</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Use Pollard&#39;s rho method to try to extract a nontrivial factor</span>
 <span class="sd">    of ``n``. The returned factor may be a composite number. If no</span>
 <span class="sd">    factor is found, ``None`` is returned.</span>
@@ -519,7 +518,7 @@
 
 
 <div class="viewcode-block" id="pollard_pm1"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.pollard_pm1">[docs]</a><span class="k">def</span> <span class="nf">pollard_pm1</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">1234</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Use Pollard&#39;s p-1 method to try to extract a nontrivial factor</span>
 <span class="sd">    of ``n``. Either a divisor (perhaps composite) or ``None`` is returned.</span>
 
@@ -675,7 +674,7 @@
 
 
 <span class="k">def</span> <span class="nf">_trial</span><span class="p">(</span><span class="n">factors</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">candidates</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper function for integer factorization. Trial factors ``n`</span>
 <span class="sd">    against all integers given in the sequence ``candidates``</span>
 <span class="sd">    and updates the dict ``factors`` in-place. Returns the reduced</span>
@@ -697,7 +696,7 @@
 
 <span class="k">def</span> <span class="nf">_check_termination</span><span class="p">(</span><span class="n">factors</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">limitp1</span><span class="p">,</span> <span class="n">use_trial</span><span class="p">,</span> <span class="n">use_rho</span><span class="p">,</span> <span class="n">use_pm1</span><span class="p">,</span>
                        <span class="n">verbose</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper function for integer factorization. Checks if ``n``</span>
 <span class="sd">    is a prime or a perfect power, and in those cases updates</span>
 <span class="sd">    the factorization and raises ``StopIteration``.</span>
@@ -740,7 +739,7 @@
 
 
 <span class="k">def</span> <span class="nf">_factorint_small</span><span class="p">(</span><span class="n">factors</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">fail_max</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the value of n and either a 0 (indicating that factorization up</span>
 <span class="sd">    to the limit was complete) or else the next near-prime that would have</span>
 <span class="sd">    been tested.</span>
@@ -754,7 +753,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">done</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;return n, d if the sqrt(n) wasn&#39;t reached yet, else</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;return n, d if the sqrt(n) wasn&#39;t reached yet, else</span>
 <span class="sd">           n, 0 indicating that factoring is done.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">d</span><span class="o">*</span><span class="n">d</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>
@@ -842,7 +841,7 @@
 
 <div class="viewcode-block" id="factorint"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.factorint">[docs]</a><span class="k">def</span> <span class="nf">factorint</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_trial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_rho</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_pm1</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
               <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given a positive integer ``n``, ``factorint(n)`` returns a dict containing</span>
 <span class="sd">    the prime factors of ``n`` as keys and their respective multiplicities</span>
 <span class="sd">    as values. For example:</span>
@@ -1227,7 +1226,7 @@
 
 <div class="viewcode-block" id="factorrat"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.factorrat">[docs]</a><span class="k">def</span> <span class="nf">factorrat</span><span class="p">(</span><span class="n">rat</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_trial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_rho</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_pm1</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
               <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given a Rational ``r``, ``factorrat(r)`` returns a dict containing</span>
 <span class="sd">    the prime factors of ``r`` as keys and their respective multiplicities</span>
 <span class="sd">    as values. For example:</span>
@@ -1290,7 +1289,7 @@
 
 
 <div class="viewcode-block" id="primefactors"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.primefactors">[docs]</a><span class="k">def</span> <span class="nf">primefactors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a sorted list of n&#39;s prime factors, ignoring multiplicity</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a sorted list of n&#39;s prime factors, ignoring multiplicity</span>
 <span class="sd">    and any composite factor that remains if the limit was set too low</span>
 <span class="sd">    for complete factorization. Unlike factorint(), primefactors() does</span>
 <span class="sd">    not return -1 or 0.</span>
@@ -1330,7 +1329,7 @@
 
 
 <span class="k">def</span> <span class="nf">_divisors</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper function for divisors which generates the divisors.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function for divisors which generates the divisors.&quot;&quot;&quot;</span>
 
     <span class="n">factordict</span> <span class="o">=</span> <span class="n">factorint</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
     <span class="n">ps</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">factordict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
@@ -1351,7 +1350,7 @@
 
 
 <div class="viewcode-block" id="divisors"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.divisors">[docs]</a><span class="k">def</span> <span class="nf">divisors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return all divisors of n sorted from 1..n by default.</span>
 <span class="sd">    If generator is ``True`` an unordered generator is returned.</span>
 
@@ -1394,7 +1393,7 @@
 
 
 <div class="viewcode-block" id="divisor_count"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.divisor_count">[docs]</a><span class="k">def</span> <span class="nf">divisor_count</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">modulus</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the number of divisors of ``n``. If ``modulus`` is not 1 then only</span>
 <span class="sd">    those that are divisible by ``modulus`` are counted.</span>
 
@@ -1425,7 +1424,7 @@
 
 
 <span class="k">def</span> <span class="nf">_udivisors</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper function for udivisors which generates the unitary divisors.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function for udivisors which generates the unitary divisors.&quot;&quot;&quot;</span>
 
     <span class="n">factorpows</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">**</span><span class="n">e</span> <span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">factorint</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="nb">len</span><span class="p">(</span><span class="n">factorpows</span><span class="p">)):</span>
@@ -1439,7 +1438,7 @@
 
 
 <div class="viewcode-block" id="udivisors"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.udivisors">[docs]</a><span class="k">def</span> <span class="nf">udivisors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return all unitary divisors of n sorted from 1..n by default.</span>
 <span class="sd">    If generator is ``True`` an unordered generator is returned.</span>
 
@@ -1485,7 +1484,7 @@
 
 
 <div class="viewcode-block" id="udivisor_count"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.udivisor_count">[docs]</a><span class="k">def</span> <span class="nf">udivisor_count</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the number of unitary divisors of ``n``.</span>
 
 <span class="sd">    References</span>
@@ -1509,7 +1508,7 @@
 
 
 <span class="k">def</span> <span class="nf">_antidivisors</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper function for antidivisors which generates the antidivisors.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function for antidivisors which generates the antidivisors.&quot;&quot;&quot;</span>
 
     <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">_divisors</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">d</span>
@@ -1524,7 +1523,7 @@
 
 
 <div class="viewcode-block" id="antidivisors"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.antidivisors">[docs]</a><span class="k">def</span> <span class="nf">antidivisors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">generator</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return all antidivisors of n sorted from 1..n by default.</span>
 
 <span class="sd">    Antidivisors [1]_ of n are numbers that do not divide n by the largest</span>
@@ -1561,7 +1560,7 @@
 
 
 <div class="viewcode-block" id="antidivisor_count"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.antidivisor_count">[docs]</a><span class="k">def</span> <span class="nf">antidivisor_count</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the number of antidivisors [1]_ of ``n``.</span>
 
 <span class="sd">    References</span>
@@ -1592,7 +1591,7 @@
 
 
 <div class="viewcode-block" id="totient"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.totient">[docs]</a><span class="k">class</span> <span class="nc">totient</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the Euler totient function phi(n)</span>
 
 <span class="sd">    ``totient(n)`` or `\phi(n)` is the number of positive integers `\leq` n</span>
@@ -1635,7 +1634,7 @@
 
 
 <div class="viewcode-block" id="reduced_totient"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.reduced_totient">[docs]</a><span class="k">class</span> <span class="nc">reduced_totient</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the Carmichael reduced totient function lambda(n)</span>
 
 <span class="sd">    ``reduced_totient(n)`` or `\lambda(n)` is the smallest m &gt; 0 such that</span>
@@ -1683,7 +1682,7 @@
 
 
 <div class="viewcode-block" id="divisor_sigma"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.divisor_sigma">[docs]</a><span class="k">class</span> <span class="nc">divisor_sigma</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the divisor function `\sigma_k(n)` for positive integer n</span>
 
 <span class="sd">    ``divisor_sigma(n, k)`` is equal to ``sum([x**k for x in divisors(n)])``</span>
@@ -1749,7 +1748,7 @@
 
 
 <div class="viewcode-block" id="core"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.core">[docs]</a><span class="k">def</span> <span class="nf">core</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate core(n,t) = `core_t(n)` of a positive integer n</span>
 
 <span class="sd">    ``core_2(n)`` is equal to the squarefree part of n</span>
@@ -1812,7 +1811,7 @@
 
 
 <div class="viewcode-block" id="digits"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.digits">[docs]</a><span class="k">def</span> <span class="nf">digits</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a list of the digits of n in base b. The first element in the list</span>
 <span class="sd">    is b (or -b if n is negative).</span>
 
@@ -1846,7 +1845,7 @@
 
 
 <div class="viewcode-block" id="udivisor_sigma"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.udivisor_sigma">[docs]</a><span class="k">class</span> <span class="nc">udivisor_sigma</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the unitary divisor function `\sigma_k^*(n)` for positive integer n</span>
 
 <span class="sd">    ``udivisor_sigma(n, k)`` is equal to ``sum([x**k for x in udivisors(n)])``</span>
@@ -1911,7 +1910,7 @@
 
 
 <div class="viewcode-block" id="primenu"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.primenu">[docs]</a><span class="k">class</span> <span class="nc">primenu</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the number of distinct prime factors for a positive integer n.</span>
 
 <span class="sd">    If n&#39;s prime factorization is:</span>
@@ -1955,7 +1954,7 @@
 
 
 <div class="viewcode-block" id="primeomega"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.factor_.primeomega">[docs]</a><span class="k">class</span> <span class="nc">primeomega</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the number of prime factors counting multiplicities for a</span>
 <span class="sd">    positive integer n.</span>
 
@@ -2014,7 +2013,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2035,7 +2034,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

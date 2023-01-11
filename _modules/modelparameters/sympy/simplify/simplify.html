@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -78,7 +77,7 @@
 
 
 <div class="viewcode-block" id="separatevars"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.separatevars">[docs]</a><span class="k">def</span> <span class="nf">separatevars</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="p">[],</span> <span class="nb">dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Separates variables in an expression, if possible.  By</span>
 <span class="sd">    default, it separates with respect to all symbols in an</span>
 <span class="sd">    expression and collects constant coefficients that are</span>
@@ -242,7 +241,7 @@
 
 
 <div class="viewcode-block" id="posify"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.posify">[docs]</a><span class="k">def</span> <span class="nf">posify</span><span class="p">(</span><span class="n">eq</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return eq (with generic symbols made positive) and a</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return eq (with generic symbols made positive) and a</span>
 <span class="sd">    dictionary containing the mapping between the old and new</span>
 <span class="sd">    symbols.</span>
 
@@ -300,7 +299,7 @@
 
 
 <div class="viewcode-block" id="hypersimp"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.hypersimp">[docs]</a><span class="k">def</span> <span class="nf">hypersimp</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Given combinatorial term f(k) simplify its consecutive term ratio</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Given combinatorial term f(k) simplify its consecutive term ratio</span>
 <span class="sd">       i.e. f(k+1)/f(k).  The input term can be composed of functions and</span>
 <span class="sd">       integer sequences which have equivalent representation in terms</span>
 <span class="sd">       of gamma special function.</span>
@@ -341,7 +340,7 @@
 
 
 <div class="viewcode-block" id="hypersimilar"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.hypersimilar">[docs]</a><span class="k">def</span> <span class="nf">hypersimilar</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns True if &#39;f&#39; and &#39;g&#39; are hyper-similar.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns True if &#39;f&#39; and &#39;g&#39; are hyper-similar.</span>
 
 <span class="sd">       Similarity in hypergeometric sense means that a quotient of</span>
 <span class="sd">       f(k) and g(k) is a rational function in k.  This procedure</span>
@@ -359,7 +358,7 @@
 
 
 <div class="viewcode-block" id="signsimp"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.signsimp">[docs]</a><span class="k">def</span> <span class="nf">signsimp</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Make all Add sub-expressions canonical wrt sign.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make all Add sub-expressions canonical wrt sign.</span>
 
 <span class="sd">    If an Add subexpression, ``a``, can have a sign extracted,</span>
 <span class="sd">    as determined by could_extract_minus_sign, it is replaced</span>
@@ -421,7 +420,7 @@
 
 
 <div class="viewcode-block" id="simplify"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.simplify">[docs]</a><span class="k">def</span> <span class="nf">simplify</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">ratio</span><span class="o">=</span><span class="mf">1.7</span><span class="p">,</span> <span class="n">measure</span><span class="o">=</span><span class="n">count_ops</span><span class="p">,</span> <span class="n">fu</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Simplifies the given expression.</span>
 
 <span class="sd">    Simplification is not a well defined term and the exact strategies</span>
@@ -573,7 +572,7 @@
     <span class="c1"># See also https://github.com/sympy/sympy/pull/185.</span>
 
     <span class="k">def</span> <span class="nf">shorter</span><span class="p">(</span><span class="o">*</span><span class="n">choices</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Return the choice that has the fewest ops. In case of a tie,</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Return the choice that has the fewest ops. In case of a tie,</span>
 <span class="sd">        the expression listed first is selected.&#39;&#39;&#39;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">has_variety</span><span class="p">(</span><span class="n">choices</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -652,7 +651,7 @@
 
 
 <div class="viewcode-block" id="sum_simplify"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.sum_simplify">[docs]</a><span class="k">def</span> <span class="nf">sum_simplify</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Main function for Sum simplification&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main function for Sum simplification&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..concrete.summations</span> <span class="kn">import</span> <span class="n">Sum</span>
     <span class="kn">from</span> <span class="nn">..core.function</span> <span class="kn">import</span> <span class="n">expand</span>
 
@@ -695,7 +694,7 @@
     <span class="k">return</span> <span class="n">result</span></div>
 
 <div class="viewcode-block" id="sum_combine"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.sum_combine">[docs]</a><span class="k">def</span> <span class="nf">sum_combine</span><span class="p">(</span><span class="n">s_t</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper function for Sum simplification</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function for Sum simplification</span>
 
 <span class="sd">       Attempts to simplify a list of sums, by combining limits / sum function&#39;s</span>
 <span class="sd">       returns the simplified sum</span>
@@ -724,7 +723,7 @@
     <span class="k">return</span> <span class="n">result</span></div>
 
 <div class="viewcode-block" id="factor_sum"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.factor_sum">[docs]</a><span class="k">def</span> <span class="nf">factor_sum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">radical</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">clear</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fraction</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sign</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper function for Sum simplification</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function for Sum simplification</span>
 
 <span class="sd">       if limits is specified, &quot;self&quot; is the inner part of a sum</span>
 
@@ -756,7 +755,7 @@
         <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="n">Sum</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="o">*</span><span class="n">limits</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="sum_add"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.sum_add">[docs]</a><span class="k">def</span> <span class="nf">sum_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper function for Sum simplification&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function for Sum simplification&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..concrete.summations</span> <span class="kn">import</span> <span class="n">Sum</span>
     <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Mul</span>
 
@@ -803,7 +802,7 @@
 
 
 <div class="viewcode-block" id="product_simplify"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.product_simplify">[docs]</a><span class="k">def</span> <span class="nf">product_simplify</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Main function for Product simplification&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main function for Product simplification&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..concrete.products</span> <span class="kn">import</span> <span class="n">Product</span>
 
     <span class="n">terms</span> <span class="o">=</span> <span class="n">Mul</span><span class="o">.</span><span class="n">make_args</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
@@ -837,7 +836,7 @@
 
 
 <div class="viewcode-block" id="product_mul"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.product_mul">[docs]</a><span class="k">def</span> <span class="nf">product_mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper function for Product simplification&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function for Product simplification&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..concrete.products</span> <span class="kn">import</span> <span class="n">Product</span>
 
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
@@ -864,7 +863,7 @@
 
 
 <span class="k">def</span> <span class="nf">_nthroot_solve</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">     helper function for ``nthroot``</span>
 <span class="sd">     It denests ``p**Rational(1, n)`` using its minimal polynomial</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -889,7 +888,7 @@
 
 
 <div class="viewcode-block" id="logcombine"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.logcombine">[docs]</a><span class="k">def</span> <span class="nf">logcombine</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Takes logarithms and combines them using the following rules:</span>
 
 <span class="sd">    - log(x) + log(y) == log(x*y) if both are not negative</span>
@@ -1024,7 +1023,7 @@
 
 
 <div class="viewcode-block" id="bottom_up"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.bottom_up">[docs]</a><span class="k">def</span> <span class="nf">bottom_up</span><span class="p">(</span><span class="n">rv</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nonbasic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Apply ``F`` to all expressions in an expression tree from the</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply ``F`` to all expressions in an expression tree from the</span>
 <span class="sd">    bottom up. If ``atoms`` is True, apply ``F`` even if there are no args;</span>
 <span class="sd">    if ``nonbasic`` is True, try to apply ``F`` to non-Basic objects.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1048,7 +1047,7 @@
 
 
 <div class="viewcode-block" id="besselsimp"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.besselsimp">[docs]</a><span class="k">def</span> <span class="nf">besselsimp</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Simplify bessel-type functions.</span>
 
 <span class="sd">    This routine tries to simplify bessel-type functions. Currently it only</span>
@@ -1136,7 +1135,7 @@
 
 
 <div class="viewcode-block" id="nthroot"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.nthroot">[docs]</a><span class="k">def</span> <span class="nf">nthroot</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">max_len</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">prec</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    compute a real nth-root of a sum of surds</span>
 
 <span class="sd">    Parameters</span>
@@ -1197,7 +1196,7 @@
 
 <div class="viewcode-block" id="nsimplify"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.nsimplify">[docs]</a><span class="k">def</span> <span class="nf">nsimplify</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">constants</span><span class="o">=</span><span class="p">(),</span> <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">full</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rational</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">rational_conversion</span><span class="o">=</span><span class="s1">&#39;base10&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find a simple representation for a number or, if there are free symbols or</span>
 <span class="sd">    if rational=True, then replace Floats with their Rational equivalents. If</span>
 <span class="sd">    no change is made and rational is not False then Floats will at least be</span>
@@ -1331,7 +1330,7 @@
 
 
 <span class="k">def</span> <span class="nf">_real_to_rational</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rational_conversion</span><span class="o">=</span><span class="s1">&#39;base10&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Replace all reals in expr with rationals.</span>
 
 <span class="sd">    &gt;&gt;&gt; from .. import Rational</span>
@@ -1394,7 +1393,7 @@
 
 
 <div class="viewcode-block" id="clear_coefficients"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.simplify.clear_coefficients">[docs]</a><span class="k">def</span> <span class="nf">clear_coefficients</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">rhs</span><span class="o">=</span><span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return `p, r` where `p` is the expression obtained when Rational</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return `p, r` where `p` is the expression obtained when Rational</span>
 <span class="sd">    additive and multiplicative coefficients of `expr` have been stripped</span>
 <span class="sd">    away in a naive fashion (i.e. without simplification). The operations</span>
 <span class="sd">    needed to remove the coefficients will be applied to `rhs` and returned</span>
@@ -1455,7 +1454,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1476,7 +1475,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

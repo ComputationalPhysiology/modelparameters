@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -53,7 +52,7 @@
 
 <div class="viewcode-block" id="QuotientRingElement"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.domains.quotientring.QuotientRingElement">[docs]</a><span class="nd">@public</span>
 <span class="k">class</span> <span class="nc">QuotientRingElement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class representing elements of (commutative) quotient rings.</span>
 
 <span class="sd">    Attributes:</span>
@@ -127,7 +126,7 @@
 
 
 <span class="k">class</span> <span class="nc">QuotientRing</span><span class="p">(</span><span class="n">Ring</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class representing (commutative) quotient rings.</span>
 
 <span class="sd">    You should not usually instantiate this by hand, instead use the constructor</span>
@@ -172,19 +171,19 @@
         <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_ideal</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">new</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct an element of `self` domain from `a`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct an element of `self` domain from `a`. &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
             <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
         <span class="c1"># TODO optionally disable reduction?</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_ideal</span><span class="o">.</span><span class="n">reduce_element</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns `True` if two domains are equivalent. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns `True` if two domains are equivalent. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">QuotientRing</span><span class="p">)</span> <span class="ow">and</span> \
             <span class="bp">self</span><span class="o">.</span><span class="n">ring</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">ring</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_ideal</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">base_ideal</span>
 
     <span class="k">def</span> <span class="nf">from_ZZ_python</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a Python `int` object to `dtype`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a Python `int` object to `dtype`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">K1</span><span class="p">(</span><span class="n">K1</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">))</span>
 
     <span class="n">from_QQ_python</span> <span class="o">=</span> <span class="n">from_ZZ_python</span>
@@ -205,15 +204,15 @@
             <span class="k">return</span> <span class="n">a</span>
 
     <span class="k">def</span> <span class="nf">poly_ring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a polynomial ring, i.e. `K[X]`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a polynomial ring, i.e. `K[X]`. &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;nested domains not allowed&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">frac_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a fraction field, i.e. `K(X)`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a fraction field, i.e. `K(X)`. &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;nested domains not allowed&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">revert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute a**(-1), if possible.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">I</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">ideal</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_ideal</span>
@@ -226,7 +225,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">base_ideal</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">free_module</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rank</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generate a free module of rank ``rank`` over ``self``.</span>
 
 <span class="sd">        &gt;&gt;&gt; from ...abc import x</span>
@@ -252,7 +251,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -273,7 +272,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

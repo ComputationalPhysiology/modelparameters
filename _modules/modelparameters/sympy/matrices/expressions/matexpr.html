@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -68,7 +67,7 @@
 
 
 <div class="viewcode-block" id="MatrixExpr"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.matexpr.MatrixExpr">[docs]</a><span class="k">class</span> <span class="nc">MatrixExpr</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Superclass for Matrix Expressions</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Superclass for Matrix Expressions</span>
 
 <span class="sd">    MatrixExprs represent abstract matrices, linear transformations represented</span>
 <span class="sd">    within a particular basis.</span>
@@ -245,7 +244,7 @@
         <span class="k">return</span> <span class="n">adjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixExpr.as_coeff_Mul"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.matexpr.MatrixExpr.as_coeff_Mul">[docs]</a>    <span class="k">def</span> <span class="nf">as_coeff_Mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rational</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Efficiently extract the coefficient of a product. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Efficiently extract the coefficient of a product. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="MatrixExpr.conjugate"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.matexpr.MatrixExpr.conjugate">[docs]</a>    <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -308,7 +307,7 @@
         <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Invalid index, wanted </span><span class="si">%s</span><span class="s2">[i,j]&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
 
 <div class="viewcode-block" id="MatrixExpr.as_explicit"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.matexpr.MatrixExpr.as_explicit">[docs]</a>    <span class="k">def</span> <span class="nf">as_explicit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a dense Matrix with elements represented explicitly</span>
 
 <span class="sd">        Returns an object of type ImmutableDenseMatrix.</span>
@@ -337,7 +336,7 @@
                             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)])</span></div>
 
 <div class="viewcode-block" id="MatrixExpr.as_mutable"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.matexpr.MatrixExpr.as_mutable">[docs]</a>    <span class="k">def</span> <span class="nf">as_mutable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a dense, mutable matrix with elements represented explicitly</span>
 
 <span class="sd">        Examples</span>
@@ -370,7 +369,7 @@
         <span class="k">return</span> <span class="n">a</span>
 
 <div class="viewcode-block" id="MatrixExpr.equals"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.matexpr.MatrixExpr.equals">[docs]</a>    <span class="k">def</span> <span class="nf">equals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Test elementwise equality between matrices, potentially of different</span>
 <span class="sd">        types</span>
 
@@ -427,7 +426,7 @@
 
 
 <div class="viewcode-block" id="MatrixSymbol"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.matexpr.MatrixSymbol">[docs]</a><span class="k">class</span> <span class="nc">MatrixSymbol</span><span class="p">(</span><span class="n">MatrixExpr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Symbolic representation of a Matrix object</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Symbolic representation of a Matrix object</span>
 
 <span class="sd">    Creates a SymPy Symbol to represent a Matrix. This matrix has a shape and</span>
 <span class="sd">    can be included in Matrix Expressions</span>
@@ -484,7 +483,7 @@
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Identity"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.matexpr.Identity">[docs]</a><span class="k">class</span> <span class="nc">Identity</span><span class="p">(</span><span class="n">MatrixExpr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The Matrix Identity I - multiplicative identity</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The Matrix Identity I - multiplicative identity</span>
 
 <span class="sd">    &gt;&gt;&gt; from ...matrices import Identity, MatrixSymbol</span>
 <span class="sd">    &gt;&gt;&gt; A = MatrixSymbol(&#39;A&#39;, 3, 5)</span>
@@ -535,7 +534,7 @@
 
 
 <div class="viewcode-block" id="ZeroMatrix"><a class="viewcode-back" href="../../../../../modelparameters.sympy.matrices.expressions.html#modelparameters.sympy.matrices.expressions.matexpr.ZeroMatrix">[docs]</a><span class="k">class</span> <span class="nc">ZeroMatrix</span><span class="p">(</span><span class="n">MatrixExpr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The Matrix Zero 0 - additive identity</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The Matrix Zero 0 - additive identity</span>
 
 <span class="sd">    &gt;&gt;&gt; from ... import MatrixSymbol, ZeroMatrix</span>
 <span class="sd">    &gt;&gt;&gt; A = MatrixSymbol(&#39;A&#39;, 3, 5)</span>
@@ -612,7 +611,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -633,7 +632,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

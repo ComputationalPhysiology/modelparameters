@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>modelparameters.sympy.polys.agca package &#8212; modelparameters 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="modelparameters.sympy.polys.domains package" href="modelparameters.sympy.polys.domains.html" />
@@ -47,12 +46,12 @@
           <div class="body" role="main">
             
   <section id="modelparameters-sympy-polys-agca-package">
-<h1>modelparameters.sympy.polys.agca package<a class="headerlink" href="#modelparameters-sympy-polys-agca-package" title="Permalink to this headline">¶</a></h1>
+<h1>modelparameters.sympy.polys.agca package<a class="headerlink" href="#modelparameters-sympy-polys-agca-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.polys.agca.homomorphisms">
-<span id="modelparameters-sympy-polys-agca-homomorphisms-module"></span><h2>modelparameters.sympy.polys.agca.homomorphisms module<a class="headerlink" href="#module-modelparameters.sympy.polys.agca.homomorphisms" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-polys-agca-homomorphisms-module"></span><h2>modelparameters.sympy.polys.agca.homomorphisms module<a class="headerlink" href="#module-modelparameters.sympy.polys.agca.homomorphisms" title="Permalink to this heading">¶</a></h2>
 <p>Computations with homomorphisms of modules and rings.</p>
 <p>This module implements classes for representing homomorphisms of rings and
 their modules. Instead of instantiating the classes directly, you should use
@@ -60,7 +59,7 @@ the function <code class="docutils literal notranslate"><span class="pre">homomo
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.homomorphisms.FreeModuleHomomorphism">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.homomorphisms.</span></span><span class="sig-name descname"><span class="pre">FreeModuleHomomorphism</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">codomain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/homomorphisms.html#FreeModuleHomomorphism"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.homomorphisms.FreeModuleHomomorphism" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.MatrixHomomorphism" title="modelparameters.sympy.polys.agca.homomorphisms.MatrixHomomorphism"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.agca.homomorphisms.MatrixHomomorphism</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.MatrixHomomorphism" title="modelparameters.sympy.polys.agca.homomorphisms.MatrixHomomorphism"><code class="xref py py-class docutils literal notranslate"><span class="pre">MatrixHomomorphism</span></code></a></p>
 <p>Concrete class for homomorphisms with domain a free module or a quotient
 thereof.</p>
 <p>Do not instantiate; the constructor does not check that your data is well
@@ -82,7 +81,7 @@ defined. Use the <code class="docutils literal notranslate"><span class="pre">ho
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.homomorphisms.MatrixHomomorphism">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.homomorphisms.</span></span><span class="sig-name descname"><span class="pre">MatrixHomomorphism</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">codomain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/homomorphisms.html#MatrixHomomorphism"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.homomorphisms.MatrixHomomorphism" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism" title="modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism" title="modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModuleHomomorphism</span></code></a></p>
 <p>Helper class for all homomoprhisms which are expressed via a matrix.</p>
 <p>That is, for such homomorphisms <code class="docutils literal notranslate"><span class="pre">domain</span></code> is contained in a module
 generated by finitely many elements <cite>e_1, ldots, e_n</cite>, so that the
@@ -113,7 +112,7 @@ only to unify the interface.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.homomorphisms.</span></span><span class="sig-name descname"><span class="pre">ModuleHomomorphism</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">codomain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/homomorphisms.html#ModuleHomomorphism"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Abstract base class for module homomoprhisms. Do not instantiate.</p>
 <p>Instead, use the <code class="docutils literal notranslate"><span class="pre">homomorphism</span></code> function:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">QQ</span>
@@ -389,7 +388,7 @@ inclusion:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.homomorphisms.SubModuleHomomorphism">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.homomorphisms.</span></span><span class="sig-name descname"><span class="pre">SubModuleHomomorphism</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">codomain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/homomorphisms.html#SubModuleHomomorphism"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.homomorphisms.SubModuleHomomorphism" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.MatrixHomomorphism" title="modelparameters.sympy.polys.agca.homomorphisms.MatrixHomomorphism"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.agca.homomorphisms.MatrixHomomorphism</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.MatrixHomomorphism" title="modelparameters.sympy.polys.agca.homomorphisms.MatrixHomomorphism"><code class="xref py py-class docutils literal notranslate"><span class="pre">MatrixHomomorphism</span></code></a></p>
 <p>Concrete class for homomorphism with domain a submodule of a free module
 or a quotient thereof.</p>
 <p>Do not instantiate; the constructor does not check that your data is well
@@ -470,12 +469,12 @@ is raised.</p>
 
 </section>
 <section id="module-modelparameters.sympy.polys.agca.ideals">
-<span id="modelparameters-sympy-polys-agca-ideals-module"></span><h2>modelparameters.sympy.polys.agca.ideals module<a class="headerlink" href="#module-modelparameters.sympy.polys.agca.ideals" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-polys-agca-ideals-module"></span><h2>modelparameters.sympy.polys.agca.ideals module<a class="headerlink" href="#module-modelparameters.sympy.polys.agca.ideals" title="Permalink to this heading">¶</a></h2>
 <p>Computations with ideals of polynomial rings.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.ideals.Ideal">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.ideals.</span></span><span class="sig-name descname"><span class="pre">Ideal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ring</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/ideals.html#Ideal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.ideals.Ideal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Abstract base class for ideals.</p>
 <p>Do not instantiate - use explicit constructors in the ring class instead:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">QQ</span>
@@ -674,7 +673,7 @@ form, simplify the expression a bit, or just do nothing.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.ideals.ModuleImplementedIdeal">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.ideals.</span></span><span class="sig-name descname"><span class="pre">ModuleImplementedIdeal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/ideals.html#ModuleImplementedIdeal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.ideals.ModuleImplementedIdeal" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal" title="modelparameters.sympy.polys.agca.ideals.Ideal"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.agca.ideals.Ideal</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal" title="modelparameters.sympy.polys.agca.ideals.Ideal"><code class="xref py py-class docutils literal notranslate"><span class="pre">Ideal</span></code></a></p>
 <p>Ideal implementation relying on the modules code.</p>
 <p>Attributes:</p>
 <ul class="simple">
@@ -747,7 +746,7 @@ form, simplify the expression a bit, or just do nothing.</p>
 
 </section>
 <section id="module-modelparameters.sympy.polys.agca.modules">
-<span id="modelparameters-sympy-polys-agca-modules-module"></span><h2>modelparameters.sympy.polys.agca.modules module<a class="headerlink" href="#module-modelparameters.sympy.polys.agca.modules" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-polys-agca-modules-module"></span><h2>modelparameters.sympy.polys.agca.modules module<a class="headerlink" href="#module-modelparameters.sympy.polys.agca.modules" title="Permalink to this heading">¶</a></h2>
 <p>Computations with modules over polynomial rings.</p>
 <p>This module implements various classes that encapsulate groebner basis
 computations for modules. Most of them should not be instantiated by hand.
@@ -764,7 +763,7 @@ convenience methods, for example if there are faster algorithms available.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.FreeModule">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.modules.</span></span><span class="sig-name descname"><span class="pre">FreeModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/modules.html#FreeModule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.modules.FreeModule" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.Module" title="modelparameters.sympy.polys.agca.modules.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.agca.modules.Module</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.Module" title="modelparameters.sympy.polys.agca.modules.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
 <p>Abstract base class for free modules.</p>
 <p>Additional attributes:</p>
 <ul class="simple">
@@ -804,7 +803,7 @@ not in the internal representation.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.FreeModule.dtype">
 <span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#modelparameters.sympy.polys.agca.modules.FreeModule.dtype" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModuleElement" title="modelparameters.sympy.polys.agca.modules.FreeModuleElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.agca.modules.FreeModuleElement</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModuleElement" title="modelparameters.sympy.polys.agca.modules.FreeModuleElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">FreeModuleElement</span></code></a></p>
 </dd></dl>
 
 <dl class="py method">
@@ -892,7 +891,7 @@ zero ring, then this is equivalent to the rank being zero.)</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.FreeModuleElement">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.modules.</span></span><span class="sig-name descname"><span class="pre">FreeModuleElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/modules.html#FreeModuleElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.modules.FreeModuleElement" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.ModuleElement" title="modelparameters.sympy.polys.agca.modules.ModuleElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.agca.modules.ModuleElement</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.ModuleElement" title="modelparameters.sympy.polys.agca.modules.ModuleElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModuleElement</span></code></a></p>
 <p>Element of a free module. Data stored as a tuple.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.FreeModuleElement.add">
@@ -917,7 +916,7 @@ zero ring, then this is equivalent to the rank being zero.)</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.FreeModulePolyRing">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.modules.</span></span><span class="sig-name descname"><span class="pre">FreeModulePolyRing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/modules.html#FreeModulePolyRing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.modules.FreeModulePolyRing" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModule" title="modelparameters.sympy.polys.agca.modules.FreeModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.agca.modules.FreeModule</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModule" title="modelparameters.sympy.polys.agca.modules.FreeModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">FreeModule</span></code></a></p>
 <p>Free module over a generalized polynomial ring.</p>
 <p>Do not instantiate this, use the constructor method of the ring instead:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...abc</span> <span class="kn">import</span> <span class="n">x</span>
@@ -953,7 +952,7 @@ zero ring, then this is equivalent to the rank being zero.)</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.FreeModuleQuotientRing">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.modules.</span></span><span class="sig-name descname"><span class="pre">FreeModuleQuotientRing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rank</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/modules.html#FreeModuleQuotientRing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.modules.FreeModuleQuotientRing" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModule" title="modelparameters.sympy.polys.agca.modules.FreeModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.agca.modules.FreeModule</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModule" title="modelparameters.sympy.polys.agca.modules.FreeModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">FreeModule</span></code></a></p>
 <p>Free module over a quotient ring.</p>
 <p>Do not instantiate this, use the constructor method of the ring instead:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...abc</span> <span class="kn">import</span> <span class="n">x</span>
@@ -1029,7 +1028,7 @@ and not as an R/I-module, so this makes sense.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.Module">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.modules.</span></span><span class="sig-name descname"><span class="pre">Module</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ring</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/modules.html#Module"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.modules.Module" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Abstract base class for modules.</p>
 <p>Do not instantiate - use ring explicit constructors instead:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">QQ</span>
@@ -1121,7 +1120,7 @@ and not as an R/I-module, so this makes sense.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.ModuleElement">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.modules.</span></span><span class="sig-name descname"><span class="pre">ModuleElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/modules.html#ModuleElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.modules.ModuleElement" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Base class for module element wrappers.</p>
 <p>Use this class to wrap primitive data types as module elements. It stores
 a reference to the containing module, and implements all the arithmetic
@@ -1167,14 +1166,14 @@ operators.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.ModuleOrder">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.modules.</span></span><span class="sig-name descname"><span class="pre">ModuleOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">o1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">o2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TOP</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/modules.html#ModuleOrder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.modules.ModuleOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.orderings.ProductOrder</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ProductOrder</span></code></p>
 <p>A product monomial order with a zeroth term as module index.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.QuotientModule">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.modules.</span></span><span class="sig-name descname"><span class="pre">QuotientModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ring</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">submodule</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/modules.html#QuotientModule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.modules.QuotientModule" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.Module" title="modelparameters.sympy.polys.agca.modules.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.agca.modules.Module</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.Module" title="modelparameters.sympy.polys.agca.modules.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
 <p>Class for quotient modules.</p>
 <p>Do not instantiate this directly. For subquotients, see the
 SubQuotientModule class.</p>
@@ -1202,7 +1201,7 @@ not in the internal representation.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.QuotientModule.dtype">
 <span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#modelparameters.sympy.polys.agca.modules.QuotientModule.dtype" title="Permalink to this definition">¶</a></dt>
-<dd><p>alias of <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.QuotientModuleElement" title="modelparameters.sympy.polys.agca.modules.QuotientModuleElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.agca.modules.QuotientModuleElement</span></code></a></p>
+<dd><p>alias of <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.QuotientModuleElement" title="modelparameters.sympy.polys.agca.modules.QuotientModuleElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuotientModuleElement</span></code></a></p>
 </dd></dl>
 
 <dl class="py method">
@@ -1290,7 +1289,7 @@ module.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.QuotientModuleElement">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.modules.</span></span><span class="sig-name descname"><span class="pre">QuotientModuleElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/modules.html#QuotientModuleElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.modules.QuotientModuleElement" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.ModuleElement" title="modelparameters.sympy.polys.agca.modules.ModuleElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.agca.modules.ModuleElement</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.ModuleElement" title="modelparameters.sympy.polys.agca.modules.ModuleElement"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModuleElement</span></code></a></p>
 <p>Element of a quotient module.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.QuotientModuleElement.eq">
@@ -1303,7 +1302,7 @@ module.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.SubModule">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.modules.</span></span><span class="sig-name descname"><span class="pre">SubModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/modules.html#SubModule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.modules.SubModule" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.Module" title="modelparameters.sympy.polys.agca.modules.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.agca.modules.Module</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.Module" title="modelparameters.sympy.polys.agca.modules.Module"><code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></a></p>
 <p>Base class for submodules.</p>
 <p>Attributes:</p>
 <ul class="simple">
@@ -1589,7 +1588,7 @@ submodule:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.SubModulePolyRing">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.modules.</span></span><span class="sig-name descname"><span class="pre">SubModulePolyRing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'lex'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TOP</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/modules.html#SubModulePolyRing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.modules.SubModulePolyRing" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule" title="modelparameters.sympy.polys.agca.modules.SubModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.agca.modules.SubModule</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule" title="modelparameters.sympy.polys.agca.modules.SubModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">SubModule</span></code></a></p>
 <p>Submodule of a free module over a generalized polynomial ring.</p>
 <p>Do not instantiate this, use the constructor method of FreeModule instead:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...abc</span> <span class="kn">import</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
@@ -1616,7 +1615,7 @@ as none, the default Mora normal form is used (which is not unique!).</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.SubModuleQuotientRing">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.modules.</span></span><span class="sig-name descname"><span class="pre">SubModuleQuotientRing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/modules.html#SubModuleQuotientRing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.modules.SubModuleQuotientRing" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule" title="modelparameters.sympy.polys.agca.modules.SubModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.agca.modules.SubModule</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule" title="modelparameters.sympy.polys.agca.modules.SubModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">SubModule</span></code></a></p>
 <p>Class for submodules of free modules over quotient rings.</p>
 <p>Do not instantiate this. Instead use the submodule methods.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">...abc</span> <span class="kn">import</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
@@ -1639,7 +1638,7 @@ as none, the default Mora normal form is used (which is not unique!).</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.polys.agca.modules.SubQuotientModule">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.polys.agca.modules.</span></span><span class="sig-name descname"><span class="pre">SubQuotientModule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gens</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">opts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/polys/agca/modules.html#SubQuotientModule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.polys.agca.modules.SubQuotientModule" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule" title="modelparameters.sympy.polys.agca.modules.SubModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.polys.agca.modules.SubModule</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule" title="modelparameters.sympy.polys.agca.modules.SubModule"><code class="xref py py-class docutils literal notranslate"><span class="pre">SubModule</span></code></a></p>
 <p>Submodule of a quotient module.</p>
 <p>Equivalently, quotient module of a submodule.</p>
 <p>Do not instantiate this, instead use the submodule or quotient_module
@@ -1693,7 +1692,7 @@ constructing methods:</p>
 
 </section>
 <section id="module-modelparameters.sympy.polys.agca">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.polys.agca" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.polys.agca" title="Permalink to this heading">¶</a></h2>
 <p>Module for algebraic geometry and commutative algebra.</p>
 </section>
 </section>
@@ -1710,9 +1709,150 @@ constructing methods:</p>
     <ul>
 <li><a class="reference internal" href="#">modelparameters.sympy.polys.agca package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.polys.agca.homomorphisms">modelparameters.sympy.polys.agca.homomorphisms module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.polys.agca.ideals">modelparameters.sympy.polys.agca.ideals module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.polys.agca.modules">modelparameters.sympy.polys.agca.modules module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.polys.agca.homomorphisms">modelparameters.sympy.polys.agca.homomorphisms module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.FreeModuleHomomorphism"><code class="docutils literal notranslate"><span class="pre">FreeModuleHomomorphism</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.MatrixHomomorphism"><code class="docutils literal notranslate"><span class="pre">MatrixHomomorphism</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism"><code class="docutils literal notranslate"><span class="pre">ModuleHomomorphism</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism.image"><code class="docutils literal notranslate"><span class="pre">ModuleHomomorphism.image()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism.is_injective"><code class="docutils literal notranslate"><span class="pre">ModuleHomomorphism.is_injective()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism.is_isomorphism"><code class="docutils literal notranslate"><span class="pre">ModuleHomomorphism.is_isomorphism()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism.is_surjective"><code class="docutils literal notranslate"><span class="pre">ModuleHomomorphism.is_surjective()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism.is_zero"><code class="docutils literal notranslate"><span class="pre">ModuleHomomorphism.is_zero()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism.kernel"><code class="docutils literal notranslate"><span class="pre">ModuleHomomorphism.kernel()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism.quotient_codomain"><code class="docutils literal notranslate"><span class="pre">ModuleHomomorphism.quotient_codomain()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism.quotient_domain"><code class="docutils literal notranslate"><span class="pre">ModuleHomomorphism.quotient_domain()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism.restrict_codomain"><code class="docutils literal notranslate"><span class="pre">ModuleHomomorphism.restrict_codomain()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.ModuleHomomorphism.restrict_domain"><code class="docutils literal notranslate"><span class="pre">ModuleHomomorphism.restrict_domain()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.SubModuleHomomorphism"><code class="docutils literal notranslate"><span class="pre">SubModuleHomomorphism</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.homomorphisms.homomorphism"><code class="docutils literal notranslate"><span class="pre">homomorphism()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.polys.agca.ideals">modelparameters.sympy.polys.agca.ideals module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal"><code class="docutils literal notranslate"><span class="pre">Ideal</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.contains"><code class="docutils literal notranslate"><span class="pre">Ideal.contains()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.depth"><code class="docutils literal notranslate"><span class="pre">Ideal.depth()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.height"><code class="docutils literal notranslate"><span class="pre">Ideal.height()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.intersect"><code class="docutils literal notranslate"><span class="pre">Ideal.intersect()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.is_maximal"><code class="docutils literal notranslate"><span class="pre">Ideal.is_maximal()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.is_primary"><code class="docutils literal notranslate"><span class="pre">Ideal.is_primary()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.is_prime"><code class="docutils literal notranslate"><span class="pre">Ideal.is_prime()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.is_principal"><code class="docutils literal notranslate"><span class="pre">Ideal.is_principal()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.is_radical"><code class="docutils literal notranslate"><span class="pre">Ideal.is_radical()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.is_whole_ring"><code class="docutils literal notranslate"><span class="pre">Ideal.is_whole_ring()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.is_zero"><code class="docutils literal notranslate"><span class="pre">Ideal.is_zero()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.product"><code class="docutils literal notranslate"><span class="pre">Ideal.product()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.quotient"><code class="docutils literal notranslate"><span class="pre">Ideal.quotient()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.radical"><code class="docutils literal notranslate"><span class="pre">Ideal.radical()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.reduce_element"><code class="docutils literal notranslate"><span class="pre">Ideal.reduce_element()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.saturate"><code class="docutils literal notranslate"><span class="pre">Ideal.saturate()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.subset"><code class="docutils literal notranslate"><span class="pre">Ideal.subset()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.Ideal.union"><code class="docutils literal notranslate"><span class="pre">Ideal.union()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.ModuleImplementedIdeal"><code class="docutils literal notranslate"><span class="pre">ModuleImplementedIdeal</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.ModuleImplementedIdeal.gens"><code class="docutils literal notranslate"><span class="pre">ModuleImplementedIdeal.gens</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.ModuleImplementedIdeal.in_terms_of_generators"><code class="docutils literal notranslate"><span class="pre">ModuleImplementedIdeal.in_terms_of_generators()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.ModuleImplementedIdeal.is_whole_ring"><code class="docutils literal notranslate"><span class="pre">ModuleImplementedIdeal.is_whole_ring()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.ModuleImplementedIdeal.is_zero"><code class="docutils literal notranslate"><span class="pre">ModuleImplementedIdeal.is_zero()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.ideals.ModuleImplementedIdeal.reduce_element"><code class="docutils literal notranslate"><span class="pre">ModuleImplementedIdeal.reduce_element()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.polys.agca.modules">modelparameters.sympy.polys.agca.modules module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModule"><code class="docutils literal notranslate"><span class="pre">FreeModule</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModule.basis"><code class="docutils literal notranslate"><span class="pre">FreeModule.basis()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModule.convert"><code class="docutils literal notranslate"><span class="pre">FreeModule.convert()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModule.dtype"><code class="docutils literal notranslate"><span class="pre">FreeModule.dtype</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModule.identity_hom"><code class="docutils literal notranslate"><span class="pre">FreeModule.identity_hom()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModule.is_submodule"><code class="docutils literal notranslate"><span class="pre">FreeModule.is_submodule()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModule.is_zero"><code class="docutils literal notranslate"><span class="pre">FreeModule.is_zero()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModule.multiply_ideal"><code class="docutils literal notranslate"><span class="pre">FreeModule.multiply_ideal()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModule.quotient_module"><code class="docutils literal notranslate"><span class="pre">FreeModule.quotient_module()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModuleElement"><code class="docutils literal notranslate"><span class="pre">FreeModuleElement</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModuleElement.add"><code class="docutils literal notranslate"><span class="pre">FreeModuleElement.add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModuleElement.div"><code class="docutils literal notranslate"><span class="pre">FreeModuleElement.div()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModuleElement.mul"><code class="docutils literal notranslate"><span class="pre">FreeModuleElement.mul()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModulePolyRing"><code class="docutils literal notranslate"><span class="pre">FreeModulePolyRing</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModulePolyRing.submodule"><code class="docutils literal notranslate"><span class="pre">FreeModulePolyRing.submodule()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModuleQuotientRing"><code class="docutils literal notranslate"><span class="pre">FreeModuleQuotientRing</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModuleQuotientRing.lift"><code class="docutils literal notranslate"><span class="pre">FreeModuleQuotientRing.lift()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModuleQuotientRing.submodule"><code class="docutils literal notranslate"><span class="pre">FreeModuleQuotientRing.submodule()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.FreeModuleQuotientRing.unlift"><code class="docutils literal notranslate"><span class="pre">FreeModuleQuotientRing.unlift()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.Module"><code class="docutils literal notranslate"><span class="pre">Module</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.Module.contains"><code class="docutils literal notranslate"><span class="pre">Module.contains()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.Module.convert"><code class="docutils literal notranslate"><span class="pre">Module.convert()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.Module.identity_hom"><code class="docutils literal notranslate"><span class="pre">Module.identity_hom()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.Module.is_submodule"><code class="docutils literal notranslate"><span class="pre">Module.is_submodule()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.Module.is_zero"><code class="docutils literal notranslate"><span class="pre">Module.is_zero()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.Module.multiply_ideal"><code class="docutils literal notranslate"><span class="pre">Module.multiply_ideal()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.Module.quotient_module"><code class="docutils literal notranslate"><span class="pre">Module.quotient_module()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.Module.submodule"><code class="docutils literal notranslate"><span class="pre">Module.submodule()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.Module.subset"><code class="docutils literal notranslate"><span class="pre">Module.subset()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.ModuleElement"><code class="docutils literal notranslate"><span class="pre">ModuleElement</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.ModuleElement.add"><code class="docutils literal notranslate"><span class="pre">ModuleElement.add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.ModuleElement.div"><code class="docutils literal notranslate"><span class="pre">ModuleElement.div()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.ModuleElement.eq"><code class="docutils literal notranslate"><span class="pre">ModuleElement.eq()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.ModuleElement.mul"><code class="docutils literal notranslate"><span class="pre">ModuleElement.mul()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.ModuleOrder"><code class="docutils literal notranslate"><span class="pre">ModuleOrder</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.QuotientModule"><code class="docutils literal notranslate"><span class="pre">QuotientModule</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.QuotientModule.convert"><code class="docutils literal notranslate"><span class="pre">QuotientModule.convert()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.QuotientModule.dtype"><code class="docutils literal notranslate"><span class="pre">QuotientModule.dtype</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.QuotientModule.identity_hom"><code class="docutils literal notranslate"><span class="pre">QuotientModule.identity_hom()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.QuotientModule.is_submodule"><code class="docutils literal notranslate"><span class="pre">QuotientModule.is_submodule()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.QuotientModule.is_zero"><code class="docutils literal notranslate"><span class="pre">QuotientModule.is_zero()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.QuotientModule.quotient_hom"><code class="docutils literal notranslate"><span class="pre">QuotientModule.quotient_hom()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.QuotientModule.submodule"><code class="docutils literal notranslate"><span class="pre">QuotientModule.submodule()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.QuotientModuleElement"><code class="docutils literal notranslate"><span class="pre">QuotientModuleElement</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.QuotientModuleElement.eq"><code class="docutils literal notranslate"><span class="pre">QuotientModuleElement.eq()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule"><code class="docutils literal notranslate"><span class="pre">SubModule</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule.convert"><code class="docutils literal notranslate"><span class="pre">SubModule.convert()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule.identity_hom"><code class="docutils literal notranslate"><span class="pre">SubModule.identity_hom()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule.in_terms_of_generators"><code class="docutils literal notranslate"><span class="pre">SubModule.in_terms_of_generators()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule.inclusion_hom"><code class="docutils literal notranslate"><span class="pre">SubModule.inclusion_hom()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule.intersect"><code class="docutils literal notranslate"><span class="pre">SubModule.intersect()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule.is_full_module"><code class="docutils literal notranslate"><span class="pre">SubModule.is_full_module()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule.is_submodule"><code class="docutils literal notranslate"><span class="pre">SubModule.is_submodule()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule.is_zero"><code class="docutils literal notranslate"><span class="pre">SubModule.is_zero()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule.module_quotient"><code class="docutils literal notranslate"><span class="pre">SubModule.module_quotient()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule.multiply_ideal"><code class="docutils literal notranslate"><span class="pre">SubModule.multiply_ideal()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule.quotient_module"><code class="docutils literal notranslate"><span class="pre">SubModule.quotient_module()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule.reduce_element"><code class="docutils literal notranslate"><span class="pre">SubModule.reduce_element()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule.submodule"><code class="docutils literal notranslate"><span class="pre">SubModule.submodule()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule.syzygy_module"><code class="docutils literal notranslate"><span class="pre">SubModule.syzygy_module()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModule.union"><code class="docutils literal notranslate"><span class="pre">SubModule.union()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModulePolyRing"><code class="docutils literal notranslate"><span class="pre">SubModulePolyRing</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModulePolyRing.reduce_element"><code class="docutils literal notranslate"><span class="pre">SubModulePolyRing.reduce_element()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubModuleQuotientRing"><code class="docutils literal notranslate"><span class="pre">SubModuleQuotientRing</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubQuotientModule"><code class="docutils literal notranslate"><span class="pre">SubQuotientModule</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubQuotientModule.is_full_module"><code class="docutils literal notranslate"><span class="pre">SubQuotientModule.is_full_module()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.polys.agca.modules.SubQuotientModule.quotient_hom"><code class="docutils literal notranslate"><span class="pre">SubQuotientModule.quotient_hom()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.polys.agca">Module contents</a></li>
 </ul>
 </li>
@@ -1745,7 +1885,7 @@ constructing methods:</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1774,7 +1914,7 @@ constructing methods:</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -51,7 +50,7 @@
 
 
 <div class="viewcode-block" id="Eijk"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.tensor_functions.Eijk">[docs]</a><span class="k">def</span> <span class="nf">Eijk</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represent the Levi-Civita symbol.</span>
 
 <span class="sd">    This is just compatibility wrapper to ``LeviCivita()``.</span>
@@ -66,7 +65,7 @@
 
 
 <div class="viewcode-block" id="eval_levicivita"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.tensor_functions.eval_levicivita">[docs]</a><span class="k">def</span> <span class="nf">eval_levicivita</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluate Levi-Civita symbol.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluate Levi-Civita symbol.&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">factorial</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">prod</span><span class="p">(</span>
@@ -76,7 +75,7 @@
 
 
 <div class="viewcode-block" id="LeviCivita"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.tensor_functions.LeviCivita">[docs]</a><span class="k">class</span> <span class="nc">LeviCivita</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represent the Levi-Civita symbol.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent the Levi-Civita symbol.</span>
 
 <span class="sd">    For even permutations of indices it returns 1, for odd permutations -1, and</span>
 <span class="sd">    for everything else (a repeated index) it returns 0.</span>
@@ -120,7 +119,7 @@
 
 
 <div class="viewcode-block" id="KroneckerDelta"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.tensor_functions.KroneckerDelta">[docs]</a><span class="k">class</span> <span class="nc">KroneckerDelta</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The discrete, or Kronecker, delta function.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The discrete, or Kronecker, delta function.</span>
 
 <span class="sd">    A function that takes in two integers `i` and `j`. It returns `0` if `i` and `j` are</span>
 <span class="sd">    not equal or it returns `1` if `i` and `j` are equal.</span>
@@ -172,7 +171,7 @@
 
 <div class="viewcode-block" id="KroneckerDelta.eval"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.tensor_functions.KroneckerDelta.eval">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Evaluates the discrete delta function.</span>
 
 <span class="sd">        Examples</span>
@@ -219,7 +218,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_above_fermi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        True if Delta can be non-zero above fermi</span>
 
 <span class="sd">        Examples</span>
@@ -253,7 +252,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_below_fermi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        True if Delta can be non-zero below fermi</span>
 
 <span class="sd">        Examples</span>
@@ -286,7 +285,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_only_above_fermi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        True if Delta is restricted to above fermi</span>
 
 <span class="sd">        Examples</span>
@@ -319,7 +318,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_only_below_fermi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        True if Delta is restricted to below fermi</span>
 
 <span class="sd">        Examples</span>
@@ -352,7 +351,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">indices_contain_equal_information</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if indices are either both above or below fermi.</span>
 
 <span class="sd">        Examples</span>
@@ -384,7 +383,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">preferred_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the index which is preferred to keep in the final expression.</span>
 
 <span class="sd">        The preferred index is the index with more information regarding fermi</span>
@@ -420,7 +419,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">killable_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the index which is preferred to substitute in the final</span>
 <span class="sd">        expression.</span>
 
@@ -456,7 +455,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">_get_preferred_index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the index which is preferred to keep in the final expression.</span>
 
 <span class="sd">        The preferred index is the index with more information regarding fermi</span>
@@ -503,7 +502,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -524,7 +523,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

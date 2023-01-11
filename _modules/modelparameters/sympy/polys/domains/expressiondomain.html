@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -50,12 +49,12 @@
 
 <div class="viewcode-block" id="ExpressionDomain"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain">[docs]</a><span class="nd">@public</span>
 <span class="k">class</span> <span class="nc">ExpressionDomain</span><span class="p">(</span><span class="n">Field</span><span class="p">,</span> <span class="n">CharacteristicZero</span><span class="p">,</span> <span class="n">SimpleDomain</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A class for arbitrary expressions. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class for arbitrary expressions. &quot;&quot;&quot;</span>
 
     <span class="n">is_SymbolicDomain</span> <span class="o">=</span> <span class="n">is_EX</span> <span class="o">=</span> <span class="kc">True</span>
 
 <div class="viewcode-block" id="ExpressionDomain.Expression"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.Expression">[docs]</a>    <span class="k">class</span> <span class="nc">Expression</span><span class="p">(</span><span class="n">PicklableWithSlots</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;An arbitrary expression. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;An arbitrary expression. &quot;&quot;&quot;</span>
 
         <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ex&#39;</span><span class="p">]</span>
 
@@ -186,75 +185,75 @@
         <span class="k">pass</span>
 
 <div class="viewcode-block" id="ExpressionDomain.to_sympy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.to_sympy">[docs]</a>    <span class="k">def</span> <span class="nf">to_sympy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert ``a`` to a SymPy object. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert ``a`` to a SymPy object. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">as_expr</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.from_sympy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.from_sympy">[docs]</a>    <span class="k">def</span> <span class="nf">from_sympy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert SymPy&#39;s expression to ``dtype``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert SymPy&#39;s expression to ``dtype``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.from_ZZ_python"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.from_ZZ_python">[docs]</a>    <span class="k">def</span> <span class="nf">from_ZZ_python</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a Python ``int`` object to ``dtype``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a Python ``int`` object to ``dtype``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">K1</span><span class="p">(</span><span class="n">K0</span><span class="o">.</span><span class="n">to_sympy</span><span class="p">(</span><span class="n">a</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.from_QQ_python"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.from_QQ_python">[docs]</a>    <span class="k">def</span> <span class="nf">from_QQ_python</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a Python ``Fraction`` object to ``dtype``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a Python ``Fraction`` object to ``dtype``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">K1</span><span class="p">(</span><span class="n">K0</span><span class="o">.</span><span class="n">to_sympy</span><span class="p">(</span><span class="n">a</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.from_ZZ_gmpy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.from_ZZ_gmpy">[docs]</a>    <span class="k">def</span> <span class="nf">from_ZZ_gmpy</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a GMPY ``mpz`` object to ``dtype``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a GMPY ``mpz`` object to ``dtype``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">K1</span><span class="p">(</span><span class="n">K0</span><span class="o">.</span><span class="n">to_sympy</span><span class="p">(</span><span class="n">a</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.from_QQ_gmpy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.from_QQ_gmpy">[docs]</a>    <span class="k">def</span> <span class="nf">from_QQ_gmpy</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a GMPY ``mpq`` object to ``dtype``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a GMPY ``mpq`` object to ``dtype``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">K1</span><span class="p">(</span><span class="n">K0</span><span class="o">.</span><span class="n">to_sympy</span><span class="p">(</span><span class="n">a</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.from_RealField"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.from_RealField">[docs]</a>    <span class="k">def</span> <span class="nf">from_RealField</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a mpmath ``mpf`` object to ``dtype``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a mpmath ``mpf`` object to ``dtype``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">K1</span><span class="p">(</span><span class="n">K0</span><span class="o">.</span><span class="n">to_sympy</span><span class="p">(</span><span class="n">a</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.from_PolynomialRing"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.from_PolynomialRing">[docs]</a>    <span class="k">def</span> <span class="nf">from_PolynomialRing</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a ``DMP`` object to ``dtype``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a ``DMP`` object to ``dtype``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">K1</span><span class="p">(</span><span class="n">K0</span><span class="o">.</span><span class="n">to_sympy</span><span class="p">(</span><span class="n">a</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.from_FractionField"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.from_FractionField">[docs]</a>    <span class="k">def</span> <span class="nf">from_FractionField</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a ``DMF`` object to ``dtype``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a ``DMF`` object to ``dtype``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">K1</span><span class="p">(</span><span class="n">K0</span><span class="o">.</span><span class="n">to_sympy</span><span class="p">(</span><span class="n">a</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.from_ExpressionDomain"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.from_ExpressionDomain">[docs]</a>    <span class="k">def</span> <span class="nf">from_ExpressionDomain</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a ``EX`` object to ``dtype``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a ``EX`` object to ``dtype``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.get_ring"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.get_ring">[docs]</a>    <span class="k">def</span> <span class="nf">get_ring</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a ring associated with ``self``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a ring associated with ``self``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span>  <span class="c1"># XXX: EX is not a ring but we don&#39;t have much choice here.</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.get_field"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.get_field">[docs]</a>    <span class="k">def</span> <span class="nf">get_field</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a field associated with ``self``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a field associated with ``self``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.is_positive"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.is_positive">[docs]</a>    <span class="k">def</span> <span class="nf">is_positive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns True if ``a`` is positive. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if ``a`` is positive. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">ex</span><span class="o">.</span><span class="n">as_coeff_mul</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">is_positive</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.is_negative"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.is_negative">[docs]</a>    <span class="k">def</span> <span class="nf">is_negative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns True if ``a`` is negative. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if ``a`` is negative. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">ex</span><span class="o">.</span><span class="n">as_coeff_mul</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">is_negative</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.is_nonpositive"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.is_nonpositive">[docs]</a>    <span class="k">def</span> <span class="nf">is_nonpositive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns True if ``a`` is non-positive. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if ``a`` is non-positive. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">ex</span><span class="o">.</span><span class="n">as_coeff_mul</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">is_nonpositive</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.is_nonnegative"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.is_nonnegative">[docs]</a>    <span class="k">def</span> <span class="nf">is_nonnegative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns True if ``a`` is non-negative. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if ``a`` is non-negative. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">ex</span><span class="o">.</span><span class="n">as_coeff_mul</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">is_nonnegative</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.numer"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.numer">[docs]</a>    <span class="k">def</span> <span class="nf">numer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns numerator of ``a``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns numerator of ``a``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">numer</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.denom"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.denom">[docs]</a>    <span class="k">def</span> <span class="nf">denom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns denominator of ``a``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns denominator of ``a``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">denom</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ExpressionDomain.gcd"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.ExpressionDomain.gcd">[docs]</a>    <span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
@@ -279,7 +278,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -300,7 +299,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

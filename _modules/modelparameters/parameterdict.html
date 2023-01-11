@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/nature.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
@@ -148,7 +147,7 @@
 
 
 <span class="k">def</span> <span class="nf">_par_cmp</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="n">obj2</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Original par_cmp</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span>
@@ -166,7 +165,7 @@
 
 
 <div class="viewcode-block" id="ParameterDict"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.ParameterDict">[docs]</a><span class="k">class</span> <span class="nc">ParameterDict</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A dictionary with attribute-style access,</span>
 <span class="sd">    that maps attribute access to the real dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -183,7 +182,7 @@
         <span class="k">return</span> <span class="nb">dict</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">SubParameterDict</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Initialize a ParameterDict</span>
 
 <span class="sd">        Arguments</span>
@@ -233,7 +232,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a nice representation of the ParameterDict</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_data</span><span class="p">()</span>
@@ -313,7 +312,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_members</span>
 
 <div class="viewcode-block" id="ParameterDict.iterparams"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.ParameterDict.iterparams">[docs]</a>    <span class="k">def</span> <span class="nf">iterparams</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">recurse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Iterate over all Param</span>
 
 <span class="sd">        Arguments</span>
@@ -330,7 +329,7 @@
                 <span class="k">yield</span> <span class="n">value</span></div>
 
 <div class="viewcode-block" id="ParameterDict.iterparameterdicts"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.ParameterDict.iterparameterdicts">[docs]</a>    <span class="k">def</span> <span class="nf">iterparameterdicts</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Iterate over all ParameterDicts</span>
 
 <span class="sd">        Arguments</span>
@@ -345,7 +344,7 @@
 
     <span class="c1"># A nice string to use &#39;\xe2\x88\x88&#39;= \in and &#39;\xe2\x88\x9e&#39;= \infty</span>
 <div class="viewcode-block" id="ParameterDict.format_data"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.ParameterDict.format_data">[docs]</a>    <span class="k">def</span> <span class="nf">format_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make a recursive indented pretty-print string of</span>
 <span class="sd">        self and parameter subsets.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -395,7 +394,7 @@
         <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ParameterDict.copy"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.ParameterDict.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">to_dict</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Make a deep copy of self, including recursive copying of parameter</span>
 <span class="sd">        subsets.</span>
 
@@ -430,7 +429,7 @@
         <span class="k">return</span> <span class="n">ch</span></div>
 
 <div class="viewcode-block" id="ParameterDict.update"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.ParameterDict.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A recursive update that handles parameter subsets</span>
 <span class="sd">        correctly unlike dict.update.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -451,7 +450,7 @@
                 <span class="bp">self</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">other_value</span></div>
 
 <div class="viewcode-block" id="ParameterDict.parse_args"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.ParameterDict.parse_args">[docs]</a>    <span class="k">def</span> <span class="nf">parse_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">usage</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parse a list of options. use sys.argv as default</span>
 
 <span class="sd">        Arguments</span>
@@ -601,7 +600,7 @@
             <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="ParameterDict.optstr"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameterdict.ParameterDict.optstr">[docs]</a>    <span class="k">def</span> <span class="nf">optstr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a string with option set</span>
 
 <span class="sd">        An option string can be sent to a script using a parameter dict</span>
@@ -656,7 +655,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -677,7 +676,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

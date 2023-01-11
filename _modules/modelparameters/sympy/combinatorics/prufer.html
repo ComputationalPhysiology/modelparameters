@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -46,7 +45,7 @@
 
 
 <div class="viewcode-block" id="Prufer"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.prufer.Prufer">[docs]</a><span class="k">class</span> <span class="nc">Prufer</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Prufer correspondence is an algorithm that describes the</span>
 <span class="sd">    bijection between labeled trees and the Prufer code. A Prufer</span>
 <span class="sd">    code of a labeled tree is unique up to isomorphism and has</span>
@@ -68,7 +67,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">prufer_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns Prufer sequence for the Prufer object.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns Prufer sequence for the Prufer object.</span>
 
 <span class="sd">        This sequence is found by removing the highest numbered vertex,</span>
 <span class="sd">        recording the node it was attached to, and continuing until only</span>
@@ -95,7 +94,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">tree_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the tree representation of the Prufer object.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the tree representation of the Prufer object.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -118,7 +117,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">nodes</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the number of nodes in the tree.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the number of nodes in the tree.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -134,7 +133,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rank</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the rank of the Prufer sequence.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the rank of the Prufer sequence.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -160,7 +159,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the number of possible trees of this Prufer object.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the number of possible trees of this Prufer object.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -179,7 +178,7 @@
 
 <div class="viewcode-block" id="Prufer.to_prufer"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.prufer.Prufer.to_prufer">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">to_prufer</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the Prufer sequence for a tree given as a list of edges where</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the Prufer sequence for a tree given as a list of edges where</span>
 <span class="sd">        ``n`` is the number of nodes in the tree.</span>
 
 <span class="sd">        Examples</span>
@@ -230,7 +229,7 @@
 
 <div class="viewcode-block" id="Prufer.to_tree"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.prufer.Prufer.to_tree">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">to_tree</span><span class="p">(</span><span class="n">prufer</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the tree (as a list of edges) of the given Prufer sequence.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the tree (as a list of edges) of the given Prufer sequence.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -275,7 +274,7 @@
 
 <div class="viewcode-block" id="Prufer.edges"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.prufer.Prufer.edges">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">edges</span><span class="p">(</span><span class="o">*</span><span class="n">runs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a list of edges and the number of nodes from the given runs</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a list of edges and the number of nodes from the given runs</span>
 <span class="sd">        that connect nodes in an integer-labelled tree.</span>
 
 <span class="sd">        All node numbers will be shifted so that the minimum node is 0. It is</span>
@@ -329,7 +328,7 @@
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">rv</span><span class="p">),</span> <span class="n">nmax</span> <span class="o">+</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="Prufer.prufer_rank"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.prufer.Prufer.prufer_rank">[docs]</a>    <span class="k">def</span> <span class="nf">prufer_rank</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Computes the rank of a Prufer sequence.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the rank of a Prufer sequence.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -354,7 +353,7 @@
 
 <div class="viewcode-block" id="Prufer.unrank"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.prufer.Prufer.unrank">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">unrank</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Finds the unranked Prufer sequence.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Finds the unranked Prufer sequence.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -372,7 +371,7 @@
         <span class="k">return</span> <span class="n">Prufer</span><span class="p">([</span><span class="n">L</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">L</span><span class="p">))])</span></div>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw_args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The constructor for the Prufer object.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The constructor for the Prufer object.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -425,7 +424,7 @@
         <span class="k">return</span> <span class="n">ret_obj</span>
 
 <div class="viewcode-block" id="Prufer.next"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.prufer.Prufer.next">[docs]</a>    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generates the Prufer sequence that is delta beyond the current one.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates the Prufer sequence that is delta beyond the current one.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -447,7 +446,7 @@
         <span class="k">return</span> <span class="n">Prufer</span><span class="o">.</span><span class="n">unrank</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">+</span> <span class="n">delta</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Prufer.prev"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.prufer.Prufer.prev">[docs]</a>    <span class="k">def</span> <span class="nf">prev</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generates the Prufer sequence that is -delta before the current one.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates the Prufer sequence that is -delta before the current one.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -486,7 +485,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -507,7 +506,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -171,7 +170,7 @@
 
 
 <span class="k">def</span> <span class="nf">_indent</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Add the given number of space characters to the beginning of</span>
 <span class="sd">    every non-blank line in ``s``, and return the result.</span>
 <span class="sd">    If the string ``s`` is Unicode, it is encoded using the stdout</span>
@@ -191,7 +190,7 @@
 
 
 <span class="k">def</span> <span class="nf">_report_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">example</span><span class="p">,</span> <span class="n">got</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Report that the given example failed.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_checker</span><span class="o">.</span><span class="n">output_difference</span><span class="p">(</span><span class="n">example</span><span class="p">,</span> <span class="n">got</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">optionflags</span><span class="p">)</span>
@@ -204,7 +203,7 @@
 
 
 <div class="viewcode-block" id="convert_to_native_paths"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.convert_to_native_paths">[docs]</a><span class="k">def</span> <span class="nf">convert_to_native_paths</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a list of &#39;/&#39; separated paths into a list of</span>
 <span class="sd">    native (os.sep separated) paths and converts to lowercase</span>
 <span class="sd">    if the system is case insensitive.</span>
@@ -223,7 +222,7 @@
 
 
 <div class="viewcode-block" id="get_sympy_dir"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.get_sympy_dir">[docs]</a><span class="k">def</span> <span class="nf">get_sympy_dir</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the root sympy directory and set the global value</span>
 <span class="sd">    indicating whether the system is case sensitive or not.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -264,7 +263,7 @@
     <span class="n">module</span><span class="o">=</span><span class="s2">&quot;sympy.utilities.runtests&quot;</span><span class="p">,</span>
     <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Run a function in a Python subprocess with hash randomization enabled.</span>
 
 <span class="sd">    If hash randomization is not supported by the version of Python given, it</span>
@@ -364,7 +363,7 @@
     <span class="n">examples_args</span><span class="o">=</span><span class="p">(),</span>
     <span class="n">examples_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Run all tests.</span>
 
 <span class="sd">    Right now, this runs the regular tests (bin/test), the doctests</span>
@@ -443,7 +442,7 @@
 
 
 <div class="viewcode-block" id="test"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.test">[docs]</a><span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="o">*</span><span class="n">paths</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Run tests in the specified test_*.py files.</span>
 
 <span class="sd">    Tests in a particular test_*.py file are run if any of the given strings</span>
@@ -612,7 +611,7 @@
 
 
 <span class="k">def</span> <span class="nf">_test</span><span class="p">(</span><span class="o">*</span><span class="n">paths</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Internal function that actually runs the tests.</span>
 
 <span class="sd">    All keyword arguments from ``test()`` are passed to this function except for</span>
@@ -703,7 +702,7 @@
 
 
 <div class="viewcode-block" id="doctest"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.doctest">[docs]</a><span class="k">def</span> <span class="nf">doctest</span><span class="p">(</span><span class="o">*</span><span class="n">paths</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Runs doctests in all \*.py files in the sympy directory which match</span>
 <span class="sd">    any of the given strings in ``paths`` or all tests if paths=[].</span>
 
@@ -778,7 +777,7 @@
 
 
 <span class="k">def</span> <span class="nf">_doctest</span><span class="p">(</span><span class="o">*</span><span class="n">paths</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Internal function that actually runs the doctests.</span>
 
 <span class="sd">    All keyword arguments from ``doctest()`` are passed to this function</span>
@@ -985,7 +984,7 @@
 
 
 <div class="viewcode-block" id="split_list"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.split_list">[docs]</a><span class="k">def</span> <span class="nf">split_list</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Splits a list into part a of b</span>
 
 <span class="sd">    split should be a string of the form &#39;a/b&#39;. For instance, &#39;1/3&#39; would give</span>
@@ -1022,7 +1021,7 @@
     <span class="n">density</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">/</span> <span class="n">tot</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">density</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">density_inv</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Interpolate the inverse to the cumulative</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Interpolate the inverse to the cumulative</span>
 <span class="sd">        distribution function given by density&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="mi">0</span>
@@ -1064,7 +1063,7 @@
     <span class="n">encoding</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
 
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Test examples in the given file.  Return (#failures, #tests).</span>
 
 <span class="sd">    Optional keyword arg ``module_relative`` specifies how filenames</span>
@@ -1222,7 +1221,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_slow_threshold</span> <span class="o">=</span> <span class="mi">10</span>
 
 <div class="viewcode-block" id="SymPyTests.test"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.SymPyTests.test">[docs]</a>    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">slow</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">enhance_asserts</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Runs the tests returning True if all tests pass, otherwise False.</span>
 
 <span class="sd">        If sort=False run tests in random order.</span>
@@ -1452,7 +1451,7 @@
         <span class="n">signal</span><span class="o">.</span><span class="n">alarm</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Disable the alarm</span>
 
 <div class="viewcode-block" id="SymPyTests.matches"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.SymPyTests.matches">[docs]</a>    <span class="k">def</span> <span class="nf">matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Does the keyword expression self._kw match &quot;x&quot;? Returns True/False.</span>
 
 <span class="sd">        Always returns True if self._kw is &quot;&quot;.</span>
@@ -1465,7 +1464,7 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="SymPyTests.get_test_files"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.SymPyTests.get_test_files">[docs]</a>    <span class="k">def</span> <span class="nf">get_test_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">dir</span><span class="p">,</span> <span class="n">pat</span><span class="o">=</span><span class="s2">&quot;test_*.py&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the list of test_*.py (default) files at or below directory</span>
 <span class="sd">        ``dir`` relative to the sympy home directory.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1489,7 +1488,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_testfiles</span> <span class="o">=</span> <span class="p">[]</span>
 
 <div class="viewcode-block" id="SymPyDocTests.test"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.SymPyDocTests.test">[docs]</a>    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Runs the tests and returns True if all tests pass, otherwise False.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_reporter</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
@@ -1592,7 +1591,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_reporter</span><span class="o">.</span><span class="n">leaving_filename</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="SymPyDocTests.get_test_files"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.SymPyDocTests.get_test_files">[docs]</a>    <span class="k">def</span> <span class="nf">get_test_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">dir</span><span class="p">,</span> <span class="n">pat</span><span class="o">=</span><span class="s2">&quot;*.py&quot;</span><span class="p">,</span> <span class="n">init_only</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the list of \*.py files (default) from which docstrings</span>
 <span class="sd">        will be tested which are at or below directory ``dir``. By default,</span>
 <span class="sd">        only those that have an __init__.py in their parent directory</span>
@@ -1600,7 +1599,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">def</span> <span class="nf">importable</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Checks if given pathname x is an importable module by checking for</span>
 <span class="sd">            __init__.py file.</span>
 
@@ -1631,7 +1630,7 @@
         <span class="k">return</span> <span class="p">[</span><span class="n">sys_normcase</span><span class="p">(</span><span class="n">gi</span><span class="p">)</span> <span class="k">for</span> <span class="n">gi</span> <span class="ow">in</span> <span class="n">g</span><span class="p">]</span></div>
 
     <span class="k">def</span> <span class="nf">_process_dependencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deps</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns ``False`` if some dependencies are not met and the test should be</span>
 <span class="sd">        skipped otherwise returns ``True``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1728,7 +1727,7 @@
 
 
 <div class="viewcode-block" id="SymPyDocTestFinder"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.SymPyDocTestFinder">[docs]</a><span class="k">class</span> <span class="nc">SymPyDocTestFinder</span><span class="p">(</span><span class="n">DocTestFinder</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A class used to extract the DocTests that are relevant to a given</span>
 <span class="sd">    object, from its docstring and the docstrings of its contained</span>
 <span class="sd">    objects.  Doctests can currently be extracted from the following</span>
@@ -1743,7 +1742,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tests</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">source_lines</span><span class="p">,</span> <span class="n">globs</span><span class="p">,</span> <span class="n">seen</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Find tests for the given object and any contained objects, and</span>
 <span class="sd">        add them to ``tests``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1846,7 +1845,7 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">_find</span><span class="p">(</span><span class="n">tests</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">valname</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">source_lines</span><span class="p">,</span> <span class="n">globs</span><span class="p">,</span> <span class="n">seen</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">module</span><span class="p">,</span> <span class="n">globs</span><span class="p">,</span> <span class="n">source_lines</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a DocTest for the given object, if it defines a docstring;</span>
 <span class="sd">        otherwise, return None.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1923,7 +1922,7 @@
 
 
 <div class="viewcode-block" id="SymPyDocTestRunner"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.SymPyDocTestRunner">[docs]</a><span class="k">class</span> <span class="nc">SymPyDocTestRunner</span><span class="p">(</span><span class="n">DocTestRunner</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A class used to run DocTest test cases, and accumulate statistics.</span>
 <span class="sd">    The ``run`` method is used to process a single DocTest case.  It</span>
 <span class="sd">    returns a tuple ``(f, t)``, where ``t`` is the number of test cases</span>
@@ -1936,7 +1935,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="SymPyDocTestRunner.run"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.SymPyDocTestRunner.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test</span><span class="p">,</span> <span class="n">compileflags</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">clear_globs</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Run the examples in ``test``, and display the results using the</span>
 <span class="sd">        writer function ``out``.</span>
 
@@ -2002,7 +2001,7 @@
 
 
 <div class="viewcode-block" id="SymPyOutputChecker"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.SymPyOutputChecker">[docs]</a><span class="k">class</span> <span class="nc">SymPyOutputChecker</span><span class="p">(</span><span class="n">pdoctest</span><span class="o">.</span><span class="n">OutputChecker</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compared to the OutputChecker from the stdlib our OutputChecker class</span>
 <span class="sd">    supports numerical comparison of floats occuring in the output of the</span>
 <span class="sd">    doctest examples</span>
@@ -2029,7 +2028,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">num_want_rgx</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">|</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fbeg</span><span class="p">,</span> <span class="n">fmidend</span><span class="p">))</span>
 
 <div class="viewcode-block" id="SymPyOutputChecker.check_output"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.SymPyOutputChecker.check_output">[docs]</a>    <span class="k">def</span> <span class="nf">check_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">want</span><span class="p">,</span> <span class="n">got</span><span class="p">,</span> <span class="n">optionflags</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return True iff the actual output from an example (`got`)</span>
 <span class="sd">        matches the expected output (`want`).  These strings are</span>
 <span class="sd">        always considered to match if they are identical; but</span>
@@ -2101,7 +2100,7 @@
 
 
 <div class="viewcode-block" id="Reporter"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.Reporter">[docs]</a><span class="k">class</span> <span class="nc">Reporter</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Parent class for all reporters.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -2109,7 +2108,7 @@
 
 
 <div class="viewcode-block" id="PyTestReporter"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.PyTestReporter">[docs]</a><span class="k">class</span> <span class="nc">PyTestReporter</span><span class="p">(</span><span class="n">Reporter</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Py.test like reporter. Should produce output identical to py.test.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -2215,7 +2214,7 @@
         <span class="k">return</span> <span class="n">width</span>
 
 <div class="viewcode-block" id="PyTestReporter.write"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.runtests.PyTestReporter.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">force_colors</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints a text on the screen.</span>
 
 <span class="sd">        It uses sys.stdout.write(), so no readline library is necessary.</span>
@@ -2375,7 +2374,7 @@
 
         <span class="k">def</span> <span class="nf">add_text</span><span class="p">(</span><span class="n">mytext</span><span class="p">):</span>
             <span class="k">global</span> <span class="n">text</span><span class="p">,</span> <span class="n">linelen</span>
-            <span class="sd">&quot;&quot;&quot;Break new text if too long.&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Break new text if too long.&quot;&quot;&quot;</span>
             <span class="k">if</span> <span class="n">linelen</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">mytext</span><span class="p">)</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">terminal_width</span><span class="p">:</span>
                 <span class="n">text</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
                 <span class="n">linelen</span> <span class="o">=</span> <span class="mi">0</span>
@@ -2553,7 +2552,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2574,7 +2573,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

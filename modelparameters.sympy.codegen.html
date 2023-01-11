@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>modelparameters.sympy.codegen package &#8212; modelparameters 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="modelparameters.sympy.combinatorics package" href="modelparameters.sympy.combinatorics.html" />
@@ -46,17 +45,17 @@
           <div class="body" role="main">
             
   <section id="modelparameters-sympy-codegen-package">
-<h1>modelparameters.sympy.codegen package<a class="headerlink" href="#modelparameters-sympy-codegen-package" title="Permalink to this headline">¶</a></h1>
+<h1>modelparameters.sympy.codegen package<a class="headerlink" href="#modelparameters-sympy-codegen-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.codegen.ast">
-<span id="modelparameters-sympy-codegen-ast-module"></span><h2>modelparameters.sympy.codegen.ast module<a class="headerlink" href="#module-modelparameters.sympy.codegen.ast" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-codegen-ast-module"></span><h2>modelparameters.sympy.codegen.ast module<a class="headerlink" href="#module-modelparameters.sympy.codegen.ast" title="Permalink to this heading">¶</a></h2>
 <p>Types used to represent a full function/module as an Abstract Syntax Tree.</p>
 <p>Most types are small, and are merely used as tokens in the AST. A tree diagram
 has been included below to illustrate the relationships between the AST types.</p>
 <section id="ast-type-tree">
-<h3>AST Type Tree<a class="headerlink" href="#ast-type-tree" title="Permalink to this headline">¶</a></h3>
+<h3>AST Type Tree<a class="headerlink" href="#ast-type-tree" title="Permalink to this heading">¶</a></h3>
 <dl class="simple">
 <dt><em>Basic</em></dt><dd><p><a href="#id1"><span class="problematic" id="id2">|</span></a>—&gt;Assignment
 |             <a href="#id3"><span class="problematic" id="id4">|</span></a>—&gt;AugmentedAssignment
@@ -71,10 +70,11 @@ has been included below to illustrate the relationships between the AST types.</
 <a href="#id17"><span class="problematic" id="id18">|</span></a>—&gt;For</p>
 </dd>
 </dl>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ast.AddAugmentedAssignment">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ast.</span></span><span class="sig-name descname"><span class="pre">AddAugmentedAssignment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lhs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ast.html#AddAugmentedAssignment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ast.AddAugmentedAssignment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ast.AugmentedAssignment" title="modelparameters.sympy.codegen.ast.AugmentedAssignment"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.codegen.ast.AugmentedAssignment</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ast.AugmentedAssignment" title="modelparameters.sympy.codegen.ast.AugmentedAssignment"><code class="xref py py-class docutils literal notranslate"><span class="pre">AugmentedAssignment</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ast.AddAugmentedAssignment.default_assumptions">
 <span class="sig-name descname"><span class="pre">default_assumptions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#modelparameters.sympy.codegen.ast.AddAugmentedAssignment.default_assumptions" title="Permalink to this definition">¶</a></dt>
@@ -85,10 +85,10 @@ has been included below to illustrate the relationships between the AST types.</
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ast.Assignment">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ast.</span></span><span class="sig-name descname"><span class="pre">Assignment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lhs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ast.html#Assignment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ast.Assignment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.relational.Relational" title="modelparameters.sympy.core.relational.Relational"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.relational.Relational</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.relational.Relational" title="modelparameters.sympy.core.relational.Relational"><code class="xref py py-class docutils literal notranslate"><span class="pre">Relational</span></code></a></p>
 <p>Represents variable assignment for code generation.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lhs</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><em>Expr</em></a>) – Sympy object representing the lhs of the expression. These should be
 singular objects, such as one would use in writing code. Notable types
@@ -132,7 +132,7 @@ the dimensions will not align.</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ast.AugmentedAssignment">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ast.</span></span><span class="sig-name descname"><span class="pre">AugmentedAssignment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lhs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ast.html#AugmentedAssignment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ast.AugmentedAssignment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ast.Assignment" title="modelparameters.sympy.codegen.ast.Assignment"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.codegen.ast.Assignment</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ast.Assignment" title="modelparameters.sympy.codegen.ast.Assignment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Assignment</span></code></a></p>
 <p>Base class for augmented assignments</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ast.AugmentedAssignment.default_assumptions">
@@ -158,7 +158,7 @@ errors defaults to ‘strict’.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ast.CodeBlock">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ast.</span></span><span class="sig-name descname"><span class="pre">CodeBlock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ast.html#CodeBlock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ast.CodeBlock" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.basic.Basic</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basic</span></code></a></p>
 <p>Represents a block of code</p>
 <p>For now only assignments are supported. This restriction will be lifted in
 the future.</p>
@@ -247,7 +247,7 @@ CodeBlock can error when variables are used before they are assigned.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ast.DivAugmentedAssignment">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ast.</span></span><span class="sig-name descname"><span class="pre">DivAugmentedAssignment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lhs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ast.html#DivAugmentedAssignment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ast.DivAugmentedAssignment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ast.AugmentedAssignment" title="modelparameters.sympy.codegen.ast.AugmentedAssignment"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.codegen.ast.AugmentedAssignment</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ast.AugmentedAssignment" title="modelparameters.sympy.codegen.ast.AugmentedAssignment"><code class="xref py py-class docutils literal notranslate"><span class="pre">AugmentedAssignment</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ast.DivAugmentedAssignment.default_assumptions">
 <span class="sig-name descname"><span class="pre">default_assumptions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#modelparameters.sympy.codegen.ast.DivAugmentedAssignment.default_assumptions" title="Permalink to this definition">¶</a></dt>
@@ -258,7 +258,7 @@ CodeBlock can error when variables are used before they are assigned.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ast.For">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ast.</span></span><span class="sig-name descname"><span class="pre">For</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ast.html#For"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ast.For" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.basic.Basic</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basic</span></code></a></p>
 <p>Represents a ‘for-loop’ in the code.</p>
 <dl class="simple">
 <dt>Expressions are of the form:</dt><dd><dl class="simple">
@@ -268,7 +268,7 @@ CodeBlock can error when variables are used before they are assigned.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>target</strong> (<em>symbol</em>) – </p></li>
 <li><p><strong>iter</strong> (<em>iterable</em>) – </p></li>
@@ -318,7 +318,7 @@ Target must be a symbol.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ast.ModAugmentedAssignment">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ast.</span></span><span class="sig-name descname"><span class="pre">ModAugmentedAssignment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lhs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ast.html#ModAugmentedAssignment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ast.ModAugmentedAssignment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ast.AugmentedAssignment" title="modelparameters.sympy.codegen.ast.AugmentedAssignment"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.codegen.ast.AugmentedAssignment</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ast.AugmentedAssignment" title="modelparameters.sympy.codegen.ast.AugmentedAssignment"><code class="xref py py-class docutils literal notranslate"><span class="pre">AugmentedAssignment</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ast.ModAugmentedAssignment.default_assumptions">
 <span class="sig-name descname"><span class="pre">default_assumptions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#modelparameters.sympy.codegen.ast.ModAugmentedAssignment.default_assumptions" title="Permalink to this definition">¶</a></dt>
@@ -329,7 +329,7 @@ Target must be a symbol.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ast.MulAugmentedAssignment">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ast.</span></span><span class="sig-name descname"><span class="pre">MulAugmentedAssignment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lhs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ast.html#MulAugmentedAssignment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ast.MulAugmentedAssignment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ast.AugmentedAssignment" title="modelparameters.sympy.codegen.ast.AugmentedAssignment"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.codegen.ast.AugmentedAssignment</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ast.AugmentedAssignment" title="modelparameters.sympy.codegen.ast.AugmentedAssignment"><code class="xref py py-class docutils literal notranslate"><span class="pre">AugmentedAssignment</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ast.MulAugmentedAssignment.default_assumptions">
 <span class="sig-name descname"><span class="pre">default_assumptions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#modelparameters.sympy.codegen.ast.MulAugmentedAssignment.default_assumptions" title="Permalink to this definition">¶</a></dt>
@@ -340,7 +340,7 @@ Target must be a symbol.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ast.SubAugmentedAssignment">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ast.</span></span><span class="sig-name descname"><span class="pre">SubAugmentedAssignment</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lhs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rhs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ast.html#SubAugmentedAssignment"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ast.SubAugmentedAssignment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ast.AugmentedAssignment" title="modelparameters.sympy.codegen.ast.AugmentedAssignment"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.codegen.ast.AugmentedAssignment</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ast.AugmentedAssignment" title="modelparameters.sympy.codegen.ast.AugmentedAssignment"><code class="xref py py-class docutils literal notranslate"><span class="pre">AugmentedAssignment</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ast.SubAugmentedAssignment.default_assumptions">
 <span class="sig-name descname"><span class="pre">default_assumptions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#modelparameters.sympy.codegen.ast.SubAugmentedAssignment.default_assumptions" title="Permalink to this definition">¶</a></dt>
@@ -356,13 +356,13 @@ Target must be a symbol.</p>
 convenience function. You can also use the AugmentedAssignment classes
 directly, like AddAugmentedAssignment(x, y).</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>lhs</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><em>Expr</em></a>) – Sympy object representing the lhs of the expression. These should be
 singular objects, such as one would use in writing code. Notable types
 include Symbol, MatrixSymbol, MatrixElement, and Indexed. Types that
 subclass these types are also supported.</p></li>
-<li><p><strong>op</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Operator (+, -, /, <a href="#id19"><span class="problematic" id="id20">*</span></a>, %).</p></li>
+<li><p><strong>op</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – Operator (+, -, /, <a href="#id19"><span class="problematic" id="id20">*</span></a>, %).</p></li>
 <li><p><strong>rhs</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><em>Expr</em></a>) – Sympy object representing the rhs of the expression. This can be any
 type, provided its shape corresponds to that of the lhs. For example,
 a Matrix type can be assigned to MatrixSymbol, but not to Symbol, as
@@ -381,16 +381,15 @@ the dimensions will not align.</p></li>
 </dd></dl>
 
 </section>
-</section>
 <section id="module-modelparameters.sympy.codegen.cfunctions">
-<span id="modelparameters-sympy-codegen-cfunctions-module"></span><h2>modelparameters.sympy.codegen.cfunctions module<a class="headerlink" href="#module-modelparameters.sympy.codegen.cfunctions" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-codegen-cfunctions-module"></span><h2>modelparameters.sympy.codegen.cfunctions module<a class="headerlink" href="#module-modelparameters.sympy.codegen.cfunctions" title="Permalink to this heading">¶</a></h2>
 <p>Functions with corresponding implementations in C.</p>
 <p>The functions defined in this module allows the user to express functions such as <code class="docutils literal notranslate"><span class="pre">expm1</span></code>
 as a SymPy function for symbolic manipulation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.cfunctions.Cbrt">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.cfunctions.</span></span><span class="sig-name descname"><span class="pre">Cbrt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/cfunctions.html#Cbrt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.cfunctions.Cbrt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.function.Function</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a></p>
 <p>Represents the cube root function.</p>
 <p>The reason why one would use <code class="docutils literal notranslate"><span class="pre">Cbrt(x)</span></code> over <code class="docutils literal notranslate"><span class="pre">cbrt(x)</span></code>
 is that the latter is internally represented as <code class="docutils literal notranslate"><span class="pre">Pow(x,</span> <span class="pre">Rational(1,</span> <span class="pre">3))</span></code> which
@@ -429,7 +428,7 @@ may not be what one wants when doing code-generation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.cfunctions.Sqrt">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.cfunctions.</span></span><span class="sig-name descname"><span class="pre">Sqrt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/cfunctions.html#Sqrt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.cfunctions.Sqrt" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.function.Function</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a></p>
 <p>Represents the square root function.</p>
 <p>The reason why one would use <code class="docutils literal notranslate"><span class="pre">Sqrt(x)</span></code> over <code class="docutils literal notranslate"><span class="pre">sqrt(x)</span></code>
 is that the latter is internally represented as <code class="docutils literal notranslate"><span class="pre">Pow(x,</span> <span class="pre">S.Half)</span></code> which
@@ -468,7 +467,7 @@ may not be what one wants when doing code-generation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.cfunctions.exp2">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.cfunctions.</span></span><span class="sig-name descname"><span class="pre">exp2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/cfunctions.html#exp2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.cfunctions.exp2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.function.Function</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a></p>
 <p>Represents the exponential function with base two.</p>
 <p>The benefit of using <code class="docutils literal notranslate"><span class="pre">exp2(x)</span></code> over <code class="docutils literal notranslate"><span class="pre">2**x</span></code>
 is that the latter is not as efficient under finite precision
@@ -499,6 +498,8 @@ arithmetic.</p>
 instantiated and it should return either some simplified instance
 (possible of some other class), or if the class cls should be
 unmodified, return None.</p>
+<section id="examples-of-eval-for-the-function-sign">
+<h3>Examples of eval() for the function “sign”<a class="headerlink" href="#examples-of-eval-for-the-function-sign" title="Permalink to this heading">¶</a></h3>
 <p>&#64;classmethod
 def eval(cls, arg):</p>
 <blockquote>
@@ -518,6 +519,7 @@ if coeff is not S.One:</p>
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>
+</section>
 </dd></dl>
 
 <dl class="py method">
@@ -536,7 +538,7 @@ if coeff is not S.One:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.cfunctions.expm1">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.cfunctions.</span></span><span class="sig-name descname"><span class="pre">expm1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/cfunctions.html#expm1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.cfunctions.expm1" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.function.Function</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a></p>
 <p>Represents the exponential function minus one.</p>
 <p>The benefit of using <code class="docutils literal notranslate"><span class="pre">expm1(x)</span></code> over <code class="docutils literal notranslate"><span class="pre">exp(x)</span> <span class="pre">-</span> <span class="pre">1</span></code>
 is that the latter is prone to cancellation under finite precision
@@ -570,6 +572,8 @@ arithmetic when x is close to zero.</p>
 instantiated and it should return either some simplified instance
 (possible of some other class), or if the class cls should be
 unmodified, return None.</p>
+<section id="id21">
+<h3>Examples of eval() for the function “sign”<a class="headerlink" href="#id21" title="Permalink to this heading">¶</a></h3>
 <p>&#64;classmethod
 def eval(cls, arg):</p>
 <blockquote>
@@ -589,6 +593,7 @@ if coeff is not S.One:</p>
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>
+</section>
 </dd></dl>
 
 <dl class="py method">
@@ -607,7 +612,7 @@ if coeff is not S.One:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.cfunctions.fma">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.cfunctions.</span></span><span class="sig-name descname"><span class="pre">fma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/cfunctions.html#fma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.cfunctions.fma" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.function.Function</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a></p>
 <p>Represents “fused multiply add”.</p>
 <p>The benefit of using <code class="docutils literal notranslate"><span class="pre">fma(x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code> over <code class="docutils literal notranslate"><span class="pre">x*y</span> <span class="pre">+</span> <span class="pre">z</span></code>
 is that, under finite precision arithmetic, the former is
@@ -640,7 +645,7 @@ supported by special instructions on some CPUs.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.cfunctions.hypot">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.cfunctions.</span></span><span class="sig-name descname"><span class="pre">hypot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/cfunctions.html#hypot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.cfunctions.hypot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.function.Function</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a></p>
 <p>Represents the hypotenuse function.</p>
 <p>The hypotenuse function is provided by e.g. the math library
 in the C99 standard, hence one may want to represent the function
@@ -677,7 +682,7 @@ symbolically when doing code-generation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.cfunctions.log10">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.cfunctions.</span></span><span class="sig-name descname"><span class="pre">log10</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/cfunctions.html#log10"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.cfunctions.log10" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.function.Function</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a></p>
 <p>Represents the logarithm function with base ten.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..abc</span> <span class="kn">import</span> <span class="n">x</span>
@@ -705,6 +710,8 @@ symbolically when doing code-generation.</p>
 instantiated and it should return either some simplified instance
 (possible of some other class), or if the class cls should be
 unmodified, return None.</p>
+<section id="id22">
+<h3>Examples of eval() for the function “sign”<a class="headerlink" href="#id22" title="Permalink to this heading">¶</a></h3>
 <p>&#64;classmethod
 def eval(cls, arg):</p>
 <blockquote>
@@ -724,6 +731,7 @@ if coeff is not S.One:</p>
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>
+</section>
 </dd></dl>
 
 <dl class="py method">
@@ -742,7 +750,7 @@ if coeff is not S.One:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.cfunctions.log1p">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.cfunctions.</span></span><span class="sig-name descname"><span class="pre">log1p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/cfunctions.html#log1p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.cfunctions.log1p" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.function.Function</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a></p>
 <p>Represents the natural logarithm of a number plus one.</p>
 <p>The benefit of using <code class="docutils literal notranslate"><span class="pre">log1p(x)</span></code> over <code class="docutils literal notranslate"><span class="pre">log(x</span> <span class="pre">+</span> <span class="pre">1)</span></code>
 is that the latter is prone to cancellation under finite precision
@@ -776,6 +784,8 @@ arithmetic when x is close to zero.</p>
 instantiated and it should return either some simplified instance
 (possible of some other class), or if the class cls should be
 unmodified, return None.</p>
+<section id="id23">
+<h3>Examples of eval() for the function “sign”<a class="headerlink" href="#id23" title="Permalink to this heading">¶</a></h3>
 <p>&#64;classmethod
 def eval(cls, arg):</p>
 <blockquote>
@@ -795,6 +805,7 @@ if coeff is not S.One:</p>
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>
+</section>
 </dd></dl>
 
 <dl class="py method">
@@ -813,7 +824,7 @@ if coeff is not S.One:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.cfunctions.log2">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.cfunctions.</span></span><span class="sig-name descname"><span class="pre">log2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/cfunctions.html#log2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.cfunctions.log2" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.function.Function</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a></p>
 <p>Represents the logarithm function with base two.</p>
 <p>The benefit of using <code class="docutils literal notranslate"><span class="pre">log2(x)</span></code> over <code class="docutils literal notranslate"><span class="pre">log(x)/log(2)</span></code>
 is that the latter is not as efficient under finite precision
@@ -844,6 +855,8 @@ arithmetic.</p>
 instantiated and it should return either some simplified instance
 (possible of some other class), or if the class cls should be
 unmodified, return None.</p>
+<section id="id24">
+<h3>Examples of eval() for the function “sign”<a class="headerlink" href="#id24" title="Permalink to this heading">¶</a></h3>
 <p>&#64;classmethod
 def eval(cls, arg):</p>
 <blockquote>
@@ -863,6 +876,7 @@ if coeff is not S.One:</p>
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>
+</section>
 </dd></dl>
 
 <dl class="py method">
@@ -880,14 +894,14 @@ if coeff is not S.One:</p>
 
 </section>
 <section id="module-modelparameters.sympy.codegen.ffunctions">
-<span id="modelparameters-sympy-codegen-ffunctions-module"></span><h2>modelparameters.sympy.codegen.ffunctions module<a class="headerlink" href="#module-modelparameters.sympy.codegen.ffunctions" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-codegen-ffunctions-module"></span><h2>modelparameters.sympy.codegen.ffunctions module<a class="headerlink" href="#module-modelparameters.sympy.codegen.ffunctions" title="Permalink to this heading">¶</a></h2>
 <p>Functions with corresponding implementations in Fortran.</p>
 <p>The functions defined in this module allows the user to express functions such as <code class="docutils literal notranslate"><span class="pre">dsign</span></code>
 as a SymPy function for symbolic manipulation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.F95Function">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ffunctions.</span></span><span class="sig-name descname"><span class="pre">F95Function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ffunctions.html#F95Function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ffunctions.F95Function" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.FFunction" title="modelparameters.sympy.codegen.ffunctions.FFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.codegen.ffunctions.FFunction</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.FFunction" title="modelparameters.sympy.codegen.ffunctions.FFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFunction</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.F95Function.default_assumptions">
 <span class="sig-name descname"><span class="pre">default_assumptions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#modelparameters.sympy.codegen.ffunctions.F95Function.default_assumptions" title="Permalink to this definition">¶</a></dt>
@@ -898,7 +912,7 @@ as a SymPy function for symbolic manipulation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.FFunction">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ffunctions.</span></span><span class="sig-name descname"><span class="pre">FFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ffunctions.html#FFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ffunctions.FFunction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.function.Function</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function" title="modelparameters.sympy.core.function.Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">Function</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.FFunction.default_assumptions">
 <span class="sig-name descname"><span class="pre">default_assumptions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#modelparameters.sympy.codegen.ffunctions.FFunction.default_assumptions" title="Permalink to this definition">¶</a></dt>
@@ -909,7 +923,7 @@ as a SymPy function for symbolic manipulation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.cmplx">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ffunctions.</span></span><span class="sig-name descname"><span class="pre">cmplx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ffunctions.html#cmplx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ffunctions.cmplx" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.FFunction" title="modelparameters.sympy.codegen.ffunctions.FFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.codegen.ffunctions.FFunction</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.FFunction" title="modelparameters.sympy.codegen.ffunctions.FFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFunction</span></code></a></p>
 <p>Fortran complex conversion function.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.cmplx.default_assumptions">
@@ -926,7 +940,7 @@ as a SymPy function for symbolic manipulation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.dsign">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ffunctions.</span></span><span class="sig-name descname"><span class="pre">dsign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ffunctions.html#dsign"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ffunctions.dsign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.FFunction" title="modelparameters.sympy.codegen.ffunctions.FFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.codegen.ffunctions.FFunction</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.FFunction" title="modelparameters.sympy.codegen.ffunctions.FFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFunction</span></code></a></p>
 <p>Fortran sign intrinsic with for double precision arguments.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.dsign.default_assumptions">
@@ -943,7 +957,7 @@ as a SymPy function for symbolic manipulation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.isign">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ffunctions.</span></span><span class="sig-name descname"><span class="pre">isign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ffunctions.html#isign"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ffunctions.isign" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.FFunction" title="modelparameters.sympy.codegen.ffunctions.FFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.codegen.ffunctions.FFunction</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.FFunction" title="modelparameters.sympy.codegen.ffunctions.FFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFunction</span></code></a></p>
 <p>Fortran sign intrinsic with for integer arguments.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.isign.default_assumptions">
@@ -960,7 +974,7 @@ as a SymPy function for symbolic manipulation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.kind">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ffunctions.</span></span><span class="sig-name descname"><span class="pre">kind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ffunctions.html#kind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ffunctions.kind" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.FFunction" title="modelparameters.sympy.codegen.ffunctions.FFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.codegen.ffunctions.FFunction</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.FFunction" title="modelparameters.sympy.codegen.ffunctions.FFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">FFunction</span></code></a></p>
 <p>Fortran kind function.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.kind.default_assumptions">
@@ -977,7 +991,7 @@ as a SymPy function for symbolic manipulation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.literal_dp">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ffunctions.</span></span><span class="sig-name descname"><span class="pre">literal_dp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ffunctions.html#literal_dp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ffunctions.literal_dp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.codegen.ffunctions._literal</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_literal</span></code></p>
 <p>Fortran double precision real literal</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.literal_dp.default_assumptions">
@@ -1024,7 +1038,7 @@ as a SymPy function for symbolic manipulation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.literal_sp">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ffunctions.</span></span><span class="sig-name descname"><span class="pre">literal_sp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">precision</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ffunctions.html#literal_sp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ffunctions.literal_sp" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.codegen.ffunctions._literal</span></code></p>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">_literal</span></code></p>
 <p>Fortran single precision real literal</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.literal_sp.default_assumptions">
@@ -1071,7 +1085,7 @@ as a SymPy function for symbolic manipulation.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.merge">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.codegen.ffunctions.</span></span><span class="sig-name descname"><span class="pre">merge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/codegen/ffunctions.html#merge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.codegen.ffunctions.merge" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.F95Function" title="modelparameters.sympy.codegen.ffunctions.F95Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.codegen.ffunctions.F95Function</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.F95Function" title="modelparameters.sympy.codegen.ffunctions.F95Function"><code class="xref py py-class docutils literal notranslate"><span class="pre">F95Function</span></code></a></p>
 <p>Fortran merge function</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.codegen.ffunctions.merge.default_assumptions">
@@ -1087,7 +1101,7 @@ as a SymPy function for symbolic manipulation.</p>
 
 </section>
 <section id="module-modelparameters.sympy.codegen">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.codegen" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.codegen" title="Permalink to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -1105,10 +1119,172 @@ as a SymPy function for symbolic manipulation.</p>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.codegen.ast">modelparameters.sympy.codegen.ast module</a><ul>
 <li><a class="reference internal" href="#ast-type-tree">AST Type Tree</a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.AddAugmentedAssignment"><code class="docutils literal notranslate"><span class="pre">AddAugmentedAssignment</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.AddAugmentedAssignment.default_assumptions"><code class="docutils literal notranslate"><span class="pre">AddAugmentedAssignment.default_assumptions</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.codegen.cfunctions">modelparameters.sympy.codegen.cfunctions module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.codegen.ffunctions">modelparameters.sympy.codegen.ffunctions module</a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.Assignment"><code class="docutils literal notranslate"><span class="pre">Assignment</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.Assignment.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Assignment.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.Assignment.rel_op"><code class="docutils literal notranslate"><span class="pre">Assignment.rel_op</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.AugmentedAssignment"><code class="docutils literal notranslate"><span class="pre">AugmentedAssignment</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.AugmentedAssignment.default_assumptions"><code class="docutils literal notranslate"><span class="pre">AugmentedAssignment.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.AugmentedAssignment.rel_op"><code class="docutils literal notranslate"><span class="pre">AugmentedAssignment.rel_op</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.CodeBlock"><code class="docutils literal notranslate"><span class="pre">CodeBlock</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.CodeBlock.cse"><code class="docutils literal notranslate"><span class="pre">CodeBlock.cse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.CodeBlock.default_assumptions"><code class="docutils literal notranslate"><span class="pre">CodeBlock.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.CodeBlock.topological_sort"><code class="docutils literal notranslate"><span class="pre">CodeBlock.topological_sort()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.DivAugmentedAssignment"><code class="docutils literal notranslate"><span class="pre">DivAugmentedAssignment</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.DivAugmentedAssignment.default_assumptions"><code class="docutils literal notranslate"><span class="pre">DivAugmentedAssignment.default_assumptions</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.For"><code class="docutils literal notranslate"><span class="pre">For</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.For.body"><code class="docutils literal notranslate"><span class="pre">For.body</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.For.default_assumptions"><code class="docutils literal notranslate"><span class="pre">For.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.For.iterable"><code class="docutils literal notranslate"><span class="pre">For.iterable</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.For.target"><code class="docutils literal notranslate"><span class="pre">For.target</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.ModAugmentedAssignment"><code class="docutils literal notranslate"><span class="pre">ModAugmentedAssignment</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.ModAugmentedAssignment.default_assumptions"><code class="docutils literal notranslate"><span class="pre">ModAugmentedAssignment.default_assumptions</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.MulAugmentedAssignment"><code class="docutils literal notranslate"><span class="pre">MulAugmentedAssignment</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.MulAugmentedAssignment.default_assumptions"><code class="docutils literal notranslate"><span class="pre">MulAugmentedAssignment.default_assumptions</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.SubAugmentedAssignment"><code class="docutils literal notranslate"><span class="pre">SubAugmentedAssignment</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.SubAugmentedAssignment.default_assumptions"><code class="docutils literal notranslate"><span class="pre">SubAugmentedAssignment.default_assumptions</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ast.aug_assign"><code class="docutils literal notranslate"><span class="pre">aug_assign()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.codegen.cfunctions">modelparameters.sympy.codegen.cfunctions module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.Cbrt"><code class="docutils literal notranslate"><span class="pre">Cbrt</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.Cbrt.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Cbrt.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.Cbrt.fdiff"><code class="docutils literal notranslate"><span class="pre">Cbrt.fdiff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.Cbrt.nargs"><code class="docutils literal notranslate"><span class="pre">Cbrt.nargs</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.Sqrt"><code class="docutils literal notranslate"><span class="pre">Sqrt</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.Sqrt.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Sqrt.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.Sqrt.fdiff"><code class="docutils literal notranslate"><span class="pre">Sqrt.fdiff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.Sqrt.nargs"><code class="docutils literal notranslate"><span class="pre">Sqrt.nargs</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.exp2"><code class="docutils literal notranslate"><span class="pre">exp2</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.exp2.default_assumptions"><code class="docutils literal notranslate"><span class="pre">exp2.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.exp2.eval"><code class="docutils literal notranslate"><span class="pre">exp2.eval()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.exp2.fdiff"><code class="docutils literal notranslate"><span class="pre">exp2.fdiff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.exp2.nargs"><code class="docutils literal notranslate"><span class="pre">exp2.nargs</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.expm1"><code class="docutils literal notranslate"><span class="pre">expm1</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.expm1.default_assumptions"><code class="docutils literal notranslate"><span class="pre">expm1.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.expm1.eval"><code class="docutils literal notranslate"><span class="pre">expm1.eval()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.expm1.fdiff"><code class="docutils literal notranslate"><span class="pre">expm1.fdiff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.expm1.nargs"><code class="docutils literal notranslate"><span class="pre">expm1.nargs</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.fma"><code class="docutils literal notranslate"><span class="pre">fma</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.fma.default_assumptions"><code class="docutils literal notranslate"><span class="pre">fma.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.fma.fdiff"><code class="docutils literal notranslate"><span class="pre">fma.fdiff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.fma.nargs"><code class="docutils literal notranslate"><span class="pre">fma.nargs</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.hypot"><code class="docutils literal notranslate"><span class="pre">hypot</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.hypot.default_assumptions"><code class="docutils literal notranslate"><span class="pre">hypot.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.hypot.fdiff"><code class="docutils literal notranslate"><span class="pre">hypot.fdiff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.hypot.nargs"><code class="docutils literal notranslate"><span class="pre">hypot.nargs</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.log10"><code class="docutils literal notranslate"><span class="pre">log10</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.log10.default_assumptions"><code class="docutils literal notranslate"><span class="pre">log10.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.log10.eval"><code class="docutils literal notranslate"><span class="pre">log10.eval()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.log10.fdiff"><code class="docutils literal notranslate"><span class="pre">log10.fdiff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.log10.nargs"><code class="docutils literal notranslate"><span class="pre">log10.nargs</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.log1p"><code class="docutils literal notranslate"><span class="pre">log1p</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.log1p.default_assumptions"><code class="docutils literal notranslate"><span class="pre">log1p.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.log1p.eval"><code class="docutils literal notranslate"><span class="pre">log1p.eval()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.log1p.fdiff"><code class="docutils literal notranslate"><span class="pre">log1p.fdiff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.log1p.nargs"><code class="docutils literal notranslate"><span class="pre">log1p.nargs</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.log2"><code class="docutils literal notranslate"><span class="pre">log2</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.log2.default_assumptions"><code class="docutils literal notranslate"><span class="pre">log2.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.log2.eval"><code class="docutils literal notranslate"><span class="pre">log2.eval()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.log2.fdiff"><code class="docutils literal notranslate"><span class="pre">log2.fdiff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.cfunctions.log2.nargs"><code class="docutils literal notranslate"><span class="pre">log2.nargs</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.codegen.ffunctions">modelparameters.sympy.codegen.ffunctions module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.F95Function"><code class="docutils literal notranslate"><span class="pre">F95Function</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.F95Function.default_assumptions"><code class="docutils literal notranslate"><span class="pre">F95Function.default_assumptions</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.FFunction"><code class="docutils literal notranslate"><span class="pre">FFunction</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.FFunction.default_assumptions"><code class="docutils literal notranslate"><span class="pre">FFunction.default_assumptions</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.cmplx"><code class="docutils literal notranslate"><span class="pre">cmplx</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.cmplx.default_assumptions"><code class="docutils literal notranslate"><span class="pre">cmplx.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.cmplx.nargs"><code class="docutils literal notranslate"><span class="pre">cmplx.nargs</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.dsign"><code class="docutils literal notranslate"><span class="pre">dsign</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.dsign.default_assumptions"><code class="docutils literal notranslate"><span class="pre">dsign.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.dsign.nargs"><code class="docutils literal notranslate"><span class="pre">dsign.nargs</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.isign"><code class="docutils literal notranslate"><span class="pre">isign</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.isign.default_assumptions"><code class="docutils literal notranslate"><span class="pre">isign.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.isign.nargs"><code class="docutils literal notranslate"><span class="pre">isign.nargs</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.kind"><code class="docutils literal notranslate"><span class="pre">kind</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.kind.default_assumptions"><code class="docutils literal notranslate"><span class="pre">kind.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.kind.nargs"><code class="docutils literal notranslate"><span class="pre">kind.nargs</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_dp"><code class="docutils literal notranslate"><span class="pre">literal_dp</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_dp.default_assumptions"><code class="docutils literal notranslate"><span class="pre">literal_dp.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_dp.is_commutative"><code class="docutils literal notranslate"><span class="pre">literal_dp.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_dp.is_complex"><code class="docutils literal notranslate"><span class="pre">literal_dp.is_complex</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_dp.is_hermitian"><code class="docutils literal notranslate"><span class="pre">literal_dp.is_hermitian</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_dp.is_imaginary"><code class="docutils literal notranslate"><span class="pre">literal_dp.is_imaginary</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_dp.is_irrational"><code class="docutils literal notranslate"><span class="pre">literal_dp.is_irrational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_dp.is_rational"><code class="docutils literal notranslate"><span class="pre">literal_dp.is_rational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_dp.is_real"><code class="docutils literal notranslate"><span class="pre">literal_dp.is_real</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_sp"><code class="docutils literal notranslate"><span class="pre">literal_sp</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_sp.default_assumptions"><code class="docutils literal notranslate"><span class="pre">literal_sp.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_sp.is_commutative"><code class="docutils literal notranslate"><span class="pre">literal_sp.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_sp.is_complex"><code class="docutils literal notranslate"><span class="pre">literal_sp.is_complex</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_sp.is_hermitian"><code class="docutils literal notranslate"><span class="pre">literal_sp.is_hermitian</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_sp.is_imaginary"><code class="docutils literal notranslate"><span class="pre">literal_sp.is_imaginary</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_sp.is_irrational"><code class="docutils literal notranslate"><span class="pre">literal_sp.is_irrational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_sp.is_rational"><code class="docutils literal notranslate"><span class="pre">literal_sp.is_rational</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.literal_sp.is_real"><code class="docutils literal notranslate"><span class="pre">literal_sp.is_real</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.merge"><code class="docutils literal notranslate"><span class="pre">merge</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.merge.default_assumptions"><code class="docutils literal notranslate"><span class="pre">merge.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.codegen.ffunctions.merge.nargs"><code class="docutils literal notranslate"><span class="pre">merge.nargs</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.codegen">Module contents</a></li>
 </ul>
 </li>
@@ -1141,7 +1317,7 @@ as a SymPy function for symbolic manipulation.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1169,7 +1345,7 @@ as a SymPy function for symbolic manipulation.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

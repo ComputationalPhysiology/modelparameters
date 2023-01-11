@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -94,7 +93,7 @@
 
 
 <span class="k">def</span> <span class="nf">_base_fact</span><span class="p">(</span><span class="n">atom</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the literal fact of an atom.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the literal fact of an atom.</span>
 
 <span class="sd">    Effectively, this merely strips the Not around a fact.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -114,7 +113,7 @@
 
 
 <div class="viewcode-block" id="transitive_closure"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.assumptions.transitive_closure">[docs]</a><span class="k">def</span> <span class="nf">transitive_closure</span><span class="p">(</span><span class="n">implications</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes the transitive closure of a list of implications</span>
 
 <span class="sd">    Uses Warshall&#39;s algorithm, as described at</span>
@@ -134,7 +133,7 @@
 
 
 <div class="viewcode-block" id="deduce_alpha_implications"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.assumptions.deduce_alpha_implications">[docs]</a><span class="k">def</span> <span class="nf">deduce_alpha_implications</span><span class="p">(</span><span class="n">implications</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;deduce all implications</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;deduce all implications</span>
 
 <span class="sd">       Description by example</span>
 <span class="sd">       ----------------------</span>
@@ -174,7 +173,7 @@
 
 
 <div class="viewcode-block" id="apply_beta_to_alpha_route"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.assumptions.apply_beta_to_alpha_route">[docs]</a><span class="k">def</span> <span class="nf">apply_beta_to_alpha_route</span><span class="p">(</span><span class="n">alpha_implications</span><span class="p">,</span> <span class="n">beta_rules</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;apply additional beta-rules (And conditions) to already-built</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;apply additional beta-rules (And conditions) to already-built</span>
 <span class="sd">    alpha implication tables</span>
 
 <span class="sd">       TODO: write about</span>
@@ -253,7 +252,7 @@
 
 
 <div class="viewcode-block" id="rules_2prereq"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.assumptions.rules_2prereq">[docs]</a><span class="k">def</span> <span class="nf">rules_2prereq</span><span class="p">(</span><span class="n">rules</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;build prerequisites table from rules</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;build prerequisites table from rules</span>
 
 <span class="sd">       Description by example</span>
 <span class="sd">       ----------------------</span>
@@ -291,12 +290,12 @@
 
 
 <div class="viewcode-block" id="TautologyDetected"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.assumptions.TautologyDetected">[docs]</a><span class="k">class</span> <span class="nc">TautologyDetected</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;(internal) Prover uses it for reporting detected tautology&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;(internal) Prover uses it for reporting detected tautology&quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="Prover"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.assumptions.Prover">[docs]</a><span class="k">class</span> <span class="nc">Prover</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;ai - prover of logic rules</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;ai - prover of logic rules</span>
 
 <span class="sd">       given a set of initial rules, Prover tries to prove all possible rules</span>
 <span class="sd">       which follow from given premises.</span>
@@ -329,7 +328,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_rules_seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Prover.split_alpha_beta"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.assumptions.Prover.split_alpha_beta">[docs]</a>    <span class="k">def</span> <span class="nf">split_alpha_beta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;split proved rules into alpha and beta chains&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;split proved rules into alpha and beta chains&quot;&quot;&quot;</span>
         <span class="n">rules_alpha</span> <span class="o">=</span> <span class="p">[]</span>    <span class="c1"># a      -&gt; b</span>
         <span class="n">rules_beta</span> <span class="o">=</span> <span class="p">[]</span>     <span class="c1"># &amp;(...) -&gt; b</span>
         <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">proved_rules</span><span class="p">:</span>
@@ -348,7 +347,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">split_alpha_beta</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
 
 <div class="viewcode-block" id="Prover.process_rule"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.assumptions.Prover.process_rule">[docs]</a>    <span class="k">def</span> <span class="nf">process_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;process a -&gt; b rule&quot;&quot;&quot;</span>   <span class="c1"># TODO write more?</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;process a -&gt; b rule&quot;&quot;&quot;</span>   <span class="c1"># TODO write more?</span>
         <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">a</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="k">return</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
@@ -414,7 +413,7 @@
 
 
 <div class="viewcode-block" id="FactRules"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.assumptions.FactRules">[docs]</a><span class="k">class</span> <span class="nc">FactRules</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Rules that describe how to deduce facts in logic space</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Rules that describe how to deduce facts in logic space</span>
 
 <span class="sd">       When defined, these rules allow implications to quickly be determined</span>
 <span class="sd">       for a set of facts. For this precomputed deduction tables are used.</span>
@@ -445,7 +444,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rules</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compile rules into internal lookup tables&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compile rules into internal lookup tables&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rules</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
             <span class="n">rules</span> <span class="o">=</span> <span class="n">rules</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
@@ -511,7 +510,7 @@
 
 
 <div class="viewcode-block" id="FactKB"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.assumptions.FactKB">[docs]</a><span class="k">class</span> <span class="nc">FactKB</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A simple propositional knowledge base relying on compiled inference rules.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -522,7 +521,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">rules</span> <span class="o">=</span> <span class="n">rules</span>
 
     <span class="k">def</span> <span class="nf">_tell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Add fact k=v to the knowledge base.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add fact k=v to the knowledge base.</span>
 
 <span class="sd">        Returns True if the KB has actually been updated, False otherwise.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -539,7 +538,7 @@
     <span class="c1"># * This is the workhorse, so keep it *fast*. *</span>
     <span class="c1"># *********************************************</span>
 <div class="viewcode-block" id="FactKB.deduce_all_facts"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.assumptions.FactKB.deduce_all_facts">[docs]</a>    <span class="k">def</span> <span class="nf">deduce_all_facts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">facts</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Update the KB with all the implications of a list of facts.</span>
 
 <span class="sd">        Facts can be specified as a dictionary or as a list of (key, value)</span>
@@ -591,7 +590,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -612,7 +611,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

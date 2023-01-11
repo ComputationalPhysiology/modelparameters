@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -63,7 +62,7 @@
 
 
 <span class="k">def</span> <span class="nf">_remove_repeated</span><span class="p">(</span><span class="n">inds</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Removes repeated objects from sequences</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Removes repeated objects from sequences</span>
 
 <span class="sd">    Returns a set of the unique objects and a tuple of all that have been</span>
 <span class="sd">    removed.</span>
@@ -85,7 +84,7 @@
 
 
 <span class="k">def</span> <span class="nf">_get_indices_Mul</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">return_dummies</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Determine the outer indices of a Mul object.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Determine the outer indices of a Mul object.</span>
 
 <span class="sd">    &gt;&gt;&gt; from .index_methods import _get_indices_Mul</span>
 <span class="sd">    &gt;&gt;&gt; from .indexed import IndexedBase, Idx</span>
@@ -121,7 +120,7 @@
 
 
 <span class="k">def</span> <span class="nf">_get_indices_Pow</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Determine outer indices of a power or an exponential.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Determine outer indices of a power or an exponential.</span>
 
 <span class="sd">    A power is considered a universal function, so that the indices of a Pow is</span>
 <span class="sd">    just the collection of indices present in the expression.  This may be</span>
@@ -170,7 +169,7 @@
 
 
 <span class="k">def</span> <span class="nf">_get_indices_Add</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Determine outer indices of an Add object.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Determine outer indices of an Add object.</span>
 
 <span class="sd">    In a sum, each term must have the same set of outer indices.  A valid</span>
 <span class="sd">    expression could be</span>
@@ -213,7 +212,7 @@
 
 
 <div class="viewcode-block" id="get_indices"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.index_methods.get_indices">[docs]</a><span class="k">def</span> <span class="nf">get_indices</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Determine the outer indices of expression ``expr``</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Determine the outer indices of expression ``expr``</span>
 
 <span class="sd">    By *outer* we mean indices that are not summation indices.  Returns a set</span>
 <span class="sd">    and a dict.  The set contains outer indices and the dict contains</span>
@@ -309,7 +308,7 @@
 
 
 <div class="viewcode-block" id="get_contraction_structure"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.index_methods.get_contraction_structure">[docs]</a><span class="k">def</span> <span class="nf">get_contraction_structure</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Determine dummy indices of ``expr`` and describe its structure</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Determine dummy indices of ``expr`` and describe its structure</span>
 
 <span class="sd">    By *dummy* we mean indices that are summation indices.</span>
 
@@ -497,7 +496,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -518,7 +517,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -48,7 +47,7 @@
 
 
 <div class="viewcode-block" id="AskFiniteHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler">[docs]</a><span class="k">class</span> <span class="nc">AskFiniteHandler</span><span class="p">(</span><span class="n">CommonHandler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handler for key &#39;finite&#39;.</span>
 
 <span class="sd">    Test that an expression is bounded respect to all its variables.</span>
@@ -68,7 +67,7 @@
 
 <div class="viewcode-block" id="AskFiniteHandler.Symbol"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.Symbol">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Symbol</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Handles Symbol.</span>
 
 <span class="sd">        Examples</span>
@@ -92,7 +91,7 @@
 
 <div class="viewcode-block" id="AskFiniteHandler.Add"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.Add">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Add</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return True if expr is bounded, False if not and None if unknown.</span>
 
 <span class="sd">        Truth Table:</span>
@@ -178,7 +177,7 @@
 
 <div class="viewcode-block" id="AskFiniteHandler.Mul"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.Mul">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Mul</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return True if expr is bounded, False if not and None if unknown.</span>
 
 <span class="sd">        Truth Table:</span>
@@ -234,7 +233,7 @@
 
 <div class="viewcode-block" id="AskFiniteHandler.Pow"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.calculus.AskFiniteHandler.Pow">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Pow</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Unbounded ** NonZero -&gt; Unbounded</span>
 <span class="sd">        Bounded ** Bounded -&gt; Bounded</span>
 <span class="sd">        Abs()&lt;=1 ** Positive -&gt; Bounded</span>
@@ -284,7 +283,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -305,7 +304,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

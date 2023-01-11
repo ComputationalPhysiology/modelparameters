@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -61,7 +60,7 @@
 <span class="kn">from</span> <span class="nn">..utilities.randtest</span> <span class="kn">import</span> <span class="n">_randrange</span>
 
 <div class="viewcode-block" id="AZ"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.AZ">[docs]</a><span class="k">def</span> <span class="nf">AZ</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the letters of ``s`` in uppercase. In case more than</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the letters of ``s`` in uppercase. In case more than</span>
 <span class="sd">    one string is passed, each of them will be processed and a list</span>
 <span class="sd">    of upper case strings will be returned.</span>
 
@@ -95,7 +94,7 @@
 
 
 <div class="viewcode-block" id="padded_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.padded_key">[docs]</a><span class="k">def</span> <span class="nf">padded_key</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a string of the distinct characters of ``symbols`` with</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a string of the distinct characters of ``symbols`` with</span>
 <span class="sd">    those of ``key`` appearing first, omitting characters in ``key``</span>
 <span class="sd">    that are not in ``symbols``. A ValueError is raised if a) there are</span>
 <span class="sd">    duplicate characters in ``symbols`` or b) there are characters</span>
@@ -127,7 +126,7 @@
 
 
 <div class="viewcode-block" id="check_and_join"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.check_and_join">[docs]</a><span class="k">def</span> <span class="nf">check_and_join</span><span class="p">(</span><span class="n">phrase</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">filter</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Joins characters of `phrase` and if ``symbols`` is given, raises</span>
 <span class="sd">    an error if any character in ``phrase`` is not in ``symbols``.</span>
 
@@ -182,7 +181,7 @@
 
 
 <div class="viewcode-block" id="cycle_list"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.cycle_list">[docs]</a><span class="k">def</span> <span class="nf">cycle_list</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the elements of the list ``range(n)`` shifted to the</span>
 <span class="sd">    left by ``k`` (so the list starts with ``k`` (mod ``n``)).</span>
 
@@ -202,7 +201,7 @@
 
 
 <div class="viewcode-block" id="encipher_shift"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.encipher_shift">[docs]</a><span class="k">def</span> <span class="nf">encipher_shift</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Performs shift cipher encryption on plaintext msg, and returns the</span>
 <span class="sd">    ciphertext.</span>
 
@@ -263,7 +262,7 @@
 
 
 <div class="viewcode-block" id="decipher_shift"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.decipher_shift">[docs]</a><span class="k">def</span> <span class="nf">decipher_shift</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the text by shifting the characters of ``msg`` to the</span>
 <span class="sd">    left by the amount given by ``key``.</span>
 
@@ -292,7 +291,7 @@
 
 
 <div class="viewcode-block" id="encipher_affine"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.encipher_affine">[docs]</a><span class="k">def</span> <span class="nf">encipher_affine</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">_inverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Performs the affine cipher encryption on plaintext ``msg``, and</span>
 <span class="sd">    returns the ciphertext.</span>
 
@@ -356,7 +355,7 @@
 
 
 <div class="viewcode-block" id="decipher_affine"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.decipher_affine">[docs]</a><span class="k">def</span> <span class="nf">decipher_affine</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the deciphered text that was made from the mapping,</span>
 <span class="sd">    `x \rightarrow ax+b` (mod `N`), where ``N`` is the</span>
 <span class="sd">    number of characters in the alphabet. Deciphering is done by</span>
@@ -382,7 +381,7 @@
 
 
 <div class="viewcode-block" id="encipher_substitution"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.encipher_substitution">[docs]</a><span class="k">def</span> <span class="nf">encipher_substitution</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the ciphertext obtained by replacing each character that</span>
 <span class="sd">    appears in ``old`` with the corresponding character in ``new``.</span>
 <span class="sd">    If ``old`` is a mapping, then new is ignored and the replacements</span>
@@ -439,7 +438,7 @@
 <span class="c1">######################################################################</span>
 
 <div class="viewcode-block" id="encipher_vigenere"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.encipher_vigenere">[docs]</a><span class="k">def</span> <span class="nf">encipher_vigenere</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Performs the Vigenère cipher encryption on plaintext ``msg``, and</span>
 <span class="sd">    returns the ciphertext.</span>
 
@@ -607,7 +606,7 @@
 
 
 <div class="viewcode-block" id="decipher_vigenere"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.decipher_vigenere">[docs]</a><span class="k">def</span> <span class="nf">decipher_vigenere</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Decode using the Vigenère cipher.</span>
 
 <span class="sd">    Examples</span>
@@ -633,7 +632,7 @@
 
 
 <div class="viewcode-block" id="encipher_hill"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.encipher_hill">[docs]</a><span class="k">def</span> <span class="nf">encipher_hill</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="s2">&quot;Q&quot;</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the Hill cipher encryption of ``msg``.</span>
 
 <span class="sd">    Notes</span>
@@ -718,7 +717,7 @@
 
 
 <div class="viewcode-block" id="decipher_hill"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.decipher_hill">[docs]</a><span class="k">def</span> <span class="nf">decipher_hill</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Deciphering is the same as enciphering but using the inverse of the</span>
 <span class="sd">    key matrix.</span>
 
@@ -785,7 +784,7 @@
 
 
 <div class="viewcode-block" id="encipher_bifid"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.encipher_bifid">[docs]</a><span class="k">def</span> <span class="nf">encipher_bifid</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Performs the Bifid cipher encryption on plaintext ``msg``, and</span>
 <span class="sd">    returns the ciphertext.</span>
 
@@ -834,7 +833,7 @@
 
 
 <div class="viewcode-block" id="decipher_bifid"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.decipher_bifid">[docs]</a><span class="k">def</span> <span class="nf">decipher_bifid</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Performs the Bifid cipher decryption on ciphertext ``msg``, and</span>
 <span class="sd">    returns the plaintext.</span>
 
@@ -926,7 +925,7 @@
 
 
 <div class="viewcode-block" id="bifid_square"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.bifid_square">[docs]</a><span class="k">def</span> <span class="nf">bifid_square</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return characters of ``key`` arranged in a square.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return characters of ``key`` arranged in a square.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -965,7 +964,7 @@
 
 
 <div class="viewcode-block" id="encipher_bifid5"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.encipher_bifid5">[docs]</a><span class="k">def</span> <span class="nf">encipher_bifid5</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Performs the Bifid cipher encryption on plaintext ``msg``, and</span>
 <span class="sd">    returns the ciphertext.</span>
 
@@ -1060,7 +1059,7 @@
 
 
 <div class="viewcode-block" id="decipher_bifid5"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.decipher_bifid5">[docs]</a><span class="k">def</span> <span class="nf">decipher_bifid5</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the Bifid cipher decryption of ``msg``.</span>
 
 <span class="sd">    This is the version of the Bifid cipher that uses the `5 \times 5`</span>
@@ -1099,7 +1098,7 @@
 
 
 <div class="viewcode-block" id="bifid5_square"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.bifid5_square">[docs]</a><span class="k">def</span> <span class="nf">bifid5_square</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    5x5 Polybius square.</span>
 
 <span class="sd">    Produce the Polybius square for the `5 \times 5` Bifid cipher.</span>
@@ -1126,7 +1125,7 @@
 
 
 <div class="viewcode-block" id="encipher_bifid6"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.encipher_bifid6">[docs]</a><span class="k">def</span> <span class="nf">encipher_bifid6</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Performs the Bifid cipher encryption on plaintext ``msg``, and</span>
 <span class="sd">    returns the ciphertext.</span>
 
@@ -1156,7 +1155,7 @@
 
 
 <div class="viewcode-block" id="decipher_bifid6"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.decipher_bifid6">[docs]</a><span class="k">def</span> <span class="nf">decipher_bifid6</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Performs the Bifid cipher decryption on ciphertext ``msg``, and</span>
 <span class="sd">    returns the plaintext.</span>
 
@@ -1193,7 +1192,7 @@
 
 
 <div class="viewcode-block" id="bifid6_square"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.bifid6_square">[docs]</a><span class="k">def</span> <span class="nf">bifid6_square</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    6x6 Polybius square.</span>
 
 <span class="sd">    Produces the Polybius square for the `6 \times 6` Bifid cipher.</span>
@@ -1225,7 +1224,7 @@
 
 
 <div class="viewcode-block" id="rsa_public_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.rsa_public_key">[docs]</a><span class="k">def</span> <span class="nf">rsa_public_key</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the RSA *public key* pair, `(n, e)`, where `n`</span>
 <span class="sd">    is a product of two primes and `e` is relatively</span>
 <span class="sd">    prime (coprime) to the Euler totient `\phi(n)`. False</span>
@@ -1251,7 +1250,7 @@
 
 
 <div class="viewcode-block" id="rsa_private_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.rsa_private_key">[docs]</a><span class="k">def</span> <span class="nf">rsa_private_key</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the RSA *private key*, `(n,d)`, where `n`</span>
 <span class="sd">    is a product of two primes and `d` is the inverse of</span>
 <span class="sd">    `e` (mod `\phi(n)`). False is returned if any assumption</span>
@@ -1278,7 +1277,7 @@
 
 
 <div class="viewcode-block" id="encipher_rsa"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.encipher_rsa">[docs]</a><span class="k">def</span> <span class="nf">encipher_rsa</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return encryption of ``i`` by computing `i^e` (mod `n`),</span>
 <span class="sd">    where ``key`` is the public key `(n, e)`.</span>
 
@@ -1298,7 +1297,7 @@
 
 
 <div class="viewcode-block" id="decipher_rsa"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.decipher_rsa">[docs]</a><span class="k">def</span> <span class="nf">decipher_rsa</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return decyption of ``i`` by computing `i^d` (mod `n`),</span>
 <span class="sd">    where ``key`` is the private key `(n, d)`.</span>
 
@@ -1321,7 +1320,7 @@
 
 
 <div class="viewcode-block" id="kid_rsa_public_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.kid_rsa_public_key">[docs]</a><span class="k">def</span> <span class="nf">kid_rsa_public_key</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Kid RSA is a version of RSA useful to teach grade school children</span>
 <span class="sd">    since it does not involve exponentiation.</span>
 
@@ -1357,7 +1356,7 @@
 
 
 <div class="viewcode-block" id="kid_rsa_private_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.kid_rsa_private_key">[docs]</a><span class="k">def</span> <span class="nf">kid_rsa_private_key</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute `M = a b - 1`, `e = A M + a`, `d = B M + b`,</span>
 <span class="sd">    `n = (e d - 1) / M`. The *private key* is `d`, which Bob</span>
 <span class="sd">    keeps secret.</span>
@@ -1379,7 +1378,7 @@
 
 
 <div class="viewcode-block" id="encipher_kid_rsa"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.encipher_kid_rsa">[docs]</a><span class="k">def</span> <span class="nf">encipher_kid_rsa</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Here ``msg`` is the plaintext and ``key`` is the public key.</span>
 
 <span class="sd">    Examples</span>
@@ -1399,7 +1398,7 @@
 
 
 <div class="viewcode-block" id="decipher_kid_rsa"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.decipher_kid_rsa">[docs]</a><span class="k">def</span> <span class="nf">decipher_kid_rsa</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Here ``msg`` is the plaintext and ``key`` is the private key.</span>
 
 <span class="sd">    Examples</span>
@@ -1455,7 +1454,7 @@
 
 
 <div class="viewcode-block" id="encode_morse"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.encode_morse">[docs]</a><span class="k">def</span> <span class="nf">encode_morse</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">mapping</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Encodes a plaintext into popular Morse Code with letters</span>
 <span class="sd">    separated by `sep` and words by a double `sep`.</span>
 
@@ -1502,7 +1501,7 @@
 
 
 <div class="viewcode-block" id="decode_morse"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.decode_morse">[docs]</a><span class="k">def</span> <span class="nf">decode_morse</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">mapping</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Decodes a Morse Code with letters separated by `sep`</span>
 <span class="sd">    (default is &#39;|&#39;) and words by `word_sep` (default is &#39;||)</span>
 <span class="sd">    into plaintext.</span>
@@ -1539,7 +1538,7 @@
 
 
 <div class="viewcode-block" id="lfsr_sequence"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.lfsr_sequence">[docs]</a><span class="k">def</span> <span class="nf">lfsr_sequence</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">fill</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function creates an lfsr sequence.</span>
 
 <span class="sd">    INPUT:</span>
@@ -1638,7 +1637,7 @@
 
 
 <div class="viewcode-block" id="lfsr_autocorrelation"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.lfsr_autocorrelation">[docs]</a><span class="k">def</span> <span class="nf">lfsr_autocorrelation</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function computes the LFSR autocorrelation function.</span>
 
 <span class="sd">    INPUT:</span>
@@ -1682,7 +1681,7 @@
 
 
 <div class="viewcode-block" id="lfsr_connection_polynomial"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.lfsr_connection_polynomial">[docs]</a><span class="k">def</span> <span class="nf">lfsr_connection_polynomial</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function computes the LFSR connection polynomial.</span>
 
 <span class="sd">    INPUT:</span>
@@ -1780,7 +1779,7 @@
 
 
 <div class="viewcode-block" id="elgamal_private_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.elgamal_private_key">[docs]</a><span class="k">def</span> <span class="nf">elgamal_private_key</span><span class="p">(</span><span class="n">digit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return three number tuple as private key.</span>
 
 <span class="sd">    Elgamal encryption is based on the mathmatical problem</span>
@@ -1826,7 +1825,7 @@
 
 
 <div class="viewcode-block" id="elgamal_public_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.elgamal_public_key">[docs]</a><span class="k">def</span> <span class="nf">elgamal_public_key</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return three number tuple as public key.</span>
 
 <span class="sd">    Parameters</span>
@@ -1851,7 +1850,7 @@
 
 
 <div class="viewcode-block" id="encipher_elgamal"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.encipher_elgamal">[docs]</a><span class="k">def</span> <span class="nf">encipher_elgamal</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Encrypt message with public key</span>
 
 <span class="sd">    ``i`` is a plaintext message expressed as an integer.</span>
@@ -1904,7 +1903,7 @@
 
 
 <div class="viewcode-block" id="decipher_elgamal"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.decipher_elgamal">[docs]</a><span class="k">def</span> <span class="nf">decipher_elgamal</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Decrypt message with private key</span>
 
 <span class="sd">    `msg = (c_{1}, c_{2})`</span>
@@ -1945,7 +1944,7 @@
 <span class="c1">################ Diffie-Hellman Key Exchange  #########################</span>
 
 <div class="viewcode-block" id="dh_private_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.dh_private_key">[docs]</a><span class="k">def</span> <span class="nf">dh_private_key</span><span class="p">(</span><span class="n">digit</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return three integer tuple as private key.</span>
 
 <span class="sd">    Diffie-Hellman key exchange is based on the mathematical problem</span>
@@ -2006,7 +2005,7 @@
 
 
 <div class="viewcode-block" id="dh_public_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.dh_public_key">[docs]</a><span class="k">def</span> <span class="nf">dh_public_key</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return three number tuple as public key.</span>
 
 <span class="sd">    This is the tuple that Alice sends to Bob.</span>
@@ -2038,7 +2037,7 @@
 
 
 <div class="viewcode-block" id="dh_shared_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.crypto.html#modelparameters.sympy.crypto.crypto.dh_shared_key">[docs]</a><span class="k">def</span> <span class="nf">dh_shared_key</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return an integer that is the shared key.</span>
 
 <span class="sd">    This is what Bob and Alice can both calculate using the public</span>
@@ -2092,7 +2091,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2113,7 +2112,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

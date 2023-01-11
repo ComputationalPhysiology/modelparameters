@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -49,7 +48,7 @@
 
 
 <div class="viewcode-block" id="TypeC.dimension"><a class="viewcode-back" href="../../../../modelparameters.sympy.liealgebras.html#modelparameters.sympy.liealgebras.type_c.TypeC.dimension">[docs]</a>    <span class="k">def</span> <span class="nf">dimension</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Dimension of the vector space V underlying the Lie algebra</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Dimension of the vector space V underlying the Lie algebra</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -63,7 +62,7 @@
         <span class="k">return</span> <span class="n">n</span></div>
 
 <div class="viewcode-block" id="TypeC.basic_root"><a class="viewcode-back" href="../../../../modelparameters.sympy.liealgebras.html#modelparameters.sympy.liealgebras.type_c.TypeC.basic_root">[docs]</a>    <span class="k">def</span> <span class="nf">basic_root</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generate roots with 1 in ith position and a -1 in jth postion</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate roots with 1 in ith position and a -1 in jth postion</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span>
         <span class="n">root</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>
@@ -72,7 +71,7 @@
         <span class="k">return</span> <span class="n">root</span></div>
 
 <div class="viewcode-block" id="TypeC.simple_root"><a class="viewcode-back" href="../../../../modelparameters.sympy.liealgebras.html#modelparameters.sympy.liealgebras.type_c.TypeC.simple_root">[docs]</a>    <span class="k">def</span> <span class="nf">simple_root</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The ith simple root for the C series</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The ith simple root for the C series</span>
 
 <span class="sd">        Every lie algebra has a unique root system.</span>
 <span class="sd">        Given a root system Q, there is a subset of the</span>
@@ -109,7 +108,7 @@
 
 
 <div class="viewcode-block" id="TypeC.positive_roots"><a class="viewcode-back" href="../../../../modelparameters.sympy.liealgebras.html#modelparameters.sympy.liealgebras.type_c.TypeC.positive_roots">[docs]</a>    <span class="k">def</span> <span class="nf">positive_roots</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generates all the positive roots of A_n</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates all the positive roots of A_n</span>
 
 <span class="sd">        This is half of all of the roots of C_n; by multiplying all the</span>
 <span class="sd">        positive roots by -1 we get the negative roots.</span>
@@ -146,7 +145,7 @@
         <span class="k">return</span> <span class="n">posroots</span></div>
 
 <div class="viewcode-block" id="TypeC.roots"><a class="viewcode-back" href="../../../../modelparameters.sympy.liealgebras.html#modelparameters.sympy.liealgebras.type_c.TypeC.roots">[docs]</a>    <span class="k">def</span> <span class="nf">roots</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the total number of roots for C_n&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -154,7 +153,7 @@
         <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TypeC.cartan_matrix"><a class="viewcode-back" href="../../../../modelparameters.sympy.liealgebras.html#modelparameters.sympy.liealgebras.type_c.TypeC.cartan_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">cartan_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The Cartan matrix for C_n</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The Cartan matrix for C_n</span>
 
 <span class="sd">        The Cartan matrix matrix for a Lie algebra is</span>
 <span class="sd">        generated by assigning an ordering to the simple</span>
@@ -188,7 +187,7 @@
 
 
 <div class="viewcode-block" id="TypeC.basis"><a class="viewcode-back" href="../../../../modelparameters.sympy.liealgebras.html#modelparameters.sympy.liealgebras.type_c.TypeC.basis">[docs]</a>    <span class="k">def</span> <span class="nf">basis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the number of independent generators of C_n</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -196,7 +195,7 @@
         <span class="k">return</span> <span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TypeC.lie_algebra"><a class="viewcode-back" href="../../../../modelparameters.sympy.liealgebras.html#modelparameters.sympy.liealgebras.type_c.TypeC.lie_algebra">[docs]</a>    <span class="k">def</span> <span class="nf">lie_algebra</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the Lie algebra associated with C_n&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -225,7 +224,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -246,7 +245,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

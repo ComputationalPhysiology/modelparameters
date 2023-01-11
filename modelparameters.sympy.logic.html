@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>modelparameters.sympy.logic package &#8212; modelparameters 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="modelparameters.sympy.logic.algorithms package" href="modelparameters.sympy.logic.algorithms.html" />
@@ -46,21 +45,42 @@
           <div class="body" role="main">
             
   <section id="modelparameters-sympy-logic-package">
-<h1>modelparameters.sympy.logic package<a class="headerlink" href="#modelparameters-sympy-logic-package" title="Permalink to this headline">¶</a></h1>
+<h1>modelparameters.sympy.logic package<a class="headerlink" href="#modelparameters-sympy-logic-package" title="Permalink to this heading">¶</a></h1>
 <section id="subpackages">
-<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html">modelparameters.sympy.logic.algorithms package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#module-modelparameters.sympy.logic.algorithms.dpll">modelparameters.sympy.logic.algorithms.dpll module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#module-modelparameters.sympy.logic.algorithms.dpll2">modelparameters.sympy.logic.algorithms.dpll2 module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#module-modelparameters.sympy.logic.algorithms.dpll">modelparameters.sympy.logic.algorithms.dpll module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.dpll"><code class="docutils literal notranslate"><span class="pre">dpll()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.dpll_int_repr"><code class="docutils literal notranslate"><span class="pre">dpll_int_repr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.dpll_satisfiable"><code class="docutils literal notranslate"><span class="pre">dpll_satisfiable()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.find_pure_symbol"><code class="docutils literal notranslate"><span class="pre">find_pure_symbol()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.find_pure_symbol_int_repr"><code class="docutils literal notranslate"><span class="pre">find_pure_symbol_int_repr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.find_unit_clause"><code class="docutils literal notranslate"><span class="pre">find_unit_clause()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.find_unit_clause_int_repr"><code class="docutils literal notranslate"><span class="pre">find_unit_clause_int_repr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.pl_true_int_repr"><code class="docutils literal notranslate"><span class="pre">pl_true_int_repr()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.unit_propagate"><code class="docutils literal notranslate"><span class="pre">unit_propagate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.unit_propagate_int_repr"><code class="docutils literal notranslate"><span class="pre">unit_propagate_int_repr()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#module-modelparameters.sympy.logic.algorithms.dpll2">modelparameters.sympy.logic.algorithms.dpll2 module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll2.Level"><code class="docutils literal notranslate"><span class="pre">Level</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll2.SATSolver"><code class="docutils literal notranslate"><span class="pre">SATSolver</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll2.dpll_satisfiable"><code class="docutils literal notranslate"><span class="pre">dpll_satisfiable()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.logic.algorithms.html#module-modelparameters.sympy.logic.algorithms">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="modelparameters.sympy.logic.utilities.html">modelparameters.sympy.logic.utilities package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.logic.utilities.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.logic.utilities.html#module-modelparameters.sympy.logic.utilities.dimacs">modelparameters.sympy.logic.utilities.dimacs module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.logic.utilities.html#module-modelparameters.sympy.logic.utilities.dimacs">modelparameters.sympy.logic.utilities.dimacs module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.utilities.html#modelparameters.sympy.logic.utilities.dimacs.load"><code class="docutils literal notranslate"><span class="pre">load()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="modelparameters.sympy.logic.utilities.html#modelparameters.sympy.logic.utilities.dimacs.load_file"><code class="docutils literal notranslate"><span class="pre">load_file()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="modelparameters.sympy.logic.utilities.html#module-modelparameters.sympy.logic.utilities">Module contents</a></li>
 </ul>
 </li>
@@ -68,15 +88,15 @@
 </div>
 </section>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.logic.boolalg">
-<span id="modelparameters-sympy-logic-boolalg-module"></span><h2>modelparameters.sympy.logic.boolalg module<a class="headerlink" href="#module-modelparameters.sympy.logic.boolalg" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-logic-boolalg-module"></span><h2>modelparameters.sympy.logic.boolalg module<a class="headerlink" href="#module-modelparameters.sympy.logic.boolalg" title="Permalink to this heading">¶</a></h2>
 <p>Boolean algebra module for SymPy</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.And">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">And</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#And"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.And" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.operations.LatticeOp" title="modelparameters.sympy.core.operations.LatticeOp"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.operations.LatticeOp</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.logic.boolalg.BooleanFunction</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.operations.LatticeOp" title="modelparameters.sympy.core.operations.LatticeOp"><code class="xref py py-class docutils literal notranslate"><span class="pre">LatticeOp</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanFunction</span></code></a></p>
 <p>Logical AND function.</p>
 <p>It evaluates its arguments in order, giving False immediately
 if any of them are False, and True if they are all True.</p>
@@ -140,7 +160,7 @@ and. Hence, <code class="docutils literal notranslate"><span class="pre">And(a,<
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.Boolean">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">Boolean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#Boolean"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.Boolean" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.basic.Basic</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basic</span></code></a></p>
 <p>A boolean object is an object for which logic operations make sense.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.Boolean.default_assumptions">
@@ -170,7 +190,7 @@ For two formulas to be equal they must have the same literals.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.BooleanAtom">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">BooleanAtom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#BooleanAtom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.BooleanAtom" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Boolean" title="modelparameters.sympy.logic.boolalg.Boolean"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.logic.boolalg.Boolean</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Boolean" title="modelparameters.sympy.logic.boolalg.Boolean"><code class="xref py py-class docutils literal notranslate"><span class="pre">Boolean</span></code></a></p>
 <p>Base class of BooleanTrue and BooleanFalse.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.BooleanAtom.canonical">
@@ -207,7 +227,7 @@ For two formulas to be equal they must have the same literals.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.BooleanFalse">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">BooleanFalse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#BooleanFalse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.BooleanFalse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanAtom" title="modelparameters.sympy.logic.boolalg.BooleanAtom"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.logic.boolalg.BooleanAtom</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanAtom" title="modelparameters.sympy.logic.boolalg.BooleanAtom"><code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanAtom</span></code></a></p>
 <p>SymPy version of False, a singleton that can be accessed via S.false.</p>
 <p>This is the SymPy version of False, for use in the logic module. The
 primary advantage of using false instead of False is that shorthand boolean
@@ -254,7 +274,7 @@ class when they evaluate to false.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.BooleanFunction">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">BooleanFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#BooleanFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Application" title="modelparameters.sympy.core.function.Application"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.function.Application</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Boolean" title="modelparameters.sympy.logic.boolalg.Boolean"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.logic.boolalg.Boolean</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.function.Application" title="modelparameters.sympy.core.function.Application"><code class="xref py py-class docutils literal notranslate"><span class="pre">Application</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Boolean" title="modelparameters.sympy.logic.boolalg.Boolean"><code class="xref py py-class docutils literal notranslate"><span class="pre">Boolean</span></code></a></p>
 <p>Boolean function is a function that lives in a boolean space
 It is used as base class for And, Or, Not, etc.</p>
 <dl class="py attribute">
@@ -277,7 +297,7 @@ It is used as base class for And, Or, Not, etc.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.BooleanTrue">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">BooleanTrue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#BooleanTrue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.BooleanTrue" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanAtom" title="modelparameters.sympy.logic.boolalg.BooleanAtom"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.logic.boolalg.BooleanAtom</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanAtom" title="modelparameters.sympy.logic.boolalg.BooleanAtom"><code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanAtom</span></code></a></p>
 <p>SymPy version of True, a singleton that can be accessed via S.true.</p>
 <p>This is the SymPy version of True, for use in the logic module. The
 primary advantage of using true instead of True is that shorthand boolean
@@ -361,7 +381,7 @@ using <code class="docutils literal notranslate"><span class="pre">==</span></co
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.Equivalent">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">Equivalent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#Equivalent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.Equivalent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.logic.boolalg.BooleanFunction</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanFunction</span></code></a></p>
 <p>Equivalence relation.</p>
 <p>Equivalent(A, B) is True iff A and B are both True or both False</p>
 <p>Returns True if all of the arguments are logically equivalent.
@@ -424,7 +444,7 @@ change the interface in the future if needed).</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.ITE">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">ITE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#ITE"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.ITE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.logic.boolalg.BooleanFunction</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanFunction</span></code></a></p>
 <p>If then else clause.</p>
 <p>ITE(A, B, C) evaluates and returns the result of B if A is true
 else it returns the result of C</p>
@@ -463,6 +483,8 @@ else it returns the result of C</p>
 instantiated and it should return either some simplified instance
 (possible of some other class), or if the class cls should be
 unmodified, return None.</p>
+<section id="examples-of-eval-for-the-function-sign">
+<h3>Examples of eval() for the function “sign”<a class="headerlink" href="#examples-of-eval-for-the-function-sign" title="Permalink to this heading">¶</a></h3>
 <p>&#64;classmethod
 def eval(cls, arg):</p>
 <blockquote>
@@ -482,6 +504,7 @@ if coeff is not S.One:</p>
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>
+</section>
 </dd></dl>
 
 <dl class="py method">
@@ -494,7 +517,7 @@ if coeff is not S.One:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.Implies">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">Implies</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#Implies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.Implies" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.logic.boolalg.BooleanFunction</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanFunction</span></code></a></p>
 <p>Logical implication.</p>
 <p>A implies B is equivalent to !A v B</p>
 <p>Accepts two Boolean arguments; A and B.
@@ -548,6 +571,8 @@ avoid this issue, use the SymPy objects <code class="docutils literal notranslat
 instantiated and it should return either some simplified instance
 (possible of some other class), or if the class cls should be
 unmodified, return None.</p>
+<section id="id1">
+<h3>Examples of eval() for the function “sign”<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
 <p>&#64;classmethod
 def eval(cls, arg):</p>
 <blockquote>
@@ -567,6 +592,7 @@ if coeff is not S.One:</p>
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>
+</section>
 </dd></dl>
 
 <dl class="py method">
@@ -579,7 +605,7 @@ if coeff is not S.One:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.Nand">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">Nand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#Nand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.Nand" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.logic.boolalg.BooleanFunction</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanFunction</span></code></a></p>
 <p>Logical NAND function.</p>
 <p>It evaluates its arguments in order, giving True immediately if any
 of them are False, and False if they are all True.</p>
@@ -610,6 +636,8 @@ Returns False if all arguments are True</p>
 instantiated and it should return either some simplified instance
 (possible of some other class), or if the class cls should be
 unmodified, return None.</p>
+<section id="id2">
+<h3>Examples of eval() for the function “sign”<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
 <p>&#64;classmethod
 def eval(cls, arg):</p>
 <blockquote>
@@ -629,6 +657,7 @@ if coeff is not S.One:</p>
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>
+</section>
 </dd></dl>
 
 </dd></dl>
@@ -636,7 +665,7 @@ if coeff is not S.One:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.Nor">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">Nor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#Nor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.Nor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.logic.boolalg.BooleanFunction</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanFunction</span></code></a></p>
 <p>Logical NOR function.</p>
 <p>It evaluates its arguments in order, giving False immediately if any
 of them are True, and True if they are all False.</p>
@@ -673,6 +702,8 @@ Returns True if all arguments are False</p>
 instantiated and it should return either some simplified instance
 (possible of some other class), or if the class cls should be
 unmodified, return None.</p>
+<section id="id3">
+<h3>Examples of eval() for the function “sign”<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
 <p>&#64;classmethod
 def eval(cls, arg):</p>
 <blockquote>
@@ -692,6 +723,7 @@ if coeff is not S.One:</p>
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>
+</section>
 </dd></dl>
 
 </dd></dl>
@@ -699,7 +731,7 @@ if coeff is not S.One:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.Not">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">Not</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#Not"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.Not" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.logic.boolalg.BooleanFunction</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanFunction</span></code></a></p>
 <p>Logical Not function (negation)</p>
 <p>Returns True if the statement is False
 Returns False if the statement is True</p>
@@ -765,6 +797,8 @@ value of True.  To avoid this issue, use the SymPy boolean types
 instantiated and it should return either some simplified instance
 (possible of some other class), or if the class cls should be
 unmodified, return None.</p>
+<section id="id4">
+<h3>Examples of eval() for the function “sign”<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h3>
 <p>&#64;classmethod
 def eval(cls, arg):</p>
 <blockquote>
@@ -784,6 +818,7 @@ if coeff is not S.One:</p>
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>
+</section>
 </dd></dl>
 
 <dl class="py attribute">
@@ -801,7 +836,7 @@ if coeff is not S.One:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.Or">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">Or</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#Or"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.Or" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.operations.LatticeOp" title="modelparameters.sympy.core.operations.LatticeOp"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.operations.LatticeOp</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.logic.boolalg.BooleanFunction</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.operations.LatticeOp" title="modelparameters.sympy.core.operations.LatticeOp"><code class="xref py py-class docutils literal notranslate"><span class="pre">LatticeOp</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanFunction</span></code></a></p>
 <p>Logical OR function</p>
 <p>It evaluates its arguments in order, giving True immediately
 if any of them are True, and False if they are all False.</p>
@@ -881,11 +916,12 @@ the conditions.</p>
 </pre></div>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id1"><span class="brackets">1</span></dt>
-<dd><p>en.wikipedia.org/wiki/Quine-McCluskey_algorithm</p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id5" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>en.wikipedia.org/wiki/Quine-McCluskey_algorithm</p>
+</aside>
+</aside>
 </dd></dl>
 
 <dl class="py function">
@@ -912,17 +948,18 @@ the conditions.</p>
 </pre></div>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets">1</span></dt>
-<dd><p>en.wikipedia.org/wiki/Quine-McCluskey_algorithm</p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id6" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>en.wikipedia.org/wiki/Quine-McCluskey_algorithm</p>
+</aside>
+</aside>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.Xnor">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">Xnor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#Xnor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.Xnor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.logic.boolalg.BooleanFunction</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanFunction</span></code></a></p>
 <p>Logical XNOR function.</p>
 <p>Returns False if an odd number of the arguments are True and the rest are
 False.</p>
@@ -955,6 +992,8 @@ False.</p>
 instantiated and it should return either some simplified instance
 (possible of some other class), or if the class cls should be
 unmodified, return None.</p>
+<section id="id7">
+<h3>Examples of eval() for the function “sign”<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h3>
 <p>&#64;classmethod
 def eval(cls, arg):</p>
 <blockquote>
@@ -974,6 +1013,7 @@ if coeff is not S.One:</p>
 </div></blockquote>
 </div></blockquote>
 </div></blockquote>
+</section>
 </dd></dl>
 
 </dd></dl>
@@ -981,7 +1021,7 @@ if coeff is not S.One:</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.Xor">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">Xor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#Xor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.Xor" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.logic.boolalg.BooleanFunction</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction" title="modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="xref py py-class docutils literal notranslate"><span class="pre">BooleanFunction</span></code></a></p>
 <p>Logical XOR (exclusive OR) function.</p>
 <p>Returns True if an odd number of the arguments are True and the rest are
 False.</p>
@@ -1152,8 +1192,8 @@ of literals, return an equivalent sentence in DNF.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.boolalg.eliminate_implications">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">eliminate_implications</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#eliminate_implications"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.eliminate_implications" title="Permalink to this definition">¶</a></dt>
-<dd><p>Change &gt;&gt;, &lt;&lt;, and Equivalent into &amp;, <a href="#id3"><span class="problematic" id="id4">|</span></a>, and ~. That is, return an
-expression that is equivalent to s, but has only &amp;, <a href="#id5"><span class="problematic" id="id6">|</span></a>, and ~ as logical
+<dd><p>Change &gt;&gt;, &lt;&lt;, and Equivalent into &amp;, <a href="#id8"><span class="problematic" id="id9">|</span></a>, and ~. That is, return an
+expression that is equivalent to s, but has only &amp;, <a href="#id10"><span class="problematic" id="id11">|</span></a>, and ~ as logical
 operators.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.boolalg</span> <span class="kn">import</span> <span class="n">Implies</span><span class="p">,</span> <span class="n">Equivalent</span><span class="p">,</span>          <span class="n">eliminate_implications</span>
@@ -1173,10 +1213,10 @@ operators.</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">integer_to_term</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_bits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#integer_to_term"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.integer_to_term" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a list of the base-2 digits in the integer, <code class="docutils literal notranslate"><span class="pre">k</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – </p></li>
-<li><p><strong>n_bits</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – If <code class="docutils literal notranslate"><span class="pre">n_bits</span></code> is given and the number of digits in the binary
+<li><p><strong>k</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – </p></li>
+<li><p><strong>n_bits</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a>) – If <code class="docutils literal notranslate"><span class="pre">n_bits</span></code> is given and the number of digits in the binary
 representation of <code class="docutils literal notranslate"><span class="pre">k</span></code> is smaller than <code class="docutils literal notranslate"><span class="pre">n_bits</span></code> then left-pad the
 list with 0s.</p></li>
 </ul>
@@ -1280,7 +1320,7 @@ If simpified is True, checks if result contains no redundant clauses.</p>
 <dd><p>This function simplifies a boolean function to its simplified version
 in SOP or POS form. The return type is an Or or And object in SymPy.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<em>string</em><em> or </em><em>boolean expression</em>) – </p></li>
 <li><p><strong>form</strong> (<em>string</em><em> (</em><em>'cnf'</em><em> or </em><em>'dnf'</em><em>) or </em><em>None</em><em> (</em><em>default</em><em>)</em><em>.</em>) – If ‘cnf’ or ‘dnf’, the simplest expression in the corresponding
@@ -1313,8 +1353,8 @@ non-boolean functions contained within the input.</p></li>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.boolalg.</span></span><span class="sig-name descname"><span class="pre">term_to_integer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">term</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/boolalg.html#term_to_integer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.boolalg.term_to_integer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an integer corresponding to the base-2 digits given by <code class="docutils literal notranslate"><span class="pre">term</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>term</strong> (<em>a string</em><em> or </em><em>list of ones and zeros</em>) – </p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>term</strong> (<em>a string</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em> of </em><em>ones and zeros</em>) – </p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -1398,10 +1438,10 @@ If simplify is True, the result contains no redundant clauses.</p>
 <dd><p>Return a generator of all possible configurations of the input variables,
 and the result of the boolean expression for those values.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<em>string</em><em> or </em><em>boolean expression</em>) – </p></li>
-<li><p><strong>variables</strong> (<em>list of variables</em>) – </p></li>
+<li><p><strong>variables</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em> of </em><em>variables</em>) – </p></li>
 <li><p><strong>input</strong> (<em>boolean</em><em> (</em><em>default True</em><em>)</em>) – indicates whether to return the input combinations.</p></li>
 </ul>
 </dd>
@@ -1447,12 +1487,12 @@ deduced from the index of a given output.</p>
 
 </section>
 <section id="module-modelparameters.sympy.logic.inference">
-<span id="modelparameters-sympy-logic-inference-module"></span><h2>modelparameters.sympy.logic.inference module<a class="headerlink" href="#module-modelparameters.sympy.logic.inference" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-logic-inference-module"></span><h2>modelparameters.sympy.logic.inference module<a class="headerlink" href="#module-modelparameters.sympy.logic.inference" title="Permalink to this heading">¶</a></h2>
 <p>Inference in propositional logic</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.inference.KB">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.inference.</span></span><span class="sig-name descname"><span class="pre">KB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/inference.html#KB"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.inference.KB" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Base class for all knowledge bases</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.inference.KB.ask">
@@ -1479,7 +1519,7 @@ deduced from the index of a given output.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.inference.PropKB">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.logic.inference.</span></span><span class="sig-name descname"><span class="pre">PropKB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/logic/inference.html#PropKB"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.logic.inference.PropKB" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.inference.KB" title="modelparameters.sympy.logic.inference.KB"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.logic.inference.KB</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.logic.inference.KB" title="modelparameters.sympy.logic.inference.KB"><code class="xref py py-class docutils literal notranslate"><span class="pre">KB</span></code></a></p>
 <p>A KB for Propositional Logic.  Inefficient, with no indexing.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.logic.inference.PropKB.ask">
@@ -1567,11 +1607,12 @@ If formula_set is empty then it returns the validity of expr.</p>
 </pre></div>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id7"><span class="brackets">1</span></dt>
-<dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Logical_consequence">http://en.wikipedia.org/wiki/Logical_consequence</a></p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id12" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Logical_consequence">http://en.wikipedia.org/wiki/Logical_consequence</a></p>
+</aside>
+</aside>
 </dd></dl>
 
 <dl class="py function">
@@ -1596,9 +1637,9 @@ If formula_set is empty then it returns the validity of expr.</p>
 <p>If the assignment does not specify the value for every proposition,
 this may return None to indicate ‘not obvious’.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em>, </em><em>optional</em><em>, </em><em>default: {}</em>) – Mapping of symbols to boolean values to indicate assignment.</p></li>
+<li><p><strong>model</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em>, </em><em>optional</em><em>, </em><em>default: {}</em>) – Mapping of symbols to boolean values to indicate assignment.</p></li>
 <li><p><strong>deep</strong> (<em>boolean</em><em>, </em><em>optional</em><em>, </em><em>default: False</em>) – Gives the value of the expression under partial assignments
 correctly. May still return None to indicate ‘not obvious’.</p></li>
 </ul>
@@ -1682,16 +1723,17 @@ A valid propositional sentence is True under every assignment.</p>
 </pre></div>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id8"><span class="brackets">1</span></dt>
-<dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Validity">http://en.wikipedia.org/wiki/Validity</a></p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id13" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Validity">http://en.wikipedia.org/wiki/Validity</a></p>
+</aside>
+</aside>
 </dd></dl>
 
 </section>
 <section id="module-modelparameters.sympy.logic">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.logic" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.logic" title="Permalink to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -1708,8 +1750,145 @@ A valid propositional sentence is True under every assignment.</p>
 <li><a class="reference internal" href="#">modelparameters.sympy.logic package</a><ul>
 <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.logic.boolalg">modelparameters.sympy.logic.boolalg module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.logic.inference">modelparameters.sympy.logic.inference module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.logic.boolalg">modelparameters.sympy.logic.boolalg module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.And"><code class="docutils literal notranslate"><span class="pre">And</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.And.as_set"><code class="docutils literal notranslate"><span class="pre">And.as_set()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.And.default_assumptions"><code class="docutils literal notranslate"><span class="pre">And.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.And.identity"><code class="docutils literal notranslate"><span class="pre">And.identity</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.And.is_commutative"><code class="docutils literal notranslate"><span class="pre">And.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.And.nargs"><code class="docutils literal notranslate"><span class="pre">And.nargs</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.And.zero"><code class="docutils literal notranslate"><span class="pre">And.zero</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Boolean"><code class="docutils literal notranslate"><span class="pre">Boolean</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Boolean.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Boolean.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Boolean.equals"><code class="docutils literal notranslate"><span class="pre">Boolean.equals()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanAtom"><code class="docutils literal notranslate"><span class="pre">BooleanAtom</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanAtom.canonical"><code class="docutils literal notranslate"><span class="pre">BooleanAtom.canonical</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanAtom.default_assumptions"><code class="docutils literal notranslate"><span class="pre">BooleanAtom.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanAtom.expand"><code class="docutils literal notranslate"><span class="pre">BooleanAtom.expand()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanAtom.is_Atom"><code class="docutils literal notranslate"><span class="pre">BooleanAtom.is_Atom</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanAtom.is_Boolean"><code class="docutils literal notranslate"><span class="pre">BooleanAtom.is_Boolean</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanAtom.simplify"><code class="docutils literal notranslate"><span class="pre">BooleanAtom.simplify()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFalse"><code class="docutils literal notranslate"><span class="pre">BooleanFalse</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFalse.as_set"><code class="docutils literal notranslate"><span class="pre">BooleanFalse.as_set()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFalse.default_assumptions"><code class="docutils literal notranslate"><span class="pre">BooleanFalse.default_assumptions</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction"><code class="docutils literal notranslate"><span class="pre">BooleanFunction</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction.default_assumptions"><code class="docutils literal notranslate"><span class="pre">BooleanFunction.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction.is_Boolean"><code class="docutils literal notranslate"><span class="pre">BooleanFunction.is_Boolean</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanFunction.to_nnf"><code class="docutils literal notranslate"><span class="pre">BooleanFunction.to_nnf()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanTrue"><code class="docutils literal notranslate"><span class="pre">BooleanTrue</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanTrue.as_set"><code class="docutils literal notranslate"><span class="pre">BooleanTrue.as_set()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.BooleanTrue.default_assumptions"><code class="docutils literal notranslate"><span class="pre">BooleanTrue.default_assumptions</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Equivalent"><code class="docutils literal notranslate"><span class="pre">Equivalent</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Equivalent.args"><code class="docutils literal notranslate"><span class="pre">Equivalent.args</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Equivalent.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Equivalent.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Equivalent.to_nnf"><code class="docutils literal notranslate"><span class="pre">Equivalent.to_nnf()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.ITE"><code class="docutils literal notranslate"><span class="pre">ITE</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.ITE.default_assumptions"><code class="docutils literal notranslate"><span class="pre">ITE.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.ITE.diff"><code class="docutils literal notranslate"><span class="pre">ITE.diff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.ITE.eval"><code class="docutils literal notranslate"><span class="pre">ITE.eval()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.ITE.to_nnf"><code class="docutils literal notranslate"><span class="pre">ITE.to_nnf()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Implies"><code class="docutils literal notranslate"><span class="pre">Implies</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Implies.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Implies.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Implies.eval"><code class="docutils literal notranslate"><span class="pre">Implies.eval()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Implies.to_nnf"><code class="docutils literal notranslate"><span class="pre">Implies.to_nnf()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Nand"><code class="docutils literal notranslate"><span class="pre">Nand</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Nand.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Nand.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Nand.eval"><code class="docutils literal notranslate"><span class="pre">Nand.eval()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Nor"><code class="docutils literal notranslate"><span class="pre">Nor</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Nor.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Nor.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Nor.eval"><code class="docutils literal notranslate"><span class="pre">Nor.eval()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Not"><code class="docutils literal notranslate"><span class="pre">Not</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Not.as_set"><code class="docutils literal notranslate"><span class="pre">Not.as_set()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Not.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Not.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Not.eval"><code class="docutils literal notranslate"><span class="pre">Not.eval()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Not.is_Not"><code class="docutils literal notranslate"><span class="pre">Not.is_Not</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Not.to_nnf"><code class="docutils literal notranslate"><span class="pre">Not.to_nnf()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Or"><code class="docutils literal notranslate"><span class="pre">Or</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Or.as_set"><code class="docutils literal notranslate"><span class="pre">Or.as_set()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Or.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Or.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Or.identity"><code class="docutils literal notranslate"><span class="pre">Or.identity</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Or.is_commutative"><code class="docutils literal notranslate"><span class="pre">Or.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Or.zero"><code class="docutils literal notranslate"><span class="pre">Or.zero</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.POSform"><code class="docutils literal notranslate"><span class="pre">POSform()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.SOPform"><code class="docutils literal notranslate"><span class="pre">SOPform()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Xnor"><code class="docutils literal notranslate"><span class="pre">Xnor</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Xnor.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Xnor.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Xnor.eval"><code class="docutils literal notranslate"><span class="pre">Xnor.eval()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Xor"><code class="docutils literal notranslate"><span class="pre">Xor</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Xor.args"><code class="docutils literal notranslate"><span class="pre">Xor.args</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Xor.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Xor.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.Xor.to_nnf"><code class="docutils literal notranslate"><span class="pre">Xor.to_nnf()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.bool_map"><code class="docutils literal notranslate"><span class="pre">bool_map()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.conjuncts"><code class="docutils literal notranslate"><span class="pre">conjuncts()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.disjuncts"><code class="docutils literal notranslate"><span class="pre">disjuncts()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.distribute_and_over_or"><code class="docutils literal notranslate"><span class="pre">distribute_and_over_or()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.distribute_or_over_and"><code class="docutils literal notranslate"><span class="pre">distribute_or_over_and()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.eliminate_implications"><code class="docutils literal notranslate"><span class="pre">eliminate_implications()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.integer_to_term"><code class="docutils literal notranslate"><span class="pre">integer_to_term()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.is_cnf"><code class="docutils literal notranslate"><span class="pre">is_cnf()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.is_dnf"><code class="docutils literal notranslate"><span class="pre">is_dnf()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.is_literal"><code class="docutils literal notranslate"><span class="pre">is_literal()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.is_nnf"><code class="docutils literal notranslate"><span class="pre">is_nnf()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.simplify_logic"><code class="docutils literal notranslate"><span class="pre">simplify_logic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.term_to_integer"><code class="docutils literal notranslate"><span class="pre">term_to_integer()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.to_cnf"><code class="docutils literal notranslate"><span class="pre">to_cnf()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.to_dnf"><code class="docutils literal notranslate"><span class="pre">to_dnf()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.to_int_repr"><code class="docutils literal notranslate"><span class="pre">to_int_repr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.to_nnf"><code class="docutils literal notranslate"><span class="pre">to_nnf()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.boolalg.truth_table"><code class="docutils literal notranslate"><span class="pre">truth_table()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.logic.inference">modelparameters.sympy.logic.inference module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.inference.KB"><code class="docutils literal notranslate"><span class="pre">KB</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.inference.KB.ask"><code class="docutils literal notranslate"><span class="pre">KB.ask()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.inference.KB.clauses"><code class="docutils literal notranslate"><span class="pre">KB.clauses</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.inference.KB.retract"><code class="docutils literal notranslate"><span class="pre">KB.retract()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.inference.KB.tell"><code class="docutils literal notranslate"><span class="pre">KB.tell()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.inference.PropKB"><code class="docutils literal notranslate"><span class="pre">PropKB</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.inference.PropKB.ask"><code class="docutils literal notranslate"><span class="pre">PropKB.ask()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.inference.PropKB.retract"><code class="docutils literal notranslate"><span class="pre">PropKB.retract()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.inference.PropKB.tell"><code class="docutils literal notranslate"><span class="pre">PropKB.tell()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.inference.entails"><code class="docutils literal notranslate"><span class="pre">entails()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.inference.literal_symbol"><code class="docutils literal notranslate"><span class="pre">literal_symbol()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.inference.pl_true"><code class="docutils literal notranslate"><span class="pre">pl_true()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.inference.satisfiable"><code class="docutils literal notranslate"><span class="pre">satisfiable()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.logic.inference.valid"><code class="docutils literal notranslate"><span class="pre">valid()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.logic">Module contents</a></li>
 </ul>
 </li>
@@ -1742,7 +1921,7 @@ A valid propositional sentence is True under every assignment.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1770,7 +1949,7 @@ A valid propositional sentence is True under every assignment.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

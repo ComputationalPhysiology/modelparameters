@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -56,7 +55,7 @@
 
 
 <span class="k">def</span> <span class="nf">_process_limits</span><span class="p">(</span><span class="o">*</span><span class="n">symbols</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Process the list of symbols and convert them to canonical limits,</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Process the list of symbols and convert them to canonical limits,</span>
 <span class="sd">    storing them as Tuple(symbol, lower, upper). The orientation of</span>
 <span class="sd">    the function is also returned when the upper limit is missing</span>
 <span class="sd">    so (x, 1, None) becomes (x, None, 1) and the orientation is changed.</span>
@@ -157,7 +156,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">function</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the function applied across limits.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the function applied across limits.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -176,7 +175,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">limits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the limits of expression.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the limits of expression.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -195,7 +194,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a list of the dummy variables</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a list of the dummy variables</span>
 
 <span class="sd">        &gt;&gt;&gt; from .. import Sum</span>
 <span class="sd">        &gt;&gt;&gt; from ..abc import x, i</span>
@@ -213,7 +212,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">free_symbols</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method returns the symbols in the object, excluding those</span>
 <span class="sd">        that take on a specific value (i.e. the dummy symbols).</span>
 
@@ -244,11 +243,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return True if the Sum has no free symbols, else False.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if the Sum has no free symbols, else False.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">free_symbols</span>
 
 <div class="viewcode-block" id="ExprWithLimits.as_dummy"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits.as_dummy">[docs]</a>    <span class="k">def</span> <span class="nf">as_dummy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Replace instances of the given dummy variables with explicit dummy</span>
 <span class="sd">        counterparts to make clear what are dummy variables and what</span>
 <span class="sd">        are real-world symbols in an object.</span>
@@ -302,7 +301,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">integrand</span><span class="p">,</span> <span class="o">*</span><span class="n">limits</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_subs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Perform substitutions over non-dummy variables</span>
 <span class="sd">        of an expression with limits.  Also, can be used</span>
 <span class="sd">        to specify point-evaluation of an abstract antiderivative.</span>
@@ -380,7 +379,7 @@
 
 
 <div class="viewcode-block" id="AddWithLimits"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.expr_with_limits.AddWithLimits">[docs]</a><span class="k">class</span> <span class="nc">AddWithLimits</span><span class="p">(</span><span class="n">ExprWithLimits</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents unevaluated oriented additions.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents unevaluated oriented additions.</span>
 <span class="sd">        Parent class for Integral and Sum.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -486,7 +485,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -507,7 +506,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

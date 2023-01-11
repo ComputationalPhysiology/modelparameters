@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/nature.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
   </head><body>
@@ -128,7 +127,7 @@
 
 
 <div class="viewcode-block" id="value_formatter"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.value_formatter">[docs]</a><span class="k">def</span> <span class="nf">value_formatter</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a formated string of a value</span>
 
 <span class="sd">    Arguments</span>
@@ -160,7 +159,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">formatstr</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">&quot;</span>
 
-            <span class="n">formatstr</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">formatstr</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span><span class="si">}</span><span class="s2">]&quot;</span>
+            <span class="n">formatstr</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">formatstr</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span><span class="si">}</span><span class="s2">]&quot;</span>
             <span class="n">ret</span> <span class="o">=</span> <span class="n">formatstr</span> <span class="o">%</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
@@ -181,12 +180,12 @@
 
 
 <div class="viewcode-block" id="Range"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.Range">[docs]</a><span class="k">class</span> <span class="nc">Range</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A simple class for helping checking a given value is within a certain range</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ge</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">le</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">gt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a Range</span>
 
 <span class="sd">        Arguments</span>
@@ -270,7 +269,7 @@
 
 <span class="s2">        Arguments</span>
 <span class="s2">        ---------</span>
-<span class="s2">        value : scalar</span><span class="si">{</span><span class="s1">&#39;&#39;</span> <span class="k">if</span> <span class="n">_np</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="s1">&#39; and np.ndarray&#39;</span><span class="si">}</span><span class="s2"></span>
+<span class="s2">        value : scalar</span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">_np</span><span class="w"> </span><span class="ow">is</span><span class="w"> </span><span class="kc">None</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39; and np.ndarray&#39;</span><span class="si">}</span>
 <span class="s2">            A value to be used in checking range</span>
 <span class="s2">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">range_types</span><span class="p">):</span>
@@ -281,7 +280,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_in_range</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Range.format"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.Range.format">[docs]</a>    <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a formated range check of the value</span>
 
 <span class="sd">        Arguments</span>
@@ -298,7 +297,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">format_not_in</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Range.format_in"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.Range.format_in">[docs]</a>    <span class="k">def</span> <span class="nf">format_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a formated range check</span>
 
 <span class="sd">        Arguments</span>
@@ -312,7 +311,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_in_str</span> <span class="o">%</span> <span class="n">value_formatter</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Range.format_not_in"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.Range.format_not_in">[docs]</a>    <span class="k">def</span> <span class="nf">format_not_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a formated range check</span>
 
 <span class="sd">        Arguments</span>
@@ -331,7 +330,7 @@
 
 
 <div class="viewcode-block" id="format_time"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.format_time">[docs]</a><span class="k">def</span> <span class="nf">format_time</span><span class="p">(</span><span class="n">time</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a formated version of the time argument</span>
 
 <span class="sd">    Arguments</span>
@@ -368,14 +367,14 @@
 
 
 <div class="viewcode-block" id="Timer"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.Timer">[docs]</a><span class="k">class</span> <span class="nc">Timer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Timer class</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">__all_timings</span> <span class="o">=</span> <span class="n">_OrderedDict</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Start timing task</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">check_arg</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
@@ -383,7 +382,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_task</span> <span class="o">=</span> <span class="n">task</span>
 
     <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Called when Timer go out of scope. The timing will be registered</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">end_time</span> <span class="o">=</span> <span class="n">_time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
@@ -395,14 +394,14 @@
 
 <div class="viewcode-block" id="Timer.timings"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.Timer.timings">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">timings</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return all registered timings</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__all_timings</span></div></div>
 
 
 <div class="viewcode-block" id="list_timings"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.list_timings">[docs]</a><span class="k">def</span> <span class="nf">list_timings</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    List all registered timings</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">left_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">Timer</span><span class="o">.</span><span class="n">timings</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
@@ -410,19 +409,19 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="n">left_size</span> <span class="o">+</span> <span class="s2">&quot;--------------------------------&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">task</span><span class="p">,</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">time</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">Timer</span><span class="o">.</span><span class="n">timings</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
         <span class="nb">print</span><span class="p">(</span>
-            <span class="n">task</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">left_size</span><span class="p">)</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;: </span><span class="si">{</span><span class="n">num</span><span class="si">:</span><span class="s2">5d</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">time</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2"> s : </span><span class="si">{</span><span class="n">time</span> <span class="o">/</span> <span class="n">num</span><span class="si">:</span><span class="s2">5.3f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">,</span>
+            <span class="n">task</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="n">left_size</span><span class="p">)</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;: </span><span class="si">{</span><span class="n">num</span><span class="si">:</span><span class="s2">5d</span><span class="si">}</span><span class="s2"> : </span><span class="si">{</span><span class="n">time</span><span class="si">:</span><span class="s2">6.3f</span><span class="si">}</span><span class="s2"> s : </span><span class="si">{</span><span class="n">time</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">num</span><span class="si">:</span><span class="s2">5.3f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="clear_timings"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.clear_timings">[docs]</a><span class="k">def</span> <span class="nf">clear_timings</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Clear all registered timings</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">Timer</span><span class="o">.</span><span class="n">_Timer__all_timings</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="tic"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.tic">[docs]</a><span class="k">def</span> <span class="nf">tic</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Start timing</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_toc_time</span>
@@ -430,7 +429,7 @@
 
 
 <div class="viewcode-block" id="toc"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.toc">[docs]</a><span class="k">def</span> <span class="nf">toc</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return timing since last toc/tic</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">_toc_time</span>
@@ -440,7 +439,7 @@
 
 
 <div class="viewcode-block" id="is_iterable"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.is_iterable">[docs]</a><span class="k">def</span> <span class="nf">is_iterable</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Test for iterable</span>
 
 <span class="sd">    Arguments</span>
@@ -457,7 +456,7 @@
 
 
 <div class="viewcode-block" id="add_iterable"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.add_iterable">[docs]</a><span class="k">def</span> <span class="nf">add_iterable</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sum the content of an iterable</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">add</span>
@@ -470,7 +469,7 @@
 
 
 <div class="viewcode-block" id="camel_capitalize"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.camel_capitalize">[docs]</a><span class="k">def</span> <span class="nf">camel_capitalize</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Camel capitalize a str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">check_arg</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">camel_capitalize</span><span class="p">)</span>
@@ -478,7 +477,7 @@
 
 
 <div class="viewcode-block" id="tuplewrap"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.tuplewrap">[docs]</a><span class="k">def</span> <span class="nf">tuplewrap</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrap the argument to a tuple if it is not a tuple</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -487,7 +486,7 @@
 
 
 <div class="viewcode-block" id="listwrap"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.listwrap">[docs]</a><span class="k">def</span> <span class="nf">listwrap</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrap the argument to a list if it is not a list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">arg</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -502,7 +501,7 @@
 
 
 <span class="k">def</span> <span class="nf">_context_message</span><span class="p">(</span><span class="n">context</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Help function to add context information to error message</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Add contexttual information if passed</span>
@@ -547,7 +546,7 @@
 
 
 <span class="k">def</span> <span class="nf">_check_arg</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">argtypes</span><span class="p">,</span> <span class="n">identifyer</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">itemtypes</span><span class="p">,</span> <span class="n">ge</span><span class="p">,</span> <span class="n">le</span><span class="p">,</span> <span class="n">gt</span><span class="p">,</span> <span class="n">lt</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper function for arg checking</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argtypes</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">type</span><span class="p">))</span>
@@ -616,7 +615,7 @@
 
 
 <div class="viewcode-block" id="check_arginlist"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.check_arginlist">[docs]</a><span class="k">def</span> <span class="nf">check_arginlist</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">lst</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;arg&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check that arg is in lst</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">check_arg</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
@@ -635,7 +634,7 @@
     <span class="n">gt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">lt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Type check for positional arguments</span>
 
 <span class="sd">    Arguments</span>
@@ -677,7 +676,7 @@
     <span class="n">gt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">lt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Type check for keyword arguments</span>
 
 <span class="sd">    Arguments</span>
@@ -709,7 +708,7 @@
 
 
 <div class="viewcode-block" id="quote_join"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.quote_join">[docs]</a><span class="k">def</span> <span class="nf">quote_join</span><span class="p">(</span><span class="n">list_of_str</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Join a list of strings with quotes and commans</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">list_of_str</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">))</span>
@@ -718,7 +717,7 @@
 
 
 <div class="viewcode-block" id="deprecated"><a class="viewcode-back" href="../../modelparameters.html#modelparameters.parameters.deprecated">[docs]</a><span class="k">def</span> <span class="nf">deprecated</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This is a decorator which can be used to mark functions</span>
 <span class="sd">    as deprecated. It will result in a warning being emitted</span>
 <span class="sd">    when the function is used.</span>
@@ -758,7 +757,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -779,7 +778,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>modelparameters.sympy.holonomic package &#8212; modelparameters 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -47,12 +46,12 @@
           <div class="body" role="main">
             
   <section id="modelparameters-sympy-holonomic-package">
-<h1>modelparameters.sympy.holonomic package<a class="headerlink" href="#modelparameters-sympy-holonomic-package" title="Permalink to this headline">¶</a></h1>
+<h1>modelparameters.sympy.holonomic package<a class="headerlink" href="#modelparameters-sympy-holonomic-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.holonomic.holonomic">
-<span id="modelparameters-sympy-holonomic-holonomic-module"></span><h2>modelparameters.sympy.holonomic.holonomic module<a class="headerlink" href="#module-modelparameters.sympy.holonomic.holonomic" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-holonomic-holonomic-module"></span><h2>modelparameters.sympy.holonomic.holonomic module<a class="headerlink" href="#module-modelparameters.sympy.holonomic.holonomic" title="Permalink to this heading">¶</a></h2>
 <p>This module implements Holonomic Functions and
 various operations on them.</p>
 <dl class="py function">
@@ -68,7 +67,7 @@ various operations on them.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.holonomic.holonomic.DifferentialOperator">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.holonomic.holonomic.</span></span><span class="sig-name descname"><span class="pre">DifferentialOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_of_poly</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/holonomic/holonomic.html#DifferentialOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.holonomic.holonomic.DifferentialOperator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Differential Operators are elements of Weyl Algebra. The Operators
 are defined by a list of polynomials in the base ring and the
 parent ring of the Operator i.e. the algebra it belongs to.</p>
@@ -107,7 +106,7 @@ the operator <code class="docutils literal notranslate"><span class="pre">Dx</sp
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.holonomic.holonomic.DifferentialOperatorAlgebra">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.holonomic.holonomic.</span></span><span class="sig-name descname"><span class="pre">DifferentialOperatorAlgebra</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/holonomic/holonomic.html#DifferentialOperatorAlgebra"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.holonomic.holonomic.DifferentialOperatorAlgebra" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>An Ore Algebra is a set of noncommutative polynomials in the
 intermediate <code class="docutils literal notranslate"><span class="pre">Dx</span></code> and coefficients in a base polynomial ring <span class="math notranslate nohighlight">\(A\)</span>.
 It follows the commutation rule:
@@ -147,7 +146,7 @@ Differential Operators.</p>
 <p>Returns an Algebra of Differential Operators also called Weyl Algebra
 and the operator for differentiation i.e. the <code class="docutils literal notranslate"><span class="pre">Dx</span></code> operator.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>base</strong> – Base polynomial ring for the algebra.
 The base polynomial ring is the ring of polynomials in <span class="math notranslate nohighlight">\(x\)</span> that
@@ -173,7 +172,7 @@ be either a noncommutative <code class="docutils literal notranslate"><span clas
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.holonomic.holonomic.HolonomicFunction">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.holonomic.holonomic.</span></span><span class="sig-name descname"><span class="pre">HolonomicFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">annihilator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/holonomic/holonomic.html#HolonomicFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A Holonomic Function is a solution to a linear homogeneous ordinary
 differential equation with polynomial coefficients. This differential
 equation can also be represented by an annihilator i.e. a Differential
@@ -515,14 +514,16 @@ it is returned as a symbol <span class="math notranslate nohighlight">\(C_j\)</s
 <p><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.series" title="modelparameters.sympy.holonomic.holonomic.HolonomicFunction.series"><code class="xref py py-obj docutils literal notranslate"><span class="pre">HolonomicFunction.series</span></code></a></p>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id1"><span class="brackets">1</span></dt>
-<dd><p><a class="reference external" href="https://hal.inria.fr/inria-00070025/document">https://hal.inria.fr/inria-00070025/document</a></p>
-</dd>
-<dt class="label" id="id2"><span class="brackets">2</span></dt>
-<dd><p><a class="reference external" href="http://www.risc.jku.at/publications/download/risc_2244/DIPLFORM.pdf">http://www.risc.jku.at/publications/download/risc_2244/DIPLFORM.pdf</a></p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id1" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://hal.inria.fr/inria-00070025/document">https://hal.inria.fr/inria-00070025/document</a></p>
+</aside>
+<aside class="footnote brackets" id="id2" role="note">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://www.risc.jku.at/publications/download/risc_2244/DIPLFORM.pdf">http://www.risc.jku.at/publications/download/risc_2244/DIPLFORM.pdf</a></p>
+</aside>
+</aside>
 </dd></dl>
 
 <dl class="py method">
@@ -539,7 +540,7 @@ Functions.</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.holonomic.holonomic.</span></span><span class="sig-name descname"><span class="pre">expr_to_holonomic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lenics</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initcond</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/holonomic/holonomic.html#expr_to_holonomic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.holonomic.holonomic.expr_to_holonomic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts a function or an expression to a holonomic function.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>func</strong> – The expression to be converted.</p></li>
 <li><p><strong>x</strong> – variable for the function.</p></li>
@@ -604,12 +605,12 @@ which initial conditions are required.</p>
 
 </section>
 <section id="module-modelparameters.sympy.holonomic.holonomicerrors">
-<span id="modelparameters-sympy-holonomic-holonomicerrors-module"></span><h2>modelparameters.sympy.holonomic.holonomicerrors module<a class="headerlink" href="#module-modelparameters.sympy.holonomic.holonomicerrors" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-holonomic-holonomicerrors-module"></span><h2>modelparameters.sympy.holonomic.holonomicerrors module<a class="headerlink" href="#module-modelparameters.sympy.holonomic.holonomicerrors" title="Permalink to this heading">¶</a></h2>
 <p>Common Exceptions for <cite>holonomic</cite> module.</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.holonomic.holonomicerrors.</span></span><span class="sig-name descname"><span class="pre">BaseHolonomicError</span></span><a class="reference internal" href="_modules/modelparameters/sympy/holonomic/holonomicerrors.html#BaseHolonomicError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError.new">
 <span class="sig-name descname"><span class="pre">new</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/holonomic/holonomicerrors.html#BaseHolonomicError.new"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError.new" title="Permalink to this definition">¶</a></dt>
@@ -620,35 +621,35 @@ which initial conditions are required.</p>
 <dl class="py exception">
 <dt class="sig sig-object py" id="modelparameters.sympy.holonomic.holonomicerrors.NotHolonomicError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.holonomic.holonomicerrors.</span></span><span class="sig-name descname"><span class="pre">NotHolonomicError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/holonomic/holonomicerrors.html#NotHolonomicError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.holonomic.holonomicerrors.NotHolonomicError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError" title="modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError" title="modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseHolonomicError</span></code></a></p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="modelparameters.sympy.holonomic.holonomicerrors.NotHyperSeriesError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.holonomic.holonomicerrors.</span></span><span class="sig-name descname"><span class="pre">NotHyperSeriesError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">holonomic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/holonomic/holonomicerrors.html#NotHyperSeriesError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.holonomic.holonomicerrors.NotHyperSeriesError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError" title="modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError" title="modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseHolonomicError</span></code></a></p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="modelparameters.sympy.holonomic.holonomicerrors.NotPowerSeriesError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.holonomic.holonomicerrors.</span></span><span class="sig-name descname"><span class="pre">NotPowerSeriesError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">holonomic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/holonomic/holonomicerrors.html#NotPowerSeriesError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.holonomic.holonomicerrors.NotPowerSeriesError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError" title="modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError" title="modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseHolonomicError</span></code></a></p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="modelparameters.sympy.holonomic.holonomicerrors.SingularityError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.holonomic.holonomicerrors.</span></span><span class="sig-name descname"><span class="pre">SingularityError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">holonomic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/holonomic/holonomicerrors.html#SingularityError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.holonomic.holonomicerrors.SingularityError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError" title="modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError" title="modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseHolonomicError</span></code></a></p>
 </dd></dl>
 
 </section>
 <section id="module-modelparameters.sympy.holonomic.linearsolver">
-<span id="modelparameters-sympy-holonomic-linearsolver-module"></span><h2>modelparameters.sympy.holonomic.linearsolver module<a class="headerlink" href="#module-modelparameters.sympy.holonomic.linearsolver" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-holonomic-linearsolver-module"></span><h2>modelparameters.sympy.holonomic.linearsolver module<a class="headerlink" href="#module-modelparameters.sympy.holonomic.linearsolver" title="Permalink to this heading">¶</a></h2>
 <p>Linear Solver for Holonomic Functions</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.holonomic.linearsolver.NewMatrix">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.holonomic.linearsolver.</span></span><span class="sig-name descname"><span class="pre">NewMatrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/holonomic/linearsolver.html#NewMatrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.holonomic.linearsolver.NewMatrix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.MutableDenseMatrix" title="modelparameters.sympy.matrices.dense.MutableDenseMatrix"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.matrices.dense.MutableDenseMatrix</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.dense.MutableDenseMatrix" title="modelparameters.sympy.matrices.dense.MutableDenseMatrix"><code class="xref py py-class docutils literal notranslate"><span class="pre">MutableDenseMatrix</span></code></a></p>
 <p>Supports elements which can’t be Sympified.
 See docstrings in sympy/matrices/matrices.py</p>
 <dl class="py method">
@@ -682,7 +683,7 @@ exists, it will be returned. If infinite solutions exist, it will
 be returned parametrically. If no solutions exist, It will throw
 ValueError.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>b</strong> (<em>Matrix</em>) – The right hand side of the equation to be solved for.  Must have
 the same number of rows as matrix A.</p></li>
@@ -693,7 +694,7 @@ in the solutions (column Matrix) will be returned by freevar, if
 the flag <cite>freevar</cite> is set to <cite>True</cite>.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>x</strong> (<em>Matrix</em>) – The matrix that will satisfy Ax = B.  Will have as many rows as
 matrix A has columns, and as many columns as matrix B.</p></li>
@@ -739,11 +740,12 @@ Matrix.</p></li>
 <p><code class="xref py py-obj docutils literal notranslate"><span class="pre">lower_triangular_solve</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">upper_triangular_solve</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">cholesky_solve</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">diagonal_solve</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">LDLsolve</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">LUsolve</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">QRsolve</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">pinv</span></code></p>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id3"><span class="brackets">1</span></dt>
-<dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Gaussian_elimination">http://en.wikipedia.org/wiki/Gaussian_elimination</a></p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id3" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Gaussian_elimination">http://en.wikipedia.org/wiki/Gaussian_elimination</a></p>
+</aside>
+</aside>
 </dd></dl>
 
 <dl class="py method">
@@ -771,16 +773,16 @@ Matrix.</p></li>
 
 </section>
 <section id="module-modelparameters.sympy.holonomic.numerical">
-<span id="modelparameters-sympy-holonomic-numerical-module"></span><h2>modelparameters.sympy.holonomic.numerical module<a class="headerlink" href="#module-modelparameters.sympy.holonomic.numerical" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-holonomic-numerical-module"></span><h2>modelparameters.sympy.holonomic.numerical module<a class="headerlink" href="#module-modelparameters.sympy.holonomic.numerical" title="Permalink to this heading">¶</a></h2>
 <p>Numerical Methods for Holonomic Functions</p>
 </section>
 <section id="module-modelparameters.sympy.holonomic.recurrence">
-<span id="modelparameters-sympy-holonomic-recurrence-module"></span><h2>modelparameters.sympy.holonomic.recurrence module<a class="headerlink" href="#module-modelparameters.sympy.holonomic.recurrence" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-holonomic-recurrence-module"></span><h2>modelparameters.sympy.holonomic.recurrence module<a class="headerlink" href="#module-modelparameters.sympy.holonomic.recurrence" title="Permalink to this heading">¶</a></h2>
 <p>Recurrence Operators</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.holonomic.recurrence.HolonomicSequence">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.holonomic.recurrence.</span></span><span class="sig-name descname"><span class="pre">HolonomicSequence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">recurrence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/holonomic/recurrence.html#HolonomicSequence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.holonomic.recurrence.HolonomicSequence" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A Holonomic Sequence is a type of sequence satisfying a linear homogeneous
 recurrence relation with Polynomial coefficients. Alternatively, A sequence
 is Holonomic if and only if its generating function is a Holonomic Function.</p>
@@ -789,7 +791,7 @@ is Holonomic if and only if its generating function is a Holonomic Function.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.holonomic.recurrence.RecurrenceOperator">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.holonomic.recurrence.</span></span><span class="sig-name descname"><span class="pre">RecurrenceOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_of_poly</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/holonomic/recurrence.html#RecurrenceOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.holonomic.recurrence.RecurrenceOperator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>The Recurrence Operators are defined by a list of polynomials
 in the base ring and the parent ring of the Operator.</p>
 <p>Takes a list of polynomials for each power of Sn and the
@@ -825,7 +827,7 @@ the operator <cite>Sn</cite>. See examples below.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.holonomic.recurrence.RecurrenceOperatorAlgebra">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.holonomic.recurrence.</span></span><span class="sig-name descname"><span class="pre">RecurrenceOperatorAlgebra</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/holonomic/recurrence.html#RecurrenceOperatorAlgebra"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.holonomic.recurrence.RecurrenceOperatorAlgebra" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A Recurrence Operator Algebra is a set of noncommutative polynomials
 in intermediate <cite>Sn</cite> and coefficients in a base ring A. It follows the
 commutation rule:
@@ -869,7 +871,7 @@ noncommutative Symbol or a string.</p>
 
 </section>
 <section id="module-modelparameters.sympy.holonomic">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.holonomic" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.holonomic" title="Permalink to this heading">¶</a></h2>
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">holonomic</span></code> module is intended to deal with holonomic functions along
 with various operations on them like addition, multiplication, composition,
 integration and differentiation. The module also implements various kinds of
@@ -890,11 +892,66 @@ other way around.</p>
     <ul>
 <li><a class="reference internal" href="#">modelparameters.sympy.holonomic package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.holonomic.holonomic">modelparameters.sympy.holonomic.holonomic module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.holonomic.holonomicerrors">modelparameters.sympy.holonomic.holonomicerrors module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.holonomic.linearsolver">modelparameters.sympy.holonomic.linearsolver module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.holonomic.holonomic">modelparameters.sympy.holonomic.holonomic module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.DMFdiff"><code class="docutils literal notranslate"><span class="pre">DMFdiff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.DMFsubs"><code class="docutils literal notranslate"><span class="pre">DMFsubs()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.DifferentialOperator"><code class="docutils literal notranslate"><span class="pre">DifferentialOperator</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.DifferentialOperator.is_singular"><code class="docutils literal notranslate"><span class="pre">DifferentialOperator.is_singular()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.DifferentialOperatorAlgebra"><code class="docutils literal notranslate"><span class="pre">DifferentialOperatorAlgebra</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.DifferentialOperators"><code class="docutils literal notranslate"><span class="pre">DifferentialOperators()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction"><code class="docutils literal notranslate"><span class="pre">HolonomicFunction</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.change_ics"><code class="docutils literal notranslate"><span class="pre">HolonomicFunction.change_ics()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.change_x"><code class="docutils literal notranslate"><span class="pre">HolonomicFunction.change_x()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.composition"><code class="docutils literal notranslate"><span class="pre">HolonomicFunction.composition()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.degree"><code class="docutils literal notranslate"><span class="pre">HolonomicFunction.degree()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.diff"><code class="docutils literal notranslate"><span class="pre">HolonomicFunction.diff()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.evalf"><code class="docutils literal notranslate"><span class="pre">HolonomicFunction.evalf()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.integrate"><code class="docutils literal notranslate"><span class="pre">HolonomicFunction.integrate()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.is_singularics"><code class="docutils literal notranslate"><span class="pre">HolonomicFunction.is_singularics()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.series"><code class="docutils literal notranslate"><span class="pre">HolonomicFunction.series()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.shift_x"><code class="docutils literal notranslate"><span class="pre">HolonomicFunction.shift_x()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.to_expr"><code class="docutils literal notranslate"><span class="pre">HolonomicFunction.to_expr()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.to_hyper"><code class="docutils literal notranslate"><span class="pre">HolonomicFunction.to_hyper()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.to_meijerg"><code class="docutils literal notranslate"><span class="pre">HolonomicFunction.to_meijerg()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.to_sequence"><code class="docutils literal notranslate"><span class="pre">HolonomicFunction.to_sequence()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.HolonomicFunction.unify"><code class="docutils literal notranslate"><span class="pre">HolonomicFunction.unify()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.expr_to_holonomic"><code class="docutils literal notranslate"><span class="pre">expr_to_holonomic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.from_hyper"><code class="docutils literal notranslate"><span class="pre">from_hyper()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomic.from_meijerg"><code class="docutils literal notranslate"><span class="pre">from_meijerg()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.holonomic.holonomicerrors">modelparameters.sympy.holonomic.holonomicerrors module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError"><code class="docutils literal notranslate"><span class="pre">BaseHolonomicError</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomicerrors.BaseHolonomicError.new"><code class="docutils literal notranslate"><span class="pre">BaseHolonomicError.new()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomicerrors.NotHolonomicError"><code class="docutils literal notranslate"><span class="pre">NotHolonomicError</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomicerrors.NotHyperSeriesError"><code class="docutils literal notranslate"><span class="pre">NotHyperSeriesError</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomicerrors.NotPowerSeriesError"><code class="docutils literal notranslate"><span class="pre">NotPowerSeriesError</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.holonomicerrors.SingularityError"><code class="docutils literal notranslate"><span class="pre">SingularityError</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.holonomic.linearsolver">modelparameters.sympy.holonomic.linearsolver module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.linearsolver.NewMatrix"><code class="docutils literal notranslate"><span class="pre">NewMatrix</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.linearsolver.NewMatrix.col_join"><code class="docutils literal notranslate"><span class="pre">NewMatrix.col_join()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.linearsolver.NewMatrix.gauss_jordan_solve"><code class="docutils literal notranslate"><span class="pre">NewMatrix.gauss_jordan_solve()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.linearsolver.NewMatrix.row_join"><code class="docutils literal notranslate"><span class="pre">NewMatrix.row_join()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.holonomic.numerical">modelparameters.sympy.holonomic.numerical module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.holonomic.recurrence">modelparameters.sympy.holonomic.recurrence module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.holonomic.recurrence">modelparameters.sympy.holonomic.recurrence module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.recurrence.HolonomicSequence"><code class="docutils literal notranslate"><span class="pre">HolonomicSequence</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.recurrence.RecurrenceOperator"><code class="docutils literal notranslate"><span class="pre">RecurrenceOperator</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.recurrence.RecurrenceOperatorAlgebra"><code class="docutils literal notranslate"><span class="pre">RecurrenceOperatorAlgebra</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.holonomic.recurrence.RecurrenceOperators"><code class="docutils literal notranslate"><span class="pre">RecurrenceOperators()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.holonomic">Module contents</a></li>
 </ul>
 </li>
@@ -927,7 +984,7 @@ other way around.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -955,7 +1012,7 @@ other way around.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

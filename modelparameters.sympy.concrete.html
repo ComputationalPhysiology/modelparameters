@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>modelparameters.sympy.concrete package &#8212; modelparameters 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -47,12 +46,12 @@
           <div class="body" role="main">
             
   <section id="modelparameters-sympy-concrete-package">
-<h1>modelparameters.sympy.concrete package<a class="headerlink" href="#modelparameters-sympy-concrete-package" title="Permalink to this headline">¶</a></h1>
+<h1>modelparameters.sympy.concrete package<a class="headerlink" href="#modelparameters-sympy-concrete-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.concrete.delta">
-<span id="modelparameters-sympy-concrete-delta-module"></span><h2>modelparameters.sympy.concrete.delta module<a class="headerlink" href="#module-modelparameters.sympy.concrete.delta" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-concrete-delta-module"></span><h2>modelparameters.sympy.concrete.delta module<a class="headerlink" href="#module-modelparameters.sympy.concrete.delta" title="Permalink to this heading">¶</a></h2>
 <p>This module implements sums and products containing the Kronecker Delta function.</p>
 <p class="rubric">References</p>
 <ul class="simple">
@@ -128,11 +127,11 @@ simplified KroneckerDelta terms, so we sum this expression.</p></li>
 
 </section>
 <section id="module-modelparameters.sympy.concrete.expr_with_intlimits">
-<span id="modelparameters-sympy-concrete-expr-with-intlimits-module"></span><h2>modelparameters.sympy.concrete.expr_with_intlimits module<a class="headerlink" href="#module-modelparameters.sympy.concrete.expr_with_intlimits" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-concrete-expr-with-intlimits-module"></span><h2>modelparameters.sympy.concrete.expr_with_intlimits module<a class="headerlink" href="#module-modelparameters.sympy.concrete.expr_with_intlimits" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.concrete.expr_with_intlimits.</span></span><span class="sig-name descname"><span class="pre">ExprWithIntLimits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/concrete/expr_with_intlimits.html#ExprWithIntLimits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits" title="modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits" title="modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExprWithLimits</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.change_index">
 <span class="sig-name descname"><span class="pre">change_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">var</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trafo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newvar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/concrete/expr_with_intlimits.html#ExprWithIntLimits.change_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.change_index" title="Permalink to this definition">¶</a></dt>
@@ -140,6 +139,8 @@ simplified KroneckerDelta terms, so we sum this expression.</p></li>
 <p>Perform a linear transformation <cite>x mapsto a x + b</cite> on the index variable
 <cite>x</cite>. For <cite>a</cite> the only values allowed are <cite>pm 1</cite>. A new variable to be used
 after the change of index can also be specified.</p>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">change_index(expr,</span> <span class="pre">var,</span> <span class="pre">trafo,</span> <span class="pre">newvar=None)</span></code> where <code class="docutils literal notranslate"><span class="pre">var</span></code> specifies the
 index variable <cite>x</cite> to transform. The transformation <code class="docutils literal notranslate"><span class="pre">trafo</span></code> must be linear
 and given in terms of <code class="docutils literal notranslate"><span class="pre">var</span></code>. If the optional argument <code class="docutils literal notranslate"><span class="pre">newvar</span></code> is
@@ -216,6 +217,7 @@ equal +1 or -1.</p>
 <p class="admonition-title">See also</p>
 <p><code class="xref py py-obj docutils literal notranslate"><span class="pre">sympy.concrete.simplification.index</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">sympy.concrete.simplification.reorder_limit</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">sympy.concrete.simplification.reorder</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">sympy.concrete.simplification.reverse_order</span></code></p>
 </div>
+</section>
 </dd></dl>
 
 <dl class="py attribute">
@@ -227,6 +229,8 @@ equal +1 or -1.</p>
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.index">
 <span class="sig-name descname"><span class="pre">index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/concrete/expr_with_intlimits.html#ExprWithIntLimits.index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.index" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the index of a dummy variable in the list of limits.</p>
+<section id="id1">
+<h3>Usage<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">index(expr,</span> <span class="pre">x)</span></code>  returns the index of the dummy variable <code class="docutils literal notranslate"><span class="pre">x</span></code> in the
 limits of <code class="docutils literal notranslate"><span class="pre">expr</span></code>. Note that we start counting with 0 at the inner-most
 limits tuple.</p>
@@ -247,6 +251,7 @@ limits tuple.</p>
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.reorder_limit" title="modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.reorder_limit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reorder_limit</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.reorder" title="modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.reorder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reorder</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reverse_order</span></code></p>
 </div>
+</section>
 </dd></dl>
 
 <dl class="py attribute">
@@ -258,6 +263,8 @@ limits tuple.</p>
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.reorder">
 <span class="sig-name descname"><span class="pre">reorder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/concrete/expr_with_intlimits.html#ExprWithIntLimits.reorder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.reorder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reorder limits in a expression containing a Sum or a Product.</p>
+<section id="id2">
+<h3>Usage<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">expr.reorder(*arg)</span></code> reorders the limits in the expression <code class="docutils literal notranslate"><span class="pre">expr</span></code>
 according to the list of tuples given by <code class="docutils literal notranslate"><span class="pre">arg</span></code>. These tuples can
 contain numerical indices or index variable names or involve both.</p>
@@ -296,12 +303,15 @@ with the inner-most one:</p>
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.reorder_limit" title="modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.reorder_limit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reorder_limit</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.index" title="modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reverse_order</span></code></p>
 </div>
+</section>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.reorder_limit">
 <span class="sig-name descname"><span class="pre">reorder_limit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/concrete/expr_with_intlimits.html#ExprWithIntLimits.reorder_limit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.reorder_limit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interchange two limit tuples of a Sum or Product expression.</p>
+<section id="id3">
+<h3>Usage<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">expr.reorder_limit(x,</span> <span class="pre">y)</span></code> interchanges two limit tuples. The
 arguments <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> are integers corresponding to the index
 variables of the two limits which are to be interchanged. The
@@ -325,6 +335,7 @@ expression <code class="docutils literal notranslate"><span class="pre">expr</sp
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.index" title="modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.index"><code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.reorder" title="modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.reorder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reorder</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reverse_order</span></code></p>
 </div>
+</section>
 </dd></dl>
 
 </dd></dl>
@@ -332,17 +343,17 @@ expression <code class="docutils literal notranslate"><span class="pre">expr</sp
 <dl class="py exception">
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.expr_with_intlimits.ReorderError">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.concrete.expr_with_intlimits.</span></span><span class="sig-name descname"><span class="pre">ReorderError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/concrete/expr_with_intlimits.html#ReorderError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.concrete.expr_with_intlimits.ReorderError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NotImplementedError" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotImplementedError</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NotImplementedError" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">NotImplementedError</span></code></a></p>
 <p>Exception raised when trying to reorder dependent limits.</p>
 </dd></dl>
 
 </section>
 <section id="module-modelparameters.sympy.concrete.expr_with_limits">
-<span id="modelparameters-sympy-concrete-expr-with-limits-module"></span><h2>modelparameters.sympy.concrete.expr_with_limits module<a class="headerlink" href="#module-modelparameters.sympy.concrete.expr_with_limits" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-concrete-expr-with-limits-module"></span><h2>modelparameters.sympy.concrete.expr_with_limits module<a class="headerlink" href="#module-modelparameters.sympy.concrete.expr_with_limits" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.expr_with_limits.AddWithLimits">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.concrete.expr_with_limits.</span></span><span class="sig-name descname"><span class="pre">AddWithLimits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/concrete/expr_with_limits.html#AddWithLimits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.concrete.expr_with_limits.AddWithLimits" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits" title="modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits" title="modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExprWithLimits</span></code></a></p>
 <p>Represents unevaluated oriented additions.
 Parent class for Integral and Sum.</p>
 <dl class="py attribute">
@@ -360,7 +371,7 @@ Parent class for Integral and Sum.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.concrete.expr_with_limits.</span></span><span class="sig-name descname"><span class="pre">ExprWithLimits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/concrete/expr_with_limits.html#ExprWithLimits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.expr.Expr</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits.as_dummy">
 <span class="sig-name descname"><span class="pre">as_dummy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/concrete/expr_with_limits.html#ExprWithLimits.as_dummy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits.as_dummy" title="Permalink to this definition">¶</a></dt>
@@ -487,7 +498,7 @@ that take on a specific value (i.e. the dummy symbols).</p>
 
 </section>
 <section id="module-modelparameters.sympy.concrete.gosper">
-<span id="modelparameters-sympy-concrete-gosper-module"></span><h2>modelparameters.sympy.concrete.gosper module<a class="headerlink" href="#module-modelparameters.sympy.concrete.gosper" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-concrete-gosper-module"></span><h2>modelparameters.sympy.concrete.gosper module<a class="headerlink" href="#module-modelparameters.sympy.concrete.gosper" title="Permalink to this heading">¶</a></h2>
 <p>Gosper’s algorithm for hypergeometric summation.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.gosper.gosper_normal">
@@ -549,12 +560,13 @@ in closed form as a sum of hypergeometric terms.</p>
 </pre></div>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id1"><span class="brackets">1</span></dt>
-<dd><p>Marko Petkovsek, Herbert S. Wilf, Doron Zeilberger, A = B,
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id4" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>Marko Petkovsek, Herbert S. Wilf, Doron Zeilberger, A = B,
 AK Peters, Ltd., Wellesley, MA, USA, 1997, pp. 73–100</p>
-</dd>
-</dl>
+</aside>
+</aside>
 </dd></dl>
 
 <dl class="py function">
@@ -580,7 +592,7 @@ term <cite>g_n</cite> such that <cite>g_{n+1} - g_n = f_n</cite>.</p>
 
 </section>
 <section id="module-modelparameters.sympy.concrete.guess">
-<span id="modelparameters-sympy-concrete-guess-module"></span><h2>modelparameters.sympy.concrete.guess module<a class="headerlink" href="#module-modelparameters.sympy.concrete.guess" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-concrete-guess-module"></span><h2>modelparameters.sympy.concrete.guess module<a class="headerlink" href="#module-modelparameters.sympy.concrete.guess" title="Permalink to this heading">¶</a></h2>
 <p>Various algorithms for helping identifying numbers and sequences.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.guess.find_simple_recurrence">
@@ -811,11 +823,11 @@ values, it may be used in some cases for approximating real numbers.
 
 </section>
 <section id="module-modelparameters.sympy.concrete.products">
-<span id="modelparameters-sympy-concrete-products-module"></span><h2>modelparameters.sympy.concrete.products module<a class="headerlink" href="#module-modelparameters.sympy.concrete.products" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-concrete-products-module"></span><h2>modelparameters.sympy.concrete.products module<a class="headerlink" href="#module-modelparameters.sympy.concrete.products" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.products.Product">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.concrete.products.</span></span><span class="sig-name descname"><span class="pre">Product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/concrete/products.html#Product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.concrete.products.Product" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits" title="modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits" title="modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExprWithIntLimits</span></code></a></p>
 <p>Represents unevaluated products.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Product</span></code> represents a finite or infinite product, with the first
 argument being the general form of terms in the series, and the second
@@ -823,6 +835,8 @@ argument being <code class="docutils literal notranslate"><span class="pre">(dum
 taking all integer values from <code class="docutils literal notranslate"><span class="pre">start</span></code> through <code class="docutils literal notranslate"><span class="pre">end</span></code>. In accordance
 with long-standing mathematical convention, the end term is included in
 the product.</p>
+<section id="finite-products">
+<h3>Finite products<a class="headerlink" href="#finite-products" title="Permalink to this heading">¶</a></h3>
 <p>For finite products (and products with symbolic limits assumed to be finite)
 we follow the analogue of the summation convention described by Karr [1],
 especially definition 3 of section 1.4. The product:</p>
@@ -957,19 +971,22 @@ those products by interchanging the limits according to the above rules:</p>
 <p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Sum</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">summation</span></code>, <a class="reference internal" href="#modelparameters.sympy.concrete.products.product" title="modelparameters.sympy.concrete.products.product"><code class="xref py py-obj docutils literal notranslate"><span class="pre">product</span></code></a></p>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets">1</span></dt>
-<dd><p>Michael Karr, “Summation in Finite Terms”, Journal of the ACM,
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id5" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>Michael Karr, “Summation in Finite Terms”, Journal of the ACM,
 Volume 28 Issue 2, April 1981, Pages 305-350
 <a class="reference external" href="http://dl.acm.org/citation.cfm?doid=322248.322255">http://dl.acm.org/citation.cfm?doid=322248.322255</a></p>
-</dd>
-<dt class="label" id="id3"><span class="brackets">2</span></dt>
-<dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Multiplication#Capital_Pi_notation">http://en.wikipedia.org/wiki/Multiplication#Capital_Pi_notation</a></p>
-</dd>
-<dt class="label" id="id4"><span class="brackets">3</span></dt>
-<dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Empty_product">http://en.wikipedia.org/wiki/Empty_product</a></p>
-</dd>
-</dl>
+</aside>
+<aside class="footnote brackets" id="id6" role="note">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Multiplication#Capital_Pi_notation">http://en.wikipedia.org/wiki/Multiplication#Capital_Pi_notation</a></p>
+</aside>
+<aside class="footnote brackets" id="id7" role="note">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Empty_product">http://en.wikipedia.org/wiki/Empty_product</a></p>
+</aside>
+</aside>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.products.Product.default_assumptions">
 <span class="sig-name descname"><span class="pre">default_assumptions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#modelparameters.sympy.concrete.products.Product.default_assumptions" title="Permalink to this definition">¶</a></dt>
@@ -1039,11 +1056,12 @@ value if and only if the sum:</p>
 \[\sum_{1 \leq i &lt; \infty} \log{f(n)}\]</div>
 <p>converges.</p>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id5"><span class="brackets">1</span></dt>
-<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Infinite_product">https://en.wikipedia.org/wiki/Infinite_product</a></p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id8" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Infinite_product">https://en.wikipedia.org/wiki/Infinite_product</a></p>
+</aside>
+</aside>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Interval</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Product</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">oo</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1063,6 +1081,8 @@ value if and only if the sum:</p>
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.products.Product.reverse_order">
 <span class="sig-name descname"><span class="pre">reverse_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">indices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/concrete/products.html#Product.reverse_order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.concrete.products.Product.reverse_order" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reverse the order of a limit in a Product.</p>
+<section id="id9">
+<h4>Usage<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">reverse_order(expr,</span> <span class="pre">*indices)</span></code> reverses some limits in the expression
 <code class="docutils literal notranslate"><span class="pre">expr</span></code> which can be either a <code class="docutils literal notranslate"><span class="pre">Sum</span></code> or a <code class="docutils literal notranslate"><span class="pre">Product</span></code>. The selectors in
 the argument <code class="docutils literal notranslate"><span class="pre">indices</span></code> specify some indices whose limits get reversed.
@@ -1113,13 +1133,15 @@ are several symbols with the same name.</p>
 <p><code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reorder_limit</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reorder</span></code></p>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id6"><span class="brackets">1</span></dt>
-<dd><p>Michael Karr, “Summation in Finite Terms”, Journal of the ACM,
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id10" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>Michael Karr, “Summation in Finite Terms”, Journal of the ACM,
 Volume 28 Issue 2, April 1981, Pages 305-350
 <a class="reference external" href="http://dl.acm.org/citation.cfm?doid=322248.322255">http://dl.acm.org/citation.cfm?doid=322248.322255</a></p>
-</dd>
-</dl>
+</aside>
+</aside>
+</section>
 </dd></dl>
 
 <dl class="py property">
@@ -1127,6 +1149,7 @@ Volume 28 Issue 2, April 1981, Pages 305-350
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">term</span></span><a class="headerlink" href="#modelparameters.sympy.concrete.products.Product.term" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
+</section>
 </dd></dl>
 
 <dl class="py function">
@@ -1161,11 +1184,11 @@ Repeated products can be computed by introducing additional symbols tuples:</p>
 
 </section>
 <section id="module-modelparameters.sympy.concrete.summations">
-<span id="modelparameters-sympy-concrete-summations-module"></span><h2>modelparameters.sympy.concrete.summations module<a class="headerlink" href="#module-modelparameters.sympy.concrete.summations" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-concrete-summations-module"></span><h2>modelparameters.sympy.concrete.summations module<a class="headerlink" href="#module-modelparameters.sympy.concrete.summations" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.summations.Sum">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.concrete.summations.</span></span><span class="sig-name descname"><span class="pre">Sum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/concrete/summations.html#Sum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.concrete.summations.Sum" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.AddWithLimits" title="modelparameters.sympy.concrete.expr_with_limits.AddWithLimits"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.concrete.expr_with_limits.AddWithLimits</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits" title="modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.AddWithLimits" title="modelparameters.sympy.concrete.expr_with_limits.AddWithLimits"><code class="xref py py-class docutils literal notranslate"><span class="pre">AddWithLimits</span></code></a>, <a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits" title="modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExprWithIntLimits</span></code></a></p>
 <p>Represents unevaluated summation.</p>
 <p><code class="docutils literal notranslate"><span class="pre">Sum</span></code> represents a finite or infinite series, with the first argument
 being the general form of terms in the series, and the second argument
@@ -1173,6 +1196,8 @@ being <code class="docutils literal notranslate"><span class="pre">(dummy_variab
 all integer values from <code class="docutils literal notranslate"><span class="pre">start</span></code> through <code class="docutils literal notranslate"><span class="pre">end</span></code>. In accordance with
 long-standing mathematical convention, the end term is included in the
 summation.</p>
+<section id="finite-sums">
+<h3>Finite sums<a class="headerlink" href="#finite-sums" title="Permalink to this heading">¶</a></h3>
 <p>For finite sums (and sums with symbolic limits assumed to be finite) we
 follow the summation convention described by Karr [1], especially
 definition 3 of section 1.4. The sum:</p>
@@ -1261,19 +1286,22 @@ those sums by interchanging the limits according to the above rules:</p>
 <p><a class="reference internal" href="#modelparameters.sympy.concrete.summations.summation" title="modelparameters.sympy.concrete.summations.summation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">summation</span></code></a>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">Product</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">product</span></code></p>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id7"><span class="brackets">1</span></dt>
-<dd><p>Michael Karr, “Summation in Finite Terms”, Journal of the ACM,
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id11" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>Michael Karr, “Summation in Finite Terms”, Journal of the ACM,
 Volume 28 Issue 2, April 1981, Pages 305-350
 <a class="reference external" href="http://dl.acm.org/citation.cfm?doid=322248.322255">http://dl.acm.org/citation.cfm?doid=322248.322255</a></p>
-</dd>
-<dt class="label" id="id8"><span class="brackets">2</span></dt>
-<dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Summation#Capital-sigma_notation">http://en.wikipedia.org/wiki/Summation#Capital-sigma_notation</a></p>
-</dd>
-<dt class="label" id="id9"><span class="brackets">3</span></dt>
-<dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Empty_sum">http://en.wikipedia.org/wiki/Empty_sum</a></p>
-</dd>
-</dl>
+</aside>
+<aside class="footnote brackets" id="id12" role="note">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Summation#Capital-sigma_notation">http://en.wikipedia.org/wiki/Summation#Capital-sigma_notation</a></p>
+</aside>
+<aside class="footnote brackets" id="id13" role="note">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Empty_sum">http://en.wikipedia.org/wiki/Empty_sum</a></p>
+</aside>
+</aside>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.summations.Sum.default_assumptions">
 <span class="sig-name descname"><span class="pre">default_assumptions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{}</span></em><a class="headerlink" href="#modelparameters.sympy.concrete.summations.Sum.default_assumptions" title="Permalink to this definition">¶</a></dt>
@@ -1362,11 +1390,12 @@ zeta function does not converge unless <cite>s &gt; 1</cite> and <cite>q &gt; 0<
 <p>Same as checking convergence of absolute value of sequence_term of
 an infinite series.</p>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id10"><span class="brackets">1</span></dt>
-<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Absolute_convergence">https://en.wikipedia.org/wiki/Absolute_convergence</a></p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id14" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Absolute_convergence">https://en.wikipedia.org/wiki/Absolute_convergence</a></p>
+</aside>
+</aside>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Sum</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">oo</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1422,11 +1451,12 @@ divergence test, root test, integral test, alternating series test,
 comparison tests, Dirichlet tests. It returns true if Sum is convergent
 and false if divergent and NotImplementedError if it can not be checked.</p>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id11"><span class="brackets">1</span></dt>
-<dd><p><a class="reference external" href="https://en.wikipedia.org/wiki/Convergence_tests">https://en.wikipedia.org/wiki/Convergence_tests</a></p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id15" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Convergence_tests">https://en.wikipedia.org/wiki/Convergence_tests</a></p>
+</aside>
+</aside>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">factorial</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">Sum</span><span class="p">,</span> <span class="n">Symbol</span><span class="p">,</span> <span class="n">oo</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -1450,6 +1480,8 @@ and false if divergent and NotImplementedError if it can not be checked.</p>
 <dt class="sig sig-object py" id="modelparameters.sympy.concrete.summations.Sum.reverse_order">
 <span class="sig-name descname"><span class="pre">reverse_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">indices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/concrete/summations.html#Sum.reverse_order"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.concrete.summations.Sum.reverse_order" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reverse the order of a limit in a Sum.</p>
+<section id="id16">
+<h4>Usage<a class="headerlink" href="#id16" title="Permalink to this heading">¶</a></h4>
 <p><code class="docutils literal notranslate"><span class="pre">reverse_order(self,</span> <span class="pre">*indices)</span></code> reverses some limits in the expression
 <code class="docutils literal notranslate"><span class="pre">self</span></code> which can be either a <code class="docutils literal notranslate"><span class="pre">Sum</span></code> or a <code class="docutils literal notranslate"><span class="pre">Product</span></code>. The selectors in
 the argument <code class="docutils literal notranslate"><span class="pre">indices</span></code> specify some indices whose limits get reversed.
@@ -1496,15 +1528,18 @@ are several symbols with the same name.</p>
 <p><code class="xref py py-obj docutils literal notranslate"><span class="pre">index</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reorder_limit</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">reorder</span></code></p>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id12"><span class="brackets">1</span></dt>
-<dd><p>Michael Karr, “Summation in Finite Terms”, Journal of the ACM,
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id17" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>Michael Karr, “Summation in Finite Terms”, Journal of the ACM,
 Volume 28 Issue 2, April 1981, Pages 305-350
 <a class="reference external" href="http://dl.acm.org/citation.cfm?doid=322248.322255">http://dl.acm.org/citation.cfm?doid=322248.322255</a></p>
-</dd>
-</dl>
+</aside>
+</aside>
+</section>
 </dd></dl>
 
+</section>
 </dd></dl>
 
 <dl class="py function">
@@ -1595,7 +1630,7 @@ n difference between the indexes of L and R</p>
 
 </section>
 <section id="module-modelparameters.sympy.concrete">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.concrete" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.concrete" title="Permalink to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -1611,13 +1646,93 @@ n difference between the indexes of L and R</p>
     <ul>
 <li><a class="reference internal" href="#">modelparameters.sympy.concrete package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.concrete.delta">modelparameters.sympy.concrete.delta module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.concrete.expr_with_intlimits">modelparameters.sympy.concrete.expr_with_intlimits module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.concrete.expr_with_limits">modelparameters.sympy.concrete.expr_with_limits module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.concrete.gosper">modelparameters.sympy.concrete.gosper module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.concrete.guess">modelparameters.sympy.concrete.guess module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.concrete.products">modelparameters.sympy.concrete.products module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.concrete.summations">modelparameters.sympy.concrete.summations module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.concrete.delta">modelparameters.sympy.concrete.delta module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.delta.deltaproduct"><code class="docutils literal notranslate"><span class="pre">deltaproduct()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.delta.deltasummation"><code class="docutils literal notranslate"><span class="pre">deltasummation()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.concrete.expr_with_intlimits">modelparameters.sympy.concrete.expr_with_intlimits module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits"><code class="docutils literal notranslate"><span class="pre">ExprWithIntLimits</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.change_index"><code class="docutils literal notranslate"><span class="pre">ExprWithIntLimits.change_index()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.default_assumptions"><code class="docutils literal notranslate"><span class="pre">ExprWithIntLimits.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.index"><code class="docutils literal notranslate"><span class="pre">ExprWithIntLimits.index()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.is_commutative"><code class="docutils literal notranslate"><span class="pre">ExprWithIntLimits.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.reorder"><code class="docutils literal notranslate"><span class="pre">ExprWithIntLimits.reorder()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ExprWithIntLimits.reorder_limit"><code class="docutils literal notranslate"><span class="pre">ExprWithIntLimits.reorder_limit()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_intlimits.ReorderError"><code class="docutils literal notranslate"><span class="pre">ReorderError</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.concrete.expr_with_limits">modelparameters.sympy.concrete.expr_with_limits module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.AddWithLimits"><code class="docutils literal notranslate"><span class="pre">AddWithLimits</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.AddWithLimits.default_assumptions"><code class="docutils literal notranslate"><span class="pre">AddWithLimits.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.AddWithLimits.is_commutative"><code class="docutils literal notranslate"><span class="pre">AddWithLimits.is_commutative</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits"><code class="docutils literal notranslate"><span class="pre">ExprWithLimits</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits.as_dummy"><code class="docutils literal notranslate"><span class="pre">ExprWithLimits.as_dummy()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits.default_assumptions"><code class="docutils literal notranslate"><span class="pre">ExprWithLimits.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits.free_symbols"><code class="docutils literal notranslate"><span class="pre">ExprWithLimits.free_symbols</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits.function"><code class="docutils literal notranslate"><span class="pre">ExprWithLimits.function</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits.is_commutative"><code class="docutils literal notranslate"><span class="pre">ExprWithLimits.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits.is_number"><code class="docutils literal notranslate"><span class="pre">ExprWithLimits.is_number</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits.limits"><code class="docutils literal notranslate"><span class="pre">ExprWithLimits.limits</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.expr_with_limits.ExprWithLimits.variables"><code class="docutils literal notranslate"><span class="pre">ExprWithLimits.variables</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.concrete.gosper">modelparameters.sympy.concrete.gosper module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.gosper.gosper_normal"><code class="docutils literal notranslate"><span class="pre">gosper_normal()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.gosper.gosper_sum"><code class="docutils literal notranslate"><span class="pre">gosper_sum()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.gosper.gosper_term"><code class="docutils literal notranslate"><span class="pre">gosper_term()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.concrete.guess">modelparameters.sympy.concrete.guess module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.guess.find_simple_recurrence"><code class="docutils literal notranslate"><span class="pre">find_simple_recurrence()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.guess.find_simple_recurrence_vector"><code class="docutils literal notranslate"><span class="pre">find_simple_recurrence_vector()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.guess.guess"><code class="docutils literal notranslate"><span class="pre">guess()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.guess.guess_generating_function"><code class="docutils literal notranslate"><span class="pre">guess_generating_function()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.guess.guess_generating_function_rational"><code class="docutils literal notranslate"><span class="pre">guess_generating_function_rational()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.guess.rationalize"><code class="docutils literal notranslate"><span class="pre">rationalize()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.concrete.products">modelparameters.sympy.concrete.products module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.products.Product"><code class="docutils literal notranslate"><span class="pre">Product</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.products.Product.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Product.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.products.Product.doit"><code class="docutils literal notranslate"><span class="pre">Product.doit()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.products.Product.function"><code class="docutils literal notranslate"><span class="pre">Product.function</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.products.Product.is_commutative"><code class="docutils literal notranslate"><span class="pre">Product.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.products.Product.is_convergent"><code class="docutils literal notranslate"><span class="pre">Product.is_convergent()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.products.Product.reverse_order"><code class="docutils literal notranslate"><span class="pre">Product.reverse_order()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.products.Product.term"><code class="docutils literal notranslate"><span class="pre">Product.term</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.products.product"><code class="docutils literal notranslate"><span class="pre">product()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.concrete.summations">modelparameters.sympy.concrete.summations module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.summations.Sum"><code class="docutils literal notranslate"><span class="pre">Sum</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.summations.Sum.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Sum.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.summations.Sum.doit"><code class="docutils literal notranslate"><span class="pre">Sum.doit()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.summations.Sum.euler_maclaurin"><code class="docutils literal notranslate"><span class="pre">Sum.euler_maclaurin()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.summations.Sum.eval_zeta_function"><code class="docutils literal notranslate"><span class="pre">Sum.eval_zeta_function()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.summations.Sum.is_absolutely_convergent"><code class="docutils literal notranslate"><span class="pre">Sum.is_absolutely_convergent()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.summations.Sum.is_commutative"><code class="docutils literal notranslate"><span class="pre">Sum.is_commutative</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.summations.Sum.is_convergent"><code class="docutils literal notranslate"><span class="pre">Sum.is_convergent()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.summations.Sum.reverse_order"><code class="docutils literal notranslate"><span class="pre">Sum.reverse_order()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.summations.eval_sum"><code class="docutils literal notranslate"><span class="pre">eval_sum()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.summations.eval_sum_direct"><code class="docutils literal notranslate"><span class="pre">eval_sum_direct()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.summations.eval_sum_hyper"><code class="docutils literal notranslate"><span class="pre">eval_sum_hyper()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.summations.eval_sum_symbolic"><code class="docutils literal notranslate"><span class="pre">eval_sum_symbolic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.summations.summation"><code class="docutils literal notranslate"><span class="pre">summation()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.summations.telescopic"><code class="docutils literal notranslate"><span class="pre">telescopic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.concrete.summations.telescopic_direct"><code class="docutils literal notranslate"><span class="pre">telescopic_direct()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.concrete">Module contents</a></li>
 </ul>
 </li>
@@ -1650,7 +1765,7 @@ n difference between the indexes of L and R</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1678,7 +1793,7 @@ n difference between the indexes of L and R</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

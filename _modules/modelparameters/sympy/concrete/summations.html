@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -60,7 +59,7 @@
 
 
 <div class="viewcode-block" id="Sum"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.summations.Sum">[docs]</a><span class="k">class</span> <span class="nc">Sum</span><span class="p">(</span><span class="n">AddWithLimits</span><span class="p">,</span> <span class="n">ExprWithIntLimits</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents unevaluated summation.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents unevaluated summation.</span>
 
 <span class="sd">    ``Sum`` represents a finite or infinite series, with the first argument</span>
 <span class="sd">    being the general form of terms in the series, and the second argument</span>
@@ -244,7 +243,7 @@
         <span class="k">return</span> <span class="n">f</span></div>
 
 <div class="viewcode-block" id="Sum.eval_zeta_function"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.summations.Sum.eval_zeta_function">[docs]</a>    <span class="k">def</span> <span class="nf">eval_zeta_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">limits</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Check whether the function matches with the zeta function.</span>
 <span class="sd">        If it matches, then return a `Piecewise` expression because</span>
 <span class="sd">        zeta function does not converge unless `s &gt; 1` and `q &gt; 0`</span>
@@ -259,7 +258,7 @@
             <span class="k">return</span> <span class="n">Piecewise</span><span class="p">((</span><span class="n">coeff</span> <span class="o">*</span> <span class="n">zeta</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">q</span><span class="p">),</span> <span class="n">And</span><span class="p">(</span><span class="n">q</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">s</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)),</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_derivative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Differentiate wrt x as long as x is not in the free symbols of any of</span>
 <span class="sd">        the upper or lower limits.</span>
 
@@ -344,7 +343,7 @@
         <span class="k">return</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="Sum.is_convergent"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.summations.Sum.is_convergent">[docs]</a>    <span class="k">def</span> <span class="nf">is_convergent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Checks for the convergence of a Sum.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Checks for the convergence of a Sum.</span>
 
 <span class="sd">        We divide the study of convergence of infinite sums and products in</span>
 <span class="sd">        two parts.</span>
@@ -566,7 +565,7 @@
                                   <span class="s2">&quot;is not yet implemented&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">sequence_term</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Sum.is_absolutely_convergent"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.summations.Sum.is_absolutely_convergent">[docs]</a>    <span class="k">def</span> <span class="nf">is_absolutely_convergent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks for the absolute convergence of an infinite series.</span>
 
 <span class="sd">        Same as checking convergence of absolute value of sequence_term of</span>
@@ -595,7 +594,7 @@
         <span class="k">return</span> <span class="n">Sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">limits</span><span class="p">)</span><span class="o">.</span><span class="n">is_convergent</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Sum.euler_maclaurin"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.summations.Sum.euler_maclaurin">[docs]</a>    <span class="k">def</span> <span class="nf">euler_maclaurin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">eval_integral</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return an Euler-Maclaurin approximation of self, where m is the</span>
 <span class="sd">        number of leading terms to sum directly and n is the number of</span>
 <span class="sd">        terms in the tail.</span>
@@ -700,7 +699,7 @@
 
 
 <div class="viewcode-block" id="Sum.reverse_order"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.summations.Sum.reverse_order">[docs]</a>    <span class="k">def</span> <span class="nf">reverse_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">indices</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reverse the order of a limit in a Sum.</span>
 
 <span class="sd">        Usage</span>
@@ -779,7 +778,7 @@
 
 
 <div class="viewcode-block" id="summation"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.summations.summation">[docs]</a><span class="k">def</span> <span class="nf">summation</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the summation of f with respect to symbols.</span>
 
 <span class="sd">    The notation for symbols is similar to the notation used in Integral.</span>
@@ -826,7 +825,7 @@
 
 
 <div class="viewcode-block" id="telescopic_direct"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.summations.telescopic_direct">[docs]</a><span class="k">def</span> <span class="nf">telescopic_direct</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">limits</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the direct summation of the terms of a telescopic sum</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the direct summation of the terms of a telescopic sum</span>
 
 <span class="sd">    L is the term with lower index</span>
 <span class="sd">    R is the term with higher index</span>
@@ -848,7 +847,7 @@
 
 
 <div class="viewcode-block" id="telescopic"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.summations.telescopic">[docs]</a><span class="k">def</span> <span class="nf">telescopic</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">limits</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Tries to perform the summation using the telescopic property</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Tries to perform the summation using the telescopic property</span>
 
 <span class="sd">    return None if not possible</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -1031,7 +1030,7 @@
 
 
 <span class="k">def</span> <span class="nf">_eval_sum_hyper</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Returns (res, cond). Sums from a to oo. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns (res, cond). Sums from a to oo. &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..functions</span> <span class="kn">import</span> <span class="n">hyper</span>
     <span class="kn">from</span> <span class="nn">..simplify</span> <span class="kn">import</span> <span class="n">hyperexpand</span><span class="p">,</span> <span class="n">hypersimp</span><span class="p">,</span> <span class="n">fraction</span><span class="p">,</span> <span class="n">simplify</span>
     <span class="kn">from</span> <span class="nn">..polys.polytools</span> <span class="kn">import</span> <span class="n">Poly</span><span class="p">,</span> <span class="n">factor</span>
@@ -1153,7 +1152,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1174,7 +1173,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

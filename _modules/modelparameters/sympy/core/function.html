@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -99,7 +98,7 @@
 <span class="kn">import</span> <span class="nn">collections</span>
 
 <span class="k">def</span> <span class="nf">_coeff_isneg</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return True if the leading Number is negative.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True if the leading Number is negative.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -171,7 +170,7 @@
 
 
 <div class="viewcode-block" id="FunctionClass"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.FunctionClass">[docs]</a><span class="k">class</span> <span class="nc">FunctionClass</span><span class="p">(</span><span class="n">ManagedProperties</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for function classes. FunctionClass is a subclass of type.</span>
 
 <span class="sd">    Use Function(&#39;&lt;function name&gt;&#39; [ , signature ]) to create</span>
@@ -202,7 +201,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">__signature__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Allow Python 3&#39;s inspect.signature to give a useful signature for</span>
 <span class="sd">        Function subclasses.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -218,7 +217,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">nargs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a set of the allowed number of arguments for the function.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a set of the allowed number of arguments for the function.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -261,7 +260,7 @@
 
 
 <div class="viewcode-block" id="Application"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.Application">[docs]</a><span class="k">class</span> <span class="nc">Application</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">FunctionClass</span><span class="p">,</span> <span class="n">Basic</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for applied functions.</span>
 
 <span class="sd">    Instances of Application represent the result of applying an application of</span>
@@ -315,7 +314,7 @@
 
 <div class="viewcode-block" id="Application.eval"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.Application.eval">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a canonical form of cls applied to arguments args.</span>
 
 <span class="sd">        The eval() method is called when the class cls is about to be</span>
@@ -353,7 +352,7 @@
 
 
 <div class="viewcode-block" id="Function"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function">[docs]</a><span class="k">class</span> <span class="nc">Function</span><span class="p">(</span><span class="n">Application</span><span class="p">,</span> <span class="n">Expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class for applied mathematical functions.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for applied mathematical functions.</span>
 
 <span class="sd">    It also serves as a constructor for undefined function classes.</span>
 
@@ -425,7 +424,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">_diff_wrt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Allow derivatives wrt functions.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Allow derivatives wrt functions.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -474,7 +473,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_should_evalf</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">arg</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Decide if the function should automatically evalf().</span>
 
 <span class="sd">        By default (in this implementation), this happens if (and only if) the</span>
@@ -527,7 +526,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_commutative</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns whether the functon is commutative.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s1">&#39;is_commutative&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">):</span>
@@ -607,13 +606,13 @@
         <span class="k">return</span> <span class="n">fuzzy_and</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">is_complex</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Function.as_base_exp"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function.as_base_exp">[docs]</a>    <span class="k">def</span> <span class="nf">as_base_exp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the method as the 2-tuple (base, exponent).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_aseries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">args0</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">logx</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute an asymptotic expansion around args0, in terms of self.args.</span>
 <span class="sd">        This function is only used internally by _eval_nseries and should not</span>
 <span class="sd">        be called directly; derived classes can overwrite this to implement</span>
@@ -625,7 +624,7 @@
 <span class="s1">            not implemented.&#39;&#39;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">args0</span><span class="p">)))</span>
 
     <span class="k">def</span> <span class="nf">_eval_nseries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">logx</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function does compute series for multivariate functions,</span>
 <span class="sd">        but the expansion is always in terms of *one* variable.</span>
 <span class="sd">        Examples</span>
@@ -730,7 +729,7 @@
         <span class="k">return</span> <span class="n">Add</span><span class="p">(</span><span class="o">*</span><span class="n">l</span><span class="p">)</span> <span class="o">+</span> <span class="n">Order</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Function.fdiff"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.Function.fdiff">[docs]</a>    <span class="k">def</span> <span class="nf">fdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the first derivative of the function.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">argindex</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)):</span>
@@ -753,7 +752,7 @@
             <span class="n">arg_dummy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="n">argindex</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_as_leading_term</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Stub that should be overridden by new Functions to return</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Stub that should be overridden by new Functions to return</span>
 <span class="sd">        the first non-zero term in a series if ever an x-dependent</span>
 <span class="sd">        argument whose leading term vanishes as x -&gt; 0 might be encountered.</span>
 <span class="sd">        See, for example, cos._eval_as_leading_term.</span>
@@ -789,7 +788,7 @@
 
 
 <div class="viewcode-block" id="AppliedUndef"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.AppliedUndef">[docs]</a><span class="k">class</span> <span class="nc">AppliedUndef</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for expressions resulting from the application of an undefined</span>
 <span class="sd">    function.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -810,7 +809,7 @@
         <span class="k">return</span> <span class="n">func</span></div>
 
 <div class="viewcode-block" id="UndefinedFunction"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.UndefinedFunction">[docs]</a><span class="k">class</span> <span class="nc">UndefinedFunction</span><span class="p">(</span><span class="n">FunctionClass</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The (meta)class of undefined functions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="n">mcl</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="o">=</span><span class="p">(</span><span class="n">AppliedUndef</span><span class="p">,),</span> <span class="vm">__dict__</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -827,7 +826,7 @@
                                          <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">class_key</span><span class="p">()</span> <span class="o">==</span> <span class="n">o</span><span class="o">.</span><span class="n">class_key</span><span class="p">()))</span>
 
 <div class="viewcode-block" id="WildFunction"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.WildFunction">[docs]</a><span class="k">class</span> <span class="nc">WildFunction</span><span class="p">(</span><span class="n">Function</span><span class="p">,</span> <span class="n">AtomicExpr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A WildFunction function matches any function (with its arguments).</span>
 
 <span class="sd">    Examples</span>
@@ -901,7 +900,7 @@
 
 
 <div class="viewcode-block" id="Derivative"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.Derivative">[docs]</a><span class="k">class</span> <span class="nc">Derivative</span><span class="p">(</span><span class="n">Expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Carries out differentiation of the given expression with respect to symbols.</span>
 
 <span class="sd">    expr must define ._eval_derivative(symbol) method that returns</span>
@@ -1076,7 +1075,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">_diff_wrt</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Allow derivatives wrt Derivatives if it contains a function.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Allow derivatives wrt Derivatives if it contains a function.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -1260,7 +1259,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_sort_variables</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="nb">vars</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Sort variables, but disallow sorting of non-symbols.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sort variables, but disallow sorting of non-symbols.</span>
 
 <span class="sd">        When taking derivatives, the following rules usually hold:</span>
 
@@ -1354,7 +1353,7 @@
 
 <div class="viewcode-block" id="Derivative.doit_numerically"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.Derivative.doit_numerically">[docs]</a>    <span class="nd">@_sympifyit</span><span class="p">(</span><span class="s1">&#39;z0&#39;</span><span class="p">,</span> <span class="ne">NotImplementedError</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">doit_numerically</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Evaluate the derivative at z numerically.</span>
 
 <span class="sd">        When we can represent derivatives at a point, this should be folded</span>
@@ -1437,7 +1436,7 @@
         <span class="k">return</span> <span class="n">sage</span><span class="o">.</span><span class="n">derivative</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Derivative.as_finite_difference"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.Derivative.as_finite_difference">[docs]</a>    <span class="k">def</span> <span class="nf">as_finite_difference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Expresses a Derivative instance as a finite difference.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Expresses a Derivative instance as a finite difference.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -1515,7 +1514,7 @@
 
 
 <div class="viewcode-block" id="Lambda"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.Lambda">[docs]</a><span class="k">class</span> <span class="nc">Lambda</span><span class="p">(</span><span class="n">Expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Lambda(x, expr) represents a lambda function similar to Python&#39;s</span>
 <span class="sd">    &#39;lambda x: expr&#39;. A function of several variables is written as</span>
 <span class="sd">    Lambda((x, y, ...), expr).</span>
@@ -1560,12 +1559,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The variables used in the internal representation of the function&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The variables used in the internal representation of the function&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">expr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The return value of the function&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The return value of the function&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="nd">@property</span>
@@ -1612,7 +1611,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_identity</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return ``True`` if this ``Lambda`` is an identity function. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return ``True`` if this ``Lambda`` is an identity function. &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1620,7 +1619,7 @@
 
 
 <div class="viewcode-block" id="Subs"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.Subs">[docs]</a><span class="k">class</span> <span class="nc">Subs</span><span class="p">(</span><span class="n">Expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents unevaluated substitutions of an expression.</span>
 
 <span class="sd">    ``Subs(expr, x, x0)`` receives 3 arguments: an expression, a variable or</span>
@@ -1727,17 +1726,17 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The variables to be evaluated&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The variables to be evaluated&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">expr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The expression on which the substitution operates&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The expression on which the substitution operates&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">point</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The values for which the variables are to be substituted&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The values for which the variables are to be substituted&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
     <span class="nd">@property</span>
@@ -1807,7 +1806,7 @@
 
 
 <div class="viewcode-block" id="diff"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.diff">[docs]</a><span class="k">def</span> <span class="nf">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">symbols</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Differentiate f with respect to symbols.</span>
 
 <span class="sd">    This is just a wrapper to unify .diff() and the Derivative class; its</span>
@@ -1877,7 +1876,7 @@
 
 <div class="viewcode-block" id="expand"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.expand">[docs]</a><span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">modulus</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">power_base</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">power_exp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="n">mul</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">multinomial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">basic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Expand an expression using methods given as hints.</span>
 
 <span class="sd">    Hints evaluated unless explicitly set to False are:  ``basic``, ``log``,</span>
@@ -2224,7 +2223,7 @@
 
 
 <div class="viewcode-block" id="expand_mul"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.expand_mul">[docs]</a><span class="k">def</span> <span class="nf">expand_mul</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrapper around expand that only uses the mul hint.  See the expand</span>
 <span class="sd">    docstring for more information.</span>
 
@@ -2242,7 +2241,7 @@
 
 
 <div class="viewcode-block" id="expand_multinomial"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.expand_multinomial">[docs]</a><span class="k">def</span> <span class="nf">expand_multinomial</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrapper around expand that only uses the multinomial hint.  See the expand</span>
 <span class="sd">    docstring for more information.</span>
 
@@ -2260,7 +2259,7 @@
 
 
 <div class="viewcode-block" id="expand_log"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.expand_log">[docs]</a><span class="k">def</span> <span class="nf">expand_log</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrapper around expand that only uses the log hint.  See the expand</span>
 <span class="sd">    docstring for more information.</span>
 
@@ -2279,7 +2278,7 @@
 
 
 <div class="viewcode-block" id="expand_func"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.expand_func">[docs]</a><span class="k">def</span> <span class="nf">expand_func</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrapper around expand that only uses the func hint.  See the expand</span>
 <span class="sd">    docstring for more information.</span>
 
@@ -2297,7 +2296,7 @@
 
 
 <div class="viewcode-block" id="expand_trig"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.expand_trig">[docs]</a><span class="k">def</span> <span class="nf">expand_trig</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrapper around expand that only uses the trig hint.  See the expand</span>
 <span class="sd">    docstring for more information.</span>
 
@@ -2315,7 +2314,7 @@
 
 
 <div class="viewcode-block" id="expand_complex"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.expand_complex">[docs]</a><span class="k">def</span> <span class="nf">expand_complex</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrapper around expand that only uses the complex hint.  See the expand</span>
 <span class="sd">    docstring for more information.</span>
 
@@ -2338,7 +2337,7 @@
 
 
 <div class="viewcode-block" id="expand_power_base"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.expand_power_base">[docs]</a><span class="k">def</span> <span class="nf">expand_power_base</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrapper around expand that only uses the power_base hint.</span>
 
 <span class="sd">    See the expand docstring for more information.</span>
@@ -2403,7 +2402,7 @@
 
 
 <div class="viewcode-block" id="expand_power_exp"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.expand_power_exp">[docs]</a><span class="k">def</span> <span class="nf">expand_power_exp</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrapper around expand that only uses the power_exp hint.</span>
 
 <span class="sd">    See the expand docstring for more information.</span>
@@ -2421,7 +2420,7 @@
 
 
 <div class="viewcode-block" id="count_ops"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.count_ops">[docs]</a><span class="k">def</span> <span class="nf">count_ops</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a representation (integer or expression) of the operations in expr.</span>
 
 <span class="sd">    If ``visual`` is ``False`` (default) then the sum of the coefficients of the</span>
@@ -2624,7 +2623,7 @@
 
 
 <div class="viewcode-block" id="nfloat"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.function.nfloat">[docs]</a><span class="k">def</span> <span class="nf">nfloat</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">exponent</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Make all Rationals in expr Floats except those in exponents</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make all Rationals in expr Floats except those in exponents</span>
 <span class="sd">    (unless the exponents flag is set to True).</span>
 
 <span class="sd">    Examples</span>
@@ -2701,7 +2700,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2722,7 +2721,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

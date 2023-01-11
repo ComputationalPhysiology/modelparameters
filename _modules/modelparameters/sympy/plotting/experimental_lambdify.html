@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -118,7 +117,7 @@
 
 
 <div class="viewcode-block" id="vectorized_lambdify"><a class="viewcode-back" href="../../../../modelparameters.sympy.plotting.html#modelparameters.sympy.plotting.experimental_lambdify.vectorized_lambdify">[docs]</a><span class="k">class</span> <span class="nc">vectorized_lambdify</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return a sufficiently smart, vectorized and lambdified function.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return a sufficiently smart, vectorized and lambdified function.</span>
 
 <span class="sd">    Returns only reals.</span>
 
@@ -210,7 +209,7 @@
 
 
 <div class="viewcode-block" id="lambdify"><a class="viewcode-back" href="../../../../modelparameters.sympy.plotting.html#modelparameters.sympy.plotting.experimental_lambdify.lambdify">[docs]</a><span class="k">class</span> <span class="nc">lambdify</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the lambdified function.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the lambdified function.</span>
 
 <span class="sd">    This function uses experimental_lambdify to create a lambdified</span>
 <span class="sd">    expression. It uses cmath to lambdify the expression. If the function</span>
@@ -531,7 +530,7 @@
     <span class="c1">##############################################################################</span>
 
 <div class="viewcode-block" id="Lambdifier.str2tree"><a class="viewcode-back" href="../../../../modelparameters.sympy.plotting.html#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.str2tree">[docs]</a>    <span class="k">def</span> <span class="nf">str2tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exprstr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Converts an expression string to a tree.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts an expression string to a tree.</span>
 
 <span class="sd">        Functions are represented by (&#39;func_name(&#39;, tree_of_arguments).</span>
 <span class="sd">        Other expressions are (head_string, mid_tree, tail_str).</span>
@@ -578,7 +577,7 @@
 
 <div class="viewcode-block" id="Lambdifier.tree2str"><a class="viewcode-back" href="../../../../modelparameters.sympy.plotting.html#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.tree2str">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">tree2str</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">tree</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Converts a tree to string without translations.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts a tree to string without translations.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -598,7 +597,7 @@
             <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">tree2str</span><span class="p">,</span> <span class="n">tree</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Lambdifier.tree2str_translate"><a class="viewcode-back" href="../../../../modelparameters.sympy.plotting.html#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.tree2str_translate">[docs]</a>    <span class="k">def</span> <span class="nf">tree2str_translate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Converts a tree to string with translations.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts a tree to string with translations.</span>
 
 <span class="sd">        Function names are translated by translate_func.</span>
 <span class="sd">        Other strings are translated by translate_str.</span>
@@ -611,14 +610,14 @@
             <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">tree2str_translate</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tree</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="Lambdifier.translate_str"><a class="viewcode-back" href="../../../../modelparameters.sympy.plotting.html#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.translate_str">[docs]</a>    <span class="k">def</span> <span class="nf">translate_str</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">estr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Translate substrings of estr using in order the dictionaries in</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Translate substrings of estr using in order the dictionaries in</span>
 <span class="sd">        dict_tuple_str.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">repl</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_str</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">estr</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">repl</span><span class="p">,</span> <span class="n">estr</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">estr</span></div>
 
 <div class="viewcode-block" id="Lambdifier.translate_func"><a class="viewcode-back" href="../../../../modelparameters.sympy.plotting.html#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.translate_func">[docs]</a>    <span class="k">def</span> <span class="nf">translate_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func_name</span><span class="p">,</span> <span class="n">argtree</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Translate function names and the tree of arguments.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Translate function names and the tree of arguments.</span>
 
 <span class="sd">        If the function name is not in the dictionaries of dict_tuple_fun then the</span>
 <span class="sd">        function is surrounded by a float((...).evalf()).</span>
@@ -653,7 +652,7 @@
 
 <div class="viewcode-block" id="Lambdifier.sympy_expression_namespace"><a class="viewcode-back" href="../../../../modelparameters.sympy.plotting.html#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.sympy_expression_namespace">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">sympy_expression_namespace</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Traverses the (func, args) tree of an expression and creates a sympy</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Traverses the (func, args) tree of an expression and creates a sympy</span>
 <span class="sd">        namespace. All other modules are imported only as a module name. That way</span>
 <span class="sd">        the namespace is not poluted and rests quite small. It probably causes much</span>
 <span class="sd">        more variable lookups and so it takes more time, but there are no tests on</span>
@@ -703,7 +702,7 @@
 
 <div class="viewcode-block" id="Lambdifier.sympy_atoms_namespace"><a class="viewcode-back" href="../../../../modelparameters.sympy.plotting.html#modelparameters.sympy.plotting.experimental_lambdify.Lambdifier.sympy_atoms_namespace">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">sympy_atoms_namespace</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;For no real reason this function is separated from</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;For no real reason this function is separated from</span>
 <span class="sd">        sympy_expression_namespace. It can be moved to it.&quot;&quot;&quot;</span>
         <span class="n">atoms</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">atoms</span><span class="p">(</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">NumberSymbol</span><span class="p">,</span> <span class="n">I</span><span class="p">,</span> <span class="n">zoo</span><span class="p">,</span> <span class="n">oo</span><span class="p">)</span>
         <span class="n">d</span> <span class="o">=</span> <span class="p">{}</span>
@@ -728,7 +727,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -749,7 +748,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

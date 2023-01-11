@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -154,7 +153,7 @@
 
 
 <div class="viewcode-block" id="Routine"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.Routine">[docs]</a><span class="k">class</span> <span class="nc">Routine</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generic description of evaluation routine for set of expressions.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generic description of evaluation routine for set of expressions.</span>
 
 <span class="sd">    A CodeGen class can translate instances of this class into code in a</span>
 <span class="sd">    particular language.  The routine specification covers all the features</span>
@@ -167,7 +166,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">arguments</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">local_vars</span><span class="p">,</span> <span class="n">global_vars</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize a Routine instance.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a Routine instance.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -239,7 +238,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a set of all variables possibly used in the routine.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a set of all variables possibly used in the routine.</span>
 
 <span class="sd">        For routines with unnamed return values, the dummies that may or</span>
 <span class="sd">        may not be used will be included in the set.</span>
@@ -254,7 +253,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">result_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a list of OutputArgument, InOutArgument and Result.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a list of OutputArgument, InOutArgument and Result.</span>
 
 <span class="sd">        If return values are present, they are at the end ot the list.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -265,7 +264,7 @@
 
 
 <div class="viewcode-block" id="DataType"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.DataType">[docs]</a><span class="k">class</span> <span class="nc">DataType</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Holds strings for a certain datatype in different languages.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Holds strings for a certain datatype in different languages.&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cname</span><span class="p">,</span> <span class="n">fname</span><span class="p">,</span> <span class="n">pyname</span><span class="p">,</span> <span class="n">jlname</span><span class="p">,</span> <span class="n">octname</span><span class="p">,</span> <span class="n">rsname</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cname</span> <span class="o">=</span> <span class="n">cname</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fname</span> <span class="o">=</span> <span class="n">fname</span>
@@ -282,7 +281,7 @@
 
 
 <div class="viewcode-block" id="get_default_datatype"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.get_default_datatype">[docs]</a><span class="k">def</span> <span class="nf">get_default_datatype</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Derives an appropriate datatype based on the expression.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Derives an appropriate datatype based on the expression.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_integer</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">default_datatypes</span><span class="p">[</span><span class="s2">&quot;int&quot;</span><span class="p">]</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">MatrixBase</span><span class="p">):</span>
@@ -295,10 +294,10 @@
 
 
 <span class="k">class</span> <span class="nc">Variable</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents a typed variable.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a typed variable.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a new variable.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a new variable.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -351,7 +350,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
 
     <span class="k">def</span> <span class="nf">get_datatype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">language</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the datatype string for the requested language.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the datatype string for the requested language.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -373,7 +372,7 @@
 
 
 <div class="viewcode-block" id="Argument"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.Argument">[docs]</a><span class="k">class</span> <span class="nc">Argument</span><span class="p">(</span><span class="n">Variable</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;An abstract Argument data structure: a name and a data type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An abstract Argument data structure: a name and a data type.</span>
 
 <span class="sd">    This structure is refined in the descendants below.</span>
 
@@ -386,7 +385,7 @@
 
 
 <span class="k">class</span> <span class="nc">ResultBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class for all &quot;outgoing&quot; information from a routine.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for all &quot;outgoing&quot; information from a routine.</span>
 
 <span class="sd">    Objects of this class stores a sympy expression, and a sympy object</span>
 <span class="sd">    representing a result variable that will be used in the generated code</span>
@@ -405,10 +404,10 @@
 
 
 <span class="k">class</span> <span class="nc">OutputArgument</span><span class="p">(</span><span class="n">Argument</span><span class="p">,</span> <span class="n">ResultBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;OutputArgument are always initialized in the routine.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;OutputArgument are always initialized in the routine.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">result_var</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a new variable.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a new variable.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -452,7 +451,7 @@
 
 
 <span class="k">class</span> <span class="nc">InOutArgument</span><span class="p">(</span><span class="n">Argument</span><span class="p">,</span> <span class="n">ResultBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;InOutArgument are never initialized in the routine.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;InOutArgument are never initialized in the routine.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">result_var</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dimensions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">datatype</span><span class="p">:</span>
@@ -470,7 +469,7 @@
 
 
 <div class="viewcode-block" id="Result"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.Result">[docs]</a><span class="k">class</span> <span class="nc">Result</span><span class="p">(</span><span class="n">Variable</span><span class="p">,</span> <span class="n">ResultBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;An expression for a return value.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An expression for a return value.</span>
 
 <span class="sd">    The name result is used to avoid conflicts with the reserved word</span>
 <span class="sd">    &quot;return&quot; in the python language.  It is also shorter than ReturnValue.</span>
@@ -482,7 +481,7 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">result_var</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">datatype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">dimensions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize a return value.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a return value.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -539,7 +538,7 @@
 <span class="c1">#</span>
 
 <div class="viewcode-block" id="CodeGen"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.CodeGen">[docs]</a><span class="k">class</span> <span class="nc">CodeGen</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Abstract class for the code generators.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract class for the code generators.&quot;&quot;&quot;</span>
 
     <span class="n">printer</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># will be set to an instance of a CodePrinter subclass</span>
 
@@ -557,7 +556,7 @@
         <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span> <span class="nf">_get_symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the symbol as fcode prints it.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the symbol as fcode prints it.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">_settings</span><span class="p">[</span><span class="s1">&#39;human&#39;</span><span class="p">]:</span>
             <span class="n">expr_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">printer</span><span class="o">.</span><span class="n">doprint</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -567,7 +566,7 @@
         <span class="k">return</span> <span class="n">expr_str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="s2">&quot;project&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize a code generator.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize a code generator.</span>
 
 <span class="sd">        Derived classes will offer more options that affect the generated</span>
 <span class="sd">        code.</span>
@@ -576,7 +575,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">project</span>
 
 <div class="viewcode-block" id="CodeGen.routine"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.CodeGen.routine">[docs]</a>    <span class="k">def</span> <span class="nf">routine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">argument_sequence</span><span class="p">,</span> <span class="n">global_vars</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Creates an Routine object that is appropriate for this language.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates an Routine object that is appropriate for this language.</span>
 
 <span class="sd">        This implementation is appropriate for at least C/Fortran.  Subclasses</span>
 <span class="sd">        can override this if necessary.</span>
@@ -705,7 +704,7 @@
         <span class="k">return</span> <span class="n">Routine</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">arg_list</span><span class="p">,</span> <span class="n">return_val</span><span class="p">,</span> <span class="n">local_vars</span><span class="p">,</span> <span class="n">global_vars</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CodeGen.write"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.CodeGen.write">[docs]</a>    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">routines</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">to_files</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">empty</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Writes all the source code files for the given routines.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Writes all the source code files for the given routines.</span>
 
 <span class="sd">        The generated source is returned as a list of (filename, contents)</span>
 <span class="sd">        tuples, or is written to files (see below).  Each filename consists</span>
@@ -748,7 +747,7 @@
             <span class="k">return</span> <span class="n">result</span></div>
 
 <div class="viewcode-block" id="CodeGen.dump_code"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.CodeGen.dump_code">[docs]</a>    <span class="k">def</span> <span class="nf">dump_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">routines</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">empty</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Write the code by calling language specific methods.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write the code by calling language specific methods.</span>
 
 <span class="sd">        The generated file contains all the definitions of the routines in</span>
 <span class="sd">        low-level code and refers to the header file if appropriate.</span>
@@ -811,7 +810,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
 
-<span class="n">header_comment</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Code generated with sympy </span><span class="si">%(version)s</span><span class="s2"></span>
+<span class="n">header_comment</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Code generated with sympy </span><span class="si">%(version)s</span>
 
 <span class="s2">See http://www.sympy.org/ for more information.</span>
 
@@ -820,7 +819,7 @@
 
 
 <div class="viewcode-block" id="CCodeGen"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.CCodeGen">[docs]</a><span class="k">class</span> <span class="nc">CCodeGen</span><span class="p">(</span><span class="n">CodeGen</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generator for C code.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generator for C code.</span>
 
 <span class="sd">    The .write() method inherited from CodeGen will output a code file and</span>
 <span class="sd">    an interface file, &lt;prefix&gt;.c and &lt;prefix&gt;.h respectively.</span>
@@ -841,7 +840,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">preprocessor_statements</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#include &lt;math.h&gt;&#39;</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">_get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Writes a common header for the generated files.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Writes a common header for the generated files.&quot;&quot;&quot;</span>
         <span class="n">code_lines</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">code_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span><span class="o">*</span><span class="mi">78</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">tmp</span> <span class="o">=</span> <span class="n">header_comment</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">sympy_version</span><span class="p">,</span>
@@ -852,7 +851,7 @@
         <span class="k">return</span> <span class="n">code_lines</span>
 
 <div class="viewcode-block" id="CCodeGen.get_prototype"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.CCodeGen.get_prototype">[docs]</a>    <span class="k">def</span> <span class="nf">get_prototype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">routine</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a string for the function prototype of the routine.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a string for the function prototype of the routine.</span>
 
 <span class="sd">        If the routine has multiple result objects, an CodeGenError is</span>
 <span class="sd">        raised.</span>
@@ -950,7 +949,7 @@
     <span class="n">dump_c</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">CodeGen</span><span class="o">.</span><span class="n">dump_code</span><span class="o">.</span><span class="vm">__doc__</span>
 
 <div class="viewcode-block" id="CCodeGen.dump_h"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.CCodeGen.dump_h">[docs]</a>    <span class="k">def</span> <span class="nf">dump_h</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">routines</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">empty</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Writes the C header file.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Writes the C header file.</span>
 
 <span class="sd">        This file contains all the function declarations.</span>
 
@@ -1010,7 +1009,7 @@
     <span class="n">standard</span> <span class="o">=</span> <span class="s1">&#39;C99&#39;</span>
 
 <div class="viewcode-block" id="FCodeGen"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.FCodeGen">[docs]</a><span class="k">class</span> <span class="nc">FCodeGen</span><span class="p">(</span><span class="n">CodeGen</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generator for Fortran 95 code</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generator for Fortran 95 code</span>
 
 <span class="sd">    The .write() method inherited from CodeGen will output a code file and</span>
 <span class="sd">    an interface file, &lt;prefix&gt;.f90 and &lt;prefix&gt;.h respectively.</span>
@@ -1025,7 +1024,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">printer</span> <span class="o">=</span> <span class="n">printer</span> <span class="ow">or</span> <span class="n">FCodePrinter</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Writes a common header for the generated files.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Writes a common header for the generated files.&quot;&quot;&quot;</span>
         <span class="n">code_lines</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">code_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;!&quot;</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span><span class="o">*</span><span class="mi">78</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">tmp</span> <span class="o">=</span> <span class="n">header_comment</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">sympy_version</span><span class="p">,</span>
@@ -1039,7 +1038,7 @@
         <span class="k">return</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="nf">_get_routine_opening</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">routine</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the opening statements of the fortran routine.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the opening statements of the fortran routine.&quot;&quot;&quot;</span>
         <span class="n">code_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">routine</span><span class="o">.</span><span class="n">results</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">CodeGenError</span><span class="p">(</span>
@@ -1113,14 +1112,14 @@
         <span class="k">return</span> <span class="n">code_list</span>
 
     <span class="k">def</span> <span class="nf">_get_routine_ending</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">routine</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the closing statements of the fortran routine.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the closing statements of the fortran routine.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">routine</span><span class="o">.</span><span class="n">results</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;end function</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;end subroutine</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">]</span>
 
 <div class="viewcode-block" id="FCodeGen.get_interface"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.FCodeGen.get_interface">[docs]</a>    <span class="k">def</span> <span class="nf">get_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">routine</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a string for the function interface.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a string for the function interface.</span>
 
 <span class="sd">        The routine should have a single result object, which can be None.</span>
 <span class="sd">        If the routine has multiple result objects, a CodeGenError is</span>
@@ -1182,7 +1181,7 @@
     <span class="n">dump_f95</span><span class="o">.</span><span class="vm">__doc__</span> <span class="o">=</span> <span class="n">CodeGen</span><span class="o">.</span><span class="n">dump_code</span><span class="o">.</span><span class="vm">__doc__</span>
 
 <div class="viewcode-block" id="FCodeGen.dump_h"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.FCodeGen.dump_h">[docs]</a>    <span class="k">def</span> <span class="nf">dump_h</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">routines</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">empty</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Writes the interface to a header file.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Writes the interface to a header file.</span>
 
 <span class="sd">        This file contains all the function declarations.</span>
 
@@ -1225,7 +1224,7 @@
 
 
 <div class="viewcode-block" id="JuliaCodeGen"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.JuliaCodeGen">[docs]</a><span class="k">class</span> <span class="nc">JuliaCodeGen</span><span class="p">(</span><span class="n">CodeGen</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generator for Julia code.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generator for Julia code.</span>
 
 <span class="sd">    The .write() method inherited from CodeGen will output a code file</span>
 <span class="sd">    &lt;prefix&gt;.jl.</span>
@@ -1239,7 +1238,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">printer</span> <span class="o">=</span> <span class="n">printer</span> <span class="ow">or</span> <span class="n">JuliaCodePrinter</span><span class="p">()</span>
 
 <div class="viewcode-block" id="JuliaCodeGen.routine"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.JuliaCodeGen.routine">[docs]</a>    <span class="k">def</span> <span class="nf">routine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">argument_sequence</span><span class="p">,</span> <span class="n">global_vars</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Specialized Routine creation for Julia.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Specialized Routine creation for Julia.&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">is_sequence</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="p">(</span><span class="n">MatrixBase</span><span class="p">,</span> <span class="n">MatrixExpr</span><span class="p">)):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">expr</span><span class="p">:</span>
@@ -1330,7 +1329,7 @@
         <span class="k">return</span> <span class="n">Routine</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">arg_list</span><span class="p">,</span> <span class="n">return_vals</span><span class="p">,</span> <span class="n">local_vars</span><span class="p">,</span> <span class="n">global_vars</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Writes a common header for the generated files.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Writes a common header for the generated files.&quot;&quot;&quot;</span>
         <span class="n">code_lines</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">tmp</span> <span class="o">=</span> <span class="n">header_comment</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">sympy_version</span><span class="p">,</span>
             <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">}</span>
@@ -1345,7 +1344,7 @@
         <span class="k">return</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="nf">_get_routine_opening</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">routine</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the opening statements of the routine.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the opening statements of the routine.&quot;&quot;&quot;</span>
         <span class="n">code_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">code_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;function &quot;</span><span class="p">)</span>
 
@@ -1426,7 +1425,7 @@
 
 
 <div class="viewcode-block" id="OctaveCodeGen"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.OctaveCodeGen">[docs]</a><span class="k">class</span> <span class="nc">OctaveCodeGen</span><span class="p">(</span><span class="n">CodeGen</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generator for Octave code.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generator for Octave code.</span>
 
 <span class="sd">    The .write() method inherited from CodeGen will output a code file</span>
 <span class="sd">    &lt;prefix&gt;.m.</span>
@@ -1448,7 +1447,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">printer</span> <span class="o">=</span> <span class="n">printer</span> <span class="ow">or</span> <span class="n">OctaveCodePrinter</span><span class="p">()</span>
 
 <div class="viewcode-block" id="OctaveCodeGen.routine"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.OctaveCodeGen.routine">[docs]</a>    <span class="k">def</span> <span class="nf">routine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">argument_sequence</span><span class="p">,</span> <span class="n">global_vars</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Specialized Routine creation for Octave.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Specialized Routine creation for Octave.&quot;&quot;&quot;</span>
 
         <span class="c1"># FIXME: this is probably general enough for other high-level</span>
         <span class="c1"># languages, perhaps its the C/Fortran one that is specialized!</span>
@@ -1538,7 +1537,7 @@
         <span class="k">return</span> <span class="n">Routine</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">arg_list</span><span class="p">,</span> <span class="n">return_vals</span><span class="p">,</span> <span class="n">local_vars</span><span class="p">,</span> <span class="n">global_vars</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Writes a common header for the generated files.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Writes a common header for the generated files.&quot;&quot;&quot;</span>
         <span class="n">code_lines</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">tmp</span> <span class="o">=</span> <span class="n">header_comment</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">sympy_version</span><span class="p">,</span>
             <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">}</span>
@@ -1553,7 +1552,7 @@
         <span class="k">return</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="nf">_get_routine_opening</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">routine</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the opening statements of the routine.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the opening statements of the routine.&quot;&quot;&quot;</span>
         <span class="n">code_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">code_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;function &quot;</span><span class="p">)</span>
 
@@ -1670,7 +1669,7 @@
     <span class="n">dump_fns</span> <span class="o">=</span> <span class="p">[</span><span class="n">dump_m</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="RustCodeGen"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.RustCodeGen">[docs]</a><span class="k">class</span> <span class="nc">RustCodeGen</span><span class="p">(</span><span class="n">CodeGen</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generator for Rust code.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generator for Rust code.</span>
 
 <span class="sd">    The .write() method inherited from CodeGen will output a code file</span>
 <span class="sd">    &lt;prefix&gt;.rs</span>
@@ -1684,7 +1683,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">printer</span> <span class="o">=</span> <span class="n">printer</span> <span class="ow">or</span> <span class="n">RustCodePrinter</span><span class="p">()</span>
 
 <div class="viewcode-block" id="RustCodeGen.routine"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.RustCodeGen.routine">[docs]</a>    <span class="k">def</span> <span class="nf">routine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">argument_sequence</span><span class="p">,</span> <span class="n">global_vars</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Specialized Routine creation for Rust.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Specialized Routine creation for Rust.&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">is_sequence</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="p">(</span><span class="n">MatrixBase</span><span class="p">,</span> <span class="n">MatrixExpr</span><span class="p">)):</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">expr</span><span class="p">:</span>
@@ -1770,7 +1769,7 @@
 
 
     <span class="k">def</span> <span class="nf">_get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Writes a common header for the generated files.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Writes a common header for the generated files.&quot;&quot;&quot;</span>
         <span class="n">code_lines</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">code_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;/*</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">tmp</span> <span class="o">=</span> <span class="n">header_comment</span> <span class="o">%</span> <span class="p">{</span><span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">sympy_version</span><span class="p">,</span>
@@ -1781,7 +1780,7 @@
         <span class="k">return</span> <span class="n">code_lines</span>
 
 <div class="viewcode-block" id="RustCodeGen.get_prototype"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.RustCodeGen.get_prototype">[docs]</a>    <span class="k">def</span> <span class="nf">get_prototype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">routine</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a string for the function prototype of the routine.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a string for the function prototype of the routine.</span>
 
 <span class="sd">        If the routine has multiple result objects, an CodeGenError is</span>
 <span class="sd">        raised.</span>
@@ -1913,7 +1912,7 @@
 <div class="viewcode-block" id="codegen"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.codegen">[docs]</a><span class="k">def</span> <span class="nf">codegen</span><span class="p">(</span><span class="n">name_expr</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="s2">&quot;project&quot;</span><span class="p">,</span>
             <span class="n">to_files</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">empty</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">argument_sequence</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">global_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">standard</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">code_gen</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generate source code for expressions in a given language.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate source code for expressions in a given language.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ==========</span>
@@ -2067,7 +2066,7 @@
 
 <div class="viewcode-block" id="make_routine"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.codegen.make_routine">[docs]</a><span class="k">def</span> <span class="nf">make_routine</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">argument_sequence</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">global_vars</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="s2">&quot;F95&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A factory that makes an appropriate Routine from an expression.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A factory that makes an appropriate Routine from an expression.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ==========</span>
@@ -2169,7 +2168,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2190,7 +2189,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

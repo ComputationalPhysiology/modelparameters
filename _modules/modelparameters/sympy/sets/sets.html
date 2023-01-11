@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -63,7 +62,7 @@
 
 
 <div class="viewcode-block" id="Set"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set">[docs]</a><span class="k">class</span> <span class="nc">Set</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The base class for any kind of set.</span>
 
 <span class="sd">    This is not meant to be used directly as a container of items. It does not</span>
@@ -89,7 +88,7 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_infimum_key</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return infimum (if possible) else S.Infinity.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
@@ -101,7 +100,7 @@
         <span class="k">return</span> <span class="n">infimum</span>
 
 <div class="viewcode-block" id="Set.union"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set.union">[docs]</a>    <span class="k">def</span> <span class="nf">union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the union of &#39;self&#39; and &#39;other&#39;.</span>
 
 <span class="sd">        Examples</span>
@@ -128,7 +127,7 @@
         <span class="k">return</span> <span class="n">Union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Set.intersect"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set.intersect">[docs]</a>    <span class="k">def</span> <span class="nf">intersect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the intersection of &#39;self&#39; and &#39;other&#39;.</span>
 
 <span class="sd">        &gt;&gt;&gt; from .. import Interval</span>
@@ -146,13 +145,13 @@
         <span class="k">return</span> <span class="n">Intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Set.intersection"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set.intersection">[docs]</a>    <span class="k">def</span> <span class="nf">intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Alias for :meth:`intersect()`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">intersect</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_intersect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function should only be used internally</span>
 
 <span class="sd">        self._intersect(other) returns a new, intersected set if self knows how</span>
@@ -166,7 +165,7 @@
         <span class="k">return</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="Set.is_disjoint"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set.is_disjoint">[docs]</a>    <span class="k">def</span> <span class="nf">is_disjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if &#39;self&#39; and &#39;other&#39; are disjoint</span>
 
 <span class="sd">        Examples</span>
@@ -186,13 +185,13 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">intersect</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="o">==</span> <span class="n">S</span><span class="o">.</span><span class="n">EmptySet</span></div>
 
 <div class="viewcode-block" id="Set.isdisjoint"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set.isdisjoint">[docs]</a>    <span class="k">def</span> <span class="nf">isdisjoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Alias for :meth:`is_disjoint()`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_disjoint</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function should only be used internally</span>
 
 <span class="sd">        self._union(other) returns a new, joined set if self knows how</span>
@@ -206,7 +205,7 @@
         <span class="k">return</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="Set.complement"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set.complement">[docs]</a>    <span class="k">def</span> <span class="nf">complement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">universe</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The complement of &#39;self&#39; w.r.t the given the universe.</span>
 
 <span class="sd">        Examples</span>
@@ -257,7 +256,7 @@
             <span class="k">return</span> <span class="n">FiniteSet</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">el</span> <span class="k">for</span> <span class="n">el</span> <span class="ow">in</span> <span class="n">other</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">el</span><span class="p">)</span> <span class="o">!=</span> <span class="kc">True</span><span class="p">])</span>
 
 <div class="viewcode-block" id="Set.symmetric_difference"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set.symmetric_difference">[docs]</a>    <span class="k">def</span> <span class="nf">symmetric_difference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns symmetric difference of `self` and `other`.</span>
 
 <span class="sd">        Examples</span>
@@ -285,7 +284,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">inf</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The infimum of &#39;self&#39;</span>
 
 <span class="sd">        Examples</span>
@@ -306,7 +305,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">sup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The supremum of &#39;self&#39;</span>
 
 <span class="sd">        Examples</span>
@@ -326,7 +325,7 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">)._sup&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Set.contains"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if &#39;other&#39; is contained in &#39;self&#39; as an element.</span>
 
 <span class="sd">        As a shortcut it is possible to use the &#39;in&#39; operator:</span>
@@ -351,7 +350,7 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;(</span><span class="si">%s</span><span class="s2">)._contains(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">))</span>
 
 <div class="viewcode-block" id="Set.is_subset"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set.is_subset">[docs]</a>    <span class="k">def</span> <span class="nf">is_subset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if &#39;self&#39; is a subset of &#39;other&#39;.</span>
 
 <span class="sd">        Examples</span>
@@ -370,13 +369,13 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown argument &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">other</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Set.issubset"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set.issubset">[docs]</a>    <span class="k">def</span> <span class="nf">issubset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Alias for :meth:`is_subset()`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_subset</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Set.is_proper_subset"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set.is_proper_subset">[docs]</a>    <span class="k">def</span> <span class="nf">is_proper_subset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if &#39;self&#39; is a proper subset of &#39;other&#39;.</span>
 
 <span class="sd">        Examples</span>
@@ -395,7 +394,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown argument &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">other</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Set.is_superset"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set.is_superset">[docs]</a>    <span class="k">def</span> <span class="nf">is_superset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if &#39;self&#39; is a superset of &#39;other&#39;.</span>
 
 <span class="sd">        Examples</span>
@@ -414,13 +413,13 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unknown argument &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span> <span class="o">%</span> <span class="n">other</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Set.issuperset"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set.issuperset">[docs]</a>    <span class="k">def</span> <span class="nf">issuperset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Alias for :meth:`is_superset()`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_superset</span><span class="p">(</span><span class="n">other</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Set.is_proper_superset"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set.is_proper_superset">[docs]</a>    <span class="k">def</span> <span class="nf">is_proper_superset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if &#39;self&#39; is a proper superset of &#39;other&#39;.</span>
 
 <span class="sd">        Examples</span>
@@ -442,7 +441,7 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Power set not defined for: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Set.powerset"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set.powerset">[docs]</a>    <span class="k">def</span> <span class="nf">powerset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Find the Power set of &#39;self&#39;.</span>
 
 <span class="sd">        Examples</span>
@@ -467,7 +466,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">measure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The (Lebesgue) measure of &#39;self&#39;</span>
 
 <span class="sd">        Examples</span>
@@ -484,7 +483,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The boundary or frontier of a set</span>
 
 <span class="sd">        A point x is on the boundary of a set S if</span>
@@ -514,7 +513,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Property method to check whether a set is open.</span>
 <span class="sd">        A set is open if and only if it has an empty intersection with its</span>
 <span class="sd">        boundary.</span>
@@ -532,7 +531,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_closed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A property method to check whether a set is closed. A set is closed</span>
 <span class="sd">        if it&#39;s complement is an open set.</span>
 
@@ -546,7 +545,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">closure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Property method which returns the closure of a set.</span>
 <span class="sd">        The closure is defined as the union of the set itself and its</span>
 <span class="sd">        boundary.</span>
@@ -563,7 +562,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">interior</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Property method which returns the interior of a set.</span>
 <span class="sd">        The interior of a set S consists all points of S that do not</span>
 <span class="sd">        belong to the boundary of S.</span>
@@ -621,7 +620,7 @@
 
 
 <div class="viewcode-block" id="ProductSet"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.ProductSet">[docs]</a><span class="k">class</span> <span class="nc">ProductSet</span><span class="p">(</span><span class="n">Set</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents a Cartesian Product of Sets.</span>
 
 <span class="sd">    Returns a Cartesian product given several sets as either an iterable</span>
@@ -691,7 +690,7 @@
         <span class="k">return</span> <span class="n">And</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">Eq</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">args</span><span class="p">)))</span>
 
     <span class="k">def</span> <span class="nf">_contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &#39;in&#39; operator for ProductSets</span>
 
 <span class="sd">        Examples</span>
@@ -715,7 +714,7 @@
             <span class="p">[</span><span class="nb">set</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="nb">set</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sets</span><span class="p">,</span> <span class="n">element</span><span class="p">)])</span>
 
     <span class="k">def</span> <span class="nf">_intersect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function should only be used internally</span>
 
 <span class="sd">        See Set._intersect for docstring</span>
@@ -755,7 +754,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_iterable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A property method which tests whether a set is iterable or not.</span>
 <span class="sd">        Returns True if set is iterable, otherwise returns False.</span>
 
@@ -774,7 +773,7 @@
         <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="nb">set</span><span class="o">.</span><span class="n">is_iterable</span> <span class="k">for</span> <span class="nb">set</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">sets</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A method which implements is_iterable property method.</span>
 <span class="sd">        If self.is_iterable returns True (both constituent sets are iterable),</span>
 <span class="sd">        then return the Cartesian Product. Otherwise, raise TypeError.</span>
@@ -801,7 +800,7 @@
 
 
 <div class="viewcode-block" id="Interval"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Interval">[docs]</a><span class="k">class</span> <span class="nc">Interval</span><span class="p">(</span><span class="n">Set</span><span class="p">,</span> <span class="n">EvalfMixin</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents a real interval as a Set.</span>
 
 <span class="sd">    Usage:</span>
@@ -885,7 +884,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The left end point of &#39;self&#39;.</span>
 
 <span class="sd">        This property takes the same value as the &#39;inf&#39; property.</span>
@@ -904,22 +903,22 @@
 
 <div class="viewcode-block" id="Interval.open"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Interval.open">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return an interval including neither boundary.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return an interval including neither boundary.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Interval.Lopen"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Interval.Lopen">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">Lopen</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return an interval not including the left boundary.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return an interval not including the left boundary.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Interval.Ropen"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Interval.Ropen">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">Ropen</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return an interval not including the right boundary.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return an interval not including the right boundary.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span></div>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">end</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The right end point of &#39;self&#39;.</span>
 
 <span class="sd">        This property takes the same value as the &#39;sup&#39; property.</span>
@@ -938,7 +937,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">left_open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        True if &#39;self&#39; is left-open.</span>
 
 <span class="sd">        Examples</span>
@@ -955,7 +954,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">right_open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        True if &#39;self&#39; is right-open.</span>
 
 <span class="sd">        Examples</span>
@@ -971,7 +970,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">_intersect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function should only be used internally</span>
 
 <span class="sd">        See Set._intersect for docstring</span>
@@ -1044,7 +1043,7 @@
 
 
     <span class="k">def</span> <span class="nf">_union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function should only be used internally</span>
 
 <span class="sd">        See Set._union for docstring</span>
@@ -1225,16 +1224,16 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_left_unbounded</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return ``True`` if the left endpoint is negative infinity. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return ``True`` if the left endpoint is negative infinity. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeInfinity</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">left</span> <span class="o">==</span> <span class="n">Float</span><span class="p">(</span><span class="s2">&quot;-inf&quot;</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_right_unbounded</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return ``True`` if the right endpoint is positive infinity. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return ``True`` if the right endpoint is positive infinity. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Infinity</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">right</span> <span class="o">==</span> <span class="n">Float</span><span class="p">(</span><span class="s2">&quot;+inf&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Interval.as_relational"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Interval.as_relational">[docs]</a>    <span class="k">def</span> <span class="nf">as_relational</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Rewrite an interval in terms of inequalities and logic operators.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rewrite an interval in terms of inequalities and logic operators.&quot;&quot;&quot;</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_open</span><span class="p">:</span>
             <span class="n">right</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span>
@@ -1261,7 +1260,7 @@
 
 
 <div class="viewcode-block" id="Union"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Union">[docs]</a><span class="k">class</span> <span class="nc">Union</span><span class="p">(</span><span class="n">Set</span><span class="p">,</span> <span class="n">EvalfMixin</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents a union of sets as a :class:`Set`.</span>
 
 <span class="sd">    Examples</span>
@@ -1320,7 +1319,7 @@
 
 <div class="viewcode-block" id="Union.reduce"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Union.reduce">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Simplify a :class:`Union` using known rules</span>
 
 <span class="sd">        We first start with global rules like</span>
@@ -1431,7 +1430,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">boundary_of_set</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot; The boundary of set i minus interior of all other sets &quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot; The boundary of set i minus interior of all other sets &quot;&quot;&quot;</span>
             <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">boundary</span>
             <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">j</span> <span class="o">!=</span> <span class="n">i</span><span class="p">:</span>
@@ -1443,7 +1442,7 @@
         <span class="k">return</span> <span class="n">Union</span><span class="p">(</span><span class="n">imageset</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Union.as_relational"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Union.as_relational">[docs]</a>    <span class="k">def</span> <span class="nf">as_relational</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Rewrite a Union in terms of equalities and logic operators. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rewrite a Union in terms of equalities and logic operators. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Or</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">set</span><span class="o">.</span><span class="n">as_relational</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span> <span class="k">for</span> <span class="nb">set</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">])</span></div>
 
     <span class="nd">@property</span>
@@ -1483,7 +1482,7 @@
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Not all constituent sets are iterable&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Intersection"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Intersection">[docs]</a><span class="k">class</span> <span class="nc">Intersection</span><span class="p">(</span><span class="n">Set</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents an intersection of sets as a :class:`Set`.</span>
 
 <span class="sd">    Examples</span>
@@ -1643,7 +1642,7 @@
 
 <div class="viewcode-block" id="Intersection.reduce"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Intersection.reduce">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a simplified intersection by applying rules.</span>
 
 <span class="sd">        We first start with global rules like</span>
@@ -1707,12 +1706,12 @@
             <span class="k">return</span> <span class="n">Intersection</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Intersection.as_relational"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Intersection.as_relational">[docs]</a>    <span class="k">def</span> <span class="nf">as_relational</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Rewrite an Intersection in terms of equalities and logic operators&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rewrite an Intersection in terms of equalities and logic operators&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">And</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">set</span><span class="o">.</span><span class="n">as_relational</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span> <span class="k">for</span> <span class="nb">set</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">])</span></div></div>
 
 
 <div class="viewcode-block" id="Complement"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Complement">[docs]</a><span class="k">class</span> <span class="nc">Complement</span><span class="p">(</span><span class="n">Set</span><span class="p">,</span> <span class="n">EvalfMixin</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents the set difference or relative complement of a set with</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Represents the set difference or relative complement of a set with</span>
 <span class="sd">    another set.</span>
 
 <span class="sd">    `A - B = \{x \in A| x \\notin B\}`</span>
@@ -1746,7 +1745,7 @@
 
 <div class="viewcode-block" id="Complement.reduce"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Complement.reduce">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">reduce</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Simplify a :class:`Complement`.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1769,7 +1768,7 @@
 
 
 <div class="viewcode-block" id="EmptySet"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.EmptySet">[docs]</a><span class="k">class</span> <span class="nc">EmptySet</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">Set</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents the empty set. The empty set is available as a singleton</span>
 <span class="sd">    as S.EmptySet.</span>
 
@@ -1836,7 +1835,7 @@
 
 
 <div class="viewcode-block" id="UniversalSet"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.UniversalSet">[docs]</a><span class="k">class</span> <span class="nc">UniversalSet</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">Set</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents the set of all things.</span>
 <span class="sd">    The universal set is available as a singleton as S.UniversalSet</span>
 
@@ -1891,7 +1890,7 @@
 
 
 <div class="viewcode-block" id="FiniteSet"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.FiniteSet">[docs]</a><span class="k">class</span> <span class="nc">FiniteSet</span><span class="p">(</span><span class="n">Set</span><span class="p">,</span> <span class="n">EvalfMixin</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents a finite set of discrete numbers</span>
 
 <span class="sd">    Examples</span>
@@ -1952,7 +1951,7 @@
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_intersect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function should only be used internally</span>
 
 <span class="sd">        See Set._intersect for docstring</span>
@@ -2002,7 +2001,7 @@
 
 
     <span class="k">def</span> <span class="nf">_union</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function should only be used internally</span>
 
 <span class="sd">        See Set._union for docstring</span>
@@ -2020,7 +2019,7 @@
 
 
     <span class="k">def</span> <span class="nf">_contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Tests whether an element, other, is in the set.</span>
 
 <span class="sd">        Relies on Python&#39;s set class. This tests for object equality</span>
@@ -2072,7 +2071,7 @@
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
 
 <div class="viewcode-block" id="FiniteSet.as_relational"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.FiniteSet.as_relational">[docs]</a>    <span class="k">def</span> <span class="nf">as_relational</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Rewrite a FiniteSet in terms of equalities and logic operators. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rewrite a FiniteSet in terms of equalities and logic operators. &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..core.relational</span> <span class="kn">import</span> <span class="n">Eq</span>
         <span class="k">return</span> <span class="n">Or</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">Eq</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">elem</span><span class="p">)</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">])</span></div>
 
@@ -2118,7 +2117,7 @@
 
 
 <div class="viewcode-block" id="SymmetricDifference"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.SymmetricDifference">[docs]</a><span class="k">class</span> <span class="nc">SymmetricDifference</span><span class="p">(</span><span class="n">Set</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents the set of elements which are in either of the</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the set of elements which are in either of the</span>
 <span class="sd">    sets and not in their intersection.</span>
 
 <span class="sd">    Examples</span>
@@ -2157,7 +2156,7 @@
 
 
 <div class="viewcode-block" id="imageset"><a class="viewcode-back" href="../../../../modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.imageset">[docs]</a><span class="k">def</span> <span class="nf">imageset</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return an image of the set under transformation ``f``.</span>
 
 <span class="sd">    If this function can&#39;t compute the image, it returns an</span>
@@ -2265,7 +2264,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2286,7 +2285,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

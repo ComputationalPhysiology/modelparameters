@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -50,7 +49,7 @@
 
 
 <span class="k">def</span> <span class="nf">_torf</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return True if all args are True, False if they</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True if all args are True, False if they</span>
 <span class="sd">    are all False, else None.</span>
 
 <span class="sd">    &gt;&gt;&gt; from .logic import _torf</span>
@@ -76,7 +75,7 @@
 
 
 <span class="k">def</span> <span class="nf">_fuzzy_group</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">quick_exit</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return True if all args are True, None if there is any None else False</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True if all args are True, None if there is any None else False</span>
 <span class="sd">    unless ``quick_exit`` is True (then return None as soon as a second False</span>
 <span class="sd">    is seen.</span>
 
@@ -125,7 +124,7 @@
 
 
 <div class="viewcode-block" id="fuzzy_bool"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.fuzzy_bool">[docs]</a><span class="k">def</span> <span class="nf">fuzzy_bool</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return True, False or None according to x.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True, False or None according to x.</span>
 
 <span class="sd">    Whereas bool(x) returns True or False, fuzzy_bool allows</span>
 <span class="sd">    for the None value and non-false values (which become None), too.</span>
@@ -148,7 +147,7 @@
 
 
 <div class="viewcode-block" id="fuzzy_and"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.fuzzy_and">[docs]</a><span class="k">def</span> <span class="nf">fuzzy_and</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return True (all True), False (any False) or None.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True (all True), False (any False) or None.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -184,7 +183,7 @@
 
 
 <div class="viewcode-block" id="fuzzy_not"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.fuzzy_not">[docs]</a><span class="k">def</span> <span class="nf">fuzzy_not</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Not in fuzzy logic</span>
 
 <span class="sd">    Return None if `v` is None else `not v`.</span>
@@ -207,7 +206,7 @@
 
 
 <div class="viewcode-block" id="fuzzy_or"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.fuzzy_or">[docs]</a><span class="k">def</span> <span class="nf">fuzzy_or</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Or in fuzzy logic. Returns True (any True), False (all False), or None</span>
 
 <span class="sd">    See the docstrings of fuzzy_and and fuzzy_not for more info.  fuzzy_or is</span>
@@ -228,7 +227,7 @@
 
 
 <div class="viewcode-block" id="Logic"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.Logic">[docs]</a><span class="k">class</span> <span class="nc">Logic</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Logical expression&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Logical expression&quot;&quot;&quot;</span>
     <span class="c1"># {} &#39;op&#39; -&gt; LogicClass</span>
     <span class="n">op_2class</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -276,7 +275,7 @@
 
 <div class="viewcode-block" id="Logic.fromstring"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.logic.Logic.fromstring">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">fromstring</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Logic from string with space around &amp; and | but none after !.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Logic from string with space around &amp; and | but none after !.</span>
 
 <span class="sd">           e.g.</span>
 
@@ -450,7 +449,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -471,7 +470,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

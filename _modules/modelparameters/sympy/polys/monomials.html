@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -50,7 +49,7 @@
 
 <div class="viewcode-block" id="itermonomials"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.monomials.itermonomials">[docs]</a><span class="nd">@public</span>
 <span class="k">def</span> <span class="nf">itermonomials</span><span class="p">(</span><span class="n">variables</span><span class="p">,</span> <span class="n">degree</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate a set of monomials of the given total degree or less.</span>
 
 <span class="sd">    Given a set of variables `V` and a total degree `N` generate</span>
@@ -96,7 +95,7 @@
         <span class="k">return</span> <span class="n">monoms</span></div>
 
 <span class="k">def</span> <span class="nf">monomial_count</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes the number of monomials.</span>
 
 <span class="sd">    The number of monomials is given by the following formula:</span>
@@ -129,7 +128,7 @@
     <span class="k">return</span> <span class="n">factorial</span><span class="p">(</span><span class="n">V</span> <span class="o">+</span> <span class="n">N</span><span class="p">)</span> <span class="o">/</span> <span class="n">factorial</span><span class="p">(</span><span class="n">V</span><span class="p">)</span> <span class="o">/</span> <span class="n">factorial</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">monomial_mul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Multiplication of tuples representing monomials.</span>
 
 <span class="sd">    Lets multiply `x**3*y**4*z` with `x*y**2`::</span>
@@ -145,7 +144,7 @@
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">([</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span> <span class="p">])</span>
 
 <span class="k">def</span> <span class="nf">monomial_div</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Division of tuples representing monomials.</span>
 
 <span class="sd">    Lets divide `x**3*y**4*z` by `x*y**2`::</span>
@@ -171,7 +170,7 @@
         <span class="k">return</span> <span class="kc">None</span>
 
 <span class="k">def</span> <span class="nf">monomial_ldiv</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Division of tuples representing monomials.</span>
 
 <span class="sd">    Lets divide `x**3*y**4*z` by `x*y**2`::</span>
@@ -192,11 +191,11 @@
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">([</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span> <span class="p">])</span>
 
 <span class="k">def</span> <span class="nf">monomial_pow</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the n-th pow of the monomial. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the n-th pow of the monomial. &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">([</span> <span class="n">a</span><span class="o">*</span><span class="n">n</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">A</span> <span class="p">])</span>
 
 <span class="k">def</span> <span class="nf">monomial_gcd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Greatest common divisor of tuples representing monomials.</span>
 
 <span class="sd">    Lets compute GCD of `x*y**4*z` and `x**3*y**2`::</span>
@@ -212,7 +211,7 @@
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">([</span> <span class="nb">min</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span> <span class="p">])</span>
 
 <span class="k">def</span> <span class="nf">monomial_lcm</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Least common multiple of tuples representing monomials.</span>
 
 <span class="sd">    Lets compute LCM of `x*y**4*z` and `x**3*y**2`::</span>
@@ -228,7 +227,7 @@
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">([</span> <span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span> <span class="p">])</span>
 
 <span class="k">def</span> <span class="nf">monomial_divides</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Does there exist a monomial X such that XA == B?</span>
 
 <span class="sd">    &gt;&gt;&gt; from .monomials import monomial_divides</span>
@@ -240,7 +239,7 @@
     <span class="k">return</span> <span class="nb">all</span><span class="p">(</span><span class="n">a</span> <span class="o">&lt;=</span> <span class="n">b</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">))</span>
 
 <span class="k">def</span> <span class="nf">monomial_max</span><span class="p">(</span><span class="o">*</span><span class="n">monoms</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns maximal degree for each variable in a set of monomials.</span>
 
 <span class="sd">    Consider monomials `x**3*y**4*z**5`, `y**5*z` and `x**6*y**3*z**9`.</span>
@@ -262,7 +261,7 @@
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">monomial_min</span><span class="p">(</span><span class="o">*</span><span class="n">monoms</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns minimal degree for each variable in a set of monomials.</span>
 
 <span class="sd">    Consider monomials `x**3*y**4*z**5`, `y**5*z` and `x**6*y**3*z**9`.</span>
@@ -284,7 +283,7 @@
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">monomial_deg</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the total degree of a monomial.</span>
 
 <span class="sd">    For example, the total degree of `xy^2` is 3:</span>
@@ -296,7 +295,7 @@
     <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">term_div</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Division of two terms in over a ring/field. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Division of two terms in over a ring/field. &quot;&quot;&quot;</span>
     <span class="n">a_lm</span><span class="p">,</span> <span class="n">a_lc</span> <span class="o">=</span> <span class="n">a</span>
     <span class="n">b_lm</span><span class="p">,</span> <span class="n">b_lc</span> <span class="o">=</span> <span class="n">b</span>
 
@@ -314,7 +313,7 @@
             <span class="k">return</span> <span class="kc">None</span>
 
 <span class="k">class</span> <span class="nc">MonomialOps</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Code generator of fast monomial arithmetic functions. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Code generator of fast monomial arithmetic functions. &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ngens</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ngens</span> <span class="o">=</span> <span class="n">ngens</span>
@@ -387,7 +386,7 @@
 <span class="s2">        def </span><span class="si">%(name)s</span><span class="s2">(A, B):</span>
 <span class="s2">            (</span><span class="si">%(A)s</span><span class="s2">,) = A</span>
 <span class="s2">            (</span><span class="si">%(B)s</span><span class="s2">,) = B</span>
-<span class="s2">            </span><span class="si">%(RAB)s</span><span class="s2"></span>
+<span class="s2">            </span><span class="si">%(RAB)s</span>
 <span class="s2">            return (</span><span class="si">%(R)s</span><span class="s2">,)</span>
 <span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
         <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_vars</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
@@ -427,7 +426,7 @@
 
 <div class="viewcode-block" id="Monomial"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.monomials.Monomial">[docs]</a><span class="nd">@public</span>
 <span class="k">class</span> <span class="nc">Monomial</span><span class="p">(</span><span class="n">PicklableWithSlots</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class representing a monomial, i.e. a product of powers. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class representing a monomial, i.e. a product of powers. &quot;&quot;&quot;</span>
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;exponents&#39;</span><span class="p">,</span> <span class="s1">&#39;gens&#39;</span><span class="p">]</span>
 
@@ -464,7 +463,7 @@
             <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">(</span><span class="si">%s</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exponents</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Monomial.as_expr"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.monomials.Monomial.as_expr">[docs]</a>    <span class="k">def</span> <span class="nf">as_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a monomial instance to a SymPy expression. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a monomial instance to a SymPy expression. &quot;&quot;&quot;</span>
         <span class="n">gens</span> <span class="o">=</span> <span class="n">gens</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">gens</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">gens</span><span class="p">:</span>
@@ -529,7 +528,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;a non-negative integer expected, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">other</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Monomial.gcd"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.monomials.Monomial.gcd">[docs]</a>    <span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Greatest common divisor of monomials. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Greatest common divisor of monomials. &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Monomial</span><span class="p">):</span>
             <span class="n">exponents</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">exponents</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">)):</span>
@@ -541,7 +540,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rebuild</span><span class="p">(</span><span class="n">monomial_gcd</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exponents</span><span class="p">,</span> <span class="n">exponents</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Monomial.lcm"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.monomials.Monomial.lcm">[docs]</a>    <span class="k">def</span> <span class="nf">lcm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Least common multiple of monomials. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Least common multiple of monomials. &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Monomial</span><span class="p">):</span>
             <span class="n">exponents</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">exponents</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">)):</span>
@@ -568,7 +567,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -589,7 +588,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

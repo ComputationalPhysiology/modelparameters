@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -80,7 +79,7 @@
     <span class="k">return</span> <span class="n">matchtype</span></div>
 
 <div class="viewcode-block" id="deconstruct"><a class="viewcode-back" href="../../../../modelparameters.sympy.unify.html#modelparameters.sympy.unify.usympy.deconstruct">[docs]</a><span class="k">def</span> <span class="nf">deconstruct</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">variables</span><span class="o">=</span><span class="p">()):</span>
-    <span class="sd">&quot;&quot;&quot; Turn a SymPy object into a Compound &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Turn a SymPy object into a Compound &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Variable</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="p">(</span><span class="n">Variable</span><span class="p">,</span> <span class="n">CondVariable</span><span class="p">)):</span>
@@ -91,7 +90,7 @@
                     <span class="nb">tuple</span><span class="p">(</span><span class="n">deconstruct</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">variables</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">args</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="construct"><a class="viewcode-back" href="../../../../modelparameters.sympy.unify.html#modelparameters.sympy.unify.usympy.construct">[docs]</a><span class="k">def</span> <span class="nf">construct</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Turn a Compound into a SymPy object &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Turn a Compound into a SymPy object &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="p">(</span><span class="n">Variable</span><span class="p">,</span> <span class="n">CondVariable</span><span class="p">)):</span>
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">arg</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">Compound</span><span class="p">):</span>
@@ -104,14 +103,14 @@
         <span class="k">return</span> <span class="n">t</span><span class="o">.</span><span class="n">op</span><span class="p">(</span><span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="n">construct</span><span class="p">,</span> <span class="n">t</span><span class="o">.</span><span class="n">args</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="rebuild"><a class="viewcode-back" href="../../../../modelparameters.sympy.unify.html#modelparameters.sympy.unify.usympy.rebuild">[docs]</a><span class="k">def</span> <span class="nf">rebuild</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Rebuild a SymPy expression</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Rebuild a SymPy expression</span>
 
 <span class="sd">    This removes harm caused by Expr-Rules interactions</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">construct</span><span class="p">(</span><span class="n">deconstruct</span><span class="p">(</span><span class="n">s</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="unify"><a class="viewcode-back" href="../../../../modelparameters.sympy.unify.html#modelparameters.sympy.unify.usympy.unify">[docs]</a><span class="k">def</span> <span class="nf">unify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">variables</span><span class="o">=</span><span class="p">(),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Structural unification of two expressions/patterns</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Structural unification of two expressions/patterns</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -179,7 +178,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -200,7 +199,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -59,14 +58,14 @@
 
 
 <div class="viewcode-block" id="isqrt"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.power.isqrt">[docs]</a><span class="k">def</span> <span class="nf">isqrt</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the largest integer less than or equal to sqrt(n).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the largest integer less than or equal to sqrt(n).&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">17984395633462800708566937239552</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">_sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">integer_nthroot</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
 
 
 <div class="viewcode-block" id="integer_nthroot"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.power.integer_nthroot">[docs]</a><span class="k">def</span> <span class="nf">integer_nthroot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a tuple containing x = floor(y**(1/n))</span>
 <span class="sd">    and a boolean indicating whether the result is exact (that is,</span>
 <span class="sd">    whether x**n == y).</span>
@@ -138,7 +137,7 @@
 
 
 <div class="viewcode-block" id="Pow"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.power.Pow">[docs]</a><span class="k">class</span> <span class="nc">Pow</span><span class="p">(</span><span class="n">Expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Defines the expression x**y as &quot;x raised to a power y&quot;</span>
 
 <span class="sd">    Singleton definitions involving (0, 1, -1, oo, -oo, I, -I):</span>
@@ -307,7 +306,7 @@
         <span class="k">elif</span> <span class="n">e</span><span class="o">.</span><span class="n">is_real</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># helper functions ===========================</span>
             <span class="k">def</span> <span class="nf">_half</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
-                <span class="sd">&quot;&quot;&quot;Return True if the exponent has a literal 2 as the</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;Return True if the exponent has a literal 2 as the</span>
 <span class="sd">                denominator, else None.&quot;&quot;&quot;</span>
                 <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="s1">&#39;q&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
                     <span class="k">return</span> <span class="kc">True</span>
@@ -315,7 +314,7 @@
                 <span class="k">if</span> <span class="n">n</span><span class="o">.</span><span class="n">is_integer</span> <span class="ow">and</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
                     <span class="k">return</span> <span class="kc">True</span>
             <span class="k">def</span> <span class="nf">_n2</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
-                <span class="sd">&quot;&quot;&quot;Return ``e`` evaluated to a Number with 2 significant</span>
+<span class="w">                </span><span class="sd">&quot;&quot;&quot;Return ``e`` evaluated to a Number with 2 significant</span>
 <span class="sd">                digits, else None.&quot;&quot;&quot;</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">rv</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -589,7 +588,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">doit</span><span class="p">()</span><span class="o">.</span><span class="n">is_prime</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_integer</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_positive</span><span class="p">:</span>
-            <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            a Power will be non-prime only if both base and exponent</span>
 <span class="sd">            are greater than 1</span>
 <span class="sd">            &quot;&quot;&quot;</span>
@@ -602,7 +601,7 @@
     <span class="k">def</span> <span class="nf">_eval_subs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">exp</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">Symbol</span>
         <span class="k">def</span> <span class="nf">_check</span><span class="p">(</span><span class="n">ct1</span><span class="p">,</span> <span class="n">ct2</span><span class="p">,</span> <span class="n">old</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Return bool, pow where, if bool is True, then the exponent of</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Return bool, pow where, if bool is True, then the exponent of</span>
 <span class="sd">            Pow `old` will combine with `pow` so the substitution is valid,</span>
 <span class="sd">            otherwise bool will be False,</span>
 
@@ -670,7 +669,7 @@
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="nb">pow</span><span class="p">)</span>  <span class="c1"># (2**x).subs(exp(x*log(2)), z) -&gt; z</span>
 
 <div class="viewcode-block" id="Pow.as_base_exp"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.power.Pow.as_base_exp">[docs]</a>    <span class="k">def</span> <span class="nf">as_base_exp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return base and exp of self.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return base and exp of self.</span>
 
 <span class="sd">        If base is 1/Integer, then return Integer, -exp. If this extra</span>
 <span class="sd">        processing is not needed, the base and exp properties will</span>
@@ -732,7 +731,7 @@
                 <span class="k">return</span> <span class="n">transpose</span><span class="p">(</span><span class="n">expanded</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_expand_power_exp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;a**(n+m) -&gt; a**n*a**m&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;a**(n+m) -&gt; a**n*a**m&quot;&quot;&quot;</span>
         <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span>
         <span class="n">e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exp</span>
         <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">is_Add</span> <span class="ow">and</span> <span class="n">e</span><span class="o">.</span><span class="n">is_commutative</span><span class="p">:</span>
@@ -743,7 +742,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_expand_power_base</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;(a*b)**n -&gt; a**n * b**n&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;(a*b)**n -&gt; a**n * b**n&quot;&quot;&quot;</span>
         <span class="n">force</span> <span class="o">=</span> <span class="n">hints</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;force&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
         <span class="n">b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span>
@@ -862,7 +861,7 @@
         <span class="k">return</span> <span class="n">rv</span>
 
     <span class="k">def</span> <span class="nf">_eval_expand_multinomial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;(a+b+..) ** n -&gt; a**n + n*a**(n-1)*b + .., n is nonzero integer&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;(a+b+..) ** n -&gt; a**n + n*a**(n-1)*b + .., n is nonzero integer&quot;&quot;&quot;</span>
 
         <span class="n">base</span><span class="p">,</span> <span class="n">exp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span>
@@ -1316,7 +1315,7 @@
         <span class="c1"># and hopefully has no other symbols</span>
 
         <span class="k">def</span> <span class="nf">e2int</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;return the integer value (if possible) of e and a</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;return the integer value (if possible) of e and a</span>
 <span class="sd">            flag indicating whether it is bounded or not.&quot;&quot;&quot;</span>
             <span class="n">n</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
             <span class="n">infinite</span> <span class="o">=</span> <span class="n">n</span><span class="o">.</span><span class="n">is_infinite</span>
@@ -1443,7 +1442,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_sage_</span><span class="p">()</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">_sage_</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Pow.as_content_primitive"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.power.Pow.as_content_primitive">[docs]</a>    <span class="k">def</span> <span class="nf">as_content_primitive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radical</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">clear</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the tuple (R, self/R) where R is the positive Rational</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the tuple (R, self/R) where R is the positive Rational</span>
 <span class="sd">        extracted from self.</span>
 
 <span class="sd">        Examples</span>
@@ -1574,7 +1573,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1595,7 +1594,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

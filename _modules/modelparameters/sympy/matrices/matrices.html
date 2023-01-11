@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -72,7 +71,7 @@
 
 
 <span class="k">def</span> <span class="nf">_iszero</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns True if x is zero.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns True if x is zero.&quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">is_zero</span>
     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
@@ -80,7 +79,7 @@
 
 
 <div class="viewcode-block" id="DeferredVector"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.DeferredVector">[docs]</a><span class="k">class</span> <span class="nc">DeferredVector</span><span class="p">(</span><span class="n">Symbol</span><span class="p">,</span> <span class="n">NotIterable</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A vector whose components are deferred (e.g. for use with lambdify)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A vector whose components are deferred (e.g. for use with lambdify)</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -111,11 +110,11 @@
 
 
 <div class="viewcode-block" id="MatrixDeterminant"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeterminant">[docs]</a><span class="k">class</span> <span class="nc">MatrixDeterminant</span><span class="p">(</span><span class="n">MatrixCommon</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Provides basic matrix determinant operations.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Provides basic matrix determinant operations.</span>
 <span class="sd">    Should not be instantiated directly.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_eval_berkowitz_toeplitz_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return (A,T) where T the Toeplitz matrix used in the Berkowitz algorithm</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return (A,T) where T the Toeplitz matrix used in the Berkowitz algorithm</span>
 <span class="sd">        corresponding to `self` and A is the first principal submatrix.&quot;&quot;&quot;</span>
 
         <span class="c1"># the 0 x 0 case is trivial</span>
@@ -159,7 +158,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">toeplitz</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_berkowitz_vector</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Run the Berkowitz algorithm and return a vector whose entries</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the Berkowitz algorithm and return a vector whose entries</span>
 <span class="sd">         are the coefficients of the characteristic polynomial of `self`.</span>
 
 <span class="sd">         Given N x N matrix, efficiently compute</span>
@@ -203,7 +202,7 @@
         <span class="k">return</span> <span class="n">toeplitz</span> <span class="o">*</span> <span class="n">submat</span><span class="o">.</span><span class="n">_eval_berkowitz_vector</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_eval_det_bareiss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute matrix determinant using Bareiss&#39; fraction-free</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute matrix determinant using Bareiss&#39; fraction-free</span>
 <span class="sd">        algorithm which is an extension of the well known Gaussian</span>
 <span class="sd">        elimination method. This approach is best suited for dense</span>
 <span class="sd">        symbolic matrices and will result in a determinant with</span>
@@ -260,12 +259,12 @@
         <span class="k">return</span> <span class="n">cancel</span><span class="p">(</span><span class="n">bareiss</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_eval_det_berkowitz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Use the Berkowitz algorithm to compute the determinant.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Use the Berkowitz algorithm to compute the determinant.&quot;&quot;&quot;</span>
         <span class="n">berk_vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_berkowitz_vector</span><span class="p">()</span>
         <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">berk_vector</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">berk_vector</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">_eval_det_lu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iszerofunc</span><span class="o">=</span><span class="n">_iszero</span><span class="p">,</span> <span class="n">simpfunc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Computes the determinant of a matrix from its LU decomposition.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the determinant of a matrix from its LU decomposition.</span>
 <span class="sd">        This function uses the LU decomposition computed by</span>
 <span class="sd">        LUDecomposition_Simple().</span>
 
@@ -314,12 +313,12 @@
         <span class="k">return</span> <span class="n">det</span>
 
     <span class="k">def</span> <span class="nf">_eval_determinant</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Assumed to exist by matrix expressions; If we subclass</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Assumed to exist by matrix expressions; If we subclass</span>
 <span class="sd">        MatrixDeterminant, we can fully evaluate determinants.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">det</span><span class="p">()</span>
 
 <div class="viewcode-block" id="MatrixDeterminant.adjugate"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeterminant.adjugate">[docs]</a>    <span class="k">def</span> <span class="nf">adjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;berkowitz&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the adjugate, or classical adjoint, of</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the adjugate, or classical adjoint, of</span>
 <span class="sd">        a matrix.  That is, the transpose of the matrix of cofactors.</span>
 
 
@@ -334,7 +333,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cofactor_matrix</span><span class="p">(</span><span class="n">method</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="MatrixDeterminant.charpoly"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeterminant.charpoly">[docs]</a>    <span class="k">def</span> <span class="nf">charpoly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">Dummy</span><span class="p">(</span><span class="s2">&quot;lambda&quot;</span><span class="p">),</span> <span class="n">simplify</span><span class="o">=</span><span class="n">_simplify</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Computes characteristic polynomial det(x*I - self) where I is</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes characteristic polynomial det(x*I - self) where I is</span>
 <span class="sd">        the identity matrix.</span>
 
 <span class="sd">        A PurePoly is returned, so using different variables for ``x`` does</span>
@@ -386,7 +385,7 @@
         <span class="k">return</span> <span class="n">PurePoly</span><span class="p">([</span><span class="n">simplify</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">berk_vector</span><span class="p">],</span> <span class="n">x</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixDeterminant.cofactor"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeterminant.cofactor">[docs]</a>    <span class="k">def</span> <span class="nf">cofactor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;berkowitz&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Calculate the cofactor of an element.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the cofactor of an element.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -402,7 +401,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">**</span> <span class="p">((</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">minor</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixDeterminant.cofactor_matrix"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeterminant.cofactor_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">cofactor_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;berkowitz&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a matrix containing the cofactor of each element.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a matrix containing the cofactor of each element.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -419,7 +418,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cofactor</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">method</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="MatrixDeterminant.det"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeterminant.det">[docs]</a>    <span class="k">def</span> <span class="nf">det</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;bareiss&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Computes the determinant of a matrix.  If the matrix</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the determinant of a matrix.  If the matrix</span>
 <span class="sd">        is at most 3x3, a hard-coded formula is used.</span>
 <span class="sd">        Otherwise, the determinant using the method `method`.</span>
 
@@ -470,7 +469,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_det_lu</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="MatrixDeterminant.minor"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeterminant.minor">[docs]</a>    <span class="k">def</span> <span class="nf">minor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;berkowitz&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the (i,j) minor of `self`.  That is,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the (i,j) minor of `self`.  That is,</span>
 <span class="sd">        return the determinant of the matrix obtained by deleting</span>
 <span class="sd">        the `i`th row and `j`th column from `self`.</span>
 
@@ -488,7 +487,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">minor_submatrix</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixDeterminant.minor_submatrix"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeterminant.minor_submatrix">[docs]</a>    <span class="k">def</span> <span class="nf">minor_submatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the submatrix obtained by removing the `i`th row</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the submatrix obtained by removing the `i`th row</span>
 <span class="sd">        and `j`th column from `self`.</span>
 
 <span class="sd">        See Also</span>
@@ -515,7 +514,7 @@
 
 
 <div class="viewcode-block" id="MatrixReductions"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixReductions">[docs]</a><span class="k">class</span> <span class="nc">MatrixReductions</span><span class="p">(</span><span class="n">MatrixDeterminant</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Provides basic matrix row/column operations.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Provides basic matrix row/column operations.</span>
 <span class="sd">    Should not be instantiated directly.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_eval_col_op_swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col1</span><span class="p">,</span> <span class="n">col2</span><span class="p">):</span>
@@ -571,7 +570,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="n">entry</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_echelon_form</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iszerofunc</span><span class="p">,</span> <span class="n">simpfunc</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns (mat, swaps) where `mat` is a row-equivalent matrix</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns (mat, swaps) where `mat` is a row-equivalent matrix</span>
 <span class="sd">        in echelon form and `swaps` is a list of row-swaps performed.&quot;&quot;&quot;</span>
         <span class="n">reduced</span><span class="p">,</span> <span class="n">pivot_cols</span><span class="p">,</span> <span class="n">swaps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_row_reduce</span><span class="p">(</span>
             <span class="n">iszerofunc</span><span class="p">,</span> <span class="n">simpfunc</span><span class="p">,</span> <span class="n">normalize_last</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">zero_above</span><span class="o">=</span><span class="kc">False</span>
@@ -593,7 +592,7 @@
         <span class="k">return</span> <span class="n">reduced</span><span class="p">,</span> <span class="n">pivot_cols</span>
 
     <span class="k">def</span> <span class="nf">_normalize_op_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">col1</span><span class="p">,</span> <span class="n">col2</span><span class="p">,</span> <span class="n">error_str</span><span class="o">=</span><span class="s2">&quot;col&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Validate the arguments for a row/column operation.  `error_str`</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate the arguments for a row/column operation.  `error_str`</span>
 <span class="sd">        can be one of &quot;row&quot; or &quot;col&quot; depending on the arguments being parsed.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">op</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;n-&gt;kn&quot;</span><span class="p">,</span> <span class="s2">&quot;n&lt;-&gt;m&quot;</span><span class="p">,</span> <span class="s2">&quot;n-&gt;n+km&quot;</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -662,7 +661,7 @@
         <span class="k">return</span> <span class="n">op</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">col1</span><span class="p">,</span> <span class="n">col2</span>
 
     <span class="k">def</span> <span class="nf">_permute_complexity_right</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iszerofunc</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Permute columns with complicated elements as</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Permute columns with complicated elements as</span>
 <span class="sd">        far right as they can go.  Since the `sympy` row reduction</span>
 <span class="sd">        algorithms start on the left, having complexity right-shifted</span>
 <span class="sd">        speeds things up.</span>
@@ -684,7 +683,7 @@
     <span class="k">def</span> <span class="nf">_row_reduce</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">iszerofunc</span><span class="p">,</span> <span class="n">simpfunc</span><span class="p">,</span> <span class="n">normalize_last</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">zero_above</span><span class="o">=</span><span class="kc">True</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Row reduce `self` and return a tuple (rref_matrix,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Row reduce `self` and return a tuple (rref_matrix,</span>
 <span class="sd">        pivot_cols, swaps) where pivot_cols are the pivot columns</span>
 <span class="sd">        and swaps are any row swaps that were used in the process</span>
 <span class="sd">        of row reduction.</span>
@@ -718,7 +717,7 @@
             <span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">cross_cancel</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Does the row op row[i] = a*row[i] - b*row[j]&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Does the row op row[i] = a*row[i] - b*row[j]&quot;&quot;&quot;</span>
             <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="n">cols</span>
             <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">cols</span><span class="p">,</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">cols</span><span class="p">):</span>
                 <span class="n">mat</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">mat</span><span class="p">[</span><span class="n">p</span><span class="p">]</span> <span class="o">-</span> <span class="n">b</span> <span class="o">*</span> <span class="n">mat</span><span class="p">[</span><span class="n">p</span> <span class="o">+</span> <span class="n">q</span><span class="p">]</span>
@@ -787,7 +786,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="n">mat</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">pivot_cols</span><span class="p">),</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">swaps</span><span class="p">)</span>
 
 <div class="viewcode-block" id="MatrixReductions.echelon_form"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixReductions.echelon_form">[docs]</a>    <span class="k">def</span> <span class="nf">echelon_form</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iszerofunc</span><span class="o">=</span><span class="n">_iszero</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">with_pivots</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a matrix row-equivalent to `self` that is</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a matrix row-equivalent to `self` that is</span>
 <span class="sd">        in echelon form.  Note that echelon form of a matrix</span>
 <span class="sd">        is *not* unique, however, properties like the row</span>
 <span class="sd">        space and the null space are preserved.&quot;&quot;&quot;</span>
@@ -799,7 +798,7 @@
         <span class="k">return</span> <span class="n">mat</span></div>
 
 <div class="viewcode-block" id="MatrixReductions.elementary_col_op"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixReductions.elementary_col_op">[docs]</a>    <span class="k">def</span> <span class="nf">elementary_col_op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="s2">&quot;n-&gt;kn&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">col1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">col2</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Perfoms the elementary column operation `op`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Perfoms the elementary column operation `op`.</span>
 
 <span class="sd">        `op` may be one of</span>
 
@@ -829,7 +828,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_col_op_add_multiple_to_other_col</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">col2</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixReductions.elementary_row_op"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixReductions.elementary_row_op">[docs]</a>    <span class="k">def</span> <span class="nf">elementary_row_op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="s2">&quot;n-&gt;kn&quot;</span><span class="p">,</span> <span class="n">row</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">row1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">row2</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Perfoms the elementary row operation `op`.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Perfoms the elementary row operation `op`.</span>
 
 <span class="sd">        `op` may be one of</span>
 
@@ -860,14 +859,14 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_echelon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iszerofunc</span><span class="o">=</span><span class="n">_iszero</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns `True` if he matrix is in echelon form.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns `True` if he matrix is in echelon form.</span>
 <span class="sd">        That is, all rows of zeros are at the bottom, and below</span>
 <span class="sd">        each leading non-zero in a row are exclusively zeros.&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_is_echelon</span><span class="p">(</span><span class="n">iszerofunc</span><span class="p">)</span>
 
 <div class="viewcode-block" id="MatrixReductions.rank"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixReductions.rank">[docs]</a>    <span class="k">def</span> <span class="nf">rank</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iszerofunc</span><span class="o">=</span><span class="n">_iszero</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the rank of a matrix</span>
 
 <span class="sd">        &gt;&gt;&gt; from .. import Matrix</span>
@@ -909,7 +908,7 @@
 <div class="viewcode-block" id="MatrixReductions.rref"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixReductions.rref">[docs]</a>    <span class="k">def</span> <span class="nf">rref</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">iszerofunc</span><span class="o">=</span><span class="n">_iszero</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">pivots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">normalize_last</span><span class="o">=</span><span class="kc">True</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return reduced row-echelon form of matrix and indices of pivot vars.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return reduced row-echelon form of matrix and indices of pivot vars.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -970,11 +969,11 @@
 
 
 <div class="viewcode-block" id="MatrixSubspaces"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixSubspaces">[docs]</a><span class="k">class</span> <span class="nc">MatrixSubspaces</span><span class="p">(</span><span class="n">MatrixReductions</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Provides methods relating to the fundamental subspaces</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Provides methods relating to the fundamental subspaces</span>
 <span class="sd">    of a matrix.  Should not be instantiated directly.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="MatrixSubspaces.columnspace"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixSubspaces.columnspace">[docs]</a>    <span class="k">def</span> <span class="nf">columnspace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a list of vectors (Matrix objects) that span columnspace of self</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a list of vectors (Matrix objects) that span columnspace of self</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -1006,7 +1005,7 @@
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">pivots</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="MatrixSubspaces.nullspace"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixSubspaces.nullspace">[docs]</a>    <span class="k">def</span> <span class="nf">nullspace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns list of vectors (Matrix objects) that span nullspace of self</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns list of vectors (Matrix objects) that span nullspace of self</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -1049,7 +1048,7 @@
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">basis</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="MatrixSubspaces.rowspace"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixSubspaces.rowspace">[docs]</a>    <span class="k">def</span> <span class="nf">rowspace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a list of vectors that span the row space of self.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a list of vectors that span the row space of self.&quot;&quot;&quot;</span>
 
         <span class="n">reduced</span><span class="p">,</span> <span class="n">pivots</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">echelon_form</span><span class="p">(</span><span class="n">simplify</span><span class="o">=</span><span class="n">simplify</span><span class="p">,</span> <span class="n">with_pivots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -1057,7 +1056,7 @@
 
 <div class="viewcode-block" id="MatrixSubspaces.orthogonalize"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixSubspaces.orthogonalize">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">orthogonalize</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">vecs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Apply the Gram-Schmidt orthogonalization procedure</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply the Gram-Schmidt orthogonalization procedure</span>
 <span class="sd">        to vectors supplied in `vecs`.</span>
 
 <span class="sd">        Arguments</span>
@@ -1074,7 +1073,7 @@
             <span class="k">return</span> <span class="n">b</span> <span class="o">*</span> <span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="n">b</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
 
         <span class="k">def</span> <span class="nf">perp_to_subspace</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">basis</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;projects vec onto the subspace given</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;projects vec onto the subspace given</span>
 <span class="sd">            by the orthogonal basis `basis`&quot;&quot;&quot;</span>
             <span class="n">components</span> <span class="o">=</span> <span class="p">[</span><span class="n">project</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">basis</span><span class="p">]</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -1098,14 +1097,14 @@
 
 
 <div class="viewcode-block" id="MatrixEigen"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixEigen">[docs]</a><span class="k">class</span> <span class="nc">MatrixEigen</span><span class="p">(</span><span class="n">MatrixSubspaces</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Provides basic matrix eigenvalue/vector operations.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Provides basic matrix eigenvalue/vector operations.</span>
 <span class="sd">    Should not be instantiated directly.&quot;&quot;&quot;</span>
 
     <span class="n">_cache_is_diagonalizable</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">_cache_eigenvects</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="MatrixEigen.diagonalize"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixEigen.diagonalize">[docs]</a>    <span class="k">def</span> <span class="nf">diagonalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reals_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return (P, D), where D is diagonal and</span>
 
 <span class="sd">            D = P^-1 * M * P</span>
@@ -1178,7 +1177,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span><span class="o">*</span><span class="n">p_cols</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="o">*</span><span class="n">diag</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixEigen.eigenvals"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixEigen.eigenvals">[docs]</a>    <span class="k">def</span> <span class="nf">eigenvals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error_when_incomplete</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">flags</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return eigenvalues using the Berkowitz agorithm to compute</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return eigenvalues using the Berkowitz agorithm to compute</span>
 <span class="sd">        the characteristic polynomial.</span>
 
 <span class="sd">        Parameters</span>
@@ -1210,7 +1209,7 @@
         <span class="k">return</span> <span class="n">eigs</span></div>
 
 <div class="viewcode-block" id="MatrixEigen.eigenvects"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixEigen.eigenvects">[docs]</a>    <span class="k">def</span> <span class="nf">eigenvects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">error_when_incomplete</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">flags</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return list of triples (eigenval, multiplicity, basis).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return list of triples (eigenval, multiplicity, basis).</span>
 
 <span class="sd">        The flag ``simplify`` has two effects:</span>
 <span class="sd">            1) if bool(simplify) is True, as_content_primitive()</span>
@@ -1248,7 +1247,7 @@
             <span class="n">mat</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">applyfunc</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">nsimplify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">rational</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 
         <span class="k">def</span> <span class="nf">eigenspace</span><span class="p">(</span><span class="n">eigenval</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Get a basis for the eigenspace for a particular eigenvalue&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Get a basis for the eigenspace for a particular eigenvalue&quot;&quot;&quot;</span>
             <span class="n">m</span> <span class="o">=</span> <span class="n">mat</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">mat</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span> <span class="o">*</span> <span class="n">eigenval</span>
             <span class="n">ret</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">nullspace</span><span class="p">()</span>
             <span class="c1"># the nullspace for a real eigenvalue should be</span>
@@ -1287,7 +1286,7 @@
         <span class="k">return</span> <span class="n">ret</span></div>
 
 <div class="viewcode-block" id="MatrixEigen.is_diagonalizable"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixEigen.is_diagonalizable">[docs]</a>    <span class="k">def</span> <span class="nf">is_diagonalizable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reals_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns true if a matrix is diagonalizable.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns true if a matrix is diagonalizable.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -1342,7 +1341,7 @@
             <span class="n">clear_cache</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;clear_subproducts&quot;</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">cleanup</span><span class="p">():</span>
-            <span class="sd">&quot;&quot;&quot;Clears any cached values if requested&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Clears any cached values if requested&quot;&quot;&quot;</span>
             <span class="k">if</span> <span class="n">clear_cache</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_cache_eigenvects</span> <span class="o">=</span> <span class="kc">None</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_cache_is_diagonalizable</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1376,7 +1375,7 @@
         <span class="k">return</span> <span class="n">ret</span></div>
 
 <div class="viewcode-block" id="MatrixEigen.jordan_form"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixEigen.jordan_form">[docs]</a>    <span class="k">def</span> <span class="nf">jordan_form</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">calc_transform</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return `(P, J)` where `J` is a Jordan block</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return `(P, J)` where `J` is a Jordan block</span>
 <span class="sd">        matrix and `P` is a matrix such that</span>
 
 <span class="sd">            `self == P*J*P**-1`</span>
@@ -1419,7 +1418,7 @@
         <span class="n">has_floats</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="n">Float</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">restore_floats</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;If `has_floats` is `True`, cast all `args` as</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;If `has_floats` is `True`, cast all `args` as</span>
 <span class="sd">            matrices of floats.&quot;&quot;&quot;</span>
             <span class="k">if</span> <span class="n">has_floats</span><span class="p">:</span>
                 <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">evalf</span><span class="p">(</span><span class="n">chop</span><span class="o">=</span><span class="n">chop</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">args</span><span class="p">]</span>
@@ -1431,7 +1430,7 @@
         <span class="n">mat_cache</span> <span class="o">=</span> <span class="p">{}</span>
 
         <span class="k">def</span> <span class="nf">eig_mat</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">pow</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Cache computations of (self - val*I)**pow for quick</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Cache computations of (self - val*I)**pow for quick</span>
 <span class="sd">            retrieval&quot;&quot;&quot;</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">pow</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mat_cache</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">mat_cache</span><span class="p">[(</span><span class="n">val</span><span class="p">,</span> <span class="nb">pow</span><span class="p">)]</span>
@@ -1443,7 +1442,7 @@
 
         <span class="c1"># helper functions</span>
         <span class="k">def</span> <span class="nf">nullity_chain</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Calculate the sequence  [0, nullity(E), nullity(E**2), ...]</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Calculate the sequence  [0, nullity(E), nullity(E**2), ...]</span>
 <span class="sd">            until it is constant where `E = self - val*I`&quot;&quot;&quot;</span>
             <span class="c1"># mat.rank() is faster than computing the null space,</span>
             <span class="c1"># so use the rank-nullity theorem</span>
@@ -1458,7 +1457,7 @@
             <span class="k">return</span> <span class="n">ret</span>
 
         <span class="k">def</span> <span class="nf">blocks_from_nullity_chain</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Return a list of the size of each Jordan block.</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Return a list of the size of each Jordan block.</span>
 <span class="sd">            If d_n is the nullity of E**n, then the number</span>
 <span class="sd">            of Jordan blocks of size n is</span>
 
@@ -1471,7 +1470,7 @@
             <span class="k">return</span> <span class="n">mid</span> <span class="o">+</span> <span class="n">end</span>
 
         <span class="k">def</span> <span class="nf">pick_vec</span><span class="p">(</span><span class="n">small_basis</span><span class="p">,</span> <span class="n">big_basis</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Picks a vector from big_basis that isn&#39;t in</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Picks a vector from big_basis that isn&#39;t in</span>
 <span class="sd">            the subspace spanned by small_basis&quot;&quot;&quot;</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">small_basis</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">big_basis</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1563,7 +1562,7 @@
         <span class="k">return</span> <span class="n">restore_floats</span><span class="p">(</span><span class="n">basis_mat</span><span class="p">,</span> <span class="n">jordan_mat</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixEigen.left_eigenvects"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixEigen.left_eigenvects">[docs]</a>    <span class="k">def</span> <span class="nf">left_eigenvects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">flags</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns left eigenvectors and eigenvalues.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns left eigenvectors and eigenvalues.</span>
 
 <span class="sd">        This function returns the list of triples (eigenval, multiplicity,</span>
 <span class="sd">        basis) for the left eigenvectors. Options are the same as for</span>
@@ -1598,7 +1597,7 @@
         <span class="p">]</span></div>
 
 <div class="viewcode-block" id="MatrixEigen.singular_values"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixEigen.singular_values">[docs]</a>    <span class="k">def</span> <span class="nf">singular_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute the singular values of a Matrix</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute the singular values of a Matrix</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -1629,10 +1628,10 @@
 
 
 <div class="viewcode-block" id="MatrixCalculus"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixCalculus">[docs]</a><span class="k">class</span> <span class="nc">MatrixCalculus</span><span class="p">(</span><span class="n">MatrixCommon</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Provides calculus-related matrix operations.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Provides calculus-related matrix operations.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="MatrixCalculus.diff"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixCalculus.diff">[docs]</a>    <span class="k">def</span> <span class="nf">diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Calculate the derivative of each element in the matrix.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the derivative of each element in the matrix.</span>
 <span class="sd">        ``args`` will be passed to the ``integrate`` function.</span>
 
 <span class="sd">        Examples</span>
@@ -1655,7 +1654,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">applyfunc</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="MatrixCalculus.integrate"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixCalculus.integrate">[docs]</a>    <span class="k">def</span> <span class="nf">integrate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Integrate each element of the matrix.  ``args`` will</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Integrate each element of the matrix.  ``args`` will</span>
 <span class="sd">        be passed to the ``integrate`` function.</span>
 
 <span class="sd">        Examples</span>
@@ -1682,7 +1681,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">applyfunc</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">integrate</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="MatrixCalculus.jacobian"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixCalculus.jacobian">[docs]</a>    <span class="k">def</span> <span class="nf">jacobian</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Calculates the Jacobian matrix (derivative of a vector-valued function).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the Jacobian matrix (derivative of a vector-valued function).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -1739,7 +1738,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="bp">self</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span></div>
 
 <div class="viewcode-block" id="MatrixCalculus.limit"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixCalculus.limit">[docs]</a>    <span class="k">def</span> <span class="nf">limit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Calculate the limit of each element in the matrix.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the limit of each element in the matrix.</span>
 <span class="sd">        ``args`` will be passed to the ``limit`` function.</span>
 
 <span class="sd">        Examples</span>
@@ -1764,13 +1763,13 @@
 
 <span class="c1"># https://github.com/sympy/sympy/pull/12854</span>
 <div class="viewcode-block" id="MatrixDeprecated"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeprecated">[docs]</a><span class="k">class</span> <span class="nc">MatrixDeprecated</span><span class="p">(</span><span class="n">MatrixCommon</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A class to house deprecated matrix methods.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class to house deprecated matrix methods.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="MatrixDeprecated.berkowitz_charpoly"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeprecated.berkowitz_charpoly">[docs]</a>    <span class="k">def</span> <span class="nf">berkowitz_charpoly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">Dummy</span><span class="p">(</span><span class="s2">&quot;lambda&quot;</span><span class="p">),</span> <span class="n">simplify</span><span class="o">=</span><span class="n">_simplify</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">charpoly</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixDeprecated.berkowitz_det"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeprecated.berkowitz_det">[docs]</a>    <span class="k">def</span> <span class="nf">berkowitz_det</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Computes determinant using Berkowitz method.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes determinant using Berkowitz method.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -1781,7 +1780,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;berkowitz&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixDeprecated.berkowitz_eigenvals"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeprecated.berkowitz_eigenvals">[docs]</a>    <span class="k">def</span> <span class="nf">berkowitz_eigenvals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">flags</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Computes eigenvalues of a Matrix using Berkowitz method.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes eigenvalues of a Matrix using Berkowitz method.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -1791,7 +1790,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">eigenvals</span><span class="p">(</span><span class="o">**</span><span class="n">flags</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixDeprecated.berkowitz_minors"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeprecated.berkowitz_minors">[docs]</a>    <span class="k">def</span> <span class="nf">berkowitz_minors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Computes principal minors using Berkowitz method.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes principal minors using Berkowitz method.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -1854,7 +1853,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bareiss&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixDeprecated.det_bareiss"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeprecated.det_bareiss">[docs]</a>    <span class="k">def</span> <span class="nf">det_bareiss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute matrix determinant using Bareiss&#39; fraction-free</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute matrix determinant using Bareiss&#39; fraction-free</span>
 <span class="sd">        algorithm which is an extension of the well known Gaussian</span>
 <span class="sd">        elimination method. This approach is best suited for dense</span>
 <span class="sd">        symbolic matrices and will result in a determinant with</span>
@@ -1873,7 +1872,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s2">&quot;bareiss&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixDeprecated.det_LU_decomposition"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeprecated.det_LU_decomposition">[docs]</a>    <span class="k">def</span> <span class="nf">det_LU_decomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute matrix determinant using LU decomposition</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute matrix determinant using LU decomposition</span>
 
 
 <span class="sd">        Note that this method fails if the LU decomposition itself</span>
@@ -1907,16 +1906,16 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">minor_submatrix</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixDeprecated.permuteBkwd"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeprecated.permuteBkwd">[docs]</a>    <span class="k">def</span> <span class="nf">permuteBkwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">perm</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Permute the rows of the matrix with the given permutation in reverse.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Permute the rows of the matrix with the given permutation in reverse.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">permute_rows</span><span class="p">(</span><span class="n">perm</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;backward&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixDeprecated.permuteFwd"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixDeprecated.permuteFwd">[docs]</a>    <span class="k">def</span> <span class="nf">permuteFwd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">perm</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Permute the rows of the matrix with the given permutation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Permute the rows of the matrix with the given permutation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">permute_rows</span><span class="p">(</span><span class="n">perm</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;forward&quot;</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="MatrixBase"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase">[docs]</a><span class="k">class</span> <span class="nc">MatrixBase</span><span class="p">(</span><span class="n">MatrixDeprecated</span><span class="p">,</span> <span class="n">MatrixCalculus</span><span class="p">,</span> <span class="n">MatrixEigen</span><span class="p">,</span> <span class="n">MatrixCommon</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class for matrix objects.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for matrix objects.&quot;&quot;&quot;</span>
 
     <span class="c1"># Added just for numpy compatibility</span>
     <span class="n">__array_priority__</span> <span class="o">=</span> <span class="mi">11</span>
@@ -1946,7 +1945,7 @@
             <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the number of elements of self.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the number of elements of self.</span>
 
 <span class="sd">        Implemented mainly so bool(Matrix()) == False.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2018,7 +2017,7 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_handle_creation_inputs</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the number of rows, cols and flat matrix elements.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the number of rows, cols and flat matrix elements.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -2167,7 +2166,7 @@
         <span class="k">return</span> <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">flat_list</span>
 
     <span class="k">def</span> <span class="nf">_setitem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Helper to set value at location given by key.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper to set value at location given by key.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -2234,11 +2233,11 @@
             <span class="k">return</span>
 
 <div class="viewcode-block" id="MatrixBase.add"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return self + b&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return self + b&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span> <span class="o">+</span> <span class="n">b</span></div>
 
 <div class="viewcode-block" id="MatrixBase.cholesky_solve"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.cholesky_solve">[docs]</a>    <span class="k">def</span> <span class="nf">cholesky_solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Solves Ax = B using Cholesky decomposition,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solves Ax = B using Cholesky decomposition,</span>
 <span class="sd">        for a general square non-singular matrix.</span>
 <span class="sd">        For a non-square matrix with rows &gt; cols,</span>
 <span class="sd">        the least squares solution is returned.</span>
@@ -2268,7 +2267,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">_upper_triangular_solve</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.cholesky"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.cholesky">[docs]</a>    <span class="k">def</span> <span class="nf">cholesky</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the Cholesky decomposition L of a matrix A</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the Cholesky decomposition L of a matrix A</span>
 <span class="sd">        such that L * L.T = A</span>
 
 <span class="sd">        A must be a square, symmetric, positive-definite</span>
@@ -2305,7 +2304,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cholesky</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="MatrixBase.condition_number"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.condition_number">[docs]</a>    <span class="k">def</span> <span class="nf">condition_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the condition number of a matrix.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the condition number of a matrix.</span>
 
 <span class="sd">        This is the maximum singular value divided by the minimum singular value</span>
 
@@ -2328,7 +2327,7 @@
         <span class="k">return</span> <span class="n">Max</span><span class="p">(</span><span class="o">*</span><span class="n">singularvalues</span><span class="p">)</span> <span class="o">/</span> <span class="n">Min</span><span class="p">(</span><span class="o">*</span><span class="n">singularvalues</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.copy"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the copy of a matrix.</span>
 
 <span class="sd">        Examples</span>
@@ -2345,7 +2344,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mat</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.cross"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.cross">[docs]</a>    <span class="k">def</span> <span class="nf">cross</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the cross product of `self` and `b` relaxing the condition</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the cross product of `self` and `b` relaxing the condition</span>
 <span class="sd">        of compatible dimensions: if each has 3 elements, a matrix of the</span>
 <span class="sd">        same type and shape as `self` will be returned. If `b` has the same</span>
 <span class="sd">        shape as `self` then common identities for the cross product (like</span>
@@ -2380,7 +2379,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">D</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return Dirac conjugate (if self.rows == 4).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return Dirac conjugate (if self.rows == 4).</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -2423,7 +2422,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">H</span> <span class="o">*</span> <span class="n">mgamma</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
 <div class="viewcode-block" id="MatrixBase.diagonal_solve"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.diagonal_solve">[docs]</a>    <span class="k">def</span> <span class="nf">diagonal_solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Solves Ax = B efficiently, where A is a diagonal Matrix,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solves Ax = B efficiently, where A is a diagonal Matrix,</span>
 <span class="sd">        with non-zero diagonal entries.</span>
 
 <span class="sd">        Examples</span>
@@ -2454,7 +2453,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_diagonal_solve</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.dot"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.dot">[docs]</a>    <span class="k">def</span> <span class="nf">dot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the dot product of Matrix self and b relaxing the condition</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the dot product of Matrix self and b relaxing the condition</span>
 <span class="sd">        of compatible dimensions: if either the number of rows or columns are</span>
 <span class="sd">        the same as the length of b then the dot product is returned. If self</span>
 <span class="sd">        is a row or column vector, a scalar is returned. Otherwise, a list</span>
@@ -2515,7 +2514,7 @@
             <span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.dual"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.dual">[docs]</a>    <span class="k">def</span> <span class="nf">dual</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the dual of a matrix, which is:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the dual of a matrix, which is:</span>
 
 <span class="sd">        `(1/2)*levicivita(i, j, k, l)*M(k, l)` summed over indices `k` and `l`</span>
 
@@ -2554,7 +2553,7 @@
         <span class="k">return</span> <span class="n">work</span></div>
 
 <div class="viewcode-block" id="MatrixBase.exp"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.exp">[docs]</a>    <span class="k">def</span> <span class="nf">exp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the exponentiation of a square matrix.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the exponentiation of a square matrix.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_square</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">NonSquareMatrixError</span><span class="p">(</span>
                 <span class="s2">&quot;Exponentiation is valid only for square matrices&quot;</span>
@@ -2597,7 +2596,7 @@
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">ret</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.gauss_jordan_solve"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.gauss_jordan_solve">[docs]</a>    <span class="k">def</span> <span class="nf">gauss_jordan_solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">freevar</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Solves Ax = b using Gauss Jordan elimination.</span>
 
 <span class="sd">        There may be zero, one, or infinite solutions.  If one solution</span>
@@ -2729,7 +2728,7 @@
             <span class="k">return</span> <span class="n">sol</span><span class="p">,</span> <span class="n">tau</span></div>
 
 <div class="viewcode-block" id="MatrixBase.inv_mod"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.inv_mod">[docs]</a>    <span class="k">def</span> <span class="nf">inv_mod</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the inverse of the matrix `K` (mod `m`), if it exists.</span>
 
 <span class="sd">        Method to find the matrix inverse of `K` (mod `m`) implemented in this function:</span>
@@ -2772,7 +2771,7 @@
         <span class="k">return</span> <span class="n">K_inv</span></div>
 
 <div class="viewcode-block" id="MatrixBase.inverse_ADJ"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.inverse_ADJ">[docs]</a>    <span class="k">def</span> <span class="nf">inverse_ADJ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iszerofunc</span><span class="o">=</span><span class="n">_iszero</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Calculates the inverse using the adjugate matrix and a determinant.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the inverse using the adjugate matrix and a determinant.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -2796,7 +2795,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">adjugate</span><span class="p">()</span> <span class="o">/</span> <span class="n">d</span></div>
 
 <div class="viewcode-block" id="MatrixBase.inverse_GE"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.inverse_GE">[docs]</a>    <span class="k">def</span> <span class="nf">inverse_GE</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iszerofunc</span><span class="o">=</span><span class="n">_iszero</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Calculates the inverse using Gaussian elimination.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the inverse using Gaussian elimination.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -2818,7 +2817,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">red</span><span class="p">[:,</span> <span class="n">big</span><span class="o">.</span><span class="n">rows</span> <span class="p">:])</span></div>
 
 <div class="viewcode-block" id="MatrixBase.inverse_LU"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.inverse_LU">[docs]</a>    <span class="k">def</span> <span class="nf">inverse_LU</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iszerofunc</span><span class="o">=</span><span class="n">_iszero</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Calculates the inverse using LU decomposition.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the inverse using LU decomposition.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -2837,7 +2836,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">LUsolve</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">),</span> <span class="n">iszerofunc</span><span class="o">=</span><span class="n">_iszero</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.inv"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.inv">[docs]</a>    <span class="k">def</span> <span class="nf">inv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the inverse of a matrix.</span>
 
 <span class="sd">        CASE 1: If the matrix is a dense matrix.</span>
@@ -2901,7 +2900,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_eval_inverse</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.is_nilpotent"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.is_nilpotent">[docs]</a>    <span class="k">def</span> <span class="nf">is_nilpotent</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Checks if a matrix is nilpotent.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if a matrix is nilpotent.</span>
 
 <span class="sd">        A matrix B is nilpotent if for some integer k, B**k is</span>
 <span class="sd">        a zero matrix.</span>
@@ -2928,7 +2927,7 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="MatrixBase.key2bounds"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.key2bounds">[docs]</a>    <span class="k">def</span> <span class="nf">key2bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Converts a key with potentially mixed types of keys (integer and slice)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts a key with potentially mixed types of keys (integer and slice)</span>
 <span class="sd">        into a tuple of ranges and raises an error if any index is out of self&#39;s</span>
 <span class="sd">        range.</span>
 
@@ -2958,7 +2957,7 @@
         <span class="k">return</span> <span class="n">rlo</span><span class="p">,</span> <span class="n">rhi</span><span class="p">,</span> <span class="n">clo</span><span class="p">,</span> <span class="n">chi</span></div>
 
 <div class="viewcode-block" id="MatrixBase.key2ij"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.key2ij">[docs]</a>    <span class="k">def</span> <span class="nf">key2ij</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Converts key into canonical form, converting integers or indexable</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts key into canonical form, converting integers or indexable</span>
 <span class="sd">        items into valid integers for self&#39;s range or returning slices</span>
 <span class="sd">        unchanged.</span>
 
@@ -2980,7 +2979,7 @@
             <span class="k">return</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">a2idx</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)),</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.LDLdecomposition"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.LDLdecomposition">[docs]</a>    <span class="k">def</span> <span class="nf">LDLdecomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the LDL Decomposition (L, D) of matrix A,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the LDL Decomposition (L, D) of matrix A,</span>
 <span class="sd">        such that L * D * L.T == A</span>
 <span class="sd">        This method eliminates the use of square root.</span>
 <span class="sd">        Further this ensures that all the diagonal entries of L are 1.</span>
@@ -3020,7 +3019,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_LDLdecomposition</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="MatrixBase.LDLsolve"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.LDLsolve">[docs]</a>    <span class="k">def</span> <span class="nf">LDLsolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Solves Ax = B using LDL decomposition,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solves Ax = B using LDL decomposition,</span>
 <span class="sd">        for a general square and non-singular matrix.</span>
 
 <span class="sd">        For a non-square matrix with rows &gt; cols,</span>
@@ -3062,7 +3061,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">L</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">_upper_triangular_solve</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.lower_triangular_solve"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.lower_triangular_solve">[docs]</a>    <span class="k">def</span> <span class="nf">lower_triangular_solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Solves Ax = B, where A is a lower triangular matrix.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solves Ax = B, where A is a lower triangular matrix.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -3086,7 +3085,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lower_triangular_solve</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.LUdecomposition"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.LUdecomposition">[docs]</a>    <span class="k">def</span> <span class="nf">LUdecomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iszerofunc</span><span class="o">=</span><span class="n">_iszero</span><span class="p">,</span> <span class="n">simpfunc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rankcheck</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns (L, U, perm) where L is a lower triangular matrix with unit</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns (L, U, perm) where L is a lower triangular matrix with unit</span>
 <span class="sd">        diagonal, U is an upper triangular matrix, and perm is a list of row</span>
 <span class="sd">        swap index pairs. If A is the original matrix, then</span>
 <span class="sd">        A = (L*U).permuteBkwd(perm), and the row permutation matrix P such</span>
@@ -3155,7 +3154,7 @@
 <div class="viewcode-block" id="MatrixBase.LUdecomposition_Simple"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.LUdecomposition_Simple">[docs]</a>    <span class="k">def</span> <span class="nf">LUdecomposition_Simple</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">iszerofunc</span><span class="o">=</span><span class="n">_iszero</span><span class="p">,</span> <span class="n">simpfunc</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rankcheck</span><span class="o">=</span><span class="kc">False</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute an lu decomposition of m x n matrix A, where P*A = L*U</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute an lu decomposition of m x n matrix A, where P*A = L*U</span>
 
 <span class="sd">        * L is m x m lower triangular with unit diagonal</span>
 <span class="sd">        * U is m x n upper triangular</span>
@@ -3363,7 +3362,7 @@
         <span class="k">return</span> <span class="n">lu</span><span class="p">,</span> <span class="n">row_swaps</span></div>
 
 <div class="viewcode-block" id="MatrixBase.LUdecompositionFF"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.LUdecompositionFF">[docs]</a>    <span class="k">def</span> <span class="nf">LUdecompositionFF</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute a fraction-free LU decomposition.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute a fraction-free LU decomposition.</span>
 
 <span class="sd">        Returns 4 matrices P, L, D, U such that PA = L D**-1 U.</span>
 <span class="sd">        If the elements of the matrix belong to some integral domain I, then all</span>
@@ -3413,7 +3412,7 @@
         <span class="k">return</span> <span class="n">P</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">DD</span><span class="p">,</span> <span class="n">U</span></div>
 
 <div class="viewcode-block" id="MatrixBase.LUsolve"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.LUsolve">[docs]</a>    <span class="k">def</span> <span class="nf">LUsolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">iszerofunc</span><span class="o">=</span><span class="n">_iszero</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Solve the linear system Ax = rhs for x where A = self.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solve the linear system Ax = rhs for x where A = self.</span>
 
 <span class="sd">        This is for symbolic matrices, for real or complex ones use</span>
 <span class="sd">        mpmath.lu_solve or mpmath.qr_solve.</span>
@@ -3452,7 +3451,7 @@
         <span class="k">return</span> <span class="n">rhs</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">b</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.multiply"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.multiply">[docs]</a>    <span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns self*b</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns self*b</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -3464,7 +3463,7 @@
         <span class="k">return</span> <span class="bp">self</span> <span class="o">*</span> <span class="n">b</span></div>
 
 <div class="viewcode-block" id="MatrixBase.normalized"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.normalized">[docs]</a>    <span class="k">def</span> <span class="nf">normalized</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the normalized version of ``self``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the normalized version of ``self``.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -3478,7 +3477,7 @@
         <span class="k">return</span> <span class="n">out</span></div>
 
 <div class="viewcode-block" id="MatrixBase.norm"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.norm">[docs]</a>    <span class="k">def</span> <span class="nf">norm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the Norm of a Matrix or Vector.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the Norm of a Matrix or Vector.</span>
 <span class="sd">        In the simplest case this is the geometric size of the vector</span>
 <span class="sd">        Other norms can be specified by the ord parameter</span>
 
@@ -3568,7 +3567,7 @@
                 <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Matrix Norms under development&quot;</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.pinv_solve"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.pinv_solve">[docs]</a>    <span class="k">def</span> <span class="nf">pinv_solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">arbitrary_matrix</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Solve Ax = B using the Moore-Penrose pseudoinverse.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solve Ax = B using the Moore-Penrose pseudoinverse.</span>
 
 <span class="sd">        There may be zero, one, or infinite solutions.  If one solution</span>
 <span class="sd">        exists, it will be returned.  If infinite solutions exist, one will</span>
@@ -3655,7 +3654,7 @@
         <span class="k">return</span> <span class="n">A_pinv</span> <span class="o">*</span> <span class="n">B</span> <span class="o">+</span> <span class="p">(</span><span class="n">eye</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">cols</span><span class="p">)</span> <span class="o">-</span> <span class="n">A_pinv</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">*</span> <span class="n">arbitrary_matrix</span></div>
 
 <div class="viewcode-block" id="MatrixBase.pinv"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.pinv">[docs]</a>    <span class="k">def</span> <span class="nf">pinv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Calculate the Moore-Penrose pseudoinverse of the matrix.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the Moore-Penrose pseudoinverse of the matrix.</span>
 
 <span class="sd">        The Moore-Penrose pseudoinverse exists and is unique for any matrix.</span>
 <span class="sd">        If the matrix is invertible, the pseudoinverse is the same as the</span>
@@ -3700,7 +3699,7 @@
             <span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.print_nonzero"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.print_nonzero">[docs]</a>    <span class="k">def</span> <span class="nf">print_nonzero</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symb</span><span class="o">=</span><span class="s2">&quot;X&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Shows location of non-zero entries for fast shape lookup.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Shows location of non-zero entries for fast shape lookup.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -3734,7 +3733,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="MatrixBase.project"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.project">[docs]</a>    <span class="k">def</span> <span class="nf">project</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the projection of ``self`` onto the line containing ``v``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the projection of ``self`` onto the line containing ``v``.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -3750,7 +3749,7 @@
         <span class="k">return</span> <span class="n">v</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">/</span> <span class="n">v</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">v</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="MatrixBase.QRdecomposition"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.QRdecomposition">[docs]</a>    <span class="k">def</span> <span class="nf">QRdecomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return Q, R where A = Q*R, Q is orthogonal and R is upper triangular.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return Q, R where A = Q*R, Q is orthogonal and R is upper triangular.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -3827,7 +3826,7 @@
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">Q</span><span class="p">),</span> <span class="bp">cls</span><span class="p">(</span><span class="n">R</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.QRsolve"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.QRsolve">[docs]</a>    <span class="k">def</span> <span class="nf">QRsolve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Solve the linear system &#39;Ax = b&#39;.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solve the linear system &#39;Ax = b&#39;.</span>
 
 <span class="sd">        &#39;self&#39; is the matrix &#39;A&#39;, the method argument is the vector</span>
 <span class="sd">        &#39;b&#39;.  The method returns the solution vector &#39;x&#39;.  If &#39;b&#39; is a</span>
@@ -3872,7 +3871,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">([</span><span class="n">row</span><span class="o">.</span><span class="n">_mat</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span></div>
 
 <div class="viewcode-block" id="MatrixBase.solve_least_squares"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.solve_least_squares">[docs]</a>    <span class="k">def</span> <span class="nf">solve_least_squares</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;CH&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the least-square fit to the data.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the least-square fit to the data.</span>
 
 <span class="sd">        By default the cholesky_solve routine is used (method=&#39;CH&#39;); other</span>
 <span class="sd">        methods of matrix inversion can be used. To find out which are</span>
@@ -3931,7 +3930,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span> <span class="o">*</span> <span class="n">t</span> <span class="o">*</span> <span class="n">rhs</span></div>
 
 <div class="viewcode-block" id="MatrixBase.solve"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.solve">[docs]</a>    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;GE&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return solution to self*soln = rhs using given inversion method.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return solution to self*soln = rhs using given inversion method.</span>
 
 <span class="sd">        For a list of possible inversion methods, see the .inv() docstring.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3952,7 +3951,7 @@
 <div class="viewcode-block" id="MatrixBase.table"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.table">[docs]</a>    <span class="k">def</span> <span class="nf">table</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">printer</span><span class="p">,</span> <span class="n">rowstart</span><span class="o">=</span><span class="s2">&quot;[&quot;</span><span class="p">,</span> <span class="n">rowend</span><span class="o">=</span><span class="s2">&quot;]&quot;</span><span class="p">,</span> <span class="n">rowsep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">colsep</span><span class="o">=</span><span class="s2">&quot;, &quot;</span><span class="p">,</span> <span class="n">align</span><span class="o">=</span><span class="s2">&quot;right&quot;</span>
     <span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        String form of Matrix as a table.</span>
 
 <span class="sd">        ``printer`` is the printer to use for on the elements (generally</span>
@@ -4029,7 +4028,7 @@
         <span class="k">return</span> <span class="n">rowsep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">res</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.upper_triangular_solve"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.upper_triangular_solve">[docs]</a>    <span class="k">def</span> <span class="nf">upper_triangular_solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Solves Ax = B, where A is an upper triangular matrix.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solves Ax = B, where A is an upper triangular matrix.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        ========</span>
@@ -4052,7 +4051,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_upper_triangular_solve</span><span class="p">(</span><span class="n">rhs</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="MatrixBase.vech"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.MatrixBase.vech">[docs]</a>    <span class="k">def</span> <span class="nf">vech</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">diagonal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">check_symmetry</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the unique elements of a symmetric Matrix as a one column matrix</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the unique elements of a symmetric Matrix as a one column matrix</span>
 <span class="sd">        by stacking the elements in the lower triangle.</span>
 
 <span class="sd">        Arguments:</span>
@@ -4109,7 +4108,7 @@
 
 
 <div class="viewcode-block" id="classof"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.classof">[docs]</a><span class="k">def</span> <span class="nf">classof</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get the type of the result when combining matrices of different types.</span>
 
 <span class="sd">    Currently the strategy is that immutability is contagious.</span>
@@ -4144,7 +4143,7 @@
 
 
 <div class="viewcode-block" id="a2idx"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.matrices.a2idx">[docs]</a><span class="k">def</span> <span class="nf">a2idx</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return integer after making positive and validating against n.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return integer after making positive and validating against n.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">j</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="fm">__index__</span><span class="p">()</span>
@@ -4159,7 +4158,7 @@
 
 
 <span class="k">def</span> <span class="nf">_find_reasonable_pivot</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">iszerofunc</span><span class="o">=</span><span class="n">_iszero</span><span class="p">,</span> <span class="n">simpfunc</span><span class="o">=</span><span class="n">_simplify</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Find the lowest index of an item in `col` that is</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the lowest index of an item in `col` that is</span>
 <span class="sd">    suitable for a pivot.  If `col` consists only of</span>
 <span class="sd">    Floats, the pivot with the largest norm is returned.</span>
 <span class="sd">    Otherwise, the first element where `iszerofunc` returns</span>
@@ -4264,7 +4263,7 @@
 
 
 <span class="k">def</span> <span class="nf">_find_reasonable_pivot_naive</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">iszerofunc</span><span class="o">=</span><span class="n">_iszero</span><span class="p">,</span> <span class="n">simpfunc</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper that computes the pivot value and location from a</span>
 <span class="sd">    sequence of contiguous matrix column elements. As a side effect</span>
 <span class="sd">    of the pivot search, this function may simplify some of the elements</span>
@@ -4345,7 +4344,7 @@
 
 
 <span class="k">class</span> <span class="nc">_MinimalMatrix</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class providing the minimum functionality</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class providing the minimum functionality</span>
 <span class="sd">    for a matrix-like object and implementing every method</span>
 <span class="sd">    required for a `MatrixRequired`.  This class does not have everything</span>
 <span class="sd">    needed to become a full-fledged sympy object, but it will satisfy the</span>
@@ -4391,7 +4390,7 @@
 
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
         <span class="k">def</span> <span class="nf">_normalize_slices</span><span class="p">(</span><span class="n">row_slice</span><span class="p">,</span> <span class="n">col_slice</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Ensure that row_slice and col_slice don&#39;t have</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Ensure that row_slice and col_slice don&#39;t have</span>
 <span class="sd">            `None` in their arguments.  Any integers are converted</span>
 <span class="sd">            to slices of length 1&quot;&quot;&quot;</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">row_slice</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
@@ -4405,7 +4404,7 @@
             <span class="k">return</span> <span class="p">(</span><span class="n">row_slice</span><span class="p">,</span> <span class="n">col_slice</span><span class="p">)</span>
 
         <span class="k">def</span> <span class="nf">_coord_to_index</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;Return the index in _mat corresponding</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Return the index in _mat corresponding</span>
 <span class="sd">            to the (i,j) position in the matrix.&quot;&quot;&quot;</span>
             <span class="k">return</span> <span class="n">i</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">+</span> <span class="n">j</span>
 
@@ -4445,7 +4444,7 @@
 
 
 <span class="k">class</span> <span class="nc">_MatrixWrapper</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrapper class providing the minimum functionality</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper class providing the minimum functionality</span>
 <span class="sd">    for a matrix-like object: .rows, .cols, .shape, indexability,</span>
 <span class="sd">    and iterability.  CommonMatrix math operations should work</span>
 <span class="sd">    on matrix-like objects.  For example, wrapping a numpy</span>
@@ -4459,7 +4458,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">=</span> <span class="n">mat</span><span class="o">.</span><span class="n">shape</span> <span class="k">if</span> <span class="n">shape</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">shape</span>
 
     <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Most attribute access is passed straight through</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Most attribute access is passed straight through</span>
 <span class="sd">        to the stored matrix&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mat</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
 
@@ -4468,7 +4467,7 @@
 
 
 <span class="k">def</span> <span class="nf">_matrixify</span><span class="p">(</span><span class="n">mat</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;If `mat` is a Matrix or is matrix-like,</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;If `mat` is a Matrix or is matrix-like,</span>
 <span class="sd">    return a Matrix or MatrixWrapper object.  Otherwise</span>
 <span class="sd">    `mat` is passed through without modification.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="s2">&quot;is_Matrix&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
@@ -4494,7 +4493,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -4515,7 +4514,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

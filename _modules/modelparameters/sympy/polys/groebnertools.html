@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -48,7 +47,7 @@
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="nb">range</span>
 
 <div class="viewcode-block" id="groebner"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.groebner">[docs]</a><span class="k">def</span> <span class="nf">groebner</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">ring</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes Groebner basis for a set of polynomials in `K[X]`.</span>
 
 <span class="sd">    Wrapper around the (default) improved Buchberger and the other algorithms</span>
@@ -88,7 +87,7 @@
     <span class="k">return</span> <span class="n">G</span></div>
 
 <span class="k">def</span> <span class="nf">_buchberger</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">ring</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes Groebner basis for a set of polynomials in `K[X]`.</span>
 
 <span class="sd">    Given a set of multivariate polynomials `F`, finds another</span>
@@ -298,7 +297,7 @@
     <span class="k">return</span> <span class="n">Gr</span>
 
 <div class="viewcode-block" id="spoly"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.spoly">[docs]</a><span class="k">def</span> <span class="nf">spoly</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">ring</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute LCM(LM(p1), LM(p2))/LM(p1)*p1 - LCM(LM(p1), LM(p2))/LM(p2)*p2</span>
 <span class="sd">    This is the S-poly provided p1 and p2 are monic</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -340,7 +339,7 @@
 
 
 <div class="viewcode-block" id="sig_cmp"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.sig_cmp">[docs]</a><span class="k">def</span> <span class="nf">sig_cmp</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compare two signatures by extending the term order to K[X]^n.</span>
 
 <span class="sd">    u &lt; v iff</span>
@@ -361,7 +360,7 @@
 
 
 <div class="viewcode-block" id="sig_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.sig_key">[docs]</a><span class="k">def</span> <span class="nf">sig_key</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Key for comparing two signatures.</span>
 
 <span class="sd">    s = (m, k), t = (n, l)</span>
@@ -373,7 +372,7 @@
 
 
 <div class="viewcode-block" id="sig_mult"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.sig_mult">[docs]</a><span class="k">def</span> <span class="nf">sig_mult</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Multiply a signature by a monomial.</span>
 
 <span class="sd">    The product of a signature (m, i) and a monomial n is defined as</span>
@@ -385,7 +384,7 @@
 
 
 <div class="viewcode-block" id="lbp_sub"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.lbp_sub">[docs]</a><span class="k">def</span> <span class="nf">lbp_sub</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Subtract labeled polynomial g from f.</span>
 
 <span class="sd">    The signature and number of the difference of f and g are signature</span>
@@ -402,7 +401,7 @@
 
 
 <div class="viewcode-block" id="lbp_mul_term"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.lbp_mul_term">[docs]</a><span class="k">def</span> <span class="nf">lbp_mul_term</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">cx</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Multiply a labeled polynomial with a term.</span>
 
 <span class="sd">    The product of a labeled polynomial (s, p, k) by a monomial is</span>
@@ -412,7 +411,7 @@
 
 
 <div class="viewcode-block" id="lbp_cmp"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.lbp_cmp">[docs]</a><span class="k">def</span> <span class="nf">lbp_cmp</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compare two labeled polynomials.</span>
 
 <span class="sd">    f &lt; g iff</span>
@@ -433,7 +432,7 @@
 
 
 <div class="viewcode-block" id="lbp_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.lbp_key">[docs]</a><span class="k">def</span> <span class="nf">lbp_key</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Key for comparing two labeled polynomials.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">sig_key</span><span class="p">(</span><span class="n">Sign</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">Polyn</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">order</span><span class="p">),</span> <span class="o">-</span><span class="n">Num</span><span class="p">(</span><span class="n">f</span><span class="p">))</span></div>
@@ -442,7 +441,7 @@
 
 
 <div class="viewcode-block" id="critical_pair"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.critical_pair">[docs]</a><span class="k">def</span> <span class="nf">critical_pair</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">ring</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the critical pair corresponding to two labeled polynomials.</span>
 
 <span class="sd">    A critical pair is a tuple (um, f, vm, g), where um and vm are</span>
@@ -477,7 +476,7 @@
 
 
 <div class="viewcode-block" id="cp_cmp"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.cp_cmp">[docs]</a><span class="k">def</span> <span class="nf">cp_cmp</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compare two critical pairs c and d.</span>
 
 <span class="sd">    c &lt; d iff</span>
@@ -513,14 +512,14 @@
 
 
 <div class="viewcode-block" id="cp_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.cp_key">[docs]</a><span class="k">def</span> <span class="nf">cp_key</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">ring</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Key for comparing critical pairs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">lbp_key</span><span class="p">(</span><span class="n">lbp</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ring</span><span class="o">.</span><span class="n">zero</span><span class="p">,</span> <span class="n">Num</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]))),</span> <span class="n">lbp_key</span><span class="p">(</span><span class="n">lbp</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">ring</span><span class="o">.</span><span class="n">zero</span><span class="p">,</span> <span class="n">Num</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">5</span><span class="p">]))))</span></div>
 
 
 <div class="viewcode-block" id="s_poly"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.s_poly">[docs]</a><span class="k">def</span> <span class="nf">s_poly</span><span class="p">(</span><span class="n">cp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the S-polynomial of a critical pair.</span>
 
 <span class="sd">    The S-polynomial of a critical pair cp is cp[1] * cp[2] - cp[4] * cp[5].</span>
@@ -529,7 +528,7 @@
 
 
 <div class="viewcode-block" id="is_rewritable_or_comparable"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.is_rewritable_or_comparable">[docs]</a><span class="k">def</span> <span class="nf">is_rewritable_or_comparable</span><span class="p">(</span><span class="n">sign</span><span class="p">,</span> <span class="n">num</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check if a labeled polynomial is redundant by checking if its</span>
 <span class="sd">    signature and number imply rewritability or comparability.</span>
 
@@ -556,7 +555,7 @@
 
 
 <div class="viewcode-block" id="f5_reduce"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.f5_reduce">[docs]</a><span class="k">def</span> <span class="nf">f5_reduce</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">B</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    F5-reduce a labeled polynomial f by B.</span>
 
 <span class="sd">    Continously searches for non-zero labeled polynomial h in B, such</span>
@@ -607,7 +606,7 @@
 
 
 <span class="k">def</span> <span class="nf">_f5b</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">ring</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes a reduced Groebner basis for the ideal generated by F.</span>
 
 <span class="sd">    f5b is an implementation of the F5B algorithm by Yao Sun and</span>
@@ -734,14 +733,14 @@
 
 
 <div class="viewcode-block" id="red_groebner"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.red_groebner">[docs]</a><span class="k">def</span> <span class="nf">red_groebner</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">ring</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute reduced Groebner basis, from BeckerWeispfenning93, p. 216</span>
 
 <span class="sd">    Selects a subset of generators, that already generate the ideal</span>
 <span class="sd">    and computes a reduced Groebner basis for them.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">reduction</span><span class="p">(</span><span class="n">P</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The actual reduction algorithm.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Q</span> <span class="o">=</span> <span class="p">[]</span>
@@ -766,7 +765,7 @@
 
 
 <div class="viewcode-block" id="is_groebner"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.is_groebner">[docs]</a><span class="k">def</span> <span class="nf">is_groebner</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">ring</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check if G is a Groebner basis.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)):</span>
@@ -780,7 +779,7 @@
 
 
 <div class="viewcode-block" id="is_minimal"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.is_minimal">[docs]</a><span class="k">def</span> <span class="nf">is_minimal</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">ring</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Checks if G is a minimal Groebner basis.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">order</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">order</span>
@@ -800,7 +799,7 @@
 
 
 <div class="viewcode-block" id="is_reduced"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.is_reduced">[docs]</a><span class="k">def</span> <span class="nf">is_reduced</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">ring</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Checks if G is a reduced Groebner basis.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">order</span> <span class="o">=</span> <span class="n">ring</span><span class="o">.</span><span class="n">order</span>
@@ -820,7 +819,7 @@
     <span class="k">return</span> <span class="kc">True</span></div>
 
 <div class="viewcode-block" id="groebner_lcm"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.groebner_lcm">[docs]</a><span class="k">def</span> <span class="nf">groebner_lcm</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes LCM of two polynomials using Groebner bases.</span>
 
 <span class="sd">    The LCM is computed as the unique generater of the intersection</span>
@@ -877,7 +876,7 @@
     <span class="k">return</span> <span class="n">h</span></div>
 
 <div class="viewcode-block" id="groebner_gcd"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.groebnertools.groebner_gcd">[docs]</a><span class="k">def</span> <span class="nf">groebner_gcd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Computes GCD of two polynomials using Groebner bases. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes GCD of two polynomials using Groebner bases. &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">ring</span> <span class="o">!=</span> <span class="n">g</span><span class="o">.</span><span class="n">ring</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Values should be equal&quot;</span><span class="p">)</span>
     <span class="n">domain</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">domain</span>
@@ -914,7 +913,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -935,7 +934,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

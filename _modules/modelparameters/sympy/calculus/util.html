@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -50,7 +49,7 @@
 
 
 <div class="viewcode-block" id="continuous_domain"><a class="viewcode-back" href="../../../../modelparameters.sympy.calculus.html#modelparameters.sympy.calculus.util.continuous_domain">[docs]</a><span class="k">def</span> <span class="nf">continuous_domain</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the intervals in the given domain for which the function</span>
 <span class="sd">    is continuous.</span>
 <span class="sd">    This method is limited by the ability to determine the various</span>
@@ -117,7 +116,7 @@
 
 
 <div class="viewcode-block" id="function_range"><a class="viewcode-back" href="../../../../modelparameters.sympy.calculus.html#modelparameters.sympy.calculus.util.function_range">[docs]</a><span class="k">def</span> <span class="nf">function_range</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">domain</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Finds the range of a function in a given domain.</span>
 <span class="sd">    This method is limited by the ability to determine the singularities and</span>
 <span class="sd">    determine limits.</span>
@@ -196,7 +195,7 @@
 
 
 <div class="viewcode-block" id="not_empty_in"><a class="viewcode-back" href="../../../../modelparameters.sympy.calculus.html#modelparameters.sympy.calculus.util.not_empty_in">[docs]</a><span class="k">def</span> <span class="nf">not_empty_in</span><span class="p">(</span><span class="n">finset_intersection</span><span class="p">,</span> <span class="o">*</span><span class="n">syms</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Finds the domain of the functions in `finite_set` in which the</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Finds the domain of the functions in `finite_set` in which the</span>
 <span class="sd">    `finite_set` is not-empty</span>
 
 <span class="sd">    Parameters</span>
@@ -264,7 +263,7 @@
                                   <span class="p">(</span><span class="n">syms</span><span class="p">,))</span>
 
     <span class="k">def</span> <span class="nf">elm_domain</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">intrvl</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Finds the domain of an expression in any given interval &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Finds the domain of an expression in any given interval &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..solvers.solveset</span> <span class="kn">import</span> <span class="n">solveset</span>
 
         <span class="n">_start</span> <span class="o">=</span> <span class="n">intrvl</span><span class="o">.</span><span class="n">start</span>
@@ -306,7 +305,7 @@
 
 
 <div class="viewcode-block" id="periodicity"><a class="viewcode-back" href="../../../../modelparameters.sympy.calculus.html#modelparameters.sympy.calculus.util.periodicity">[docs]</a><span class="k">def</span> <span class="nf">periodicity</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Tests the given function for periodicity in the given symbol.</span>
 
 <span class="sd">    Parameters</span>
@@ -440,7 +439,7 @@
 
 
 <span class="k">def</span> <span class="nf">_periodicity</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper for periodicity to find the period of a list of simpler</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper for periodicity to find the period of a list of simpler</span>
 <span class="sd">    functions. It uses the `lcim` method to find the least common period of</span>
 <span class="sd">    all the functions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -460,7 +459,7 @@
 
 
 <div class="viewcode-block" id="lcim"><a class="viewcode-back" href="../../../../modelparameters.sympy.calculus.html#modelparameters.sympy.calculus.util.lcim">[docs]</a><span class="k">def</span> <span class="nf">lcim</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the least common integral multiple of a list of numbers.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the least common integral multiple of a list of numbers.</span>
 
 <span class="sd">    The numbers can be rational or irrational or a mixture of both.</span>
 <span class="sd">    `None` is returned for incommensurable numbers.</span>
@@ -497,7 +496,7 @@
 
 
 <div class="viewcode-block" id="AccumulationBounds"><a class="viewcode-back" href="../../../../modelparameters.sympy.calculus.html#modelparameters.sympy.calculus.util.AccumulationBounds">[docs]</a><span class="k">class</span> <span class="nc">AccumulationBounds</span><span class="p">(</span><span class="n">AtomicExpr</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    # Note AccumulationBounds has an alias: AccumBounds</span>
 
 <span class="sd">    AccumulationBounds represent an interval `[a, b]`, which is always closed</span>
@@ -679,7 +678,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">min</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the minimum possible value attained by AccumulationBounds</span>
 <span class="sd">        object.</span>
 
@@ -695,7 +694,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">max</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the maximum possible value attained by AccumulationBounds</span>
 <span class="sd">        object.</span>
 
@@ -711,7 +710,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">delta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the difference of maximum possible value attained by</span>
 <span class="sd">        AccumulationBounds object and minimum possible value attained</span>
 <span class="sd">        by AccumulationBounds object.</span>
@@ -728,7 +727,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">mid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the mean of maximum possible value attained by</span>
 <span class="sd">        AccumulationBounds object and minimum possible value</span>
 <span class="sd">        attained by AccumulationBounds object.</span>
@@ -1001,7 +1000,7 @@
             <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if range of values attained by `self` AccumulationBounds</span>
 <span class="sd">        object is less than the range of values attained by `other`, where</span>
 <span class="sd">        other may be any value of type AccumulationBounds object or extended</span>
@@ -1043,7 +1042,7 @@
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if range of values attained by `self` AccumulationBounds</span>
 <span class="sd">        object is less than or equal to the range of values attained by</span>
 <span class="sd">        `other`, where other may be any value of type AccumulationBounds</span>
@@ -1085,7 +1084,7 @@
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if range of values attained by `self` AccumulationBounds</span>
 <span class="sd">        object is greater than the range of values attained by `other`,</span>
 <span class="sd">        where other may be any value of type AccumulationBounds object or</span>
@@ -1127,7 +1126,7 @@
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if range of values attained by `self` AccumulationBounds</span>
 <span class="sd">        object is less that the range of values attained by `other`, where</span>
 <span class="sd">        other may be any value of type AccumulationBounds object or extended</span>
@@ -1169,7 +1168,7 @@
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if other is contained in self, where other</span>
 <span class="sd">        belongs to extended real numbers, False if not contained,</span>
 <span class="sd">        otherwise TypeError is raised.</span>
@@ -1202,7 +1201,7 @@
         <span class="k">return</span> <span class="n">And</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">min</span> <span class="o">&lt;=</span> <span class="n">other</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">max</span> <span class="o">&gt;=</span> <span class="n">other</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AccumulationBounds.intersection"><a class="viewcode-back" href="../../../../modelparameters.sympy.calculus.html#modelparameters.sympy.calculus.util.AccumulationBounds.intersection">[docs]</a>    <span class="k">def</span> <span class="nf">intersection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the intersection of &#39;self&#39; and &#39;other&#39;.</span>
 <span class="sd">        Here other can be an instance of FiniteSet or AccumulationBounds.</span>
 
@@ -1280,7 +1279,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1301,7 +1300,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

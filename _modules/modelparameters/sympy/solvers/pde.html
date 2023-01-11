@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -100,7 +99,7 @@
 
 
 <div class="viewcode-block" id="pdsolve"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.pde.pdsolve">[docs]</a><span class="k">def</span> <span class="nf">pdsolve</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hint</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="nb">dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">solvefun</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves any (supported) kind of partial differential equation.</span>
 
 <span class="sd">    **Usage**</span>
@@ -237,7 +236,7 @@
 
 
 <span class="k">def</span> <span class="nf">_helper_simplify</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">hint</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">match</span><span class="p">,</span> <span class="n">solvefun</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper function of pdsolve that calls the respective</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function of pdsolve that calls the respective</span>
 <span class="sd">    pde functions to solve for the partial differential</span>
 <span class="sd">    equations. This minimizes the computation in</span>
 <span class="sd">    calling _desolve multiple times.</span>
@@ -253,7 +252,7 @@
 
 
 <span class="k">def</span> <span class="nf">_handle_Integral</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">hint</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts a solution with integrals in it into an actual solution.</span>
 
 <span class="sd">    Simplifies the integral mainly using doit()</span>
@@ -269,7 +268,7 @@
 
 
 <div class="viewcode-block" id="classify_pde"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.pde.classify_pde">[docs]</a><span class="k">def</span> <span class="nf">classify_pde</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">dict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns a tuple of possible pdsolve() classifications for a PDE.</span>
 
 <span class="sd">    The tuple is ordered so that first item is the classification that</span>
@@ -430,7 +429,7 @@
 
 
 <div class="viewcode-block" id="checkpdesol"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.pde.checkpdesol">[docs]</a><span class="k">def</span> <span class="nf">checkpdesol</span><span class="p">(</span><span class="n">pde</span><span class="p">,</span> <span class="n">sol</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">solve_for_func</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Checks if the given solution satisfies the partial differential</span>
 <span class="sd">    equation.</span>
 
@@ -524,7 +523,7 @@
 
 
 <div class="viewcode-block" id="pde_1st_linear_constant_coeff_homogeneous"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.pde.pde_1st_linear_constant_coeff_homogeneous">[docs]</a><span class="k">def</span> <span class="nf">pde_1st_linear_constant_coeff_homogeneous</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">match</span><span class="p">,</span> <span class="n">solvefun</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves a first order linear homogeneous</span>
 <span class="sd">    partial differential equation with constant coefficients.</span>
 
@@ -594,7 +593,7 @@
 
 
 <div class="viewcode-block" id="pde_1st_linear_constant_coeff"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.pde.pde_1st_linear_constant_coeff">[docs]</a><span class="k">def</span> <span class="nf">pde_1st_linear_constant_coeff</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">match</span><span class="p">,</span> <span class="n">solvefun</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves a first order linear partial differential equation</span>
 <span class="sd">    with constant coefficients.</span>
 
@@ -698,7 +697,7 @@
 
 
 <div class="viewcode-block" id="pde_1st_linear_variable_coeff"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.pde.pde_1st_linear_variable_coeff">[docs]</a><span class="k">def</span> <span class="nf">pde_1st_linear_variable_coeff</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">match</span><span class="p">,</span> <span class="n">solvefun</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solves a first order linear partial differential equation</span>
 <span class="sd">    with variable coefficients. The general form of this partial differential equation is</span>
 
@@ -827,7 +826,7 @@
 
 
 <span class="k">def</span> <span class="nf">_simplify_variable_coeff</span><span class="p">(</span><span class="n">sol</span><span class="p">,</span> <span class="n">syms</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">funcarg</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper function to replace constants by functions in 1st_linear_variable_coeff</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">eta</span> <span class="o">=</span> <span class="n">Symbol</span><span class="p">(</span><span class="s2">&quot;eta&quot;</span><span class="p">)</span>
@@ -845,7 +844,7 @@
 
 
 <div class="viewcode-block" id="pde_separate"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.pde.pde_separate">[docs]</a><span class="k">def</span> <span class="nf">pde_separate</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">sep</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;mul&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Separate variables in partial differential equation either by additive</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Separate variables in partial differential equation either by additive</span>
 <span class="sd">    or multiplicative separation approach. It tries to rewrite an equation so</span>
 <span class="sd">    that one of the specified variables occurs on a different side of the</span>
 <span class="sd">    equation than the others.</span>
@@ -935,7 +934,7 @@
 
 
 <div class="viewcode-block" id="pde_separate_add"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.pde.pde_separate_add">[docs]</a><span class="k">def</span> <span class="nf">pde_separate_add</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">sep</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper function for searching additive separable solutions.</span>
 
 <span class="sd">    Consider an equation of two independent variables x, y and a dependent</span>
@@ -960,7 +959,7 @@
 
 
 <div class="viewcode-block" id="pde_separate_mul"><a class="viewcode-back" href="../../../../modelparameters.sympy.solvers.html#modelparameters.sympy.solvers.pde.pde_separate_mul">[docs]</a><span class="k">def</span> <span class="nf">pde_separate_mul</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">sep</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper function for searching multiplicative separable solutions.</span>
 
 <span class="sd">    Consider an equation of two independent variables x, y and a dependent</span>
@@ -985,7 +984,7 @@
 
 
 <span class="k">def</span> <span class="nf">_separate</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">dep</span><span class="p">,</span> <span class="n">others</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Separate expression into two parts based on dependencies of variables.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Separate expression into two parts based on dependencies of variables.&quot;&quot;&quot;</span>
 
     <span class="c1"># FIRST PASS</span>
     <span class="c1"># Extract derivatives depending our separable variable...</span>
@@ -1059,7 +1058,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1080,7 +1079,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

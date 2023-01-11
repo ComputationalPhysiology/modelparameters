@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -49,13 +48,13 @@
 
 
 <div class="viewcode-block" id="is_sqrt"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.sqrtdenest.is_sqrt">[docs]</a><span class="k">def</span> <span class="nf">is_sqrt</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return True if expr is a sqrt, otherwise False.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True if expr is a sqrt, otherwise False.&quot;&quot;&quot;</span>
 
     <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Pow</span> <span class="ow">and</span> <span class="n">expr</span><span class="o">.</span><span class="n">exp</span><span class="o">.</span><span class="n">is_Rational</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">expr</span><span class="o">.</span><span class="n">exp</span><span class="p">)</span> <span class="ow">is</span> <span class="n">S</span><span class="o">.</span><span class="n">Half</span></div>
 
 
 <div class="viewcode-block" id="sqrt_depth"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.sqrtdenest.sqrt_depth">[docs]</a><span class="k">def</span> <span class="nf">sqrt_depth</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the maximum depth of any square root argument of p.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the maximum depth of any square root argument of p.</span>
 
 <span class="sd">    &gt;&gt;&gt; from ..functions.elementary.miscellaneous import sqrt</span>
 <span class="sd">    &gt;&gt;&gt; from .sqrtdenest import sqrt_depth</span>
@@ -84,7 +83,7 @@
 
 
 <div class="viewcode-block" id="is_algebraic"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.sqrtdenest.is_algebraic">[docs]</a><span class="k">def</span> <span class="nf">is_algebraic</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return True if p is comprised of only Rationals or square roots</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True if p is comprised of only Rationals or square roots</span>
 <span class="sd">    of Rationals and algebraic operations.</span>
 
 <span class="sd">    Examples</span>
@@ -112,7 +111,7 @@
 
 
 <span class="k">def</span> <span class="nf">_subsets</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns all possible subsets of the set (0, 1, ..., n-1) except the</span>
 <span class="sd">    empty set, listed in reversed lexicographical order according to binary</span>
 <span class="sd">    representation, so that the case of the fourth root is treated last.</span>
@@ -141,7 +140,7 @@
 
 
 <div class="viewcode-block" id="sqrtdenest"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.sqrtdenest.sqrtdenest">[docs]</a><span class="k">def</span> <span class="nf">sqrtdenest</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Denests sqrts in an expression that contain other square roots</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Denests sqrts in an expression that contain other square roots</span>
 <span class="sd">    if possible, otherwise returns the expr unchanged. This is based on the</span>
 <span class="sd">    algorithms of [1].</span>
 
@@ -175,7 +174,7 @@
 
 
 <span class="k">def</span> <span class="nf">_sqrt_match</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return [a, b, r] for p.match(a + b*sqrt(r)) where, in addition to</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return [a, b, r] for p.match(a + b*sqrt(r)) where, in addition to</span>
 <span class="sd">    matching, sqrt(r) also has then maximal sqrt_depth among addends of p.</span>
 
 <span class="sd">    Examples</span>
@@ -257,7 +256,7 @@
 
 
 <span class="k">def</span> <span class="nf">_sqrtdenest0</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns expr after denesting its arguments.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns expr after denesting its arguments.&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">is_sqrt</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
         <span class="n">n</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">as_numer_denom</span><span class="p">()</span>
@@ -294,7 +293,7 @@
 
 
 <span class="k">def</span> <span class="nf">_sqrtdenest_rec</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper that denests the square root of three or more surds.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper that denests the square root of three or more surds.</span>
 
 <span class="sd">    It returns the denested expression; if it cannot be denested it</span>
 <span class="sd">    throws SqrtdenestStopIteration</span>
@@ -355,7 +354,7 @@
 
 
 <span class="k">def</span> <span class="nf">_sqrtdenest1</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">denester</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return denested expr after denesting with simpler methods or, that</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return denested expr after denesting with simpler methods or, that</span>
 <span class="sd">    failing, using the denester.&quot;&quot;&quot;</span>
 
     <span class="kn">from</span> <span class="nn">.simplify</span> <span class="kn">import</span> <span class="n">radsimp</span>
@@ -414,7 +413,7 @@
 
 
 <span class="k">def</span> <span class="nf">_sqrt_symbolic_denest</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Given an expression, sqrt(a + b*sqrt(b)), return the denested</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Given an expression, sqrt(a + b*sqrt(b)), return the denested</span>
 <span class="sd">    expression or None.</span>
 
 <span class="sd">    Algorithm:</span>
@@ -475,7 +474,7 @@
 
 
 <span class="k">def</span> <span class="nf">_sqrt_numeric_denest</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">d2</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper that denest expr = a + b*sqrt(r), with d2 = a**2 - b**2*r &gt; 0</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper that denest expr = a + b*sqrt(r), with d2 = a**2 - b**2*r &gt; 0</span>
 <span class="sd">    or returns None if not denested.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.simplify</span> <span class="kn">import</span> <span class="n">radsimp</span>
@@ -492,7 +491,7 @@
 
 
 <div class="viewcode-block" id="sqrt_biquadratic_denest"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.sqrtdenest.sqrt_biquadratic_denest">[docs]</a><span class="k">def</span> <span class="nf">sqrt_biquadratic_denest</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">d2</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;denest expr = sqrt(a + b*sqrt(r))</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;denest expr = sqrt(a + b*sqrt(r))</span>
 <span class="sd">    where a, b, r are linear combinations of square roots of</span>
 <span class="sd">    positive rationals on the rationals (SQRR) and r &gt; 0, b != 0,</span>
 <span class="sd">    d2 = a**2 - b**2*r &gt; 0</span>
@@ -564,7 +563,7 @@
 
 
 <span class="k">def</span> <span class="nf">_denester</span><span class="p">(</span><span class="n">nested</span><span class="p">,</span> <span class="n">av0</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">max_depth_level</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Denests a list of expressions that contain nested square roots.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Denests a list of expressions that contain nested square roots.</span>
 
 <span class="sd">    Algorithm based on &lt;http://www.almaden.ibm.com/cs/people/fagin/symb85.pdf&gt;.</span>
 
@@ -661,7 +660,7 @@
 
 
 <span class="k">def</span> <span class="nf">_sqrt_ratcomb</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Denest rational combinations of radicals.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Denest rational combinations of radicals.</span>
 
 <span class="sd">    Based on section 5 of [1].</span>
 
@@ -719,7 +718,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -740,7 +739,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -42,12 +41,12 @@
 
 
 <div class="viewcode-block" id="AskHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.calculus.AskHandler">[docs]</a><span class="k">class</span> <span class="nc">AskHandler</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class that all Ask Handlers must inherit&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class that all Ask Handlers must inherit&quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 
 <div class="viewcode-block" id="CommonHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.calculus.CommonHandler">[docs]</a><span class="k">class</span> <span class="nc">CommonHandler</span><span class="p">(</span><span class="n">AskHandler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Defines some useful methods common to most Handlers &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Defines some useful methods common to most Handlers &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="CommonHandler.AlwaysTrue"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.calculus.CommonHandler.AlwaysTrue">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">AlwaysTrue</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
@@ -61,13 +60,13 @@
 
 
 <div class="viewcode-block" id="AskCommutativeHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.calculus.AskCommutativeHandler">[docs]</a><span class="k">class</span> <span class="nc">AskCommutativeHandler</span><span class="p">(</span><span class="n">CommonHandler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handler for key &#39;commutative&#39;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="AskCommutativeHandler.Symbol"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.calculus.AskCommutativeHandler.Symbol">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">Symbol</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Objects are expected to be commutative unless otherwise stated&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Objects are expected to be commutative unless otherwise stated&quot;&quot;&quot;</span>
         <span class="n">assumps</span> <span class="o">=</span> <span class="n">conjuncts</span><span class="p">(</span><span class="n">assumptions</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_commutative</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_commutative</span> <span class="ow">and</span> <span class="ow">not</span> <span class="o">~</span><span class="n">Q</span><span class="o">.</span><span class="n">commutative</span><span class="p">(</span><span class="n">expr</span><span class="p">)</span> <span class="ow">in</span> <span class="n">assumps</span>
@@ -88,7 +87,7 @@
 
 
 <div class="viewcode-block" id="TautologicalHandler"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.calculus.TautologicalHandler">[docs]</a><span class="k">class</span> <span class="nc">TautologicalHandler</span><span class="p">(</span><span class="n">AskHandler</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrapper allowing to query the truth value of a boolean expression.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper allowing to query the truth value of a boolean expression.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="TautologicalHandler.bool"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.calculus.TautologicalHandler.bool">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">bool</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">):</span>
@@ -150,7 +149,7 @@
 
 <span class="c1">#### Helper methods</span>
 <div class="viewcode-block" id="test_closed_group"><a class="viewcode-back" href="../../../../../modelparameters.sympy.assumptions.handlers.html#modelparameters.sympy.assumptions.handlers.calculus.test_closed_group">[docs]</a><span class="k">def</span> <span class="nf">test_closed_group</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">assumptions</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Test for membership in a group with respect</span>
 <span class="sd">    to the current operation</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -173,7 +172,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -194,7 +193,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

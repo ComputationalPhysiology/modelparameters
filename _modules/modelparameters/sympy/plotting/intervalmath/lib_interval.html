@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -60,7 +59,7 @@
 
 
 <div class="viewcode-block" id="exp"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.exp">[docs]</a><span class="k">def</span> <span class="nf">exp</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;evaluates the exponential of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;evaluates the exponential of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
@@ -72,7 +71,7 @@
 
 <span class="c1">#Monotonic</span>
 <div class="viewcode-block" id="log"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.log">[docs]</a><span class="k">def</span> <span class="nf">log</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;evaluates the natural logarithm of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;evaluates the natural logarithm of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
@@ -94,7 +93,7 @@
 
 <span class="c1">#Monotonic</span>
 <div class="viewcode-block" id="log10"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.log10">[docs]</a><span class="k">def</span> <span class="nf">log10</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;evaluates the logarithm to the base 10 of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;evaluates the logarithm to the base 10 of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
@@ -115,7 +114,7 @@
 
 <span class="c1">#Monotonic</span>
 <div class="viewcode-block" id="atan"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.atan">[docs]</a><span class="k">def</span> <span class="nf">atan</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;evaluates the tan inverse of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;evaluates the tan inverse of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arctan</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
@@ -129,7 +128,7 @@
 
 <span class="c1">#periodic</span>
 <div class="viewcode-block" id="sin"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.sin">[docs]</a><span class="k">def</span> <span class="nf">sin</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;evaluates the sine of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;evaluates the sine of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
@@ -158,7 +157,7 @@
 
 <span class="c1">#periodic</span>
 <div class="viewcode-block" id="cos"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.cos">[docs]</a><span class="k">def</span> <span class="nf">cos</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluates the cos of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluates the cos of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
@@ -188,13 +187,13 @@
 
 
 <div class="viewcode-block" id="tan"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.tan">[docs]</a><span class="k">def</span> <span class="nf">tan</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluates the tan of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluates the tan of an interval&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
 
 <span class="c1">#Monotonic</span>
 <div class="viewcode-block" id="sqrt"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.sqrt">[docs]</a><span class="k">def</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluates the square root of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluates the square root of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -216,7 +215,7 @@
 
 
 <div class="viewcode-block" id="imin"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.imin">[docs]</a><span class="k">def</span> <span class="nf">imin</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluates the minimum of a list of intervals&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluates the minimum of a list of intervals&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">interval</span><span class="p">))</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">):</span>
         <span class="k">return</span> <span class="ne">NotImplementedError</span>
@@ -237,7 +236,7 @@
 
 
 <div class="viewcode-block" id="imax"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.imax">[docs]</a><span class="k">def</span> <span class="nf">imax</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluates the maximum of a list of intervals&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluates the maximum of a list of intervals&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">interval</span><span class="p">))</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">):</span>
         <span class="k">return</span> <span class="ne">NotImplementedError</span>
@@ -260,7 +259,7 @@
 
 <span class="c1">#Monotonic</span>
 <div class="viewcode-block" id="sinh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.sinh">[docs]</a><span class="k">def</span> <span class="nf">sinh</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluates the hyperbolic sine of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluates the hyperbolic sine of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
@@ -271,7 +270,7 @@
 
 
 <div class="viewcode-block" id="cosh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.cosh">[docs]</a><span class="k">def</span> <span class="nf">cosh</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluates the hyperbolic cos of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluates the hyperbolic cos of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
@@ -291,7 +290,7 @@
 
 <span class="c1">#Monotonic</span>
 <div class="viewcode-block" id="tanh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.tanh">[docs]</a><span class="k">def</span> <span class="nf">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluates the hyperbolic tan of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluates the hyperbolic tan of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
@@ -302,7 +301,7 @@
 
 
 <div class="viewcode-block" id="asin"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.asin">[docs]</a><span class="k">def</span> <span class="nf">asin</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluates the inverse sine of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluates the inverse sine of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="c1">#Outside the domain</span>
@@ -324,7 +323,7 @@
 
 
 <div class="viewcode-block" id="acos"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.acos">[docs]</a><span class="k">def</span> <span class="nf">acos</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluates the inverse cos of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluates the inverse cos of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -346,7 +345,7 @@
 
 
 <div class="viewcode-block" id="ceil"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.ceil">[docs]</a><span class="k">def</span> <span class="nf">ceil</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluates the ceiling of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluates the ceiling of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
@@ -367,7 +366,7 @@
 
 
 <div class="viewcode-block" id="floor"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.floor">[docs]</a><span class="k">def</span> <span class="nf">floor</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluates the floor of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluates the floor of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
@@ -388,7 +387,7 @@
 
 
 <div class="viewcode-block" id="acosh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.acosh">[docs]</a><span class="k">def</span> <span class="nf">acosh</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluates the inverse hyperbolic cosine of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluates the inverse hyperbolic cosine of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="c1">#Outside the domain</span>
@@ -413,7 +412,7 @@
 
 <span class="c1">#Monotonic</span>
 <div class="viewcode-block" id="asinh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.asinh">[docs]</a><span class="k">def</span> <span class="nf">asinh</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluates the inverse hyperbolic sine of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluates the inverse hyperbolic sine of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="k">return</span> <span class="n">interval</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arcsinh</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
@@ -426,7 +425,7 @@
 
 
 <div class="viewcode-block" id="atanh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.atanh">[docs]</a><span class="k">def</span> <span class="nf">atanh</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Evaluates the inverse hyperbolic tangent of an interval&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Evaluates the inverse hyperbolic tangent of an interval&quot;&quot;&quot;</span>
     <span class="n">np</span> <span class="o">=</span> <span class="n">import_module</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="c1">#Outside the domain</span>
@@ -452,7 +451,7 @@
 <span class="c1">#Three valued logic for interval plotting.</span>
 
 <div class="viewcode-block" id="And"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.And">[docs]</a><span class="k">def</span> <span class="nf">And</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Defines the three valued ``And`` behaviour for a 2-tuple of</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Defines the three valued ``And`` behaviour for a 2-tuple of</span>
 <span class="sd">     three valued logic values&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">reduce_and</span><span class="p">(</span><span class="n">cmp_intervala</span><span class="p">,</span> <span class="n">cmp_intervalb</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">cmp_intervala</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span> <span class="ow">or</span> <span class="n">cmp_intervalb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
@@ -472,7 +471,7 @@
 
 
 <div class="viewcode-block" id="Or"><a class="viewcode-back" href="../../../../../modelparameters.sympy.plotting.intervalmath.html#modelparameters.sympy.plotting.intervalmath.lib_interval.Or">[docs]</a><span class="k">def</span> <span class="nf">Or</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Defines the three valued ``Or`` behaviour for a 2-tuple of</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Defines the three valued ``Or`` behaviour for a 2-tuple of</span>
 <span class="sd">     three valued logic values&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">reduce_or</span><span class="p">(</span><span class="n">cmp_intervala</span><span class="p">,</span> <span class="n">cmp_intervalb</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">cmp_intervala</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">or</span> <span class="n">cmp_intervalb</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
@@ -507,7 +506,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -528,7 +527,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

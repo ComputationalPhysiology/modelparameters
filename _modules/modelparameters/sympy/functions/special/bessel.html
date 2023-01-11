@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -67,7 +66,7 @@
 
 
 <div class="viewcode-block" id="BesselBase"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.BesselBase">[docs]</a><span class="k">class</span> <span class="nc">BesselBase</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Abstract base class for bessel-type functions.</span>
 
 <span class="sd">    This class is meant to reduce code duplication.</span>
@@ -83,12 +82,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">order</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; The order of the bessel-type function. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; The order of the bessel-type function. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">argument</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; The argument of the bessel-type function. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; The argument of the bessel-type function. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
 <div class="viewcode-block" id="BesselBase.eval"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.BesselBase.eval">[docs]</a>    <span class="nd">@classmethod</span>
@@ -123,7 +122,7 @@
 
 
 <div class="viewcode-block" id="besselj"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.besselj">[docs]</a><span class="k">class</span> <span class="nc">besselj</span><span class="p">(</span><span class="n">BesselBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Bessel function of the first kind.</span>
 
 <span class="sd">    The Bessel `J` function of order `\nu` is defined to be the function</span>
@@ -249,7 +248,7 @@
 
 
 <div class="viewcode-block" id="bessely"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.bessely">[docs]</a><span class="k">class</span> <span class="nc">bessely</span><span class="p">(</span><span class="n">BesselBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Bessel function of the second kind.</span>
 
 <span class="sd">    The Bessel `Y` function of order `\nu` is defined as</span>
@@ -328,7 +327,7 @@
 
 
 <div class="viewcode-block" id="besseli"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.besseli">[docs]</a><span class="k">class</span> <span class="nc">besseli</span><span class="p">(</span><span class="n">BesselBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Modified Bessel function of the first kind.</span>
 
 <span class="sd">    The Bessel I function is a solution to the modified Bessel equation</span>
@@ -428,7 +427,7 @@
 
 
 <div class="viewcode-block" id="besselk"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.besselk">[docs]</a><span class="k">class</span> <span class="nc">besselk</span><span class="p">(</span><span class="n">BesselBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Modified Bessel function of the second kind.</span>
 
 <span class="sd">    The Bessel K function of order :math:`\nu` is defined as</span>
@@ -512,7 +511,7 @@
 
 
 <div class="viewcode-block" id="hankel1"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.hankel1">[docs]</a><span class="k">class</span> <span class="nc">hankel1</span><span class="p">(</span><span class="n">BesselBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Hankel function of the first kind.</span>
 
 <span class="sd">    This function is defined as</span>
@@ -555,7 +554,7 @@
 
 
 <div class="viewcode-block" id="hankel2"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.hankel2">[docs]</a><span class="k">class</span> <span class="nc">hankel2</span><span class="p">(</span><span class="n">BesselBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Hankel function of the second kind.</span>
 
 <span class="sd">    This function is defined as</span>
@@ -607,7 +606,7 @@
 
 
 <div class="viewcode-block" id="SphericalBesselBase"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.SphericalBesselBase">[docs]</a><span class="k">class</span> <span class="nc">SphericalBesselBase</span><span class="p">(</span><span class="n">BesselBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for spherical Bessel functions.</span>
 
 <span class="sd">    These are thin wrappers around ordinary Bessel functions,</span>
@@ -618,11 +617,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_expand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Expand self into a polynomial. Nu is guaranteed to be Integer. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Expand self into a polynomial. Nu is guaranteed to be Integer. &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;expansion&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_rewrite</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Rewrite self in terms of ordinary Bessel functions. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Rewrite self in terms of ordinary Bessel functions. &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;rewriting&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_expand_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
@@ -651,7 +650,7 @@
 
 
 <div class="viewcode-block" id="jn"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.jn">[docs]</a><span class="k">class</span> <span class="nc">jn</span><span class="p">(</span><span class="n">SphericalBesselBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Spherical Bessel function of the first kind.</span>
 
 <span class="sd">    This function is a solution to the spherical Bessel equation</span>
@@ -724,7 +723,7 @@
 
 
 <div class="viewcode-block" id="yn"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.yn">[docs]</a><span class="k">class</span> <span class="nc">yn</span><span class="p">(</span><span class="n">SphericalBesselBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Spherical Bessel function of the second kind.</span>
 
 <span class="sd">    This function is another solution to the spherical Bessel equation, and</span>
@@ -843,7 +842,7 @@
 
 
 <div class="viewcode-block" id="hn1"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.hn1">[docs]</a><span class="k">class</span> <span class="nc">hn1</span><span class="p">(</span><span class="n">SphericalHankelBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Spherical Hankel function of the first kind.</span>
 
 <span class="sd">    This function is defined as</span>
@@ -896,7 +895,7 @@
 
 
 <div class="viewcode-block" id="hn2"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.hn2">[docs]</a><span class="k">class</span> <span class="nc">hn2</span><span class="p">(</span><span class="n">SphericalHankelBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Spherical Hankel function of the second kind.</span>
 
 <span class="sd">    This function is defined as</span>
@@ -949,7 +948,7 @@
 
 
 <div class="viewcode-block" id="jn_zeros"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.jn_zeros">[docs]</a><span class="k">def</span> <span class="nf">jn_zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;sympy&quot;</span><span class="p">,</span> <span class="n">dps</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Zeros of the spherical Bessel function of the first kind.</span>
 
 <span class="sd">    This returns an array of zeros of jn up to the k-th zero.</span>
@@ -1019,7 +1018,7 @@
 
 
 <div class="viewcode-block" id="AiryBase"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.AiryBase">[docs]</a><span class="k">class</span> <span class="nc">AiryBase</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Abstract base class for Airy functions.</span>
 
 <span class="sd">    This class is meant to reduce code duplication.</span>
@@ -1057,7 +1056,7 @@
 
 
 <div class="viewcode-block" id="airyai"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.airyai">[docs]</a><span class="k">class</span> <span class="nc">airyai</span><span class="p">(</span><span class="n">AiryBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Airy function `\operatorname{Ai}` of the first kind.</span>
 
 <span class="sd">    The Airy function `\operatorname{Ai}(z)` is defined to be the function</span>
@@ -1223,7 +1222,7 @@
 
 
 <div class="viewcode-block" id="airybi"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.airybi">[docs]</a><span class="k">class</span> <span class="nc">airybi</span><span class="p">(</span><span class="n">AiryBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Airy function `\operatorname{Bi}` of the second kind.</span>
 
 <span class="sd">    The Airy function `\operatorname{Bi}(z)` is defined to be the function</span>
@@ -1393,7 +1392,7 @@
 
 
 <div class="viewcode-block" id="airyaiprime"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.airyaiprime">[docs]</a><span class="k">class</span> <span class="nc">airyaiprime</span><span class="p">(</span><span class="n">AiryBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The derivative `\operatorname{Ai}^\prime` of the Airy function of the first kind.</span>
 
 <span class="sd">    The Airy function `\operatorname{Ai}^\prime(z)` is defined to be the function</span>
@@ -1545,7 +1544,7 @@
 
 
 <div class="viewcode-block" id="airybiprime"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.bessel.airybiprime">[docs]</a><span class="k">class</span> <span class="nc">airybiprime</span><span class="p">(</span><span class="n">AiryBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The derivative `\operatorname{Bi}^\prime` of the Airy function of the first kind.</span>
 
 <span class="sd">    The Airy function `\operatorname{Bi}^\prime(z)` is defined to be the function</span>
@@ -1715,7 +1714,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1736,7 +1735,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

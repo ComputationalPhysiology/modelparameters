@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -55,7 +54,7 @@
 
 <span class="nd">@cacheit</span>
 <span class="k">def</span> <span class="nf">_expand_delta</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Expand the first Add containing a simple KroneckerDelta.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Mul</span><span class="p">:</span>
@@ -75,7 +74,7 @@
 
 <span class="nd">@cacheit</span>
 <span class="k">def</span> <span class="nf">_extract_delta</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Extract a simple KroneckerDelta from the expression.</span>
 
 <span class="sd">    Returns the tuple ``(delta, newexpr)`` where:</span>
@@ -123,7 +122,7 @@
 
 <span class="nd">@cacheit</span>
 <span class="k">def</span> <span class="nf">_has_simple_delta</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns True if ``expr`` is an expression that contains a KroneckerDelta</span>
 <span class="sd">    that is simple in the index ``index``, meaning that this KroneckerDelta</span>
 <span class="sd">    is nonzero for a single value of the index ``index``.</span>
@@ -140,7 +139,7 @@
 
 <span class="nd">@cacheit</span>
 <span class="k">def</span> <span class="nf">_is_simple_delta</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns True if ``delta`` is a KroneckerDelta and is nonzero for a single</span>
 <span class="sd">    value of the index ``index``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -153,7 +152,7 @@
 
 <span class="nd">@cacheit</span>
 <span class="k">def</span> <span class="nf">_remove_multiple_delta</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Evaluate products of KroneckerDelta&#39;s.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..solvers</span> <span class="kn">import</span> <span class="n">solve</span>
@@ -184,7 +183,7 @@
 
 <span class="nd">@cacheit</span>
 <span class="k">def</span> <span class="nf">_simplify_delta</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Rewrite a KroneckerDelta&#39;s indices in its simplest form.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..solvers</span> <span class="kn">import</span> <span class="n">solve</span>
@@ -201,7 +200,7 @@
 
 <div class="viewcode-block" id="deltaproduct"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.delta.deltaproduct">[docs]</a><span class="nd">@cacheit</span>
 <span class="k">def</span> <span class="nf">deltaproduct</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">limit</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handle products containing a KroneckerDelta.</span>
 
 <span class="sd">    See Also</span>
@@ -266,7 +265,7 @@
 
 <div class="viewcode-block" id="deltasummation"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.delta.deltasummation">[docs]</a><span class="nd">@cacheit</span>
 <span class="k">def</span> <span class="nf">deltasummation</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">limit</span><span class="p">,</span> <span class="n">no_piecewise</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Handle summations containing a KroneckerDelta.</span>
 
 <span class="sd">    The idea for summation is the following:</span>
@@ -380,7 +379,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -401,7 +400,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

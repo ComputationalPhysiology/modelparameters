@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -56,7 +55,7 @@
 
 
 <div class="viewcode-block" id="SparseMatrix"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.SparseMatrix">[docs]</a><span class="k">class</span> <span class="nc">SparseMatrix</span><span class="p">(</span><span class="n">MatrixBase</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A sparse matrix (a matrix with a large number of zero elements).</span>
 
 <span class="sd">    Examples</span>
@@ -200,7 +199,7 @@
         <span class="k">return</span> <span class="n">rv</span>
 
     <span class="k">def</span> <span class="nf">_cholesky_sparse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Algorithm for numeric Cholesky factorization of a sparse matrix.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Algorithm for numeric Cholesky factorization of a sparse matrix.&quot;&quot;&quot;</span>
         <span class="n">Crowstruc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">row_structure_symbolic_cholesky</span><span class="p">()</span>
         <span class="n">C</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Crowstruc</span><span class="p">)):</span>
@@ -238,7 +237,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="n">rhs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">_eval_inverse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the matrix inverse using Cholesky or LDL (default)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the matrix inverse using Cholesky or LDL (default)</span>
 <span class="sd">        decomposition as selected with the ``method`` keyword: &#39;CH&#39; or &#39;LDL&#39;,</span>
 <span class="sd">        respectively.</span>
 
@@ -293,7 +292,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">applyfunc</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_eval_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;If `other` is a SparseMatrix, add efficiently. Otherwise,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;If `other` is a SparseMatrix, add efficiently. Otherwise,</span>
 <span class="sd">        do standard addition.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">SparseMatrix</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
@@ -381,7 +380,7 @@
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">diff</span><span class="o">.</span><span class="n">values</span><span class="p">())</span> <span class="o">==</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="nf">_eval_matrix_mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Fast multiplication exploiting the sparsity of the matrix.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fast multiplication exploiting the sparsity of the matrix.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">SparseMatrix</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
@@ -428,7 +427,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">applyfunc</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">other</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the transposed SparseMatrix of this SparseMatrix.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the transposed SparseMatrix of this SparseMatrix.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -466,7 +465,7 @@
         <span class="k">return</span> <span class="n">L</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">_upper_triangular_solve</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_LDL_sparse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Algorithm for numeric LDL factization, exploiting sparse structure.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Algorithm for numeric LDL factization, exploiting sparse structure.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Lrowstruc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">row_structure_symbolic_cholesky</span><span class="p">()</span>
         <span class="n">L</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span>
@@ -502,7 +501,7 @@
         <span class="k">return</span> <span class="n">L</span><span class="p">,</span> <span class="n">D</span>
 
     <span class="k">def</span> <span class="nf">_lower_triangular_solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Fast algorithm for solving a lower-triangular system,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fast algorithm for solving a lower-triangular system,</span>
 <span class="sd">        exploiting the sparsity of the given matrix.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rows</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)]</span>
@@ -518,12 +517,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">_mat</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a list of matrix elements.  Some routines</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a list of matrix elements.  Some routines</span>
 <span class="sd">        in DenseMatrix use `_mat` directly to speed up operations.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_upper_triangular_solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Fast algorithm for solving an upper-triangular system,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fast algorithm for solving an upper-triangular system,</span>
 <span class="sd">        exploiting the sparsity of the given matrix.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rows</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)]</span>
@@ -540,7 +539,7 @@
 
 
 <div class="viewcode-block" id="SparseMatrix.applyfunc"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.SparseMatrix.applyfunc">[docs]</a>    <span class="k">def</span> <span class="nf">applyfunc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Apply a function to each element of the matrix.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply a function to each element of the matrix.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -570,12 +569,12 @@
         <span class="k">return</span> <span class="n">out</span></div>
 
 <div class="viewcode-block" id="SparseMatrix.as_immutable"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.SparseMatrix.as_immutable">[docs]</a>    <span class="k">def</span> <span class="nf">as_immutable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns an Immutable version of this Matrix.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns an Immutable version of this Matrix.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.immutable</span> <span class="kn">import</span> <span class="n">ImmutableSparseMatrix</span>
         <span class="k">return</span> <span class="n">ImmutableSparseMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SparseMatrix.as_mutable"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.SparseMatrix.as_mutable">[docs]</a>    <span class="k">def</span> <span class="nf">as_mutable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a mutable version of this matrix.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a mutable version of this matrix.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -592,7 +591,7 @@
         <span class="k">return</span> <span class="n">MutableSparseMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SparseMatrix.cholesky"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.SparseMatrix.cholesky">[docs]</a>    <span class="k">def</span> <span class="nf">cholesky</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the Cholesky decomposition L of a matrix A</span>
 <span class="sd">        such that L * L.T = A</span>
 
@@ -624,7 +623,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">M</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SparseMatrix.col_list"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.SparseMatrix.col_list">[docs]</a>    <span class="k">def</span> <span class="nf">col_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a column-sorted list of non-zero elements of the matrix.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a column-sorted list of non-zero elements of the matrix.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -649,7 +648,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_smat</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SparseMatrix.LDLdecomposition"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.SparseMatrix.LDLdecomposition">[docs]</a>    <span class="k">def</span> <span class="nf">LDLdecomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the LDL Decomposition (matrices ``L`` and ``D``) of matrix</span>
 <span class="sd">        ``A``, such that ``L * D * L.T == A``. ``A`` must be a square,</span>
 <span class="sd">        symmetric, positive-definite and non-singular.</span>
@@ -689,7 +688,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">L</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_new</span><span class="p">(</span><span class="n">D</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SparseMatrix.liupc"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.SparseMatrix.liupc">[docs]</a>    <span class="k">def</span> <span class="nf">liupc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Liu&#39;s algorithm, for pre-determination of the Elimination Tree of</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Liu&#39;s algorithm, for pre-determination of the Elimination Tree of</span>
 <span class="sd">        the given matrix, used in row-based symbolic Cholesky factorization.</span>
 
 <span class="sd">        Examples</span>
@@ -733,11 +732,11 @@
         <span class="k">return</span> <span class="n">R</span><span class="p">,</span> <span class="n">parent</span></div>
 
 <div class="viewcode-block" id="SparseMatrix.nnz"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.SparseMatrix.nnz">[docs]</a>    <span class="k">def</span> <span class="nf">nnz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the number of non-zero elements in Matrix.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the number of non-zero elements in Matrix.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_smat</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="SparseMatrix.row_list"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.SparseMatrix.row_list">[docs]</a>    <span class="k">def</span> <span class="nf">row_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a row-sorted list of non-zero elements of the matrix.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a row-sorted list of non-zero elements of the matrix.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -760,7 +759,7 @@
             <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_smat</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">k</span><span class="p">))]</span></div>
 
 <div class="viewcode-block" id="SparseMatrix.row_structure_symbolic_cholesky"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.SparseMatrix.row_structure_symbolic_cholesky">[docs]</a>    <span class="k">def</span> <span class="nf">row_structure_symbolic_cholesky</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Symbolic cholesky factorization, for pre-determination of the</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Symbolic cholesky factorization, for pre-determination of the</span>
 <span class="sd">        non-zero structure of the Cholesky factororization.</span>
 
 <span class="sd">        Examples</span>
@@ -807,7 +806,7 @@
         <span class="k">return</span> <span class="n">M</span></div>
 
 <div class="viewcode-block" id="SparseMatrix.solve_least_squares"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.SparseMatrix.solve_least_squares">[docs]</a>    <span class="k">def</span> <span class="nf">solve_least_squares</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;LDL&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the least-square fit to the data.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the least-square fit to the data.</span>
 
 <span class="sd">        By default the cholesky_solve routine is used (method=&#39;CH&#39;); other</span>
 <span class="sd">        methods of matrix inversion can be used. To find out which are</span>
@@ -864,7 +863,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span><span class="o">*</span><span class="n">t</span><span class="o">*</span><span class="n">rhs</span></div>
 
 <div class="viewcode-block" id="SparseMatrix.solve"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.SparseMatrix.solve">[docs]</a>    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;LDL&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return solution to self*soln = rhs using given inversion method.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return solution to self*soln = rhs using given inversion method.</span>
 
 <span class="sd">        For a list of possible inversion methods, see the .inv() docstring.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -888,7 +887,7 @@
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Assign value to position designated by key.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Assign value to position designated by key.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -950,7 +949,7 @@
     <span class="fm">__hash__</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="MutableSparseMatrix.col_del"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.MutableSparseMatrix.col_del">[docs]</a>    <span class="k">def</span> <span class="nf">col_del</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Delete the given column of the matrix.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete the given column of the matrix.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -985,7 +984,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">cols</span> <span class="o">-=</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="MutableSparseMatrix.col_join"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.MutableSparseMatrix.col_join">[docs]</a>    <span class="k">def</span> <span class="nf">col_join</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns B augmented beneath A (row-wise joining)::</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns B augmented beneath A (row-wise joining)::</span>
 
 <span class="sd">            [A]</span>
 <span class="sd">            [B]</span>
@@ -1047,7 +1046,7 @@
         <span class="k">return</span> <span class="n">A</span></div>
 
 <div class="viewcode-block" id="MutableSparseMatrix.col_op"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.MutableSparseMatrix.col_op">[docs]</a>    <span class="k">def</span> <span class="nf">col_op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;In-place operation on col j using two-arg functor whose args are</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;In-place operation on col j using two-arg functor whose args are</span>
 <span class="sd">        interpreted as (self[i, j], i) for i in range(self.rows).</span>
 
 <span class="sd">        Examples</span>
@@ -1071,7 +1070,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_smat</span><span class="o">.</span><span class="n">pop</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="MutableSparseMatrix.col_swap"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.MutableSparseMatrix.col_swap">[docs]</a>    <span class="k">def</span> <span class="nf">col_swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Swap, in place, columns i and j.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Swap, in place, columns i and j.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -1132,7 +1131,7 @@
                 <span class="bp">self</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">rlo</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="n">clo</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="MutableSparseMatrix.fill"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.MutableSparseMatrix.fill">[docs]</a>    <span class="k">def</span> <span class="nf">fill</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Fill self with the given value.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fill self with the given value.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        =====</span>
@@ -1164,7 +1163,7 @@
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rows</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cols</span><span class="p">)])</span></div>
 
 <div class="viewcode-block" id="MutableSparseMatrix.row_del"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.MutableSparseMatrix.row_del">[docs]</a>    <span class="k">def</span> <span class="nf">row_del</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Delete the given row of the matrix.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete the given row of the matrix.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -1197,7 +1196,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">rows</span> <span class="o">-=</span> <span class="mi">1</span></div>
 
 <div class="viewcode-block" id="MutableSparseMatrix.row_join"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.MutableSparseMatrix.row_join">[docs]</a>    <span class="k">def</span> <span class="nf">row_join</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns B appended after A (column-wise augmenting)::</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns B appended after A (column-wise augmenting)::</span>
 
 <span class="sd">            [A B]</span>
 
@@ -1255,7 +1254,7 @@
         <span class="k">return</span> <span class="n">A</span></div>
 
 <div class="viewcode-block" id="MutableSparseMatrix.row_op"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.MutableSparseMatrix.row_op">[docs]</a>    <span class="k">def</span> <span class="nf">row_op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;In-place operation on row ``i`` using two-arg functor whose args are</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;In-place operation on row ``i`` using two-arg functor whose args are</span>
 <span class="sd">        interpreted as ``(self[i, j], j)``.</span>
 
 <span class="sd">        Examples</span>
@@ -1286,7 +1285,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_smat</span><span class="o">.</span><span class="n">pop</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="MutableSparseMatrix.row_swap"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.MutableSparseMatrix.row_swap">[docs]</a>    <span class="k">def</span> <span class="nf">row_swap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Swap, in place, columns i and j.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Swap, in place, columns i and j.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -1316,7 +1315,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_smat</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span></div>
 
 <div class="viewcode-block" id="MutableSparseMatrix.zip_row_op"><a class="viewcode-back" href="../../../../modelparameters.sympy.matrices.html#modelparameters.sympy.matrices.sparse.MutableSparseMatrix.zip_row_op">[docs]</a>    <span class="k">def</span> <span class="nf">zip_row_op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;In-place operation on row ``i`` using two-arg functor whose args are</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;In-place operation on row ``i`` using two-arg functor whose args are</span>
 <span class="sd">        interpreted as ``(self[i, j], self[k, j])``.</span>
 
 <span class="sd">        Examples</span>
@@ -1356,7 +1355,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1377,7 +1376,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

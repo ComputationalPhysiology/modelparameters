@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -42,7 +41,7 @@
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="nb">range</span>
 
 <div class="viewcode-block" id="RootSystem"><a class="viewcode-back" href="../../../../modelparameters.sympy.liealgebras.html#modelparameters.sympy.liealgebras.root_system.RootSystem">[docs]</a><span class="k">class</span> <span class="nc">RootSystem</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represent the root system of a simple Lie algebra</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent the root system of a simple Lie algebra</span>
 
 <span class="sd">    Every simple Lie algebra has a unique root system.  To find the root</span>
 <span class="sd">    system, we first consider the Cartan subalgebra of g, which is the maximal</span>
@@ -72,7 +71,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">cartantype</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a new RootSystem object</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a new RootSystem object</span>
 
 <span class="sd">        This method assigns an attribute called cartan_type to each instance of</span>
 <span class="sd">        a RootSystem object.  When an instance of RootSystem is called, it</span>
@@ -86,7 +85,7 @@
         <span class="k">return</span> <span class="n">obj</span>
 
 <div class="viewcode-block" id="RootSystem.simple_roots"><a class="viewcode-back" href="../../../../modelparameters.sympy.liealgebras.html#modelparameters.sympy.liealgebras.root_system.RootSystem.simple_roots">[docs]</a>    <span class="k">def</span> <span class="nf">simple_roots</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generate the simple roots of the Lie algebra</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate the simple roots of the Lie algebra</span>
 
 <span class="sd">        The rank of the Lie algebra determines the number of simple roots that</span>
 <span class="sd">        it has.  This method obtains the rank of the Lie algebra, and then uses</span>
@@ -112,7 +111,7 @@
 
 
 <div class="viewcode-block" id="RootSystem.all_roots"><a class="viewcode-back" href="../../../../modelparameters.sympy.liealgebras.html#modelparameters.sympy.liealgebras.root_system.RootSystem.all_roots">[docs]</a>    <span class="k">def</span> <span class="nf">all_roots</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generate all the roots of a given root system</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate all the roots of a given root system</span>
 
 <span class="sd">        The result is a dictionary where the keys are integer numbers.  It</span>
 <span class="sd">        generates the roots by getting the dictionary of all positive roots</span>
@@ -132,7 +131,7 @@
         <span class="k">return</span> <span class="n">alpha</span></div>
 
 <div class="viewcode-block" id="RootSystem.root_space"><a class="viewcode-back" href="../../../../modelparameters.sympy.liealgebras.html#modelparameters.sympy.liealgebras.root_system.RootSystem.root_space">[docs]</a>    <span class="k">def</span> <span class="nf">root_space</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the span of the simple roots</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the span of the simple roots</span>
 
 <span class="sd">        The root space is the vector space spanned by the simple roots, i.e. it</span>
 <span class="sd">        is a vector space with a distinguished basis, the simple roots.  This</span>
@@ -153,7 +152,7 @@
         <span class="k">return</span> <span class="n">rs</span></div>
 
 <div class="viewcode-block" id="RootSystem.add_simple_roots"><a class="viewcode-back" href="../../../../modelparameters.sympy.liealgebras.html#modelparameters.sympy.liealgebras.root_system.RootSystem.add_simple_roots">[docs]</a>    <span class="k">def</span> <span class="nf">add_simple_roots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root1</span><span class="p">,</span> <span class="n">root2</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Add two simple roots together</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add two simple roots together</span>
 
 <span class="sd">        The function takes as input two integers, root1 and root2.  It then</span>
 <span class="sd">        uses these integers as keys in the dictionary of simple roots, and gets</span>
@@ -182,7 +181,7 @@
         <span class="k">return</span> <span class="n">newroot</span></div>
 
 <div class="viewcode-block" id="RootSystem.add_as_roots"><a class="viewcode-back" href="../../../../modelparameters.sympy.liealgebras.html#modelparameters.sympy.liealgebras.root_system.RootSystem.add_as_roots">[docs]</a>    <span class="k">def</span> <span class="nf">add_as_roots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root1</span><span class="p">,</span> <span class="n">root2</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Add two roots together if and only if their sum is also a root</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add two roots together if and only if their sum is also a root</span>
 
 <span class="sd">        It takes as input two vectors which should be roots.  It then computes</span>
 <span class="sd">        their sum and checks if it is in the list of all possible roots.  If it</span>
@@ -211,7 +210,7 @@
 
 
 <div class="viewcode-block" id="RootSystem.cartan_matrix"><a class="viewcode-back" href="../../../../modelparameters.sympy.liealgebras.html#modelparameters.sympy.liealgebras.root_system.RootSystem.cartan_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">cartan_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Cartan matrix of Lie algebra associated with this root system</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Cartan matrix of Lie algebra associated with this root system</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -227,7 +226,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cartan_type</span><span class="o">.</span><span class="n">cartan_matrix</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="RootSystem.dynkin_diagram"><a class="viewcode-back" href="../../../../modelparameters.sympy.liealgebras.html#modelparameters.sympy.liealgebras.root_system.RootSystem.dynkin_diagram">[docs]</a>    <span class="k">def</span> <span class="nf">dynkin_diagram</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Dynkin diagram of the Lie algebra associated with this root system</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Dynkin diagram of the Lie algebra associated with this root system</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -256,7 +255,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -277,7 +276,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

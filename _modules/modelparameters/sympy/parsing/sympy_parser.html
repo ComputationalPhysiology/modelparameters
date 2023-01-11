@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -65,7 +64,7 @@
 
 
 <span class="k">def</span> <span class="nf">_token_splittable</span><span class="p">(</span><span class="n">token</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Predicate for whether a token name can be split into multiple tokens.</span>
 
 <span class="sd">    A token is splittable if it does not contain an underscore character and</span>
@@ -85,7 +84,7 @@
 
 
 <span class="k">def</span> <span class="nf">_token_callable</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">,</span> <span class="n">nextToken</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Predicate for whether a token name represents a callable function.</span>
 
 <span class="sd">    Essentially wraps ``callable``, but looks up the token name in the</span>
@@ -126,7 +125,7 @@
 
 
 <div class="viewcode-block" id="AppliedFunction"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.AppliedFunction">[docs]</a><span class="k">class</span> <span class="nc">AppliedFunction</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A group of tokens representing a function and its arguments.</span>
 
 <span class="sd">    `exponent` is for handling the shorthand sin^2, ln^2, etc.</span>
@@ -141,7 +140,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;function&quot;</span><span class="p">,</span> <span class="s2">&quot;args&quot;</span><span class="p">,</span> <span class="s2">&quot;exponent&quot;</span><span class="p">]</span>
 
 <div class="viewcode-block" id="AppliedFunction.expand"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.AppliedFunction.expand">[docs]</a>    <span class="k">def</span> <span class="nf">expand</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a list of tokens representing the function&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a list of tokens representing the function&quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">function</span><span class="p">)</span>
         <span class="n">result</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
@@ -155,7 +154,7 @@
 
 
 <div class="viewcode-block" id="ParenthesisGroup"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.ParenthesisGroup">[docs]</a><span class="k">class</span> <span class="nc">ParenthesisGroup</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;List of tokens representing an expression in parentheses.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;List of tokens representing an expression in parentheses.&quot;&quot;&quot;</span>
 
     <span class="k">pass</span></div>
 
@@ -172,7 +171,7 @@
 
 <span class="k">def</span> <span class="nf">_group_parentheses</span><span class="p">(</span><span class="n">recursor</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">_inner</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Group tokens between parentheses with ParenthesisGroup.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Group tokens between parentheses with ParenthesisGroup.</span>
 
 <span class="sd">        Also processes those tokens recursively.</span>
 
@@ -214,7 +213,7 @@
 
 
 <span class="k">def</span> <span class="nf">_apply_functions</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert a NAME token + ParenthesisGroup into an AppliedFunction.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a NAME token + ParenthesisGroup into an AppliedFunction.</span>
 
 <span class="sd">    Note that ParenthesisGroups, if not applied to any function, are</span>
 <span class="sd">    converted back into lists of tokens.</span>
@@ -239,7 +238,7 @@
 
 
 <span class="k">def</span> <span class="nf">_implicit_multiplication</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Implicitly adds &#39;*&#39; tokens.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implicitly adds &#39;*&#39; tokens.</span>
 
 <span class="sd">    Cases:</span>
 
@@ -305,7 +304,7 @@
 
 
 <span class="k">def</span> <span class="nf">_implicit_application</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Adds parentheses as needed after functions.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds parentheses as needed after functions.&quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">appendParen</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># number of closing parentheses to add</span>
     <span class="n">skip</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># number of tokens to delay before adding a &#39;)&#39; (to</span>
@@ -355,7 +354,7 @@
 
 
 <div class="viewcode-block" id="function_exponentiation"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.function_exponentiation">[docs]</a><span class="k">def</span> <span class="nf">function_exponentiation</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Allows functions to be exponentiated, e.g. ``cos**2(x)``.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Allows functions to be exponentiated, e.g. ``cos**2(x)``.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -405,7 +404,7 @@
 
 
 <div class="viewcode-block" id="split_symbols_custom"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.split_symbols_custom">[docs]</a><span class="k">def</span> <span class="nf">split_symbols_custom</span><span class="p">(</span><span class="n">predicate</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Creates a transformation that splits symbol names.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates a transformation that splits symbol names.</span>
 
 <span class="sd">    ``predicate`` should return True if the symbol name is to be split.</span>
 
@@ -484,7 +483,7 @@
 
 
 <div class="viewcode-block" id="implicit_multiplication"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.implicit_multiplication">[docs]</a><span class="k">def</span> <span class="nf">implicit_multiplication</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Makes the multiplication operator optional in most cases.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes the multiplication operator optional in most cases.</span>
 
 <span class="sd">    Use this before :func:`implicit_application`, otherwise expressions like</span>
 <span class="sd">    ``sin 2x`` will be parsed as ``x * sin(2)`` rather than ``sin(2*x)``.</span>
@@ -511,7 +510,7 @@
 
 
 <div class="viewcode-block" id="implicit_application"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.implicit_application">[docs]</a><span class="k">def</span> <span class="nf">implicit_application</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Makes parentheses optional in some cases for function calls.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Makes parentheses optional in some cases for function calls.</span>
 
 <span class="sd">    Use this after :func:`implicit_multiplication`, otherwise expressions</span>
 <span class="sd">    like ``sin 2x`` will be parsed as ``x * sin(2)`` rather than</span>
@@ -538,7 +537,7 @@
 
 
 <div class="viewcode-block" id="implicit_multiplication_application"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.implicit_multiplication_application">[docs]</a><span class="k">def</span> <span class="nf">implicit_multiplication_application</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Allows a slightly relaxed syntax.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Allows a slightly relaxed syntax.</span>
 
 <span class="sd">    - Parentheses for single-argument method calls are optional.</span>
 
@@ -572,7 +571,7 @@
 
 
 <div class="viewcode-block" id="auto_symbol"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.auto_symbol">[docs]</a><span class="k">def</span> <span class="nf">auto_symbol</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Inserts calls to ``Symbol`` for undefined variables.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Inserts calls to ``Symbol`` for undefined variables.&quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">prevTok</span> <span class="o">=</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
@@ -622,7 +621,7 @@
 
 
 <div class="viewcode-block" id="lambda_notation"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.lambda_notation">[docs]</a><span class="k">def</span> <span class="nf">lambda_notation</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Substitutes &quot;lambda&quot; with its Sympy equivalent Lambda().</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Substitutes &quot;lambda&quot; with its Sympy equivalent Lambda().</span>
 <span class="sd">    However, the conversion doesn&#39;t take place if only &quot;lambda&quot;</span>
 <span class="sd">    is passed because that is a syntax error.</span>
 
@@ -661,7 +660,7 @@
 
 
 <div class="viewcode-block" id="factorial_notation"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.factorial_notation">[docs]</a><span class="k">def</span> <span class="nf">factorial_notation</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Allows standard notation for factorial.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Allows standard notation for factorial.&quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">prevtoken</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
     <span class="k">for</span> <span class="n">toknum</span><span class="p">,</span> <span class="n">tokval</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
@@ -687,7 +686,7 @@
 
 
 <div class="viewcode-block" id="convert_xor"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.convert_xor">[docs]</a><span class="k">def</span> <span class="nf">convert_xor</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Treats XOR, ``^``, as exponentiation, ``**``.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Treats XOR, ``^``, as exponentiation, ``**``.&quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">toknum</span><span class="p">,</span> <span class="n">tokval</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">toknum</span> <span class="o">==</span> <span class="n">OP</span><span class="p">:</span>
@@ -702,7 +701,7 @@
 
 
 <div class="viewcode-block" id="auto_number"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.auto_number">[docs]</a><span class="k">def</span> <span class="nf">auto_number</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Converts numeric literals to use SymPy equivalents.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts numeric literals to use SymPy equivalents.</span>
 
 <span class="sd">    Complex numbers use ``I``; integer literals use ``Integer``, float</span>
 <span class="sd">    literals use ``Float``, and repeating decimals use ``Rational``.</span>
@@ -778,7 +777,7 @@
 
 
 <div class="viewcode-block" id="rationalize"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.rationalize">[docs]</a><span class="k">def</span> <span class="nf">rationalize</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Converts floats into ``Rational``. Run AFTER ``auto_number``.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts floats into ``Rational``. Run AFTER ``auto_number``.&quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">passed_float</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">for</span> <span class="n">toknum</span><span class="p">,</span> <span class="n">tokval</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">:</span>
@@ -797,7 +796,7 @@
 
 
 <span class="k">def</span> <span class="nf">_transform_equals_sign</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transforms the equals sign ``=`` to instances of Eq.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transforms the equals sign ``=`` to instances of Eq.</span>
 
 <span class="sd">    This is a helper function for `convert_equals_signs`.</span>
 <span class="sd">    Works with expressions containing one equals sign and no</span>
@@ -826,7 +825,7 @@
 
 
 <div class="viewcode-block" id="convert_equals_signs"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.convert_equals_signs">[docs]</a><span class="k">def</span> <span class="nf">convert_equals_signs</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Transforms all the equals signs ``=`` to instances of Eq.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transforms all the equals signs ``=`` to instances of Eq.</span>
 
 <span class="sd">    Parses the equals signs in the expression and replaces them with</span>
 <span class="sd">    appropriate Eq instances.Also works with nested equals signs.</span>
@@ -876,7 +875,7 @@
 
 
 <div class="viewcode-block" id="stringify_expr"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.stringify_expr">[docs]</a><span class="k">def</span> <span class="nf">stringify_expr</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">,</span> <span class="n">transformations</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts the string ``s`` to Python code, in ``local_dict``</span>
 
 <span class="sd">    Generally, ``parse_expr`` should be used.</span>
@@ -894,7 +893,7 @@
 
 
 <div class="viewcode-block" id="eval_expr"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.eval_expr">[docs]</a><span class="k">def</span> <span class="nf">eval_expr</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">local_dict</span><span class="p">,</span> <span class="n">global_dict</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Evaluate Python code generated by ``stringify_expr``.</span>
 
 <span class="sd">    Generally, ``parse_expr`` should be used.</span>
@@ -911,7 +910,7 @@
     <span class="n">global_dict</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">evaluate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Converts the string ``s`` to a SymPy expression, in ``local_dict``</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts the string ``s`` to a SymPy expression, in ``local_dict``</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ==========</span>
@@ -995,7 +994,7 @@
 
 
 <div class="viewcode-block" id="evaluateFalse"><a class="viewcode-back" href="../../../../modelparameters.sympy.parsing.html#modelparameters.sympy.parsing.sympy_parser.evaluateFalse">[docs]</a><span class="k">def</span> <span class="nf">evaluateFalse</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Replaces operators with the SymPy equivalent and sets evaluate=False.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">node</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
@@ -1105,7 +1104,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1126,7 +1125,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

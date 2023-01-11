@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -53,13 +52,13 @@
 
 
 <div class="viewcode-block" id="AssignmentError"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.codeprinter.AssignmentError">[docs]</a><span class="k">class</span> <span class="nc">AssignmentError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Raised if an assignment variable for a loop is missing.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="CodePrinter"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.codeprinter.CodePrinter">[docs]</a><span class="k">class</span> <span class="nc">CodePrinter</span><span class="p">(</span><span class="n">StrPrinter</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The base class for code-printing subclasses.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -82,7 +81,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">reserved_words</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
 
 <div class="viewcode-block" id="CodePrinter.doprint"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.codeprinter.CodePrinter.doprint">[docs]</a>    <span class="k">def</span> <span class="nf">doprint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">assign_to</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print the expression as code.</span>
 
 <span class="sd">        Parameters</span>
@@ -256,7 +255,7 @@
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">score_table</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">_rate_index_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;function to calculate score based on position among indices</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;function to calculate score based on position among indices</span>
 
 <span class="sd">        This method is used to sort loops in an optimized order, see</span>
 <span class="sd">        CodePrinter._sort_optimized()</span>
@@ -265,29 +264,29 @@
                                   <span class="s2">&quot;subclass of CodePrinter.&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_statement</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">codestring</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Formats a codestring with the proper line ending.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Formats a codestring with the proper line ending.&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;This function must be implemented by &quot;</span>
                                   <span class="s2">&quot;subclass of CodePrinter.&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_comment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Formats a text string as a comment.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Formats a text string as a comment.&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;This function must be implemented by &quot;</span>
                                   <span class="s2">&quot;subclass of CodePrinter.&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_declare_number_const</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Declare a numeric constant at the top of a function&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Declare a numeric constant at the top of a function&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;This function must be implemented by &quot;</span>
                                   <span class="s2">&quot;subclass of CodePrinter.&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_format_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lines</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Take in a list of lines of code, and format them accordingly.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Take in a list of lines of code, and format them accordingly.</span>
 
 <span class="sd">        This may include indenting, wrapping long lines, etc...&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;This function must be implemented by &quot;</span>
                                   <span class="s2">&quot;subclass of CodePrinter.&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_get_loop_opening_ending</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indices</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a tuple (open_lines, close_lines) containing lists</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a tuple (open_lines, close_lines) containing lists</span>
 <span class="sd">        of codelines&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;This function must be implemented by &quot;</span>
                                   <span class="s2">&quot;subclass of CodePrinter.&quot;</span><span class="p">)</span>
@@ -515,7 +514,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -536,7 +535,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

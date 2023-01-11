@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -55,7 +54,7 @@
 
 
 <div class="viewcode-block" id="dpll_satisfiable"><a class="viewcode-back" href="../../../../../modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.dpll_satisfiable">[docs]</a><span class="k">def</span> <span class="nf">dpll_satisfiable</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check satisfiability of a propositional sentence.</span>
 <span class="sd">    It returns a model rather than True when it succeeds</span>
 
@@ -83,7 +82,7 @@
 
 
 <div class="viewcode-block" id="dpll"><a class="viewcode-back" href="../../../../../modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.dpll">[docs]</a><span class="k">def</span> <span class="nf">dpll</span><span class="p">(</span><span class="n">clauses</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute satisfiability in a partial model.</span>
 <span class="sd">    Clauses is an array of conjuncts.</span>
 
@@ -132,7 +131,7 @@
 
 
 <div class="viewcode-block" id="dpll_int_repr"><a class="viewcode-back" href="../../../../../modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.dpll_int_repr">[docs]</a><span class="k">def</span> <span class="nf">dpll_int_repr</span><span class="p">(</span><span class="n">clauses</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute satisfiability in a partial model.</span>
 <span class="sd">    Arguments are expected to be in integer representation</span>
 
@@ -180,7 +179,7 @@
 
 
 <div class="viewcode-block" id="pl_true_int_repr"><a class="viewcode-back" href="../../../../../modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.pl_true_int_repr">[docs]</a><span class="k">def</span> <span class="nf">pl_true_int_repr</span><span class="p">(</span><span class="n">clause</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="p">{}):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Lightweight version of pl_true.</span>
 <span class="sd">    Argument clause represents the set of args of an Or clause. This is used</span>
 <span class="sd">    inside dpll_int_repr, it is not meant to be used directly.</span>
@@ -207,7 +206,7 @@
 
 
 <div class="viewcode-block" id="unit_propagate"><a class="viewcode-back" href="../../../../../modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.unit_propagate">[docs]</a><span class="k">def</span> <span class="nf">unit_propagate</span><span class="p">(</span><span class="n">clauses</span><span class="p">,</span> <span class="n">symbol</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns an equivalent set of clauses</span>
 <span class="sd">    If a set of clauses contains the unit clause l, the other clauses are</span>
 <span class="sd">    simplified by the application of the two following rules:</span>
@@ -241,7 +240,7 @@
 
 
 <div class="viewcode-block" id="unit_propagate_int_repr"><a class="viewcode-back" href="../../../../../modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.unit_propagate_int_repr">[docs]</a><span class="k">def</span> <span class="nf">unit_propagate_int_repr</span><span class="p">(</span><span class="n">clauses</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Same as unit_propagate, but arguments are expected to be in integer</span>
 <span class="sd">    representation</span>
 
@@ -255,7 +254,7 @@
 
 
 <div class="viewcode-block" id="find_pure_symbol"><a class="viewcode-back" href="../../../../../modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.find_pure_symbol">[docs]</a><span class="k">def</span> <span class="nf">find_pure_symbol</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">unknown_clauses</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find a symbol and its value if it appears only as a positive literal</span>
 <span class="sd">    (or only as a negative) in clauses.</span>
 
@@ -279,7 +278,7 @@
 
 
 <div class="viewcode-block" id="find_pure_symbol_int_repr"><a class="viewcode-back" href="../../../../../modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.find_pure_symbol_int_repr">[docs]</a><span class="k">def</span> <span class="nf">find_pure_symbol_int_repr</span><span class="p">(</span><span class="n">symbols</span><span class="p">,</span> <span class="n">unknown_clauses</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Same as find_pure_symbol, but arguments are expected</span>
 <span class="sd">    to be in integer representation</span>
 
@@ -302,7 +301,7 @@
 
 
 <div class="viewcode-block" id="find_unit_clause"><a class="viewcode-back" href="../../../../../modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.find_unit_clause">[docs]</a><span class="k">def</span> <span class="nf">find_unit_clause</span><span class="p">(</span><span class="n">clauses</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A unit clause has only 1 variable that is not bound in the model.</span>
 
 <span class="sd">    &gt;&gt;&gt; from ... import symbols</span>
@@ -325,7 +324,7 @@
 
 
 <div class="viewcode-block" id="find_unit_clause_int_repr"><a class="viewcode-back" href="../../../../../modelparameters.sympy.logic.algorithms.html#modelparameters.sympy.logic.algorithms.dpll.find_unit_clause_int_repr">[docs]</a><span class="k">def</span> <span class="nf">find_unit_clause_int_repr</span><span class="p">(</span><span class="n">clauses</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Same as find_unit_clause, but arguments are expected to be in</span>
 <span class="sd">    integer representation.</span>
 
@@ -362,7 +361,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -383,7 +382,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

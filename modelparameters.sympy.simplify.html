@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>modelparameters.sympy.simplify package &#8212; modelparameters 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="modelparameters.sympy.solvers package" href="modelparameters.sympy.solvers.html" />
@@ -46,12 +45,12 @@
           <div class="body" role="main">
             
   <section id="modelparameters-sympy-simplify-package">
-<h1>modelparameters.sympy.simplify package<a class="headerlink" href="#modelparameters-sympy-simplify-package" title="Permalink to this headline">¶</a></h1>
+<h1>modelparameters.sympy.simplify package<a class="headerlink" href="#modelparameters-sympy-simplify-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.simplify.combsimp">
-<span id="modelparameters-sympy-simplify-combsimp-module"></span><h2>modelparameters.sympy.simplify.combsimp module<a class="headerlink" href="#module-modelparameters.sympy.simplify.combsimp" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-simplify-combsimp-module"></span><h2>modelparameters.sympy.simplify.combsimp module<a class="headerlink" href="#module-modelparameters.sympy.simplify.combsimp" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.combsimp.combsimp">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.combsimp.</span></span><span class="sig-name descname"><span class="pre">combsimp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/combsimp.html#combsimp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.combsimp.combsimp" title="Permalink to this definition">¶</a></dt>
@@ -103,26 +102,26 @@ possible.</p></li>
 
 </section>
 <section id="module-modelparameters.sympy.simplify.cse_main">
-<span id="modelparameters-sympy-simplify-cse-main-module"></span><h2>modelparameters.sympy.simplify.cse_main module<a class="headerlink" href="#module-modelparameters.sympy.simplify.cse_main" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-simplify-cse-main-module"></span><h2>modelparameters.sympy.simplify.cse_main module<a class="headerlink" href="#module-modelparameters.sympy.simplify.cse_main" title="Permalink to this heading">¶</a></h2>
 <p>Tools for doing common subexpression elimination.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.cse_main.cse">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.cse_main.</span></span><span class="sig-name descname"><span class="pre">cse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exprs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbols</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">postprocess</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'canonical'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/cse_main.html#cse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.cse_main.cse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform common subexpression elimination on an expression.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>exprs</strong> (<em>list of sympy expressions</em><em>, or </em><em>a single sympy expression</em>) – The expressions to reduce.</p></li>
+<li><p><strong>exprs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em> of </em><em>sympy expressions</em><em>, or </em><em>a single sympy expression</em>) – The expressions to reduce.</p></li>
 <li><p><strong>symbols</strong> (<em>infinite iterator yielding unique Symbols</em>) – The symbols used to label the common subexpressions which are pulled
 out. The <code class="docutils literal notranslate"><span class="pre">numbered_symbols</span></code> generator is useful. The default is a
 stream of symbols of the form “x0”, “x1”, etc. This must be an
 infinite iterator.</p></li>
-<li><p><strong>optimizations</strong> (<em>list of</em><em> (</em><em>callable</em><em>, </em><em>callable</em><em>) </em><em>pairs</em>) – The (preprocessor, postprocessor) pairs of external optimization
+<li><p><strong>optimizations</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em> of </em><em>(</em><em>callable</em><em>, </em><em>callable</em><em>) </em><em>pairs</em>) – The (preprocessor, postprocessor) pairs of external optimization
 functions. Optionally ‘basic’ can be passed for a set of predefined
 basic optimizations. Such ‘basic’ optimizations were used by default
 in old implementation, however they can be really slow on larger
 expressions. Now, no pre or post optimizations are made by default.</p></li>
-<li><p><strong>postprocess</strong> (<em>a function which accepts the two return values of cse and</em>) – returns the desired form of output from cse, e.g. if you want the
+<li><p><strong>postprocess</strong> (<em>a function which accepts the two return values</em><em> of </em><em>cse and</em>) – returns the desired form of output from cse, e.g. if you want the
 replacements reversed the function might be the following lambda:
 lambda r, e: return reversed(r), e</p></li>
 <li><p><strong>order</strong> (<em>string</em><em>, </em><em>'none'</em><em> or </em><em>'canonical'</em>) – The order by which Mul and Add arguments are processed. If set to
@@ -130,10 +129,10 @@ lambda r, e: return reversed(r), e</p></li>
 ordering will be faster but dependent on expressions hashes, thus
 machine dependent and variable. For large expressions where speed is a
 concern, use the setting order=’none’.</p></li>
-<li><p><strong>ignore</strong> (<em>iterable of Symbols</em>) – Substitutions containing any Symbol from <code class="docutils literal notranslate"><span class="pre">ignore</span></code> will be ignored.</p></li>
+<li><p><strong>ignore</strong> (<em>iterable</em><em> of </em><em>Symbols</em>) – Substitutions containing any Symbol from <code class="docutils literal notranslate"><span class="pre">ignore</span></code> will be ignored.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
 <li><p><strong>replacements</strong> (<em>list of (Symbol, expression) pairs</em>) – All of the common subexpressions that were replaced. Subexpressions
 earlier in this list might show up in subexpressions later in this
@@ -201,17 +200,17 @@ expressions and sort them into the replacements using the reps_toposort.</p>
 <dd><p>Find optimization opportunities in Adds, Muls, Pows and negative
 coefficient Muls</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>exprs</strong> (<em>list of sympy expressions</em>) – The expressions to optimize.</p></li>
+<li><p><strong>exprs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em> of </em><em>sympy expressions</em>) – The expressions to optimize.</p></li>
 <li><p><strong>order</strong> (<em>string</em><em>, </em><em>'none'</em><em> or </em><em>'canonical'</em>) – The order by which Mul and Add arguments are processed. For large
 expressions where speed is a concern, use the setting order=’none’.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>opt_subs</strong> – The expression substitutions which can be useful to optimize CSE.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dictionary of expression substitutions</p>
 </dd>
 </dl>
@@ -231,18 +230,18 @@ expressions where speed is a concern, use the setting order=’none’.</p></li>
 <dd><p>Postprocess an expression after common subexpression elimination to
 return the expression to canonical sympy form.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<em>sympy expression</em>) – The target expression to transform.</p></li>
-<li><p><strong>optimizations</strong> (<em>list of</em><em> (</em><em>callable</em><em>, </em><em>callable</em><em>) </em><em>pairs</em><em>, </em><em>optional</em>) – The (preprocessor, postprocessor) pairs.  The postprocessors will be
+<li><p><strong>optimizations</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em> of </em><em>(</em><em>callable</em><em>, </em><em>callable</em><em>) </em><em>pairs</em><em>, </em><em>optional</em>) – The (preprocessor, postprocessor) pairs.  The postprocessors will be
 applied in reversed order to undo the effects of the preprocessors
 correctly.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>expr</strong> – The transformed expression.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>sympy expression</p>
 </dd>
 </dl>
@@ -254,16 +253,16 @@ correctly.</p></li>
 <dd><p>Preprocess an expression to optimize for common subexpression
 elimination.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>expr</strong> (<em>sympy expression</em>) – The target expression to optimize.</p></li>
-<li><p><strong>optimizations</strong> (<em>list of</em><em> (</em><em>callable</em><em>, </em><em>callable</em><em>) </em><em>pairs</em>) – The (preprocessor, postprocessor) pairs.</p></li>
+<li><p><strong>optimizations</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em> of </em><em>(</em><em>callable</em><em>, </em><em>callable</em><em>) </em><em>pairs</em>) – The (preprocessor, postprocessor) pairs.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>expr</strong> – The transformed expression.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>sympy expression</p>
 </dd>
 </dl>
@@ -295,15 +294,15 @@ to reverse the order).</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.cse_main.</span></span><span class="sig-name descname"><span class="pre">tree_cse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exprs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">opt_subs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'canonical'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/cse_main.html#tree_cse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.cse_main.tree_cse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform raw CSE on expression tree, taking opt_subs into account.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>exprs</strong> (<em>list of sympy expressions</em>) – The expressions to reduce.</p></li>
+<li><p><strong>exprs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em> of </em><em>sympy expressions</em>) – The expressions to reduce.</p></li>
 <li><p><strong>symbols</strong> (<em>infinite iterator yielding unique Symbols</em>) – The symbols used to label the common subexpressions which are pulled
 out.</p></li>
-<li><p><strong>opt_subs</strong> (<em>dictionary of expression substitutions</em>) – The expressions to be substituted before any CSE action is performed.</p></li>
+<li><p><strong>opt_subs</strong> (<em>dictionary</em><em> of </em><em>expression substitutions</em>) – The expressions to be substituted before any CSE action is performed.</p></li>
 <li><p><strong>order</strong> (<em>string</em><em>, </em><em>'none'</em><em> or </em><em>'canonical'</em>) – The order by which Mul and Add arguments are processed. For large
 expressions where speed is a concern, use the setting order=’none’.</p></li>
-<li><p><strong>ignore</strong> (<em>iterable of Symbols</em>) – Substitutions containing any Symbol from <code class="docutils literal notranslate"><span class="pre">ignore</span></code> will be ignored.</p></li>
+<li><p><strong>ignore</strong> (<em>iterable</em><em> of </em><em>Symbols</em>) – Substitutions containing any Symbol from <code class="docutils literal notranslate"><span class="pre">ignore</span></code> will be ignored.</p></li>
 </ul>
 </dd>
 </dl>
@@ -311,7 +310,7 @@ expressions where speed is a concern, use the setting order=’none’.</p></li>
 
 </section>
 <section id="module-modelparameters.sympy.simplify.cse_opts">
-<span id="modelparameters-sympy-simplify-cse-opts-module"></span><h2>modelparameters.sympy.simplify.cse_opts module<a class="headerlink" href="#module-modelparameters.sympy.simplify.cse_opts" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-simplify-cse-opts-module"></span><h2>modelparameters.sympy.simplify.cse_opts module<a class="headerlink" href="#module-modelparameters.sympy.simplify.cse_opts" title="Permalink to this heading">¶</a></h2>
 <p>Optimizations of the expression tree representation for better CSE
 opportunities.</p>
 <dl class="py function">
@@ -328,12 +327,12 @@ opportunities.</p>
 
 </section>
 <section id="module-modelparameters.sympy.simplify.epathtools">
-<span id="modelparameters-sympy-simplify-epathtools-module"></span><h2>modelparameters.sympy.simplify.epathtools module<a class="headerlink" href="#module-modelparameters.sympy.simplify.epathtools" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-simplify-epathtools-module"></span><h2>modelparameters.sympy.simplify.epathtools module<a class="headerlink" href="#module-modelparameters.sympy.simplify.epathtools" title="Permalink to this heading">¶</a></h2>
 <p>Tools for manipulation of expressions using paths.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.epathtools.EPath">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.epathtools.</span></span><span class="sig-name descname"><span class="pre">EPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/epathtools.html#EPath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.epathtools.EPath" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Manipulate expressions using paths.</p>
 <p>EPath grammar in EBNF notation:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>literal   ::= /[A-Za-z_][A-Za-z_0-9]*/
@@ -433,24 +432,24 @@ interactive use.</p>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>select by type: <code class="docutils literal notranslate"><span class="pre">/list</span></code> or <code class="docutils literal notranslate"><span class="pre">/list|tuple</span></code></dt><dd><p>Emulates <a class="reference external" href="https://docs.python.org/3/library/functions.html#isinstance" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a>.</p>
+<dt>select by type: <code class="docutils literal notranslate"><span class="pre">/list</span></code> or <code class="docutils literal notranslate"><span class="pre">/list|tuple</span></code></dt><dd><p>Emulates <a class="reference external" href="https://docs.python.org/3/library/functions.html#isinstance" title="(in Python v3.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">isinstance()</span></code></a>.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt>select by attribute: <code class="docutils literal notranslate"><span class="pre">/__iter__?</span></code></dt><dd><p>Emulates <a class="reference external" href="https://docs.python.org/3/library/functions.html#hasattr" title="(in Python v3.10)"><code class="xref py py-func docutils literal notranslate"><span class="pre">hasattr()</span></code></a>.</p>
+<dt>select by attribute: <code class="docutils literal notranslate"><span class="pre">/__iter__?</span></code></dt><dd><p>Emulates <a class="reference external" href="https://docs.python.org/3/library/functions.html#hasattr" title="(in Python v3.11)"><code class="xref py py-func docutils literal notranslate"><span class="pre">hasattr()</span></code></a>.</p>
 </dd>
 </dl>
 </li>
 </ul>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em> | </em><a class="reference internal" href="#modelparameters.sympy.simplify.epathtools.EPath" title="modelparameters.sympy.simplify.epathtools.EPath"><em>EPath</em></a>) – A path as a string or a compiled EPath.</p></li>
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a><em> | </em><a class="reference internal" href="#modelparameters.sympy.simplify.epathtools.EPath" title="modelparameters.sympy.simplify.epathtools.EPath"><em>EPath</em></a>) – A path as a string or a compiled EPath.</p></li>
 <li><p><strong>expr</strong> (<a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><em>Basic</em></a><em> | </em><em>iterable</em>) – An expression or a container of expressions.</p></li>
 <li><p><strong>func</strong> (<em>callable</em><em> (</em><em>optional</em><em>)</em>) – A callable that will be applied to matching parts.</p></li>
-<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><em>tuple</em></a><em> (</em><em>optional</em><em>)</em>) – Additional positional arguments to <code class="docutils literal notranslate"><span class="pre">func</span></code>.</p></li>
-<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><em>dict</em></a><em> (</em><em>optional</em><em>)</em>) – Additional keyword arguments to <code class="docutils literal notranslate"><span class="pre">func</span></code>.</p></li>
+<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><em>tuple</em></a><em> (</em><em>optional</em><em>)</em>) – Additional positional arguments to <code class="docutils literal notranslate"><span class="pre">func</span></code>.</p></li>
+<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.11)"><em>dict</em></a><em> (</em><em>optional</em><em>)</em>) – Additional keyword arguments to <code class="docutils literal notranslate"><span class="pre">func</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -484,7 +483,7 @@ interactive use.</p>
 
 </section>
 <section id="module-modelparameters.sympy.simplify.fu">
-<span id="modelparameters-sympy-simplify-fu-module"></span><h2>modelparameters.sympy.simplify.fu module<a class="headerlink" href="#module-modelparameters.sympy.simplify.fu" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-simplify-fu-module"></span><h2>modelparameters.sympy.simplify.fu module<a class="headerlink" href="#module-modelparameters.sympy.simplify.fu" title="Permalink to this heading">¶</a></h2>
 <p>Implementation of the trigsimp algorithm by Fu et al.</p>
 <p>The idea behind the <code class="docutils literal notranslate"><span class="pre">fu</span></code> algorithm is to use a sequence of rules, applied
 in what is heuristically known to be a smart order, to select a simpler
@@ -984,9 +983,7 @@ for both numerator and denominator)</p>
 <blockquote>
 <div><p>a=  0   pi/6        pi/4        pi/3        pi/2</p>
 </div></blockquote>
-<p>cos(a)  0   1/2         sqrt(2)/2   sqrt(3)/2   1
-sin(a)  1   sqrt(3)/2   sqrt(2)/2   1/2         0
-tan(a)  0   sqt(3)/3    1           sqrt(3)     –</p>
+<p>tan(a)  0   sqt(3)/3    1           sqrt(3)     –</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.fu</span> <span class="kn">import</span> <span class="n">TR4</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">pi</span>
@@ -1342,7 +1339,7 @@ n1*gcd*sin(b - a)</p>
 
 </section>
 <section id="module-modelparameters.sympy.simplify.hyperexpand">
-<span id="modelparameters-sympy-simplify-hyperexpand-module"></span><h2>modelparameters.sympy.simplify.hyperexpand module<a class="headerlink" href="#module-modelparameters.sympy.simplify.hyperexpand" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-simplify-hyperexpand-module"></span><h2>modelparameters.sympy.simplify.hyperexpand module<a class="headerlink" href="#module-modelparameters.sympy.simplify.hyperexpand" title="Permalink to this heading">¶</a></h2>
 <p>Expand Hypergeometric (and Meijer G) functions into named
 special functions.</p>
 <p>The algorithm for doing this uses a collection of lookup tables of
@@ -1358,7 +1355,7 @@ Algebraic Computation, pages 205-211, New York, 1997. ACM.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.Formula">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">Formula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#Formula"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.Formula" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This class represents hypergeometric formulae.</p>
 <p>Its data members are:
 - z, the argument
@@ -1390,7 +1387,7 @@ instantiations need not actually match, or be valid!</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.FormulaCollection">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">FormulaCollection</span></span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#FormulaCollection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.FormulaCollection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A collection of formulae to use as origins.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.FormulaCollection.lookup_origin">
@@ -1419,7 +1416,7 @@ knowledge base.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.G_Function">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">G_Function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">an</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bq</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#G_Function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.G_Function" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.expr.Expr</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code></a></p>
 <p>A Meijer G-function.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.G_Function.args">
@@ -1489,7 +1486,7 @@ descendending, bm and ap ascending).</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.Hyper_Function">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">Hyper_Function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bq</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#Hyper_Function"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.Hyper_Function" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.expr.Expr</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.expr.Expr" title="modelparameters.sympy.core.expr.Expr"><code class="xref py py-class docutils literal notranslate"><span class="pre">Expr</span></code></a></p>
 <p>A generalized hypergeometric function.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.Hyper_Function.args">
@@ -1588,7 +1585,7 @@ Return -1 if impossible.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.MeijerFormula">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">MeijerFormula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">an</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">B</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matcher</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#MeijerFormula"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.MeijerFormula" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This class represents a Meijer G-function formula.</p>
 <p>Its data members are:
 - z, the argument
@@ -1612,7 +1609,7 @@ This uses the _matcher passed on init.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.MeijerFormulaCollection">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">MeijerFormulaCollection</span></span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#MeijerFormulaCollection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.MeijerFormulaCollection" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This class holds a collection of meijer g formulae.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.MeijerFormulaCollection.lookup_origin">
@@ -1625,70 +1622,70 @@ This uses the _matcher passed on init.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.MeijerShiftA">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">MeijerShiftA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bi</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#MeijerShiftA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.MeijerShiftA" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.simplify.hyperexpand.Operator</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Operator</span></code></a></p>
 <p>Increment an upper b index.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.MeijerShiftB">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">MeijerShiftB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bi</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#MeijerShiftB"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.MeijerShiftB" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.simplify.hyperexpand.Operator</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Operator</span></code></a></p>
 <p>Decrement an upper a index.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.MeijerShiftC">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">MeijerShiftC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bi</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#MeijerShiftC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.MeijerShiftC" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.simplify.hyperexpand.Operator</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Operator</span></code></a></p>
 <p>Increment a lower b index.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.MeijerShiftD">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">MeijerShiftD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bi</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#MeijerShiftD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.MeijerShiftD" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.simplify.hyperexpand.Operator</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Operator</span></code></a></p>
 <p>Decrement a lower a index.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.MeijerUnShiftA">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">MeijerUnShiftA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">an</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#MeijerUnShiftA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.MeijerUnShiftA" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.simplify.hyperexpand.Operator</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Operator</span></code></a></p>
 <p>Decrement an upper b index.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.MeijerUnShiftB">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">MeijerUnShiftB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">an</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#MeijerUnShiftB"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.MeijerUnShiftB" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.simplify.hyperexpand.Operator</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Operator</span></code></a></p>
 <p>Increment an upper a index.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.MeijerUnShiftC">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">MeijerUnShiftC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">an</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#MeijerUnShiftC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.MeijerUnShiftC" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.simplify.hyperexpand.Operator</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Operator</span></code></a></p>
 <p>Decrement a lower b index.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.MeijerUnShiftD">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">MeijerUnShiftD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">an</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#MeijerUnShiftD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.MeijerUnShiftD" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.simplify.hyperexpand.Operator</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Operator</span></code></a></p>
 <p>Increment a lower a index.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.MultOperator">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">MultOperator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#MultOperator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.MultOperator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.simplify.hyperexpand.Operator</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Operator</span></code></a></p>
 <p>Simply multiply by a “constant”</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.Operator">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">Operator</span></span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#Operator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Base class for operators to be applied to our functions.</p>
 <p>These operators are differential operators. They are by convention
 expressed in the variable D = z*d/dz (although this base class does
@@ -1727,7 +1724,7 @@ function expansion algorithm.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.ReduceOrder">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">ReduceOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ai</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#ReduceOrder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.ReduceOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.simplify.hyperexpand.Operator</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Operator</span></code></a></p>
 <p>Reduce Order by cancelling an upper and a lower index.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.ReduceOrder.meijer_minus">
@@ -1744,28 +1741,28 @@ function expansion algorithm.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.ShiftA">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">ShiftA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ai</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#ShiftA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.ShiftA" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.simplify.hyperexpand.Operator</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Operator</span></code></a></p>
 <p>Increment an upper index.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.ShiftB">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">ShiftB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bi</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#ShiftB"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.ShiftB" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.simplify.hyperexpand.Operator</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Operator</span></code></a></p>
 <p>Decrement a lower index.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.UnShiftA">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">UnShiftA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#UnShiftA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.UnShiftA" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.simplify.hyperexpand.Operator</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Operator</span></code></a></p>
 <p>Decrement an upper index.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.hyperexpand.UnShiftB">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.hyperexpand.</span></span><span class="sig-name descname"><span class="pre">UnShiftB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/hyperexpand.html#UnShiftB"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.hyperexpand.UnShiftB" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.simplify.hyperexpand.Operator</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator" title="modelparameters.sympy.simplify.hyperexpand.Operator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Operator</span></code></a></p>
 <p>Increment a lower index.</p>
 </dd></dl>
 
@@ -2005,10 +2002,10 @@ Requires order to be fully reduced.</p>
 
 </section>
 <section id="modelparameters-sympy-simplify-hyperexpand-doc-module">
-<h2>modelparameters.sympy.simplify.hyperexpand_doc module<a class="headerlink" href="#modelparameters-sympy-simplify-hyperexpand-doc-module" title="Permalink to this headline">¶</a></h2>
+<h2>modelparameters.sympy.simplify.hyperexpand_doc module<a class="headerlink" href="#modelparameters-sympy-simplify-hyperexpand-doc-module" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.simplify.powsimp">
-<span id="modelparameters-sympy-simplify-powsimp-module"></span><h2>modelparameters.sympy.simplify.powsimp module<a class="headerlink" href="#module-modelparameters.sympy.simplify.powsimp" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-simplify-powsimp-module"></span><h2>modelparameters.sympy.simplify.powsimp module<a class="headerlink" href="#module-modelparameters.sympy.simplify.powsimp" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.powsimp.powdenest">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.powsimp.</span></span><span class="sig-name descname"><span class="pre">powdenest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">polar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/powsimp.html#powdenest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.powsimp.powdenest" title="Permalink to this definition">¶</a></dt>
@@ -2184,7 +2181,7 @@ autoexpanded then Mul does not join the resulting factors:</p>
 
 </section>
 <section id="module-modelparameters.sympy.simplify.radsimp">
-<span id="modelparameters-sympy-simplify-radsimp-module"></span><h2>modelparameters.sympy.simplify.radsimp module<a class="headerlink" href="#module-modelparameters.sympy.simplify.radsimp" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-simplify-radsimp-module"></span><h2>modelparameters.sympy.simplify.radsimp module<a class="headerlink" href="#module-modelparameters.sympy.simplify.radsimp" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.radsimp.collect">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.radsimp.</span></span><span class="sig-name descname"><span class="pre">collect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">syms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evaluate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exact</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distribute_order_term</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/radsimp.html#collect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.radsimp.collect" title="Permalink to this definition">¶</a></dt>
@@ -2634,7 +2631,7 @@ and a sum of terms with surds squared prime with g</p>
 
 </section>
 <section id="module-modelparameters.sympy.simplify.ratsimp">
-<span id="modelparameters-sympy-simplify-ratsimp-module"></span><h2>modelparameters.sympy.simplify.ratsimp module<a class="headerlink" href="#module-modelparameters.sympy.simplify.ratsimp" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-simplify-ratsimp-module"></span><h2>modelparameters.sympy.simplify.ratsimp module<a class="headerlink" href="#module-modelparameters.sympy.simplify.ratsimp" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.ratsimp.ratsimp">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.ratsimp.</span></span><span class="sig-name descname"><span class="pre">ratsimp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/ratsimp.html#ratsimp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.ratsimp.ratsimp" title="Permalink to this definition">¶</a></dt>
@@ -2676,7 +2673,7 @@ Ideal,
 
 </section>
 <section id="module-modelparameters.sympy.simplify.simplify">
-<span id="modelparameters-sympy-simplify-simplify-module"></span><h2>modelparameters.sympy.simplify.simplify module<a class="headerlink" href="#module-modelparameters.sympy.simplify.simplify" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-simplify-simplify-module"></span><h2>modelparameters.sympy.simplify.simplify module<a class="headerlink" href="#module-modelparameters.sympy.simplify.simplify" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.simplify.besselsimp">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.simplify.</span></span><span class="sig-name descname"><span class="pre">besselsimp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/simplify.html#besselsimp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.simplify.besselsimp" title="Permalink to this definition">¶</a></dt>
@@ -2880,9 +2877,9 @@ When rational_conversion=’exact’ it uses the exact, base-2 representation.</
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.simplify.</span></span><span class="sig-name descname"><span class="pre">nthroot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">15</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/simplify.html#nthroot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.simplify.nthroot" title="Permalink to this definition">¶</a></dt>
 <dd><p>compute a real nth-root of a sum of surds</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>expr</strong> (<em>sum of surds</em>) – </p></li>
+<li><p><strong>expr</strong> (<em>sum</em><em> of </em><em>surds</em>) – </p></li>
 <li><p><strong>n</strong> (<em>integer</em>) – </p></li>
 <li><p><strong>max_len</strong> (maximum number of surds passed as constants to <code class="docutils literal notranslate"><span class="pre">nsimplify</span></code>) – </p></li>
 <li><p><strong>Algorithm</strong> – </p></li>
@@ -3202,11 +3199,11 @@ returns the simplified sum</p>
 
 </section>
 <section id="module-modelparameters.sympy.simplify.sqrtdenest">
-<span id="modelparameters-sympy-simplify-sqrtdenest-module"></span><h2>modelparameters.sympy.simplify.sqrtdenest module<a class="headerlink" href="#module-modelparameters.sympy.simplify.sqrtdenest" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-simplify-sqrtdenest-module"></span><h2>modelparameters.sympy.simplify.sqrtdenest module<a class="headerlink" href="#module-modelparameters.sympy.simplify.sqrtdenest" title="Permalink to this heading">¶</a></h2>
 <dl class="py exception">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.sqrtdenest.SqrtdenestStopIteration">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.sqrtdenest.</span></span><span class="sig-name descname"><span class="pre">SqrtdenestStopIteration</span></span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/sqrtdenest.html#SqrtdenestStopIteration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.sqrtdenest.SqrtdenestStopIteration" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#StopIteration" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">StopIteration</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#StopIteration" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">StopIteration</span></code></a></p>
 </dd></dl>
 
 <dl class="py function">
@@ -3324,7 +3321,7 @@ by Denesting’ (available at <a class="reference external" href="http://www.cyb
 
 </section>
 <section id="module-modelparameters.sympy.simplify.traversaltools">
-<span id="modelparameters-sympy-simplify-traversaltools-module"></span><h2>modelparameters.sympy.simplify.traversaltools module<a class="headerlink" href="#module-modelparameters.sympy.simplify.traversaltools" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-simplify-traversaltools-module"></span><h2>modelparameters.sympy.simplify.traversaltools module<a class="headerlink" href="#module-modelparameters.sympy.simplify.traversaltools" title="Permalink to this heading">¶</a></h2>
 <p>Tools for applying functions to specified parts of expressions.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.traversaltools.use">
@@ -3348,7 +3345,7 @@ by Denesting’ (available at <a class="reference external" href="http://www.cyb
 
 </section>
 <section id="module-modelparameters.sympy.simplify.trigsimp">
-<span id="modelparameters-sympy-simplify-trigsimp-module"></span><h2>modelparameters.sympy.simplify.trigsimp module<a class="headerlink" href="#module-modelparameters.sympy.simplify.trigsimp" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-simplify-trigsimp-module"></span><h2>modelparameters.sympy.simplify.trigsimp module<a class="headerlink" href="#module-modelparameters.sympy.simplify.trigsimp" title="Permalink to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.simplify.trigsimp.exptrigsimp">
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.simplify.trigsimp.</span></span><span class="sig-name descname"><span class="pre">exptrigsimp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simplify</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/simplify/trigsimp.html#exptrigsimp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.simplify.trigsimp.exptrigsimp" title="Permalink to this definition">¶</a></dt>
@@ -3572,7 +3569,7 @@ more simplification:</p>
 
 </section>
 <section id="module-modelparameters.sympy.simplify">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.simplify" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.simplify" title="Permalink to this heading">¶</a></h2>
 <p>The module helps converting SymPy expressions into shorter forms of them.</p>
 <p>for example:
 the expression E**(pi*I) will be converted into -1
@@ -3592,20 +3589,213 @@ the expression (x+x)**2 will be converted into 4*x**2</p>
     <ul>
 <li><a class="reference internal" href="#">modelparameters.sympy.simplify package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.combsimp">modelparameters.sympy.simplify.combsimp module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.cse_main">modelparameters.sympy.simplify.cse_main module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.cse_opts">modelparameters.sympy.simplify.cse_opts module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.epathtools">modelparameters.sympy.simplify.epathtools module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.fu">modelparameters.sympy.simplify.fu module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.hyperexpand">modelparameters.sympy.simplify.hyperexpand module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.combsimp">modelparameters.sympy.simplify.combsimp module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.combsimp.combsimp"><code class="docutils literal notranslate"><span class="pre">combsimp()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.cse_main">modelparameters.sympy.simplify.cse_main module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.cse_main.cse"><code class="docutils literal notranslate"><span class="pre">cse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.cse_main.cse_separate"><code class="docutils literal notranslate"><span class="pre">cse_separate()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.cse_main.opt_cse"><code class="docutils literal notranslate"><span class="pre">opt_cse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.cse_main.postprocess_for_cse"><code class="docutils literal notranslate"><span class="pre">postprocess_for_cse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.cse_main.preprocess_for_cse"><code class="docutils literal notranslate"><span class="pre">preprocess_for_cse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.cse_main.reps_toposort"><code class="docutils literal notranslate"><span class="pre">reps_toposort()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.cse_main.tree_cse"><code class="docutils literal notranslate"><span class="pre">tree_cse()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.cse_opts">modelparameters.sympy.simplify.cse_opts module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.cse_opts.sub_post"><code class="docutils literal notranslate"><span class="pre">sub_post()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.cse_opts.sub_pre"><code class="docutils literal notranslate"><span class="pre">sub_pre()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.epathtools">modelparameters.sympy.simplify.epathtools module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.epathtools.EPath"><code class="docutils literal notranslate"><span class="pre">EPath</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.epathtools.EPath.apply"><code class="docutils literal notranslate"><span class="pre">EPath.apply()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.epathtools.EPath.select"><code class="docutils literal notranslate"><span class="pre">EPath.select()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.epathtools.epath"><code class="docutils literal notranslate"><span class="pre">epath()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.fu">modelparameters.sympy.simplify.fu module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.L"><code class="docutils literal notranslate"><span class="pre">L()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR0"><code class="docutils literal notranslate"><span class="pre">TR0()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR1"><code class="docutils literal notranslate"><span class="pre">TR1()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR10"><code class="docutils literal notranslate"><span class="pre">TR10()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR10i"><code class="docutils literal notranslate"><span class="pre">TR10i()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR11"><code class="docutils literal notranslate"><span class="pre">TR11()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR111"><code class="docutils literal notranslate"><span class="pre">TR111()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR12"><code class="docutils literal notranslate"><span class="pre">TR12()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR12i"><code class="docutils literal notranslate"><span class="pre">TR12i()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR13"><code class="docutils literal notranslate"><span class="pre">TR13()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR14"><code class="docutils literal notranslate"><span class="pre">TR14()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR15"><code class="docutils literal notranslate"><span class="pre">TR15()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR16"><code class="docutils literal notranslate"><span class="pre">TR16()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR2"><code class="docutils literal notranslate"><span class="pre">TR2()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR22"><code class="docutils literal notranslate"><span class="pre">TR22()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR2i"><code class="docutils literal notranslate"><span class="pre">TR2i()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR3"><code class="docutils literal notranslate"><span class="pre">TR3()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR4"><code class="docutils literal notranslate"><span class="pre">TR4()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR5"><code class="docutils literal notranslate"><span class="pre">TR5()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR6"><code class="docutils literal notranslate"><span class="pre">TR6()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR7"><code class="docutils literal notranslate"><span class="pre">TR7()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR8"><code class="docutils literal notranslate"><span class="pre">TR8()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TR9"><code class="docutils literal notranslate"><span class="pre">TR9()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.TRmorrie"><code class="docutils literal notranslate"><span class="pre">TRmorrie()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.as_f_sign_1"><code class="docutils literal notranslate"><span class="pre">as_f_sign_1()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.fu"><code class="docutils literal notranslate"><span class="pre">fu()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.hyper_as_trig"><code class="docutils literal notranslate"><span class="pre">hyper_as_trig()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.process_common_addends"><code class="docutils literal notranslate"><span class="pre">process_common_addends()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.fu.trig_split"><code class="docutils literal notranslate"><span class="pre">trig_split()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.hyperexpand">modelparameters.sympy.simplify.hyperexpand module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Formula"><code class="docutils literal notranslate"><span class="pre">Formula</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Formula.closed_form"><code class="docutils literal notranslate"><span class="pre">Formula.closed_form</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Formula.find_instantiations"><code class="docutils literal notranslate"><span class="pre">Formula.find_instantiations()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.FormulaCollection"><code class="docutils literal notranslate"><span class="pre">FormulaCollection</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.FormulaCollection.lookup_origin"><code class="docutils literal notranslate"><span class="pre">FormulaCollection.lookup_origin()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.G_Function"><code class="docutils literal notranslate"><span class="pre">G_Function</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.G_Function.args"><code class="docutils literal notranslate"><span class="pre">G_Function.args</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.G_Function.compute_buckets"><code class="docutils literal notranslate"><span class="pre">G_Function.compute_buckets()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.G_Function.default_assumptions"><code class="docutils literal notranslate"><span class="pre">G_Function.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.G_Function.signature"><code class="docutils literal notranslate"><span class="pre">G_Function.signature</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Hyper_Function"><code class="docutils literal notranslate"><span class="pre">Hyper_Function</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Hyper_Function.args"><code class="docutils literal notranslate"><span class="pre">Hyper_Function.args</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Hyper_Function.build_invariants"><code class="docutils literal notranslate"><span class="pre">Hyper_Function.build_invariants()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Hyper_Function.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Hyper_Function.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Hyper_Function.difficulty"><code class="docutils literal notranslate"><span class="pre">Hyper_Function.difficulty()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Hyper_Function.gamma"><code class="docutils literal notranslate"><span class="pre">Hyper_Function.gamma</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Hyper_Function.sizes"><code class="docutils literal notranslate"><span class="pre">Hyper_Function.sizes</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.MeijerFormula"><code class="docutils literal notranslate"><span class="pre">MeijerFormula</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.MeijerFormula.closed_form"><code class="docutils literal notranslate"><span class="pre">MeijerFormula.closed_form</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.MeijerFormula.try_instantiate"><code class="docutils literal notranslate"><span class="pre">MeijerFormula.try_instantiate()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.MeijerFormulaCollection"><code class="docutils literal notranslate"><span class="pre">MeijerFormulaCollection</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.MeijerFormulaCollection.lookup_origin"><code class="docutils literal notranslate"><span class="pre">MeijerFormulaCollection.lookup_origin()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.MeijerShiftA"><code class="docutils literal notranslate"><span class="pre">MeijerShiftA</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.MeijerShiftB"><code class="docutils literal notranslate"><span class="pre">MeijerShiftB</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.MeijerShiftC"><code class="docutils literal notranslate"><span class="pre">MeijerShiftC</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.MeijerShiftD"><code class="docutils literal notranslate"><span class="pre">MeijerShiftD</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.MeijerUnShiftA"><code class="docutils literal notranslate"><span class="pre">MeijerUnShiftA</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.MeijerUnShiftB"><code class="docutils literal notranslate"><span class="pre">MeijerUnShiftB</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.MeijerUnShiftC"><code class="docutils literal notranslate"><span class="pre">MeijerUnShiftC</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.MeijerUnShiftD"><code class="docutils literal notranslate"><span class="pre">MeijerUnShiftD</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.MultOperator"><code class="docutils literal notranslate"><span class="pre">MultOperator</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator"><code class="docutils literal notranslate"><span class="pre">Operator</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.Operator.apply"><code class="docutils literal notranslate"><span class="pre">Operator.apply()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.ReduceOrder"><code class="docutils literal notranslate"><span class="pre">ReduceOrder</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.ReduceOrder.meijer_minus"><code class="docutils literal notranslate"><span class="pre">ReduceOrder.meijer_minus()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.ReduceOrder.meijer_plus"><code class="docutils literal notranslate"><span class="pre">ReduceOrder.meijer_plus()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.ShiftA"><code class="docutils literal notranslate"><span class="pre">ShiftA</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.ShiftB"><code class="docutils literal notranslate"><span class="pre">ShiftB</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.UnShiftA"><code class="docutils literal notranslate"><span class="pre">UnShiftA</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.UnShiftB"><code class="docutils literal notranslate"><span class="pre">UnShiftB</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.add_formulae"><code class="docutils literal notranslate"><span class="pre">add_formulae()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.add_meijerg_formulae"><code class="docutils literal notranslate"><span class="pre">add_meijerg_formulae()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.apply_operators"><code class="docutils literal notranslate"><span class="pre">apply_operators()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.build_hypergeometric_formula"><code class="docutils literal notranslate"><span class="pre">build_hypergeometric_formula()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.debug"><code class="docutils literal notranslate"><span class="pre">debug()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.devise_plan"><code class="docutils literal notranslate"><span class="pre">devise_plan()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.devise_plan_meijer"><code class="docutils literal notranslate"><span class="pre">devise_plan_meijer()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.hyperexpand"><code class="docutils literal notranslate"><span class="pre">hyperexpand()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.hyperexpand_special"><code class="docutils literal notranslate"><span class="pre">hyperexpand_special()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.make_derivative_operator"><code class="docutils literal notranslate"><span class="pre">make_derivative_operator()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.make_simp"><code class="docutils literal notranslate"><span class="pre">make_simp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.reduce_order"><code class="docutils literal notranslate"><span class="pre">reduce_order()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.reduce_order_meijer"><code class="docutils literal notranslate"><span class="pre">reduce_order_meijer()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.try_lerchphi"><code class="docutils literal notranslate"><span class="pre">try_lerchphi()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.try_polynomial"><code class="docutils literal notranslate"><span class="pre">try_polynomial()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.hyperexpand.try_shifted_sum"><code class="docutils literal notranslate"><span class="pre">try_shifted_sum()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#modelparameters-sympy-simplify-hyperexpand-doc-module">modelparameters.sympy.simplify.hyperexpand_doc module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.powsimp">modelparameters.sympy.simplify.powsimp module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.radsimp">modelparameters.sympy.simplify.radsimp module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.ratsimp">modelparameters.sympy.simplify.ratsimp module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.simplify">modelparameters.sympy.simplify.simplify module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.sqrtdenest">modelparameters.sympy.simplify.sqrtdenest module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.traversaltools">modelparameters.sympy.simplify.traversaltools module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.trigsimp">modelparameters.sympy.simplify.trigsimp module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.powsimp">modelparameters.sympy.simplify.powsimp module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.powsimp.powdenest"><code class="docutils literal notranslate"><span class="pre">powdenest()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.powsimp.powsimp"><code class="docutils literal notranslate"><span class="pre">powsimp()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.radsimp">modelparameters.sympy.simplify.radsimp module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.radsimp.collect"><code class="docutils literal notranslate"><span class="pre">collect()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.radsimp.collect_const"><code class="docutils literal notranslate"><span class="pre">collect_const()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.radsimp.collect_sqrt"><code class="docutils literal notranslate"><span class="pre">collect_sqrt()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.radsimp.denom"><code class="docutils literal notranslate"><span class="pre">denom()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.radsimp.denom_expand"><code class="docutils literal notranslate"><span class="pre">denom_expand()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.radsimp.expand_denom"><code class="docutils literal notranslate"><span class="pre">expand_denom()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.radsimp.expand_fraction"><code class="docutils literal notranslate"><span class="pre">expand_fraction()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.radsimp.expand_numer"><code class="docutils literal notranslate"><span class="pre">expand_numer()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.radsimp.fraction"><code class="docutils literal notranslate"><span class="pre">fraction()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.radsimp.fraction_expand"><code class="docutils literal notranslate"><span class="pre">fraction_expand()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.radsimp.numer"><code class="docutils literal notranslate"><span class="pre">numer()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.radsimp.numer_expand"><code class="docutils literal notranslate"><span class="pre">numer_expand()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.radsimp.rad_rationalize"><code class="docutils literal notranslate"><span class="pre">rad_rationalize()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.radsimp.radsimp"><code class="docutils literal notranslate"><span class="pre">radsimp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.radsimp.rcollect"><code class="docutils literal notranslate"><span class="pre">rcollect()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.radsimp.split_surds"><code class="docutils literal notranslate"><span class="pre">split_surds()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.ratsimp">modelparameters.sympy.simplify.ratsimp module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.ratsimp.ratsimp"><code class="docutils literal notranslate"><span class="pre">ratsimp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.ratsimp.ratsimpmodprime"><code class="docutils literal notranslate"><span class="pre">ratsimpmodprime()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.simplify">modelparameters.sympy.simplify.simplify module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.besselsimp"><code class="docutils literal notranslate"><span class="pre">besselsimp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.bottom_up"><code class="docutils literal notranslate"><span class="pre">bottom_up()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.clear_coefficients"><code class="docutils literal notranslate"><span class="pre">clear_coefficients()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.factor_sum"><code class="docutils literal notranslate"><span class="pre">factor_sum()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.hypersimilar"><code class="docutils literal notranslate"><span class="pre">hypersimilar()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.hypersimp"><code class="docutils literal notranslate"><span class="pre">hypersimp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.logcombine"><code class="docutils literal notranslate"><span class="pre">logcombine()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.nsimplify"><code class="docutils literal notranslate"><span class="pre">nsimplify()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.nthroot"><code class="docutils literal notranslate"><span class="pre">nthroot()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.posify"><code class="docutils literal notranslate"><span class="pre">posify()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.product_mul"><code class="docutils literal notranslate"><span class="pre">product_mul()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.product_simplify"><code class="docutils literal notranslate"><span class="pre">product_simplify()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.separatevars"><code class="docutils literal notranslate"><span class="pre">separatevars()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.signsimp"><code class="docutils literal notranslate"><span class="pre">signsimp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.simplify"><code class="docutils literal notranslate"><span class="pre">simplify()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.sum_add"><code class="docutils literal notranslate"><span class="pre">sum_add()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.sum_combine"><code class="docutils literal notranslate"><span class="pre">sum_combine()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.simplify.sum_simplify"><code class="docutils literal notranslate"><span class="pre">sum_simplify()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.sqrtdenest">modelparameters.sympy.simplify.sqrtdenest module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.sqrtdenest.SqrtdenestStopIteration"><code class="docutils literal notranslate"><span class="pre">SqrtdenestStopIteration</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.sqrtdenest.is_algebraic"><code class="docutils literal notranslate"><span class="pre">is_algebraic()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.sqrtdenest.is_sqrt"><code class="docutils literal notranslate"><span class="pre">is_sqrt()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.sqrtdenest.sqrt_biquadratic_denest"><code class="docutils literal notranslate"><span class="pre">sqrt_biquadratic_denest()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.sqrtdenest.sqrt_depth"><code class="docutils literal notranslate"><span class="pre">sqrt_depth()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.sqrtdenest.sqrtdenest"><code class="docutils literal notranslate"><span class="pre">sqrtdenest()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.traversaltools">modelparameters.sympy.simplify.traversaltools module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.traversaltools.use"><code class="docutils literal notranslate"><span class="pre">use()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.simplify.trigsimp">modelparameters.sympy.simplify.trigsimp module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.trigsimp.exptrigsimp"><code class="docutils literal notranslate"><span class="pre">exptrigsimp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.trigsimp.futrig"><code class="docutils literal notranslate"><span class="pre">futrig()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.trigsimp.trigsimp"><code class="docutils literal notranslate"><span class="pre">trigsimp()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.trigsimp.trigsimp_groebner"><code class="docutils literal notranslate"><span class="pre">trigsimp_groebner()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.simplify.trigsimp.trigsimp_old"><code class="docutils literal notranslate"><span class="pre">trigsimp_old()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.simplify">Module contents</a></li>
 </ul>
 </li>
@@ -3638,7 +3828,7 @@ the expression (x+x)**2 will be converted into 4*x**2</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -3666,7 +3856,7 @@ the expression (x+x)**2 will be converted into 4*x**2</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

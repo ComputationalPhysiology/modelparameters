@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -51,7 +50,7 @@
 
 <div class="viewcode-block" id="PythonIntegerRing"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonIntegerRing">[docs]</a><span class="nd">@public</span>
 <span class="k">class</span> <span class="nc">PythonIntegerRing</span><span class="p">(</span><span class="n">IntegerRing</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Integer ring based on Python&#39;s ``int`` type. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Integer ring based on Python&#39;s ``int`` type. &quot;&quot;&quot;</span>
 
     <span class="n">dtype</span> <span class="o">=</span> <span class="n">PythonInteger</span>
     <span class="n">zero</span> <span class="o">=</span> <span class="n">dtype</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -59,14 +58,14 @@
     <span class="n">alias</span> <span class="o">=</span> <span class="s1">&#39;ZZ_python&#39;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Allow instantiation of this domain. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Allow instantiation of this domain. &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="PythonIntegerRing.to_sympy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonIntegerRing.to_sympy">[docs]</a>    <span class="k">def</span> <span class="nf">to_sympy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert ``a`` to a SymPy object. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert ``a`` to a SymPy object. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">SymPyInteger</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PythonIntegerRing.from_sympy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonIntegerRing.from_sympy">[docs]</a>    <span class="k">def</span> <span class="nf">from_sympy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert SymPy&#39;s Integer to ``dtype``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert SymPy&#39;s Integer to ``dtype``. &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">is_Integer</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">PythonInteger</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">p</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">a</span><span class="o">.</span><span class="n">is_Float</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="n">a</span><span class="p">:</span>
@@ -75,56 +74,56 @@
             <span class="k">raise</span> <span class="n">CoercionFailed</span><span class="p">(</span><span class="s2">&quot;expected an integer, got </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">a</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PythonIntegerRing.from_FF_python"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonIntegerRing.from_FF_python">[docs]</a>    <span class="k">def</span> <span class="nf">from_FF_python</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert ``ModularInteger(int)`` to Python&#39;s ``int``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert ``ModularInteger(int)`` to Python&#39;s ``int``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">to_int</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="PythonIntegerRing.from_ZZ_python"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonIntegerRing.from_ZZ_python">[docs]</a>    <span class="k">def</span> <span class="nf">from_ZZ_python</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert Python&#39;s ``int`` to Python&#39;s ``int``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert Python&#39;s ``int`` to Python&#39;s ``int``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span></div>
 
 <div class="viewcode-block" id="PythonIntegerRing.from_QQ_python"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonIntegerRing.from_QQ_python">[docs]</a>    <span class="k">def</span> <span class="nf">from_QQ_python</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert Python&#39;s ``Fraction`` to Python&#39;s ``int``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert Python&#39;s ``Fraction`` to Python&#39;s ``int``. &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">denominator</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">numerator</span></div>
 
 <div class="viewcode-block" id="PythonIntegerRing.from_FF_gmpy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonIntegerRing.from_FF_gmpy">[docs]</a>    <span class="k">def</span> <span class="nf">from_FF_gmpy</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert ``ModularInteger(mpz)`` to Python&#39;s ``int``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert ``ModularInteger(mpz)`` to Python&#39;s ``int``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">PythonInteger</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">to_int</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="PythonIntegerRing.from_ZZ_gmpy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonIntegerRing.from_ZZ_gmpy">[docs]</a>    <span class="k">def</span> <span class="nf">from_ZZ_gmpy</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert GMPY&#39;s ``mpz`` to Python&#39;s ``int``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert GMPY&#39;s ``mpz`` to Python&#39;s ``int``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">PythonInteger</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PythonIntegerRing.from_QQ_gmpy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonIntegerRing.from_QQ_gmpy">[docs]</a>    <span class="k">def</span> <span class="nf">from_QQ_gmpy</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert GMPY&#39;s ``mpq`` to Python&#39;s ``int``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert GMPY&#39;s ``mpq`` to Python&#39;s ``int``. &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">denom</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">PythonInteger</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">numer</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="PythonIntegerRing.from_RealField"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonIntegerRing.from_RealField">[docs]</a>    <span class="k">def</span> <span class="nf">from_RealField</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert mpmath&#39;s ``mpf`` to Python&#39;s ``int``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert mpmath&#39;s ``mpf`` to Python&#39;s ``int``. &quot;&quot;&quot;</span>
         <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">K0</span><span class="o">.</span><span class="n">to_rational</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">q</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">PythonInteger</span><span class="p">(</span><span class="n">p</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PythonIntegerRing.gcdex"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonIntegerRing.gcdex">[docs]</a>    <span class="k">def</span> <span class="nf">gcdex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute extended GCD of ``a`` and ``b``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute extended GCD of ``a`` and ``b``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">python_gcdex</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PythonIntegerRing.gcd"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonIntegerRing.gcd">[docs]</a>    <span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute GCD of ``a`` and ``b``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute GCD of ``a`` and ``b``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">python_gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PythonIntegerRing.lcm"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonIntegerRing.lcm">[docs]</a>    <span class="k">def</span> <span class="nf">lcm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute LCM of ``a`` and ``b``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute LCM of ``a`` and ``b``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">python_lcm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PythonIntegerRing.sqrt"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonIntegerRing.sqrt">[docs]</a>    <span class="k">def</span> <span class="nf">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute square root of ``a``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute square root of ``a``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">python_sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PythonIntegerRing.factorial"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PythonIntegerRing.factorial">[docs]</a>    <span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute factorial of ``a``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute factorial of ``a``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">python_factorial</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div></div>
 </pre></div>
 
@@ -143,7 +142,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -164,7 +163,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

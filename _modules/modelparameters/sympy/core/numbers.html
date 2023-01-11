@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -74,7 +73,7 @@
 
 
 <div class="viewcode-block" id="comp"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.comp">[docs]</a><span class="k">def</span> <span class="nf">comp</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span> <span class="n">z2</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a bool indicating whether the error between z1 and z2 is &lt;= tol.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a bool indicating whether the error between z1 and z2 is &lt;= tol.</span>
 
 <span class="sd">    If ``tol`` is None then True will be returned if there is a significant</span>
 <span class="sd">    difference between the numbers: ``abs(z1 - z2)*10**p &lt;= 1/2`` where ``p``</span>
@@ -114,7 +113,7 @@
 
 
 <div class="viewcode-block" id="mpf_norm"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.mpf_norm">[docs]</a><span class="k">def</span> <span class="nf">mpf_norm</span><span class="p">(</span><span class="n">mpf</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the mpf tuple normalized appropriately for the indicated</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the mpf tuple normalized appropriately for the indicated</span>
 <span class="sd">    precision after doing a check to see if zero should be returned or</span>
 <span class="sd">    not when the mantissa is 0. ``mpf_normlize`` always assumes that this</span>
 <span class="sd">    is zero, but it may not be since the mantissa for mpf&#39;s values &quot;+inf&quot;,</span>
@@ -147,7 +146,7 @@
 
 
 <div class="viewcode-block" id="seterr"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.seterr">[docs]</a><span class="k">def</span> <span class="nf">seterr</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Should sympy raise an exception on 0/0 or return a nan?</span>
 
 <span class="sd">    divide == True .... raise an exception</span>
@@ -170,7 +169,7 @@
 
 
 <span class="k">def</span> <span class="nf">_decimal_to_Rational_prec</span><span class="p">(</span><span class="n">dec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert an ordinary decimal instance to a Rational.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert an ordinary decimal instance to a Rational.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">dec</span><span class="o">.</span><span class="n">is_finite</span><span class="p">():</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;dec must be finite, got </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="n">dec</span><span class="p">)</span>
     <span class="n">s</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span> <span class="o">=</span> <span class="n">dec</span><span class="o">.</span><span class="n">as_tuple</span><span class="p">()</span>
@@ -185,7 +184,7 @@
 
 
 <span class="k">def</span> <span class="nf">_literal_float</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return True if n can be interpreted as a floating point number.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True if n can be interpreted as a floating point number.&quot;&quot;&quot;</span>
     <span class="n">pat</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;[-+]?((\d*\.\d+)|(\d+\.?))(eE[-+]?\d+)?&quot;</span>
     <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="n">regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pat</span><span class="p">,</span> <span class="n">f</span><span class="p">))</span>
 
@@ -196,7 +195,7 @@
 
 
 <div class="viewcode-block" id="igcd"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.igcd">[docs]</a><span class="k">def</span> <span class="nf">igcd</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Computes nonnegative integer greatest common divisor.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes nonnegative integer greatest common divisor.</span>
 
 <span class="sd">    The algorithm is based on the well known Euclid&#39;s algorithm. To</span>
 <span class="sd">    improve speed, igcd() has its own caching mechanism implemented.</span>
@@ -248,7 +247,7 @@
     <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">gcd</span> <span class="k">as</span> <span class="n">igcd2</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">igcd2</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute gcd of two Python integers a and b.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute gcd of two Python integers a and b.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">bit_length</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">BIGBITS</span> <span class="ow">and</span>
             <span class="n">b</span><span class="o">.</span><span class="n">bit_length</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">BIGBITS</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">igcd_lehmer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
@@ -264,7 +263,7 @@
 <span class="c1"># If so, then this could be defined in compatibility.py.</span>
 <span class="n">BIGBITS</span> <span class="o">=</span> <span class="mi">5000</span>
 <div class="viewcode-block" id="igcd_lehmer"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.igcd_lehmer">[docs]</a><span class="k">def</span> <span class="nf">igcd_lehmer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Computes greatest common divisor of two integers.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes greatest common divisor of two integers.</span>
 
 <span class="sd">    Euclid&#39;s algorithm for the computation of the greatest</span>
 <span class="sd">    common divisor  gcd(a, b)  of two (positive) integers</span>
@@ -407,7 +406,7 @@
 
 
 <div class="viewcode-block" id="ilcm"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.ilcm">[docs]</a><span class="k">def</span> <span class="nf">ilcm</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Computes integer least common multiple.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes integer least common multiple.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -433,7 +432,7 @@
 
 
 <div class="viewcode-block" id="igcdex"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.igcdex">[docs]</a><span class="k">def</span> <span class="nf">igcdex</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns x, y, g such that g = x*a + y*b = gcd(a, b).</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns x, y, g such that g = x*a + y*b = gcd(a, b).</span>
 
 <span class="sd">       &gt;&gt;&gt; from .numbers import igcdex</span>
 <span class="sd">       &gt;&gt;&gt; igcdex(2, 3)</span>
@@ -476,7 +475,7 @@
 
 
 <div class="viewcode-block" id="mod_inverse"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.mod_inverse">[docs]</a><span class="k">def</span> <span class="nf">mod_inverse</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the number c such that, ( a * c ) % m == 1 where</span>
 <span class="sd">    c has the same sign as a. If no such value exists, a</span>
 <span class="sd">    ValueError is raised.</span>
@@ -543,7 +542,7 @@
 
 
 <div class="viewcode-block" id="Number"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Number">[docs]</a><span class="k">class</span> <span class="nc">Number</span><span class="p">(</span><span class="n">AtomicExpr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents any kind of number in sympy.</span>
 
 <span class="sd">    Floating point numbers are represented by the Float class.</span>
@@ -621,7 +620,7 @@
         <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_as_mpf_val</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Evaluation of mpf tuple accurate to at least prec bits.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluation of mpf tuple accurate to at least prec bits.&quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> needs ._as_mpf_val() method&#39;</span> <span class="o">%</span>
             <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
 
@@ -782,35 +781,35 @@
         <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="p">,)</span></div>
 
 <div class="viewcode-block" id="Number.as_coeff_Mul"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Number.as_coeff_Mul">[docs]</a>    <span class="k">def</span> <span class="nf">as_coeff_Mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rational</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Efficiently extract the coefficient of a product. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Efficiently extract the coefficient of a product. &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">rational</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_Rational</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="bp">self</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span> <span class="k">else</span> <span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Number.as_coeff_Add"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Number.as_coeff_Add">[docs]</a>    <span class="k">def</span> <span class="nf">as_coeff_Add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rational</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Efficiently extract the coefficient of a summation. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Efficiently extract the coefficient of a summation. &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">rational</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span>
         <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">,</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Number.gcd"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Number.gcd">[docs]</a>    <span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute GCD of `self` and `other`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute GCD of `self` and `other`. &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..polys</span> <span class="kn">import</span> <span class="n">gcd</span>
         <span class="k">return</span> <span class="n">gcd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Number.lcm"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Number.lcm">[docs]</a>    <span class="k">def</span> <span class="nf">lcm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute LCM of `self` and `other`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute LCM of `self` and `other`. &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..polys</span> <span class="kn">import</span> <span class="n">lcm</span>
         <span class="k">return</span> <span class="n">lcm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Number.cofactors"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Number.cofactors">[docs]</a>    <span class="k">def</span> <span class="nf">cofactors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute GCD and cofactors of `self` and `other`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute GCD and cofactors of `self` and `other`. &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..polys</span> <span class="kn">import</span> <span class="n">cofactors</span>
         <span class="k">return</span> <span class="n">cofactors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span></div></div>
 
 
 <div class="viewcode-block" id="Float"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Float">[docs]</a><span class="k">class</span> <span class="nc">Float</span><span class="p">(</span><span class="n">Number</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represent a floating-point number of arbitrary precision.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represent a floating-point number of arbitrary precision.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -1243,7 +1242,7 @@
         <span class="k">return</span> <span class="n">Number</span><span class="o">.</span><span class="fm">__rmod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        expt is symbolic object but not equal to 0, 1</span>
 
 <span class="sd">        (-p)**r -&gt; exp(r*log(-p)) -&gt; exp(r*(log(p) + I*Pi)) -&gt;</span>
@@ -1394,7 +1393,7 @@
 
 
 <div class="viewcode-block" id="Rational"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Rational">[docs]</a><span class="k">class</span> <span class="nc">Rational</span><span class="p">(</span><span class="n">Number</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Represents integers and rational numbers (p/q) of any size.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents integers and rational numbers (p/q) of any size.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -1560,7 +1559,7 @@
         <span class="k">return</span> <span class="n">obj</span>
 
 <div class="viewcode-block" id="Rational.limit_denominator"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Rational.limit_denominator">[docs]</a>    <span class="k">def</span> <span class="nf">limit_denominator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_denominator</span><span class="o">=</span><span class="mi">1000000</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Closest Rational to self with denominator at most max_denominator.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Closest Rational to self with denominator at most max_denominator.</span>
 
 <span class="sd">        &gt;&gt;&gt; from .. import Rational</span>
 <span class="sd">        &gt;&gt;&gt; Rational(&#39;3.141592653589793&#39;).limit_denominator(10)</span>
@@ -1851,7 +1850,7 @@
 
 <div class="viewcode-block" id="Rational.factors"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Rational.factors">[docs]</a>    <span class="k">def</span> <span class="nf">factors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_trial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_rho</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                 <span class="n">use_pm1</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;A wrapper to factorint which return factors of self that are</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A wrapper to factorint which return factors of self that are</span>
 <span class="sd">        smaller than limit (or cheap to compute). Special methods of</span>
 <span class="sd">        factoring are disabled by default so that only trial division is used.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1887,7 +1886,7 @@
         <span class="k">return</span> <span class="n">sage</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">)</span><span class="o">/</span><span class="n">sage</span><span class="o">.</span><span class="n">Integer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">q</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Rational.as_content_primitive"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Rational.as_content_primitive">[docs]</a>    <span class="k">def</span> <span class="nf">as_content_primitive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radical</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">clear</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the tuple (R, self/R) where R is the positive Rational</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the tuple (R, self/R) where R is the positive Rational</span>
 <span class="sd">        extracted from self.</span>
 
 <span class="sd">        Examples</span>
@@ -1907,11 +1906,11 @@
         <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Rational.as_coeff_Mul"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Rational.as_coeff_Mul">[docs]</a>    <span class="k">def</span> <span class="nf">as_coeff_Mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rational</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Efficiently extract the coefficient of a product. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Efficiently extract the coefficient of a product. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span></div>
 
 <div class="viewcode-block" id="Rational.as_coeff_Add"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Rational.as_coeff_Add">[docs]</a>    <span class="k">def</span> <span class="nf">as_coeff_Add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rational</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Efficiently extract the coefficient of a summation. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Efficiently extract the coefficient of a summation. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span></div></div>
 
 
@@ -2200,7 +2199,7 @@
         <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Tries to do some simplifications on self**expt</span>
 
 <span class="sd">        Returns None if no further simplifications can be done</span>
@@ -2334,7 +2333,7 @@
 
 
 <div class="viewcode-block" id="AlgebraicNumber"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.AlgebraicNumber">[docs]</a><span class="k">class</span> <span class="nc">AlgebraicNumber</span><span class="p">(</span><span class="n">Expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class for representing algebraic numbers in SymPy. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class for representing algebraic numbers in SymPy. &quot;&quot;&quot;</span>
 
     <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;rep&#39;</span><span class="p">,</span> <span class="s1">&#39;root&#39;</span><span class="p">,</span> <span class="s1">&#39;alias&#39;</span><span class="p">,</span> <span class="s1">&#39;minpoly&#39;</span><span class="p">]</span>
 
@@ -2343,7 +2342,7 @@
     <span class="n">is_number</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">coeffs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">alias</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Construct a new algebraic number. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct a new algebraic number. &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Poly</span>
         <span class="kn">from</span> <span class="nn">..polys.polyclasses</span> <span class="kn">import</span> <span class="n">ANP</span><span class="p">,</span> <span class="n">DMP</span>
         <span class="kn">from</span> <span class="nn">..polys.numberfields</span> <span class="kn">import</span> <span class="n">minimal_polynomial</span>
@@ -2407,11 +2406,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_aliased</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns ``True`` if ``alias`` was set. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns ``True`` if ``alias`` was set. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">alias</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="AlgebraicNumber.as_poly"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.AlgebraicNumber.as_poly">[docs]</a>    <span class="k">def</span> <span class="nf">as_poly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a Poly instance from ``self``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a Poly instance from ``self``. &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Dummy</span><span class="p">,</span> <span class="n">Poly</span><span class="p">,</span> <span class="n">PurePoly</span>
         <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Poly</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
@@ -2422,19 +2421,19 @@
                 <span class="k">return</span> <span class="n">PurePoly</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="p">,</span> <span class="n">Dummy</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="AlgebraicNumber.as_expr"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.AlgebraicNumber.as_expr">[docs]</a>    <span class="k">def</span> <span class="nf">as_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create a Basic expression from ``self``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a Basic expression from ``self``. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">as_poly</span><span class="p">(</span><span class="n">x</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span><span class="o">.</span><span class="n">as_expr</span><span class="p">()</span><span class="o">.</span><span class="n">expand</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="AlgebraicNumber.coeffs"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.AlgebraicNumber.coeffs">[docs]</a>    <span class="k">def</span> <span class="nf">coeffs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns all SymPy coefficients of an algebraic number. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns all SymPy coefficients of an algebraic number. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">dom</span><span class="o">.</span><span class="n">to_sympy</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">all_coeffs</span><span class="p">()</span> <span class="p">]</span></div>
 
 <div class="viewcode-block" id="AlgebraicNumber.native_coeffs"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.AlgebraicNumber.native_coeffs">[docs]</a>    <span class="k">def</span> <span class="nf">native_coeffs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns all native coefficients of an algebraic number. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns all native coefficients of an algebraic number. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rep</span><span class="o">.</span><span class="n">all_coeffs</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="AlgebraicNumber.to_algebraic_integer"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.AlgebraicNumber.to_algebraic_integer">[docs]</a>    <span class="k">def</span> <span class="nf">to_algebraic_integer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert ``self`` to an algebraic integer. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert ``self`` to an algebraic integer. &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Poly</span>
         <span class="n">f</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minpoly</span>
 
@@ -2461,7 +2460,7 @@
 
 
 <div class="viewcode-block" id="RationalConstant"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.RationalConstant">[docs]</a><span class="k">class</span> <span class="nc">RationalConstant</span><span class="p">(</span><span class="n">Rational</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Abstract base class for rationals with specific behaviors</span>
 
 <span class="sd">    Derived classes must define class attributes p and q and should probably all</span>
@@ -2481,7 +2480,7 @@
 
 
 <div class="viewcode-block" id="Zero"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Zero">[docs]</a><span class="k">class</span> <span class="nc">Zero</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">IntegerConstant</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;The number zero.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The number zero.</span>
 
 <span class="sd">    Zero is a singleton, and can be accessed by ``S.Zero``</span>
 
@@ -2543,12 +2542,12 @@
     <span class="fm">__bool__</span> <span class="o">=</span> <span class="n">__nonzero__</span>
 
 <div class="viewcode-block" id="Zero.as_coeff_Mul"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Zero.as_coeff_Mul">[docs]</a>    <span class="k">def</span> <span class="nf">as_coeff_Mul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rational</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>  <span class="c1"># XXX this routine should be deleted</span>
-        <span class="sd">&quot;&quot;&quot;Efficiently extract the coefficient of a summation. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Efficiently extract the coefficient of a summation. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="bp">self</span></div></div>
 
 
 <div class="viewcode-block" id="One"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.One">[docs]</a><span class="k">class</span> <span class="nc">One</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">IntegerConstant</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;The number one.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The number one.</span>
 
 <span class="sd">    One is a singleton, and can be accessed by ``S.One``.</span>
 
@@ -2595,7 +2594,7 @@
 
 
 <div class="viewcode-block" id="NegativeOne"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.NegativeOne">[docs]</a><span class="k">class</span> <span class="nc">NegativeOne</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">IntegerConstant</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;The number negative one.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The number negative one.</span>
 
 <span class="sd">    NegativeOne is a singleton, and can be accessed by ``S.NegativeOne``.</span>
 
@@ -2656,7 +2655,7 @@
 
 
 <div class="viewcode-block" id="Half"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Half">[docs]</a><span class="k">class</span> <span class="nc">Half</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">RationalConstant</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;The rational number 1/2.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The rational number 1/2.</span>
 
 <span class="sd">    Half is a singleton, and can be accessed by ``S.Half``.</span>
 
@@ -2685,7 +2684,7 @@
 
 
 <div class="viewcode-block" id="Infinity"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Infinity">[docs]</a><span class="k">class</span> <span class="nc">Infinity</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">Number</span><span class="p">)):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Positive infinite quantity.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Positive infinite quantity.</span>
 
 <span class="sd">    In real analysis the symbol `\infty` denotes an unbounded</span>
 <span class="sd">    limit: `x\to\infty` means that `x` grows without bound.</span>
@@ -2820,7 +2819,7 @@
         <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">NegativeInfinity</span>
 
     <span class="k">def</span> <span class="nf">_eval_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``expt`` is symbolic object but not equal to 0 or 1.</span>
 
 <span class="sd">        ================ ======= ==============================</span>
@@ -2935,7 +2934,7 @@
 
 
 <div class="viewcode-block" id="NegativeInfinity"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.NegativeInfinity">[docs]</a><span class="k">class</span> <span class="nc">NegativeInfinity</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">Number</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;Negative infinite quantity.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Negative infinite quantity.</span>
 
 <span class="sd">    NegativeInfinity is a singleton, and can be accessed</span>
 <span class="sd">    by ``S.NegativeInfinity``.</span>
@@ -3044,7 +3043,7 @@
         <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">Infinity</span>
 
     <span class="k">def</span> <span class="nf">_eval_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        ``expt`` is symbolic object but not equal to 0 or 1.</span>
 
 <span class="sd">        ================ ======= ==============================</span>
@@ -3154,7 +3153,7 @@
 
 
 <div class="viewcode-block" id="NaN"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.NaN">[docs]</a><span class="k">class</span> <span class="nc">NaN</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">Number</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Not a Number.</span>
 
 <span class="sd">    This serves as a place holder for numeric values that are indeterminate.</span>
@@ -3275,7 +3274,7 @@
 
 
 <div class="viewcode-block" id="ComplexInfinity"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.ComplexInfinity">[docs]</a><span class="k">class</span> <span class="nc">ComplexInfinity</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">AtomicExpr</span><span class="p">)):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Complex infinity.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Complex infinity.</span>
 
 <span class="sd">    In complex analysis the symbol `\tilde\infty`, called &quot;complex</span>
 <span class="sd">    infinity&quot;, represents a quantity with infinite magnitude, but</span>
@@ -3365,7 +3364,7 @@
         <span class="k">return</span> <span class="n">AtomicExpr</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
 
 <div class="viewcode-block" id="NumberSymbol.approximation"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.NumberSymbol.approximation">[docs]</a>    <span class="k">def</span> <span class="nf">approximation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_cls</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Return an interval with number_cls endpoints</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Return an interval with number_cls endpoints</span>
 <span class="sd">        that contains the value of NumberSymbol.</span>
 <span class="sd">        If not implemented, then return None.</span>
 <span class="sd">        &quot;&quot;&quot;</span></div>
@@ -3456,7 +3455,7 @@
 
 
 <div class="viewcode-block" id="Exp1"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Exp1">[docs]</a><span class="k">class</span> <span class="nc">Exp1</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">NumberSymbol</span><span class="p">)):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The `e` constant.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The `e` constant.</span>
 
 <span class="sd">    The transcendental number `e = 2.718281828\ldots` is the base of the</span>
 <span class="sd">    natural logarithm and of the exponential function, `e = \exp(1)`.</span>
@@ -3530,7 +3529,7 @@
 
 
 <div class="viewcode-block" id="Pi"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Pi">[docs]</a><span class="k">class</span> <span class="nc">Pi</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">NumberSymbol</span><span class="p">)):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The `\pi` constant.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The `\pi` constant.</span>
 
 <span class="sd">    The transcendental number `\pi = 3.141592654\ldots` represents the ratio</span>
 <span class="sd">    of a circle&#39;s circumference to its diameter, the area of the unit circle,</span>
@@ -3598,7 +3597,7 @@
 
 
 <div class="viewcode-block" id="GoldenRatio"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.GoldenRatio">[docs]</a><span class="k">class</span> <span class="nc">GoldenRatio</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">NumberSymbol</span><span class="p">)):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The golden ratio, `\phi`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The golden ratio, `\phi`.</span>
 
 <span class="sd">    `\phi = \frac{1 + \sqrt{5}}{2}` is algebraic number.  Two quantities</span>
 <span class="sd">    are in the golden ratio if their ratio is the same as the ratio of</span>
@@ -3662,7 +3661,7 @@
 
 
 <div class="viewcode-block" id="EulerGamma"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.EulerGamma">[docs]</a><span class="k">class</span> <span class="nc">EulerGamma</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">NumberSymbol</span><span class="p">)):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Euler-Mascheroni constant.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The Euler-Mascheroni constant.</span>
 
 <span class="sd">    `\gamma = 0.5772157\ldots` (also called Euler&#39;s constant) is a mathematical</span>
 <span class="sd">    constant recurring in analysis and number theory.  It is defined as the</span>
@@ -3722,7 +3721,7 @@
 
 
 <div class="viewcode-block" id="Catalan"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.Catalan">[docs]</a><span class="k">class</span> <span class="nc">Catalan</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">NumberSymbol</span><span class="p">)):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Catalan&#39;s constant.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Catalan&#39;s constant.</span>
 
 <span class="sd">    `K = 0.91596559\ldots` is given by the infinite series</span>
 
@@ -3775,7 +3774,7 @@
 
 
 <div class="viewcode-block" id="ImaginaryUnit"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.ImaginaryUnit">[docs]</a><span class="k">class</span> <span class="nc">ImaginaryUnit</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">Singleton</span><span class="p">,</span> <span class="n">AtomicExpr</span><span class="p">)):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The imaginary unit, `i = \sqrt{-1}`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The imaginary unit, `i = \sqrt{-1}`.</span>
 
 <span class="sd">    I is a singleton, and can be accessed by ``S.I``, or can be</span>
 <span class="sd">    imported as ``I``.</span>
@@ -3820,7 +3819,7 @@
         <span class="k">return</span> <span class="o">-</span><span class="n">S</span><span class="o">.</span><span class="n">ImaginaryUnit</span>
 
     <span class="k">def</span> <span class="nf">_eval_power</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expt</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        b is I = sqrt(-1)</span>
 <span class="sd">        e is symbolic object but not equal to 0, 1</span>
 
@@ -3922,7 +3921,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -3943,7 +3942,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

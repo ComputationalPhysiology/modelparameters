@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -84,7 +83,7 @@
 
 
 <div class="viewcode-block" id="TIDS"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TIDS">[docs]</a><span class="k">class</span> <span class="nc">TIDS</span><span class="p">(</span><span class="n">CantSympify</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    DEPRECATED CLASS: DO NOT USE.</span>
 
 <span class="sd">    Tensor-index data structure. This contains internal data structures about</span>
@@ -148,7 +147,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">dum</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
 <div class="viewcode-block" id="TIDS.get_tensors"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TIDS.get_tensors">[docs]</a>    <span class="k">def</span> <span class="nf">get_tensors</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a list of ``Tensor`` objects having the same ``TIDS`` if multiplied</span>
 <span class="sd">        by one another.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -163,7 +162,7 @@
         <span class="k">return</span> <span class="n">tensors</span></div>
 
 <div class="viewcode-block" id="TIDS.get_components_with_free_indices"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TIDS.get_components_with_free_indices">[docs]</a>    <span class="k">def</span> <span class="nf">get_components_with_free_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a list of components with their associated indices.</span>
 
 <span class="sd">        Examples</span>
@@ -202,7 +201,7 @@
 
 <div class="viewcode-block" id="TIDS.from_components_and_indices"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TIDS.from_components_and_indices">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">from_components_and_indices</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="n">indices</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a new ``TIDS`` object from ``components`` and ``indices``</span>
 
 <span class="sd">        ``components``  ``TensorHead`` objects representing the components</span>
@@ -236,7 +235,7 @@
 
 <div class="viewcode-block" id="TIDS.free_dum_from_indices"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TIDS.free_dum_from_indices">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">free_dum_from_indices</span><span class="p">(</span><span class="o">*</span><span class="n">indices</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert ``indices`` into ``free``, ``dum`` for single component tensor</span>
 
 <span class="sd">        ``free``     list of tuples ``(index, pos, 0)``,</span>
@@ -348,7 +347,7 @@
 
 <div class="viewcode-block" id="TIDS.mul"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TIDS.mul">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">mul</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The algorithms performing the multiplication of two ``TIDS`` instances.</span>
 
 <span class="sd">        In short, it forms a new ``TIDS`` object, joining components and indices,</span>
@@ -396,7 +395,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
 
 <div class="viewcode-block" id="TIDS.sorted_components"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TIDS.sorted_components">[docs]</a>    <span class="k">def</span> <span class="nf">sorted_components</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a ``TIDS`` with sorted components</span>
 
 <span class="sd">        The sorting is done taking into account the commutation group</span>
@@ -437,7 +436,7 @@
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dum</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
 <div class="viewcode-block" id="TIDS.canon_args"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TIDS.canon_args">[docs]</a>    <span class="k">def</span> <span class="nf">canon_args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns ``(g, dummies, msym, v)``, the entries of ``canonicalize``</span>
 
 <span class="sd">        see ``canonicalize`` in ``tensor_can.py``</span>
@@ -503,7 +502,7 @@
         <span class="k">return</span> <span class="n">_af_new</span><span class="p">(</span><span class="n">g</span><span class="p">),</span> <span class="n">dummies</span><span class="p">,</span> <span class="n">msym</span><span class="p">,</span> <span class="n">v</span></div>
 
 <div class="viewcode-block" id="TIDS.perm2tensor"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TIDS.perm2tensor">[docs]</a>    <span class="k">def</span> <span class="nf">perm2tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">canon_bp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a ``TIDS`` instance corresponding to the permutation ``g``</span>
 
 <span class="sd">        ``g``  permutation corresponding to the tensor in the representation</span>
@@ -547,7 +546,7 @@
         <span class="k">return</span> <span class="n">TIDS</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="n">free</span><span class="p">,</span> <span class="n">dum</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TIDS.get_indices"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TIDS.get_indices">[docs]</a>    <span class="k">def</span> <span class="nf">get_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a list of indices, creating new tensor indices to complete dummy indices.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">components</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span>
@@ -582,7 +581,7 @@
         <span class="k">return</span> <span class="n">indices</span></div>
 
 <div class="viewcode-block" id="TIDS.contract_metric"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TIDS.contract_metric">[docs]</a>    <span class="k">def</span> <span class="nf">contract_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns new TIDS and sign.</span>
 
 <span class="sd">        Sign is either 1 or -1, to correct the sign after metric contraction</span>
@@ -717,7 +716,7 @@
 
 
 <span class="k">class</span> <span class="nc">_IndexStructure</span><span class="p">(</span><span class="n">CantSympify</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class handles the indices (free and dummy ones). It contains the</span>
 <span class="sd">    algorithms to manage the dummy indices replacements and contractions of</span>
 <span class="sd">    free indices under multiplications of tensor expressions, as well as stuff</span>
@@ -736,7 +735,7 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">from_indices</span><span class="p">(</span><span class="o">*</span><span class="n">indices</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a new ``_IndexStructure`` object from a list of ``indices``</span>
 
 <span class="sd">        ``indices``     ``TensorIndex`` objects, the indices. Contractions are</span>
@@ -772,7 +771,7 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_free_dum_from_indices</span><span class="p">(</span><span class="o">*</span><span class="n">indices</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert ``indices`` into ``free``, ``dum`` for single component tensor</span>
 
 <span class="sd">        ``free``     list of tuples ``(index, pos, 0)``,</span>
@@ -831,7 +830,7 @@
         <span class="k">return</span> <span class="n">free</span><span class="p">,</span> <span class="n">dum</span>
 
     <span class="k">def</span> <span class="nf">get_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a list of indices, creating new tensor indices to complete dummy indices.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">indices</span><span class="p">[:]</span>
@@ -883,7 +882,7 @@
         <span class="k">return</span> <span class="n">new_indices</span>
 
     <span class="k">def</span> <span class="nf">get_free_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a list of free indices.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># get sorted indices according to their position:</span>
@@ -919,7 +918,7 @@
         <span class="k">return</span> <span class="n">indices</span>
 
     <span class="k">def</span> <span class="nf">perm2tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">is_canon_bp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a ``_IndexStructure`` instance corresponding to the permutation ``g``</span>
 
 <span class="sd">        ``g``  permutation corresponding to the tensor in the representation</span>
@@ -958,7 +957,7 @@
         <span class="k">return</span> <span class="n">_IndexStructure</span><span class="p">(</span><span class="n">free</span><span class="p">,</span> <span class="n">dum</span><span class="p">,</span> <span class="n">index_types</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">indices_canon_args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns ``(g, dummies, msym, v)``, the entries of ``canonicalize``</span>
 
 <span class="sd">        see ``canonicalize`` in ``tensor_can.py``</span>
@@ -1020,7 +1019,7 @@
 
 
 <span class="k">class</span> <span class="nc">_TensorDataLazyEvaluator</span><span class="p">(</span><span class="n">CantSympify</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    EXPERIMENTAL: do not rely on this class, it may change without deprecation</span>
 <span class="sd">    warnings in future versions of SymPy.</span>
 
@@ -1053,7 +1052,7 @@
         <span class="k">return</span> <span class="n">dat</span>
 
     <span class="k">def</span> <span class="nf">_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieve ``data`` associated with ``key``.</span>
 
 <span class="sd">        This algorithm looks into ``self._substitutions_dict`` for all</span>
@@ -1138,7 +1137,7 @@
         <span class="k">return</span> <span class="n">tensorcontraction</span><span class="p">(</span><span class="n">prodarr</span><span class="p">,</span> <span class="o">*</span><span class="n">dum</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">data_tensorhead_from_tensmul</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">tensmul</span><span class="p">,</span> <span class="n">tensorhead</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method is used when assigning components data to a ``TensMul``</span>
 <span class="sd">        object, it converts components data to a fully contravariant ndarray,</span>
 <span class="sd">        which is then stored according to the ``TensorHead`` key.</span>
@@ -1154,7 +1153,7 @@
             <span class="kc">True</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">data_from_tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tensor</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This method corrects the components data to the right signature</span>
 <span class="sd">        (covariant/contravariant) using the metric associated with each</span>
 <span class="sd">        ``TensorIndexType``.</span>
@@ -1211,7 +1210,7 @@
                 <span class="n">last_data</span> <span class="o">=</span> <span class="n">data_swapped</span>
 
     <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the components data of a tensor object/expression.</span>
 
 <span class="sd">        Components data are transformed to the all-contravariant form and stored</span>
@@ -1245,7 +1244,7 @@
         <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_substitutions_dict</span>
 
     <span class="k">def</span> <span class="nf">add_metric_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Assign data to the ``metric`` tensor. The metric tensor behaves in an</span>
 <span class="sd">        anomalous way when raising and lowering indices.</span>
 
@@ -1308,7 +1307,7 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_correct_signature_from_indices</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">indices</span><span class="p">,</span> <span class="n">free</span><span class="p">,</span> <span class="n">dum</span><span class="p">,</span> <span class="n">inverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Utility function to correct the values inside the components data</span>
 <span class="sd">        ndarray according to whether indices are covariant or contravariant.</span>
 
@@ -1353,7 +1352,7 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">parse_data</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Transform ``data`` to array. The parameter ``data`` may</span>
 <span class="sd">        contain data in various formats, e.g. nested lists, sympy ``Matrix``,</span>
 <span class="sd">        and so on.</span>
@@ -1381,7 +1380,7 @@
 
 
 <span class="k">class</span> <span class="nc">_TensorManager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class to manage tensor properties.</span>
 
 <span class="sd">    Notes</span>
@@ -1419,7 +1418,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comm</span>
 
     <span class="k">def</span> <span class="nf">comm_symbols2i</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        get the commutation group number corresponding to ``i``</span>
 
 <span class="sd">        ``i`` can be a symbol or a number or a string</span>
@@ -1438,13 +1437,13 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comm_symbols2i</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">comm_i2symbol</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the symbol corresponding to the commutation group number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comm_i2symbol</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">set_comm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        set the commutation parameter ``c`` for commutation groups ``i, j``</span>
 
 <span class="sd">        Parameters</span>
@@ -1516,7 +1515,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_comm</span><span class="p">[</span><span class="n">nj</span><span class="p">][</span><span class="n">ni</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span>
 
     <span class="k">def</span> <span class="nf">set_comms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        set the commutation group numbers ``c`` for symbols ``i, j``</span>
 
 <span class="sd">        Parameters</span>
@@ -1528,7 +1527,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">set_comm</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_comm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the commutation parameter for commutation group numbers ``i, j``</span>
 
 <span class="sd">        see ``_TensorManager.set_comm``</span>
@@ -1536,7 +1535,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_comm</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Clear the TensorManager.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_comm_init</span><span class="p">()</span>
@@ -1546,7 +1545,7 @@
 
 
 <div class="viewcode-block" id="TensorIndexType"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensorIndexType">[docs]</a><span class="k">class</span> <span class="nc">TensorIndexType</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A TensorIndexType is characterized by its name and its metric.</span>
 
 <span class="sd">    Parameters</span>
@@ -1777,7 +1776,7 @@
     <span class="fm">__repr__</span> <span class="o">=</span> <span class="fm">__str__</span>
 
     <span class="k">def</span> <span class="nf">_components_data_full_destroy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        EXPERIMENTAL: do not rely on this API method.</span>
 
 <span class="sd">        This destroys components data associated to the ``TensorIndexType``, if</span>
@@ -1806,7 +1805,7 @@
 
 
 <div class="viewcode-block" id="TensorIndex"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensorIndex">[docs]</a><span class="k">class</span> <span class="nc">TensorIndex</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represents an abstract tensor index.</span>
 
 <span class="sd">    Parameters</span>
@@ -1915,7 +1914,7 @@
 
 
 <div class="viewcode-block" id="tensor_indices"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.tensor_indices">[docs]</a><span class="k">def</span> <span class="nf">tensor_indices</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">typ</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns list of tensor indices given their names and their types</span>
 
 <span class="sd">    Parameters</span>
@@ -1944,7 +1943,7 @@
 
 
 <div class="viewcode-block" id="TensorSymmetry"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensorSymmetry">[docs]</a><span class="k">class</span> <span class="nc">TensorSymmetry</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Monoterm symmetry of a tensor</span>
 
 <span class="sd">    Parameters</span>
@@ -2011,7 +2010,7 @@
 
 
 <div class="viewcode-block" id="tensorsymmetry"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.tensorsymmetry">[docs]</a><span class="k">def</span> <span class="nf">tensorsymmetry</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a ``TensorSymmetry`` object.</span>
 
 <span class="sd">    One can represent a tensor with any monoterm slot symmetry group</span>
@@ -2091,7 +2090,7 @@
 
 
 <div class="viewcode-block" id="TensorType"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensorType">[docs]</a><span class="k">class</span> <span class="nc">TensorType</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class of tensor types.</span>
 
 <span class="sd">    Parameters</span>
@@ -2141,7 +2140,7 @@
         <span class="k">return</span> <span class="s1">&#39;TensorType(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">index_types</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">comm</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a TensorHead object or a list of TensorHead objects.</span>
 
 <span class="sd">        ``s``  name or string of names</span>
@@ -2179,7 +2178,7 @@
 
 
 <div class="viewcode-block" id="tensorhead"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.tensorhead">[docs]</a><span class="k">def</span> <span class="nf">tensorhead</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">typ</span><span class="p">,</span> <span class="n">sym</span><span class="p">,</span> <span class="n">comm</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function generating tensorhead(s).</span>
 
 <span class="sd">    Parameters</span>
@@ -2213,7 +2212,7 @@
 
 
 <div class="viewcode-block" id="TensorHead"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensorHead">[docs]</a><span class="k">class</span> <span class="nc">TensorHead</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Tensor head of the tensor</span>
 
 <span class="sd">    Parameters</span>
@@ -2425,7 +2424,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">index_types</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">index_types</span><span class="p">)</span>
 
 <div class="viewcode-block" id="TensorHead.commutes_with"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensorHead.commutes_with">[docs]</a>    <span class="k">def</span> <span class="nf">commutes_with</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns ``0`` if ``self`` and ``other`` commute, ``1`` if they anticommute.</span>
 
 <span class="sd">        Returns ``None`` if ``self`` and ``other`` neither commute nor anticommute.</span>
@@ -2437,7 +2436,7 @@
         <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">(</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">index_types</span><span class="p">]))</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">indices</span><span class="p">,</span> <span class="o">**</span><span class="n">kw_args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a tensor with indices.</span>
 
 <span class="sd">        There is a special behavior in case of indices denoted by ``True``,</span>
@@ -2494,7 +2493,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_components_data_full_destroy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        EXPERIMENTAL: do not rely on this API method.</span>
 
 <span class="sd">        Destroy components data associated to the ``TensorHead`` object, this</span>
@@ -2519,7 +2518,7 @@
 
 
 <div class="viewcode-block" id="TensExpr"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensExpr">[docs]</a><span class="k">class</span> <span class="nc">TensExpr</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Abstract base class for tensor expressions</span>
 
 <span class="sd">    Notes</span>
@@ -2602,7 +2601,7 @@
     <span class="fm">__rtruediv__</span> <span class="o">=</span> <span class="n">__rdiv__</span>
 
 <div class="viewcode-block" id="TensExpr.fun_eval"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensExpr.fun_eval">[docs]</a>    <span class="k">def</span> <span class="nf">fun_eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">index_tuples</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a tensor with free indices substituted according to ``index_tuples``</span>
 
 <span class="sd">        ``index_types`` list of tuples ``(old_index, new_index)``</span>
@@ -2630,7 +2629,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_set_new_index_structure</span><span class="p">(</span><span class="n">indstruc</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TensExpr.get_matrix"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensExpr.get_matrix">[docs]</a>    <span class="k">def</span> <span class="nf">get_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns ndarray components data as a matrix, if components data are</span>
 <span class="sd">        available and ndarray dimension does not exceed 2.</span>
 
@@ -2754,7 +2753,7 @@
 
 
 <div class="viewcode-block" id="TensAdd"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensAdd">[docs]</a><span class="k">class</span> <span class="nc">TensAdd</span><span class="p">(</span><span class="n">TensExpr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sum of tensors</span>
 
 <span class="sd">    Parameters</span>
@@ -2933,7 +2932,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">free_args</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">indices</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns tensor with ordered free indices replaced by ``indices``</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns tensor with ordered free indices replaced by ``indices``</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ==========</span>
@@ -2968,7 +2967,7 @@
         <span class="k">return</span> <span class="n">res</span>
 
 <div class="viewcode-block" id="TensAdd.canon_bp"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensAdd.canon_bp">[docs]</a>    <span class="k">def</span> <span class="nf">canon_bp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        canonicalize using the Butler-Portugal algorithm for canonicalization</span>
 <span class="sd">        under monoterm symmetries.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3036,7 +3035,7 @@
         <span class="k">return</span> <span class="n">canon_bp</span><span class="p">(</span><span class="n">t</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TensAdd.contract_metric"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensAdd.contract_metric">[docs]</a>    <span class="k">def</span> <span class="nf">contract_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Raise or lower indices with the metric ``g``</span>
 
 <span class="sd">        Parameters</span>
@@ -3057,7 +3056,7 @@
         <span class="k">return</span> <span class="n">canon_bp</span><span class="p">(</span><span class="n">t</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TensAdd.fun_eval"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensAdd.fun_eval">[docs]</a>    <span class="k">def</span> <span class="nf">fun_eval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">index_tuples</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a tensor with free indices substituted according to ``index_tuples``</span>
 
 <span class="sd">        Parameters</span>
@@ -3084,7 +3083,7 @@
         <span class="k">return</span> <span class="n">TensAdd</span><span class="p">(</span><span class="o">*</span><span class="n">args1</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TensAdd.substitute_indices"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensAdd.substitute_indices">[docs]</a>    <span class="k">def</span> <span class="nf">substitute_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">index_tuples</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a tensor with free indices substituted according to ``index_tuples``</span>
 
 <span class="sd">        Parameters</span>
@@ -3141,7 +3140,7 @@
 
 
 <div class="viewcode-block" id="Tensor"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.Tensor">[docs]</a><span class="k">class</span> <span class="nc">Tensor</span><span class="p">(</span><span class="n">TensExpr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base tensor class, i.e. this represents a tensor, the single unit to be</span>
 <span class="sd">    put into an expression.</span>
 
@@ -3245,7 +3244,7 @@
         <span class="k">return</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">free</span><span class="p">])</span>
 
 <div class="viewcode-block" id="Tensor.commutes_with"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.Tensor.commutes_with">[docs]</a>    <span class="k">def</span> <span class="nf">commutes_with</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        :param other:</span>
 <span class="sd">        :return:</span>
 <span class="sd">            0  commute</span>
@@ -3259,7 +3258,7 @@
         <span class="k">return</span> <span class="ne">NotImplementedError</span></div>
 
 <div class="viewcode-block" id="Tensor.perm2tensor"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.Tensor.perm2tensor">[docs]</a>    <span class="k">def</span> <span class="nf">perm2tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">is_canon_bp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the tensor corresponding to the permutation ``g``</span>
 
 <span class="sd">        For further details, see the method in ``TIDS`` with the same name.</span>
@@ -3307,13 +3306,13 @@
         <span class="k">return</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Tensor.get_indices"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.Tensor.get_indices">[docs]</a>    <span class="k">def</span> <span class="nf">get_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a list of indices, corresponding to those of the tensor.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_index_structure</span><span class="o">.</span><span class="n">get_indices</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="Tensor.get_free_indices"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.Tensor.get_free_indices">[docs]</a>    <span class="k">def</span> <span class="nf">get_free_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a list of free indices, corresponding to those of the tensor.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_index_structure</span><span class="o">.</span><span class="n">get_free_indices</span><span class="p">()</span></div>
@@ -3325,7 +3324,7 @@
         <span class="k">return</span> <span class="n">substitute_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">index_tuples</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">indices</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns tensor with ordered free indices replaced by ``indices``</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns tensor with ordered free indices replaced by ``indices``</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -3473,7 +3472,7 @@
 
 
 <div class="viewcode-block" id="TensMul"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensMul">[docs]</a><span class="k">class</span> <span class="nc">TensMul</span><span class="p">(</span><span class="n">TensExpr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Product of tensors</span>
 
 <span class="sd">    Parameters</span>
@@ -3676,7 +3675,7 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_get_components_from_args</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a list of ``Tensor`` objects having the same ``TIDS`` if multiplied</span>
 <span class="sd">        by one another.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3717,7 +3716,7 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_get_tensors_from_components_free_dum</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="n">free</span><span class="p">,</span> <span class="n">dum</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a list of ``Tensor`` objects by distributing ``free`` and ``dum`` indices on the ``components``.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">index_structure</span> <span class="o">=</span> <span class="n">_IndexStructure</span><span class="o">.</span><span class="n">from_components_free_dum</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="n">free</span><span class="p">,</span> <span class="n">dum</span><span class="p">)</span>
@@ -3809,7 +3808,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">canon_bp</span><span class="p">()</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">canon_bp</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="TensMul.get_indices"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensMul.get_indices">[docs]</a>    <span class="k">def</span> <span class="nf">get_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the list of indices of the tensor</span>
 
 <span class="sd">        The indices are listed in the order in which they appear in the</span>
@@ -3835,7 +3834,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_index_structure</span><span class="o">.</span><span class="n">get_indices</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="TensMul.get_free_indices"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensMul.get_free_indices">[docs]</a>    <span class="k">def</span> <span class="nf">get_free_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the list of free indices of the tensor</span>
 
 <span class="sd">        The indices are listed in the order in which they appear in the</span>
@@ -3859,7 +3858,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_index_structure</span><span class="o">.</span><span class="n">get_free_indices</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="TensMul.split"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensMul.split">[docs]</a>    <span class="k">def</span> <span class="nf">split</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a list of tensors, whose product is ``self``</span>
 
 <span class="sd">        Dummy indices contracted among different tensor components</span>
@@ -3904,7 +3903,7 @@
         <span class="k">return</span> <span class="n">TensAdd</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Multiply two tensors using Einstein summation convention.</span>
 
 <span class="sd">        If the two tensors have an index in common, one contravariant</span>
@@ -3952,7 +3951,7 @@
     <span class="n">__truerdiv__</span> <span class="o">=</span> <span class="n">__rdiv__</span>
 
     <span class="k">def</span> <span class="nf">_sort_args_for_sorted_components</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the ``args`` sorted according to the components commutation</span>
 <span class="sd">        properties.</span>
 
@@ -3981,13 +3980,13 @@
         <span class="k">return</span> <span class="n">cv</span>
 
 <div class="viewcode-block" id="TensMul.sorted_components"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensMul.sorted_components">[docs]</a>    <span class="k">def</span> <span class="nf">sorted_components</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a tensor product with sorted components.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">TensMul</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_sort_args_for_sorted_components</span><span class="p">())</span></div>
 
 <div class="viewcode-block" id="TensMul.perm2tensor"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensMul.perm2tensor">[docs]</a>    <span class="k">def</span> <span class="nf">perm2tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">is_canon_bp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the tensor corresponding to the permutation ``g``</span>
 
 <span class="sd">        For further details, see the method in ``TIDS`` with the same name.</span>
@@ -3995,7 +3994,7 @@
         <span class="k">return</span> <span class="n">perm2tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">is_canon_bp</span><span class="o">=</span><span class="n">is_canon_bp</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TensMul.canon_bp"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensMul.canon_bp">[docs]</a>    <span class="k">def</span> <span class="nf">canon_bp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Canonicalize using the Butler-Portugal algorithm for canonicalization</span>
 <span class="sd">        under monoterm symmetries.</span>
 
@@ -4031,7 +4030,7 @@
         <span class="k">return</span> <span class="n">t</span></div>
 
     <span class="k">def</span> <span class="nf">_get_indices_to_args_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get a dict mapping the index position to TensMul&#39;s argument number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">pos_map</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
@@ -4046,7 +4045,7 @@
         <span class="k">return</span> <span class="n">pos_map</span>
 
 <div class="viewcode-block" id="TensMul.contract_metric"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.TensMul.contract_metric">[docs]</a>    <span class="k">def</span> <span class="nf">contract_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Raise or lower indices with the metric ``g``</span>
 
 <span class="sd">        Parameters</span>
@@ -4231,7 +4230,7 @@
         <span class="k">return</span> <span class="n">substitute_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">index_tuples</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">indices</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns tensor product with ordered free indices replaced by ``indices``</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns tensor product with ordered free indices replaced by ``indices``</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -4296,7 +4295,7 @@
 
 
 <div class="viewcode-block" id="canon_bp"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.canon_bp">[docs]</a><span class="k">def</span> <span class="nf">canon_bp</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Butler-Portugal canonicalization</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">TensExpr</span><span class="p">):</span>
@@ -4304,7 +4303,7 @@
     <span class="k">return</span> <span class="n">p</span></div>
 
 <div class="viewcode-block" id="tensor_mul"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.tensor_mul">[docs]</a><span class="k">def</span> <span class="nf">tensor_mul</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    product of tensors</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="p">:</span>
@@ -4316,7 +4315,7 @@
 
 
 <div class="viewcode-block" id="riemann_cyclic_replace"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.riemann_cyclic_replace">[docs]</a><span class="k">def</span> <span class="nf">riemann_cyclic_replace</span><span class="p">(</span><span class="n">t_r</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    replace Riemann tensor with an equivalent expression</span>
 
 <span class="sd">    ``R(m,n,p,q) -&gt; 2/3*R(m,n,p,q) - 1/3*R(m,q,n,p) + 1/3*R(m,p,n,q)``</span>
@@ -4331,7 +4330,7 @@
     <span class="k">return</span> <span class="n">t3</span></div>
 
 <div class="viewcode-block" id="riemann_cyclic"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.riemann_cyclic">[docs]</a><span class="k">def</span> <span class="nf">riemann_cyclic</span><span class="p">(</span><span class="n">t2</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    replace each Riemann tensor with an equivalent expression</span>
 <span class="sd">    satisfying the cyclic identity.</span>
 
@@ -4363,7 +4362,7 @@
 
 
 <div class="viewcode-block" id="get_lines"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.get_lines">[docs]</a><span class="k">def</span> <span class="nf">get_lines</span><span class="p">(</span><span class="n">ex</span><span class="p">,</span> <span class="n">index_type</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    returns ``(lines, traces, rest)`` for an index type,</span>
 <span class="sd">    where ``lines`` is the list of list of positions of a matrix line,</span>
 <span class="sd">    ``traces`` is the list of list of traced matrix lines,</span>
@@ -4516,7 +4515,7 @@
 
 
 <div class="viewcode-block" id="perm2tensor"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.perm2tensor">[docs]</a><span class="k">def</span> <span class="nf">perm2tensor</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">is_canon_bp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the tensor corresponding to the permutation ``g``</span>
 
 <span class="sd">    For further details, see the method in ``TIDS`` with the same name.</span>
@@ -4534,7 +4533,7 @@
 
 
 <div class="viewcode-block" id="substitute_indices"><a class="viewcode-back" href="../../../../modelparameters.sympy.tensor.html#modelparameters.sympy.tensor.tensor.substitute_indices">[docs]</a><span class="k">def</span> <span class="nf">substitute_indices</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="o">*</span><span class="n">index_tuples</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a tensor with free indices substituted according to ``index_tuples``</span>
 
 <span class="sd">    ``index_types`` list of tuples ``(old_index, new_index)``</span>
@@ -4587,7 +4586,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -4608,7 +4607,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -57,7 +56,7 @@
 
 
 <div class="viewcode-block" id="re"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.complexes.re">[docs]</a><span class="k">class</span> <span class="nc">re</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns real part of expression. This function performs only</span>
 <span class="sd">    elementary analysis and so it will fail to decompose properly</span>
 <span class="sd">    more complicated expressions. If completely simplified result</span>
@@ -128,7 +127,7 @@
                 <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span> <span class="n">im</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span></div>
 
 <div class="viewcode-block" id="re.as_real_imag"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.complexes.re.as_real_imag">[docs]</a>    <span class="k">def</span> <span class="nf">as_real_imag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the real number with a zero imaginary part.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">Zero</span><span class="p">)</span></div>
@@ -152,7 +151,7 @@
 
 
 <div class="viewcode-block" id="im"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.complexes.im">[docs]</a><span class="k">class</span> <span class="nc">im</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns imaginary part of expression. This function performs only</span>
 <span class="sd">    elementary analysis and so it will fail to decompose properly more</span>
 <span class="sd">    complicated expressions. If completely simplified result is needed then</span>
@@ -223,7 +222,7 @@
                 <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">re</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="n">c</span></div>
 
 <div class="viewcode-block" id="im.as_real_imag"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.complexes.im.as_real_imag">[docs]</a>    <span class="k">def</span> <span class="nf">as_real_imag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the imaginary part with a zero real part.</span>
 
 <span class="sd">        Examples</span>
@@ -259,7 +258,7 @@
 <span class="c1">###############################################################################</span>
 
 <div class="viewcode-block" id="sign"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.complexes.sign">[docs]</a><span class="k">class</span> <span class="nc">sign</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the complex sign of an expression:</span>
 
 <span class="sd">    If the expresssion is real the sign will be:</span>
@@ -414,7 +413,7 @@
 
 
 <div class="viewcode-block" id="Abs"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.complexes.Abs">[docs]</a><span class="k">class</span> <span class="nc">Abs</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the absolute value of the argument.</span>
 
 <span class="sd">    This is an extension of the built-in function abs() to accept symbolic</span>
@@ -456,7 +455,7 @@
     <span class="n">unbranched</span> <span class="o">=</span> <span class="kc">True</span>
 
 <div class="viewcode-block" id="Abs.fdiff"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.complexes.Abs.fdiff">[docs]</a>    <span class="k">def</span> <span class="nf">fdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Get the first derivative of the argument to Abs().</span>
 
 <span class="sd">        Examples</span>
@@ -623,7 +622,7 @@
 
 
 <div class="viewcode-block" id="arg"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.complexes.arg">[docs]</a><span class="k">class</span> <span class="nc">arg</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the argument (in radians) of a complex number. For a real</span>
 <span class="sd">    number, the argument is always 0.</span>
 
@@ -674,7 +673,7 @@
 
 
 <div class="viewcode-block" id="conjugate"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.complexes.conjugate">[docs]</a><span class="k">class</span> <span class="nc">conjugate</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the `complex conjugate` Ref[1] of an argument.</span>
 <span class="sd">    In mathematics, the complex conjugate of a complex number</span>
 <span class="sd">    is given by changing the sign of the imaginary part.</span>
@@ -731,7 +730,7 @@
 
 
 <div class="viewcode-block" id="transpose"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.complexes.transpose">[docs]</a><span class="k">class</span> <span class="nc">transpose</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Linear map transposition.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -752,7 +751,7 @@
 
 
 <div class="viewcode-block" id="adjoint"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.complexes.adjoint">[docs]</a><span class="k">class</span> <span class="nc">adjoint</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Conjugate transpose or Hermite conjugation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -796,7 +795,7 @@
 
 
 <div class="viewcode-block" id="polar_lift"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.complexes.polar_lift">[docs]</a><span class="k">class</span> <span class="nc">polar_lift</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Lift argument to the Riemann surface of the logarithm, using the</span>
 <span class="sd">    standard branch.</span>
 
@@ -862,7 +861,7 @@
                 <span class="k">return</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="n">positive</span><span class="p">)</span><span class="o">*</span><span class="n">exp_polar</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_evalf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Careful! any evalf of polar numbers is flaky &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Careful! any evalf of polar numbers is flaky &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">_eval_evalf</span><span class="p">(</span><span class="n">prec</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_eval_Abs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -870,7 +869,7 @@
 
 
 <div class="viewcode-block" id="periodic_argument"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.complexes.periodic_argument">[docs]</a><span class="k">class</span> <span class="nc">periodic_argument</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represent the argument on a quotient of the Riemann surface of the</span>
 <span class="sd">    logarithm. That is, given a period P, always return a value in</span>
 <span class="sd">    (-P/2, P/2], by using exp(P*I) == 1.</span>
@@ -966,7 +965,7 @@
 
 
 <div class="viewcode-block" id="principal_branch"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.complexes.principal_branch">[docs]</a><span class="k">class</span> <span class="nc">principal_branch</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Represent a polar number reduced to its principal branch on a quotient</span>
 <span class="sd">    of the Riemann surface of the logarithm.</span>
 
@@ -1082,7 +1081,7 @@
 
 
 <div class="viewcode-block" id="polarify"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.complexes.polarify">[docs]</a><span class="k">def</span> <span class="nf">polarify</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">subs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">lift</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Turn all numbers in eq into their polar equivalents (under the standard</span>
 <span class="sd">    choice of argument).</span>
 
@@ -1161,7 +1160,7 @@
 
 
 <div class="viewcode-block" id="unpolarify"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.elementary.html#modelparameters.sympy.functions.elementary.complexes.unpolarify">[docs]</a><span class="k">def</span> <span class="nf">unpolarify</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">subs</span><span class="o">=</span><span class="p">{},</span> <span class="n">exponents_only</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    If p denotes the projection from the Riemann surface of the logarithm to</span>
 <span class="sd">    the complex line, return a simplified version eq&#39; of `eq` such that</span>
 <span class="sd">    p(eq&#39;) == p(eq).</span>
@@ -1219,7 +1218,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1240,7 +1239,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

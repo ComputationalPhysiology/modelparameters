@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -48,7 +47,7 @@
 
 <div class="viewcode-block" id="PolynomialRing"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing">[docs]</a><span class="nd">@public</span>
 <span class="k">class</span> <span class="nc">PolynomialRing</span><span class="p">(</span><span class="n">Ring</span><span class="p">,</span> <span class="n">CompositeDomain</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A class for representing multivariate polynomial rings. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class for representing multivariate polynomial rings. &quot;&quot;&quot;</span>
 
     <span class="n">is_PolynomialRing</span> <span class="o">=</span> <span class="n">is_Poly</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -101,53 +100,53 @@
         <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">ring</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns `True` if two domains are equivalent. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns `True` if two domains are equivalent. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">PolynomialRing</span><span class="p">)</span> <span class="ow">and</span> \
             <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">ring</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">symbols</span><span class="p">)</span> <span class="o">==</span> \
             <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">ring</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">domain</span><span class="p">,</span> <span class="n">other</span><span class="o">.</span><span class="n">symbols</span><span class="p">)</span>
 
 <div class="viewcode-block" id="PolynomialRing.to_sympy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.to_sympy">[docs]</a>    <span class="k">def</span> <span class="nf">to_sympy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert `a` to a SymPy object. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert `a` to a SymPy object. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">as_expr</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.from_sympy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.from_sympy">[docs]</a>    <span class="k">def</span> <span class="nf">from_sympy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert SymPy&#39;s expression to `dtype`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert SymPy&#39;s expression to `dtype`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">from_expr</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.from_ZZ_python"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.from_ZZ_python">[docs]</a>    <span class="k">def</span> <span class="nf">from_ZZ_python</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a Python `int` object to `dtype`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a Python `int` object to `dtype`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">K1</span><span class="p">(</span><span class="n">K1</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.from_QQ_python"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.from_QQ_python">[docs]</a>    <span class="k">def</span> <span class="nf">from_QQ_python</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a Python `Fraction` object to `dtype`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a Python `Fraction` object to `dtype`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">K1</span><span class="p">(</span><span class="n">K1</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.from_ZZ_gmpy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.from_ZZ_gmpy">[docs]</a>    <span class="k">def</span> <span class="nf">from_ZZ_gmpy</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a GMPY `mpz` object to `dtype`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a GMPY `mpz` object to `dtype`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">K1</span><span class="p">(</span><span class="n">K1</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.from_QQ_gmpy"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.from_QQ_gmpy">[docs]</a>    <span class="k">def</span> <span class="nf">from_QQ_gmpy</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a GMPY `mpq` object to `dtype`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a GMPY `mpq` object to `dtype`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">K1</span><span class="p">(</span><span class="n">K1</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.from_RealField"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.from_RealField">[docs]</a>    <span class="k">def</span> <span class="nf">from_RealField</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a mpmath `mpf` object to `dtype`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a mpmath `mpf` object to `dtype`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">K1</span><span class="p">(</span><span class="n">K1</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.from_AlgebraicField"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.from_AlgebraicField">[docs]</a>    <span class="k">def</span> <span class="nf">from_AlgebraicField</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert an algebraic number to ``dtype``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert an algebraic number to ``dtype``. &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">K1</span><span class="o">.</span><span class="n">domain</span> <span class="o">==</span> <span class="n">K0</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">K1</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">a</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.from_PolynomialRing"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.from_PolynomialRing">[docs]</a>    <span class="k">def</span> <span class="nf">from_PolynomialRing</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a polynomial to ``dtype``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a polynomial to ``dtype``. &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">set_ring</span><span class="p">(</span><span class="n">K1</span><span class="o">.</span><span class="n">ring</span><span class="p">)</span>
         <span class="k">except</span> <span class="p">(</span><span class="n">CoercionFailed</span><span class="p">,</span> <span class="n">GeneratorsError</span><span class="p">):</span>
             <span class="k">return</span> <span class="kc">None</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.from_FractionField"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.from_FractionField">[docs]</a>    <span class="k">def</span> <span class="nf">from_FractionField</span><span class="p">(</span><span class="n">K1</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">K0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Convert a rational function to ``dtype``. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert a rational function to ``dtype``. &quot;&quot;&quot;</span>
         <span class="n">q</span><span class="p">,</span> <span class="n">r</span> <span class="o">=</span> <span class="n">K0</span><span class="o">.</span><span class="n">numer</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">K0</span><span class="o">.</span><span class="n">denom</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">is_zero</span><span class="p">:</span>
@@ -156,39 +155,39 @@
             <span class="k">return</span> <span class="kc">None</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.get_field"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.get_field">[docs]</a>    <span class="k">def</span> <span class="nf">get_field</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a field associated with `self`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a field associated with `self`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring</span><span class="o">.</span><span class="n">to_field</span><span class="p">()</span><span class="o">.</span><span class="n">to_domain</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.is_positive"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.is_positive">[docs]</a>    <span class="k">def</span> <span class="nf">is_positive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns True if `LC(a)` is positive. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if `LC(a)` is positive. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_positive</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">LC</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.is_negative"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.is_negative">[docs]</a>    <span class="k">def</span> <span class="nf">is_negative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns True if `LC(a)` is negative. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if `LC(a)` is negative. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_negative</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">LC</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.is_nonpositive"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.is_nonpositive">[docs]</a>    <span class="k">def</span> <span class="nf">is_nonpositive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns True if `LC(a)` is non-positive. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if `LC(a)` is non-positive. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_nonpositive</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">LC</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.is_nonnegative"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.is_nonnegative">[docs]</a>    <span class="k">def</span> <span class="nf">is_nonnegative</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns True if `LC(a)` is non-negative. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns True if `LC(a)` is non-negative. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">is_nonnegative</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">LC</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.gcdex"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.gcdex">[docs]</a>    <span class="k">def</span> <span class="nf">gcdex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Extended GCD of `a` and `b`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extended GCD of `a` and `b`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">gcdex</span><span class="p">(</span><span class="n">b</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.gcd"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.gcd">[docs]</a>    <span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns GCD of `a` and `b`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns GCD of `a` and `b`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">b</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.lcm"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.lcm">[docs]</a>    <span class="k">def</span> <span class="nf">lcm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns LCM of `a` and `b`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns LCM of `a` and `b`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">lcm</span><span class="p">(</span><span class="n">b</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PolynomialRing.factorial"><a class="viewcode-back" href="../../../../../modelparameters.sympy.polys.domains.html#modelparameters.sympy.polys.PolynomialRing.factorial">[docs]</a>    <span class="k">def</span> <span class="nf">factorial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns factorial of `a`. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns factorial of `a`. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">a</span><span class="p">))</span></div></div>
 </pre></div>
 
@@ -207,7 +206,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -228,7 +227,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

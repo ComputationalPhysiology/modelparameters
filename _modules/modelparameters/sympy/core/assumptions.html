@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -243,7 +242,7 @@
 
 
 <div class="viewcode-block" id="StdFactKB"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.StdFactKB">[docs]</a><span class="k">class</span> <span class="nc">StdFactKB</span><span class="p">(</span><span class="n">FactKB</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A FactKB specialised for the built-in rules</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A FactKB specialised for the built-in rules</span>
 
 <span class="sd">    This is the only kind of FactKB that Basic objects should use.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -269,12 +268,12 @@
 
 
 <div class="viewcode-block" id="as_property"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.as_property">[docs]</a><span class="k">def</span> <span class="nf">as_property</span><span class="p">(</span><span class="n">fact</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert a fact name to the name of the corresponding property&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a fact name to the name of the corresponding property&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="s1">&#39;is_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">fact</span></div>
 
 
 <div class="viewcode-block" id="make_property"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.make_property">[docs]</a><span class="k">def</span> <span class="nf">make_property</span><span class="p">(</span><span class="n">fact</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create the automagic property corresponding to a fact.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create the automagic property corresponding to a fact.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">getit</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
@@ -289,7 +288,7 @@
 
 
 <span class="k">def</span> <span class="nf">_ask</span><span class="p">(</span><span class="n">fact</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find the truth value for a property of an object.</span>
 
 <span class="sd">    This function is called when a request is made to see what a fact</span>
@@ -349,7 +348,7 @@
 
 
 <div class="viewcode-block" id="ManagedProperties"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.add.ManagedProperties">[docs]</a><span class="k">class</span> <span class="nc">ManagedProperties</span><span class="p">(</span><span class="n">BasicMeta</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Metaclass for classes with old-style assumptions&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Metaclass for classes with old-style assumptions&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">):</span>
         <span class="n">BasicMeta</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kws</span><span class="p">)</span>
 
@@ -418,7 +417,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -439,7 +438,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

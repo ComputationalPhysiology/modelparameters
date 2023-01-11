@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -52,7 +51,7 @@
 
 <div class="viewcode-block" id="TupleArg"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.TupleArg">[docs]</a><span class="k">class</span> <span class="nc">TupleArg</span><span class="p">(</span><span class="n">Tuple</span><span class="p">):</span>
 <div class="viewcode-block" id="TupleArg.limit"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.TupleArg.limit">[docs]</a>    <span class="k">def</span> <span class="nf">limit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Compute limit x-&gt;xlim.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Compute limit x-&gt;xlim.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">...series.limits</span> <span class="kn">import</span> <span class="n">limit</span>
         <span class="k">return</span> <span class="n">TupleArg</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="n">limit</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">xlim</span><span class="p">,</span> <span class="nb">dir</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">])</span></div></div>
@@ -63,7 +62,7 @@
 
 
 <span class="k">def</span> <span class="nf">_prep_tuple</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Turn an iterable argument V into a Tuple and unpolarify, since both</span>
 <span class="sd">    hypergeometric and meijer g-functions are unbranched in their parameters.</span>
 
@@ -83,7 +82,7 @@
 
 
 <div class="viewcode-block" id="TupleParametersBase"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.TupleParametersBase">[docs]</a><span class="k">class</span> <span class="nc">TupleParametersBase</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Base class that takes care of differentiation, when some of</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Base class that takes care of differentiation, when some of</span>
 <span class="sd">        the arguments are actually tuples. &quot;&quot;&quot;</span>
     <span class="c1"># This is not deduced automatically since there are Tuples as arguments.</span>
     <span class="n">is_commutative</span> <span class="o">=</span> <span class="kc">True</span>
@@ -102,7 +101,7 @@
 
 
 <div class="viewcode-block" id="hyper"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.hyper">[docs]</a><span class="k">class</span> <span class="nc">hyper</span><span class="p">(</span><span class="n">TupleParametersBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The (generalized) hypergeometric function is defined by a series where</span>
 <span class="sd">    the ratios of successive terms are a rational function of the summation</span>
 <span class="sd">    index. When convergent, it is continued analytically to the largest</span>
@@ -255,17 +254,17 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">argument</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Argument of the hypergeometric function. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Argument of the hypergeometric function. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Numerator parameters of the hypergeometric function. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Numerator parameters of the hypergeometric function. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Tuple</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">bq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Denominator parameters of the hypergeometric function. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Denominator parameters of the hypergeometric function. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Tuple</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="nd">@property</span>
@@ -274,12 +273,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">eta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; A quantity related to the convergence of the series. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; A quantity related to the convergence of the series. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ap</span><span class="p">)</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bq</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">radius_of_convergence</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the radius of convergence of the defining series.</span>
 
 <span class="sd">        Note that even if this is not oo, the function may still be evaluated</span>
@@ -324,7 +323,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">convergence_statement</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Return a condition on z under which the series converges. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Return a condition on z under which the series converges. &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">And</span><span class="p">,</span> <span class="n">Or</span><span class="p">,</span> <span class="n">re</span><span class="p">,</span> <span class="n">Ne</span><span class="p">,</span> <span class="n">oo</span>
         <span class="n">R</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius_of_convergence</span>
         <span class="k">if</span> <span class="n">R</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -351,7 +350,7 @@
 
 
 <div class="viewcode-block" id="meijerg"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.meijerg">[docs]</a><span class="k">class</span> <span class="nc">meijerg</span><span class="p">(</span><span class="n">TupleParametersBase</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Meijer G-function is defined by a Mellin-Barnes type integral that</span>
 <span class="sd">    resembles an inverse Mellin transform. It generalizes the hypergeometric</span>
 <span class="sd">    functions.</span>
@@ -605,7 +604,7 @@
         <span class="k">return</span> <span class="n">res</span>
 
 <div class="viewcode-block" id="meijerg.get_period"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.meijerg.get_period">[docs]</a>    <span class="k">def</span> <span class="nf">get_period</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a number P such that G(x*exp(I*P)) == G(x).</span>
 
 <span class="sd">        &gt;&gt;&gt; from .hyper import meijerg</span>
@@ -683,7 +682,7 @@
         <span class="k">return</span> <span class="n">Expr</span><span class="o">.</span><span class="n">_from_mpmath</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">prec</span><span class="p">)</span>
 
 <div class="viewcode-block" id="meijerg.integrand"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.meijerg.integrand">[docs]</a>    <span class="k">def</span> <span class="nf">integrand</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Get the defining integrand D(s). &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Get the defining integrand D(s). &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">...</span> <span class="kn">import</span> <span class="n">gamma</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">argument</span><span class="o">**</span><span class="n">s</span> \
             <span class="o">*</span> <span class="n">Mul</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">gamma</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">bm</span><span class="p">))</span> \
@@ -693,37 +692,37 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">argument</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Argument of the Meijer G-function. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Argument of the Meijer G-function. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">an</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; First set of numerator parameters. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; First set of numerator parameters. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Tuple</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Combined numerator parameters. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Combined numerator parameters. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Tuple</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">aother</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Second set of numerator parameters. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Second set of numerator parameters. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Tuple</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">bm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; First set of denominator parameters. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; First set of denominator parameters. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Tuple</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">bq</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Combined denominator parameters. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Combined denominator parameters. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Tuple</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">bother</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; Second set of denominator parameters. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Second set of denominator parameters. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">Tuple</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="nd">@property</span>
@@ -732,19 +731,19 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">nu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; A quantity related to the convergence region of the integral,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; A quantity related to the convergence region of the integral,</span>
 <span class="sd">            c.f. references. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bq</span><span class="p">)</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ap</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">delta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; A quantity related to the convergence region of the integral,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; A quantity related to the convergence region of the integral,</span>
 <span class="sd">            c.f. references. &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bm</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">an</span><span class="p">)</span> <span class="o">-</span> <span class="n">S</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ap</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bq</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span></div>
 
 
 <div class="viewcode-block" id="HyperRep"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.HyperRep">[docs]</a><span class="k">class</span> <span class="nc">HyperRep</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A base class for &quot;hyper representation functions&quot;.</span>
 
 <span class="sd">    This is used exclusively in hyperexpand(), but fits more logically here.</span>
@@ -768,22 +767,22 @@
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_expr_small</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; An expression for F(x) which holds for |x| &lt; 1. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; An expression for F(x) which holds for |x| &lt; 1. &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_expr_small_minus</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; An expression for F(-x) which holds for |x| &lt; 1. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; An expression for F(-x) which holds for |x| &lt; 1. &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_expr_big</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; An expression for F(exp_polar(2*I*pi*n)*x), |x| &gt; 1. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; An expression for F(exp_polar(2*I*pi*n)*x), |x| &gt; 1. &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_expr_big_minus</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; An expression for F(exp_polar(2*I*pi*n + pi*I)*x), |x| &gt; 1. &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; An expression for F(exp_polar(2*I*pi*n + pi*I)*x), |x| &gt; 1. &quot;&quot;&quot;</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
     <span class="k">def</span> <span class="nf">_eval_rewrite_as_nonrep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
@@ -815,7 +814,7 @@
 
 
 <div class="viewcode-block" id="HyperRep_power1"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.HyperRep_power1">[docs]</a><span class="k">class</span> <span class="nc">HyperRep_power1</span><span class="p">(</span><span class="n">HyperRep</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return a representative for hyper([-a], [], z) == (1 - z)**a. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return a representative for hyper([-a], [], z) == (1 - z)**a. &quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_expr_small</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -839,7 +838,7 @@
 
 
 <div class="viewcode-block" id="HyperRep_power2"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.HyperRep_power2">[docs]</a><span class="k">class</span> <span class="nc">HyperRep_power2</span><span class="p">(</span><span class="n">HyperRep</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return a representative for hyper([a, a - 1/2], [2*a], z). &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return a representative for hyper([a, a - 1/2], [2*a], z). &quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_expr_small</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
@@ -867,7 +866,7 @@
 
 
 <div class="viewcode-block" id="HyperRep_log1"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.HyperRep_log1">[docs]</a><span class="k">class</span> <span class="nc">HyperRep_log1</span><span class="p">(</span><span class="n">HyperRep</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Represent -z*hyper([1, 1], [2], z) == log(1 - z). &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Represent -z*hyper([1, 1], [2], z) == log(1 - z). &quot;&quot;&quot;</span>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_expr_small</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
@@ -886,7 +885,7 @@
 
 
 <div class="viewcode-block" id="HyperRep_atanh"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.HyperRep_atanh">[docs]</a><span class="k">class</span> <span class="nc">HyperRep_atanh</span><span class="p">(</span><span class="n">HyperRep</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Represent hyper([1/2, 1], [3/2], z) == atanh(sqrt(z))/sqrt(z). &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Represent hyper([1/2, 1], [3/2], z) == atanh(sqrt(z))/sqrt(z). &quot;&quot;&quot;</span>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_expr_small</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">atanh</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -908,7 +907,7 @@
 
 
 <div class="viewcode-block" id="HyperRep_asin1"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.HyperRep_asin1">[docs]</a><span class="k">class</span> <span class="nc">HyperRep_asin1</span><span class="p">(</span><span class="n">HyperRep</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Represent hyper([1/2, 1/2], [3/2], z) == asin(sqrt(z))/sqrt(z). &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Represent hyper([1/2, 1/2], [3/2], z) == asin(sqrt(z))/sqrt(z). &quot;&quot;&quot;</span>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_expr_small</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">asin</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">z</span><span class="p">))</span><span class="o">/</span><span class="n">sqrt</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
@@ -927,7 +926,7 @@
 
 
 <div class="viewcode-block" id="HyperRep_asin2"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.HyperRep_asin2">[docs]</a><span class="k">class</span> <span class="nc">HyperRep_asin2</span><span class="p">(</span><span class="n">HyperRep</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Represent hyper([1, 1], [3/2], z) == asin(sqrt(z))/sqrt(z)/sqrt(1-z). &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Represent hyper([1, 1], [3/2], z) == asin(sqrt(z))/sqrt(z)/sqrt(1-z). &quot;&quot;&quot;</span>
     <span class="c1"># TODO this can be nicer</span>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_expr_small</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
@@ -951,7 +950,7 @@
 
 
 <div class="viewcode-block" id="HyperRep_sqrts1"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.HyperRep_sqrts1">[docs]</a><span class="k">class</span> <span class="nc">HyperRep_sqrts1</span><span class="p">(</span><span class="n">HyperRep</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return a representative for hyper([-a, 1/2 - a], [1/2], z). &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return a representative for hyper([-a, 1/2 - a], [1/2], z). &quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_expr_small</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
@@ -980,7 +979,7 @@
 
 
 <div class="viewcode-block" id="HyperRep_sqrts2"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.HyperRep_sqrts2">[docs]</a><span class="k">class</span> <span class="nc">HyperRep_sqrts2</span><span class="p">(</span><span class="n">HyperRep</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return a representative for</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return a representative for</span>
 <span class="sd">          sqrt(z)/2*[(1-sqrt(z))**2a - (1 + sqrt(z))**2a]</span>
 <span class="sd">          == -2*z/(2*a+1) d/dz hyper([-a - 1/2, -a], [1/2], z)&quot;&quot;&quot;</span>
 
@@ -1011,7 +1010,7 @@
 
 
 <div class="viewcode-block" id="HyperRep_log2"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.HyperRep_log2">[docs]</a><span class="k">class</span> <span class="nc">HyperRep_log2</span><span class="p">(</span><span class="n">HyperRep</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Represent log(1/2 + sqrt(1 - z)/2) == -z/4*hyper([3/2, 1, 1], [2, 2], z) &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Represent log(1/2 + sqrt(1 - z)/2) == -z/4*hyper([3/2, 1, 1], [2, 2], z) &quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_expr_small</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
@@ -1036,7 +1035,7 @@
 
 
 <div class="viewcode-block" id="HyperRep_cosasin"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.HyperRep_cosasin">[docs]</a><span class="k">class</span> <span class="nc">HyperRep_cosasin</span><span class="p">(</span><span class="n">HyperRep</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Represent hyper([a, -a], [1/2], z) == cos(2*a*asin(sqrt(z))). &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Represent hyper([a, -a], [1/2], z) == cos(2*a*asin(sqrt(z))). &quot;&quot;&quot;</span>
     <span class="c1"># Note there are many alternative expressions, e.g. as powers of a sum of</span>
     <span class="c1"># square roots.</span>
 
@@ -1058,7 +1057,7 @@
 
 
 <div class="viewcode-block" id="HyperRep_sinasin"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.hyper.HyperRep_sinasin">[docs]</a><span class="k">class</span> <span class="nc">HyperRep_sinasin</span><span class="p">(</span><span class="n">HyperRep</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Represent 2*a*z*hyper([1 - a, 1 + a], [3/2], z)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Represent 2*a*z*hyper([1 - a, 1 + a], [3/2], z)</span>
 <span class="sd">        == sqrt(z)/sqrt(1-z)*sin(2*a*asin(sqrt(z))) &quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
@@ -1093,7 +1092,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1114,7 +1113,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

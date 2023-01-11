@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -135,7 +134,7 @@
 
 
 <div class="viewcode-block" id="CodeWrapper"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.autowrap.CodeWrapper">[docs]</a><span class="k">class</span> <span class="nc">CodeWrapper</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base Class for code wrappers&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base Class for code wrappers&quot;&quot;&quot;</span>
     <span class="n">_filename</span> <span class="o">=</span> <span class="s2">&quot;wrapped_code&quot;</span>
     <span class="n">_module_basename</span> <span class="o">=</span> <span class="s2">&quot;wrapper_module&quot;</span>
     <span class="n">_module_counter</span> <span class="o">=</span> <span class="mi">0</span>
@@ -149,7 +148,7 @@
         <span class="k">return</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">_</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_module_basename</span><span class="p">,</span> <span class="n">CodeWrapper</span><span class="o">.</span><span class="n">_module_counter</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">generator</span><span class="p">,</span> <span class="n">filepath</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="p">[],</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        generator -- the code generator to use</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">generator</span> <span class="o">=</span> <span class="n">generator</span>
@@ -211,7 +210,7 @@
 
 
 <div class="viewcode-block" id="DummyWrapper"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.autowrap.DummyWrapper">[docs]</a><span class="k">class</span> <span class="nc">DummyWrapper</span><span class="p">(</span><span class="n">CodeWrapper</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class used for testing independent of backends &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class used for testing independent of backends &quot;&quot;&quot;</span>
 
     <span class="n">template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;# dummy module for testing of SymPy</span>
 <span class="s2">def </span><span class="si">%(name)s</span><span class="s2">():</span>
@@ -253,7 +252,7 @@
 
 
 <div class="viewcode-block" id="CythonCodeWrapper"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.autowrap.CythonCodeWrapper">[docs]</a><span class="k">class</span> <span class="nc">CythonCodeWrapper</span><span class="p">(</span><span class="n">CodeWrapper</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrapper that uses Cython&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper that uses Cython&quot;&quot;&quot;</span>
 
     <span class="n">setup_template</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
 <span class="s2">try:</span>
@@ -263,15 +262,15 @@
 <span class="s2">    from distutils.core import setup</span>
 <span class="s2">    from distutils.extension import Extension</span>
 <span class="s2">from Cython.Build import cythonize</span>
-<span class="s2">cy_opts = </span><span class="si">{cythonize_options}</span><span class="s2"></span>
-<span class="si">{np_import}</span><span class="s2"></span>
+<span class="s2">cy_opts = </span><span class="si">{cythonize_options}</span>
+<span class="si">{np_import}</span>
 <span class="s2">ext_mods = [Extension(</span>
 <span class="s2">    </span><span class="si">{ext_args}</span><span class="s2">,</span>
 <span class="s2">    include_dirs=</span><span class="si">{include_dirs}</span><span class="s2">,</span>
 <span class="s2">    library_dirs=</span><span class="si">{library_dirs}</span><span class="s2">,</span>
 <span class="s2">    libraries=</span><span class="si">{libraries}</span><span class="s2">,</span>
 <span class="s2">    extra_compile_args=</span><span class="si">{extra_compile_args}</span><span class="s2">,</span>
-<span class="s2">    extra_link_args=</span><span class="si">{extra_link_args}</span><span class="s2"></span>
+<span class="s2">    extra_link_args=</span><span class="si">{extra_link_args}</span>
 <span class="s2">)]</span>
 <span class="s2">setup(ext_modules=cythonize(ext_mods, **cy_opts))</span>
 <span class="s2">&quot;&quot;&quot;</span>
@@ -293,7 +292,7 @@
     <span class="n">std_compile_flag</span> <span class="o">=</span> <span class="s1">&#39;-std=c99&#39;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Instantiates a Cython code wrapper.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Instantiates a Cython code wrapper.</span>
 
 <span class="sd">        The following optional parameters get passed to ``distutils.Extension``</span>
 <span class="sd">        for building the Python extension module. Read its documentation to</span>
@@ -378,7 +377,7 @@
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_c&#39;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="CythonCodeWrapper.dump_pyx"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.autowrap.CythonCodeWrapper.dump_pyx">[docs]</a>    <span class="k">def</span> <span class="nf">dump_pyx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">routines</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">prefix</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Write a Cython file with python wrappers</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write a Cython file with python wrappers</span>
 
 <span class="sd">        This file contains all the definitions of the routines in c code and</span>
 <span class="sd">        refers to the header file.</span>
@@ -442,7 +441,7 @@
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">functions</span><span class="p">))</span></div>
 
     <span class="k">def</span> <span class="nf">_partition_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Group function arguments into categories.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Group function arguments into categories.&quot;&quot;&quot;</span>
         <span class="n">py_args</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">py_returns</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">py_locals</span> <span class="o">=</span> <span class="p">[]</span>
@@ -503,7 +502,7 @@
 
 
 <div class="viewcode-block" id="F2PyCodeWrapper"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.autowrap.F2PyCodeWrapper">[docs]</a><span class="k">class</span> <span class="nc">F2PyCodeWrapper</span><span class="p">(</span><span class="n">CodeWrapper</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrapper that uses f2py&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper that uses f2py&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
@@ -544,7 +543,7 @@
 
 
 <span class="k">def</span> <span class="nf">_infer_language</span><span class="p">(</span><span class="n">backend</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;For a given backend, return the top choice of language&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;For a given backend, return the top choice of language&quot;&quot;&quot;</span>
     <span class="n">langs</span> <span class="o">=</span> <span class="n">_lang_lookup</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">backend</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="kc">False</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">langs</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unrecognized backend: &quot;</span> <span class="o">+</span> <span class="n">backend</span><span class="p">)</span>
@@ -552,7 +551,7 @@
 
 
 <span class="k">def</span> <span class="nf">_validate_backend_language</span><span class="p">(</span><span class="n">backend</span><span class="p">,</span> <span class="n">language</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Throws error if backend and language are incompatible&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Throws error if backend and language are incompatible&quot;&quot;&quot;</span>
     <span class="n">langs</span> <span class="o">=</span> <span class="n">_lang_lookup</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">backend</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span> <span class="kc">False</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">langs</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Unrecognized backend: &quot;</span> <span class="o">+</span> <span class="n">backend</span><span class="p">)</span>
@@ -565,7 +564,7 @@
 <span class="nd">@doctest_depends_on</span><span class="p">(</span><span class="n">exe</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;f2py&#39;</span><span class="p">,</span> <span class="s1">&#39;gfortran&#39;</span><span class="p">),</span> <span class="n">modules</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">,))</span>
 <span class="k">def</span> <span class="nf">autowrap</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;f2py&#39;</span><span class="p">,</span> <span class="n">tempdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="n">flags</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">helpers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">code_gen</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generates python callable binaries based on the math expression.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates python callable binaries based on the math expression.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -672,7 +671,7 @@
 
 <div class="viewcode-block" id="binary_function"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.autowrap.binary_function">[docs]</a><span class="nd">@doctest_depends_on</span><span class="p">(</span><span class="n">exe</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;f2py&#39;</span><span class="p">,</span> <span class="s1">&#39;gfortran&#39;</span><span class="p">),</span> <span class="n">modules</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">,))</span>
 <span class="k">def</span> <span class="nf">binary_function</span><span class="p">(</span><span class="n">symfunc</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns a sympy function with expr as binary implementation</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a sympy function with expr as binary implementation</span>
 
 <span class="sd">    This is a convenience function that automates the steps needed to</span>
 <span class="sd">    autowrap the SymPy expression and attaching it to a Function object</span>
@@ -713,7 +712,7 @@
 <span class="s2">#include &quot;numpy/ndarraytypes.h&quot;</span>
 <span class="s2">#include &quot;numpy/ufuncobject.h&quot;</span>
 <span class="s2">#include &quot;numpy/halffloat.h&quot;</span>
-<span class="s2">#include $</span><span class="si">{include_file}</span><span class="s2"></span>
+<span class="s2">#include $</span><span class="si">{include_file}</span>
 
 <span class="s2">static PyMethodDef $</span><span class="si">{module}</span><span class="s2">Methods[] = {</span>
 <span class="s2">        {NULL, NULL, 0, NULL}</span>
@@ -726,15 +725,15 @@
 <span class="s2">{</span>
 <span class="s2">    npy_intp i;</span>
 <span class="s2">    npy_intp n = dimensions[0];</span>
-<span class="s2">    $</span><span class="si">{declare_args}</span><span class="s2"></span>
-<span class="s2">    $</span><span class="si">{declare_steps}</span><span class="s2"></span>
+<span class="s2">    $</span><span class="si">{declare_args}</span>
+<span class="s2">    $</span><span class="si">{declare_steps}</span>
 <span class="s2">    for (i = 0; i &lt; n; i++) {</span>
-<span class="s2">        $</span><span class="si">{outcalls}</span><span class="s2"></span>
-<span class="s2">        $</span><span class="si">{step_increments}</span><span class="s2"></span>
+<span class="s2">        $</span><span class="si">{outcalls}</span>
+<span class="s2">        $</span><span class="si">{step_increments}</span>
 <span class="s2">    }</span>
 <span class="s2">}</span>
 <span class="s2">PyUFuncGenericFunction $</span><span class="si">{funcname}</span><span class="s2">_funcs[1] = {&amp;$</span><span class="si">{funcname}</span><span class="s2">_ufunc};</span>
-<span class="s2">static char $</span><span class="si">{funcname}</span><span class="s2">_types[$</span><span class="si">{n_types}</span><span class="s2">] = $</span><span class="si">{types}</span><span class="s2"></span>
+<span class="s2">static char $</span><span class="si">{funcname}</span><span class="s2">_types[$</span><span class="si">{n_types}</span><span class="s2">] = $</span><span class="si">{types}</span>
 <span class="s2">static void *$</span><span class="si">{funcname}</span><span class="s2">_data[1] = </span><span class="si">{NULL}</span><span class="s2">;&quot;&quot;&quot;</span><span class="p">)</span>
 
 <span class="n">_ufunc_bottom</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\</span>
@@ -754,7 +753,7 @@
 <span class="s2">PyMODINIT_FUNC PyInit_$</span><span class="si">{module}</span><span class="s2">(void)</span>
 <span class="s2">{</span>
 <span class="s2">    PyObject *m, *d;</span>
-<span class="s2">    $</span><span class="si">{function_creation}</span><span class="s2"></span>
+<span class="s2">    $</span><span class="si">{function_creation}</span>
 <span class="s2">    m = PyModule_Create(&amp;moduledef);</span>
 <span class="s2">    if (!m) {</span>
 <span class="s2">        return NULL;</span>
@@ -762,14 +761,14 @@
 <span class="s2">    import_array();</span>
 <span class="s2">    import_umath();</span>
 <span class="s2">    d = PyModule_GetDict(m);</span>
-<span class="s2">    $</span><span class="si">{ufunc_init}</span><span class="s2"></span>
+<span class="s2">    $</span><span class="si">{ufunc_init}</span>
 <span class="s2">    return m;</span>
 <span class="s2">}</span>
 <span class="s2">#else</span>
 <span class="s2">PyMODINIT_FUNC init$</span><span class="si">{module}</span><span class="s2">(void)</span>
 <span class="s2">{</span>
 <span class="s2">    PyObject *m, *d;</span>
-<span class="s2">    $</span><span class="si">{function_creation}</span><span class="s2"></span>
+<span class="s2">    $</span><span class="si">{function_creation}</span>
 <span class="s2">    m = Py_InitModule(&quot;$</span><span class="si">{module}</span><span class="s2">&quot;, $</span><span class="si">{module}</span><span class="s2">Methods);</span>
 <span class="s2">    if (m == NULL) {</span>
 <span class="s2">        return;</span>
@@ -777,7 +776,7 @@
 <span class="s2">    import_array();</span>
 <span class="s2">    import_umath();</span>
 <span class="s2">    d = PyModule_GetDict(m);</span>
-<span class="s2">    $</span><span class="si">{ufunc_init}</span><span class="s2"></span>
+<span class="s2">    $</span><span class="si">{ufunc_init}</span>
 <span class="s2">}</span>
 <span class="s2">#endif</span><span class="se">\</span>
 <span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
@@ -806,7 +805,7 @@
 
 
 <div class="viewcode-block" id="UfuncifyCodeWrapper"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.autowrap.UfuncifyCodeWrapper">[docs]</a><span class="k">class</span> <span class="nc">UfuncifyCodeWrapper</span><span class="p">(</span><span class="n">CodeWrapper</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Wrapper for Ufuncify&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper for Ufuncify&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 
@@ -887,7 +886,7 @@
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">setup</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="UfuncifyCodeWrapper.dump_c"><a class="viewcode-back" href="../../../../modelparameters.sympy.utilities.html#modelparameters.sympy.utilities.autowrap.UfuncifyCodeWrapper.dump_c">[docs]</a>    <span class="k">def</span> <span class="nf">dump_c</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">routines</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">funcname</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Write a C file with python wrappers</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write a C file with python wrappers</span>
 
 <span class="sd">        This file contains all the definitions of the routines in c code.</span>
 
@@ -986,7 +985,7 @@
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="p">))</span></div>
 
     <span class="k">def</span> <span class="nf">_partition_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Group function arguments into categories.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Group function arguments into categories.&quot;&quot;&quot;</span>
         <span class="n">py_in</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">py_out</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
@@ -1003,7 +1002,7 @@
 <span class="nd">@doctest_depends_on</span><span class="p">(</span><span class="n">exe</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;f2py&#39;</span><span class="p">,</span> <span class="s1">&#39;gfortran&#39;</span><span class="p">,</span> <span class="s1">&#39;gcc&#39;</span><span class="p">),</span> <span class="n">modules</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;numpy&#39;</span><span class="p">,))</span>
 <span class="k">def</span> <span class="nf">ufuncify</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">language</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;numpy&#39;</span><span class="p">,</span> <span class="n">tempdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
              <span class="n">flags</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">helpers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generates a binary function that supports broadcasting on numpy arrays.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a binary function that supports broadcasting on numpy arrays.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -1149,7 +1148,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1170,7 +1169,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

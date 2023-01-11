@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -65,7 +64,7 @@
 
 <div class="viewcode-block" id="trigsimp_groebner"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.trigsimp.trigsimp_groebner">[docs]</a><span class="k">def</span> <span class="nf">trigsimp_groebner</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">hints</span><span class="o">=</span><span class="p">[],</span> <span class="n">quick</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;grlex&quot;</span><span class="p">,</span>
                       <span class="n">polynomial</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Simplify trigonometric expressions using a groebner basis algorithm.</span>
 
 <span class="sd">    This routine takes a fraction involving trigonometric or hyperbolic</span>
@@ -240,7 +239,7 @@
     <span class="c1"># preserved by the same argument as before.</span>
 
     <span class="k">def</span> <span class="nf">parse_hints</span><span class="p">(</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Split hints into (n, funcs, iterables, gens).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Split hints into (n, funcs, iterables, gens).&quot;&quot;&quot;</span>
         <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="n">funcs</span><span class="p">,</span> <span class="n">iterables</span><span class="p">,</span> <span class="n">gens</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">hints</span><span class="p">:</span>
@@ -260,7 +259,7 @@
         <span class="k">return</span> <span class="n">n</span><span class="p">,</span> <span class="n">funcs</span><span class="p">,</span> <span class="n">iterables</span><span class="p">,</span> <span class="n">gens</span>
 
     <span class="k">def</span> <span class="nf">build_ideal</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">terms</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Build generators for our ideal. Terms is an iterable with elements of</span>
 <span class="sd">        the form (fn, coeff), indicating that we have a generator fn(coeff*x).</span>
 
@@ -285,7 +284,7 @@
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">I</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">analyse_gens</span><span class="p">(</span><span class="n">gens</span><span class="p">,</span> <span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Analyse the generators ``gens``, using the hints ``hints``.</span>
 
 <span class="sd">        The meaning of ``hints`` is described in the main docstring.</span>
@@ -464,7 +463,7 @@
 
 
 <div class="viewcode-block" id="trigsimp"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.trigsimp.trigsimp">[docs]</a><span class="k">def</span> <span class="nf">trigsimp</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">opts</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    reduces expression by using known trig identities</span>
 
 <span class="sd">    Notes</span>
@@ -552,7 +551,7 @@
 
 
 <div class="viewcode-block" id="exptrigsimp"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.trigsimp.exptrigsimp">[docs]</a><span class="k">def</span> <span class="nf">exptrigsimp</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">simplify</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Simplifies exponential / trigonometric / hyperbolic functions.</span>
 <span class="sd">    When ``simplify`` is True (default) the expression obtained after the</span>
 <span class="sd">    simplification step will be then be passed through simplify to</span>
@@ -627,7 +626,7 @@
 <span class="c1">#-------------------- the old trigsimp routines ---------------------</span>
 
 <div class="viewcode-block" id="trigsimp_old"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.trigsimp.trigsimp_old">[docs]</a><span class="k">def</span> <span class="nf">trigsimp_old</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">opts</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    reduces expression by using known trig identities</span>
 
 <span class="sd">    Notes</span>
@@ -762,7 +761,7 @@
 
 
 <span class="k">def</span> <span class="nf">_dotrig</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper to tell whether ``a`` and ``b`` have the same sorts</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper to tell whether ``a`` and ``b`` have the same sorts</span>
 <span class="sd">    of symbols in them -- no need to test hyperbolic patterns against</span>
 <span class="sd">    expressions that have no hyperbolics in them.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">func</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">func</span> <span class="ow">and</span> <span class="p">(</span>
@@ -856,7 +855,7 @@
 
 
 <span class="k">def</span> <span class="nf">_replace_mul_fpowxgpow</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">rexp</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">rexph</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper for _match_div_rewrite.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper for _match_div_rewrite.</span>
 
 <span class="sd">    Replace f(b_)**c_*g(b_)**(rexp(c_)) with h(b)**rexph(c) if f(b_)</span>
 <span class="sd">    and g(b_) are both positive or if c_ is an integer.</span>
@@ -904,7 +903,7 @@
 <span class="n">_one</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span>
 
 <span class="k">def</span> <span class="nf">_match_div_rewrite</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;helper for __trigsimp&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;helper for __trigsimp&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">expr</span> <span class="o">=</span> <span class="n">_replace_mul_fpowxgpow</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span>
             <span class="n">_midn</span><span class="p">,</span> <span class="n">tan</span><span class="p">,</span> <span class="n">_idn</span><span class="p">)</span>
@@ -957,7 +956,7 @@
 
 <span class="nd">@cacheit</span>
 <span class="k">def</span> <span class="nf">__trigsimp</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;recursive helper for trigsimp&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;recursive helper for trigsimp&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.fu</span> <span class="kn">import</span> <span class="n">TR10i</span>
 
     <span class="k">if</span> <span class="n">_trigpat</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1087,7 +1086,7 @@
 
 
 <div class="viewcode-block" id="futrig"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.trigsimp.futrig">[docs]</a><span class="k">def</span> <span class="nf">futrig</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return simplified ``e`` using Fu-like transformations.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return simplified ``e`` using Fu-like transformations.</span>
 <span class="sd">    This is not the &quot;Fu&quot; algorithm. This is called by default</span>
 <span class="sd">    from ``trigsimp``. By default, hyperbolics subexpressions</span>
 <span class="sd">    will be simplified, but this can be disabled by setting</span>
@@ -1131,7 +1130,7 @@
 
 
 <span class="k">def</span> <span class="nf">_futrig</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Helper for futrig.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper for futrig.&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">.fu</span> <span class="kn">import</span> <span class="p">(</span>
         <span class="n">TR1</span><span class="p">,</span> <span class="n">TR2</span><span class="p">,</span> <span class="n">TR3</span><span class="p">,</span> <span class="n">TR2i</span><span class="p">,</span> <span class="n">TR10</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">TR10i</span><span class="p">,</span>
         <span class="n">TR8</span><span class="p">,</span> <span class="n">TR6</span><span class="p">,</span> <span class="n">TR15</span><span class="p">,</span> <span class="n">TR16</span><span class="p">,</span> <span class="n">TR111</span><span class="p">,</span> <span class="n">TR5</span><span class="p">,</span> <span class="n">TRmorrie</span><span class="p">,</span> <span class="n">TR11</span><span class="p">,</span> <span class="n">TR14</span><span class="p">,</span> <span class="n">TR22</span><span class="p">,</span>
@@ -1192,7 +1191,7 @@
 
 
 <span class="k">def</span> <span class="nf">_is_Expr</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;_eapply helper to tell whether ``e`` and all its args</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;_eapply helper to tell whether ``e`` and all its args</span>
 <span class="sd">    are Exprs.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">Expr</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">False</span>
@@ -1200,7 +1199,7 @@
 
 
 <span class="k">def</span> <span class="nf">_eapply</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">cond</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Apply ``func`` to ``e`` if all args are Exprs else only</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply ``func`` to ``e`` if all args are Exprs else only</span>
 <span class="sd">    apply it to those args that *are* Exprs.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">Expr</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">e</span>
@@ -1226,7 +1225,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1247,7 +1246,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

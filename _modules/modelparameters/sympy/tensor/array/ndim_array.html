@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -43,7 +42,7 @@
 
 
 <div class="viewcode-block" id="NDimArray"><a class="viewcode-back" href="../../../../../modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray">[docs]</a><span class="k">class</span> <span class="nc">NDimArray</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -197,7 +196,7 @@
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">shape</span><span class="p">),</span> <span class="n">iterable</span>
 
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Overload common function len(). Returns number of elements in array.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Overload common function len(). Returns number of elements in array.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -214,7 +213,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns array shape (dimension).</span>
 
 <span class="sd">        Examples</span>
@@ -229,7 +228,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_shape</span>
 
 <div class="viewcode-block" id="NDimArray.rank"><a class="viewcode-back" href="../../../../../modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.rank">[docs]</a>    <span class="k">def</span> <span class="nf">rank</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns rank of array.</span>
 
 <span class="sd">        Examples</span>
@@ -244,7 +243,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rank</span></div>
 
 <div class="viewcode-block" id="NDimArray.diff"><a class="viewcode-back" href="../../../../../modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.diff">[docs]</a>    <span class="k">def</span> <span class="nf">diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate the derivative of each element in the array.</span>
 
 <span class="sd">        Examples</span>
@@ -260,7 +259,7 @@
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">),</span> <span class="bp">self</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="NDimArray.applyfunc"><a class="viewcode-back" href="../../../../../modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.applyfunc">[docs]</a>    <span class="k">def</span> <span class="nf">applyfunc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Apply a function to each element of the N-dim array.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply a function to each element of the N-dim array.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -275,7 +274,7 @@
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="nb">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns string, allows to use standard functions print() and str().</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns string, allows to use standard functions print() and str().</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -299,7 +298,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
 
 <div class="viewcode-block" id="NDimArray.tolist"><a class="viewcode-back" href="../../../../../modelparameters.sympy.tensor.array.html#modelparameters.sympy.tensor.array.ndim_array.NDimArray.tolist">[docs]</a>    <span class="k">def</span> <span class="nf">tolist</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Conveting MutableDenseNDimArray to one-dim list</span>
 
 <span class="sd">        Examples</span>
@@ -380,7 +379,7 @@
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="n">result_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        NDimArray instances can be compared to each other.</span>
 <span class="sd">        Instances equal if they have same shape and data.</span>
 
@@ -466,7 +465,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -487,7 +486,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

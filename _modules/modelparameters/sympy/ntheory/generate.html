@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -60,7 +59,7 @@
 
 
 <div class="viewcode-block" id="Sieve"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.generate.Sieve">[docs]</a><span class="k">class</span> <span class="nc">Sieve</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;An infinite list of prime numbers, implemented as a dynamically</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An infinite list of prime numbers, implemented as a dynamically</span>
 <span class="sd">    growing sieve of Eratosthenes. When a lookup is requested involving</span>
 <span class="sd">    an odd number that has not been sieved, the sieve is automatically</span>
 <span class="sd">    extended up to that number.</span>
@@ -84,12 +83,12 @@
             <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_list</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">_list</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">_reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return sieve to its initial state for testing purposes.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return sieve to its initial state for testing purposes.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_list</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span>
 
 <div class="viewcode-block" id="Sieve.extend"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.generate.Sieve.extend">[docs]</a>    <span class="k">def</span> <span class="nf">extend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Grow the sieve to cover all primes &lt;= n (a real number).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Grow the sieve to cover all primes &lt;= n (a real number).</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -126,7 +125,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_list</span> <span class="o">+=</span> <span class="n">_array</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">newsieve</span> <span class="k">if</span> <span class="n">x</span><span class="p">])</span></div>
 
 <div class="viewcode-block" id="Sieve.extend_to_no"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.generate.Sieve.extend_to_no">[docs]</a>    <span class="k">def</span> <span class="nf">extend_to_no</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Extend to include the ith prime number.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extend to include the ith prime number.</span>
 
 <span class="sd">        i must be an integer.</span>
 
@@ -147,7 +146,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_list</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Sieve.primerange"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.generate.Sieve.primerange">[docs]</a>    <span class="k">def</span> <span class="nf">primerange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generate all prime numbers in the range [a, b).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate all prime numbers in the range [a, b).</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -176,7 +175,7 @@
                 <span class="k">return</span></div>
 
 <div class="viewcode-block" id="Sieve.search"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.generate.Sieve.search">[docs]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the indices i, j of the primes that bound n.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the indices i, j of the primes that bound n.</span>
 
 <span class="sd">        If n is prime then i == j.</span>
 
@@ -220,7 +219,7 @@
         <span class="k">return</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span>
 
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the nth prime number&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the nth prime number&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">slice</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">extend_to_no</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">stop</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_list</span><span class="p">[</span><span class="n">n</span><span class="o">.</span><span class="n">start</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">.</span><span class="n">stop</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="o">.</span><span class="n">step</span><span class="p">]</span>
@@ -234,7 +233,7 @@
 
 
 <div class="viewcode-block" id="prime"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.generate.prime">[docs]</a><span class="k">def</span> <span class="nf">prime</span><span class="p">(</span><span class="n">nth</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return the nth prime, with the primes indexed as prime(1) = 2,</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return the nth prime, with the primes indexed as prime(1) = 2,</span>
 <span class="sd">        prime(2) = 3, etc.... The nth prime is approximately n*log(n).</span>
 
 <span class="sd">        Logarithmic integral of x is a pretty nice approximation for number of</span>
@@ -309,7 +308,7 @@
 
 
 <div class="viewcode-block" id="primepi"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.generate.primepi">[docs]</a><span class="k">def</span> <span class="nf">primepi</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return the value of the prime counting function pi(n) = the number</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return the value of the prime counting function pi(n) = the number</span>
 <span class="sd">        of prime numbers less than or equal to n.</span>
 
 <span class="sd">        Algorithm Description:</span>
@@ -410,7 +409,7 @@
 
 
 <div class="viewcode-block" id="nextprime"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.generate.nextprime">[docs]</a><span class="k">def</span> <span class="nf">nextprime</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">ith</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return the ith prime greater than n.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return the ith prime greater than n.</span>
 
 <span class="sd">        i must be an integer.</span>
 
@@ -478,7 +477,7 @@
 
 
 <div class="viewcode-block" id="prevprime"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.generate.prevprime">[docs]</a><span class="k">def</span> <span class="nf">prevprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return the largest prime smaller than n.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return the largest prime smaller than n.</span>
 
 <span class="sd">        Notes</span>
 <span class="sd">        =====</span>
@@ -529,7 +528,7 @@
 
 
 <div class="viewcode-block" id="primerange"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.generate.primerange">[docs]</a><span class="k">def</span> <span class="nf">primerange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Generate a list of all prime numbers in the range [a, b).</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Generate a list of all prime numbers in the range [a, b).</span>
 
 <span class="sd">        If the range exists in the default sieve, the values will</span>
 <span class="sd">        be returned from there; otherwise values will be returned</span>
@@ -611,7 +610,7 @@
 
 
 <div class="viewcode-block" id="randprime"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.generate.randprime">[docs]</a><span class="k">def</span> <span class="nf">randprime</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return a random prime number in the range [a, b).</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return a random prime number in the range [a, b).</span>
 
 <span class="sd">        Bertrand&#39;s postulate assures that</span>
 <span class="sd">        randprime(a, 2*a) will always succeed for a &gt; 1.</span>
@@ -649,7 +648,7 @@
 
 
 <div class="viewcode-block" id="primorial"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.generate.primorial">[docs]</a><span class="k">def</span> <span class="nf">primorial</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">nth</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the product of the first n primes (default) or</span>
 <span class="sd">    the primes less than or equal to n (when ``nth=False``).</span>
 
@@ -712,7 +711,7 @@
 
 
 <div class="viewcode-block" id="cycle_length"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.generate.cycle_length">[docs]</a><span class="k">def</span> <span class="nf">cycle_length</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">nmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;For a given iterated sequence, return a generator that gives</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;For a given iterated sequence, return a generator that gives</span>
 <span class="sd">    the length of the iterated cycle (lambda) and the length of terms</span>
 <span class="sd">    before the cycle begins (mu); if ``values`` is True then the</span>
 <span class="sd">    terms of the sequence will be returned instead. The sequence is</span>
@@ -801,7 +800,7 @@
 
 
 <div class="viewcode-block" id="composite"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.generate.composite">[docs]</a><span class="k">def</span> <span class="nf">composite</span><span class="p">(</span><span class="n">nth</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return the nth composite number, with the composite numbers indexed as</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return the nth composite number, with the composite numbers indexed as</span>
 <span class="sd">        composite(1) = 4, composite(2) = 6, etc....</span>
 
 <span class="sd">        Examples</span>
@@ -867,7 +866,7 @@
 
 
 <div class="viewcode-block" id="compositepi"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.generate.compositepi">[docs]</a><span class="k">def</span> <span class="nf">compositepi</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Return the number of positive composite numbers less than or equal to n.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Return the number of positive composite numbers less than or equal to n.</span>
 <span class="sd">        The first positive composite is 4, i.e. compositepi(4) = 1.</span>
 
 <span class="sd">        Examples</span>
@@ -909,7 +908,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -930,7 +929,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

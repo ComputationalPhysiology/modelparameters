@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -54,7 +53,7 @@
 <span class="kn">from</span> <span class="nn">...polys.polytools</span> <span class="kn">import</span> <span class="n">Poly</span>
 
 <div class="viewcode-block" id="CombinatorialFunction"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.combinatorial.html#modelparameters.sympy.functions.combinatorial.factorials.CombinatorialFunction">[docs]</a><span class="k">class</span> <span class="nc">CombinatorialFunction</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class for combinatorial functions. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for combinatorial functions. &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">_eval_simplify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ratio</span><span class="p">,</span> <span class="n">measure</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">...simplify.simplify</span> <span class="kn">import</span> <span class="n">combsimp</span>
@@ -69,7 +68,7 @@
 
 
 <div class="viewcode-block" id="factorial"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.combinatorial.html#modelparameters.sympy.functions.combinatorial.factorials.factorial">[docs]</a><span class="k">class</span> <span class="nc">factorial</span><span class="p">(</span><span class="n">CombinatorialFunction</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Implementation of factorial function over nonnegative integers.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implementation of factorial function over nonnegative integers.</span>
 <span class="sd">       By convention (consistent with the gamma function and the binomial</span>
 <span class="sd">       coefficients), factorial of a negative integer is complex infinity.</span>
 
@@ -243,7 +242,7 @@
 
 
 <div class="viewcode-block" id="subfactorial"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.combinatorial.html#modelparameters.sympy.functions.combinatorial.factorials.subfactorial">[docs]</a><span class="k">class</span> <span class="nc">subfactorial</span><span class="p">(</span><span class="n">CombinatorialFunction</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The subfactorial counts the derangements of n items and is</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;The subfactorial counts the derangements of n items and is</span>
 <span class="sd">    defined for non-negative integers as::</span>
 
 <span class="sd">              ,</span>
@@ -329,7 +328,7 @@
 
 
 <div class="viewcode-block" id="factorial2"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.combinatorial.html#modelparameters.sympy.functions.combinatorial.factorials.factorial2">[docs]</a><span class="k">class</span> <span class="nc">factorial2</span><span class="p">(</span><span class="n">CombinatorialFunction</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The double factorial n!!, not to be confused with (n!)!</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The double factorial n!!, not to be confused with (n!)!</span>
 
 <span class="sd">    The double factorial is defined for nonnegative integers and for odd</span>
 <span class="sd">    negative integers as::</span>
@@ -444,7 +443,7 @@
 
 
 <div class="viewcode-block" id="RisingFactorial"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.combinatorial.html#modelparameters.sympy.functions.combinatorial.factorials.RisingFactorial">[docs]</a><span class="k">class</span> <span class="nc">RisingFactorial</span><span class="p">(</span><span class="n">CombinatorialFunction</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Rising factorial (also called Pochhammer symbol) is a double valued</span>
 <span class="sd">    function arising in concrete mathematics, hypergeometric functions</span>
 <span class="sd">    and series expansions. It is defined by:</span>
@@ -574,7 +573,7 @@
 
 
 <div class="viewcode-block" id="FallingFactorial"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.combinatorial.html#modelparameters.sympy.functions.combinatorial.factorials.FallingFactorial">[docs]</a><span class="k">class</span> <span class="nc">FallingFactorial</span><span class="p">(</span><span class="n">CombinatorialFunction</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Falling factorial (related to rising factorial) is a double valued</span>
 <span class="sd">    function arising in concrete mathematics, hypergeometric functions</span>
 <span class="sd">    and series expansions. It is defined by</span>
@@ -713,7 +712,7 @@
 
 
 <div class="viewcode-block" id="binomial"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.combinatorial.html#modelparameters.sympy.functions.combinatorial.factorials.binomial">[docs]</a><span class="k">class</span> <span class="nc">binomial</span><span class="p">(</span><span class="n">CombinatorialFunction</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Implementation of the binomial coefficient. It can be defined</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Implementation of the binomial coefficient. It can be defined</span>
 <span class="sd">    in two ways depending on its desired interpretation:</span>
 
 <span class="sd">        C(n,k) = n!/(k!(n-k)!)   or   C(n, k) = ff(n, k)/k!</span>
@@ -858,7 +857,7 @@
             <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_eval</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_expand_func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Function to expand binomial(n,k) when m is positive integer</span>
 <span class="sd">        Also,</span>
 <span class="sd">        n is self.args[0] and k is self.args[1] while using binomial(n, k)</span>
@@ -923,7 +922,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -944,7 +943,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

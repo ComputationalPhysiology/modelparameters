@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -163,7 +162,7 @@
     <span class="kn">from</span> <span class="nn">cStringIO</span> <span class="kn">import</span> <span class="n">StringIO</span> <span class="k">as</span> <span class="n">cStringIO</span>
 
     <span class="k">def</span> <span class="nf">exec_</span><span class="p">(</span><span class="n">_code_</span><span class="p">,</span> <span class="n">_globs_</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">_locs_</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Execute code in a namespace.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute code in a namespace.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">_globs_</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">frame</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">_getframe</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">_globs_</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_globals</span>
@@ -176,7 +175,7 @@
     <span class="nb">range</span><span class="o">=</span><span class="n">xrange</span>
 
 <div class="viewcode-block" id="with_metaclass"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.compatibility.with_metaclass">[docs]</a><span class="k">def</span> <span class="nf">with_metaclass</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="o">*</span><span class="n">bases</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a base class with a metaclass.</span>
 
 <span class="sd">    For example, if you have the metaclass</span>
@@ -226,7 +225,7 @@
 <span class="c1"># I think putting them here also makes it easier to use them in the core.</span>
 
 <div class="viewcode-block" id="NotIterable"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.compatibility.NotIterable">[docs]</a><span class="k">class</span> <span class="nc">NotIterable</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Use this as mixin when creating a class which is not supposed to return</span>
 <span class="sd">    true when iterable() is called on its instances. I.e. avoid infinite loop</span>
 <span class="sd">    when calling e.g. list() on the instance</span>
@@ -234,7 +233,7 @@
     <span class="k">pass</span></div>
 
 <div class="viewcode-block" id="iterable"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.compatibility.iterable">[docs]</a><span class="k">def</span> <span class="nf">iterable</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="p">(</span><span class="n">string_types</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">NotIterable</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a boolean indicating whether ``i`` is SymPy iterable.</span>
 <span class="sd">    True also indicates that the iterator is finite, i.e. you e.g.</span>
 <span class="sd">    call list(...) on the instance.</span>
@@ -292,7 +291,7 @@
 
 
 <div class="viewcode-block" id="is_sequence"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.compatibility.is_sequence">[docs]</a><span class="k">def</span> <span class="nf">is_sequence</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">include</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a boolean indicating whether ``i`` is a sequence in the SymPy</span>
 <span class="sd">    sense. If anything that fails the test below should be included as</span>
 <span class="sd">    being a sequence for your application, set &#39;include&#39; to that object&#39;s</span>
@@ -343,7 +342,7 @@
 
 
 <div class="viewcode-block" id="as_int"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.compatibility.as_int">[docs]</a><span class="k">def</span> <span class="nf">as_int</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert the argument to a builtin integer.</span>
 
 <span class="sd">    The return value is guaranteed to be equal to the input. ValueError is</span>
@@ -376,7 +375,7 @@
 
 
 <div class="viewcode-block" id="default_sort_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.compatibility.default_sort_key">[docs]</a><span class="k">def</span> <span class="nf">default_sort_key</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a key that can be used for sorting.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a key that can be used for sorting.</span>
 
 <span class="sd">    The key has the structure:</span>
 
@@ -538,7 +537,7 @@
 
 
 <span class="k">def</span> <span class="nf">_nodes</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A helper for ordered() which returns the node count of ``e`` which</span>
 <span class="sd">    for Basic objects is the number of Basic nodes in the expression tree</span>
 <span class="sd">    but for other objects is 1 (unless the object is an iterable or dict</span>
@@ -557,7 +556,7 @@
 
 
 <div class="viewcode-block" id="ordered"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.compatibility.ordered">[docs]</a><span class="k">def</span> <span class="nf">ordered</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">warn</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return an iterator of the seq where keys are used to break ties in</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return an iterator of the seq where keys are used to break ties in</span>
 <span class="sd">    a conservative fashion: if, after applying a key, there are no ties</span>
 <span class="sd">    then no other keys will be computed.</span>
 
@@ -761,7 +760,7 @@
     <span class="k">return</span> <span class="n">_HashedSeq</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">typed</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Least-recently-used cache decorator.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Least-recently-used cache decorator.</span>
 
 <span class="sd">    If *maxsize* is set to None, the LRU features are disabled and the cache</span>
 <span class="sd">    can grow without bound.</span>
@@ -875,12 +874,12 @@
                 <span class="k">return</span> <span class="n">result</span>
 
         <span class="k">def</span> <span class="nf">cache_info</span><span class="p">():</span>
-            <span class="sd">&quot;&quot;&quot;Report cache statistics&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Report cache statistics&quot;&quot;&quot;</span>
             <span class="k">with</span> <span class="n">lock</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">_CacheInfo</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="n">HITS</span><span class="p">],</span> <span class="n">stats</span><span class="p">[</span><span class="n">MISSES</span><span class="p">],</span> <span class="n">maxsize</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cache</span><span class="p">))</span>
 
         <span class="k">def</span> <span class="nf">cache_clear</span><span class="p">():</span>
-            <span class="sd">&quot;&quot;&quot;Clear the cache and cache statistics&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Clear the cache and cache statistics&quot;&quot;&quot;</span>
             <span class="k">with</span> <span class="n">lock</span><span class="p">:</span>
                 <span class="n">cache</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
                 <span class="n">root</span> <span class="o">=</span> <span class="n">nonlocal_root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -915,7 +914,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -936,7 +935,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -47,7 +46,7 @@
 
 
 <div class="viewcode-block" id="RecurrenceOperators"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.recurrence.RecurrenceOperators">[docs]</a><span class="k">def</span> <span class="nf">RecurrenceOperators</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">generator</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns an Algebra of Recurrence Operators and the operator for</span>
 <span class="sd">    shifting i.e. the `Sn` operator.</span>
 <span class="sd">    The first argument needs to be the base polynomial ring for the algebra</span>
@@ -69,7 +68,7 @@
 
 
 <div class="viewcode-block" id="RecurrenceOperatorAlgebra"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.recurrence.RecurrenceOperatorAlgebra">[docs]</a><span class="k">class</span> <span class="nc">RecurrenceOperatorAlgebra</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A Recurrence Operator Algebra is a set of noncommutative polynomials</span>
 <span class="sd">    in intermediate `Sn` and coefficients in a base ring A. It follows the</span>
 <span class="sd">    commutation rule:</span>
@@ -136,7 +135,7 @@
 
 
 <div class="viewcode-block" id="RecurrenceOperator"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.recurrence.RecurrenceOperator">[docs]</a><span class="k">class</span> <span class="nc">RecurrenceOperator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Recurrence Operators are defined by a list of polynomials</span>
 <span class="sd">    in the base ring and the parent ring of the Operator.</span>
 
@@ -190,7 +189,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">listofpoly</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
 
     <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Multiplies two Operators and returns another</span>
 <span class="sd">        RecurrenceOperator instance using the commutation rule</span>
 <span class="sd">        Sn * a(n) = a(n + 1) * Sn</span>
@@ -351,7 +350,7 @@
 
 
 <div class="viewcode-block" id="HolonomicSequence"><a class="viewcode-back" href="../../../../modelparameters.sympy.holonomic.html#modelparameters.sympy.holonomic.recurrence.HolonomicSequence">[docs]</a><span class="k">class</span> <span class="nc">HolonomicSequence</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A Holonomic Sequence is a type of sequence satisfying a linear homogeneous</span>
 <span class="sd">    recurrence relation with Polynomial coefficients. Alternatively, A sequence</span>
 <span class="sd">    is Holonomic if and only if its generating function is a Holonomic Function.</span>
@@ -417,7 +416,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -438,7 +437,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

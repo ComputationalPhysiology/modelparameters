@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -72,7 +71,7 @@
 
 
 <div class="viewcode-block" id="reps_toposort"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.cse_main.reps_toposort">[docs]</a><span class="k">def</span> <span class="nf">reps_toposort</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Sort replacements `r` so (k1, v1) appears before (k2, v2)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sort replacements `r` so (k1, v1) appears before (k2, v2)</span>
 <span class="sd">    if k2 is in v1&#39;s free symbols. This orders items in the</span>
 <span class="sd">    way that cse returns its results (hence, in order to use the</span>
 <span class="sd">    replacements in a substitution option it would make sense</span>
@@ -101,7 +100,7 @@
 
 
 <div class="viewcode-block" id="cse_separate"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.cse_main.cse_separate">[docs]</a><span class="k">def</span> <span class="nf">cse_separate</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Move expressions that are in the form (symbol, expr) out of the</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Move expressions that are in the form (symbol, expr) out of the</span>
 <span class="sd">    expressions and sort them into the replacements using the reps_toposort.</span>
 
 <span class="sd">    Examples</span>
@@ -129,7 +128,7 @@
 
 
 <div class="viewcode-block" id="preprocess_for_cse"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.cse_main.preprocess_for_cse">[docs]</a><span class="k">def</span> <span class="nf">preprocess_for_cse</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">optimizations</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Preprocess an expression to optimize for common subexpression</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Preprocess an expression to optimize for common subexpression</span>
 <span class="sd">    elimination.</span>
 
 <span class="sd">    Parameters</span>
@@ -151,7 +150,7 @@
 
 
 <div class="viewcode-block" id="postprocess_for_cse"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.cse_main.postprocess_for_cse">[docs]</a><span class="k">def</span> <span class="nf">postprocess_for_cse</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">optimizations</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Postprocess an expression after common subexpression elimination to</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Postprocess an expression after common subexpression elimination to</span>
 <span class="sd">    return the expression to canonical sympy form.</span>
 
 <span class="sd">    Parameters</span>
@@ -175,7 +174,7 @@
 
 
 <div class="viewcode-block" id="opt_cse"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.cse_main.opt_cse">[docs]</a><span class="k">def</span> <span class="nf">opt_cse</span><span class="p">(</span><span class="n">exprs</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;canonical&#39;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Find optimization opportunities in Adds, Muls, Pows and negative</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find optimization opportunities in Adds, Muls, Pows and negative</span>
 <span class="sd">    coefficient Muls</span>
 
 <span class="sd">    Parameters</span>
@@ -305,7 +304,7 @@
 
 
 <div class="viewcode-block" id="tree_cse"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.cse_main.tree_cse">[docs]</a><span class="k">def</span> <span class="nf">tree_cse</span><span class="p">(</span><span class="n">exprs</span><span class="p">,</span> <span class="n">symbols</span><span class="p">,</span> <span class="n">opt_subs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;canonical&#39;</span><span class="p">,</span> <span class="n">ignore</span><span class="o">=</span><span class="p">()):</span>
-    <span class="sd">&quot;&quot;&quot;Perform raw CSE on expression tree, taking opt_subs into account.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform raw CSE on expression tree, taking opt_subs into account.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ==========</span>
@@ -454,7 +453,7 @@
 
 <div class="viewcode-block" id="cse"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.cse_main.cse">[docs]</a><span class="k">def</span> <span class="nf">cse</span><span class="p">(</span><span class="n">exprs</span><span class="p">,</span> <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">optimizations</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">postprocess</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">order</span><span class="o">=</span><span class="s1">&#39;canonical&#39;</span><span class="p">,</span> <span class="n">ignore</span><span class="o">=</span><span class="p">()):</span>
-    <span class="sd">&quot;&quot;&quot; Perform common subexpression elimination on an expression.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Perform common subexpression elimination on an expression.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ==========</span>
@@ -615,7 +614,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -636,7 +635,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

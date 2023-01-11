@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -46,7 +45,7 @@
 
 
 <span class="k">def</span> <span class="nf">_cmp_perm_lists</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">second</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compare two lists of permutations as sets.</span>
 
 <span class="sd">    This is used for testing purposes. Since the array form of a</span>
@@ -73,7 +72,7 @@
 
 <span class="k">def</span> <span class="nf">_naive_list_centralizer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">af</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">.perm_groups</span> <span class="kn">import</span> <span class="n">PermutationGroup</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a list of elements for the centralizer of a subgroup/set/element.</span>
 
 <span class="sd">    This is a brute force implementation that goes over all elements of the</span>
@@ -117,7 +116,7 @@
 
 
 <span class="k">def</span> <span class="nf">_verify_bsgs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">gens</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Verify the correctness of a base and strong generating set.</span>
 
 <span class="sd">    This is a naive implementation using the definition of a base and a strong</span>
@@ -155,7 +154,7 @@
 
 
 <span class="k">def</span> <span class="nf">_verify_centralizer</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">centr</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Verify the centralizer of a group/set/element inside another group.</span>
 
 <span class="sd">    This is used for testing ``.centralizer()`` from</span>
@@ -192,7 +191,7 @@
 
 <span class="k">def</span> <span class="nf">_verify_normal_closure</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">closure</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="kn">from</span> <span class="nn">.perm_groups</span> <span class="kn">import</span> <span class="n">PermutationGroup</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Verify the normal closure of a subgroup/subset/element in a group.</span>
 
 <span class="sd">    This is used to test</span>
@@ -232,7 +231,7 @@
 
 
 <div class="viewcode-block" id="canonicalize_naive"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.testutil.canonicalize_naive">[docs]</a><span class="k">def</span> <span class="nf">canonicalize_naive</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">dummies</span><span class="p">,</span> <span class="n">sym</span><span class="p">,</span> <span class="o">*</span><span class="n">v</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Canonicalize tensor formed by tensors of the different types</span>
 
 <span class="sd">    g  permutation representing the tensor</span>
@@ -302,7 +301,7 @@
 
 
 <div class="viewcode-block" id="graph_certificate"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.testutil.graph_certificate">[docs]</a><span class="k">def</span> <span class="nf">graph_certificate</span><span class="p">(</span><span class="n">gr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a certificate for the graph</span>
 
 <span class="sd">    gr adjacency list</span>
@@ -391,7 +390,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -412,7 +411,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

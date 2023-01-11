@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -49,7 +48,7 @@
 
 
 <div class="viewcode-block" id="Partition"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.partitions.Partition">[docs]</a><span class="k">class</span> <span class="nc">Partition</span><span class="p">(</span><span class="n">FiniteSet</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class represents an abstract partition.</span>
 
 <span class="sd">    A partition is a set of disjoint sets whose union equals a given set.</span>
@@ -65,7 +64,7 @@
     <span class="n">_partition</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">partition</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates a new partition object.</span>
 
 <span class="sd">        This method also verifies if the arguments passed are</span>
@@ -102,7 +101,7 @@
         <span class="k">return</span> <span class="n">obj</span>
 
 <div class="viewcode-block" id="Partition.sort_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.partitions.Partition.sort_key">[docs]</a>    <span class="k">def</span> <span class="nf">sort_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a canonical key that can be used for sorting.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a canonical key that can be used for sorting.</span>
 
 <span class="sd">        Ordering is based on the size and sorted elements of the partition</span>
 <span class="sd">        and ties are broken with the rank.</span>
@@ -130,7 +129,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">partition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return partition as a sorted list of lists.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return partition as a sorted list of lists.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -145,7 +144,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_partition</span>
 
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return permutation whose rank is ``other`` greater than current rank,</span>
 <span class="sd">        (mod the maximum rank for the set).</span>
 
@@ -169,7 +168,7 @@
         <span class="k">return</span> <span class="n">Partition</span><span class="o">.</span><span class="n">from_rgs</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">members</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return permutation whose rank is ``other`` less than current rank,</span>
 <span class="sd">        (mod the maximum rank for the set).</span>
 
@@ -188,7 +187,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__add__</span><span class="p">(</span><span class="o">-</span><span class="n">other</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks if a partition is less than or equal to</span>
 <span class="sd">        the other based on rank.</span>
 
@@ -208,7 +207,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sort_key</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">other</span><span class="p">)</span><span class="o">.</span><span class="n">sort_key</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks if a partition is less than the other.</span>
 
 <span class="sd">        Examples</span>
@@ -226,7 +225,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rank</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets the rank of a partition.</span>
 
 <span class="sd">        Examples</span>
@@ -244,7 +243,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">RGS</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the &quot;restricted growth string&quot; of the partition.</span>
 
 <span class="sd">        The RGS is returned as a list of indices, L, where L[i] indicates</span>
@@ -276,7 +275,7 @@
 
 <div class="viewcode-block" id="Partition.from_rgs"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.partitions.Partition.from_rgs">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_rgs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rgs</span><span class="p">,</span> <span class="n">elements</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Creates a set partition from a restricted growth string.</span>
 
 <span class="sd">        The indices given in rgs are assumed to be the index</span>
@@ -311,7 +310,7 @@
 
 
 <div class="viewcode-block" id="IntegerPartition"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.partitions.IntegerPartition">[docs]</a><span class="k">class</span> <span class="nc">IntegerPartition</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class represents an integer partition.</span>
 
 <span class="sd">    In number theory and combinatorics, a partition of a positive integer,</span>
@@ -336,7 +335,7 @@
     <span class="n">_keys</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">partition</span><span class="p">,</span> <span class="n">integer</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates a new IntegerPartition object from a list or dictionary.</span>
 
 <span class="sd">        The partition can be given as a list of positive integers or a</span>
@@ -395,7 +394,7 @@
         <span class="k">return</span> <span class="n">obj</span>
 
 <div class="viewcode-block" id="IntegerPartition.prev_lex"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.partitions.IntegerPartition.prev_lex">[docs]</a>    <span class="k">def</span> <span class="nf">prev_lex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the previous partition of the integer, n, in lexical order,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the previous partition of the integer, n, in lexical order,</span>
 <span class="sd">        wrapping around to [1, ..., 1] if the partition is [n].</span>
 
 <span class="sd">        Examples</span>
@@ -432,7 +431,7 @@
         <span class="k">return</span> <span class="n">IntegerPartition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">integer</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="IntegerPartition.next_lex"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.partitions.IntegerPartition.next_lex">[docs]</a>    <span class="k">def</span> <span class="nf">next_lex</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the next partition of the integer, n, in lexical order,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the next partition of the integer, n, in lexical order,</span>
 <span class="sd">        wrapping around to [n] if the partition is [1, ..., 1].</span>
 
 <span class="sd">        Examples</span>
@@ -482,7 +481,7 @@
         <span class="k">return</span> <span class="n">IntegerPartition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">integer</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="IntegerPartition.as_dict"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.partitions.IntegerPartition.as_dict">[docs]</a>    <span class="k">def</span> <span class="nf">as_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the partition as a dictionary whose keys are the</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the partition as a dictionary whose keys are the</span>
 <span class="sd">        partition integers and the values are the multiplicity of that</span>
 <span class="sd">        integer.</span>
 
@@ -501,7 +500,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">conjugate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the conjugate partition of itself.</span>
 
 <span class="sd">        Examples</span>
@@ -524,7 +523,7 @@
         <span class="k">return</span> <span class="n">b</span>
 
     <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return True if self is less than other when the partition</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if self is less than other when the partition</span>
 <span class="sd">        is listed from smallest to biggest.</span>
 
 <span class="sd">        Examples</span>
@@ -543,7 +542,7 @@
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partition</span><span class="p">))</span> <span class="o">&lt;</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">partition</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return True if self is less than other when the partition</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if self is less than other when the partition</span>
 <span class="sd">        is listed from smallest to biggest.</span>
 
 <span class="sd">        Examples</span>
@@ -557,7 +556,7 @@
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partition</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">partition</span><span class="p">))</span>
 
 <div class="viewcode-block" id="IntegerPartition.as_ferrers"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.partitions.IntegerPartition.as_ferrers">[docs]</a>    <span class="k">def</span> <span class="nf">as_ferrers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">char</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints the ferrer diagram of a partition.</span>
 
 <span class="sd">        Examples</span>
@@ -576,7 +575,7 @@
 
 
 <div class="viewcode-block" id="random_integer_partition"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.partitions.random_integer_partition">[docs]</a><span class="k">def</span> <span class="nf">random_integer_partition</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates a random integer partition summing to ``n`` as a list</span>
 <span class="sd">    of reverse-sorted integers.</span>
 
@@ -615,7 +614,7 @@
 
 
 <div class="viewcode-block" id="RGS_generalized"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.partitions.RGS_generalized">[docs]</a><span class="k">def</span> <span class="nf">RGS_generalized</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes the m + 1 generalized unrestricted growth strings</span>
 <span class="sd">    and returns them as rows in matrix.</span>
 
@@ -647,7 +646,7 @@
 
 
 <div class="viewcode-block" id="RGS_enum"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.partitions.RGS_enum">[docs]</a><span class="k">def</span> <span class="nf">RGS_enum</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    RGS_enum computes the total number of restricted growth strings</span>
 <span class="sd">    possible for a superset of size m.</span>
 
@@ -684,7 +683,7 @@
 
 
 <div class="viewcode-block" id="RGS_unrank"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.partitions.RGS_unrank">[docs]</a><span class="k">def</span> <span class="nf">RGS_unrank</span><span class="p">(</span><span class="n">rank</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gives the unranked restricted growth string for a given</span>
 <span class="sd">    superset size.</span>
 
@@ -719,7 +718,7 @@
 
 
 <div class="viewcode-block" id="RGS_rank"><a class="viewcode-back" href="../../../../modelparameters.sympy.combinatorics.html#modelparameters.sympy.combinatorics.partitions.RGS_rank">[docs]</a><span class="k">def</span> <span class="nf">RGS_rank</span><span class="p">(</span><span class="n">rgs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes the rank of a restricted growth string.</span>
 
 <span class="sd">    Examples</span>
@@ -756,7 +755,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -777,7 +776,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

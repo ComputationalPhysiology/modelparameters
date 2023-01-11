@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -45,7 +44,7 @@
 
 
 <div class="viewcode-block" id="literal_symbol"><a class="viewcode-back" href="../../../../modelparameters.sympy.logic.html#modelparameters.sympy.logic.inference.literal_symbol">[docs]</a><span class="k">def</span> <span class="nf">literal_symbol</span><span class="p">(</span><span class="n">literal</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The symbol in this literal (without the negation).</span>
 
 <span class="sd">    Examples</span>
@@ -74,7 +73,7 @@
 
 
 <div class="viewcode-block" id="satisfiable"><a class="viewcode-back" href="../../../../modelparameters.sympy.logic.html#modelparameters.sympy.logic.inference.satisfiable">[docs]</a><span class="k">def</span> <span class="nf">satisfiable</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s2">&quot;dpll2&quot;</span><span class="p">,</span> <span class="n">all_models</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check satisfiability of a propositional sentence.</span>
 <span class="sd">    Returns a model when it succeeds.</span>
 <span class="sd">    Returns {true: true} for trivially true expressions.</span>
@@ -126,7 +125,7 @@
 
 
 <div class="viewcode-block" id="valid"><a class="viewcode-back" href="../../../../modelparameters.sympy.logic.html#modelparameters.sympy.logic.inference.valid">[docs]</a><span class="k">def</span> <span class="nf">valid</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check validity of a propositional sentence.</span>
 <span class="sd">    A valid propositional sentence is True under every assignment.</span>
 
@@ -150,7 +149,7 @@
 
 
 <div class="viewcode-block" id="pl_true"><a class="viewcode-back" href="../../../../modelparameters.sympy.logic.html#modelparameters.sympy.logic.inference.pl_true">[docs]</a><span class="k">def</span> <span class="nf">pl_true</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="p">{},</span> <span class="n">deep</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns whether the given assignment is a model or not.</span>
 
 <span class="sd">    If the assignment does not specify the value for every proposition,</span>
@@ -220,7 +219,7 @@
 
 
 <div class="viewcode-block" id="entails"><a class="viewcode-back" href="../../../../modelparameters.sympy.logic.html#modelparameters.sympy.logic.inference.entails">[docs]</a><span class="k">def</span> <span class="nf">entails</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">formula_set</span><span class="o">=</span><span class="p">{}):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check whether the given expr_set entail an expr.</span>
 <span class="sd">    If formula_set is empty then it returns the validity of expr.</span>
 
@@ -250,7 +249,7 @@
 
 
 <div class="viewcode-block" id="KB"><a class="viewcode-back" href="../../../../modelparameters.sympy.logic.html#modelparameters.sympy.logic.inference.KB">[docs]</a><span class="k">class</span> <span class="nc">KB</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class for all knowledge bases&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for all knowledge bases&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clauses_</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">sentence</span><span class="p">:</span>
@@ -271,10 +270,10 @@
 
 
 <div class="viewcode-block" id="PropKB"><a class="viewcode-back" href="../../../../modelparameters.sympy.logic.html#modelparameters.sympy.logic.inference.PropKB">[docs]</a><span class="k">class</span> <span class="nc">PropKB</span><span class="p">(</span><span class="n">KB</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A KB for Propositional Logic.  Inefficient, with no indexing.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A KB for Propositional Logic.  Inefficient, with no indexing.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="PropKB.tell"><a class="viewcode-back" href="../../../../modelparameters.sympy.logic.html#modelparameters.sympy.logic.inference.PropKB.tell">[docs]</a>    <span class="k">def</span> <span class="nf">tell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Add the sentence&#39;s clauses to the KB</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add the sentence&#39;s clauses to the KB</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -297,7 +296,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">clauses_</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">c</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PropKB.ask"><a class="viewcode-back" href="../../../../modelparameters.sympy.logic.html#modelparameters.sympy.logic.inference.PropKB.ask">[docs]</a>    <span class="k">def</span> <span class="nf">ask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Checks if the query is true given the set of clauses.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Checks if the query is true given the set of clauses.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -314,7 +313,7 @@
         <span class="k">return</span> <span class="n">entails</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">clauses_</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="PropKB.retract"><a class="viewcode-back" href="../../../../modelparameters.sympy.logic.html#modelparameters.sympy.logic.inference.PropKB.retract">[docs]</a>    <span class="k">def</span> <span class="nf">retract</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Remove the sentence&#39;s clauses from the KB</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove the sentence&#39;s clauses from the KB</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -352,7 +351,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -373,7 +372,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

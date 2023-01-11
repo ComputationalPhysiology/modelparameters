@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -58,7 +57,7 @@
 
 
 <div class="viewcode-block" id="collect"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.radsimp.collect">[docs]</a><span class="k">def</span> <span class="nf">collect</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">syms</span><span class="p">,</span> <span class="n">func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">distribute_order_term</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Collect additive terms of an expression.</span>
 
 <span class="sd">    This function collects additive terms of an expression with respect</span>
@@ -246,7 +245,7 @@
         <span class="k">return</span> <span class="n">expr</span><span class="p">,</span> <span class="p">(</span><span class="n">sym</span><span class="p">,</span> <span class="n">Rational</span><span class="p">(</span><span class="n">order</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">parse_term</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Parses expression expr and outputs tuple (sexpr, rat_expo,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parses expression expr and outputs tuple (sexpr, rat_expo,</span>
 <span class="sd">        sym_expo, deriv)</span>
 <span class="sd">        where:</span>
 <span class="sd">         - sexpr is the base expression</span>
@@ -288,7 +287,7 @@
         <span class="k">return</span> <span class="n">sexpr</span><span class="p">,</span> <span class="n">rat_expo</span><span class="p">,</span> <span class="n">sym_expo</span><span class="p">,</span> <span class="n">deriv</span>
 
     <span class="k">def</span> <span class="nf">parse_expression</span><span class="p">(</span><span class="n">terms</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Parse terms searching for a pattern.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Parse terms searching for a pattern.</span>
 <span class="sd">        terms is a list of tuples as returned by parse_terms;</span>
 <span class="sd">        pattern is an expression treated as a product of factors</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -445,7 +444,7 @@
 
 
 <div class="viewcode-block" id="rcollect"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.radsimp.rcollect">[docs]</a><span class="k">def</span> <span class="nf">rcollect</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">*</span><span class="nb">vars</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Recursively collect sums in an expression.</span>
 
 <span class="sd">    Examples</span>
@@ -475,7 +474,7 @@
 
 
 <div class="viewcode-block" id="collect_sqrt"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.radsimp.collect_sqrt">[docs]</a><span class="k">def</span> <span class="nf">collect_sqrt</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return expr with terms having common square roots collected together.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return expr with terms having common square roots collected together.</span>
 <span class="sd">    If ``evaluate`` is False a count indicating the number of sqrt-containing</span>
 <span class="sd">    terms will be returned and, if non-zero, the terms of the Add will be</span>
 <span class="sd">    returned, else the expression itself will be returned as a single term.</span>
@@ -553,7 +552,7 @@
 
 
 <div class="viewcode-block" id="collect_const"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.radsimp.collect_const">[docs]</a><span class="k">def</span> <span class="nf">collect_const</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">*</span><span class="nb">vars</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A non-greedy collection of terms with similar number coefficients in</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A non-greedy collection of terms with similar number coefficients in</span>
 <span class="sd">    an Add expr. If ``vars`` is given then only those constants will be</span>
 <span class="sd">    targeted. Although any Number can also be targeted, if this is not</span>
 <span class="sd">    desired set ``Numbers=False`` and no Float or Rational will be collected.</span>
@@ -666,7 +665,7 @@
 
 
 <div class="viewcode-block" id="radsimp"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.radsimp.radsimp">[docs]</a><span class="k">def</span> <span class="nf">radsimp</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">symbolic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_terms</span><span class="o">=</span><span class="mi">4</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Rationalize the denominator by removing square roots.</span>
 
 <span class="sd">    Note: the expression returned from radsimp must be used with caution</span>
@@ -914,7 +913,7 @@
 
 
 <div class="viewcode-block" id="rad_rationalize"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.radsimp.rad_rationalize">[docs]</a><span class="k">def</span> <span class="nf">rad_rationalize</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">den</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Rationalize num/den by removing square roots in the denominator;</span>
 <span class="sd">    num and den are sum of terms whose squares are rationals</span>
 
@@ -936,7 +935,7 @@
 
 
 <div class="viewcode-block" id="fraction"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.radsimp.fraction">[docs]</a><span class="k">def</span> <span class="nf">fraction</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns a pair with expression&#39;s numerator and denominator.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns a pair with expression&#39;s numerator and denominator.</span>
 <span class="sd">       If the given expression is not a fraction then this function</span>
 <span class="sd">       will return the tuple (expr, 1).</span>
 
@@ -1056,7 +1055,7 @@
 
 
 <div class="viewcode-block" id="split_surds"><a class="viewcode-back" href="../../../../modelparameters.sympy.simplify.html#modelparameters.sympy.simplify.radsimp.split_surds">[docs]</a><span class="k">def</span> <span class="nf">split_surds</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    split an expression with terms whose squares are rationals</span>
 <span class="sd">    into a sum of terms whose surds squared have gcd equal to g</span>
 <span class="sd">    and a sum of terms with surds squared prime with g</span>
@@ -1097,7 +1096,7 @@
 
 
 <span class="k">def</span> <span class="nf">_split_gcd</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    split the list of integers ``a`` into a list of integers, ``a1`` having</span>
 <span class="sd">    ``g = gcd(a1)``, and a list ``a2`` whose elements are not divisible by</span>
 <span class="sd">    ``g``.  Returns ``g, a1, a2``</span>
@@ -1137,7 +1136,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1158,7 +1157,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

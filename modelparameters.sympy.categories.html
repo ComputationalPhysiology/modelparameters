@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>modelparameters.sympy.categories package &#8212; modelparameters 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="modelparameters.sympy.codegen package" href="modelparameters.sympy.codegen.html" />
@@ -46,16 +45,16 @@
           <div class="body" role="main">
             
   <section id="modelparameters-sympy-categories-package">
-<h1>modelparameters.sympy.categories package<a class="headerlink" href="#modelparameters-sympy-categories-package" title="Permalink to this headline">¶</a></h1>
+<h1>modelparameters.sympy.categories package<a class="headerlink" href="#modelparameters-sympy-categories-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.categories.baseclasses">
-<span id="modelparameters-sympy-categories-baseclasses-module"></span><h2>modelparameters.sympy.categories.baseclasses module<a class="headerlink" href="#module-modelparameters.sympy.categories.baseclasses" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-categories-baseclasses-module"></span><h2>modelparameters.sympy.categories.baseclasses module<a class="headerlink" href="#module-modelparameters.sympy.categories.baseclasses" title="Permalink to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.categories.baseclasses.Category">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.categories.baseclasses.</span></span><span class="sig-name descname"><span class="pre">Category</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">EmptySet()</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commutative_diagrams</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">EmptySet()</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/categories/baseclasses.html#Category"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.categories.baseclasses.Category" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.basic.Basic</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basic</span></code></a></p>
 <p>An (abstract) category.</p>
 <p>A category [JoyOfCats] is a quadruple <cite>mbox{K} = (O, hom, id,
 circ)</cite> consisting of</p>
@@ -166,7 +165,7 @@ be commutative in this category.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.categories.baseclasses.Class">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.categories.baseclasses.</span></span><span class="sig-name descname"><span class="pre">Class</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/categories/baseclasses.html#Class"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.categories.baseclasses.Class" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set" title="modelparameters.sympy.sets.sets.Set"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.sets.sets.Set</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.sets.html#modelparameters.sympy.sets.sets.Set" title="modelparameters.sympy.sets.sets.Set"><code class="xref py py-class docutils literal notranslate"><span class="pre">Set</span></code></a></p>
 <p>The base class for any kind of class in the set-theoretic sense.</p>
 <p>In axiomatic set theories, everything is a class.  A class which
 can be a member of another class is a set.  A class which is not a
@@ -190,7 +189,7 @@ eventual proper implementation of set theory.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.categories.baseclasses.CompositeMorphism">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.categories.baseclasses.</span></span><span class="sig-name descname"><span class="pre">CompositeMorphism</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">components</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/categories/baseclasses.html#CompositeMorphism"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.categories.baseclasses.CompositeMorphism" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Morphism" title="modelparameters.sympy.categories.baseclasses.Morphism"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.categories.baseclasses.Morphism</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Morphism" title="modelparameters.sympy.categories.baseclasses.Morphism"><code class="xref py py-class docutils literal notranslate"><span class="pre">Morphism</span></code></a></p>
 <p>Represents a morphism which is a composition of other morphisms.</p>
 <p>Two composite morphisms are equal if the morphisms they were
 obtained from (components) are the same and were listed in the
@@ -301,7 +300,7 @@ is the codomain of this composite morphism.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.categories.baseclasses.Diagram">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.categories.baseclasses.</span></span><span class="sig-name descname"><span class="pre">Diagram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/categories/baseclasses.html#Diagram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.categories.baseclasses.Diagram" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.basic.Basic</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basic</span></code></a></p>
 <p>Represents a diagram in a certain category.</p>
 <p>Informally, a diagram is a collection of objects of a category and
 certain morphisms between them.  A diagram is still a monoid with
@@ -496,7 +495,7 @@ for conclusions.  Properties are preserved.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.categories.baseclasses.IdentityMorphism">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.categories.baseclasses.</span></span><span class="sig-name descname"><span class="pre">IdentityMorphism</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/categories/baseclasses.html#IdentityMorphism"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.categories.baseclasses.IdentityMorphism" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Morphism" title="modelparameters.sympy.categories.baseclasses.Morphism"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.categories.baseclasses.Morphism</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Morphism" title="modelparameters.sympy.categories.baseclasses.Morphism"><code class="xref py py-class docutils literal notranslate"><span class="pre">Morphism</span></code></a></p>
 <p>Represents an identity morphism.</p>
 <p>An identity morphism is a morphism with equal domain and codomain,
 which acts as an identity with respect to composition.</p>
@@ -527,7 +526,7 @@ which acts as an identity with respect to composition.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.categories.baseclasses.Morphism">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.categories.baseclasses.</span></span><span class="sig-name descname"><span class="pre">Morphism</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">codomain</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/categories/baseclasses.html#Morphism"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.categories.baseclasses.Morphism" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.basic.Basic</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic" title="modelparameters.sympy.core.basic.Basic"><code class="xref py py-class docutils literal notranslate"><span class="pre">Basic</span></code></a></p>
 <p>The base class for any morphism in an abstract category.</p>
 <p>In abstract categories, a morphism is an arrow between two
 category objects.  The object where the arrow starts is called the
@@ -606,7 +605,7 @@ i.e., to construct <cite>gcirc f</cite> use <code class="docutils literal notran
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.categories.baseclasses.NamedMorphism">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.categories.baseclasses.</span></span><span class="sig-name descname"><span class="pre">NamedMorphism</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">codomain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/categories/baseclasses.html#NamedMorphism"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.categories.baseclasses.NamedMorphism" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Morphism" title="modelparameters.sympy.categories.baseclasses.Morphism"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.categories.baseclasses.Morphism</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Morphism" title="modelparameters.sympy.categories.baseclasses.Morphism"><code class="xref py py-class docutils literal notranslate"><span class="pre">Morphism</span></code></a></p>
 <p>Represents a morphism which has a name.</p>
 <p>Names are used to distinguish between morphisms which have the
 same domain and codomain: two named morphisms are equal if they
@@ -651,7 +650,7 @@ have the same domains, codomains, and names.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.categories.baseclasses.Object">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.categories.baseclasses.</span></span><span class="sig-name descname"><span class="pre">Object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">assumptions</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/categories/baseclasses.html#Object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.categories.baseclasses.Object" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.symbol.Symbol" title="modelparameters.sympy.core.symbol.Symbol"><code class="xref py py-class docutils literal notranslate"><span class="pre">modelparameters.sympy.core.symbol.Symbol</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="modelparameters.sympy.core.html#modelparameters.sympy.core.symbol.Symbol" title="modelparameters.sympy.core.symbol.Symbol"><code class="xref py py-class docutils literal notranslate"><span class="pre">Symbol</span></code></a></p>
 <p>The base class for any kind of object in an abstract category.</p>
 <p>While technically any instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Basic</span></code> will do, this
 class is the recommended way to create abstract objects in
@@ -670,13 +669,13 @@ abstract categories.</p>
 
 </section>
 <section id="module-modelparameters.sympy.categories.diagram_drawing">
-<span id="modelparameters-sympy-categories-diagram-drawing-module"></span><h2>modelparameters.sympy.categories.diagram_drawing module<a class="headerlink" href="#module-modelparameters.sympy.categories.diagram_drawing" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-categories-diagram-drawing-module"></span><h2>modelparameters.sympy.categories.diagram_drawing module<a class="headerlink" href="#module-modelparameters.sympy.categories.diagram_drawing" title="Permalink to this heading">¶</a></h2>
 <p>This module contains the functionality to arrange the nodes of a
 diagram on an abstract grid, and then to produce a graphical
 representation of the grid.</p>
 <p>The currently supported back-ends are Xy-pic [Xypic].</p>
 <section id="layout-algorithm">
-<h3>Layout Algorithm<a class="headerlink" href="#layout-algorithm" title="Permalink to this headline">¶</a></h3>
+<h3>Layout Algorithm<a class="headerlink" href="#layout-algorithm" title="Permalink to this heading">¶</a></h3>
 <p>This section provides an overview of the algorithms implemented in
 <a class="reference internal" href="#modelparameters.sympy.categories.diagram_drawing.DiagramGrid" title="modelparameters.sympy.categories.diagram_drawing.DiagramGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">DiagramGrid</span></code></a> to lay out diagrams.</p>
 <p>The first step of the algorithm is the removal composite and identity
@@ -737,10 +736,11 @@ the <cite>n</cite>-th column of the resulting grid.  The sequential layout will
 therefore attempt to lay the objects out along a line.</p>
 <p class="rubric">References</p>
 <p>[Xypic] <a class="reference external" href="http://xy-pic.sourceforge.net/">http://xy-pic.sourceforge.net/</a></p>
+</section>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.categories.diagram_drawing.ArrowStringDescription">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.categories.diagram_drawing.</span></span><span class="sig-name descname"><span class="pre">ArrowStringDescription</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curving</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">curving_amount</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">looping_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">looping_end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">horizontal_direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertical_direction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_position</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/categories/diagram_drawing.html#ArrowStringDescription"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.categories.diagram_drawing.ArrowStringDescription" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Stores the information necessary for producing an Xy-pic
 description of an arrow.</p>
 <p>The principal goal of this class is to abstract away the string
@@ -831,7 +831,7 @@ to checkout the Xy-pic user guide, available at [Xypic].</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.categories.diagram_drawing.DiagramGrid">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.categories.diagram_drawing.</span></span><span class="sig-name descname"><span class="pre">DiagramGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diagram</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">hints</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/categories/diagram_drawing.html#DiagramGrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.categories.diagram_drawing.DiagramGrid" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Constructs and holds the fitting of the diagram into a grid.</p>
 <p>The mission of this class is to analyse the structure of the
 supplied diagram and to place its objects on a grid such that,
@@ -1015,7 +1015,7 @@ sufficiently meaningful to be drawn.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.categories.diagram_drawing.XypicDiagramDrawer">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.categories.diagram_drawing.</span></span><span class="sig-name descname"><span class="pre">XypicDiagramDrawer</span></span><a class="reference internal" href="_modules/modelparameters/sympy/categories/diagram_drawing.html#XypicDiagramDrawer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.categories.diagram_drawing.XypicDiagramDrawer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Given a <code class="xref py py-class docutils literal notranslate"><span class="pre">Diagram</span></code> and the corresponding
 <a class="reference internal" href="#modelparameters.sympy.categories.diagram_drawing.DiagramGrid" title="modelparameters.sympy.categories.diagram_drawing.DiagramGrid"><code class="xref py py-class docutils literal notranslate"><span class="pre">DiagramGrid</span></code></a>, produces the Xy-pic representation of the
 diagram.</p>
@@ -1240,9 +1240,8 @@ the constructor of <a class="reference internal" href="#modelparameters.sympy.ca
 </dd></dl>
 
 </section>
-</section>
 <section id="module-modelparameters.sympy.categories">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.categories" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.categories" title="Permalink to this heading">¶</a></h2>
 <p>Category Theory module.</p>
 <p>Provides some of the fundamental category-theory-related classes,
 including categories, morphisms, diagrams.  Functors are not
@@ -1274,9 +1273,77 @@ from</p>
     <ul>
 <li><a class="reference internal" href="#">modelparameters.sympy.categories package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.categories.baseclasses">modelparameters.sympy.categories.baseclasses module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.categories.baseclasses">modelparameters.sympy.categories.baseclasses module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Category"><code class="docutils literal notranslate"><span class="pre">Category</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Category.all_morphisms"><code class="docutils literal notranslate"><span class="pre">Category.all_morphisms()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Category.commutative_diagrams"><code class="docutils literal notranslate"><span class="pre">Category.commutative_diagrams</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Category.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Category.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Category.hom"><code class="docutils literal notranslate"><span class="pre">Category.hom()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Category.name"><code class="docutils literal notranslate"><span class="pre">Category.name</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Category.objects"><code class="docutils literal notranslate"><span class="pre">Category.objects</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Class"><code class="docutils literal notranslate"><span class="pre">Class</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Class.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Class.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Class.is_proper"><code class="docutils literal notranslate"><span class="pre">Class.is_proper</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.CompositeMorphism"><code class="docutils literal notranslate"><span class="pre">CompositeMorphism</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.CompositeMorphism.codomain"><code class="docutils literal notranslate"><span class="pre">CompositeMorphism.codomain</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.CompositeMorphism.components"><code class="docutils literal notranslate"><span class="pre">CompositeMorphism.components</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.CompositeMorphism.default_assumptions"><code class="docutils literal notranslate"><span class="pre">CompositeMorphism.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.CompositeMorphism.domain"><code class="docutils literal notranslate"><span class="pre">CompositeMorphism.domain</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.CompositeMorphism.flatten"><code class="docutils literal notranslate"><span class="pre">CompositeMorphism.flatten()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Diagram"><code class="docutils literal notranslate"><span class="pre">Diagram</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Diagram.conclusions"><code class="docutils literal notranslate"><span class="pre">Diagram.conclusions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Diagram.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Diagram.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Diagram.hom"><code class="docutils literal notranslate"><span class="pre">Diagram.hom()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Diagram.is_subdiagram"><code class="docutils literal notranslate"><span class="pre">Diagram.is_subdiagram()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Diagram.objects"><code class="docutils literal notranslate"><span class="pre">Diagram.objects</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Diagram.premises"><code class="docutils literal notranslate"><span class="pre">Diagram.premises</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Diagram.subdiagram_from_objects"><code class="docutils literal notranslate"><span class="pre">Diagram.subdiagram_from_objects()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.IdentityMorphism"><code class="docutils literal notranslate"><span class="pre">IdentityMorphism</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.IdentityMorphism.default_assumptions"><code class="docutils literal notranslate"><span class="pre">IdentityMorphism.default_assumptions</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Morphism"><code class="docutils literal notranslate"><span class="pre">Morphism</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Morphism.codomain"><code class="docutils literal notranslate"><span class="pre">Morphism.codomain</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Morphism.compose"><code class="docutils literal notranslate"><span class="pre">Morphism.compose()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Morphism.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Morphism.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Morphism.domain"><code class="docutils literal notranslate"><span class="pre">Morphism.domain</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.NamedMorphism"><code class="docutils literal notranslate"><span class="pre">NamedMorphism</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.NamedMorphism.default_assumptions"><code class="docutils literal notranslate"><span class="pre">NamedMorphism.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.NamedMorphism.name"><code class="docutils literal notranslate"><span class="pre">NamedMorphism.name</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Object"><code class="docutils literal notranslate"><span class="pre">Object</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Object.default_assumptions"><code class="docutils literal notranslate"><span class="pre">Object.default_assumptions</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.baseclasses.Object.name"><code class="docutils literal notranslate"><span class="pre">Object.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.categories.diagram_drawing">modelparameters.sympy.categories.diagram_drawing module</a><ul>
 <li><a class="reference internal" href="#layout-algorithm">Layout Algorithm</a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.diagram_drawing.ArrowStringDescription"><code class="docutils literal notranslate"><span class="pre">ArrowStringDescription</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.diagram_drawing.DiagramGrid"><code class="docutils literal notranslate"><span class="pre">DiagramGrid</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.diagram_drawing.DiagramGrid.height"><code class="docutils literal notranslate"><span class="pre">DiagramGrid.height</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.diagram_drawing.DiagramGrid.morphisms"><code class="docutils literal notranslate"><span class="pre">DiagramGrid.morphisms</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.diagram_drawing.DiagramGrid.width"><code class="docutils literal notranslate"><span class="pre">DiagramGrid.width</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.diagram_drawing.XypicDiagramDrawer"><code class="docutils literal notranslate"><span class="pre">XypicDiagramDrawer</span></code></a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.diagram_drawing.XypicDiagramDrawer.draw"><code class="docutils literal notranslate"><span class="pre">XypicDiagramDrawer.draw()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.diagram_drawing.preview_diagram"><code class="docutils literal notranslate"><span class="pre">preview_diagram()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.categories.diagram_drawing.xypic_draw_diagram"><code class="docutils literal notranslate"><span class="pre">xypic_draw_diagram()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.categories">Module contents</a></li>
@@ -1311,7 +1378,7 @@ from</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1339,7 +1406,7 @@ from</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

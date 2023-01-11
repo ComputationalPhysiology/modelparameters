@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>modelparameters.sympy.crypto package &#8212; modelparameters 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -47,12 +46,12 @@
           <div class="body" role="main">
             
   <section id="modelparameters-sympy-crypto-package">
-<h1>modelparameters.sympy.crypto package<a class="headerlink" href="#modelparameters-sympy-crypto-package" title="Permalink to this headline">¶</a></h1>
+<h1>modelparameters.sympy.crypto package<a class="headerlink" href="#modelparameters-sympy-crypto-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.crypto.crypto">
-<span id="modelparameters-sympy-crypto-crypto-module"></span><h2>modelparameters.sympy.crypto.crypto module<a class="headerlink" href="#module-modelparameters.sympy.crypto.crypto" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-crypto-crypto-module"></span><h2>modelparameters.sympy.crypto.crypto module<a class="headerlink" href="#module-modelparameters.sympy.crypto.crypto" title="Permalink to this heading">¶</a></h2>
 <p>This file contains some classical ciphers and routines
 implementing a linear-feedback shift register (LFSR)
 and the Diffie-Hellman key exchange.</p>
@@ -152,9 +151,9 @@ Assumes alphabet of symbols is “A”, …, “Z”, “0”, …, “9”.</p>
 <dd><p>Joins characters of <cite>phrase</cite> and if <code class="docutils literal notranslate"><span class="pre">symbols</span></code> is given, raises
 an error if any character in <code class="docutils literal notranslate"><span class="pre">phrase</span></code> is not in <code class="docutils literal notranslate"><span class="pre">symbols</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>phrase</strong> (<em>string</em><em> or </em><em>list of strings to be returned as a string</em>) – </p></li>
+<li><p><strong>phrase</strong> (<em>string</em><em> or </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><em>list</em></a><em> of </em><em>strings to be returned as a string</em>) – </p></li>
 <li><p><strong>symbols</strong> (iterable of characters allowed in <code class="docutils literal notranslate"><span class="pre">phrase</span></code>;) – if <code class="docutils literal notranslate"><span class="pre">symbols</span></code> is None, no checking is performed</p></li>
 </ul>
 </dd>
@@ -495,11 +494,12 @@ left by the amount given by <code class="docutils literal notranslate"><span cla
 (default is ‘|’) and words by <cite>word_sep</cite> (default is ‘||)
 into plaintext.</p>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id1"><span class="brackets">1</span></dt>
-<dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Morse_code">http://en.wikipedia.org/wiki/Morse_code</a></p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id1" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Morse_code">http://en.wikipedia.org/wiki/Morse_code</a></p>
+</aside>
+</aside>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.crypto</span> <span class="kn">import</span> <span class="n">decode_morse</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">mc</span> <span class="o">=</span> <span class="s1">&#39;--|---|...-|.||.|.-|...|-&#39;</span>
@@ -529,13 +529,13 @@ number (<code class="docutils literal notranslate"><span class="pre">a</span></c
 <cite>g^{ab} pmod p</cite></p></li>
 </ul>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>digit</strong> (<em>minimum number of binary digits required in key</em>) – </p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>digit</strong> (<em>minimum number</em><em> of </em><em>binary digits required in key</em>) – </p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>(p, g, a)</strong> – a = random number from 2 thru p - 1</p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>p = prime number, g = primitive root of p,</p>
 </dd>
 </dl>
@@ -565,13 +565,13 @@ the output of this routine. See sympy.utilities.randtest._randrange.</p>
 <dd><p>Return three number tuple as public key.</p>
 <p>This is the tuple that Alice sends to Bob.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>key</strong> (Tuple (p, g, a) generated by <code class="docutils literal notranslate"><span class="pre">dh_private_key</span></code>) – </p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>(p, g, g^a mod p)</strong></p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>p, g and a as in Parameters</p>
 </dd>
 </dl>
@@ -594,14 +594,14 @@ the output of this routine. See sympy.utilities.randtest._randrange.</p>
 <p>This is what Bob and Alice can both calculate using the public
 keys they received from each other and their private keys.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>key</strong> (Tuple (p, g, x) generated by <code class="docutils literal notranslate"><span class="pre">dh_public_key</span></code>) – </p></li>
-<li><p><strong>b</strong> (<em>Random number in the range of 2 to p - 1</em>) – (Chosen by second key exchange member (Bob))</p></li>
+<li><p><strong>b</strong> (<em>Random number in the range</em><em> of </em><em>2 to p - 1</em>) – (Chosen by second key exchange member (Bob))</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>shared key (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a>)</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>shared key (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a>)</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -627,13 +627,13 @@ called the Discrete Logarithm Problem (DLP). For example,</p>
 calculated. If <code class="docutils literal notranslate"><span class="pre">b</span></code> is unknown, it is hard to use
 <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">ct</span></code> to get <code class="docutils literal notranslate"><span class="pre">b</span></code>.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>digit</strong> (<em>minimum number of binary digits for key</em>) – </p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>digit</strong> (<em>minimum number</em><em> of </em><em>binary digits for key</em>) – </p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>(p, r, d)</strong></p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>p = prime number, r = primitive root, d = random number</p>
 </dd>
 </dl>
@@ -657,13 +657,13 @@ the output of this routine. See sympy.utilities.randtest._randrange.</p>
 <span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.crypto.crypto.</span></span><span class="sig-name descname"><span class="pre">elgamal_public_key</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/crypto/crypto.html#elgamal_public_key"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.crypto.crypto.elgamal_public_key" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return three number tuple as public key.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>key</strong> (Tuple (p, r, e)  generated by <code class="docutils literal notranslate"><span class="pre">elgamal_private_key</span></code>) – </p>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>(p, r, e = r**d mod p)</strong></p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>d is a random number in private key.</p>
 </dd>
 </dl>
@@ -882,16 +882,16 @@ is generated and the encryped message is returned as
 <p><cite>c_{1} equiv r^{a} pmod p</cite></p>
 <p><cite>c_{2} equiv m e^{a} pmod p</cite></p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>msg</strong> (<em>int of encoded message</em>) – </p></li>
+<li><p><strong>msg</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><em>int</em></a><em> of </em><em>encoded message</em>) – </p></li>
 <li><p><strong>key</strong> (<em>public key</em>) – </p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>(c1, c2)</strong></p>
 </dd>
-<dt class="field-odd">Return type</dt>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Encipher into two number</p>
 </dd>
 </dl>
@@ -964,16 +964,18 @@ letters. This has length <code class="docutils literal notranslate"><span class=
 </dl>
 </div></blockquote>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id4"><span class="brackets">1</span></dt>
-<dd><p>en.wikipedia.org/wiki/Hill_cipher</p>
-</dd>
-<dt class="label" id="id5"><span class="brackets">2</span></dt>
-<dd><p>Lester S. Hill, Cryptography in an Algebraic Alphabet,
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id4" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p>en.wikipedia.org/wiki/Hill_cipher</p>
+</aside>
+<aside class="footnote brackets" id="id5" role="note">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p>Lester S. Hill, Cryptography in an Algebraic Alphabet,
 The American Mathematical Monthly Vol.36, June-July 1929,
 pp.306-312.</p>
-</dd>
-</dl>
+</aside>
+</aside>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.decipher_hill" title="modelparameters.sympy.crypto.crypto.decipher_hill"><code class="xref py py-obj docutils literal notranslate"><span class="pre">decipher_hill</span></code></a></p>
@@ -1257,16 +1259,18 @@ key to  decipher the next <code class="docutils literal notranslate"><span class
 </pre></div>
 </div>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id8"><span class="brackets">1</span></dt>
-<dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Vigenere_cipher">http://en.wikipedia.org/wiki/Vigenere_cipher</a></p>
-</dd>
-<dt class="label" id="id9"><span class="brackets">2</span></dt>
-<dd><p><a class="reference external" href="http://web.archive.org/web/20071116100808/">http://web.archive.org/web/20071116100808/</a>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id8" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Vigenere_cipher">http://en.wikipedia.org/wiki/Vigenere_cipher</a></p>
+</aside>
+<aside class="footnote brackets" id="id9" role="note">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://web.archive.org/web/20071116100808/">http://web.archive.org/web/20071116100808/</a>
 <a class="reference external" href="http://filebox.vt.edu/users/batman/kryptos.html">http://filebox.vt.edu/users/batman/kryptos.html</a>
 (short URL: <a class="reference external" href="https://goo.gl/ijr22d">https://goo.gl/ijr22d</a>)</p>
-</dd>
-</dl>
+</aside>
+</aside>
 </dd></dl>
 
 <dl class="py function">
@@ -1275,11 +1279,12 @@ key to  decipher the next <code class="docutils literal notranslate"><span class
 <dd><p>Encodes a plaintext into popular Morse Code with letters
 separated by <cite>sep</cite> and words by a double <cite>sep</cite>.</p>
 <p class="rubric">References</p>
-<dl class="footnote brackets">
-<dt class="label" id="id10"><span class="brackets">1</span></dt>
-<dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Morse_code">http://en.wikipedia.org/wiki/Morse_code</a></p>
-</dd>
-</dl>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id10" role="note">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Morse_code">http://en.wikipedia.org/wiki/Morse_code</a></p>
+</aside>
+</aside>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.crypto</span> <span class="kn">import</span> <span class="n">encode_morse</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;ATTACK RIGHT FLANK&#39;</span>
@@ -1379,13 +1384,14 @@ a finite field</p>
 <p>This implements the algorithm in section 3 of J. L. Massey’s
 article <a class="reference internal" href="#m" id="id11"><span>[M]</span></a>.</p>
 <p class="rubric">References</p>
-<dl class="citation">
-<dt class="label" id="m"><span class="brackets"><a class="fn-backref" href="#id11">M</a></span></dt>
-<dd><p>James L. Massey, “Shift-Register Synthesis and BCH Decoding.”
+<div role="list" class="citation-list">
+<div class="citation" id="m" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">M</a><span class="fn-bracket">]</span></span>
+<p>James L. Massey, “Shift-Register Synthesis and BCH Decoding.”
 IEEE Trans. on Information Theory, vol. 15(1), pp. 122-127,
 Jan 1969.</p>
-</dd>
-</dl>
+</div>
+</div>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.crypto</span> <span class="kn">import</span> <span class="p">(</span>
 <span class="gp">... </span>    <span class="n">lfsr_sequence</span><span class="p">,</span> <span class="n">lfsr_connection_polynomial</span><span class="p">)</span>
@@ -1467,12 +1473,13 @@ Moreover, there are as many runs of <cite>1</cite>’s as there are of
 <cite>0</cite>’s.</p></li>
 </ul>
 <p class="rubric">References</p>
-<dl class="citation">
-<dt class="label" id="g"><span class="brackets"><a class="fn-backref" href="#id12">G</a></span></dt>
-<dd><p>Solomon Golomb, Shift register sequences, Aegean Park Press,
+<div role="list" class="citation-list">
+<div class="citation" id="g" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">G</a><span class="fn-bracket">]</span></span>
+<p>Solomon Golomb, Shift register sequences, Aegean Park Press,
 Laguna Hills, Ca, 1967</p>
-</dd>
-</dl>
+</div>
+</div>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">.crypto</span> <span class="kn">import</span> <span class="n">lfsr_sequence</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">..polys.domains</span> <span class="kn">import</span> <span class="n">FF</span>
@@ -1544,7 +1551,7 @@ is returned if any assumption is violated.</p>
 
 </section>
 <section id="module-modelparameters.sympy.crypto">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.crypto" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.crypto" title="Permalink to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -1560,7 +1567,51 @@ is returned if any assumption is violated.</p>
     <ul>
 <li><a class="reference internal" href="#">modelparameters.sympy.crypto package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.crypto.crypto">modelparameters.sympy.crypto.crypto module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.crypto.crypto">modelparameters.sympy.crypto.crypto module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.AZ"><code class="docutils literal notranslate"><span class="pre">AZ()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.bifid5_square"><code class="docutils literal notranslate"><span class="pre">bifid5_square()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.bifid6_square"><code class="docutils literal notranslate"><span class="pre">bifid6_square()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.bifid_square"><code class="docutils literal notranslate"><span class="pre">bifid_square()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.check_and_join"><code class="docutils literal notranslate"><span class="pre">check_and_join()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.cycle_list"><code class="docutils literal notranslate"><span class="pre">cycle_list()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.decipher_affine"><code class="docutils literal notranslate"><span class="pre">decipher_affine()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.decipher_bifid"><code class="docutils literal notranslate"><span class="pre">decipher_bifid()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.decipher_bifid5"><code class="docutils literal notranslate"><span class="pre">decipher_bifid5()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.decipher_bifid6"><code class="docutils literal notranslate"><span class="pre">decipher_bifid6()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.decipher_elgamal"><code class="docutils literal notranslate"><span class="pre">decipher_elgamal()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.decipher_hill"><code class="docutils literal notranslate"><span class="pre">decipher_hill()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.decipher_kid_rsa"><code class="docutils literal notranslate"><span class="pre">decipher_kid_rsa()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.decipher_rsa"><code class="docutils literal notranslate"><span class="pre">decipher_rsa()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.decipher_shift"><code class="docutils literal notranslate"><span class="pre">decipher_shift()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.decipher_vigenere"><code class="docutils literal notranslate"><span class="pre">decipher_vigenere()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.decode_morse"><code class="docutils literal notranslate"><span class="pre">decode_morse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.dh_private_key"><code class="docutils literal notranslate"><span class="pre">dh_private_key()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.dh_public_key"><code class="docutils literal notranslate"><span class="pre">dh_public_key()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.dh_shared_key"><code class="docutils literal notranslate"><span class="pre">dh_shared_key()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.elgamal_private_key"><code class="docutils literal notranslate"><span class="pre">elgamal_private_key()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.elgamal_public_key"><code class="docutils literal notranslate"><span class="pre">elgamal_public_key()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.encipher_affine"><code class="docutils literal notranslate"><span class="pre">encipher_affine()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.encipher_bifid"><code class="docutils literal notranslate"><span class="pre">encipher_bifid()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.encipher_bifid5"><code class="docutils literal notranslate"><span class="pre">encipher_bifid5()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.encipher_bifid6"><code class="docutils literal notranslate"><span class="pre">encipher_bifid6()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.encipher_elgamal"><code class="docutils literal notranslate"><span class="pre">encipher_elgamal()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.encipher_hill"><code class="docutils literal notranslate"><span class="pre">encipher_hill()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.encipher_kid_rsa"><code class="docutils literal notranslate"><span class="pre">encipher_kid_rsa()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.encipher_rsa"><code class="docutils literal notranslate"><span class="pre">encipher_rsa()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.encipher_shift"><code class="docutils literal notranslate"><span class="pre">encipher_shift()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.encipher_substitution"><code class="docutils literal notranslate"><span class="pre">encipher_substitution()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.encipher_vigenere"><code class="docutils literal notranslate"><span class="pre">encipher_vigenere()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.encode_morse"><code class="docutils literal notranslate"><span class="pre">encode_morse()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.kid_rsa_private_key"><code class="docutils literal notranslate"><span class="pre">kid_rsa_private_key()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.kid_rsa_public_key"><code class="docutils literal notranslate"><span class="pre">kid_rsa_public_key()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.lfsr_autocorrelation"><code class="docutils literal notranslate"><span class="pre">lfsr_autocorrelation()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.lfsr_connection_polynomial"><code class="docutils literal notranslate"><span class="pre">lfsr_connection_polynomial()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.lfsr_sequence"><code class="docutils literal notranslate"><span class="pre">lfsr_sequence()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.padded_key"><code class="docutils literal notranslate"><span class="pre">padded_key()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.rsa_private_key"><code class="docutils literal notranslate"><span class="pre">rsa_private_key()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.crypto.crypto.rsa_public_key"><code class="docutils literal notranslate"><span class="pre">rsa_public_key()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.crypto">Module contents</a></li>
 </ul>
 </li>
@@ -1593,7 +1644,7 @@ is returned if any assumption is violated.</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1621,7 +1672,7 @@ is returned if any assumption is violated.</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

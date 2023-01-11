@@ -1,18 +1,17 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>modelparameters.sympy.unify package &#8212; modelparameters 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="modelparameters.sympy.utilities package" href="modelparameters.sympy.utilities.html" />
@@ -46,12 +45,12 @@
           <div class="body" role="main">
             
   <section id="modelparameters-sympy-unify-package">
-<h1>modelparameters.sympy.unify package<a class="headerlink" href="#modelparameters-sympy-unify-package" title="Permalink to this headline">¶</a></h1>
+<h1>modelparameters.sympy.unify package<a class="headerlink" href="#modelparameters-sympy-unify-package" title="Permalink to this heading">¶</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
 </section>
 <section id="module-modelparameters.sympy.unify.core">
-<span id="modelparameters-sympy-unify-core-module"></span><h2>modelparameters.sympy.unify.core module<a class="headerlink" href="#module-modelparameters.sympy.unify.core" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-unify-core-module"></span><h2>modelparameters.sympy.unify.core module<a class="headerlink" href="#module-modelparameters.sympy.unify.core" title="Permalink to this heading">¶</a></h2>
 <p>Generic Unification algorithm for expression trees with lists of children</p>
 <p>This implementation is a direct translation of</p>
 <p>Artificial Intelligence: A Modern Approach by Stuart Russel and Peter Norvig
@@ -68,7 +67,7 @@ combinatorial blowup.</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.unify.core.Compound">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.core.</span></span><span class="sig-name descname"><span class="pre">Compound</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/core.html#Compound"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.core.Compound" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A little class to represent an interior node in the tree</p>
 <p>This is analagous to SymPy.Basic for non-Atoms</p>
 </dd></dl>
@@ -76,7 +75,7 @@ combinatorial blowup.</p></li>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.unify.core.CondVariable">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.core.</span></span><span class="sig-name descname"><span class="pre">CondVariable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/core.html#CondVariable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.core.CondVariable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A wild token that matches conditionally</p>
 <p>arg   - a wild token
 valid - an additional constraining function on a match</p>
@@ -85,7 +84,7 @@ valid - an additional constraining function on a match</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="modelparameters.sympy.unify.core.Variable">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modelparameters.sympy.unify.core.</span></span><span class="sig-name descname"><span class="pre">Variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/modelparameters/sympy/unify/core.html#Variable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#modelparameters.sympy.unify.core.Variable" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A Wild token</p>
 </dd></dl>
 
@@ -192,7 +191,7 @@ s    - a mapping of variables to subtrees</p>
 
 </section>
 <section id="module-modelparameters.sympy.unify.rewrite">
-<span id="modelparameters-sympy-unify-rewrite-module"></span><h2>modelparameters.sympy.unify.rewrite module<a class="headerlink" href="#module-modelparameters.sympy.unify.rewrite" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-unify-rewrite-module"></span><h2>modelparameters.sympy.unify.rewrite module<a class="headerlink" href="#module-modelparameters.sympy.unify.rewrite" title="Permalink to this heading">¶</a></h2>
 <p>Functions to support rewriting of SymPy expressions</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="modelparameters.sympy.unify.rewrite.rewriterule">
@@ -231,7 +230,7 @@ the same order as is found in variables.</p>
 
 </section>
 <section id="module-modelparameters.sympy.unify.usympy">
-<span id="modelparameters-sympy-unify-usympy-module"></span><h2>modelparameters.sympy.unify.usympy module<a class="headerlink" href="#module-modelparameters.sympy.unify.usympy" title="Permalink to this headline">¶</a></h2>
+<span id="modelparameters-sympy-unify-usympy-module"></span><h2>modelparameters.sympy.unify.usympy module<a class="headerlink" href="#module-modelparameters.sympy.unify.usympy" title="Permalink to this heading">¶</a></h2>
 <p>SymPy interface to Unification engine</p>
 <p>See sympy.unify for module level docstring
 See sympy.unify.core for algorithmic docstring</p>
@@ -326,7 +325,7 @@ in the Mul of expr. Here, a single symbol matches an entire term:</p>
 
 </section>
 <section id="module-modelparameters.sympy.unify">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.unify" title="Permalink to this headline">¶</a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-modelparameters.sympy.unify" title="Permalink to this heading">¶</a></h2>
 <p>Unification in SymPy</p>
 <p>See sympy.unify.core docstring for algorithmic details</p>
 <p>See <a class="reference external" href="http://matthewrocklin.com/blog/work/2012/11/01/Unification/">http://matthewrocklin.com/blog/work/2012/11/01/Unification/</a> for discussion</p>
@@ -345,9 +344,37 @@ in the Mul of expr. Here, a single symbol matches an entire term:</p>
     <ul>
 <li><a class="reference internal" href="#">modelparameters.sympy.unify package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.unify.core">modelparameters.sympy.unify.core module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.unify.rewrite">modelparameters.sympy.unify.rewrite module</a></li>
-<li><a class="reference internal" href="#module-modelparameters.sympy.unify.usympy">modelparameters.sympy.unify.usympy module</a></li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.unify.core">modelparameters.sympy.unify.core module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.core.Compound"><code class="docutils literal notranslate"><span class="pre">Compound</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.core.CondVariable"><code class="docutils literal notranslate"><span class="pre">CondVariable</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.core.Variable"><code class="docutils literal notranslate"><span class="pre">Variable</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.core.allcombinations"><code class="docutils literal notranslate"><span class="pre">allcombinations()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.core.assoc"><code class="docutils literal notranslate"><span class="pre">assoc()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.core.index"><code class="docutils literal notranslate"><span class="pre">index()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.core.is_args"><code class="docutils literal notranslate"><span class="pre">is_args()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.core.occur_check"><code class="docutils literal notranslate"><span class="pre">occur_check()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.core.partition"><code class="docutils literal notranslate"><span class="pre">partition()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.core.unify"><code class="docutils literal notranslate"><span class="pre">unify()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.core.unify_var"><code class="docutils literal notranslate"><span class="pre">unify_var()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.core.unpack"><code class="docutils literal notranslate"><span class="pre">unpack()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.unify.rewrite">modelparameters.sympy.unify.rewrite module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.rewrite.rewriterule"><code class="docutils literal notranslate"><span class="pre">rewriterule()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-modelparameters.sympy.unify.usympy">modelparameters.sympy.unify.usympy module</a><ul>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.usympy.construct"><code class="docutils literal notranslate"><span class="pre">construct()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.usympy.deconstruct"><code class="docutils literal notranslate"><span class="pre">deconstruct()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.usympy.is_associative"><code class="docutils literal notranslate"><span class="pre">is_associative()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.usympy.is_commutative"><code class="docutils literal notranslate"><span class="pre">is_commutative()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.usympy.mk_matchtype"><code class="docutils literal notranslate"><span class="pre">mk_matchtype()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.usympy.rebuild"><code class="docutils literal notranslate"><span class="pre">rebuild()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.usympy.sympy_associative"><code class="docutils literal notranslate"><span class="pre">sympy_associative()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.usympy.sympy_commutative"><code class="docutils literal notranslate"><span class="pre">sympy_commutative()</span></code></a></li>
+<li><a class="reference internal" href="#modelparameters.sympy.unify.usympy.unify"><code class="docutils literal notranslate"><span class="pre">unify()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-modelparameters.sympy.unify">Module contents</a></li>
 </ul>
 </li>
@@ -380,7 +407,7 @@ in the Mul of expr. Here, a single symbol matches an entire term:</p>
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -408,7 +435,7 @@ in the Mul of expr. Here, a single symbol matches an entire term:</p>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

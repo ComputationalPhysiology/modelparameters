@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -50,7 +49,7 @@
 
 <div class="viewcode-block" id="find_simple_recurrence_vector"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.guess.find_simple_recurrence_vector">[docs]</a><span class="nd">@public</span>
 <span class="k">def</span> <span class="nf">find_simple_recurrence_vector</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function is used internally by other functions from the</span>
 <span class="sd">    sympy.concrete.guess module. While most users may want to rather use the</span>
 <span class="sd">    function find_simple_recurrence when looking for recurrence relations</span>
@@ -112,7 +111,7 @@
 
 <div class="viewcode-block" id="find_simple_recurrence"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.guess.find_simple_recurrence">[docs]</a><span class="nd">@public</span>
 <span class="k">def</span> <span class="nf">find_simple_recurrence</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">A</span><span class="o">=</span><span class="n">Function</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">),</span> <span class="n">N</span><span class="o">=</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;n&#39;</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Detects and returns a recurrence relation from a sequence of several integer</span>
 <span class="sd">    (or rational) terms. The name of the function in the returned expression is</span>
 <span class="sd">    &#39;a&#39; by default; the main variable is &#39;n&#39; by default. The smallest index in</span>
@@ -146,7 +145,7 @@
 
 <div class="viewcode-block" id="rationalize"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.guess.rationalize">[docs]</a><span class="nd">@public</span>
 <span class="k">def</span> <span class="nf">rationalize</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">maxcoeff</span><span class="o">=</span><span class="mi">10000</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helps identifying a rational number from a float (or mpmath.mpf) value by</span>
 <span class="sd">    using a continued fraction. The algorithm stops as soon as a large partial</span>
 <span class="sd">    quotient is detected (greater than 10000 by default).</span>
@@ -207,7 +206,7 @@
 
 <div class="viewcode-block" id="guess_generating_function_rational"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.guess.guess_generating_function_rational">[docs]</a><span class="nd">@public</span>
 <span class="k">def</span> <span class="nf">guess_generating_function_rational</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Tries to &quot;guess&quot; a rational generating function for a sequence of rational</span>
 <span class="sd">    numbers v.</span>
 
@@ -238,7 +237,7 @@
 
 <div class="viewcode-block" id="guess_generating_function"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.guess.guess_generating_function">[docs]</a><span class="nd">@public</span>
 <span class="k">def</span> <span class="nf">guess_generating_function</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">Symbol</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">),</span> <span class="n">types</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">],</span> <span class="n">maxsqrtn</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Tries to &quot;guess&quot; a generating function for a sequence of rational numbers v.</span>
 <span class="sd">    Only a few patterns are implemented yet.</span>
 
@@ -420,7 +419,7 @@
 
 <div class="viewcode-block" id="guess"><a class="viewcode-back" href="../../../../modelparameters.sympy.concrete.html#modelparameters.sympy.concrete.guess.guess">[docs]</a><span class="nd">@public</span>
 <span class="k">def</span> <span class="nf">guess</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="nb">all</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">evaluate</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">niter</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">variables</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This function is adapted from the Rate.m package for Mathematica</span>
 <span class="sd">    written by Christian Krattenthaler.</span>
 <span class="sd">    It tries to guess a formula from a given sequence of rational numbers.</span>
@@ -508,7 +507,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -529,7 +528,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

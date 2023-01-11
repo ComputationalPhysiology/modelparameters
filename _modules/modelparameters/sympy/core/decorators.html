@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -51,7 +50,7 @@
 
 
 <div class="viewcode-block" id="deprecated"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.decorators.deprecated">[docs]</a><span class="k">def</span> <span class="nf">deprecated</span><span class="p">(</span><span class="o">**</span><span class="n">decorator_kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;This is a decorator which can be used to mark functions</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This is a decorator which can be used to mark functions</span>
 <span class="sd">    as deprecated. It will result in a warning being emitted</span>
 <span class="sd">    when the function is used.&quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">..utilities.exceptions</span> <span class="kn">import</span> <span class="n">SymPyDeprecationWarning</span>
@@ -81,7 +80,7 @@
 
 
 <span class="k">def</span> <span class="nf">_sympifyit</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="n">retval</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;decorator to smartly _sympify function arguments</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;decorator to smartly _sympify function arguments</span>
 
 <span class="sd">       @_sympifyit(&#39;other&#39;, NotImplemented)</span>
 <span class="sd">       def add(self, other):</span>
@@ -103,7 +102,7 @@
 
 
 <span class="k">def</span> <span class="nf">__sympifyit</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">retval</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;decorator to _sympify `arg` argument for function `func`</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;decorator to _sympify `arg` argument for function `func`</span>
 
 <span class="sd">       don&#39;t use directly -- use _sympifyit instead</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -134,7 +133,7 @@
 
 
 <div class="viewcode-block" id="call_highest_priority"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.decorators.call_highest_priority">[docs]</a><span class="k">def</span> <span class="nf">call_highest_priority</span><span class="p">(</span><span class="n">method_name</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A decorator for binary special methods to handle _op_priority.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A decorator for binary special methods to handle _op_priority.</span>
 
 <span class="sd">    Binary special methods in Expr and its subclasses use a special attribute</span>
 <span class="sd">    &#39;_op_priority&#39; to determine whose special method will be called to</span>
@@ -187,7 +186,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -208,7 +207,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

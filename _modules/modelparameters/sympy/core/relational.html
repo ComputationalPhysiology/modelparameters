@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -59,7 +58,7 @@
 <span class="c1"># and Expr.</span>
 
 <div class="viewcode-block" id="Relational"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.relational.Relational">[docs]</a><span class="k">class</span> <span class="nc">Relational</span><span class="p">(</span><span class="n">Boolean</span><span class="p">,</span> <span class="n">Expr</span><span class="p">,</span> <span class="n">EvalfMixin</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Base class for all relation types.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base class for all relation types.</span>
 
 <span class="sd">    Subclasses of Relational should generally be instantiated directly, but</span>
 <span class="sd">    Relational can be instantiated with a valid `rop` value to dispatch to</span>
@@ -101,17 +100,17 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">lhs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The left-hand side of the relation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The left-hand side of the relation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">rhs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;The right-hand side of the relation.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The right-hand side of the relation.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">reversed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return the relationship with sides (and sign) reversed.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the relationship with sides (and sign) reversed.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -136,7 +135,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">canonical</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a canonical form of the relational.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a canonical form of the relational.</span>
 
 <span class="sd">        The rules for the canonical form, in order of decreasing priority are:</span>
 <span class="sd">            1) Number on right if left is not a Number;</span>
@@ -163,7 +162,7 @@
         <span class="k">return</span> <span class="n">r</span>
 
 <div class="viewcode-block" id="Relational.equals"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.relational.Relational.equals">[docs]</a>    <span class="k">def</span> <span class="nf">equals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">failing_expression</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return True if the sides of the relationship are mathematically</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if the sides of the relationship are mathematically</span>
 <span class="sd">        identical and the type of relationship is the same.</span>
 <span class="sd">        If failing_expression is True, return the expression whose truth value</span>
 <span class="sd">        was unknown.&quot;&quot;&quot;</span>
@@ -235,7 +234,7 @@
     <span class="fm">__bool__</span> <span class="o">=</span> <span class="n">__nonzero__</span>
 
 <div class="viewcode-block" id="Relational.as_set"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.relational.Relational.as_set">[docs]</a>    <span class="k">def</span> <span class="nf">as_set</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Rewrites univariate inequality in terms of real sets</span>
 
 <span class="sd">        Examples</span>
@@ -266,7 +265,7 @@
 
 
 <div class="viewcode-block" id="Equality"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.relational.Equality">[docs]</a><span class="k">class</span> <span class="nc">Equality</span><span class="p">(</span><span class="n">Relational</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;An equal relation between two objects.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An equal relation between two objects.</span>
 
 <span class="sd">    Represents that two objects are equal.  If they can be easily shown</span>
 <span class="sd">    to be definitively equal (or unequal), this will reduce to True (or</span>
@@ -407,7 +406,7 @@
 
 
 <div class="viewcode-block" id="Unequality"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.relational.Unequality">[docs]</a><span class="k">class</span> <span class="nc">Unequality</span><span class="p">(</span><span class="n">Relational</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;An unequal relation between two objects.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An unequal relation between two objects.</span>
 
 <span class="sd">    Represents that two objects are not equal.  If they can be shown to be</span>
 <span class="sd">    definitively equal, this will reduce to False; if definitively unequal,</span>
@@ -461,7 +460,7 @@
 
 
 <span class="k">class</span> <span class="nc">_Inequality</span><span class="p">(</span><span class="n">Relational</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Internal base class for all *Than types.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Internal base class for all *Than types.</span>
 
 <span class="sd">    Each subclass must implement _eval_relation to provide the method for</span>
 <span class="sd">    comparing two real numbers.</span>
@@ -496,7 +495,7 @@
 
 
 <span class="k">class</span> <span class="nc">_Greater</span><span class="p">(</span><span class="n">_Inequality</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Not intended for general use</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Not intended for general use</span>
 
 <span class="sd">    _Greater is only used so that GreaterThan and StrictGreaterThan may subclass</span>
 <span class="sd">    it for the .gts and .lts properties.</span>
@@ -514,7 +513,7 @@
 
 
 <span class="k">class</span> <span class="nc">_Less</span><span class="p">(</span><span class="n">_Inequality</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Not intended for general use.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Not intended for general use.</span>
 
 <span class="sd">    _Less is only used so that LessThan and StrictLessThan may subclass it for</span>
 <span class="sd">    the .gts and .lts properties.</span>
@@ -532,7 +531,7 @@
 
 
 <div class="viewcode-block" id="GreaterThan"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.relational.GreaterThan">[docs]</a><span class="k">class</span> <span class="nc">GreaterThan</span><span class="p">(</span><span class="n">_Greater</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class representations of inequalities.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class representations of inequalities.</span>
 
 <span class="sd">    Extended Summary</span>
 <span class="sd">    ================</span>
@@ -860,7 +859,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -881,7 +880,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/nature.css" />
     <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
-    <script src="../../../../../_static/jquery.js"></script>
-    <script src="../../../../../_static/underscore.js"></script>
     <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../../search.html" /> 
   </head><body>
@@ -55,7 +54,7 @@
 
 
 <div class="viewcode-block" id="DiracDelta"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.delta_functions.DiracDelta">[docs]</a><span class="k">class</span> <span class="nc">DiracDelta</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The DiracDelta function and its derivatives.</span>
 
 <span class="sd">    DiracDelta is not an ordinary function. It can be rigorously defined either</span>
@@ -135,7 +134,7 @@
     <span class="n">is_real</span> <span class="o">=</span> <span class="kc">True</span>
 
 <div class="viewcode-block" id="DiracDelta.fdiff"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.delta_functions.DiracDelta.fdiff">[docs]</a>    <span class="k">def</span> <span class="nf">fdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the first derivative of a DiracDelta Function.</span>
 
 <span class="sd">        The difference between ``diff()`` and ``fdiff()`` is:-</span>
@@ -175,7 +174,7 @@
 
 <div class="viewcode-block" id="DiracDelta.eval"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.delta_functions.DiracDelta.eval">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a simplified form or a value of DiracDelta depending on the</span>
 <span class="sd">        argument passed by the DiracDelta object.</span>
 
@@ -239,7 +238,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">diracdelta</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">wrt</span><span class="o">=</span><span class="n">x</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_expand_diracdelta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Compute a simplified representation of the function using</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute a simplified representation of the function using</span>
 <span class="sd">           property number 4. Pass wrt as a hint to expand the expression</span>
 <span class="sd">           with respect to a particular variable.</span>
 
@@ -304,7 +303,7 @@
         <span class="k">return</span> <span class="bp">self</span>
 
 <div class="viewcode-block" id="DiracDelta.is_simple"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.delta_functions.DiracDelta.is_simple">[docs]</a>    <span class="k">def</span> <span class="nf">is_simple</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;is_simple(self, x)</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;is_simple(self, x)</span>
 
 <span class="sd">           Tells whether the argument(args[0]) of DiracDelta is a linear</span>
 <span class="sd">           expression in x.</span>
@@ -342,7 +341,7 @@
         <span class="k">return</span> <span class="kc">False</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_rewrite_as_Piecewise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Represents DiracDelta in a Piecewise form</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Represents DiracDelta in a Piecewise form</span>
 
 <span class="sd">           Examples</span>
 <span class="sd">           ========</span>
@@ -367,7 +366,7 @@
             <span class="k">return</span> <span class="n">Piecewise</span><span class="p">((</span><span class="n">DiracDelta</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">Eq</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_eval_rewrite_as_SingularityFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the DiracDelta expression written in the form of Singularity Functions.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -405,7 +404,7 @@
 
 
 <div class="viewcode-block" id="Heaviside"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.delta_functions.Heaviside">[docs]</a><span class="k">class</span> <span class="nc">Heaviside</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Heaviside Piecewise function</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Heaviside Piecewise function</span>
 
 <span class="sd">    Heaviside function has the following properties [1]_:</span>
 
@@ -453,7 +452,7 @@
     <span class="n">is_real</span> <span class="o">=</span> <span class="kc">True</span>
 
 <div class="viewcode-block" id="Heaviside.fdiff"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.delta_functions.Heaviside.fdiff">[docs]</a>    <span class="k">def</span> <span class="nf">fdiff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argindex</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the first derivative of a Heaviside Function.</span>
 
 <span class="sd">        Examples</span>
@@ -486,7 +485,7 @@
 
 <div class="viewcode-block" id="Heaviside.eval"><a class="viewcode-back" href="../../../../../modelparameters.sympy.functions.special.html#modelparameters.sympy.functions.special.delta_functions.Heaviside.eval">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">eval</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">H0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a simplified form or a value of Heaviside depending on the</span>
 <span class="sd">        argument passed by the Heaviside object.</span>
 
@@ -544,7 +543,7 @@
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Function defined only for Real Values. Complex part: </span><span class="si">%s</span><span class="s2">  found in </span><span class="si">%s</span><span class="s2"> .&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">im</span><span class="p">(</span><span class="n">arg</span><span class="p">)),</span> <span class="nb">repr</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span> <span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_eval_rewrite_as_Piecewise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">H0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Represents Heaviside in a Piecewise form</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Represents Heaviside in a Piecewise form</span>
 
 <span class="sd">           Examples</span>
 <span class="sd">           ========</span>
@@ -571,7 +570,7 @@
         <span class="k">return</span> <span class="n">Piecewise</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">arg</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">H0</span><span class="p">,</span> <span class="n">Eq</span><span class="p">(</span><span class="n">arg</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">arg</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_eval_rewrite_as_sign</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">,</span> <span class="n">H0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Represents the Heaviside function in the form of sign function.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Represents the Heaviside function in the form of sign function.</span>
 <span class="sd">        The value of the second argument of Heaviside must specify Heaviside(0)</span>
 <span class="sd">        = 1/2 for rewritting as sign to be strictly equivalent.  For easier</span>
 <span class="sd">        usage, we also allow this rewriting when Heaviside(0) is undefined.</span>
@@ -613,7 +612,7 @@
                 <span class="k">return</span> <span class="p">(</span><span class="n">sign</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
 
     <span class="k">def</span> <span class="nf">_eval_rewrite_as_SingularityFunction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the Heaviside expression written in the form of Singularity Functions.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -654,7 +653,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -675,7 +674,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

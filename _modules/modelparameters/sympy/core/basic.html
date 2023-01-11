@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -60,7 +59,7 @@
 
 
 <div class="viewcode-block" id="Basic"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic">[docs]</a><span class="k">class</span> <span class="nc">Basic</span><span class="p">(</span><span class="n">with_metaclass</span><span class="p">(</span><span class="n">ManagedProperties</span><span class="p">)):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Base class for all objects in SymPy.</span>
 
 <span class="sd">    Conventions:</span>
@@ -134,7 +133,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__reduce_ex__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proto</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Pickling support.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Pickling support.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getnewargs__</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">__getnewargs__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -157,7 +156,7 @@
         <span class="k">return</span> <span class="n">h</span>
 
     <span class="k">def</span> <span class="nf">_hashable_content</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a tuple of information about self that can be used to</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a tuple of information about self that can be used to</span>
 <span class="sd">        compute the hash. If a class defines additional attributes,</span>
 <span class="sd">        like ``name`` in Symbol, then this method should be updated</span>
 <span class="sd">        accordingly to return such relevant attributes.</span>
@@ -168,7 +167,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">assumptions0</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return object `type` assumptions.</span>
 
 <span class="sd">        For example:</span>
@@ -197,7 +196,7 @@
         <span class="k">return</span> <span class="p">{}</span>
 
 <div class="viewcode-block" id="Basic.compare"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.compare">[docs]</a>    <span class="k">def</span> <span class="nf">compare</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return -1, 0, 1 if the object is smaller, equal, or greater than other.</span>
 
 <span class="sd">        Not in the mathematical sense. If the object is of a different type</span>
@@ -273,7 +272,7 @@
 
 <div class="viewcode-block" id="Basic.fromiter"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.fromiter">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">fromiter</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">assumptions</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Create a new object from an iterable.</span>
 
 <span class="sd">        This is a convenience function that allows one to create objects from</span>
@@ -291,12 +290,12 @@
 
 <div class="viewcode-block" id="Basic.class_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.class_key">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">class_key</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Nice order of classes.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Nice order of classes.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span></div>
 
 <div class="viewcode-block" id="Basic.sort_key"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.sort_key">[docs]</a>    <span class="nd">@cacheit</span>
     <span class="k">def</span> <span class="nf">sort_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return a sort key.</span>
 
 <span class="sd">        Examples</span>
@@ -326,7 +325,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">class_key</span><span class="p">(),</span> <span class="n">args</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="o">.</span><span class="n">sort_key</span><span class="p">(),</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span></div>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a boolean indicating whether a == b on the basis of</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a boolean indicating whether a == b on the basis of</span>
 <span class="sd">        their symbolic trees.</span>
 
 <span class="sd">        This is the same as a.compare(b) == 0 but faster.</span>
@@ -378,7 +377,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hashable_content</span><span class="p">()</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_hashable_content</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;a != b  -&gt; Compare two symbolic trees and see whether they are different</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;a != b  -&gt; Compare two symbolic trees and see whether they are different</span>
 
 <span class="sd">        this is the same as:</span>
 
@@ -389,7 +388,7 @@
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Basic.dummy_eq"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.dummy_eq">[docs]</a>    <span class="k">def</span> <span class="nf">dummy_eq</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">symbol</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compare two expressions and handle dummy symbols.</span>
 
 <span class="sd">        Examples</span>
@@ -439,7 +438,7 @@
     <span class="c1"># Note, we always use the default ordering (lex) in __str__ and __repr__,</span>
     <span class="c1"># regardless of the global setting.  See issue 5487.</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Method to return the string representation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Method to return the string representation.</span>
 <span class="sd">        Return the expression as a string.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..printing</span> <span class="kn">import</span> <span class="n">sstr</span>
@@ -452,7 +451,7 @@
         <span class="k">return</span> <span class="n">sstr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Basic.atoms"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.atoms">[docs]</a>    <span class="k">def</span> <span class="nf">atoms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">types</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the atoms that form the current object.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the atoms that form the current object.</span>
 
 <span class="sd">        By default, only objects that are truly atomic and can&#39;t</span>
 <span class="sd">        be divided into smaller pieces are returned: symbols, numbers,</span>
@@ -535,7 +534,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">free_symbols</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return from the atoms of self those which are free symbols.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return from the atoms of self those which are free symbols.</span>
 
 <span class="sd">        For most expressions, all symbols are free symbols. For some classes</span>
 <span class="sd">        this is not true. e.g. Integrals use Symbols for the dummy variables</span>
@@ -550,7 +549,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">canonical_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return a dictionary mapping any variable defined in</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a dictionary mapping any variable defined in</span>
 <span class="sd">        ``self.variables`` as underscore-suffixed numbers</span>
 <span class="sd">        corresponding to their position in ``self.variables``. Enough</span>
 <span class="sd">        underscores are added to ensure that there will be no clash with</span>
@@ -578,7 +577,7 @@
         <span class="p">)</span>
 
 <div class="viewcode-block" id="Basic.rcall"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.rcall">[docs]</a>    <span class="k">def</span> <span class="nf">rcall</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Apply on the argument recursively through the expression tree.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply on the argument recursively through the expression tree.</span>
 
 <span class="sd">        This method is used to simulate a common abuse of notation for</span>
 <span class="sd">        operators. For instance in SymPy the the following will not work:</span>
@@ -596,7 +595,7 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">_recursive_call</span><span class="p">(</span><span class="n">expr_to_call</span><span class="p">,</span> <span class="n">on_args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Helper for rcall method.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper for rcall method.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Symbol</span>
 
         <span class="k">def</span> <span class="nf">the_call_method_is_overridden</span><span class="p">(</span><span class="n">expr</span><span class="p">):</span>
@@ -622,7 +621,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_comparable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return True if self can be computed to a real number</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if self can be computed to a real number</span>
 <span class="sd">        (or already is a real number) with precision, else False.</span>
 
 <span class="sd">        Examples</span>
@@ -667,7 +666,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The top-level function in an expression.</span>
 
 <span class="sd">        The following should hold for all objects::</span>
@@ -693,7 +692,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a tuple of arguments of &#39;self&#39;.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a tuple of arguments of &#39;self&#39;.</span>
 
 <span class="sd">        Examples</span>
 <span class="sd">        ========</span>
@@ -725,7 +724,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">_sorted_args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        The same as ``args``.  Derived classes which don&#39;t fix an</span>
 <span class="sd">        order on their arguments should override this method to</span>
 <span class="sd">        produce the sorted representation.</span>
@@ -733,7 +732,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span>
 
 <div class="viewcode-block" id="Basic.as_poly"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.as_poly">[docs]</a>    <span class="k">def</span> <span class="nf">as_poly</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">gens</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Converts ``self`` to a polynomial or returns ``None``.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Converts ``self`` to a polynomial or returns ``None``.</span>
 
 <span class="sd">        &gt;&gt;&gt; from .. import sin</span>
 <span class="sd">        &gt;&gt;&gt; from ..abc import x, y</span>
@@ -761,7 +760,7 @@
             <span class="k">return</span> <span class="kc">None</span></div>
 
 <div class="viewcode-block" id="Basic.as_content_primitive"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.as_content_primitive">[docs]</a>    <span class="k">def</span> <span class="nf">as_content_primitive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radical</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">clear</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;A stub to allow Basic args (like Tuple) to be skipped when computing</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;A stub to allow Basic args (like Tuple) to be skipped when computing</span>
 <span class="sd">        the content and primitive components of an expression.</span>
 
 <span class="sd">        See docstring of Expr.as_content_primitive</span>
@@ -769,7 +768,7 @@
         <span class="k">return</span> <span class="n">S</span><span class="o">.</span><span class="n">One</span><span class="p">,</span> <span class="bp">self</span></div>
 
 <div class="viewcode-block" id="Basic.subs"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.subs">[docs]</a>    <span class="k">def</span> <span class="nf">subs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Substitutes old for new in an expression after sympifying args.</span>
 
 <span class="sd">        `args` is either:</span>
@@ -898,7 +897,7 @@
 
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
                     <span class="n">filldedent</span><span class="p">(</span>
-                        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">                        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">                   When a single argument is passed to subs</span>
 <span class="sd">                   it should be a dictionary of old: new pairs or an iterable</span>
 <span class="sd">                   of (old, new) tuples.&quot;&quot;&quot;</span>
@@ -975,7 +974,7 @@
 
     <span class="nd">@cacheit</span>
     <span class="k">def</span> <span class="nf">_subs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Substitutes an expression old -&gt; new.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Substitutes an expression old -&gt; new.</span>
 
 <span class="sd">        If self is not equal to old then _eval_subs is called.</span>
 <span class="sd">        If _eval_subs doesn&#39;t want to make any special replacement</span>
@@ -1046,7 +1045,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">def</span> <span class="nf">fallback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-            <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">            Try to replace old with new in any of self&#39;s arguments.</span>
 <span class="sd">            &quot;&quot;&quot;</span>
             <span class="n">hit</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1086,7 +1085,7 @@
         <span class="k">return</span> <span class="n">rv</span>
 
     <span class="k">def</span> <span class="nf">_eval_subs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Override this stub if you want to do anything more than</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Override this stub if you want to do anything more than</span>
 <span class="sd">        attempt a replacement of old with new in the arguments of self.</span>
 
 <span class="sd">        See also: _subs</span>
@@ -1094,7 +1093,7 @@
         <span class="k">return</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="Basic.xreplace"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.xreplace">[docs]</a>    <span class="k">def</span> <span class="nf">xreplace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Replace occurrences of objects within the expression.</span>
 
 <span class="sd">        Parameters</span>
@@ -1157,7 +1156,7 @@
         <span class="k">return</span> <span class="n">value</span></div>
 
     <span class="k">def</span> <span class="nf">_xreplace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Helper for xreplace. Tracks whether a replacement actually occurred.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span> <span class="ow">in</span> <span class="n">rule</span><span class="p">:</span>
@@ -1179,7 +1178,7 @@
 
 <div class="viewcode-block" id="Basic.has"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.has">[docs]</a>    <span class="nd">@cacheit</span>
     <span class="k">def</span> <span class="nf">has</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">patterns</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Test whether any subexpression matches any of the patterns.</span>
 
 <span class="sd">        Examples</span>
@@ -1227,7 +1226,7 @@
         <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_has</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span> <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">patterns</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_has</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Helper for .has()&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper for .has()&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">.function</span> <span class="kn">import</span> <span class="n">UndefinedFunction</span><span class="p">,</span> <span class="n">Function</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">UndefinedFunction</span><span class="p">):</span>
@@ -1247,11 +1246,11 @@
             <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">arg</span> <span class="o">==</span> <span class="n">pattern</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">preorder_traversal</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_has_matcher</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Helper for .has()&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper for .has()&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__eq__</span>
 
 <div class="viewcode-block" id="Basic.replace"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.replace">[docs]</a>    <span class="k">def</span> <span class="nf">replace</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="nb">map</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">simultaneous</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exact</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Replace matching subexpressions of ``self`` with ``value``.</span>
 
 <span class="sd">        If ``map = True`` then also return the mapping {old: new} where ``old``</span>
@@ -1494,7 +1493,7 @@
             <span class="k">return</span> <span class="n">rv</span><span class="p">,</span> <span class="n">mapping</span></div>
 
 <div class="viewcode-block" id="Basic.find"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.find">[docs]</a>    <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Find all subexpressions matching a query.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find all subexpressions matching a query.&quot;&quot;&quot;</span>
         <span class="n">query</span> <span class="o">=</span> <span class="n">_make_find_query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
         <span class="n">results</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">preorder_traversal</span><span class="p">(</span><span class="bp">self</span><span class="p">)))</span>
 
@@ -1512,12 +1511,12 @@
             <span class="k">return</span> <span class="n">groups</span></div>
 
 <div class="viewcode-block" id="Basic.count"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.count">[docs]</a>    <span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Count the number of matching subexpressions.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Count the number of matching subexpressions.&quot;&quot;&quot;</span>
         <span class="n">query</span> <span class="o">=</span> <span class="n">_make_find_query</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">bool</span><span class="p">(</span><span class="n">query</span><span class="p">(</span><span class="n">sub</span><span class="p">))</span> <span class="k">for</span> <span class="n">sub</span> <span class="ow">in</span> <span class="n">preorder_traversal</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Basic.matches"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.matches">[docs]</a>    <span class="k">def</span> <span class="nf">matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">repl_dict</span><span class="o">=</span><span class="p">{},</span> <span class="n">old</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Helper method for match() that looks for a match between Wild symbols</span>
 <span class="sd">        in self and expressions in expr.</span>
 
@@ -1552,7 +1551,7 @@
         <span class="k">return</span> <span class="n">d</span></div>
 
 <div class="viewcode-block" id="Basic.match"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.match">[docs]</a>    <span class="k">def</span> <span class="nf">match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">,</span> <span class="n">old</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Pattern matching.</span>
 
 <span class="sd">        Wild symbols match all.</span>
@@ -1595,13 +1594,13 @@
         <span class="k">return</span> <span class="n">pattern</span><span class="o">.</span><span class="n">matches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">old</span><span class="o">=</span><span class="n">old</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Basic.count_ops"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.count_ops">[docs]</a>    <span class="k">def</span> <span class="nf">count_ops</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visual</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;wrapper for count_ops that returns the operation count.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;wrapper for count_ops that returns the operation count.&quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">count_ops</span>
 
         <span class="k">return</span> <span class="n">count_ops</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visual</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Basic.doit"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.doit">[docs]</a>    <span class="k">def</span> <span class="nf">doit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Evaluate objects that are not evaluated by default like limits,</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate objects that are not evaluated by default like limits,</span>
 <span class="sd">        integrals, sums and products. All objects of this kind will be</span>
 <span class="sd">        evaluated recursively, unless some species were excluded via &#39;hints&#39;</span>
 <span class="sd">        or unless the &#39;deep&#39; hint was set to &#39;False&#39;.</span>
@@ -1650,7 +1649,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Basic.rewrite"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Basic.rewrite">[docs]</a>    <span class="k">def</span> <span class="nf">rewrite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">hints</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Rewrite functions in terms of other functions.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rewrite functions in terms of other functions.</span>
 
 <span class="sd">        Rewrites expression containing applications of functions</span>
 <span class="sd">        of one kind in terms of functions of different kind. For</span>
@@ -1760,7 +1759,7 @@
 
 
 <div class="viewcode-block" id="Atom"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.Atom">[docs]</a><span class="k">class</span> <span class="nc">Atom</span><span class="p">(</span><span class="n">Basic</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A parent class for atomic things. An atom is an expression with no subexpressions.</span>
 
 <span class="sd">    Examples</span>
@@ -1808,7 +1807,7 @@
 
 
 <span class="k">def</span> <span class="nf">_aresame</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return True if a and b are structurally the same, else False.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True if a and b are structurally the same, else False.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    ========</span>
@@ -1843,7 +1842,7 @@
 
 
 <span class="k">def</span> <span class="nf">_atomic</span><span class="p">(</span><span class="n">e</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return atom-like quantities as far as substitution is</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return atom-like quantities as far as substitution is</span>
 <span class="sd">    concerned: Derivatives, Functions and Symbols. Don&#39;t</span>
 <span class="sd">    return any &#39;atoms&#39; that are inside such quantities unless</span>
 <span class="sd">    they also appear outside, too.</span>
@@ -1886,7 +1885,7 @@
 
 
 <div class="viewcode-block" id="preorder_traversal"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.preorder_traversal">[docs]</a><span class="k">class</span> <span class="nc">preorder_traversal</span><span class="p">(</span><span class="n">Iterator</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Do a pre-order traversal of a tree.</span>
 
 <span class="sd">    This iterator recursively yields nodes that it has visited in a pre-order</span>
@@ -1962,7 +1961,7 @@
                     <span class="k">yield</span> <span class="n">subtree</span>
 
 <div class="viewcode-block" id="preorder_traversal.skip"><a class="viewcode-back" href="../../../../modelparameters.sympy.core.html#modelparameters.sympy.core.basic.preorder_traversal.skip">[docs]</a>    <span class="k">def</span> <span class="nf">skip</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Skip yielding current node&#39;s (last yielded node&#39;s) subtrees.</span>
 
 <span class="sd">        Examples</span>
@@ -1990,7 +1989,7 @@
 
 
 <span class="k">def</span> <span class="nf">_make_find_query</span><span class="p">(</span><span class="n">query</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Convert the argument of Basic.find() into a callable&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert the argument of Basic.find() into a callable&quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">query</span> <span class="o">=</span> <span class="n">sympify</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">SympifyError</span><span class="p">:</span>
@@ -2017,7 +2016,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2038,7 +2037,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

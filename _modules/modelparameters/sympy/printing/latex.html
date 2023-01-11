@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -223,7 +222,7 @@
             <span class="k">return</span> <span class="sa">r</span><span class="s2">&quot;\begin{</span><span class="si">%s</span><span class="s2">}</span><span class="si">%s</span><span class="s2">\end{</span><span class="si">%s</span><span class="s2">}&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">env_str</span><span class="p">,</span> <span class="n">tex</span><span class="p">,</span> <span class="n">env_str</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_needs_brackets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if the expression needs to be wrapped in brackets when</span>
 <span class="sd">        printed, False otherwise. For example: a + b =&gt; True; a =&gt; False;</span>
 <span class="sd">        10 =&gt; False; -10 =&gt; True.</span>
@@ -233,7 +232,7 @@
                                           <span class="ow">and</span> <span class="n">expr</span><span class="o">.</span><span class="n">is_Rational</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">)))</span>
 
     <span class="k">def</span> <span class="nf">_needs_function_brackets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if the expression needs to be wrapped in brackets when</span>
 <span class="sd">        passed as an argument to a function, False otherwise. This is a more</span>
 <span class="sd">        liberal version of _needs_brackets, in that many expressions which need</span>
@@ -256,7 +255,7 @@
                 <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">_needs_mul_brackets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">first</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">last</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if the expression needs to be wrapped in brackets when</span>
 <span class="sd">        printed as part of a Mul, False otherwise. This is True for Add,</span>
 <span class="sd">        but also for some container objects that would not need brackets</span>
@@ -285,7 +284,7 @@
 
 
     <span class="k">def</span> <span class="nf">_needs_add_brackets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns True if the expression needs to be wrapped in brackets when</span>
 <span class="sd">        printed as part of an Add, False otherwise.  This is False for most</span>
 <span class="sd">        things.</span>
@@ -695,7 +694,7 @@
             <span class="k">return</span> <span class="sa">r</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">tex</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_print</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_hprint_Function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Logic to decide how to render a function to latex</span>
 <span class="sd">          - if it is a recognized latex name, use the appropriate latex command</span>
 <span class="sd">          - if it is a single letter, just use that letter</span>
@@ -713,7 +712,7 @@
         <span class="k">return</span> <span class="n">name</span>
 
     <span class="k">def</span> <span class="nf">_print_Function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">,</span> <span class="n">exp</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Render functions to LaTeX, handling functions that LaTeX knows about</span>
 <span class="sd">        e.g., sin, cos, ... by using the proper LaTeX command (\sin, \cos, ...).</span>
 <span class="sd">        For single-letter function names, render them as regular LaTeX math</span>
@@ -2037,7 +2036,7 @@
 
 
 <div class="viewcode-block" id="translate"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.latex.translate">[docs]</a><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Check for a modifier ending the string.  If present, convert the</span>
 <span class="sd">    modifier to latex and translate the rest recursively.</span>
 
@@ -2066,7 +2065,7 @@
         <span class="k">return</span> <span class="n">s</span></div>
 
 <div class="viewcode-block" id="latex"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.latex.latex">[docs]</a><span class="k">def</span> <span class="nf">latex</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert the given expression to LaTeX representation.</span>
 
 <span class="sd">    &gt;&gt;&gt; from .. import latex, pi, sin, asin, Integral, Matrix, Rational</span>
@@ -2194,7 +2193,7 @@
 
 
 <div class="viewcode-block" id="print_latex"><a class="viewcode-back" href="../../../../modelparameters.sympy.printing.html#modelparameters.sympy.printing.latex.print_latex">[docs]</a><span class="k">def</span> <span class="nf">print_latex</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Prints LaTeX representation of the given expression.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Prints LaTeX representation of the given expression.&quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">latex</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="o">**</span><span class="n">settings</span><span class="p">))</span></div>
 </pre></div>
 
@@ -2213,7 +2212,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2234,7 +2233,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

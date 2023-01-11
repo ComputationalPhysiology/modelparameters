@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -47,7 +46,7 @@
 <span class="kn">from</span> <span class="nn">..core.compatibility</span> <span class="kn">import</span> <span class="nb">range</span>
 
 <div class="viewcode-block" id="ratint"><a class="viewcode-back" href="../../../../modelparameters.sympy.integrals.html#modelparameters.sympy.integrals.rationaltools.ratint">[docs]</a><span class="k">def</span> <span class="nf">ratint</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">flags</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Performs indefinite integration of rational functions.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Performs indefinite integration of rational functions.</span>
 
 <span class="sd">       Given a field :math:`K` and a rational function :math:`f = p/q`,</span>
 <span class="sd">       where :math:`p` and :math:`q` are polynomials in :math:`K[x]`,</span>
@@ -148,7 +147,7 @@
 
 
 <div class="viewcode-block" id="ratint_ratpart"><a class="viewcode-back" href="../../../../modelparameters.sympy.integrals.html#modelparameters.sympy.integrals.rationaltools.ratint_ratpart">[docs]</a><span class="k">def</span> <span class="nf">ratint_ratpart</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Horowitz-Ostrogradsky algorithm.</span>
 
 <span class="sd">    Given a field K and polynomials f and g in K[x], such that f and g</span>
@@ -208,7 +207,7 @@
 
 
 <div class="viewcode-block" id="ratint_logpart"><a class="viewcode-back" href="../../../../modelparameters.sympy.integrals.html#modelparameters.sympy.integrals.rationaltools.ratint_logpart">[docs]</a><span class="k">def</span> <span class="nf">ratint_logpart</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Lazard-Rioboo-Trager algorithm.</span>
 
 <span class="sd">    Given a field K and polynomials f and g in K[x], such that f and g</span>
@@ -293,7 +292,7 @@
 
 
 <div class="viewcode-block" id="log_to_atan"><a class="viewcode-back" href="../../../../modelparameters.sympy.integrals.html#modelparameters.sympy.integrals.rationaltools.log_to_atan">[docs]</a><span class="k">def</span> <span class="nf">log_to_atan</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert complex logarithms to real arctangents.</span>
 
 <span class="sd">    Given a real field K and polynomials f and g in K[x], with g != 0,</span>
@@ -339,7 +338,7 @@
 
 
 <div class="viewcode-block" id="log_to_real"><a class="viewcode-back" href="../../../../modelparameters.sympy.integrals.html#modelparameters.sympy.integrals.rationaltools.log_to_real">[docs]</a><span class="k">def</span> <span class="nf">log_to_real</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Convert complex logarithms to real functions.</span>
 
 <span class="sd">    Given real field K and polynomials h in K[t,x] and q in K[t],</span>
@@ -438,7 +437,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -459,7 +458,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

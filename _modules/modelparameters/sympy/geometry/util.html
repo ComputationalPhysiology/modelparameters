@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -57,12 +56,12 @@
 
 
 <span class="k">def</span> <span class="nf">_ordered_points</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the tuple of points sorted numerically according to args&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the tuple of points sorted numerically according to args&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">args</span><span class="p">))</span>
 
 
 <span class="k">def</span> <span class="nf">_symbol</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">matching_symbol</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return s if s is a Symbol, else return either a new Symbol (real=True)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return s if s is a Symbol, else return either a new Symbol (real=True)</span>
 <span class="sd">    with the same name s or the matching_symbol if s is a string and it matches</span>
 <span class="sd">    the name of the matching_symbol.</span>
 
@@ -103,7 +102,7 @@
 
 
 <span class="k">def</span> <span class="nf">_uniquely_named_symbol</span><span class="p">(</span><span class="n">xname</span><span class="p">,</span> <span class="o">*</span><span class="n">exprs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a symbol which, when printed, will have a name unique</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a symbol which, when printed, will have a name unique</span>
 <span class="sd">    from any other already in the expressions given. The name is made</span>
 <span class="sd">    unique by prepending underscores.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -117,7 +116,7 @@
 
 
 <div class="viewcode-block" id="are_coplanar"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.util.are_coplanar">[docs]</a><span class="k">def</span> <span class="nf">are_coplanar</span><span class="p">(</span><span class="o">*</span><span class="n">e</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Returns True if the given entities are coplanar otherwise False</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns True if the given entities are coplanar otherwise False</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ==========</span>
@@ -188,7 +187,7 @@
 
 
 <div class="viewcode-block" id="are_similar"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.util.are_similar">[docs]</a><span class="k">def</span> <span class="nf">are_similar</span><span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Are two geometrical entities similar.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Are two geometrical entities similar.</span>
 
 <span class="sd">    Can one geometrical entity be uniformly scaled to the other?</span>
 
@@ -250,7 +249,7 @@
 
 
 <div class="viewcode-block" id="centroid"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.util.centroid">[docs]</a><span class="k">def</span> <span class="nf">centroid</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Find the centroid (center of mass) of the collection containing only Points,</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the centroid (center of mass) of the collection containing only Points,</span>
 <span class="sd">    Segments or Polygons. The centroid is the weighted average of the individual centroid</span>
 <span class="sd">    where the weights are the lengths (of segments) or areas (of polygons).</span>
 <span class="sd">    Overlapping regions will add to the weight of that region.</span>
@@ -326,7 +325,7 @@
 
 
 <div class="viewcode-block" id="closest_points"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.util.closest_points">[docs]</a><span class="k">def</span> <span class="nf">closest_points</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the subset of points from a set of points that were</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the subset of points from a set of points that were</span>
 <span class="sd">    the closest to each other in the 2D plane.</span>
 
 <span class="sd">    Parameters</span>
@@ -405,7 +404,7 @@
 
 
 <div class="viewcode-block" id="convex_hull"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.util.convex_hull">[docs]</a><span class="k">def</span> <span class="nf">convex_hull</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The convex hull surrounding the Points contained in the list of entities.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The convex hull surrounding the Points contained in the list of entities.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ==========</span>
@@ -485,7 +484,7 @@
         <span class="k">return</span> <span class="n">s</span> <span class="k">if</span> <span class="n">polygon</span> <span class="k">else</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_orientation</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;Return positive if p-q-r are clockwise, neg if ccw, zero if</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Return positive if p-q-r are clockwise, neg if ccw, zero if</span>
 <span class="sd">        collinear.&#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">p</span><span class="o">.</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">p</span><span class="o">.</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">q</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">p</span><span class="o">.</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">p</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
 
@@ -516,7 +515,7 @@
         <span class="k">return</span> <span class="p">(</span><span class="n">U</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="farthest_points"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.util.farthest_points">[docs]</a><span class="k">def</span> <span class="nf">farthest_points</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the subset of points from a set of points that were</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the subset of points from a set of points that were</span>
 <span class="sd">    the furthest apart from each other in the 2D plane.</span>
 
 <span class="sd">    Parameters</span>
@@ -602,7 +601,7 @@
 
 
 <div class="viewcode-block" id="idiff"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.util.idiff">[docs]</a><span class="k">def</span> <span class="nf">idiff</span><span class="p">(</span><span class="n">eq</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return ``dy/dx`` assuming that ``eq == 0``.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return ``dy/dx`` assuming that ``eq == 0``.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ==========</span>
@@ -664,7 +663,7 @@
 
 
 <div class="viewcode-block" id="intersection"><a class="viewcode-back" href="../../../../modelparameters.sympy.geometry.html#modelparameters.sympy.geometry.util.intersection">[docs]</a><span class="k">def</span> <span class="nf">intersection</span><span class="p">(</span><span class="o">*</span><span class="n">entities</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;The intersection of a collection of GeometryEntity instances.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The intersection of a collection of GeometryEntity instances.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ==========</span>
@@ -759,7 +758,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -780,7 +779,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -94,7 +93,7 @@
 
 
 <span class="k">def</span> <span class="nf">_invert_monoms</span><span class="p">(</span><span class="n">p1</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute ``x**n * p1(1/x)`` for a univariate polynomial ``p1`` in ``x``.</span>
 
 <span class="sd">    Examples</span>
@@ -125,14 +124,14 @@
     <span class="k">return</span> <span class="n">p</span>
 
 <span class="k">def</span> <span class="nf">_giant_steps</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return a list of precision steps for the Newton&#39;s method&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a list of precision steps for the Newton&#39;s method&quot;&quot;&quot;</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">giant_steps</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
         <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">res</span>
     <span class="k">return</span> <span class="n">res</span>
 
 <div class="viewcode-block" id="rs_trunc"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_trunc">[docs]</a><span class="k">def</span> <span class="nf">rs_trunc</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Truncate the series in the ``x`` variable with precision ``prec``,</span>
 <span class="sd">    that is, modulo ``O(x**prec)``</span>
 
@@ -159,7 +158,7 @@
     <span class="k">return</span> <span class="n">p</span></div>
 
 <div class="viewcode-block" id="rs_is_puiseux"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_is_puiseux">[docs]</a><span class="k">def</span> <span class="nf">rs_is_puiseux</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Test if ``p`` is Puiseux series in ``x``.</span>
 
 <span class="sd">    Raise an exception if it has a negative power in ``x``.</span>
@@ -184,7 +183,7 @@
     <span class="k">return</span> <span class="kc">False</span></div>
 
 <div class="viewcode-block" id="rs_puiseux"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_puiseux">[docs]</a><span class="k">def</span> <span class="nf">rs_puiseux</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the puiseux series for `f(p, x, prec)`.</span>
 
 <span class="sd">    To be used when function ``f`` is implemented only for regular series.</span>
@@ -223,7 +222,7 @@
     <span class="k">return</span> <span class="n">r</span></div>
 
 <div class="viewcode-block" id="rs_puiseux2"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_puiseux2">[docs]</a><span class="k">def</span> <span class="nf">rs_puiseux2</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the puiseux series for `f(p, q, x, prec)`.</span>
 
 <span class="sd">    To be used when function ``f`` is implemented only for regular series.</span>
@@ -248,7 +247,7 @@
     <span class="k">return</span> <span class="n">r</span></div>
 
 <div class="viewcode-block" id="rs_mul"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_mul">[docs]</a><span class="k">def</span> <span class="nf">rs_mul</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the product of the given two series, modulo ``O(x**prec)``.</span>
 
 <span class="sd">    ``x`` is the series variable or its position in the generators.</span>
@@ -299,7 +298,7 @@
     <span class="k">return</span> <span class="n">p</span></div>
 
 <div class="viewcode-block" id="rs_square"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_square">[docs]</a><span class="k">def</span> <span class="nf">rs_square</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Square the series modulo ``O(x**prec)``</span>
 
 <span class="sd">    Examples</span>
@@ -339,7 +338,7 @@
     <span class="k">return</span> <span class="n">p</span></div>
 
 <div class="viewcode-block" id="rs_pow"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_pow">[docs]</a><span class="k">def</span> <span class="nf">rs_pow</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return ``p1**n`` modulo ``O(x**prec)``</span>
 
 <span class="sd">    Examples</span>
@@ -394,7 +393,7 @@
     <span class="k">return</span> <span class="n">p</span></div>
 
 <div class="viewcode-block" id="rs_subs"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_subs">[docs]</a><span class="k">def</span> <span class="nf">rs_subs</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">rules</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Substitution with truncation according to the mapping in ``rules``.</span>
 
 <span class="sd">    Return a series with precision ``prec`` in the generator ``x``</span>
@@ -462,7 +461,7 @@
     <span class="k">return</span> <span class="n">p1</span></div>
 
 <span class="k">def</span> <span class="nf">_has_constant_term</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Check if ``p`` has a constant term in ``x``</span>
 
 <span class="sd">    Examples</span>
@@ -488,7 +487,7 @@
     <span class="k">return</span> <span class="kc">False</span>
 
 <span class="k">def</span> <span class="nf">_get_constant_term</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return constant term in p with respect to x</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return constant term in p with respect to x</span>
 
 <span class="sd">    Note that it is not simply `p[R.zero_monom]` as there might be multiple</span>
 <span class="sd">    generators in the ring R. We want the `x`-free term which can contain other</span>
@@ -516,7 +515,7 @@
     <span class="k">return</span> <span class="n">index</span><span class="p">,</span> <span class="n">m</span>
 
 <span class="k">def</span> <span class="nf">_series_inversion1</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Univariate series inversion ``1/p`` modulo ``O(x**prec)``.</span>
 
 <span class="sd">    The Newton method is used.</span>
@@ -562,7 +561,7 @@
     <span class="k">return</span> <span class="n">p1</span>
 
 <div class="viewcode-block" id="rs_series_inversion"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_series_inversion">[docs]</a><span class="k">def</span> <span class="nf">rs_series_inversion</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Multivariate series inversion ``1/p`` modulo ``O(x**prec)``.</span>
 
 <span class="sd">    Examples</span>
@@ -600,7 +599,7 @@
     <span class="k">return</span> <span class="n">r</span></div>
 
 <span class="k">def</span> <span class="nf">_coefficient_t</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Coefficient of `x\_i**j` in p, where ``t`` = (i, j)&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Coefficient of `x\_i**j` in p, where ``t`` = (i, j)&quot;&quot;&quot;</span>
     <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="n">t</span>
     <span class="n">R</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">ring</span>
     <span class="n">expv1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">R</span><span class="o">.</span><span class="n">ngens</span>
@@ -613,7 +612,7 @@
     <span class="k">return</span> <span class="n">p1</span>
 
 <div class="viewcode-block" id="rs_series_reversion"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_series_reversion">[docs]</a><span class="k">def</span> <span class="nf">rs_series_reversion</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Reversion of a series.</span>
 
 <span class="sd">    ``p`` is a series with ``O(x**n)`` of the form `p = a*x + f(x)`</span>
@@ -678,7 +677,7 @@
     <span class="k">return</span> <span class="n">r</span></div>
 
 <div class="viewcode-block" id="rs_series_from_list"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_series_from_list">[docs]</a><span class="k">def</span> <span class="nf">rs_series_from_list</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">,</span> <span class="n">concur</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a series `sum c[n]*p**n` modulo `O(x**prec)`.</span>
 
 <span class="sd">    It reduces the number of multiplications by summing concurrently.</span>
@@ -764,7 +763,7 @@
     <span class="k">return</span> <span class="n">s</span></div>
 
 <div class="viewcode-block" id="rs_diff"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_diff">[docs]</a><span class="k">def</span> <span class="nf">rs_diff</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return partial derivative of ``p`` with respect to ``x``.</span>
 
 <span class="sd">    Parameters</span>
@@ -795,7 +794,7 @@
     <span class="k">return</span> <span class="n">p1</span></div>
 
 <div class="viewcode-block" id="rs_integrate"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_integrate">[docs]</a><span class="k">def</span> <span class="nf">rs_integrate</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Integrate ``p`` with respect to ``x``.</span>
 
 <span class="sd">    Parameters</span>
@@ -826,7 +825,7 @@
     <span class="k">return</span> <span class="n">p1</span></div>
 
 <div class="viewcode-block" id="rs_fun"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_fun">[docs]</a><span class="k">def</span> <span class="nf">rs_fun</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Function of a multivariate series computed by substitution.</span>
 
 <span class="sd">    The case with f method name is used to compute `rs\_tan` and `rs\_nth\_root`</span>
@@ -881,7 +880,7 @@
     <span class="k">return</span> <span class="n">p1</span></div>
 
 <div class="viewcode-block" id="mul_xin"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.mul_xin">[docs]</a><span class="k">def</span> <span class="nf">mul_xin</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return `p*x_i**n`.</span>
 
 <span class="sd">    `x\_i` is the ith variable in ``p``.</span>
@@ -895,7 +894,7 @@
     <span class="k">return</span> <span class="n">q</span></div>
 
 <div class="viewcode-block" id="pow_xin"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.pow_xin">[docs]</a><span class="k">def</span> <span class="nf">pow_xin</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    &gt;&gt;&gt; from .domains import QQ</span>
 <span class="sd">    &gt;&gt;&gt; from .rings import ring</span>
 <span class="sd">    &gt;&gt;&gt; from .ring_series import pow_xin</span>
@@ -914,7 +913,7 @@
     <span class="k">return</span> <span class="n">q</span></div>
 
 <span class="k">def</span> <span class="nf">_nth_root1</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Univariate series expansion of the nth root of ``p``.</span>
 
 <span class="sd">    The Newton method is used.</span>
@@ -949,7 +948,7 @@
         <span class="k">return</span> <span class="n">_series_inversion1</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">)</span>
 
 <div class="viewcode-block" id="rs_nth_root"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_nth_root">[docs]</a><span class="k">def</span> <span class="nf">rs_nth_root</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Multivariate series expansion of the nth root of ``p``.</span>
 
 <span class="sd">    Parameters</span>
@@ -1023,7 +1022,7 @@
     <span class="k">return</span> <span class="n">res</span></div>
 
 <div class="viewcode-block" id="rs_log"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_log">[docs]</a><span class="k">def</span> <span class="nf">rs_log</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The Logarithm of ``p`` modulo ``O(x**prec)``.</span>
 
 <span class="sd">    Notes</span>
@@ -1080,7 +1079,7 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 <div class="viewcode-block" id="rs_LambertW"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_LambertW">[docs]</a><span class="k">def</span> <span class="nf">rs_LambertW</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculate the series expansion of the principal branch of the Lambert W</span>
 <span class="sd">    function.</span>
 
@@ -1119,7 +1118,7 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 <span class="k">def</span> <span class="nf">_exp1</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Helper function for `rs\_exp`. &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Helper function for `rs\_exp`. &quot;&quot;&quot;</span>
     <span class="n">R</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">ring</span>
     <span class="n">p1</span> <span class="o">=</span> <span class="n">R</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">precx</span> <span class="ow">in</span> <span class="n">_giant_steps</span><span class="p">(</span><span class="n">prec</span><span class="p">):</span>
@@ -1129,7 +1128,7 @@
     <span class="k">return</span> <span class="n">p1</span>
 
 <div class="viewcode-block" id="rs_exp"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_exp">[docs]</a><span class="k">def</span> <span class="nf">rs_exp</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Exponentiation of a series modulo ``O(x**prec)``</span>
 
 <span class="sd">    Examples</span>
@@ -1187,7 +1186,7 @@
     <span class="k">return</span> <span class="n">r</span></div>
 
 <span class="k">def</span> <span class="nf">_atan</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">iv</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Expansion using formula.</span>
 
 <span class="sd">    Faster on very small and univariate series.</span>
@@ -1203,7 +1202,7 @@
     <span class="k">return</span> <span class="n">s</span>
 
 <div class="viewcode-block" id="rs_atan"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_atan">[docs]</a><span class="k">def</span> <span class="nf">rs_atan</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The arctangent of a series</span>
 
 <span class="sd">    Return the series expansion of the atan of ``p``, about 0.</span>
@@ -1257,7 +1256,7 @@
     <span class="k">return</span> <span class="n">rs_integrate</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">const</span></div>
 
 <div class="viewcode-block" id="rs_asin"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_asin">[docs]</a><span class="k">def</span> <span class="nf">rs_asin</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Arcsine of a series</span>
 
 <span class="sd">    Return the series expansion of the asin of ``p``, about 0.</span>
@@ -1302,7 +1301,7 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 <span class="k">def</span> <span class="nf">_tan1</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper function of `rs\_tan`.</span>
 
 <span class="sd">    Return the series expansion of tan of a univariate series using Newton&#39;s</span>
@@ -1323,7 +1322,7 @@
     <span class="k">return</span> <span class="n">p1</span>
 
 <div class="viewcode-block" id="rs_tan"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_tan">[docs]</a><span class="k">def</span> <span class="nf">rs_tan</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Tangent of a series.</span>
 
 <span class="sd">    Return the series expansion of the tan of ``p``, about 0.</span>
@@ -1383,7 +1382,7 @@
         <span class="k">return</span> <span class="n">rs_fun</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">rs_tan</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="rs_cot"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_cot">[docs]</a><span class="k">def</span> <span class="nf">rs_cot</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Cotangent of a series</span>
 
 <span class="sd">    Return the series expansion of the cot of ``p``, about 0.</span>
@@ -1419,7 +1418,7 @@
     <span class="k">return</span> <span class="n">res</span></div>
 
 <div class="viewcode-block" id="rs_sin"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_sin">[docs]</a><span class="k">def</span> <span class="nf">rs_sin</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Sine of a series</span>
 
 <span class="sd">    Return the series expansion of the sin of ``p``, about 0.</span>
@@ -1489,7 +1488,7 @@
     <span class="k">return</span> <span class="n">rs_series_from_list</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="rs_cos"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_cos">[docs]</a><span class="k">def</span> <span class="nf">rs_cos</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Cosine of a series</span>
 
 <span class="sd">    Return the series expansion of the cos of ``p``, about 0.</span>
@@ -1562,7 +1561,7 @@
     <span class="k">return</span> <span class="n">rs_series_from_list</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="rs_cos_sin"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_cos_sin">[docs]</a><span class="k">def</span> <span class="nf">rs_cos_sin</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return the tuple `(rs\_cos(p, x, prec)`, `rs\_sin(p, x, prec))`.</span>
 
 <span class="sd">    Is faster than calling rs_cos and rs_sin separately</span>
@@ -1575,7 +1574,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">rs_mul</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">t2</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">),</span> <span class="n">rs_mul</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">))</span></div>
 
 <span class="k">def</span> <span class="nf">_atanh</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Expansion using formula</span>
 
 <span class="sd">    Faster for very small and univariate series</span>
@@ -1591,7 +1590,7 @@
     <span class="k">return</span> <span class="n">s</span>
 
 <div class="viewcode-block" id="rs_atanh"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_atanh">[docs]</a><span class="k">def</span> <span class="nf">rs_atanh</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Hyperbolic arctangent of a series</span>
 
 <span class="sd">    Return the series expansion of the atanh of ``p``, about 0.</span>
@@ -1645,7 +1644,7 @@
     <span class="k">return</span> <span class="n">rs_integrate</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">const</span></div>
 
 <div class="viewcode-block" id="rs_sinh"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_sinh">[docs]</a><span class="k">def</span> <span class="nf">rs_sinh</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Hyperbolic sine of a series</span>
 
 <span class="sd">    Return the series expansion of the sinh of ``p``, about 0.</span>
@@ -1672,7 +1671,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span></div>
 
 <div class="viewcode-block" id="rs_cosh"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_cosh">[docs]</a><span class="k">def</span> <span class="nf">rs_cosh</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Hyperbolic cosine of a series</span>
 
 <span class="sd">    Return the series expansion of the cosh of ``p``, about 0.</span>
@@ -1699,7 +1698,7 @@
     <span class="k">return</span> <span class="p">(</span><span class="n">t</span> <span class="o">+</span> <span class="n">t1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span></div>
 
 <span class="k">def</span> <span class="nf">_tanh</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Helper function of `rs\_tanh`</span>
 
 <span class="sd">    Return the series expansion of tanh of a univariate series using Newton&#39;s</span>
@@ -1720,7 +1719,7 @@
     <span class="k">return</span> <span class="n">p1</span>
 
 <div class="viewcode-block" id="rs_tanh"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_tanh">[docs]</a><span class="k">def</span> <span class="nf">rs_tanh</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Hyperbolic tangent of a series</span>
 
 <span class="sd">    Return the series expansion of the tanh of ``p``, about 0.</span>
@@ -1774,7 +1773,7 @@
         <span class="k">return</span> <span class="n">rs_fun</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">_tanh</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="rs_newton"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_newton">[docs]</a><span class="k">def</span> <span class="nf">rs_newton</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the truncated Newton sum of the polynomial ``p``</span>
 
 <span class="sd">    Examples</span>
@@ -1796,7 +1795,7 @@
     <span class="k">return</span> <span class="n">res</span></div>
 
 <div class="viewcode-block" id="rs_hadamard_exp"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_hadamard_exp">[docs]</a><span class="k">def</span> <span class="nf">rs_hadamard_exp</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">inverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return ``sum f_i/i!*x**i`` from ``sum f_i*x**i``,</span>
 <span class="sd">    where ``x`` is the first variable.</span>
 
@@ -1826,7 +1825,7 @@
     <span class="k">return</span> <span class="n">p</span></div>
 
 <div class="viewcode-block" id="rs_compose_add"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_compose_add">[docs]</a><span class="k">def</span> <span class="nf">rs_compose_add</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    compute the composed sum ``prod(p2(x - beta) for beta root of p1)``</span>
 
 <span class="sd">    Examples</span>
@@ -1885,7 +1884,7 @@
         <span class="p">}</span>
 
 <div class="viewcode-block" id="rs_min_pow"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_min_pow">[docs]</a><span class="k">def</span> <span class="nf">rs_min_pow</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">series_rs</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Find the minimum power of `a` in the series expansion of expr&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the minimum power of `a` in the series expansion of expr&quot;&quot;&quot;</span>
     <span class="n">series</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span>
     <span class="k">while</span> <span class="n">series</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -1983,7 +1982,7 @@
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
 <div class="viewcode-block" id="rs_series"><a class="viewcode-back" href="../../../../modelparameters.sympy.polys.html#modelparameters.sympy.polys.ring_series.rs_series">[docs]</a><span class="k">def</span> <span class="nf">rs_series</span><span class="p">(</span><span class="n">expr</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">prec</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return the series expansion of an expression about 0.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the series expansion of an expression about 0.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -2067,7 +2066,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -2088,7 +2087,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>

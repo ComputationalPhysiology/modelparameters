@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,9 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css" />
     <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
-    <script src="../../../../_static/jquery.js"></script>
-    <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
   </head><body>
@@ -52,7 +51,7 @@
 
 
 <div class="viewcode-block" id="n_order"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.residue_ntheory.n_order">[docs]</a><span class="k">def</span> <span class="nf">n_order</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the order of ``a`` modulo ``n``.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the order of ``a`` modulo ``n``.</span>
 
 <span class="sd">    The order of ``a`` modulo ``n`` is the smallest integer</span>
 <span class="sd">    ``k`` such that ``a**k`` leaves a remainder of 1 with ``n``.</span>
@@ -95,7 +94,7 @@
 
 
 <span class="k">def</span> <span class="nf">_primitive_root_prime_iter</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates the primitive roots for a prime ``p``</span>
 
 <span class="sd">    References</span>
@@ -123,7 +122,7 @@
 
 
 <div class="viewcode-block" id="primitive_root"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.residue_ntheory.primitive_root">[docs]</a><span class="k">def</span> <span class="nf">primitive_root</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the smallest primitive root or None</span>
 
 <span class="sd">    References</span>
@@ -188,7 +187,7 @@
 
 
 <div class="viewcode-block" id="is_primitive_root"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.residue_ntheory.is_primitive_root">[docs]</a><span class="k">def</span> <span class="nf">is_primitive_root</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns True if ``a`` is a primitive root of ``p``</span>
 
 <span class="sd">    ``a`` is said to be the primitive root of ``p`` if gcd(a, p) == 1 and</span>
@@ -219,7 +218,7 @@
 
 
 <span class="k">def</span> <span class="nf">_sqrt_mod_tonelli_shanks</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the square root in the case of ``p`` prime with ``p == 1 (mod 8)``</span>
 
 <span class="sd">    References</span>
@@ -251,7 +250,7 @@
 
 
 <div class="viewcode-block" id="sqrt_mod"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.residue_ntheory.sqrt_mod">[docs]</a><span class="k">def</span> <span class="nf">sqrt_mod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">all_roots</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find a root of ``x**2 = a mod p``</span>
 
 <span class="sd">    Parameters</span>
@@ -303,7 +302,7 @@
 
 
 <span class="k">def</span> <span class="nf">_product</span><span class="p">(</span><span class="o">*</span><span class="n">iters</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Cartesian product generator</span>
 
 <span class="sd">    Notes</span>
@@ -337,7 +336,7 @@
 
 
 <div class="viewcode-block" id="sqrt_mod_iter"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.residue_ntheory.sqrt_mod_iter">[docs]</a><span class="k">def</span> <span class="nf">sqrt_mod_iter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">domain</span><span class="o">=</span><span class="nb">int</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Iterate over solutions to ``x**2 = a mod p``</span>
 
 <span class="sd">    Parameters</span>
@@ -397,7 +396,7 @@
 
 
 <span class="k">def</span> <span class="nf">_sqrt_mod_prime_power</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find the solutions to ``x**2 = a mod p**k`` when ``a % p != 0``</span>
 
 <span class="sd">    Parameters</span>
@@ -514,7 +513,7 @@
 
 
 <span class="k">def</span> <span class="nf">_sqrt_mod1</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find solution to ``x**2 == a mod p**n`` when ``a % p == 0``</span>
 
 <span class="sd">    see http://www.numbertheory.org/php/squareroot.html</span>
@@ -619,7 +618,7 @@
 
 
 <div class="viewcode-block" id="is_quad_residue"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.residue_ntheory.is_quad_residue">[docs]</a><span class="k">def</span> <span class="nf">is_quad_residue</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns True if ``a`` (mod ``p``) is in the set of squares mod ``p``,</span>
 <span class="sd">    i.e a % p in set([i**2 % p for i in range(p)]). If ``p`` is an odd</span>
 <span class="sd">    prime, an iterative method is used to make the determination:</span>
@@ -655,7 +654,7 @@
 
 
 <div class="viewcode-block" id="is_nthpow_residue"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.residue_ntheory.is_nthpow_residue">[docs]</a><span class="k">def</span> <span class="nf">is_nthpow_residue</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns True if ``x**n == a (mod m)`` has solutions.</span>
 
 <span class="sd">    References</span>
@@ -683,7 +682,7 @@
 
 
 <span class="k">def</span> <span class="nf">_is_nthpow_residue_bign</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns True if ``x**n == a (mod m)`` has solutions for n &gt; 2.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns True if ``x**n == a (mod m)`` has solutions for n &gt; 2.&quot;&quot;&quot;</span>
     <span class="c1"># assert n &gt; 2</span>
     <span class="c1"># assert a &gt; 0 and m &gt; 0</span>
     <span class="k">if</span> <span class="n">primitive_root</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -698,7 +697,7 @@
 
 
 <span class="k">def</span> <span class="nf">_is_nthpow_residue_bign_prime_power</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns True/False if a solution for ``x**n == a (mod(p**k))``</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns True/False if a solution for ``x**n == a (mod(p**k))``</span>
 <span class="sd">    does/doesn&#39;t exist.&quot;&quot;&quot;</span>
     <span class="c1"># assert a &gt; 0</span>
     <span class="c1"># assert n &gt; 2</span>
@@ -733,7 +732,7 @@
 
 
 <span class="k">def</span> <span class="nf">_nthroot_mod1</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">all_roots</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Root of ``x**q = s mod p``, ``p`` prime and ``q`` divides ``p - 1``</span>
 
 <span class="sd">    References</span>
@@ -781,7 +780,7 @@
 
 
 <div class="viewcode-block" id="nthroot_mod"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.residue_ntheory.nthroot_mod">[docs]</a><span class="k">def</span> <span class="nf">nthroot_mod</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">all_roots</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find the solutions to ``x**n = a mod p``</span>
 
 <span class="sd">    Parameters</span>
@@ -845,7 +844,7 @@
 
 
 <div class="viewcode-block" id="quadratic_residues"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.residue_ntheory.quadratic_residues">[docs]</a><span class="k">def</span> <span class="nf">quadratic_residues</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the list of quadratic residues.</span>
 
 <span class="sd">    Examples</span>
@@ -862,7 +861,7 @@
 
 
 <div class="viewcode-block" id="legendre_symbol"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.residue_ntheory.legendre_symbol">[docs]</a><span class="k">def</span> <span class="nf">legendre_symbol</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the Legendre symbol `(a / p)`.</span>
 
 <span class="sd">    For an integer ``a`` and an odd prime ``p``, the Legendre symbol is</span>
@@ -908,7 +907,7 @@
 
 
 <div class="viewcode-block" id="jacobi_symbol"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.residue_ntheory.jacobi_symbol">[docs]</a><span class="k">def</span> <span class="nf">jacobi_symbol</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the Jacobi symbol `(m / n)`.</span>
 
 <span class="sd">    For any integer ``m`` and any positive odd integer ``n`` the Jacobi symbol</span>
@@ -996,7 +995,7 @@
 
 
 <div class="viewcode-block" id="mobius"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.residue_ntheory.mobius">[docs]</a><span class="k">class</span> <span class="nc">mobius</span><span class="p">(</span><span class="n">Function</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Möbius function maps natural number to {-1, 0, 1}</span>
 
 <span class="sd">    It is defined as follows:</span>
@@ -1054,7 +1053,7 @@
 
 
 <span class="k">def</span> <span class="nf">_discrete_log_trial_mul</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Trial multiplication algorithm for computing the discrete logarithm of</span>
 <span class="sd">    ``a`` to the base ``b`` modulo ``n``.</span>
 
@@ -1094,7 +1093,7 @@
 
 
 <span class="k">def</span> <span class="nf">_discrete_log_shanks_steps</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Baby-step giant-step algorithm for computing the discrete logarithm of</span>
 <span class="sd">    ``a`` to the base ``b`` modulo ``n``.</span>
 
@@ -1140,7 +1139,7 @@
 
 
 <span class="k">def</span> <span class="nf">_discrete_log_pollard_rho</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">retries</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">rseed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Pollard&#39;s Rho algorithm for computing the discrete logarithm of ``a`` to</span>
 <span class="sd">    the base ``b`` modulo ``n``.</span>
 
@@ -1241,7 +1240,7 @@
 
 
 <span class="k">def</span> <span class="nf">_discrete_log_pohlig_hellman</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Pohlig-Hellman algorithm for computing the discrete logarithm of ``a`` to</span>
 <span class="sd">    the base ``b`` modulo ``n``.</span>
 
@@ -1290,7 +1289,7 @@
 
 
 <div class="viewcode-block" id="discrete_log"><a class="viewcode-back" href="../../../../modelparameters.sympy.ntheory.html#modelparameters.sympy.ntheory.residue_ntheory.discrete_log">[docs]</a><span class="k">def</span> <span class="nf">discrete_log</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prime_order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the discrete logarithm of ``a`` to the base ``b`` modulo ``n``.</span>
 
 <span class="sd">    This is a recursive function to reduce the discrete logarithm problem in</span>
@@ -1351,7 +1350,7 @@
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -1372,7 +1371,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2018, Johan Hake, Henrik Finsberg.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.4.0.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.1.3.
     </div>
   </body>
 </html>
