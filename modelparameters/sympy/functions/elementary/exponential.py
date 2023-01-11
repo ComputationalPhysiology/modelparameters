@@ -350,7 +350,7 @@ class exp(ExpBase):
         sympy.functions.elementary.complexes.re
         sympy.functions.elementary.complexes.im
         """
-        import sympy
+        from .... import sympy
         re, im = self.args[0].as_real_imag()
         if deep:
             re = re.expand(deep, **hints)
